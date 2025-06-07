@@ -29,6 +29,28 @@ The BMAD Method now includes a specialized **v0 UX/UI Architect** persona design
 - **Code-Design Synthesis**: Seamlessly moves between visual design concepts and production-ready code
 - **Quality Assurance**: Includes comprehensive checklists and templates for consistent, high-quality output
 
+#### What's New in This Version:
+- **🎨 v0 UX/UI Architect Personas**: Veronica (Web) and Victor (IDE) for rapid design-to-code workflows
+- **🔧 IDE-Specific Configurations**: Optimized setups for Cursor AI, Cline, Claude Code, and Roocode
+- **📚 Comprehensive Training Materials**: Step-by-step guides for each environment
+- **🚀 Rapid Prototyping Tasks**: Transform concepts to production-ready components in minutes
+- **✅ Quality Assurance Framework**: Built-in checklists and templates for consistent output
+- **🔄 Seamless Integration**: Works with existing BMAD personas and workflows
+
+#### IDE-Specific Setup & Training:
+| IDE Environment | Setup Guide | Training Material | Best For |
+|----------------|-------------|-------------------|----------|
+| **Cursor AI** | [Setup Guide](docs/ide-setup-guides/cursor-ai-setup.md) | [Training Guide](docs/training/ide-specific-guides/cursor-ai-guide.md) | Advanced codebase integration |
+| **Cline (Claude Dev)** | [Setup Guide](docs/ide-setup-guides/cline-setup.md) | [Training Guide](docs/training/ide-specific-guides/cline-guide.md) | Project context awareness |
+| **Claude Code** | [Setup Guide](docs/ide-setup-guides/claude-code-setup.md) | [Training Guide](docs/training/ide-specific-guides/claude-code-guide.md) | Code quality standards |
+| **Roocode** | [Setup Guide](docs/ide-setup-guides/roocode-setup.md) | [Training Guide](docs/training/ide-specific-guides/roocode-guide.md) | Rapid prototyping |
+
+#### Complete Documentation:
+- **📖 [v0 UX/UI Architect User Guide](docs/v0-ux-ui-architect-user-guide.md)** - Comprehensive usage documentation
+- **🔗 [Integration Guide](docs/integration-guide/v0-ux-ui-architect-integration.md)** - How it fits with existing BMAD workflows
+- **💡 [Example Project](examples/v0-ux-ui-architect-example.md)** - Complete workflow demonstration
+- **🎯 [Training Materials](docs/training/using-v0-ux-ui-architect.md)** - Master the new personas
+
 #### Available Personas:
 - **Veronica (Web-based)**: Perfect for design planning, specification creation, and visual concept generation
 - **Victor (IDE-based)**: Optimized for direct implementation in development environments with real-time code generation
@@ -52,7 +74,35 @@ This enhancement makes the BMAD Method incredibly versatile for frontend develop
 
 ## End Matter
 
-Interested in improving the BMAD Method? See the [contributing guidelines](docs/CONTRIBUTING.md).
+## 🚀 What's New - Version 3.1 Enhancements
+
+### Major Features Added:
+- **v0 UX/UI Architect Integration**: Revolutionary design-to-code workflow with dual personas
+- **Multi-IDE Support**: Native configurations for 4 major AI-powered IDEs
+- **Enhanced Training System**: Comprehensive guides for each environment
+- **Quality Framework**: Built-in checklists and templates for consistent output
+
+### New Documentation:
+- IDE-specific setup guides for Cursor AI, Cline, Claude Code, and Roocode
+- Comprehensive training materials for v0 UX/UI Architect personas
+- Integration guides showing how new personas work with existing BMAD workflow
+- Example projects demonstrating complete design-to-implementation workflows
+
+### Enhanced Capabilities:
+- **Rapid Prototyping**: Transform simple prompts into production-ready components
+- **Component-Based Design**: Automatic creation of reusable design systems
+- **Cross-Environment Compatibility**: Seamless workflow between web and IDE environments
+- **Quality Assurance**: Built-in validation and best practices enforcement
+
+### Files Added/Enhanced:
+- `bmad-agent/personas/v0-ux-ui-architect.md` & `.ide.md` - Core persona definitions
+- `docs/ide-setup-guides/` - Complete IDE configuration documentation
+- `docs/training/` - Comprehensive training materials
+- `examples/v0-ux-ui-architect-example.md` - Real-world usage examples
+- Enhanced orchestrator configurations with v0 integration
+
+**Previous Versions**: [V1](https://github.com/bmadcode/BMAD-METHOD/tree/V1) | [V2](https://github.com/bmadcode/BMAD-METHOD/tree/V2)
 
 Thank you and enjoy - BMad!
 [License](docs/LICENSE)
+Interested in improving the BMAD Method? See the [contributing guidelines](docs/CONTRIBUTING.md).
