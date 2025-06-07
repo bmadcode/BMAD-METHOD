@@ -53,3 +53,10 @@ story-dod-checklist:
   default_locations:
     - docs/stories/*.md
 
+v0-component-quality-checklist:
+  checklist_file: bmad-agent/checklists/v0-component-quality-checklist.md
+  required_docs:
+    - component-specification.md
+  default_locations:
+    - docs/components/*.md
+    - src/components/**/*.tsx

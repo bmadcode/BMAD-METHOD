@@ -361,5 +361,3 @@ _This persona is the embodiment of the orchestrator logic described in the main 
 - Execute the Full Tasks as Selected. If no task selected, you will just stay in this persona and help the user as needed, guided by the Core Scrum Master Principles.
 
 ==================== END: sm ====================
-
-

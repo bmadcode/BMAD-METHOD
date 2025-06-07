@@ -1,4 +1,4 @@
-```mermaid
+\`\`\`mermaid
 flowchart TD
     %% Phase 0: BA
     subgraph BA["Phase 0: Business Analyst"]
@@ -80,4 +80,4 @@ flowchart TD
     class BA_P,PM_PRD,ARCH_D artifact
     class BA_B,BA_R,PM_D,PM_M,ARCH_P,SM_S,DEV_I,DEV_T,DEV_D process
     class PM_C,ARCH_C,PO_C,PO_A,SM_A,DEV_A approval
-```
+\`\`\`

@@ -16,14 +16,14 @@
 ## Information Architecture (IA)
 
 - **Site Map / Screen Inventory:**
-  ```mermaid
+  \`\`\`mermaid
   graph TD
       A[Homepage] --> B(Dashboard);
       A --> C{Settings};
       B --> D[View Details];
       C --> E[Profile Settings];
       C --> F[Notification Settings];
-  ```
+  \`\`\`
   _(Or provide a list of all screens/pages)_
 - **Navigation Structure:** {Describe primary navigation (e.g., top bar, sidebar), secondary navigation, breadcrumbs, etc.}
 
@@ -35,7 +35,7 @@
 
 - **Goal:** {What the user wants to achieve.}
 - **Steps / Diagram:**
-  ```mermaid
+  \`\`\`mermaid
   graph TD
       Start --> EnterCredentials[Enter Email/Password];
       EnterCredentials --> ClickLogin[Click Login Button];
@@ -43,7 +43,7 @@
       CheckAuth -- Yes --> Dashboard;
       CheckAuth -- No --> ShowError[Show Error Message];
       ShowError --> EnterCredentials;
-  ```
+  \`\`\`
   _(Or: Link to specific flow diagram in Figma/Miro)_
 
 ### {Another User Flow Name}

@@ -45,7 +45,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 {Provide an ASCII or Mermaid diagram representing the project's folder structure. The following is a general example. If a `front-end-architecture-tmpl.txt` (or equivalent) is in use, it will contain the detailed structure for the frontend portion (e.g., within `src/frontend/` or a dedicated `frontend/` root directory). Shared code structure (e.g., in a `packages/` directory for a monorepo) should also be detailed here.}
 
-```plaintext
+\`\`\`plaintext
 {project-root}/
 ├── .github/                    # CI/CD workflows (e.g., GitHub Actions)
 │   └── workflows/
@@ -85,7 +85,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 ├── tsconfig.json / pyproject.toml # Language-specific configuration (if applicable)
 ├── Dockerfile                  # Docker build instructions (if applicable)
 └── README.md                   # Project overview and setup instructions
-```
+\`\`\`
 
 (Adjust the example tree based on the actual project type - e.g., Python would have requirements.txt, etc. The structure above illustrates a potential separation for projects with distinct frontends; for simpler projects or APIs, the `src/` structure might be flatter.)
 
@@ -157,7 +157,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 - **Description:** {What does this entity represent?}
 - **Schema / Interface Definition:**
-  ```typescript
+  \`\`\`typescript
   // Example using TypeScript Interface
   export interface {EntityName} {
     id: string; // {Description, e.g., Unique identifier}
@@ -165,7 +165,7 @@ If the project includes a significant user interface, a separate Frontend Archit
     optionalProperty?: number; // {Description}
     // ... other properties
   }
-  ```
+  \`\`\`
 - **Validation Rules:** {List any specific validation rules beyond basic types - e.g., max length, format, range.}
 
 ### API Payload Schemas (If distinct)
@@ -175,14 +175,14 @@ If the project includes a significant user interface, a separate Frontend Archit
 #### {API Endpoint / Purpose, e.g., Create Order Request, repeat the section as needed}
 
 - **Schema / Interface Definition:**
-  ```typescript
+  \`\`\`typescript
   // Example
   export interface CreateOrderRequest {
     customerId: string;
     items: { productId: string; quantity: number }[];
     // ...
   }
-  ```
+  \`\`\`
 
 ### Database Schemas (If applicable)
 
@@ -192,7 +192,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 - **Purpose:** {What data does this table store?}
 - **Schema Definition:**
-  ```sql
+  \`\`\`sql
   -- Example SQL
   CREATE TABLE {TableName} (
     id VARCHAR(36) PRIMARY KEY,
@@ -200,7 +200,7 @@ If the project includes a significant user interface, a separate Frontend Archit
     numeric_column DECIMAL(10, 2),
     -- ... other columns, indexes, constraints
   );
-  ```
+  \`\`\`
   _(Alternatively, use ORM model definitions, NoSQL document structure, etc.)_
 
 ## Core Workflow / Sequence Diagrams

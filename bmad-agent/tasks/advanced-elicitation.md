@@ -14,7 +14,7 @@
 
 **Present the numbered list (0-9) with this exact format:**
 
-```
+\`\`\`
 **Advanced Reflective, Elicitation & Brainstorming Actions**
 Choose an action (0-9 - 9 to bypass - HELP for explanation of these options):
 
@@ -28,7 +28,7 @@ Choose an action (0-9 - 9 to bypass - HELP for explanation of these options):
 7. Explore Diverse Alternatives (ToT-Inspired)
 8. Hindsight is 20/20: The 'If Only...' Reflection
 9. Proceed / No Further Actions
-```
+\`\`\`
 
 ### 2. Processing Guidelines
 

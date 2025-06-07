@@ -46,7 +46,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 {Provide an ASCII or Mermaid diagram representing the project's folder structure. The following is a general example. If a `front-end-architecture-tmpl.txt` (or equivalent) is in use, it will contain the detailed structure for the frontend portion (e.g., within `src/frontend/` or a dedicated `frontend/` root directory). Shared code structure (e.g., in a `packages/` directory for a monorepo) should also be detailed here.}
 
-```plaintext
+\`\`\`plaintext
 {project-root}/
 ├── .github/                    # CI/CD workflows (e.g., GitHub Actions)
 │   └── workflows/
@@ -86,7 +86,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 ├── tsconfig.json / pyproject.toml # Language-specific configuration (if applicable)
 ├── Dockerfile                  # Docker build instructions (if applicable)
 └── README.md                   # Project overview and setup instructions
-```
+\`\`\`
 
 (Adjust the example tree based on the actual project type - e.g., Python would have requirements.txt, etc. The structure above illustrates a potential separation for projects with distinct frontends; for simpler projects or APIs, the `src/` structure might be flatter.)
 
@@ -158,7 +158,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 - **Description:** {What does this entity represent?}
 - **Schema / Interface Definition:**
-  ```typescript
+  \`\`\`typescript
   // Example using TypeScript Interface
   export interface {EntityName} {
     id: string; // {Description, e.g., Unique identifier}
@@ -166,7 +166,7 @@ If the project includes a significant user interface, a separate Frontend Archit
     optionalProperty?: number; // {Description}
     // ... other properties
   }
-  ```
+  \`\`\`
 - **Validation Rules:** {List any specific validation rules beyond basic types - e.g., max length, format, range.}
 
 ### API Payload Schemas (If distinct)
@@ -176,14 +176,14 @@ If the project includes a significant user interface, a separate Frontend Archit
 #### {API Endpoint / Purpose, e.g., Create Order Request, repeat the section as needed}
 
 - **Schema / Interface Definition:**
-  ```typescript
+  \`\`\`typescript
   // Example
   export interface CreateOrderRequest {
     customerId: string;
     items: { productId: string; quantity: number }[];
     // ...
   }
-  ```
+  \`\`\`
 
 ### Database Schemas (If applicable)
 
@@ -193,7 +193,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 - **Purpose:** {What data does this table store?}
 - **Schema Definition:**
-  ```sql
+  \`\`\`sql
   -- Example SQL
   CREATE TABLE {TableName} (
     id VARCHAR(36) PRIMARY KEY,
@@ -201,7 +201,7 @@ If the project includes a significant user interface, a separate Frontend Archit
     numeric_column DECIMAL(10, 2),
     -- ... other columns, indexes, constraints
   );
-  ```
+  \`\`\`
   _(Alternatively, use ORM model definitions, NoSQL document structure, etc.)_
 
 ## Core Workflow / Sequence Diagrams
@@ -549,7 +549,7 @@ CRITICAL: **Index Management:** After creating the files, update `docs/index.md`
 
 ### EXAMPLE - Not Prescriptive (for a React/Next.js app)
 
-```plaintext
+\`\`\`plaintext
 src/
 ├── app/                        # Next.js App Router: Pages/Layouts/Routes. MUST contain route segments, layouts, and page components.
 │   ├── (features)/             # Feature-based routing groups. MUST group related routes for a specific feature.
@@ -588,7 +588,7 @@ src/
 ├── styles/                     # Global styles, theme configurations (if not using `globals.css` or similar, or for specific styling systems like SCSS partials).
 └── types/                      # Global TypeScript type definitions/interfaces. MUST contain types shared across multiple features/modules.
     └── index.ts
-```
+\`\`\`
 
 ### Notes on Frontend Structure:
 
@@ -629,14 +629,14 @@ src/
   | `{anotherState}`| `{type}`  | `{value}`     | {Description of state variable and its purpose.}                               |
 - **Key UI Elements / Structure:**
   { Provide a pseudo-HTML or JSX-like structure representing the component\'s DOM. Include key conditional rendering logic if applicable. **This structure dictates the primary output for the AI agent.** }
-  ```html
+  \`\`\`html
   <div> <!-- Main card container with specific class e.g., styles.cardFull or styles.cardCompact based on variant prop -->
     <img src="{avatarUrl || defaultAvatar}" alt="User Avatar" class="{styles.avatar}" />
     <h2>{userName}</h2>
     <p class="{variant === 'full' ? styles.emailFull : styles.emailCompact}">{userEmail}</p>
     {variant === 'full' && onEdit && <button onClick={onEdit} class="{styles.editButton}">Edit</button>}
   </div>
-  ```
+  \`\`\`
 - **Events Handled / Emitted:**
   - **Handles:** {e.g., `onClick` on the edit button (triggers `onEdit` prop).}
   - **Emits:** {If the component emits custom events/callbacks not covered by props, describe them with their exact signature. e.g., `onFollow: (payload: { userId: string; followed: boolean }) => void`}
@@ -671,7 +671,7 @@ _Repeat the above template for each significant component._
 - **Core Slice Example (e.g., `sessionSlice` in `src/store/slices/sessionSlice.ts`):**
   - **Purpose:** {Manages user session, authentication status, and basic user profile info accessible globally.}
   - **State Shape (Interface/Type):**
-    ```typescript
+    \`\`\`typescript
     interface SessionState {
       currentUser: { id: string; name: string; email: string; roles: string[]; } | null;
       isAuthenticated: boolean;
@@ -679,7 +679,7 @@ _Repeat the above template for each significant component._
       status: "idle" | "loading" | "succeeded" | "failed";
       error: string | null;
     }
-    ```
+    \`\`\`
   - **Key Reducers/Actions (within `createSlice`):** {Briefly list main synchronous actions, e.g., `setCurrentUser`, `clearSession`, `setAuthStatus`, `setAuthError`.}
   - **Async Thunks (if any):** {List key async thunks, e.g., `loginUserThunk`, `fetchUserProfileThunk`.}
   - **Selectors (memoized with `createSelector`):** {List key selectors, e.g., `selectCurrentUser`, `selectIsAuthenticated`.}
@@ -937,14 +937,14 @@ _Repeat the above template for each significant component._
 ## Information Architecture (IA)
 
 - **Site Map / Screen Inventory:**
-  ```mermaid
+  \`\`\`mermaid
   graph TD
       A[Homepage] --> B(Dashboard);
       A --> C{Settings};
       B --> D[View Details];
       C --> E[Profile Settings];
       C --> F[Notification Settings];
-  ```
+  \`\`\`
   _(Or provide a list of all screens/pages)_
 - **Navigation Structure:** {Describe primary navigation (e.g., top bar, sidebar), secondary navigation, breadcrumbs, etc.}
 
@@ -956,7 +956,7 @@ _Repeat the above template for each significant component._
 
 - **Goal:** {What the user wants to achieve.}
 - **Steps / Diagram:**
-  ```mermaid
+  \`\`\`mermaid
   graph TD
       Start --> EnterCredentials[Enter Email/Password];
       EnterCredentials --> ClickLogin[Click Login Button];
@@ -964,7 +964,7 @@ _Repeat the above template for each significant component._
       CheckAuth -- Yes --> Dashboard;
       CheckAuth -- No --> ShowError[Show Error Message];
       ShowError --> EnterCredentials;
-  ```
+  \`\`\`
   _(Or: Link to specific flow diagram in Figma/Miro)_
 
 ### {Another User Flow Name}
@@ -1519,5 +1519,3 @@ Hello {{users name}}, this is your foo report for {{todays date}}
 @{/example}
 
 ==================== END: template-format ====================
-
-

@@ -53,7 +53,7 @@ NOTE the build will skip any files with the `.ide.<extension>` - so you can have
 
 1. ```cmd
     node build-web-agent.js
-    ```
+    \`\`\`
 
 The script will log its progress, including discovered source directories, any issues found (like duplicate base filenames), and the output files being generated.
 
@@ -89,18 +89,18 @@ While `build-bmad-orchestrator.js` packages assets, the Orchestrator's core beha
   `checklists`, `templates`, `data`, `tasks`: These keys introduce lists of resources the agent will have access to. Each item is a Markdown link under the respective key, for example:
   For `checklists`:
 
-  ```markdown
+  \`\`\`markdown
   - checklists:
     - [Pm Checklist](checklists#pm-checklist)
     - [Another Checklist](checklists#another-one)
-  ```
+  \`\`\`
 
   For `tasks`:
 
-  ```markdown
+  \`\`\`markdown
   - tasks:
     - [Create Prd](tasks#create-prd)
-  ```
+  \`\`\`
 
   These references (e.g., `checklists#pm-checklist` or `tasks#create-prd`) point to sections in bundled asset files, providing the agent with its knowledge and tools. Note: `data` is used (not `data_sources`), and `tasks` is used (not `available_tasks` from older documentation styles).
 
@@ -143,7 +143,7 @@ A powerful alternative is the `ide-bmad-orchestrator.md`. This agent provides th
     - **Data Resolution:**
       Located at the top of the config file, this section defines key-value pairs for base paths. These paths tell the orchestrator where to find different types of asset files (personas, tasks, checklists, templates, data).
 
-      ```markdown
+      \`\`\`markdown
       # Configuration for IDE Agents
 
       ## Data Resolution
@@ -157,7 +157,7 @@ A powerful alternative is the `ide-bmad-orchestrator.md`. This agent provides th
 
       NOTE: All Persona references and task markdown style links assume these data resolution paths unless a specific path is given.
       Example: If above cfg has `agent-root: root/foo/` and `tasks: (agent-root)/tasks`, then below [Create PRD](create-prd.md) would resolve to `root/foo/tasks/create-prd.md`
-      ```
+      \`\`\`
 
       The `(project-root)` placeholder is typically interpreted as the root of your current workspace.
 
@@ -175,7 +175,7 @@ A powerful alternative is the `ide-bmad-orchestrator.md`. This agent provides th
         - The link target is either a Markdown filename for an external task definition (e.g., `(create-prd.md)`), resolved using the `tasks:` path, or a special string like `(In Analyst Memory Already)` indicating the task logic is part of the persona's main definition.
           Example:
 
-        ```markdown
+        \`\`\`markdown
         ## Title: Product Owner AKA PO
 
         - Name: Curly
@@ -183,7 +183,7 @@ A powerful alternative is the `ide-bmad-orchestrator.md`. This agent provides th
         - Tasks:
           - [Create PRD](create-prd.md)
           - [Create Next Story](create-next-story-task.md)
-        ```
+        \`\`\`
 
 2. **Operational Workflow (inside `ide-bmad-orchestrator.md`):**
     - **Initialization:** Upon activation in your IDE, the `ide-bmad-orchestrator.md` first loads and parses its specified configuration file (`ide-bmad-orchestrator.cfg.md`). If this fails, it will inform you and halt.

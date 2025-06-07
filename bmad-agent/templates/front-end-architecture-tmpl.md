@@ -62,7 +62,7 @@
 
 ### EXAMPLE - Not Prescriptive (for a React/Next.js app)
 
-```plaintext
+\`\`\`plaintext
 src/
 ├── app/                        # Next.js App Router: Pages/Layouts/Routes. MUST contain route segments, layouts, and page components.
 │   ├── (features)/             # Feature-based routing groups. MUST group related routes for a specific feature.
@@ -101,7 +101,7 @@ src/
 ├── styles/                     # Global styles, theme configurations (if not using `globals.css` or similar, or for specific styling systems like SCSS partials).
 └── types/                      # Global TypeScript type definitions/interfaces. MUST contain types shared across multiple features/modules.
     └── index.ts
-```
+\`\`\`
 
 ### Notes on Frontend Structure:
 
@@ -142,14 +142,14 @@ src/
   | `{anotherState}`| `{type}`  | `{value}`     | {Description of state variable and its purpose.}                               |
 - **Key UI Elements / Structure:**
   { Provide a pseudo-HTML or JSX-like structure representing the component\'s DOM. Include key conditional rendering logic if applicable. **This structure dictates the primary output for the AI agent.** }
-  ```html
+  \`\`\`html
   <div> <!-- Main card container with specific class e.g., styles.cardFull or styles.cardCompact based on variant prop -->
     <img src="{avatarUrl || defaultAvatar}" alt="User Avatar" class="{styles.avatar}" />
     <h2>{userName}</h2>
     <p class="{variant === 'full' ? styles.emailFull : styles.emailCompact}">{userEmail}</p>
     {variant === 'full' && onEdit && <button onClick={onEdit} class="{styles.editButton}">Edit</button>}
   </div>
-  ```
+  \`\`\`
 - **Events Handled / Emitted:**
   - **Handles:** {e.g., `onClick` on the edit button (triggers `onEdit` prop).}
   - **Emits:** {If the component emits custom events/callbacks not covered by props, describe them with their exact signature. e.g., `onFollow: (payload: { userId: string; followed: boolean }) => void`}
@@ -184,7 +184,7 @@ _Repeat the above template for each significant component._
 - **Core Slice Example (e.g., `sessionSlice` in `src/store/slices/sessionSlice.ts`):**
   - **Purpose:** {Manages user session, authentication status, and basic user profile info accessible globally.}
   - **State Shape (Interface/Type):**
-    ```typescript
+    \`\`\`typescript
     interface SessionState {
       currentUser: { id: string; name: string; email: string; roles: string[]; } | null;
       isAuthenticated: boolean;
@@ -192,7 +192,7 @@ _Repeat the above template for each significant component._
       status: "idle" | "loading" | "succeeded" | "failed";
       error: string | null;
     }
-    ```
+    \`\`\`
   - **Key Reducers/Actions (within `createSlice`):** {Briefly list main synchronous actions, e.g., `setCurrentUser`, `clearSession`, `setAuthStatus`, `setAuthError`.}
   - **Async Thunks (if any):** {List key async thunks, e.g., `loginUserThunk`, `fetchUserProfileThunk`.}
   - **Selectors (memoized with `createSelector`):** {List key selectors, e.g., `selectCurrentUser`, `selectIsAuthenticated`.}

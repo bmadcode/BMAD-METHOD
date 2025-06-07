@@ -1636,5 +1636,3 @@ The Scrum Master should use this checklist to validate that each story contains 
 - BLOCKED: External information required (specify what information)
 
 ==================== END: story-draft-checklist ====================
-
-
