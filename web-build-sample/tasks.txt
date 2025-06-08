@@ -206,7 +206,7 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
    - Mark items as:
-     - âœ… PASS: Requirement clearly met
+     - PASS: Requirement clearly met
      - âŒ FAIL: Requirement not met or insufficient coverage
      - âš ï¸ PARTIAL: Some aspects covered but needs improvement
      - N/A: Not applicable to this case

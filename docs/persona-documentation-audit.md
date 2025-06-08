@@ -7,10 +7,10 @@
 
 ## Current Persona Documentation Status
 
-### âœ… Well-Documented Personas
+### Well-Documented Personas
 
 #### v0 UX/UI Architect
-- **Status**: âœ… COMPLETE - Recently standardized
+- **Status**: COMPLETE - Recently standardized
 - **Files**: 
   - `bmad-agent/personas/v0-ux-ui-architect.md` (Web version)
   - `bmad-agent/personas/v0-ux-ui-architect.ide.md` (IDE version)

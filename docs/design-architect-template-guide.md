@@ -1325,9 +1325,9 @@ import { ComponentName } from '@/components/ui/component-name'
 ## Best Practices
 
 ### Do's
-- âœ… [Best practice 1]
-- âœ… [Best practice 2]
-- âœ… [Best practice 3]
+- [Best practice 1]
+- [Best practice 2]
+- [Best practice 3]
 
 ### Don'ts
 - âŒ [What to avoid 1]

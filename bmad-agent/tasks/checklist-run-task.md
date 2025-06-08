@@ -1,4 +1,4 @@
-# Checklist Validation Task
+﻿# Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent should follow these instructions to ensure thorough and systematic validation of documents.
 
@@ -56,9 +56,9 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
    - Mark items as:
-     - ✅ PASS: Requirement clearly met
-     - ❌ FAIL: Requirement not met or insufficient coverage
-     - ⚠️ PARTIAL: Some aspects covered but needs improvement
+     - PASS: Requirement clearly met
+     - âŒ FAIL: Requirement not met or insufficient coverage
+     - âš ï¸ PARTIAL: Some aspects covered but needs improvement
      - N/A: Not applicable to this case
 
 5. **Section Analysis**

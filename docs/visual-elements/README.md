@@ -206,7 +206,7 @@ We use a consistent icon system throughout the documentation:
 - ðŸŽ¨ **UX/UI Designer**: User experience
 - ðŸ’» **Developer**: Implementation
 - ðŸ“Š **Analyst**: Data and requirements
-- âœ… **Completed**: Finished tasks
+- **Completed**: Finished tasks
 - ðŸ”„ **In Progress**: Active work
 - â³ **Pending**: Waiting to start
 - â­ **Decision Point**: Key choices
