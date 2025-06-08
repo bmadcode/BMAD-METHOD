@@ -3,7 +3,7 @@
 Previous Versions:
 [Prior Version 1](https://github.com/bmadcode/BMAD-METHOD/tree/V1) | [Prior Version 2](https://github.com/bmadcode/BMAD-METHOD/tree/V2) | [Prior Version 3.1](https://github.com/bmadcode/BMAD-METHOD/tree/V3.1)
 
-## ðŸš€ Major Update: Complete Documentation Enhancement Project
+## Major Update: Complete Documentation Enhancement Project
 
 **BMAD Method 4.0** represents a massive expansion with **100+ documents**, **500+ pages**, and **comprehensive persona documentation packages**. This release includes complete documentation ecosystems for all personas, integration guides, quality frameworks, and success metrics.
 
@@ -35,7 +35,7 @@ The BMAD Method uses a powerful **Orchestrator** system that coordinates special
 ### Workflow:
 
 ```
-User Request â†’ Orchestrator â†’ Appropriate Persona â†’ Task Execution â†’ Deliverable
+User Request ’ Orchestrator ’ Appropriate Persona ’ Task Execution ’ Deliverable
 ```
 
 ### Environments:
@@ -136,7 +136,7 @@ Each persona now has a **complete documentation package** including comprehensiv
 - **[Review Process](docs/documentation-standards/review-process.md)** - Quality assurance procedures
 - **[Contribution Guidelines](docs/documentation-standards/contribution-guidelines.md)** - How to contribute
 
-## ðŸš€ Quick Start Guides
+## Quick Start Guides
 
 ### For Different Roles:
 - **[BMAD Method Quickstart](docs/quick-start-guides/bmad-method-quickstart.md)** - General overview and getting started
@@ -220,7 +220,7 @@ Every persona includes comprehensive success metrics and quality standards:
 - **Outcome Metrics** - Business value and impact measurement
 - **Continuous Improvement** - Feedback loops and optimization processes
 
-## ðŸš€ What's New - Version 4.0 Major Release
+## What's New - Version 4.0 Major Release
 
 ### ðŸŽ‰ Documentation Enhancement Project Completed:
 - **Complete Persona Documentation Packages** - Every persona now has comprehensive documentation
