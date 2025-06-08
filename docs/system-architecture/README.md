@@ -44,7 +44,7 @@ The BMAD (Business, Management, Architecture, Development) system is built on a 
 
 ## System Architecture Layers
 
-```mermaid title="BMAD System Architecture Layers" type="diagram"
+\```mermaid title="BMAD System Architecture Layers" type="diagram"
 graph TB
     subgraph "Presentation Layer"
         WEB[Web Interface]
@@ -104,7 +104,7 @@ graph TB
     CONFIG --> DATABASE
     CACHE --> QUEUE
     SEARCH --> MONITOR
-```
+\```
 
 ## Key Architectural Decisions
 

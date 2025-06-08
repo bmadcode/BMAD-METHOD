@@ -21,7 +21,7 @@ This document maps the complete journey of a UX/UI Architect creating a design s
 
 ## Journey Map
 
-```mermaid title="Design System Creation Journey" type="diagram"
+\```mermaid title="Design System Creation Journey" type="diagram"
 journey
     title Design System Creation User Journey
     section Research & Planning
@@ -40,7 +40,7 @@ journey
       Train development teams: 3
       Monitor implementation: 2
       Iterate based on feedback: 4
-```
+\```
 
 ## Detailed Journey Stages
 
@@ -131,7 +131,7 @@ journey
 
 ## Emotional Journey
 
-```mermaid title="Emotional Journey" type="diagram"
+\```mermaid title="Emotional Journey" type="diagram"
 journey
     title Emotional Journey - Design System Creation
     section Research & Planning
@@ -150,7 +150,7 @@ journey
       Anxiety about team reception: 3
       Disappointment with partial adoption: 2
       Fulfillment seeing system in use: 5
-```
+\```
 
 ## Success Metrics
 

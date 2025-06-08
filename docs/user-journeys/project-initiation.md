@@ -21,7 +21,7 @@ This document maps the complete journey of a Product Owner initiating a new proj
 
 ## Journey Map
 
-```mermaid title="Project Initiation Journey" type="diagram"
+\```mermaid title="Project Initiation Journey" type="diagram"
 journey
     title Project Initiation User Journey
     section Project Definition
@@ -40,7 +40,7 @@ journey
       Brief development team: 4
       Address questions: 3
       Begin implementation: 5
-```
+\```
 
 ## Detailed Journey Stages
 
@@ -131,7 +131,7 @@ journey
 
 ## Emotional Journey
 
-```mermaid title="Emotional Journey" type="diagram"
+\```mermaid title="Emotional Journey" type="diagram"
 journey
     title Emotional Journey - Project Initiation
     section Project Definition
@@ -150,7 +150,7 @@ journey
       Pride in comprehensive documentation: 5
       Nervousness about team reception: 3
       Excitement as implementation begins: 5
-```
+\```
 
 ## Success Metrics
 

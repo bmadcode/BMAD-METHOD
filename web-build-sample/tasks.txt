@@ -136,13 +136,6 @@ story-dod-checklist:
   default_locations:
     - docs/stories/*.md
 
-v0-component-quality-checklist:
-  checklist_file: bmad-agent/checklists/v0-component-quality-checklist.md
-  required_docs:
-    - component-specification.md
-  default_locations:
-    - docs/components/*.md
-    - src/components/**/*.tsx
 
 ==================== END: checklist-mappings ====================
 
@@ -206,7 +199,7 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
    - Mark items as:
-     - PASS: Requirement clearly met
+     - âœ… PASS: Requirement clearly met
      - âŒ FAIL: Requirement not met or insufficient coverage
      - âš ï¸ PARTIAL: Some aspects covered but needs improvement
      - N/A: Not applicable to this case
@@ -694,90 +687,6 @@ To perform deep research effectively, please be aware:
     - Once confirmed, clearly state that the next step could be to invoke the 'PRD Generate Task' or, if applicable, revisit other phase options.
 
 ==================== END: create-deep-research-prompt ====================
-
-
-==================== START: create-design-system-components ====================
-# Task: Create Design System Components
-
-## Objective
-Design and implement a cohesive set of reusable UI components that form a comprehensive design system, ensuring consistency, accessibility, and scalability across the application.
-
-## Prerequisites
-- Brand guidelines or visual design direction
-- Technical stack information
-- Existing components or patterns (if available)
-- Accessibility requirements
-
-## Process Steps
-
-### 1. Design System Foundation
-- Define design tokens (colors, typography, spacing, etc.)
-- Establish naming conventions
-- Define component categories (atoms, molecules, organisms)
-- Create design principles and guidelines
-
-### 2. Core Components Identification
-- Identify primitive components (buttons, inputs, etc.)
-- Identify composite components (cards, modals, etc.)
-- Identify layout components (grids, containers, etc.)
-- Identify specialized components (data tables, charts, etc.)
-
-### 3. Component Specification
-- Define component props and variants
-- Document component states and behaviors
-- Define accessibility requirements
-- Document responsive behavior
-
-### 4. Implementation Strategy
-- Determine component architecture
-- Define styling approach
-- Plan component documentation
-- Establish testing strategy
-
-### 5. Component Implementation
-- Create base components
-- Implement variants and states
-- Add accessibility features
-- Ensure responsive behavior
-- Add proper documentation
-
-### 6. Design System Documentation
-- Create usage guidelines
-- Document component API
-- Provide examples and patterns
-- Create visual documentation
-
-### 7. Testing & Validation
-- Test components across devices and browsers
-- Validate accessibility compliance
-- Perform visual regression testing
-- Validate component API usability
-
-## IDE-Specific Considerations
-
-### Implementation in IDE Environments
-- Structure components for easy discovery and usage
-- Create appropriate folder structure
-- Implement consistent patterns across components
-- Ensure proper typing and documentation
-
-## Deliverables
-- Design system foundation (tokens, principles)
-- Core component library
-- Component documentation
-- Usage examples
-- Testing suite
-
-## Success Criteria
-- Components follow consistent patterns
-- Components are accessible
-- Components are responsive
-- Components are well-documented
-- Components are properly tested
-- Components are easy to use and extend
-- Design system is cohesive and scalable
-
-==================== END: create-design-system-components ====================
 
 
 ==================== START: create-doc-from-template ====================
@@ -1773,102 +1682,6 @@ Would you like to proceed with document sharding? Please provide the required in
 ==================== END: doc-sharding-task ====================
 
 
-==================== START: implement-components-ide ====================
-# Task: Implement Components in IDE Environment
-
-## Objective
-Transform design requirements into production-ready frontend components directly in the IDE environment, optimizing for immediate implementation and integration.
-
-## Prerequisites
-- Project structure and tech stack information
-- Design requirements or component specifications
-- Access to an IDE with AI capabilities (Cursor, Cline, Claude Code, Roocode)
-
-## Process Steps
-
-### 1. Project Context Analysis
-- Analyze the existing project structure
-- Identify the frontend framework and libraries in use
-- Determine styling approach (CSS, Tailwind, styled-components, etc.)
-- Identify existing component patterns and conventions
-
-### 2. Component Architecture Planning
-- Define the component hierarchy
-- Determine required props and state
-- Plan file structure for components
-- Identify reusable sub-components
-
-### 3. Implementation Strategy
-- Determine implementation approach based on project context
-- Plan file creation sequence
-- Identify potential dependencies to add
-- Consider testing strategy
-
-### 4. Component Implementation
-- Create component files with proper structure
-- Implement component logic and rendering
-- Add styling according to project conventions
-- Implement responsive behavior
-- Add accessibility features
-- Implement state management
-
-### 5. Testing & Validation
-- Create unit tests for components
-- Verify responsive behavior
-- Validate accessibility compliance
-- Test edge cases and error states
-
-### 6. Integration
-- Update imports/exports as needed
-- Add components to relevant pages or parent components
-- Update navigation or routing if needed
-- Document usage examples
-
-### 7. Documentation
-- Add JSDoc comments to components
-- Create README documentation if appropriate
-- Add Storybook stories if applicable
-
-## IDE-Specific Considerations
-
-### Cursor AI
-- Leverage multi-file creation capabilities
-- Use Cursor's codebase understanding for consistent implementation
-- Utilize command palette for efficient workflow
-
-### Cline (Claude Dev)
-- Use terminal integration for dependency management
-- Leverage project-wide understanding for consistent implementation
-- Utilize Cline's ability to understand complex component relationships
-
-### Claude Code
-- Focus on code quality and best practices
-- Emphasize accessibility implementation
-- Prioritize comprehensive documentation
-
-### Roocode
-- Emphasize visual feedback loop
-- Focus on rapid prototyping and iteration
-- Leverage component library integration
-
-## Deliverables
-- Implemented component files
-- Associated test files
-- Documentation and usage examples
-- Integration instructions
-
-## Success Criteria
-- Components render correctly
-- Components are responsive
-- Components are accessible
-- Components follow project conventions
-- Components are properly tested
-- Components are well-documented
-- Components integrate with existing codebase
-
-==================== END: implement-components-ide ====================
-
-
 ==================== START: library-indexing-task ====================
 # Library Indexing Task
 
@@ -1989,80 +1802,6 @@ Please provide:
 Would you like to proceed with library indexing? Please provide the required input above.
 
 ==================== END: library-indexing-task ====================
-
-
-==================== START: rapid-prototype-from-brief ====================
-# Task: Rapid Prototype from Brief
-
-## Objective
-Transform a project brief or requirements document into a visual prototype and implementation-ready frontend components in a rapid timeframe, focusing on key user flows and core functionality.
-
-## Prerequisites
-- Project brief or requirements document
-- Technical constraints and platform information
-- Brand guidelines or design direction (if available)
-- User personas or target audience information
-
-## Process Steps
-
-### 1. Brief Analysis
-- Extract key requirements and user needs
-- Identify core functionality and primary user flows
-- Determine technical constraints and platform requirements
-- Note any specific design direction or brand guidelines
-
-### 2. Information Architecture
-- Define key screens and components
-- Map user flows and navigation
-- Identify reusable patterns and components
-- Create simple site/app map
-
-### 3. Rapid Visual Exploration
-- Generate multiple visual directions based on requirements
-- Create low-fidelity wireframes for key screens
-- Explore component patterns and design system elements
-- Establish visual hierarchy and layout principles
-
-### 4. Core Component Design
-- Design key UI components needed for core functionality
-- Define component variants and states
-- Ensure responsive behavior across device sizes
-- Apply accessibility best practices
-
-### 5. Prototype Implementation
-- Implement core screens and components in code
-- Focus on functional prototype over comprehensive implementation
-- Ensure responsive behavior works across target devices
-- Implement key interactions and state transitions
-
-### 6. Validation & Iteration
-- Review prototype against requirements
-- Identify gaps and areas for improvement
-- Gather feedback on usability and visual design
-- Iterate on design and implementation as needed
-
-### 7. Documentation & Handoff
-- Document component specifications
-- Create implementation notes for developers
-- Provide design system documentation
-- Outline next steps for full implementation
-
-## Deliverables
-- Visual design concepts
-- Interactive prototype
-- Core component implementations
-- Design system foundation
-- Implementation documentation
-
-## Success Criteria
-- Prototype addresses core requirements from brief
-- Design is visually cohesive and on-brand
-- Components are reusable and well-structured
-- Implementation is responsive and accessible
-- Prototype demonstrates key user flows
-- Documentation provides clear path to full implementation
-
-==================== END: rapid-prototype-from-brief ====================
 
 
 ==================== START: review-infrastructure ====================
@@ -2385,5 +2124,3 @@ After I perform the selected action, we can discuss the outcome and decide on an
 REPEAT by Asking the user if they would like to perform another Reflective, Elicitation & Brainstorming Action UNTIL the user indicates it is time to proceed to the next section (or selects #8)
 
 ==================== END: validate-infrastructure ====================
-
-

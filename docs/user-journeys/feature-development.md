@@ -21,7 +21,7 @@ This document maps the complete journey of a Developer implementing features usi
 
 ## Journey Map
 
-```mermaid title="Feature Development Journey" type="diagram"
+\```mermaid title="Feature Development Journey" type="diagram"
 journey
     title Feature Development User Journey
     section Preparation
@@ -42,7 +42,7 @@ journey
       Address feedback: 3
       Complete documentation: 4
       Merge and deploy: 5
-```
+\```
 
 ## Detailed Journey Stages
 
@@ -134,7 +134,7 @@ journey
 
 ## Emotional Journey
 
-```mermaid title="Emotional Journey" type="diagram"
+\```mermaid title="Emotional Journey" type="diagram"
 journey
     title Emotional Journey - Feature Development
     section Preparation
@@ -153,7 +153,7 @@ journey
       Nervousness during review: 2
       Stress addressing feedback: 3
       Pride in completed feature: 5
-```
+\```
 
 ## Success Metrics
 

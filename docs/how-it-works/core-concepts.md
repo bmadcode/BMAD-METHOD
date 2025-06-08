@@ -14,7 +14,7 @@ The **Orchestrator** is the central intelligence that manages all interactions:
 - **Quality Assurance**: Ensures deliverables meet standards
 - **Workflow Optimization**: Streamlines handoffs and reduces friction
 
-```mermaid title="Orchestrator Decision Flow" type="diagram"
+\```mermaid title="Orchestrator Decision Flow" type="diagram"
 graph TD
     A["User Input"] --> B["Parse Request"]
     B --> C{["Request Type?"]}
@@ -30,7 +30,7 @@ graph TD
     H --> I
     I --> J["Update Shared Context"]
     J --> K["Ready for Next Request"]
-```
+\```
 
 ### 2. ðŸ‘¥ Specialized AI Personas
 
@@ -66,7 +66,7 @@ Every action in BMAD is structured as a **Task**:
 
 #### Task Categories:
 
-```mermaid title="Task Classification" type="diagram"
+\```mermaid title="Task Classification" type="diagram"
 graph LR
     A["BMAD Tasks"] --> B["Planning Tasks"]
     A --> C["Architecture Tasks"]
@@ -93,7 +93,7 @@ graph LR
     F --> F1["Requirements Analysis"]
     F --> F2["User Story Creation"]
     F --> F3["Business Case Development"]
-```
+\```
 
 ### 4. ðŸ“„ Template-Driven Standardization
 
@@ -107,7 +107,7 @@ All deliverables follow proven templates:
 
 ## The BMAD Workflow Cycle
 
-```mermaid title="Complete BMAD Workflow" type="diagram"
+\```mermaid title="Complete BMAD Workflow" type="diagram"
 graph TD
     A["Project Initiation"] --> B["Requirements Gathering"]
     B --> C["Architecture Planning"]
@@ -137,7 +137,7 @@ graph TD
     F -.-> M
     G -.-> N
     H -.-> O
-```
+\```
 
 ## Key Principles
 

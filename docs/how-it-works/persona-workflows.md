@@ -10,7 +10,7 @@ Each BMAD persona has specialized workflows designed to maximize their effective
 
 ### 1. Product Owner (PO) Workflow
 
-```mermaid
+\```mermaid
 graph TD
     A[Receive Requirements] --> B[Analyze Business Value]
     B --> C[Create User Stories]
@@ -19,7 +19,7 @@ graph TD
     E --> F[Stakeholder Review]
     F --> G[Story Refinement]
     G --> H[Sprint Planning Input]
-```
+\```
 
 **Key Activities:**
 - Requirements gathering and analysis
@@ -30,7 +30,7 @@ graph TD
 
 ### 2. Project Manager (PM) Workflow
 
-```mermaid
+\```mermaid
 graph TD
     A[Project Initiation] --> B[Resource Planning]
     B --> C[Timeline Creation]
@@ -39,7 +39,7 @@ graph TD
     E --> F[Progress Monitoring]
     F --> G[Stakeholder Updates]
     G --> H[Delivery Management]
-```
+\```
 
 **Key Activities:**
 - Project planning and scheduling
@@ -50,7 +50,7 @@ graph TD
 
 ### 3. System Architect Workflow
 
-```mermaid
+\```mermaid
 graph TD
     A[Requirements Analysis] --> B[Architecture Design]
     B --> C[Technology Selection]
@@ -59,7 +59,7 @@ graph TD
     E --> F[Documentation Creation]
     F --> G[Review and Validation]
     G --> H[Implementation Guidance]
-```
+\```
 
 **Key Activities:**
 - System design and architecture
@@ -70,7 +70,7 @@ graph TD
 
 ### 4. UX/UI Architect Workflow
 
-```mermaid
+\```mermaid
 graph TD
     A[User Research] --> B[Design System Creation]
     B --> C[Component Specification]
@@ -79,7 +79,7 @@ graph TD
     E --> F[Design Refinement]
     F --> G[Implementation Specs]
     G --> H[Quality Assurance]
-```
+\```
 
 **Key Activities:**
 - User experience research and design
@@ -90,7 +90,7 @@ graph TD
 
 ### 5. Business Analyst Workflow
 
-```mermaid
+\```mermaid
 graph TD
     A[Business Requirements] --> B[Process Analysis]
     B --> C[Gap Identification]
@@ -99,7 +99,7 @@ graph TD
     E --> F[Documentation]
     F --> G[Stakeholder Review]
     G --> H[Implementation Support]
-```
+\```
 
 **Key Activities:**
 - Business process analysis
