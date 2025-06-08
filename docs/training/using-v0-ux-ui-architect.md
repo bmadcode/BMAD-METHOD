@@ -1,4 +1,4 @@
-# Training Guide: Using the v0 UX/UI Architect
+﻿# Training Guide: Using the v0 UX/UI Architect
 
 This guide will help you effectively use the v0 UX/UI Architect persona in your projects, whether in web-based AI environments or directly in your IDE.
 
@@ -52,44 +52,44 @@ The quality of your output depends significantly on your prompts. Here are guide
 
 ### Basic Structure
 
-\`\`\`
+```
 I need [component/design/system] for [project type] with [specific requirements].
 The brand values are [values]. The target audience is [audience].
 [Additional context or constraints]
-\`\`\`
+```
 
 ### Example Prompts
 
 #### For Design System Creation:
 
-\`\`\`
+```
 I need a design system for a healthcare application focused on elderly users.
 The brand values are trustworthy, accessible, and compassionate.
 The application needs to be extremely accessible, with large touch targets
 and high contrast. Please create the color system, typography, spacing,
 and core components that would form this design system.
-\`\`\`
+```
 
 #### For Component Creation:
 
-\`\`\`
+```
 I need a patient information card component for our healthcare app.
 It should display the patient's name, photo, key health metrics,
 upcoming appointments, and medication schedule. It needs to be
 scannable by busy healthcare providers and should include
 appropriate actions like "View Details" and "Contact Patient."
 Please create this component following our existing design system.
-\`\`\`
+```
 
 #### For IDE Implementation:
 
-\`\`\`
+```
 I need to implement a responsive navigation system for our React application.
 It should include a desktop horizontal menu that collapses to a hamburger
 menu on mobile. The navigation should include dropdown support for nested
 items, highlight the current page, and be fully keyboard accessible.
 Please implement this using our existing Tailwind setup.
-\`\`\`
+```
 
 ## Working with the v0 UX/UI Architect
 

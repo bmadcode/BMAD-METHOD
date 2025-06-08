@@ -1,4 +1,4 @@
-# v0 UX/UI Architect User Guide
+﻿# v0 UX/UI Architect User Guide
 
 ## Overview
 
@@ -39,7 +39,7 @@ The v0 UX/UI Architect is a specialized persona in the BMAD Method designed to b
 - "I want to create some frontend components"
 
 ### Sample Prompts:
-\`\`\`
+```
 "Veronica, I need you to create a modern dashboard component for a SaaS application. 
 It should include a sidebar navigation, main content area, and header with user profile."
 
@@ -48,7 +48,7 @@ It needs to show product image, title, price, and add to cart button."
 
 "I need a complete design system for a fintech application. 
 Can you create the core components with consistent styling?"
-\`\`\`
+```
 
 ### Expected Outputs:
 - Detailed component specifications
@@ -87,7 +87,7 @@ Can you create the core components with consistent styling?"
 3. Begin rapid prototyping workflow
 
 ### Sample IDE Prompts:
-\`\`\`
+```
 "Victor, I need you to implement a responsive navigation component using React and Tailwind CSS. 
 It should work on mobile and desktop with a hamburger menu for mobile."
 
@@ -96,7 +96,7 @@ Use TypeScript and make it reusable across the application."
 
 "I need a complete login form with validation, error handling, and accessibility features. 
 Implement it using our existing design system tokens."
-\`\`\`
+```
 
 ### Expected Outputs:
 - Complete component files (JSX/TSX, CSS, tests)

@@ -1,4 +1,4 @@
-# Using the v0 UX/UI Architect with Cursor AI
+﻿# Using the v0 UX/UI Architect with Cursor AI
 
 This guide provides specific instructions for using the v0 UX/UI IDE Architect persona within Cursor AI.
 
@@ -7,7 +7,7 @@ This guide provides specific instructions for using the v0 UX/UI IDE Architect p
 1. **Install Cursor AI**: Download and install from [cursor.sh](https://cursor.sh)
 2. **Open Your Project**: Launch Cursor AI and open your frontend project
 3. **Configure AI Settings**:
-   - Open Settings (⚙️)
+   - Open Settings (âš™ï¸)
    - Navigate to AI settings
    - Ensure you're using the most capable model available
 
@@ -16,12 +16,12 @@ This guide provides specific instructions for using the v0 UX/UI IDE Architect p
 1. Open the AI command palette (Cmd/Ctrl + Shift + L)
 2. Enter the following prompt:
 
-\`\`\`
+```
 I want to work with the v0 UX/UI IDE Architect from the BMAD Method. 
 My name is Victor and I'm specialized in direct implementation of 
 frontend components in IDE environments with a focus on code quality, 
 testability, and integration with existing codebases.
-\`\`\`
+```
 
 3. The AI will acknowledge and adopt the persona
 
@@ -30,51 +30,51 @@ testability, and integration with existing codebases.
 ### Component Creation Workflow
 
 1. **Create Component Files**:
-   \`\`\`
+   ```
    I need to create a ProductCard component for our e-commerce site.
    It should display product image, title, price, rating, and have
    "Add to Cart" and "Quick View" actions. Please create the necessary
    files following our project structure.
-   \`\`\`
+   ```
 
 2. **Implement Component Logic**:
-   \`\`\`
+   ```
    Now let's implement the logic for the ProductCard component.
    It should handle loading states, error states, and user interactions.
-   \`\`\`
+   ```
 
 3. **Style the Component**:
-   \`\`\`
+   ```
    Let's style the ProductCard component using our Tailwind setup.
    It should be responsive and match our design system.
-   \`\`\`
+   ```
 
 4. **Add Tests**:
-   \`\`\`
+   ```
    Please create tests for the ProductCard component to ensure
    it renders correctly and handles user interactions properly.
-   \`\`\`
+   ```
 
 ### Design System Implementation
 
 1. **Create Design Tokens**:
-   \`\`\`
+   ```
    I need to implement our design tokens in code. We use CSS variables
    for colors, spacing, typography, and shadows. Here are our token values:
    [paste design token values]
-   \`\`\`
+   ```
 
 2. **Create Base Components**:
-   \`\`\`
+   ```
    Let's create our base Button component that will support all our
    variants: primary, secondary, tertiary, and ghost.
-   \`\`\`
+   ```
 
 3. **Document Components**:
-   \`\`\`
+   ```
    Please create documentation for our Button component using JSDoc
    or Storybook, depending on our project setup.
-   \`\`\`
+   ```
 
 ## Cursor AI-Specific Features
 
@@ -82,7 +82,7 @@ testability, and integration with existing codebases.
 
 Cursor AI excels at creating and modifying multiple files at once. Use this to your advantage:
 
-\`\`\`
+```
 I need to create a complete form system with the following components:
 - TextInput
 - Select
@@ -91,25 +91,25 @@ I need to create a complete form system with the following components:
 - Form
 
 Please create all necessary files and implement them according to our design system.
-\`\`\`
+```
 
 ### Code Explanation
 
 Use Cursor AI to explain complex code:
 
-\`\`\`
+```
 Can you explain how this component works and suggest improvements
 for performance and accessibility?
-\`\`\`
+```
 
 ### Refactoring
 
 Leverage Cursor AI for refactoring:
 
-\`\`\`
+```
 This component has grown too complex. Can you refactor it into
 smaller, more manageable components while maintaining the same functionality?
-\`\`\`
+```
 
 ## Tips for Best Results
 
@@ -139,7 +139,7 @@ smaller, more manageable components while maintaining the same functionality?
 
 Here's an example of a complete session with the v0 UX/UI Architect in Cursor AI:
 
-\`\`\`
+```
 User: I want to work with the v0 UX/UI IDE Architect from the BMAD Method.
 
 AI: I'll embody the v0 UX/UI IDE Architect persona. I'm Victor, specialized in direct implementation of frontend components with a focus on code quality, testability, and integration with existing codebases. How can I help with your frontend implementation today?
@@ -169,7 +169,7 @@ User: Perfect! Can you also add tests for this component?
 
 AI: I'll create comprehensive tests for the Navigation component:
 [Creates test files with various test cases]
-\`\`\`
+```
 
 ## Conclusion
 

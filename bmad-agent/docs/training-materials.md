@@ -1,4 +1,4 @@
-# v0 UX/UI Architect Training Materials
+﻿# v0 UX/UI Architect Training Materials
 
 ## Quick Start Guide
 
@@ -6,9 +6,9 @@
 
 To activate Veronica in a web-based AI environment:
 
-\`\`\`
+```
 "I need to work with Veronica, the v0 UX/UI Architect. I want to create [describe your UI/UX need]."
-\`\`\`
+```
 
 ### Core Capabilities
 
@@ -22,24 +22,24 @@ Veronica excels at:
 ### Common Use Cases
 
 #### 1. Creating a New Component
-\`\`\`
+```
 "Veronica, I need a modern card component for displaying product information. 
 It should include an image, title, price, and call-to-action button. 
 The design should be clean and work well on mobile."
-\`\`\`
+```
 
 #### 2. Building a Design System
-\`\`\`
+```
 "Veronica, help me create a design system for a fintech application. 
 I need primary and secondary buttons, form inputs, and cards. 
 The brand colors are blue (#2563eb) and gray (#64748b)."
-\`\`\`
+```
 
 #### 3. Rapid Prototyping
-\`\`\`
+```
 "Veronica, I have a project brief for an e-commerce dashboard. 
 Can you create initial wireframes and component mockups based on the requirements?"
-\`\`\`
+```
 
 ### Best Practices
 

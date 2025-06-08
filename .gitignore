@@ -17,3 +17,7 @@ build/
 .env
 
 CLAUDE.md
+Clean-EscapedBackticks.ps1
+
+#Enhancements
+Enhancements/

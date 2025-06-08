@@ -1,4 +1,4 @@
-# Using the v0 UX/UI Architect with Claude Code
+﻿# Using the v0 UX/UI Architect with Claude Code
 
 This guide provides specific instructions for using the v0 UX/UI IDE Architect persona within Claude Code.
 
@@ -15,12 +15,12 @@ This guide provides specific instructions for using the v0 UX/UI IDE Architect p
 1. Start a new conversation in Claude Code
 2. Enter the following prompt:
 
-\`\`\`
+```
 I want to work with the v0 UX/UI IDE Architect from the BMAD Method. 
 My name is Victor and I'm specialized in direct implementation of 
 frontend components in IDE environments with a focus on code quality, 
 testability, and integration with existing codebases.
-\`\`\`
+```
 
 3. The AI will acknowledge and adopt the persona
 
@@ -29,55 +29,55 @@ testability, and integration with existing codebases.
 ### Component Creation Workflow
 
 1. **Project Analysis**:
-   \`\`\`
+   ```
    Please analyze my project to understand our component architecture,
    styling approach, and existing patterns.
-   \`\`\`
+   ```
 
 2. **Component Planning**:
-   \`\`\`
+   ```
    I need to create a complex Dashboard component with multiple widgets,
    data visualization, and interactive elements. Let's plan the component
    structure before implementation.
-   \`\`\`
+   ```
 
 3. **Implementation**:
-   \`\`\`
+   ```
    Based on our plan, let's implement the Dashboard component and its
    child components, focusing on maintainability and performance.
-   \`\`\`
+   ```
 
 4. **Styling**:
-   \`\`\`
+   ```
    Now let's style the Dashboard component according to our design system,
    ensuring it's responsive and visually consistent with our application.
-   \`\`\`
+   ```
 
 5. **Testing**:
-   \`\`\`
+   ```
    Please create comprehensive tests for the Dashboard component,
    including unit tests, integration tests, and visual regression tests.
-   \`\`\`
+   ```
 
 ### Design System Implementation
 
 1. **Design Token Implementation**:
-   \`\`\`
+   ```
    I need to implement our design tokens in a way that supports
    theming and can be used across our application.
-   \`\`\`
+   ```
 
 2. **Component Library Setup**:
-   \`\`\`
+   ```
    Let's set up a component library structure that will allow us
    to maintain and document our design system components.
-   \`\`\`
+   ```
 
 3. **Core Component Creation**:
-   \`\`\`
+   ```
    Let's implement the core components of our design system:
    Typography, Button, Input, Card, and Modal.
-   \`\`\`
+   ```
 
 ## Claude Code-Specific Features
 
@@ -85,31 +85,31 @@ testability, and integration with existing codebases.
 
 Claude Code excels at generating high-quality, well-structured code:
 
-\`\`\`
+```
 Please generate a complete, production-ready Accordion component
 that follows accessibility best practices and supports keyboard navigation.
-\`\`\`
+```
 
 ### Documentation Generation
 
 Leverage Claude Code's documentation capabilities:
 
-\`\`\`
+```
 Please create comprehensive documentation for our Button component,
 including props, examples, accessibility notes, and best practices.
-\`\`\`
+```
 
 ### Code Review
 
 Use Claude Code for code review and improvement:
 
-\`\`\`
+```
 Please review this component and suggest improvements for:
 1. Performance optimization
 2. Accessibility
 3. Code organization
 4. Error handling
-\`\`\`
+```
 
 ## Tips for Best Results
 
@@ -139,7 +139,7 @@ Please review this component and suggest improvements for:
 
 Here's an example of a complete session with the v0 UX/UI Architect in Claude Code:
 
-\`\`\`
+```
 User: I want to work with the v0 UX/UI IDE Architect from the BMAD Method.
 
 AI: I'll embody the v0 UX/UI IDE Architect persona. I'm Victor, specialized in direct implementation of frontend components with a focus on code quality, testability, and integration with existing codebases. How can I help with your frontend implementation today?
@@ -175,7 +175,7 @@ User: Can you also show how we would test this component?
 
 AI: Here's a comprehensive testing strategy:
 [Creates test files with various test cases and scenarios]
-\`\`\`
+```
 
 ## Conclusion
 

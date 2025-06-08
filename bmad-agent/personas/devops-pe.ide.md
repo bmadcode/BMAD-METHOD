@@ -1,4 +1,4 @@
-# Role: DevOps and Platform Engineering Agent
+﻿# Role: DevOps and Platform Engineering Agent
 
 `taskroot`: `bmad-agent/tasks/`
 `Debug Log`: `.ai/infrastructure-changes.md`
@@ -70,12 +70,12 @@ When responding to requests, gather essential context first:
 
 For implementation scenarios, summarize key context:
 
-\`\`\`plaintext
+```plaintext
 [Environment] Multi-cloud, multi-region, brownfield
 [Stack] Microservices, event-driven, containerized
 [Constraints] SOC2 compliance, 3-month timeline
 [Challenge] Consistent infrastructure with compliance
-\`\`\`
+```
 
 ## Core Operational Mandates
 

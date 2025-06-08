@@ -1,20 +1,20 @@
-# IDE Component Structure Template
+﻿# IDE Component Structure Template
 
 ## File Structure
 
-\`\`\`
+```
 {component-name}/
-├── index.ts                 # Main export file
-├── {component-name}.tsx     # Component implementation
-├── {component-name}.test.tsx # Component tests
-├── {component-name}.module.css # Component styles (if using CSS modules)
-├── {component-name}.stories.tsx # Storybook stories (if applicable)
-└── types.ts                 # TypeScript types (if complex enough to warrant separation)
-\`\`\`
+â”œâ”€â”€ index.ts                 # Main export file
+â”œâ”€â”€ {component-name}.tsx     # Component implementation
+â”œâ”€â”€ {component-name}.test.tsx # Component tests
+â”œâ”€â”€ {component-name}.module.css # Component styles (if using CSS modules)
+â”œâ”€â”€ {component-name}.stories.tsx # Storybook stories (if applicable)
+â””â”€â”€ types.ts                 # TypeScript types (if complex enough to warrant separation)
+```
 
 ## Component Implementation File ({component-name}.tsx)
 
-\`\`\`tsx
+```tsx
 import React from 'react';
 import styles from './{component-name}.module.css'; // If using CSS modules
 
@@ -47,11 +47,11 @@ export const {ComponentName} = ({
 };
 
 export default {ComponentName};
-\`\`\`
+```
 
 ## Test File ({component-name}.test.tsx)
 
-\`\`\`tsx
+```tsx
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { {ComponentName} } from './{component-name}';
@@ -71,11 +71,11 @@ describe('{ComponentName}', () => {
   
   // Additional tests
 });
-\`\`\`
+```
 
 ## Storybook File ({component-name}.stories.tsx)
 
-\`\`\`tsx
+```tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { {ComponentName} } from './{component-name}';
 
@@ -107,28 +107,28 @@ export const Variant: Story = {
 };
 
 // Additional stories
-\`\`\`
+```
 
 ## Index File (index.ts)
 
-\`\`\`tsx
+```tsx
 export { {ComponentName} } from './{component-name}';
 export type { {ComponentName}Props } from './types'; // If using separate types file
-\`\`\`
+```
 
 ## Types File (types.ts) - If needed
 
-\`\`\`tsx
+```tsx
 export interface {ComponentName}Props {
   // Props definition
 }
 
 // Additional types
-\`\`\`
+```
 
 ## Usage Example
 
-\`\`\`tsx
+```tsx
 import { {ComponentName} } from 'components/{component-name}';
 
 const MyPage = () => {

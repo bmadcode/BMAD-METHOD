@@ -1,4 +1,4 @@
-# Using the v0 UX/UI Architect with Cline (Claude Dev)
+﻿# Using the v0 UX/UI Architect with Cline (Claude Dev)
 
 This guide provides specific instructions for using the v0 UX/UI IDE Architect persona within Cline (formerly Claude Dev).
 
@@ -15,12 +15,12 @@ This guide provides specific instructions for using the v0 UX/UI IDE Architect p
 1. Open a new chat in Cline
 2. Enter the following prompt:
 
-\`\`\`
+```
 I want to work with the v0 UX/UI IDE Architect from the BMAD Method. 
 My name is Victor and I'm specialized in direct implementation of 
 frontend components in IDE environments with a focus on code quality, 
 testability, and integration with existing codebases.
-\`\`\`
+```
 
 3. The AI will acknowledge and adopt the persona
 
@@ -29,54 +29,54 @@ testability, and integration with existing codebases.
 ### Component Creation Workflow
 
 1. **Analyze Project Structure**:
-   \`\`\`
+   ```
    Please analyze my project structure to understand our component organization,
    styling approach, and existing patterns.
-   \`\`\`
+   ```
 
 2. **Create Component Files**:
-   \`\`\`
+   ```
    I need to create a DataTable component that supports sorting, filtering,
    and pagination. Please create the necessary files following our project structure.
-   \`\`\`
+   ```
 
 3. **Implement Component Logic**:
-   \`\`\`
+   ```
    Now let's implement the core logic for the DataTable component,
    focusing on the sorting and filtering functionality.
-   \`\`\`
+   ```
 
 4. **Add Styling**:
-   \`\`\`
+   ```
    Let's style the DataTable component according to our design system.
    It should be responsive and support both light and dark themes.
-   \`\`\`
+   ```
 
 5. **Create Tests**:
-   \`\`\`
+   ```
    Please create comprehensive tests for the DataTable component,
    covering all key functionality and edge cases.
-   \`\`\`
+   ```
 
 ### Design System Implementation
 
 1. **Analyze Existing Design System**:
-   \`\`\`
+   ```
    Please analyze our current design system implementation and suggest
    improvements for consistency and maintainability.
-   \`\`\`
+   ```
 
 2. **Implement Design Tokens**:
-   \`\`\`
+   ```
    I need to implement our design tokens as CSS variables or a ThemeProvider,
    depending on our project setup.
-   \`\`\`
+   ```
 
 3. **Create Component Library**:
-   \`\`\`
+   ```
    Let's create a core set of components that implement our design system:
    Button, Input, Card, and Modal.
-   \`\`\`
+   ```
 
 ## Cline-Specific Features
 
@@ -84,28 +84,28 @@ testability, and integration with existing codebases.
 
 Cline has excellent file system awareness. Use this to your advantage:
 
-\`\`\`
+```
 Please scan our src/components directory and identify any inconsistencies
 in our component implementation patterns.
-\`\`\`
+```
 
 ### Code Analysis
 
 Leverage Cline's code understanding capabilities:
 
-\`\`\`
+```
 Can you analyze this component and suggest improvements for performance,
 accessibility, and maintainability?
-\`\`\`
+```
 
 ### Terminal Integration
 
 Use Cline's terminal integration for package management:
 
-\`\`\`
+```
 I need to add a date picker to our project. Please recommend a library
 that fits our needs and show me how to install and integrate it.
-\`\`\`
+```
 
 ## Tips for Best Results
 
@@ -135,7 +135,7 @@ that fits our needs and show me how to install and integrate it.
 
 Here's an example of a complete session with the v0 UX/UI Architect in Cline:
 
-\`\`\`
+```
 User: I want to work with the v0 UX/UI IDE Architect from the BMAD Method.
 
 AI: I'll embody the v0 UX/UI IDE Architect persona. I'm Victor, specialized in direct implementation of frontend components with a focus on code quality, testability, and integration with existing codebases. How can I help with your frontend implementation today?
@@ -165,7 +165,7 @@ User: Can you also show me how to test these components for accessibility?
 
 AI: Here's how to test these components for accessibility:
 [Creates test files with accessibility testing]
-\`\`\`
+```
 
 ## Conclusion
 

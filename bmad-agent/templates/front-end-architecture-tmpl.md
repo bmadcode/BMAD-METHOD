@@ -1,4 +1,4 @@
-# {Project Name} Frontend Architecture Document
+﻿# {Project Name} Frontend Architecture Document
 
 ## Table of Contents
 
@@ -51,7 +51,7 @@
 
 - **Framework & Core Libraries:** {e.g., React 18.x with Next.js 13.x, Angular 16.x, Vue 3.x with Nuxt.js}. **These are derived from the 'Definitive Tech Stack Selections' in the main Architecture Document.** This section elaborates on *how* these choices are applied specifically to the frontend.
 - **Component Architecture:** {e.g., Atomic Design principles, Presentational vs. Container components, use of specific component libraries like Material UI, Tailwind CSS for styling approach. Specify chosen approach and any key libraries.}
-- **State Management Strategy:** {e.g., Redux Toolkit, Zustand, Vuex, NgRx. Briefly describe the overall approach – global store, feature stores, context API usage. **Referenced from main Architecture Document and detailed further in "State Management In-Depth" section.**}
+- **State Management Strategy:** {e.g., Redux Toolkit, Zustand, Vuex, NgRx. Briefly describe the overall approach â€“ global store, feature stores, context API usage. **Referenced from main Architecture Document and detailed further in "State Management In-Depth" section.**}
 - **Data Flow:** {e.g., Unidirectional data flow (Flux/Redux pattern), React Query/SWR for server state. Describe how data is fetched, cached, passed to components, and updated.}
 - **Styling Approach:** **{Chosen Styling Solution, e.g., Tailwind CSS / CSS Modules / Styled Components}**. Configuration File(s): {e.g., `tailwind.config.js`, `postcss.config.js`}. Key conventions: {e.g., "Utility-first approach for Tailwind. Custom components defined in `src/styles/components.css`. Theme extensions in `tailwind.config.js` under `theme.extend`. For CSS Modules, files are co-located with components, e.g., `MyComponent.module.css`.}
 - **Key Design Patterns Used:** {e.g., Provider pattern, Hooks, Higher-Order Components, Service patterns for API calls, Container/Presentational. These patterns are to be consistently applied. Deviations require justification and documentation.}
@@ -62,46 +62,46 @@
 
 ### EXAMPLE - Not Prescriptive (for a React/Next.js app)
 
-\`\`\`plaintext
+```plaintext
 src/
-├── app/                        # Next.js App Router: Pages/Layouts/Routes. MUST contain route segments, layouts, and page components.
-│   ├── (features)/             # Feature-based routing groups. MUST group related routes for a specific feature.
-│   │   └── dashboard/
-│   │       ├── layout.tsx      # Layout specific to the dashboard feature routes.
-│   │       └── page.tsx        # Entry page component for a dashboard route.
-│   ├── api/                    # API Routes (if using Next.js backend features). MUST contain backend handlers for client-side calls.
-│   ├── globals.css             # Global styles. MUST contain base styles, CSS variable definitions, Tailwind base/components/utilities.
-│   └── layout.tsx              # Root layout for the entire application.
-├── components/                 # Shared/Reusable UI Components.
-│   ├── ui/                     # Base UI elements (Button, Input, Card). MUST contain only generic, reusable, presentational UI elements, often mapped from a design system. MUST NOT contain business logic.
-│   │   ├── Button.tsx
-│   │   └── ...
-│   ├── layout/                 # Layout components (Header, Footer, Sidebar). MUST contain components structuring page layouts, not specific page content.
-│   │   ├── Header.tsx
-│   │   └── ...
-│   └── (feature-specific)/     # Components specific to a feature but potentially reusable within it. This is an alternative to co-locating within features/ directory.
-│       └── user-profile/
-│           └── ProfileCard.tsx
-├── features/                   # Feature-specific logic, hooks, non-global state, services, and components solely used by that feature.
-│   └── auth/
-│       ├── components/         # Components used exclusively by the auth feature. MUST NOT be imported by other features.
-│       ├── hooks/              # Custom React Hooks specific to the 'auth' feature. Hooks reusable across features belong in `src/hooks/`.
-│       ├── services/           # Feature-specific API interactions or orchestrations for the 'auth' feature.
-│       └── store.ts            # Feature-specific state slice (e.g., Redux slice) if not part of a global store or if local state is complex.
-├── hooks/                      # Global/sharable custom React Hooks. MUST be generic and usable by multiple features/components.
-│   └── useAuth.ts
-├── lib/ / utils/             # Utility functions, helpers, constants. MUST contain pure functions and constants, no side effects or framework-specific code unless clearly named (e.g., `react-helpers.ts`).
-│   └── utils.ts
-├── services/                   # Global API service clients or SDK configurations. MUST define base API client instances and core data fetching/mutation services.
-│   └── apiClient.ts
-├── store/                      # Global state management setup (e.g., Redux store, Zustand store).
-│   ├── index.ts                # Main store configuration and export.
-│   ├── rootReducer.ts          # Root reducer if using Redux.
-│   └── (slices)/               # Directory for global state slices (if not co-located in features).
-├── styles/                     # Global styles, theme configurations (if not using `globals.css` or similar, or for specific styling systems like SCSS partials).
-└── types/                      # Global TypeScript type definitions/interfaces. MUST contain types shared across multiple features/modules.
-    └── index.ts
-\`\`\`
+â”œâ”€â”€ app/                        # Next.js App Router: Pages/Layouts/Routes. MUST contain route segments, layouts, and page components.
+â”‚   â”œâ”€â”€ (features)/             # Feature-based routing groups. MUST group related routes for a specific feature.
+â”‚   â”‚   â””â”€â”€ dashboard/
+â”‚   â”‚       â”œâ”€â”€ layout.tsx      # Layout specific to the dashboard feature routes.
+â”‚   â”‚       â””â”€â”€ page.tsx        # Entry page component for a dashboard route.
+â”‚   â”œâ”€â”€ api/                    # API Routes (if using Next.js backend features). MUST contain backend handlers for client-side calls.
+â”‚   â”œâ”€â”€ globals.css             # Global styles. MUST contain base styles, CSS variable definitions, Tailwind base/components/utilities.
+â”‚   â””â”€â”€ layout.tsx              # Root layout for the entire application.
+â”œâ”€â”€ components/                 # Shared/Reusable UI Components.
+â”‚   â”œâ”€â”€ ui/                     # Base UI elements (Button, Input, Card). MUST contain only generic, reusable, presentational UI elements, often mapped from a design system. MUST NOT contain business logic.
+â”‚   â”‚   â”œâ”€â”€ Button.tsx
+â”‚   â”‚   â””â”€â”€ ...
+â”‚   â”œâ”€â”€ layout/                 # Layout components (Header, Footer, Sidebar). MUST contain components structuring page layouts, not specific page content.
+â”‚   â”‚   â”œâ”€â”€ Header.tsx
+â”‚   â”‚   â””â”€â”€ ...
+â”‚   â””â”€â”€ (feature-specific)/     # Components specific to a feature but potentially reusable within it. This is an alternative to co-locating within features/ directory.
+â”‚       â””â”€â”€ user-profile/
+â”‚           â””â”€â”€ ProfileCard.tsx
+â”œâ”€â”€ features/                   # Feature-specific logic, hooks, non-global state, services, and components solely used by that feature.
+â”‚   â””â”€â”€ auth/
+â”‚       â”œâ”€â”€ components/         # Components used exclusively by the auth feature. MUST NOT be imported by other features.
+â”‚       â”œâ”€â”€ hooks/              # Custom React Hooks specific to the 'auth' feature. Hooks reusable across features belong in `src/hooks/`.
+â”‚       â”œâ”€â”€ services/           # Feature-specific API interactions or orchestrations for the 'auth' feature.
+â”‚       â””â”€â”€ store.ts            # Feature-specific state slice (e.g., Redux slice) if not part of a global store or if local state is complex.
+â”œâ”€â”€ hooks/                      # Global/sharable custom React Hooks. MUST be generic and usable by multiple features/components.
+â”‚   â””â”€â”€ useAuth.ts
+â”œâ”€â”€ lib/ / utils/             # Utility functions, helpers, constants. MUST contain pure functions and constants, no side effects or framework-specific code unless clearly named (e.g., `react-helpers.ts`).
+â”‚   â””â”€â”€ utils.ts
+â”œâ”€â”€ services/                   # Global API service clients or SDK configurations. MUST define base API client instances and core data fetching/mutation services.
+â”‚   â””â”€â”€ apiClient.ts
+â”œâ”€â”€ store/                      # Global state management setup (e.g., Redux store, Zustand store).
+â”‚   â”œâ”€â”€ index.ts                # Main store configuration and export.
+â”‚   â”œâ”€â”€ rootReducer.ts          # Root reducer if using Redux.
+â”‚   â””â”€â”€ (slices)/               # Directory for global state slices (if not co-located in features).
+â”œâ”€â”€ styles/                     # Global styles, theme configurations (if not using `globals.css` or similar, or for specific styling systems like SCSS partials).
+â””â”€â”€ types/                      # Global TypeScript type definitions/interfaces. MUST contain types shared across multiple features/modules.
+    â””â”€â”€ index.ts
+```
 
 ### Notes on Frontend Structure:
 
@@ -142,14 +142,14 @@ src/
   | `{anotherState}`| `{type}`  | `{value}`     | {Description of state variable and its purpose.}                               |
 - **Key UI Elements / Structure:**
   { Provide a pseudo-HTML or JSX-like structure representing the component\'s DOM. Include key conditional rendering logic if applicable. **This structure dictates the primary output for the AI agent.** }
-  \`\`\`html
+  ```html
   <div> <!-- Main card container with specific class e.g., styles.cardFull or styles.cardCompact based on variant prop -->
     <img src="{avatarUrl || defaultAvatar}" alt="User Avatar" class="{styles.avatar}" />
     <h2>{userName}</h2>
     <p class="{variant === 'full' ? styles.emailFull : styles.emailCompact}">{userEmail}</p>
     {variant === 'full' && onEdit && <button onClick={onEdit} class="{styles.editButton}">Edit</button>}
   </div>
-  \`\`\`
+  ```
 - **Events Handled / Emitted:**
   - **Handles:** {e.g., `onClick` on the edit button (triggers `onEdit` prop).}
   - **Emits:** {If the component emits custom events/callbacks not covered by props, describe them with their exact signature. e.g., `onFollow: (payload: { userId: string; followed: boolean }) => void`}
@@ -184,7 +184,7 @@ _Repeat the above template for each significant component._
 - **Core Slice Example (e.g., `sessionSlice` in `src/store/slices/sessionSlice.ts`):**
   - **Purpose:** {Manages user session, authentication status, and basic user profile info accessible globally.}
   - **State Shape (Interface/Type):**
-    \`\`\`typescript
+    ```typescript
     interface SessionState {
       currentUser: { id: string; name: string; email: string; roles: string[]; } | null;
       isAuthenticated: boolean;
@@ -192,7 +192,7 @@ _Repeat the above template for each significant component._
       status: "idle" | "loading" | "succeeded" | "failed";
       error: string | null;
     }
-    \`\`\`
+    ```
   - **Key Reducers/Actions (within `createSlice`):** {Briefly list main synchronous actions, e.g., `setCurrentUser`, `clearSession`, `setAuthStatus`, `setAuthError`.}
   - **Async Thunks (if any):** {List key async thunks, e.g., `loginUserThunk`, `fetchUserProfileThunk`.}
   - **Selectors (memoized with `createSelector`):** {List key selectors, e.g., `selectCurrentUser`, `selectIsAuthenticated`.}

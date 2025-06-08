@@ -1,4 +1,4 @@
-# Component Specification: {Component Name}
+﻿# Component Specification: {Component Name}
 
 ## Overview
 **Purpose:** {Brief description of component purpose}
@@ -41,36 +41,36 @@
 ## Implementation Code
 
 ### Component Structure
-\`\`\`tsx
+```tsx
 // Component structure code
-\`\`\`
+```
 
 ### Styling
-\`\`\`tsx
+```tsx
 // Styling code
-\`\`\`
+```
 
 ### Logic
-\`\`\`tsx
+```tsx
 // Logic code
-\`\`\`
+```
 
 ## Usage Examples
 
 ### Basic Usage
-\`\`\`tsx
+```tsx
 // Basic usage example
-\`\`\`
+```
 
 ### With Variants
-\`\`\`tsx
+```tsx
 // Variant examples
-\`\`\`
+```
 
 ### With Different States
-\`\`\`tsx
+```tsx
 // State examples
-\`\`\`
+```
 
 ## Testing Checklist
 - [ ] Visual regression tests

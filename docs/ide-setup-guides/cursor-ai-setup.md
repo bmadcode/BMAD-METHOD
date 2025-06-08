@@ -1,4 +1,4 @@
-# Setting Up v0-UX/UI Architect in Cursor AI
+﻿# Setting Up v0-UX/UI Architect in Cursor AI
 
 This guide will help you set up and use the v0-UX/UI Architect persona in Cursor AI for efficient frontend development.
 
@@ -7,10 +7,10 @@ This guide will help you set up and use the v0-UX/UI Architect persona in Cursor
 ### 1. Initial Setup
 
 1. **Clone the BMAD-Method Repository**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/bmadcode/BMAD-METHOD.git
    cd BMAD-METHOD
-   \`\`\`
+   ```
 
 2. **Open in Cursor AI**
    - Launch Cursor AI
@@ -39,13 +39,13 @@ This guide will help you set up and use the v0-UX/UI Architect persona in Cursor
 For optimal results, provide the following context:
 
 1. **Project Structure Overview**
-   \`\`\`
+   ```
    /src
      /components
      /styles
      /pages
    package.json
-   \`\`\`
+   ```
 
 2. **Tech Stack Information**
    - Frontend framework (React, Vue, etc.)
@@ -58,46 +58,46 @@ For optimal results, provide the following context:
 ### Basic Component Creation
 
 1. **Simple Component Request**
-   \`\`\`
+   ```
    Create a responsive card component with:
    - Image
    - Title
    - Description
    - Action button
-   \`\`\`
+   ```
 
 2. **Component with Variants**
-   \`\`\`
+   ```
    Create a button component with:
    - Primary, secondary, and tertiary variants
    - Different sizes (sm, md, lg)
    - Loading state
    - Disabled state
-   \`\`\`
+   ```
 
 ### Advanced Usage
 
 1. **Design System Integration**
-   \`\`\`
+   ```
    Create a modal component that follows our existing design system.
    It should have a header, body, footer, and close button.
-   \`\`\`
+   ```
 
 2. **Multi-Component Creation**
-   \`\`\`
+   ```
    Create a form with:
    - Text input
    - Dropdown select
    - Checkbox group
    - Submit button
    All components should be reusable and follow accessibility best practices.
-   \`\`\`
+   ```
 
 3. **Component Refactoring**
-   \`\`\`
+   ```
    Refactor this existing component to use Tailwind CSS and improve performance:
    [paste component code]
-   \`\`\`
+   ```
 
 ### Cursor-Specific Tips
 

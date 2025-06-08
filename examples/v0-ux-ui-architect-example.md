@@ -1,4 +1,4 @@
-# v0 UX/UI Architect Example Project
+﻿# v0 UX/UI Architect Example Project
 
 This example demonstrates how to use the v0 UX/UI Architect persona to create a complete component library for a fictional e-commerce application.
 
@@ -11,15 +11,15 @@ This example demonstrates how to use the v0 UX/UI Architect persona to create a 
 
 ## Step 1: Initial Prompt to v0 UX/UI Architect
 
-\`\`\`
+```
 I need a component library for a modern e-commerce platform called ModernShop. The brand values are minimalist, premium, sustainable, and inclusive. The target audience is fashion-conscious consumers aged 25-45. Please create a design system and core components that reflect these values.
-\`\`\`
+```
 
 ## Step 2: Design System Definition
 
 The v0 UX/UI Architect will first establish the design system foundations:
 
-\`\`\`markdown
+```markdown
 # ModernShop Design System
 
 ## Color Palette
@@ -54,7 +54,7 @@ The v0 UX/UI Architect will first establish the design system foundations:
 - Subtle: 0 2px 4px rgba(0,0,0,0.05)
 - Medium: 0 4px 8px rgba(0,0,0,0.1)
 - Strong: 0 8px 16px rgba(0,0,0,0.15)
-\`\`\`
+```
 
 ## Step 3: Core Component Creation
 
@@ -62,7 +62,7 @@ The v0 UX/UI Architect will then generate core components:
 
 ### Button Component
 
-\`\`\`tsx
+```tsx
 // Button.tsx
 import React from 'react';
 import './Button.css';
@@ -101,11 +101,11 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-\`\`\`
+```
 
 ### Product Card Component
 
-\`\`\`tsx
+```tsx
 // ProductCard.tsx
 import React from 'react';
 import './ProductCard.css';
@@ -174,13 +174,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     </div>
   );
 };
-\`\`\`
+```
 
 ## Step 4: Component Documentation
 
 The v0 UX/UI Architect will create comprehensive documentation for each component:
 
-\`\`\`markdown
+```markdown
 # Button Component
 
 ## Overview
@@ -204,7 +204,7 @@ The Button component is a versatile, accessible button that supports multiple va
 - Focus states are clearly visible
 
 ## Usage Examples
-\`\`\`tsx
+```tsx
 // Primary button
 <Button label="Add to Cart" onClick={handleAddToCart} />
 
@@ -230,21 +230,21 @@ The Button component is a versatile, accessible button that supports multiple va
   fullWidth={true} 
   onClick={handleViewAll} 
 />
-\`\`\`
+```
 
 ## Step 5: IDE Implementation
 
 For IDE environments like Cursor AI, the v0 UX/UI IDE Architect would implement the components directly in the codebase:
 
-\`\`\`
+```
 I need to implement the Button component from our ModernShop design system in our React codebase. The component should support primary, secondary, tertiary, and ghost variants, multiple sizes, and include proper accessibility features.
-\`\`\`
+```
 
 ## Step 6: Quality Assurance
 
 The v0 UX/UI Architect will run the component through the quality checklist:
 
-\`\`\`markdown
+```markdown
 # Button Component Quality Checklist
 
 ## Design Consistency
@@ -277,7 +277,7 @@ The v0 UX/UI Architect will run the component through the quality checklist:
 - [x] Dependencies clearly documented
 - [x] Integration examples provided
 - [x] Storybook story created
-\`\`\`
+```
 
 ## Conclusion
 

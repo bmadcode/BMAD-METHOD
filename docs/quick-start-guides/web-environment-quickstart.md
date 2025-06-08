@@ -1,4 +1,4 @@
-# Web Environment Quick Start Guide
+﻿# Web Environment Quick Start Guide
 
 ## 5-Minute Setup for v0 UX/UI Architect
 
@@ -13,19 +13,19 @@
 4. **Save the configuration**
 
 ### Step 2: Activate Veronica
-\`\`\`
+```
 I need Veronica, the v0 UX/UI Architect, to help me create a modern dashboard component.
-\`\`\`
+```
 
 ### Step 3: Provide Your Requirements
-\`\`\`
+```
 I'm building a SaaS application dashboard that needs:
 - A sidebar navigation with menu items
 - A main content area for widgets
 - A top header with user profile and notifications
 - Responsive design for mobile and desktop
 - Modern, clean aesthetic using a blue and white color scheme
-\`\`\`
+```
 
 ### Step 4: Review the Output
 Veronica will provide:
@@ -35,33 +35,33 @@ Veronica will provide:
 - Accessibility considerations
 
 ### Step 5: Iterate and Refine
-\`\`\`
+```
 Can you modify the sidebar to be collapsible and add a dark mode variant?
-\`\`\`
+```
 
 ## Common Web Environment Workflows
 
 ### Design Exploration
-\`\`\`
+```
 Veronica, I need to explore different design directions for a product landing page. 
 Can you create 3 different layout concepts with different visual styles?
-\`\`\`
+```
 
 ### Component Specification
-\`\`\`
+```
 I need a detailed specification for a data table component that includes:
 - Sortable columns
 - Row selection
 - Pagination
 - Search functionality
 - Export options
-\`\`\`
+```
 
 ### Design System Planning
-\`\`\`
+```
 Veronica, help me plan a design system for a fintech application. 
 I need core components, color palette, typography scale, and spacing tokens.
-\`\`\`
+```
 
 ## Tips for Success
 - Be specific about your technical requirements

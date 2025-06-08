@@ -1,4 +1,4 @@
-# Setting Up v0-UX/UI Architect in Claude Code
+﻿# Setting Up v0-UX/UI Architect in Claude Code
 
 This guide will help you set up and use the v0-UX/UI Architect persona in Claude Code for efficient frontend development.
 
@@ -7,10 +7,10 @@ This guide will help you set up and use the v0-UX/UI Architect persona in Claude
 ### 1. Initial Setup
 
 1. **Clone the BMAD-Method Repository**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/bmadcode/BMAD-METHOD.git
    cd BMAD-METHOD
-   \`\`\`
+   ```
 
 2. **Open in Claude Code**
    - Launch Claude Code
@@ -48,47 +48,47 @@ For optimal results, provide the following context:
 ### Basic Component Creation
 
 1. **Simple Component Request**
-   \`\`\`
+   ```
    Create a responsive card component with:
    - Image
    - Title
    - Description
    - Action button
-   \`\`\`
+   ```
 
 2. **Component with Variants**
-   \`\`\`
+   ```
    Create a button component with:
    - Primary, secondary, and tertiary variants
    - Different sizes (sm, md, lg)
    - Loading state
    - Disabled state
-   \`\`\`
+   ```
 
 ### Advanced Usage
 
 1. **Design System Integration**
-   \`\`\`
+   ```
    Create a modal component that follows our existing design system.
    It should have a header, body, footer, and close button.
-   \`\`\`
+   ```
 
 2. **Multi-Component Creation**
-   \`\`\`
+   ```
    Create a form with:
    - Text input
    - Dropdown select
    - Checkbox group
    - Submit button
    All components should be reusable and follow accessibility best practices.
-   \`\`\`
+   ```
 
 3. **Code Quality Focus**
    Claude Code excels at code quality. Try:
-   \`\`\`
+   ```
    Create a data table component with sorting, filtering, and pagination.
    Ensure it follows best practices for performance and accessibility.
-   \`\`\`
+   ```
 
 ### Claude Code-Specific Tips
 
