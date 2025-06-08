@@ -43,6 +43,35 @@ For optimal results, provide the following context:
    - Share your package.json or describe your tech stack
    - Highlight any specific libraries or frameworks you're using
 
+## Advanced Configuration
+
+### Roocode Visual Settings
+Configure these settings for optimal visual development:
+```json
+{
+  "roocode.visualFeedback": "enhanced",
+  "roocode.componentPreview": "realtime",
+  "roocode.designSystem": "auto-detect",
+  "bmad.visualPersona": "v0-ux-ui-architect"
+}
+```
+
+### Design System Integration
+Create a `.roocode/design-config.json` file:
+```json
+{
+  "designTokens": "./src/tokens/design-tokens.json",
+  "componentLibrary": "./src/components",
+  "personaPreferences": {
+    "v0-ux-ui-architect": {
+      "framework": "react",
+      "styling": "tailwind",
+      "accessibility": "wcag-aa"
+    }
+  }
+}
+```
+
 ## Usage Guide
 
 ### Basic Component Creation
@@ -106,6 +135,18 @@ For optimal results, provide the following context:
 4. **Visual Design Focus**
    - Roocode can help with visual design aspects
    - Example: "Improve the visual hierarchy of this component"
+
+## Performance Optimization
+
+### Visual Rendering Performance
+- Enable hardware acceleration for component previews
+- Use Roocode's caching for faster iterations
+- Configure optimal viewport settings for responsive design
+
+### Design Workflow Enhancement
+- Set up automated design token synchronization
+- Use Roocode's visual diff features for component changes
+- Enable real-time collaboration features
 
 ## Troubleshooting
 

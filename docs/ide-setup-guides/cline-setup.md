@@ -43,6 +43,27 @@ For optimal results, provide the following context:
    - Share your package.json or describe your tech stack
    - Highlight any specific libraries or frameworks you're using
 
+## Advanced Configuration
+
+### Environment Variables
+Set these environment variables for optimal Cline integration:
+```bash
+export BMAD_PERSONA_PATH="/path/to/BMAD-METHOD/bmad-agent/personas"
+export BMAD_AUTO_ACTIVATE="true"
+export CLINE_CONTEXT_SIZE="8192"
+```
+
+### Project Configuration
+Create a `.cline/config.json` file:
+```json
+{
+  "defaultPersona": "v0-ux-ui-architect",
+  "autoLoadContext": true,
+  "maxTokens": 8192,
+  "temperature": 0.7
+}
+```
+
 ## Usage Guide
 
 ### Basic Component Creation
@@ -107,6 +128,13 @@ For optimal results, provide the following context:
    - Cline can create tests alongside components
    - Try: "Create a modal component with Jest tests"
 
+## Performance Optimization
+
+### Terminal Integration Best Practices
+- Use relative paths when referencing BMAD files
+- Leverage Cline's file watching capabilities
+- Set up automated persona switching based on file types
+
 ## Troubleshooting
 
 ### Common Issues
@@ -122,6 +150,11 @@ For optimal results, provide the following context:
 3. **File Creation Permissions**
    - **Problem**: Cline can't create new files
    - **Solution**: Check your IDE permissions and settings
+
+### Debugging Setup Issues
+- Check file permissions on BMAD-METHOD directory
+- Verify API key configuration
+- Test persona activation with simple commands first
 
 ### Getting Help
 

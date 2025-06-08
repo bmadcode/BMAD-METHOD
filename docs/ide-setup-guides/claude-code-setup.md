@@ -43,6 +43,36 @@ For optimal results, provide the following context:
    - Share your package.json or describe your tech stack
    - Highlight any specific libraries or frameworks you're using
 
+## Advanced Configuration
+
+### Claude Code Settings
+Configure these settings for optimal BMAD integration:
+```json
+{
+  "claude.contextWindow": "maximum",
+  "claude.codeQuality": "high",
+  "claude.autoSuggest": true,
+  "bmad.personaPath": "./bmad-agent/personas/"
+}
+```
+
+### Project Workspace Setup
+Create a `.claude/workspace.json` file:
+```json
+{
+  "personas": {
+    "default": "v0-ux-ui-architect",
+    "fallback": "dev",
+    "autoSwitch": true
+  },
+  "codeGeneration": {
+    "framework": "react",
+    "styling": "tailwind",
+    "testing": "jest"
+  }
+}
+```
+
 ## Usage Guide
 
 ### Basic Component Creation
@@ -107,6 +137,18 @@ For optimal results, provide the following context:
 4. **Best Practices Integration**
    - Claude Code can implement current best practices
    - Try: "Create a data fetching hook using the latest React best practices"
+
+## Performance Optimization
+
+### Code Quality Enhancement
+- Enable real-time code analysis
+- Use Claude Code's built-in linting integration
+- Configure automated code formatting
+
+### Best Practices for BMAD Integration
+- Always specify the target persona at conversation start
+- Use Claude Code's project understanding features
+- Leverage code context for better persona responses
 
 ## Troubleshooting
 
