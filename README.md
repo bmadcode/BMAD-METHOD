@@ -19,8 +19,6 @@ Orchestrator Uber BMad Agent that does it all - already pre-compiled in the `web
 - The remaining files in that same folder folder just need to be attached as shown in the screenshot below. Give it a name (such as BMad Agent) and save it, and you now have the BMad Agent available to help you brainstorm, research, plan, execute on your vision, or understand how this all even works!
 - Once its running, start with typing `/help`, and then type option `2` when it presents 3 options to learn about the method!
 
-![image info](docs/images/gem-setup.png)
-
 ## How It Works: The BMAD Method Explained
 
 The BMAD Method uses a powerful **Orchestrator** system that coordinates specialized AI personas to handle different aspects of your project:
