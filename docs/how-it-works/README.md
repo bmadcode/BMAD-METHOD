@@ -35,7 +35,7 @@ The BMAD Method is a revolutionary AI-driven development approach that uses spec
 
 ## How It All Fits Together
 
-\```mermaid title="BMAD Method Overview" type="diagram"
+```mermaid title="BMAD Method Overview" type="diagram"
 graph TD
     A["User Request"] --> B["Orchestrator"]
     B --> C{["Analyze Request"]}
@@ -48,7 +48,7 @@ graph TD
     H -->|Yes| J["Update Context"]
     I --> E
     J --> K["Ready for Next Request"]
-\```
+```
 
 ## Environment Support
 

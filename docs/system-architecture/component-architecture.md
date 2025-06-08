@@ -8,7 +8,7 @@ The BMAD Method is a structured approach for AI-driven development that coordina
 
 The BMAD Method consists of several interconnected conceptual components that work together to facilitate AI-driven development:
 
-\```mermaid title="BMAD Method Component Architecture" type="diagram"
+```mermaid title="BMAD Method Component Architecture" type="diagram"
 graph TD
     A["BMAD Orchestrator"] --> B["Persona System"]
     A --> C["Task Framework"]
@@ -33,7 +33,7 @@ graph TD
     E --> E1["Quality Checklists"]
     E --> E2["Process Checklists"]
     E --> E3["Deliverable Checklists"]
-\```
+```
 
 ## Component Descriptions
 
@@ -90,7 +90,7 @@ Quality assurance mechanisms to ensure completeness and consistency.
 
 The components interact through a series of defined workflows:
 
-\```mermaid title="Component Interaction Flow" type="diagram"
+```mermaid title="Component Interaction Flow" type="diagram"
 sequenceDiagram
     participant User
     participant Orchestrator as BMAD Orchestrator
@@ -106,7 +106,7 @@ sequenceDiagram
     Tasks->>Checklists: Verify against checklists
     Personas->>Orchestrator: Return completed work
     Orchestrator->>User: Deliver output
-\```
+```
 
 ## Integration Points
 

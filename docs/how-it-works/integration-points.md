@@ -8,7 +8,7 @@ BMAD operates through multiple integration points that enable seamless collabora
 
 ## System Integration Architecture
 
-\```mermaid
+```mermaid
 graph TB
     subgraph "External Systems"
         IDE[IDE Environment]
@@ -40,7 +40,7 @@ graph TB
     PERSONAS --> KB
     TASKS --> CHECKLISTS
     TEMPLATES --> CONFIGS
-\```
+```
 
 ## Core Integration Points
 
@@ -81,7 +81,7 @@ graph TB
 **Purpose**: Enable consistent document and code generation
 
 **Integration Flow:**
-\```mermaid
+```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
@@ -93,7 +93,7 @@ sequenceDiagram
     Template Engine->>Template Engine: Process Variables
     Template Engine->>Output System: Generate Content
     Output System->>User: Deliver Document
-\```
+```
 
 ### 4. Checklist Integration
 
@@ -121,19 +121,19 @@ sequenceDiagram
 
 Personas work in sequence, with clear handoff points:
 
-\```mermaid
+```mermaid
 graph LR
     PO[Product Owner] --> PM[Project Manager]
     PM --> ARCH[Architect]
     ARCH --> UX[UX/UI Designer]
     UX --> DEV[Developer]
-\```
+```
 
 ### 2. Parallel Integration
 
 Multiple personas work simultaneously on different aspects:
 
-\```mermaid
+```mermaid
 graph TD
     REQ[Requirements] --> PO[Product Owner]
     REQ --> PM[Project Manager]
@@ -142,13 +142,13 @@ graph TD
     PO --> INTEGRATION[Integration Point]
     PM --> INTEGRATION
     ARCH --> INTEGRATION
-\```
+```
 
 ### 3. Collaborative Integration
 
 Personas collaborate in real-time on shared deliverables:
 
-\```mermaid
+```mermaid
 graph TB
     subgraph "Collaborative Space"
         DOC[Shared Document]
@@ -160,7 +160,7 @@ graph TB
     PO --> DOC
     ARCH --> DOC
     UX --> DOC
-\```
+```
 
 ## Data Integration Points
 

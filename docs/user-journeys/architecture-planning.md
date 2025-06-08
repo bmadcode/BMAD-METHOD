@@ -21,7 +21,7 @@ This document maps the complete journey of a System Architect planning technical
 
 ## Journey Map
 
-\```mermaid title="Architecture Planning Journey" type="diagram"
+```mermaid title="Architecture Planning Journey" type="diagram"
 journey
     title Architecture Planning User Journey
     section Requirements Analysis
@@ -40,7 +40,7 @@ journey
       Create implementation roadmap: 4
       Develop technical standards: 3
       Prepare knowledge transfer: 4
-\```
+```
 
 ## Detailed Journey Stages
 
@@ -131,7 +131,7 @@ journey
 
 ## Emotional Journey
 
-\```mermaid title="Emotional Journey" type="diagram"
+```mermaid title="Emotional Journey" type="diagram"
 journey
     title Emotional Journey - Architecture Planning
     section Requirements Analysis
@@ -150,7 +150,7 @@ journey
       Concern about execution challenges: 3
       Focus during standards development: 4
       Optimism about implementation: 4
-\```
+```
 
 ## Success Metrics
 

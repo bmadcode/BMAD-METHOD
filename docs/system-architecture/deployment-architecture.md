@@ -6,7 +6,7 @@ Unlike traditional software systems, the BMAD Method is not "deployed" in the co
 
 ## Conceptual Deployment Architecture
 
-\```mermaid title="BMAD Method Conceptual Deployment" type="diagram"
+```mermaid title="BMAD Method Conceptual Deployment" type="diagram"
 graph TD
     A[BMAD Method] --> B[Documentation Deployment]
     A --> C[Template Deployment]
@@ -28,13 +28,13 @@ graph TD
     E --> E1[LLM Integration]
     E --> E2[IDE Integration]
     E --> E3[Tool-Specific Adapters]
-\```
+```
 
 ## Documentation Deployment
 
 The BMAD Method documentation can be deployed through various channels:
 
-\```mermaid title="Documentation Deployment Options" type="diagram"
+```mermaid title="Documentation Deployment Options" type="diagram"
 graph LR
     A[BMAD Documentation] --> B[GitHub Repository]
     A --> C[Internal Wiki]
@@ -49,13 +49,13 @@ graph LR
     D --> K[Interactive Docs]
     F --> L[LMS]
     F --> M[Workshop Materials]
-\```
+```
 
 ## Template Deployment
 
 BMAD Method templates can be deployed through:
 
-\```mermaid title="Template Deployment Architecture" type="diagram"
+```mermaid title="Template Deployment Architecture" type="diagram"
 flowchart TD
     A[BMAD Templates] --> B[Version Control]
     B --> C[Template Repository]
@@ -74,13 +74,13 @@ flowchart TD
     
     G --> M[GitHub Access]
     G --> N[Direct Download]
-\```
+```
 
 ## Process Deployment
 
 BMAD Method processes can be deployed through:
 
-\```mermaid title="Process Deployment Architecture" type="diagram"
+```mermaid title="Process Deployment Architecture" type="diagram"
 graph TD
     A[BMAD Processes] --> B[Process Documentation]
     A --> C[Workflow Integration]
@@ -97,13 +97,13 @@ graph TD
     D --> D1[Onboarding]
     D --> D2[Workshops]
     D --> D3[Practice Exercises]
-\```
+```
 
 ## LLM Integration Deployment
 
 How the BMAD Method can be deployed for LLM integration:
 
-\```mermaid title="LLM Integration Deployment" type="diagram"
+```mermaid title="LLM Integration Deployment" type="diagram"
 flowchart LR
     A[BMAD Method] --> B[Prompt Engineering]
     A --> C[Context Management]
@@ -121,13 +121,13 @@ flowchart LR
     E --> K[OpenAI Integration]
     E --> L[Anthropic Integration]
     E --> M[Custom LLM Integration]
-\```
+```
 
 ## Organizational Deployment Models
 
 Different ways to deploy the BMAD Method within an organization:
 
-\```mermaid title="Organizational Deployment Models" type="diagram"
+```mermaid title="Organizational Deployment Models" type="diagram"
 graph TD
     A[BMAD Method] --> B[Full Adoption]
     A --> C[Hybrid Adoption]
@@ -149,13 +149,13 @@ graph TD
     E --> E1[Project-Specific Implementation]
     E --> E2[Custom Adaptation]
     E --> E3[Limited Scope]
-\```
+```
 
 ## Deployment Phases
 
 A phased approach to deploying the BMAD Method:
 
-\```mermaid title="BMAD Deployment Phases" type="diagram"
+```mermaid title="BMAD Deployment Phases" type="diagram"
 graph LR
     A[Phase 1: Preparation] --> B[Phase 2: Pilot]
     B --> C[Phase 3: Evaluation]
@@ -186,7 +186,7 @@ graph LR
     F --> F1[Standard Operating Procedures]
     F --> F2[Integration with Existing Processes]
     F --> F3[Continuous Improvement]
-\```
+```
 
 ## Conclusion
 

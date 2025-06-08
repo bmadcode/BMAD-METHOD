@@ -1,0 +1,83 @@
+﻿==================== START: training-materials ====================
+# v0 UX/UI Architect Training Materials
+
+## Quick Start Guide
+
+### Activating the v0 UX/UI Architect (Veronica)
+
+To activate Veronica in a web-based AI environment:
+
+```
+"I need to work with Veronica, the v0 UX/UI Architect. I want to create [describe your UI/UX need]."
+```
+
+### Core Capabilities
+
+Veronica excels at:
+- **Rapid Visual Prototyping**: Transform text descriptions into visual mockups
+- **Component Generation**: Create reusable UI components with code
+- **Design System Creation**: Build cohesive design systems
+- **Responsive Design**: Ensure designs work across all devices
+- **Accessibility Integration**: Build inclusive user experiences
+
+### Common Use Cases
+
+#### 1. Creating a New Component
+```
+"Veronica, I need a modern card component for displaying product information. 
+It should include an image, title, price, and call-to-action button. 
+The design should be clean and work well on mobile."
+```
+
+#### 2. Building a Design System
+```
+"Veronica, help me create a design system for a fintech application. 
+I need primary and secondary buttons, form inputs, and cards. 
+The brand colors are blue (#2563eb) and gray (#64748b)."
+```
+
+#### 3. Rapid Prototyping
+```
+"Veronica, I have a project brief for an e-commerce dashboard. 
+Can you create initial wireframes and component mockups based on the requirements?"
+```
+
+### Best Practices
+
+1. **Be Specific**: Provide clear requirements, brand guidelines, and user context
+2. **Iterate**: Start with basic concepts and refine based on feedback
+3. **Think Components**: Focus on reusable elements that scale
+4. **Consider Users**: Always mention target audience and use cases
+5. **Quality Check**: Use the v0 component quality checklist for final review
+
+### Integration with BMAD Workflow
+
+- **After Analyst Phase**: Use for initial visual exploration
+- **During PM Phase**: Create component specifications for user stories
+- **Before Development**: Generate implementation-ready components
+- **Quality Assurance**: Apply component quality checklist
+
+### Troubleshooting
+
+**Issue**: Generated components don't match brand guidelines
+**Solution**: Provide specific brand colors, typography, and style references
+
+**Issue**: Components aren't responsive
+**Solution**: Explicitly request mobile-first responsive design
+
+**Issue**: Accessibility concerns
+**Solution**: Request WCAG compliance and screen reader compatibility
+
+### IDE Integration Reference
+
+For development environments, the v0 UX/UI Architect can also work directly in:
+- **Cursor AI**: Excellent for multi-file component creation
+- **Cline**: Strong project context understanding
+- **Claude Code**: Focus on code quality and best practices
+- **Roocode**: Rapid prototyping capabilities
+
+To use in IDE environments, activate the IDE-specific version and follow the implementation-focused workflow.
+
+==================== END: training-materials ====================
+
+

@@ -4,7 +4,7 @@ The Orchestrator is the central intelligence system that coordinates all BMAD pe
 
 ## Orchestrator Architecture
 
-\```mermaid title="Orchestrator System Architecture" type="diagram"
+```mermaid title="Orchestrator System Architecture" type="diagram"
 graph TB
     subgraph "User Interface Layer"
         A["User Input"]
@@ -58,7 +58,7 @@ graph TB
     G <--> O
     H <--> P
     F <--> Q
-\```
+```
 
 ## Core Components
 
@@ -93,7 +93,7 @@ Maintains and provides access to all project information:
 
 **Context Structure:**
 
-\```mermaid title="Context Information Flow" type="diagram"
+```mermaid title="Context Information Flow" type="diagram"
 graph LR
     A["User Interactions"] --> B["Context Manager"]
     C["Persona Outputs"] --> B
@@ -109,7 +109,7 @@ graph LR
     G --> J
     H --> J
     I --> J
-\```
+```
 
 ### 3. Persona Selector
 
@@ -123,7 +123,7 @@ Intelligently chooses the right persona(s) for each task:
 
 **Selection Algorithm:**
 
-\```mermaid title="Persona Selection Logic" type="diagram"
+```mermaid title="Persona Selection Logic" type="diagram"
 graph TD
     A["Analyze Request"] --> B{["Primary Domain?"]}
     
@@ -147,7 +147,7 @@ graph TD
     
     K --> M["Synthesize Results"]
     L --> M
-\```
+```
 
 ### 4. Task Coordinator
 
@@ -161,7 +161,7 @@ Manages the execution of tasks across personas:
 
 **Task Execution Flow:**
 
-\```mermaid title="Task Coordination Process" type="diagram"
+```mermaid title="Task Coordination Process" type="diagram"
 graph TD
     A["Receive Task Request"] --> B["Decompose into Subtasks"]
     B --> C["Identify Dependencies"]
@@ -182,7 +182,7 @@ graph TD
     K --> I
     L --> M["Quality Check"]
     M --> N["Deliver Results"]
-\```
+```
 
 ### 5. Quality Controller
 

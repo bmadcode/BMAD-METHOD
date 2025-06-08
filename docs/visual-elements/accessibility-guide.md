@@ -22,7 +22,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 
 All text and interactive elements meet or exceed WCAG AA standards:
 
-\```css
+```css
 /* High contrast color combinations */
 .high-contrast-text {
   color: #000000;           /* Black text */
@@ -54,13 +54,13 @@ All text and interactive elements meet or exceed WCAG AA standards:
   outline-offset: 2px;
   /* Focus indicator clearly visible */
 }
-\```
+```
 
 ### Color-Blind Friendly Palette
 
 Our color system works for users with various types of color vision deficiency:
 
-\```css
+```css
 /* Color-blind friendly palette */
 :root {
   --accessible-blue: #0066cc;      /* Distinguishable blue */
@@ -104,13 +104,13 @@ Our color system works for users with various types of color vision deficiency:
   content: "âš ";
   font-weight: bold;
 }
-\```
+```
 
 ## Typography and Readability
 
 ### Font Selection and Sizing
 
-\```css
+```css
 /* Accessible typography */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -137,11 +137,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
   }
 }
-\```
+```
 
 ### Reading Flow and Structure
 
-\```html
+```html
 <!-- Proper heading hierarchy -->
 <main>
   <h1>BMAD Method Documentation</h1>
@@ -162,13 +162,13 @@ h1, h2, h3, h4, h5, h6 {
 <!-- Skip links for keyboard navigation -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <a href="#navigation" class="skip-link">Skip to navigation</a>
-\```
+```
 
 ## Keyboard Navigation
 
 ### Focus Management
 
-\```css
+```css
 /* Visible focus indicators */
 *:focus {
   outline: 2px solid var(--bmad-primary);
@@ -203,11 +203,11 @@ textarea:focus {
 .skip-link:focus {
   top: 6px;
 }
-\```
+```
 
 ### Keyboard Interaction Patterns
 
-\```javascript
+```javascript
 // Accessible dropdown menu
 class AccessibleDropdown {
   constructor(element) {
@@ -278,13 +278,13 @@ class AccessibleDropdown {
     this.items[prevIndex].focus();
   }
 }
-\```
+```
 
 ## Screen Reader Support
 
 ### Semantic HTML and ARIA
 
-\```html
+```html
 <!-- Proper semantic structure -->
 <article role="main">
   <header>
@@ -358,11 +358,11 @@ class AccessibleDropdown {
     </div>
   </fieldset>
 </form>
-\```
+```
 
 ### Screen Reader Announcements
 
-\```javascript
+```javascript
 // Live region for dynamic content updates
 class AccessibleNotifications {
   constructor() {
@@ -401,13 +401,13 @@ notifications.announce('Error: Please fill in all required fields', 'assertive')
 
 // Announce success
 notifications.announce('Project created successfully');
-\```
+```
 
 ## Image and Media Accessibility
 
 ### Alternative Text Guidelines
 
-\```html
+```html
 <!-- Informative images -->
 <img src="bmad-workflow-diagram.png" 
      alt="BMAD workflow diagram showing four connected steps: Requirements gathering by Product Owner, Architecture design by System Architect, UI/UX design by Designer, and Implementation by Developer">
@@ -441,11 +441,11 @@ notifications.announce('Project created successfully');
     Architecture
   </button>
 </div>
-\```
+```
 
 ### Video and Audio Accessibility
 
-\```html
+```html
 <!-- Video with captions and transcripts -->
 <video controls aria-describedby="video-description">
   <source src="bmad-introduction.mp4" type="video/mp4">
@@ -468,7 +468,7 @@ notifications.announce('Project created successfully');
     <p>Welcome to the BMAD Method introduction...</p>
   </details>
 </div>
-\```
+```
 
 ## Testing and Validation
 
@@ -503,7 +503,7 @@ notifications.announce('Project created successfully');
 
 ### Automated Testing Tools
 
-\```javascript
+```javascript
 // Example accessibility testing with axe-core
 import { axe, toHaveNoViolations } from 'jest-axe';
 
@@ -529,7 +529,7 @@ function announceToScreenReader(message) {
     document.body.removeChild(announcement);
   }, 1000);
 }
-\```
+```
 
 ---
 

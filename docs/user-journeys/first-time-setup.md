@@ -19,7 +19,7 @@ This document maps the complete journey of a new user setting up the BMAD Method
 
 ## Journey Map
 
-\```mermaid title="First-Time Setup Journey" type="diagram"
+```mermaid title="First-Time Setup Journey" type="diagram"
 journey
     title First-Time Setup User Journey
     section Discovery
@@ -38,7 +38,7 @@ journey
       Completes first deliverable: 5
       Reviews output quality: 4
       Shares with team: 4
-\```
+```
 
 ## Detailed Journey Stages
 
@@ -126,7 +126,7 @@ journey
 
 ## Emotional Journey
 
-\```mermaid title="Emotional Journey" type="diagram"
+```mermaid title="Emotional Journey" type="diagram"
 journey
     title Emotional Journey - First-Time Setup
     section Discovery
@@ -145,7 +145,7 @@ journey
       Pride in completed work: 5
       Satisfaction with quality: 4
       Enthusiasm for future use: 5
-\```
+```
 
 ## Success Metrics
 

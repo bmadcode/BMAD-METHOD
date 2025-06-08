@@ -70,7 +70,7 @@ small { font-size: 0.875rem; }                /* 14px - Captions */
 
 ### Persona Selector Component
 
-\```html
+```html
 <div class="persona-selector">
   <h3>Select Your Persona</h3>
   <div class="persona-grid">
@@ -96,11 +96,11 @@ small { font-size: 0.875rem; }                /* 14px - Captions */
     </div>
   </div>
 </div>
-\```
+```
 
 ### Progress Indicator Component
 
-\```html
+```html
 <div class="progress-indicator">
   <div class="progress-step completed">
     <div class="step-number">1</div>
@@ -122,11 +122,11 @@ small { font-size: 0.875rem; }                /* 14px - Captions */
     <div class="step-label">Implementation</div>
   </div>
 </div>
-\```
+```
 
 ### Expandable Code Example Component
 
-\```html
+```html
 <div class="code-example">
   <div class="code-header">
     <span class="code-title">BMAD Persona Configuration</span>
@@ -146,13 +146,13 @@ personas:
     </code></pre>
   </div>
 </div>
-\```
+```
 
 ## Visual Diagram Standards
 
 ### Mermaid Diagram Styling
 
-\```css
+```css
 /* Custom Mermaid theme for BMAD documentation */
 .mermaid {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -194,7 +194,7 @@ personas:
   border-radius: 4px;
   padding: 4px 8px;
 }
-\```
+```
 
 ### Icon System
 
@@ -228,7 +228,7 @@ All screenshots should follow these guidelines:
 
 ### Annotation Guidelines
 
-\```html
+```html
 <div class="screenshot-container">
   <img src="/images/bmad-setup-example.png" alt="BMAD Method setup interface" />
   <div class="screenshot-annotations">
@@ -242,7 +242,7 @@ All screenshots should follow these guidelines:
     </div>
   </div>
 </div>
-\```
+```
 
 ## Accessibility Standards
 
@@ -255,7 +255,7 @@ All text must meet WCAG AA standards:
 
 ### Alternative Text Guidelines
 
-\```html
+```html
 <!-- Good: Descriptive alt text -->
 <img src="workflow-diagram.png" alt="BMAD workflow showing progression from requirements through architecture, design, and implementation phases" />
 
@@ -264,7 +264,7 @@ All text must meet WCAG AA standards:
 
 <!-- Decorative images -->
 <img src="decorative-pattern.png" alt="" role="presentation" />
-\```
+```
 
 ### Keyboard Navigation
 
@@ -278,14 +278,14 @@ All interactive elements must be keyboard accessible:
 
 ### Breakpoint System
 
-\```css
+```css
 /* Mobile first approach */
 @media (min-width: 640px) { /* sm */ }
 @media (min-width: 768px) { /* md */ }
 @media (min-width: 1024px) { /* lg */ }
 @media (min-width: 1280px) { /* xl */ }
 @media (min-width: 1536px) { /* 2xl */ }
-\```
+```
 
 ### Mobile Optimization
 
@@ -298,7 +298,7 @@ All interactive elements must be keyboard accessible:
 
 ### CSS Custom Properties
 
-\```css
+```css
 :root {
   /* Brand colors */
   --bmad-brand-primary: #2563eb;
@@ -322,11 +322,11 @@ All interactive elements must be keyboard accessible:
   --bmad-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --bmad-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
-\```
+```
 
 ### Component Classes
 
-\```css
+```css
 /* Base component styling */
 .bmad-card {
   background: white;
@@ -356,7 +356,7 @@ All interactive elements must be keyboard accessible:
   outline: 2px solid var(--bmad-brand-primary);
   outline-offset: 2px;
 }
-\```
+```
 
 ## Quality Assurance Checklist
 

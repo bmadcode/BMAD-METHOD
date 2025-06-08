@@ -4,7 +4,7 @@ This document provides a high-level overview of the BMAD system architecture, fo
 
 ## System Context
 
-\```mermaid title="BMAD System Context Diagram" type="diagram"
+```mermaid title="BMAD System Context Diagram" type="diagram"
 graph TB
     subgraph "External Systems"
         USERS[Users]
@@ -35,11 +35,11 @@ graph TB
     BMAD --> DB
     BMAD --> STORAGE
     BMAD --> MONITOR
-\```
+```
 
 ## High-Level Architecture
 
-\```mermaid title="BMAD High-Level Architecture" type="diagram"
+```mermaid title="BMAD High-Level Architecture" type="diagram"
 graph TB
     subgraph "User Interfaces"
         WEB_UI[Web Interface]
@@ -109,7 +109,7 @@ graph TB
     ORCHESTRATOR --> JIRA_INT
     ORCHESTRATOR --> SLACK_INT
     ORCHESTRATOR --> AI_SERVICES
-\```
+```
 
 ## Core Components
 
@@ -191,7 +191,7 @@ graph TB
 
 ### 1. User Request Flow
 
-\```mermaid title="User Request Processing Flow" type="diagram"
+```mermaid title="User Request Processing Flow" type="diagram"
 sequenceDiagram
     participant User
     participant Interface
@@ -211,11 +211,11 @@ sequenceDiagram
     Persona->>Orchestrator: Return Results
     Orchestrator->>Interface: Format Response
     Interface->>User: Deliver Results
-\```
+```
 
 ### 2. Multi-Persona Collaboration
 
-\```mermaid title="Multi-Persona Collaboration Flow" type="diagram"
+```mermaid title="Multi-Persona Collaboration Flow" type="diagram"
 sequenceDiagram
     participant Orchestrator
     participant PM_Persona
@@ -232,7 +232,7 @@ sequenceDiagram
     Orchestrator->>Dev_Persona: Implement Solution
     Dev_Persona->>Orchestrator: Return Implementation
     Orchestrator->>Orchestrator: Integrate Results
-\```
+```
 
 ## Deployment Architecture
 
@@ -258,7 +258,7 @@ sequenceDiagram
 
 ### 2. Infrastructure Components
 
-\```mermaid title="Infrastructure Architecture" type="diagram"
+```mermaid title="Infrastructure Architecture" type="diagram"
 graph TB
     subgraph "Load Balancing"
         LB[Load Balancer]
@@ -306,7 +306,7 @@ graph TB
     APP1 --> METRICS
     APP2 --> LOGS
     APP3 --> ALERTS
-\```
+```
 
 ## Quality Attributes
 

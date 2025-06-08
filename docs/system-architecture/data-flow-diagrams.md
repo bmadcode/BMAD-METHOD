@@ -8,7 +8,7 @@ This document illustrates how information flows through the BMAD Method process.
 
 The BMAD Method's primary information flow shows how context and requirements transform into deliverables through a series of specialized personas:
 
-\```mermaid title="BMAD Core Information Flow" type="diagram"
+```mermaid title="BMAD Core Information Flow" type="diagram"
 flowchart TD
     A[Initial Requirements] --> B{BMAD Orchestrator}
     B --> C[Product Owner]
@@ -22,13 +22,13 @@ flowchart TD
     B --> G[Final Deliverable]
     
     style B fill:#f96,stroke:#333,stroke-width:2px
-\```
+```
 
 ## Context Preservation Flow
 
 One of the BMAD Method's key strengths is how it preserves and enriches context throughout the development process:
 
-\```mermaid title="Context Preservation Flow" type="diagram"
+```mermaid title="Context Preservation Flow" type="diagram"
 graph TD
     A[Initial Context] --> B[Context Enrichment]
     B --> C[Context Sharing]
@@ -47,13 +47,13 @@ graph TD
     D2 --> D3[Design Application]
     D3 --> D4[Implementation Application]
     end
-\```
+```
 
 ## Task Execution Flow
 
 Information flow during task execution in the BMAD Method:
 
-\```mermaid title="Task Execution Information Flow" type="diagram"
+```mermaid title="Task Execution Information Flow" type="diagram"
 sequenceDiagram
     participant User
     participant Orchestrator
@@ -73,13 +73,13 @@ sequenceDiagram
     Checklists-->>ActivePersona: Verification Results
     ActivePersona->>Orchestrator: Task Output
     Orchestrator->>User: Deliverable
-\```
+```
 
 ## Persona Transition Flow
 
 How information transitions between personas in the BMAD Method:
 
-\```mermaid title="Persona Transition Information Flow" type="diagram"
+```mermaid title="Persona Transition Information Flow" type="diagram"
 graph TD
     A[Initial Request] --> B[Product Owner]
     B -- "PRD" --> C[Architect]
@@ -95,13 +95,13 @@ graph TD
     H <-.-> F
     
     style H fill:#f9f,stroke:#333,stroke-width:2px
-\```
+```
 
 ## Checklist Verification Flow
 
 How information flows through the checklist verification process:
 
-\```mermaid title="Checklist Verification Flow" type="diagram"
+```mermaid title="Checklist Verification Flow" type="diagram"
 flowchart TD
     A[Task Output] --> B{Checklist System}
     B --> C[Quality Checklist]
@@ -129,13 +129,13 @@ flowchart TD
     M --> O
     
     O --> P[Verified Deliverable]
-\```
+```
 
 ## Template Application Flow
 
 How templates are applied to structure information in the BMAD Method:
 
-\```mermaid title="Template Application Flow" type="diagram"
+```mermaid title="Template Application Flow" type="diagram"
 graph LR
     A[Raw Information] --> B[Template Selection]
     B --> C[Template Application]
@@ -144,7 +144,7 @@ graph LR
     E -->|Valid| F[Finalized Document]
     E -->|Invalid| G[Revision]
     G --> C
-\```
+```
 
 ## Conclusion
 

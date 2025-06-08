@@ -452,3 +452,5 @@ Anything you learn or prefer over time to drive future project choices, add them
 These will be used by the agents when producing PRD and Architectures
 
 ==================== END: technical-preferences ====================
+
+
