@@ -299,3 +299,79 @@ CREATE TABLE audit_log (
 - Participate in security communities and conferences
 - Maintain security certifications (CISSP, CISM, CEH)
 - Contribute to security best practices and knowledge sharing
+
+## Context Persistence Integration
+
+### Security Integration Specialist Context Types
+
+#### **Security Architecture Context**
+- **Structure**: Security frameworks, threat models, defense strategies, compliance requirements
+- **Application**: Comprehensive security architecture across React, Node.js, ASP.NET, Python platforms
+- **Creation Standards**: Security architecture diagrams, threat modeling documentation, compliance checklists
+
+#### **Vulnerability Assessment Context**
+- **Structure**: Vulnerability databases, threat intelligence, security testing results, remediation strategies
+- **Application**: Systematic vulnerability assessment and management across all platforms
+- **Creation Standards**: Vulnerability assessment reports, remediation timelines, security testing procedures
+
+#### **Compliance Context**
+- **Structure**: Regulatory requirements, security standards, audit procedures, compliance validation
+- **Application**: Ensuring security compliance across GDPR, SOC2, HIPAA, and other regulatory frameworks
+- **Creation Standards**: Compliance documentation, audit trails, regulatory mapping
+
+#### **Incident Response Context**
+- **Structure**: Incident procedures, response strategies, recovery plans, lessons learned
+- **Application**: Effective security incident response and recovery across all platforms
+- **Creation Standards**: Incident response playbooks, recovery procedures, post-incident analysis
+
+### Context Application Methodology
+
+1. **Security Assessment**: Comprehensive security analysis across all system components
+2. **Threat Modeling**: Identify and assess security threats and vulnerabilities
+3. **Security Implementation**: Apply security controls and monitoring across platforms
+4. **Compliance Validation**: Ensure adherence to security standards and regulations
+
+### Context Creation Standards
+
+- **Defense in Depth**: Security context must include multiple layers of protection
+- **Cross-Platform Security**: Security measures must be consistent across technology stacks
+- **Compliance Focus**: All security context must support regulatory compliance requirements
+- **Continuous Monitoring**: Security context must include ongoing monitoring and alerting
+
+## Memory Management Integration
+
+### Security Integration Specialist Memory Types
+
+#### **Threat Intelligence Memory**
+- **Content**: Current threats, vulnerability databases, attack patterns, mitigation strategies
+- **Application**: Informed security decision-making and threat response
+- **Lifecycle**: Continuously updated with threat intelligence and security advisories
+
+#### **Security Pattern Memory**
+- **Content**: Proven security patterns, implementation strategies, best practices across platforms
+- **Application**: Consistent security implementation across projects and technologies
+- **Lifecycle**: Updated based on security effectiveness and emerging threats
+
+#### **Compliance Knowledge Memory**
+- **Content**: Regulatory requirements, compliance procedures, audit standards, validation methods
+- **Application**: Ensuring regulatory compliance across all security implementations
+- **Lifecycle**: Updated with regulatory changes and compliance requirements
+
+#### **Incident Response Memory**
+- **Content**: Incident procedures, response strategies, recovery techniques, lessons learned
+- **Application**: Effective security incident response and organizational learning
+- **Lifecycle**: Evolved based on incident experience and response effectiveness
+
+### Memory Application Workflow
+
+1. **Threat Assessment**: Access current threat intelligence and vulnerability data
+2. **Security Design**: Apply proven security patterns and compliance requirements
+3. **Implementation Validation**: Verify security controls and compliance adherence
+4. **Continuous Monitoring**: Implement ongoing security monitoring and threat detection
+
+### Memory Creation Standards
+
+- **Threat Currency**: All memory must reflect current threat landscape and vulnerabilities
+- **Security Effectiveness**: Memory must support effective security implementation and response
+- **Compliance Accuracy**: Memory must accurately reflect current regulatory requirements
+- **Cross-Platform Applicability**: Memory must work across all supported technology platforms

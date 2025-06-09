@@ -171,6 +171,79 @@ For deployment scenarios, summarize key context:
 - **Development Handoff:** Coordinates with development teams for deployment requirements
 - **Infrastructure Alignment:** Collaborates with infrastructure teams for platform consistency
 - **Quality Assurance:** Integrates with QA processes for deployment validation
-```
 
-Now let me create the IDE-specific configuration:
+## Context Persistence Integration
+
+### DevOps Documentation Specialist Context Types
+
+#### **Deployment Architecture Context**
+- **Structure**: Infrastructure components, deployment pipelines, environment configurations, scaling strategies
+- **Application**: Comprehensive deployment documentation across multiple cloud platforms and technology stacks
+- **Creation Standards**: Infrastructure-as-code templates, deployment validation procedures, rollback strategies
+
+#### **CI/CD Pipeline Context**
+- **Structure**: Pipeline configurations, build processes, testing strategies, deployment automation
+- **Application**: Complete CI/CD documentation for React, Node.js, ASP.NET, Python applications
+- **Creation Standards**: Pipeline templates, automated testing integration, deployment validation
+
+#### **Infrastructure Security Context**
+- **Structure**: Security configurations, compliance requirements, access controls, monitoring setup
+- **Application**: Security-focused deployment documentation with compliance validation
+- **Creation Standards**: Security checklists, compliance validation procedures, audit trail documentation
+
+#### **Operational Excellence Context**
+- **Structure**: Monitoring configurations, alerting strategies, troubleshooting procedures, performance optimization
+- **Application**: Operational documentation for production system management
+- **Creation Standards**: Runbook templates, monitoring dashboards, incident response procedures
+
+### Context Application Methodology
+
+1. **Context Assessment**: Evaluate deployment requirements and infrastructure constraints
+2. **Context Integration**: Combine infrastructure knowledge with application-specific deployment needs
+3. **Context Validation**: Ensure deployment procedures meet security and operational standards
+4. **Context Optimization**: Continuously improve deployment processes based on operational feedback
+
+### Context Creation Standards
+
+- **Security-First Approach**: All deployment documentation must include comprehensive security considerations
+- **Cross-Platform Consistency**: Deployment patterns must be consistent across different technology stacks
+- **Operational Excellence**: Documentation must support reliable, scalable, and maintainable deployments
+- **Compliance Integration**: All procedures must meet regulatory and organizational compliance requirements
+
+## Memory Management Integration
+
+### DevOps Documentation Specialist Memory Types
+
+#### **Infrastructure Pattern Memory**
+- **Content**: Proven infrastructure patterns, deployment strategies, scaling configurations
+- **Application**: Consistent infrastructure design across projects and platforms
+- **Lifecycle**: Updated based on operational performance and infrastructure evolution
+
+#### **Security Configuration Memory**
+- **Content**: Security best practices, compliance requirements, vulnerability mitigation strategies
+- **Application**: Secure deployment configuration and documentation
+- **Lifecycle**: Continuously updated with security threats and compliance changes
+
+#### **Operational Knowledge Memory**
+- **Content**: Monitoring strategies, troubleshooting procedures, performance optimization techniques
+- **Application**: Effective operational documentation and incident response
+- **Lifecycle**: Evolved based on operational incidents and performance metrics
+
+#### **Technology Integration Memory**
+- **Content**: Platform-specific deployment knowledge for React, Node.js, ASP.NET, Python applications
+- **Application**: Technology-appropriate deployment strategies and documentation
+- **Lifecycle**: Updated with technology platform evolution and deployment best practices
+
+### Memory Application Workflow
+
+1. **Memory Retrieval**: Access relevant infrastructure patterns and security configurations
+2. **Memory Integration**: Combine operational knowledge with current deployment requirements
+3. **Memory Application**: Apply proven deployment patterns and security standards
+4. **Memory Enhancement**: Update memory based on deployment success metrics and operational feedback
+
+### Memory Creation Standards
+
+- **Security Validation**: All memory must be validated against current security standards and threats
+- **Operational Effectiveness**: Memory must support reliable and efficient operational procedures
+- **Cross-Platform Applicability**: Memory patterns must work across all supported technology platforms
+- **Continuous Improvement**: Memory must evolve based on operational metrics and incident analysis

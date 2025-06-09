@@ -1,0 +1,228 @@
+﻿File Cleanup Report
+Generated: 06/09/2025 17:40:20
+Path: .
+Create Backup: False
+Remove Non-ASCII: True
+
+SUMMARY:
+Files Processed: 278
+Files Modified: 215
+Files with Errors: 0
+
+MODIFIED FILES:
+  C:\Projects\BMAD-Method\bmad-agent\checklists\advanced-troubleshooting-specialist-checklist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\checklists\context-persistence-persona-integration-checklist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\checklists\cross-platform-integration-specialist-checklist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\checklists\devops-documentation-specialist-checklist.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\checklists\infrastructure-checklist.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\checklists\memory-management-persona-integration-checklist.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\checklists\performance-optimization-specialist-checklist.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\checklists\polyglot-code-review-specialist-checklist.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\checklists\security-integration-specialist-checklist.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\checklists\technical-documentation-architect-checklist.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\docs\training-materials.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\examples\v0-example-project.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\memory\context-persistence-engine.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\context-persistence-persona-integration.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-architecture.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-data-structures.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-integration.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-management-persona-integration.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-organization-lifecycle.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-performance-monitoring.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-security-privacy.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-storage-retrieval.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\memory\memory-testing-validation.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\context-management-engine.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\intelligent-routing-engine.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\persona-capability-matrix.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\persona-matching-algorithms.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\persona-registry.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\request-analysis-system.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\orchestrator\workflow-optimization-engine.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\personas\advanced-troubleshooting-specialist.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\analyst.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\personas\architect.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\bmad.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\cross-platform-integration-specialist.ide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\personas\cross-platform-integration-specialist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\dev.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\devops-documentation-specialist.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\devops-documentation-specialist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\devops-pe.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\enterprise-architecture-consultant.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\performance-optimization-specialist.ide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\personas\performance-optimization-specialist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\po.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\polyglot-code-review-specialist.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\polyglot-code-review-specialist.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\personas\security-integration-specialist.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\security-integration-specialist.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\sm.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\technical-documentation-architect.ide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\personas\technical-documentation-architect.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\personas\v0-ux-ui-architect.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\advanced-elicitation.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\checklist-run-task.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\tasks\create-infrastructure-architecture.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\tasks\create-next-story-task.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\create-platform-infrastructure.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\tasks\enterprise-architecture-assessment-task.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\generate-api-documentation.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\generate-code-review.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\tasks\generate-deployment-documentation.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\generate-integration-documentation.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\implement-context-persistence.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\tasks\library-indexing-task.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\performance-analysis-task.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\review-infrastructure.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\tasks\security-analysis-task.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\technology-strategy-development-task.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\train-personas-context-persistence.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\train-personas-memory-management.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\tasks\validate-infrastructure.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\api-documentation-template.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\architecture-decision-record-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\architecture-tmpl.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\code-review-comprehensive-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\code-review-template.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\context-persistence-configuration-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\cross-platform-api-documentation-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\deployment-documentation-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\deployment-guide-comprehensive-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\enterprise-architecture-assessment-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\enterprise-reference-architecture-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\front-end-architecture-tmpl.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\front-end-spec-tmpl.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\ide-component-structure-tmpl.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\integration-documentation-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\performance-optimization-template.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\persona-documentation-template.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\security-optimization-template.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\bmad-agent\templates\technical-architecture-comprehensive-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\technology-strategy-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\troubleshooting-analysis-template.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\templates\v0-component-spec-tmpl.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\bmad-agent\web-bmad-orchestrator-agent.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\documentation-architecture\README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\documentation-standards\automated-checks.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\documentation-standards\contribution-guidelines.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\documentation-standards\README.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\documentation-standards\review-process.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\how-it-works\core-concepts.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\how-it-works\integration-points.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\how-it-works\orchestrator-mechanics.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\how-it-works\persona-workflows.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\how-it-works\README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\how-it-works\troubleshooting.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\claude-code-setup.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\cline-setup.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\cursor-ai-setup.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\jetbrains-setup.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\README.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\roocode-setup.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\ide-setup-guides\vscode-setup.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\integration-guides\api-development-integration.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\integration-guides\documentation-overhaul-workflow.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\integration-guides\project-initiation-workflow.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\integration-guides\system-integration-workflow.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\claude-code-implementation-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\cursor-ai-implementation-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\ide-memory-activation-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\memory-activation-templates.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\memory-command-reference.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\memory-integration-patterns.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\memory-management-README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\memory-architecture\transient-memory-implementation.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\navigation\index.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\navigation\persona-map.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\navigation\technology-map.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\quality-framework\continuous-quality-monitoring.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\quality-framework\quality-metrics-dashboard.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\quality-framework\README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\quick-start-guides\bmad-method-common-use-cases.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\quick-start-guides\bmad-method-quickstart.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\quick-start-guides\bmad-method-video-script.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\quick-start-guides\ide-environment-quickstart.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\quick-start-guides\README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\quick-start-guides\web-environment-quickstart.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\system-architecture\component-architecture.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\system-architecture\data-flow-diagrams.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\system-architecture\deployment-architecture.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\system-architecture\integration-architecture.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\system-architecture\README.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\system-architecture\system-overview.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\templates\README.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\training\ide-specific-guides\claude-code-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\training\ide-specific-guides\cline-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\training\ide-specific-guides\cursor-ai-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\training\ide-specific-guides\roocode-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\training\using-v0-ux-ui-architect.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\user-journeys\architecture-planning.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\user-journeys\design-system-creation.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\user-journeys\feature-development.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\user-journeys\first-time-setup.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\user-journeys\project-initiation.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\visual-elements\accessibility-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\visual-elements\interactive-examples.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\visual-elements\README.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\analyst-comprehensive-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\analyst-integration-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\analyst-quality-standards.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\analyst-quickstart.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\analyst-template-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\analyst-workflow-mapping.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\architect-comprehensive-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\architect-integration-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\architect-quality-standards.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\architect-quickstart.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\architect-task-library.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\architect-template-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\bmad-comprehensive-integration-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\bmad-documentation-map.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\bmad-project-summary.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\design-architect-comprehensive-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\design-architect-integration-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\design-architect-quality-standards.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\design-architect-quickstart.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\design-architect-success-metrics.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\design-architect-template-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\design-architect-workflow-mapping.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\dev-comprehensive-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\dev-integration-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\dev-quality-standards.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\dev-quickstart.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\dev-success-metrics.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\dev-template-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\dev-workflow-mapping.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\ide-setup.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\instruction.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\persona-documentation-audit.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\pm-integration-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\pm-quickstart.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\po-comprehensive-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\po-integration-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\po-quickstart.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\po-success-metrics.md - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\po-template-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\po-workflow-mapping.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\sm-comprehensive-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\sm-success-metrics.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\sm-template-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\sm-workflow-mapping.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\v0-ux-ui-architect-comprehensive-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\v0-ux-ui-architect-integration-guide.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\docs\v0-ux-ui-architect-quality-assurance.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\v0-ux-ui-architect-quickstart.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\v0-ux-ui-architect-user-guide.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\docs\workflow-diagram.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\examples\dashboard-component-code.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\examples\dashboard-component-example.md - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\examples\v0-ux-ui-architect-example.md - Fixed escaped backticks
+  C:\Projects\BMAD-Method\web-build-sample\checklists.txt - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\web-build-sample\personas.txt - Removed non-ASCII characters
+  C:\Projects\BMAD-Method\web-build-sample\tasks.txt - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\web-build-sample\templates.txt - Fixed escaped backticks, Removed non-ASCII characters
+  C:\Projects\BMAD-Method\README.md - Fixed escaped backticks, Removed non-ASCII characters
+

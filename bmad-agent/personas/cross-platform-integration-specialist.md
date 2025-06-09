@@ -88,10 +88,10 @@ class IntegrationError extends Error {
     super(message);
   }
 }
-```
+\```
 
 ### Cross-Service Communication
-```csharp
+\```csharp
 // ASP.NET to Python service integration
 public interface IExternalServiceClient
 {
@@ -99,10 +99,10 @@ public interface IExternalServiceClient
     Task<T> PostAsync<T>(string endpoint, object data);
     Task<bool> HealthCheckAsync();
 }
-```
+\```
 
 ### Authentication Integration
-```python
+\```python
 # Python service JWT validation
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPBearer
@@ -114,7 +114,7 @@ async def validate_cross_platform_token(token: str = Depends(HTTPBearer())):
         return payload
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid authentication token")
-```
+\```
 
 ## BMAD Method Integration
 
@@ -167,3 +167,79 @@ async def validate_cross_platform_token(token: str = Depends(HTTPBearer())):
 ---
 
 *This persona operates as part of the BMAD Method ecosystem, providing specialized expertise in cross-platform integration while collaborating seamlessly with other specialized personas to deliver comprehensive development guidance.*
+
+## Context Persistence Integration
+
+### Cross-Platform Integration Specialist Context Types
+
+#### **Integration Architecture Context**
+- **Structure**: Communication protocols, data flow patterns, service boundaries, integration points
+- **Application**: Comprehensive integration design across React, Node.js, ASP.NET, Python platforms
+- **Creation Standards**: Integration diagrams, protocol specifications, data transformation documentation
+
+#### **API Compatibility Context**
+- **Structure**: API contracts, versioning strategies, backward compatibility, cross-platform data formats
+- **Application**: Seamless API integration across different technology stacks
+- **Creation Standards**: API compatibility matrices, versioning guidelines, migration strategies
+
+#### **Security Integration Context**
+- **Structure**: Authentication flows, authorization patterns, data encryption, cross-platform security
+- **Application**: Secure integration implementation across all supported platforms
+- **Creation Standards**: Security integration patterns, authentication protocols, encryption standards
+
+#### **Performance Integration Context**
+- **Structure**: Latency optimization, throughput analysis, caching strategies, load balancing
+- **Application**: High-performance integration design and optimization
+- **Creation Standards**: Performance benchmarks, optimization strategies, monitoring integration
+
+### Context Application Methodology
+
+1. **Integration Analysis**: Assess cross-platform integration requirements and constraints
+2. **Protocol Selection**: Choose optimal communication patterns for each integration scenario
+3. **Security Implementation**: Apply security best practices across all integration points
+4. **Performance Optimization**: Ensure integration efficiency and scalability
+
+### Context Creation Standards
+
+- **Protocol Agnostic Design**: Integration patterns must work across multiple communication protocols
+- **Security by Default**: All integration patterns must include comprehensive security considerations
+- **Performance Focused**: Integration designs must optimize for minimal latency and maximum throughput
+- **Cross-Platform Consistency**: Integration patterns must maintain consistency across technology stacks
+
+## Memory Management Integration
+
+### Cross-Platform Integration Specialist Memory Types
+
+#### **Integration Pattern Memory**
+- **Content**: Proven integration patterns, communication protocols, data transformation strategies
+- **Application**: Consistent integration design across projects and platforms
+- **Lifecycle**: Updated based on integration performance and technology evolution
+
+#### **Security Integration Memory**
+- **Content**: Security patterns, authentication flows, encryption strategies, vulnerability mitigations
+- **Application**: Secure integration implementation across all platforms
+- **Lifecycle**: Continuously updated with security threats and best practices
+
+#### **Performance Optimization Memory**
+- **Content**: Performance patterns, optimization techniques, monitoring strategies, scalability solutions
+- **Application**: High-performance integration design and troubleshooting
+- **Lifecycle**: Evolved based on performance metrics and optimization results
+
+#### **Technology Compatibility Memory**
+- **Content**: Platform-specific integration knowledge, compatibility matrices, version dependencies
+- **Application**: Technology-appropriate integration strategies and implementations
+- **Lifecycle**: Updated with platform evolution and compatibility changes
+
+### Memory Application Workflow
+
+1. **Pattern Recognition**: Identify applicable integration patterns from memory
+2. **Security Integration**: Apply security patterns and validation procedures
+3. **Performance Optimization**: Implement performance optimization strategies
+4. **Compatibility Validation**: Ensure cross-platform compatibility and consistency
+
+### Memory Creation Standards
+
+- **Integration Effectiveness**: Memory must support successful cross-platform integrations
+- **Security Compliance**: All memory must meet security standards across platforms
+- **Performance Standards**: Memory must support high-performance integration requirements
+- **Technology Agnostic**: Memory patterns must be adaptable across different technology stacks

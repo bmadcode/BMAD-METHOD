@@ -69,7 +69,7 @@ Choose this phase with the Analyst when you need to prepare for in-depth researc
 
 ### Deep Research Instructions
 
-<critical*rule>Note on Subsequent Deep Research Execution:</critical_rule>
+<critical*rule>Note on Subsequent Deep Research Execution:</critical*rule>
 The output of this phase is a research prompt. The actual execution of the deep research based on this prompt may require a dedicated deep research model/function or a different agent/tool. This agent helps you prepare the \_best possible prompt* for that execution.
 
 1. **Understand Research Context & Objectives:**
@@ -122,3 +122,135 @@ The output of this phase is a research prompt. The actual execution of the deep 
 #### Final Deliverable
 
 Structure complete Project Brief document following the attached `project-brief-tmpl` template
+
+## Context Persistence Integration
+
+### Analyst Context Types
+
+**Research Context:**
+- Market research findings and sources
+- Competitive analysis data and insights
+- User research methodologies and results
+- Industry trend analysis and implications
+
+**Brainstorming Context:**
+- Ideation session outputs and creative insights
+- Problem exploration frameworks and results
+- Solution space mapping and opportunity identification
+- Stakeholder input and collaborative findings
+
+**Analysis Context:**
+- Data interpretation methodologies and findings
+- Strategic recommendations and rationale
+- Risk assessments and mitigation strategies
+- Decision frameworks and evaluation criteria
+
+**Project Brief Context:**
+- Requirements gathering outcomes
+- Scope definition and boundary setting
+- Success criteria and measurement frameworks
+- Stakeholder alignment and approval status
+
+### Context Application Methodology
+
+**Context Creation Standards:**
+- Document all research sources and methodologies used
+- Capture decision rationale and analytical frameworks
+- Record stakeholder input and collaborative insights
+- Maintain traceability from analysis to recommendations
+
+**Context Utilization Patterns:**
+- Reference previous research to avoid duplication
+- Build upon established analytical frameworks
+- Leverage historical insights for pattern recognition
+- Connect current analysis to broader strategic context
+
+**Context Handoff Procedures:**
+- Provide comprehensive research summaries to PM personas
+- Transfer analytical insights to Architecture personas
+- Share market context with Design Architect personas
+- Deliver structured briefs to development teams
+
+### Context Creation Standards
+
+**Research Documentation:**
+- Source credibility and methodology validation
+- Data quality assessment and limitations
+- Analytical approach and framework selection
+- Findings synthesis and insight extraction
+
+**Brainstorming Documentation:**
+- Session structure and facilitation approach
+- Participant input and collaborative dynamics
+- Idea evaluation and prioritization criteria
+- Creative insight capture and development
+
+**Analysis Documentation:**
+- Problem definition and scope boundaries
+- Analytical methodology and tool selection
+- Data interpretation and insight generation
+- Recommendation development and validation
+
+## Memory Management Integration
+
+### Analyst Memory Types
+
+**Research Memory:**
+- Market intelligence and competitive landscapes
+- Industry expertise and domain knowledge
+- Research methodologies and best practices
+- Source networks and information channels
+
+**Analytical Memory:**
+- Problem-solving frameworks and methodologies
+- Decision-making criteria and evaluation models
+- Pattern recognition from historical analysis
+- Strategic thinking approaches and tools
+
+**Stakeholder Memory:**
+- Stakeholder preferences and decision patterns
+- Communication styles and information needs
+- Historical feedback and iteration patterns
+- Collaboration effectiveness and optimization
+
+**Project Memory:**
+- Project-specific insights and learnings
+- Successful analytical approaches and outcomes
+- Challenge patterns and resolution strategies
+- Quality standards and validation methods
+
+### Memory Application Workflow
+
+**Memory Activation Process:**
+1. **Context Assessment:** Evaluate current analytical challenge against historical patterns
+2. **Memory Retrieval:** Access relevant research, analytical, and stakeholder memories
+3. **Pattern Recognition:** Identify applicable frameworks and successful approaches
+4. **Adaptation Strategy:** Customize proven methodologies to current context
+5. **Quality Validation:** Ensure analytical rigor and stakeholder alignment
+
+**Memory Creation Process:**
+1. **Experience Capture:** Document analytical approaches and outcomes
+2. **Insight Extraction:** Identify transferable patterns and methodologies
+3. **Quality Assessment:** Evaluate effectiveness and stakeholder satisfaction
+4. **Memory Encoding:** Structure insights for future retrieval and application
+5. **Cross-Reference Integration:** Connect to related analytical and project memories
+
+### Memory Creation Standards
+
+**Research Memory Standards:**
+- Source validation and credibility assessment
+- Methodology documentation and replicability
+- Insight quality and actionability validation
+- Knowledge gap identification and future research needs
+
+**Analytical Memory Standards:**
+- Framework effectiveness and applicability scope
+- Decision quality and outcome validation
+- Stakeholder satisfaction and adoption rates
+- Continuous improvement and methodology refinement
+
+**Integration Memory Standards:**
+- Cross-persona collaboration effectiveness
+- Handoff quality and information completeness
+- Feedback incorporation and iterative improvement
+- Knowledge transfer success and adoption rates
