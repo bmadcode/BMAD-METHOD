@@ -1,4 +1,4 @@
-# Infrastructure Change Validation Checklist
+﻿# Infrastructure Change Validation Checklist
 
 This checklist serves as a comprehensive framework for validating infrastructure changes before deployment to production. The DevOps/Platform Engineer should systematically work through each item, ensuring the infrastructure is secure, compliant, resilient, and properly implemented according to organizational standards.
 
@@ -376,7 +376,7 @@ This checklist serves as a comprehensive framework for validating infrastructure
 
 ### 14.3 Environment Promotion & Automation
 
-- [ ] Environment promotion pipelines operational (dev → staging → prod)
+- [ ] Environment promotion pipelines operational (dev  staging  prod)
 - [ ] Automated testing and validation gates configured
 - [ ] Approval workflows and change management integration implemented
 - [ ] Automated rollback mechanisms configured and tested

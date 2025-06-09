@@ -6,12 +6,12 @@ The BMAD Method is a revolutionary AI-driven development approach that uses spec
 
 | Section | Description | Best For |
 |---------|-------------|----------|
-| [ðŸ§  Core Concepts](core-concepts.md) | Fundamental BMAD principles | New users |
-| [ðŸŽ­ Orchestrator Mechanics](orchestrator-mechanics.md) | How the orchestrator works | Technical users |
-| [ðŸ‘¥ Persona System](persona-system.md) | Understanding AI personas | All users |
-| [ðŸ“‹ Task Execution](task-execution.md) | How tasks are performed | Process-focused users |
-| [ðŸ”„ Workflow Examples](workflow-examples.md) | Real-world scenarios | Practical learners |
-| [ðŸš€ Getting Started](getting-started.md) | Your first BMAD project | Beginners |
+| [ Core Concepts](core-concepts.md) | Fundamental BMAD principles | New users |
+| [ Orchestrator Mechanics](orchestrator-mechanics.md) | How the orchestrator works | Technical users |
+| [ Persona System](persona-system.md) | Understanding AI personas | All users |
+| [ Task Execution](task-execution.md) | How tasks are performed | Process-focused users |
+| [ Workflow Examples](workflow-examples.md) | Real-world scenarios | Practical learners |
+| [ Getting Started](getting-started.md) | Your first BMAD project | Beginners |
 
 ## The BMAD Advantage
 
@@ -19,19 +19,19 @@ The BMAD Method is a revolutionary AI-driven development approach that uses spec
 
 | Traditional Approach | BMAD Method |
 |---------------------|-------------|
-| âŒ Manual coordination between roles | Automated orchestration |
-| âŒ Context switching between tools | Unified AI-driven workflow |
-| âŒ Inconsistent deliverable quality | Template-driven standardization |
-| âŒ Knowledge silos | Shared context across all personas |
-| âŒ Time-consuming handoffs | Seamless persona transitions |
+|  Manual coordination between roles |  Automated orchestration |
+|  Context switching between tools |  Unified AI-driven workflow |
+|  Inconsistent deliverable quality |  Template-driven standardization |
+|  Knowledge silos |  Shared context across all personas |
+|  Time-consuming handoffs |  Seamless persona transitions |
 
 ### Key Benefits
 
-- **ðŸš€ 10x Faster Development**: Automated coordination eliminates bottlenecks
-- **ðŸŽ¯ Consistent Quality**: Template-driven deliverables ensure standards
-- **ðŸ¤ Seamless Handoffs**: Personas share context automatically
-- **ðŸ”§ Role Specialization**: Each persona is an expert in their domain
-- **ðŸŒ Environment Flexibility**: Works in web browsers or IDEs
+- ** 10x Faster Development**: Automated coordination eliminates bottlenecks
+- ** Consistent Quality**: Template-driven deliverables ensure standards
+- ** Seamless Handoffs**: Personas share context automatically
+- ** Role Specialization**: Each persona is an expert in their domain
+- ** Environment Flexibility**: Works in web browsers or IDEs
 
 ## How It All Fits Together
 
@@ -54,12 +54,12 @@ graph TD
 
 The BMAD Method works seamlessly across multiple environments:
 
-### ðŸŒ Web-Based Environments
+###  Web-Based Environments
 - **ChatGPT Custom GPTs**: Full orchestrator with file attachments
 - **Google Gemini Gems**: Complete persona system with knowledge base
 - **Claude Projects**: Integrated workflow with document management
 
-### ðŸ’» IDE-Based Environments  
+###  IDE-Based Environments  
 - **Cursor AI**: Advanced codebase integration with file system access
 - **Cline (Claude Dev)**: Project context awareness with terminal integration
 - **Claude Code**: Code quality focus with best practices enforcement
@@ -69,9 +69,9 @@ The BMAD Method works seamlessly across multiple environments:
 
 Choose your preferred starting point:
 
-1. **ðŸš€ Quick Start (5 minutes)**: [Web Environment Setup](../quick-start-guides/web-environment-quickstart.md)
-2. **ðŸ’» Developer Setup (15 minutes)**: [IDE Environment Setup](../quick-start-guides/ide-environment-quickstart.md)
-3. **ðŸ“š Deep Dive (30 minutes)**: [Complete Training Materials](../training/using-v0-ux-ui-architect.md)
+1. ** Quick Start (5 minutes)**: [Web Environment Setup](../quick-start-guides/web-environment-quickstart.md)
+2. ** Developer Setup (15 minutes)**: [IDE Environment Setup](../quick-start-guides/ide-environment-quickstart.md)
+3. ** Deep Dive (30 minutes)**: [Complete Training Materials](../training/using-v0-ux-ui-architect.md)
 
 ## What Makes BMAD Different
 

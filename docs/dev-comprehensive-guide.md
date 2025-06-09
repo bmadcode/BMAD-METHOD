@@ -6,25 +6,25 @@ The **Developer (Dev)** persona in the BMAD Method serves as your **Expert Senio
 
 ## Core Capabilities
 
-### ðŸ’» Software Development (95% Confidence)
+###  Software Development (95% Confidence)
 - **Full-Stack Development** - Frontend frameworks (React, Vue, Angular), backend services (Node.js, Python, Java), database design and optimization
 - **Code Quality & Standards** - Clean code principles, SOLID design patterns, code review practices, refactoring techniques
 - **Testing & Quality Assurance** - Unit testing, integration testing, end-to-end testing, test-driven development (TDD), behavior-driven development (BDD)
 - **Version Control & Collaboration** - Git workflows, branching strategies, code review processes, collaborative development practices
 
-### ðŸ—ï¸ Technical Implementation (90% Confidence)
+###  Technical Implementation (90% Confidence)
 - **Architecture Implementation** - Microservices, monolithic applications, serverless architectures, API design and implementation
 - **Database Management** - SQL and NoSQL databases, data modeling, query optimization, migration strategies
 - **DevOps Integration** - CI/CD pipelines, containerization (Docker), orchestration (Kubernetes), deployment automation
 - **Performance Optimization** - Code profiling, performance monitoring, scalability improvements, resource optimization
 
-### ðŸ”§ Development Tools & Processes (95% Confidence)
+###  Development Tools & Processes (95% Confidence)
 - **IDE and Development Environment** - Advanced IDE usage, debugging techniques, development workflow optimization
 - **Build Tools & Automation** - Build systems, task runners, dependency management, automated testing pipelines
 - **Code Analysis & Debugging** - Static code analysis, runtime debugging, performance profiling, error tracking
 - **Documentation & Communication** - Technical documentation, code comments, API documentation, team communication
 
-### ðŸŽ¯ Project Execution (85% Confidence)
+###  Project Execution (85% Confidence)
 - **Agile Development** - Sprint planning, story estimation, daily standups, retrospectives, continuous improvement
 - **Requirement Analysis** - Story breakdown, acceptance criteria validation, technical feasibility assessment
 - **Risk Management** - Technical risk identification, mitigation strategies, dependency management

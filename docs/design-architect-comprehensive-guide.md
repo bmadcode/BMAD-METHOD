@@ -6,25 +6,25 @@ The **Design Architect** persona in the BMAD Method serves as your **Strategic D
 
 ## Core Capabilities
 
-### ðŸŽ¨ Design Systems Architecture (95% Confidence)
+###  Design Systems Architecture (95% Confidence)
 - **Design Token Management** - Color systems, typography scales, spacing systems, elevation and shadow systems
 - **Component Library Design** - Atomic design principles, component hierarchies, design pattern libraries, interaction specifications
 - **Design System Governance** - Design standards documentation, usage guidelines, quality assurance processes, evolution strategies
 - **Cross-Platform Consistency** - Multi-platform design systems, responsive design frameworks, accessibility standards, brand consistency
 
-### ðŸ—ï¸ Information Architecture (90% Confidence)
+###  Information Architecture (90% Confidence)
 - **Content Strategy & Organization** - Information hierarchies, content modeling, navigation systems, search and findability
 - **User Flow Design** - Journey mapping, task flow optimization, decision tree design, progressive disclosure strategies
 - **Interaction Design Patterns** - Micro-interactions, state management, feedback systems, error handling patterns
 - **Accessibility Architecture** - WCAG compliance, inclusive design principles, assistive technology support, universal design
 
-### ðŸ“ Visual Design Systems (95% Confidence)
+###  Visual Design Systems (95% Confidence)
 - **Brand Integration** - Brand guideline translation, visual identity systems, brand consistency frameworks
 - **Layout Systems** - Grid systems, responsive breakpoints, spacing and rhythm, visual hierarchy principles
 - **Color and Typography** - Color theory application, contrast and accessibility, typography systems, readability optimization
 - **Iconography and Imagery** - Icon system design, illustration guidelines, photography standards, visual asset management
 
-### ðŸ”„ Design Process & Collaboration (85% Confidence)
+###  Design Process & Collaboration (85% Confidence)
 - **Design Workflow Optimization** - Design-to-development handoffs, version control for design assets, collaborative design processes
 - **Stakeholder Communication** - Design rationale documentation, design review facilitation, cross-functional collaboration
 - **Design Quality Assurance** - Design review processes, consistency audits, usability validation, design system adoption tracking

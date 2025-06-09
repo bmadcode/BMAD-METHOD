@@ -91,7 +91,7 @@ graph TD
 
 #### Commitment Reliability
 - **Definition**: Accuracy of sprint commitments vs. actual delivery
-- **Calculation**: (Completed story points / Committed story points) Ã— 100%
+- **Calculation**: (Completed story points / Committed story points)  100%
 - **Target Range**: 80-100%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Consistent achievement of 90%+ reliability
@@ -99,9 +99,9 @@ graph TD
 #### Forecast Accuracy
 - **Definition**: Accuracy of release forecasts based on velocity
 - **Calculation**: (Actual delivery date - Forecast date) in sprints
-- **Target Range**: Â±1 sprint
+- **Target Range**: 1 sprint
 - **Measurement Frequency**: Each release
-- **Improvement Goal**: Consistent achievement of Â±1 sprint accuracy
+- **Improvement Goal**: Consistent achievement of 1 sprint accuracy
 
 ### Quality Metrics
 
@@ -114,14 +114,14 @@ graph TD
 
 #### Technical Debt Ratio
 - **Definition**: Proportion of effort dedicated to technical debt reduction
-- **Calculation**: (Technical debt story points / Total story points) Ã— 100%
+- **Calculation**: (Technical debt story points / Total story points)  100%
 - **Target Range**: 10-20%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Sustainable technical debt ratio within target range
 
 #### Definition of Done Compliance
 - **Definition**: Adherence to team's Definition of Done
-- **Calculation**: (Stories fully meeting DoD / Total completed stories) Ã— 100%
+- **Calculation**: (Stories fully meeting DoD / Total completed stories)  100%
 - **Target Range**: 95-100%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Consistent 100% compliance
@@ -144,7 +144,7 @@ graph TD
 
 #### Team Stability
 - **Definition**: Consistency of team membership
-- **Calculation**: (1 - (Team member changes / Total team size)) Ã— 100%
+- **Calculation**: (1 - (Team member changes / Total team size))  100%
 - **Target Range**: 80-100%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Maintain stability above 85%
@@ -172,7 +172,7 @@ graph TD
 
 #### Retrospective Action Completion
 - **Definition**: Implementation rate of retrospective action items
-- **Calculation**: (Completed action items / Total action items) Ã— 100%
+- **Calculation**: (Completed action items / Total action items)  100%
 - **Target Range**: 80-100%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Consistent achievement of 90%+
@@ -211,7 +211,7 @@ graph TD
 
 #### Flow Efficiency
 - **Definition**: Proportion of time stories are actively worked on
-- **Calculation**: (Active work time / Total cycle time) Ã— 100%
+- **Calculation**: (Active work time / Total cycle time)  100%
 - **Target Range**: 40-70%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Increasing trend in flow efficiency
@@ -243,7 +243,7 @@ graph TD
 
 #### Decision-Making Autonomy
 - **Definition**: Team's autonomy in decision-making
-- **Calculation**: (Decisions made by team / Total decisions) Ã— 100%
+- **Calculation**: (Decisions made by team / Total decisions)  100%
 - **Target Range**: 80-95%
 - **Measurement Frequency**: Monthly
 - **Improvement Goal**: Increasing trend toward 95%
@@ -266,7 +266,7 @@ graph TD
 
 #### Cross-Functional Capability
 - **Definition**: Team's cross-functional capability
-- **Calculation**: (Skills covered by multiple team members / Total required skills) Ã— 100%
+- **Calculation**: (Skills covered by multiple team members / Total required skills)  100%
 - **Target Range**: 70-90%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Increasing trend toward 90%
@@ -282,7 +282,7 @@ graph TD
 
 #### Behavior Change Adoption
 - **Definition**: Adoption rate of behaviors introduced through coaching
-- **Calculation**: (Observed instances of new behavior / Opportunities for new behavior) Ã— 100%
+- **Calculation**: (Observed instances of new behavior / Opportunities for new behavior)  100%
 - **Target Range**: 60-80%
 - **Measurement Frequency**: Monthly
 - **Improvement Goal**: Increasing trend toward 80%
@@ -307,14 +307,14 @@ graph TD
 
 #### Resolution Success Rate
 - **Definition**: Proportion of impediments successfully resolved
-- **Calculation**: (Successfully resolved impediments / Total impediments) Ã— 100%
+- **Calculation**: (Successfully resolved impediments / Total impediments)  100%
 - **Target Range**: 90-100%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Consistent achievement of 95%+
 
 #### First-Time Resolution Rate
 - **Definition**: Proportion of impediments resolved without recurrence
-- **Calculation**: (Impediments resolved without recurrence / Total resolved impediments) Ã— 100%
+- **Calculation**: (Impediments resolved without recurrence / Total resolved impediments)  100%
 - **Target Range**: 80-95%
 - **Measurement Frequency**: Monthly
 - **Improvement Goal**: Increasing trend toward 95%
@@ -323,21 +323,21 @@ graph TD
 
 #### Impediment Recurrence Rate
 - **Definition**: Frequency of recurring impediment types
-- **Calculation**: (Recurring impediment types / Total impediment types) Ã— 100%
+- **Calculation**: (Recurring impediment types / Total impediment types)  100%
 - **Target Range**: < 20%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Decreasing trend toward 0%
 
 #### Proactive Identification Rate
 - **Definition**: Proportion of impediments identified proactively
-- **Calculation**: (Proactively identified impediments / Total impediments) Ã— 100%
+- **Calculation**: (Proactively identified impediments / Total impediments)  100%
 - **Target Range**: 40-60%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Increasing trend toward 60%
 
 #### Preventive Measure Effectiveness
 - **Definition**: Effectiveness of implemented preventive measures
-- **Calculation**: (Prevented impediments / Total potential impediments) Ã— 100%
+- **Calculation**: (Prevented impediments / Total potential impediments)  100%
 - **Target Range**: 70-90%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Increasing trend toward 90%
@@ -353,14 +353,14 @@ graph TD
 
 #### Blocked Time Ratio
 - **Definition**: Proportion of time stories are blocked by impediments
-- **Calculation**: (Total blocked time / Total cycle time) Ã— 100%
+- **Calculation**: (Total blocked time / Total cycle time)  100%
 - **Target Range**: < 20%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Decreasing trend toward 10%
 
 #### Escalation Effectiveness
 - **Definition**: Effectiveness of impediment escalation process
-- **Calculation**: (Successfully resolved escalated impediments / Total escalated impediments) Ã— 100%
+- **Calculation**: (Successfully resolved escalated impediments / Total escalated impediments)  100%
 - **Target Range**: 80-100%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Consistent achievement of 90%+
@@ -424,7 +424,7 @@ graph TD
 
 #### Stakeholder Expectation Management
 - **Definition**: Effectiveness of stakeholder expectation management
-- **Calculation**: (Stakeholders with aligned expectations / Total stakeholders) Ã— 100%
+- **Calculation**: (Stakeholders with aligned expectations / Total stakeholders)  100%
 - **Target Range**: 80-100%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Consistent achievement of 90%+
@@ -442,7 +442,7 @@ graph TD
 
 #### Retrospective Action Implementation Rate
 - **Definition**: Rate of implementing retrospective action items
-- **Calculation**: (Implemented action items / Total action items) Ã— 100%
+- **Calculation**: (Implemented action items / Total action items)  100%
 - **Target Range**: 80-100%
 - **Measurement Frequency**: Every sprint
 - **Improvement Goal**: Consistent achievement of 90%+
@@ -472,14 +472,14 @@ graph TD
 
 #### Experiment Success Rate
 - **Definition**: Success rate of process experiments
-- **Calculation**: (Successful experiments / Total experiments) Ã— 100%
+- **Calculation**: (Successful experiments / Total experiments)  100%
 - **Target Range**: 60-80%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Increasing trend toward 80%
 
 #### Learning Integration Rate
 - **Definition**: Rate of integrating learnings from experiments
-- **Calculation**: (Integrated learnings / Total learnings) Ã— 100%
+- **Calculation**: (Integrated learnings / Total learnings)  100%
 - **Target Range**: 70-90%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Increasing trend toward 90%
@@ -495,7 +495,7 @@ graph TD
 
 #### Learning Opportunity Utilization
 - **Definition**: Utilization of learning opportunities
-- **Calculation**: (Utilized learning opportunities / Available opportunities) Ã— 100%
+- **Calculation**: (Utilized learning opportunities / Available opportunities)  100%
 - **Target Range**: 70-90%
 - **Measurement Frequency**: Quarterly
 - **Improvement Goal**: Increasing trend toward 90%

@@ -18,6 +18,12 @@ build/
 
 CLAUDE.md
 Clean-EscapedBackticks.ps1
+Clean-MarkdownFiles.ps1
 
 #Enhancements
 Enhancements/
+
+README-normalize.md
+normalize-files.js
+normalize-files.sh
+package.json

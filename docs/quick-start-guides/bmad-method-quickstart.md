@@ -30,10 +30,10 @@ cd BMAD-METHOD
 ### Step 3: Understand the File Structure
 ```
 bmad-agent/
-â”œâ”€â”€ personas/          # AI persona definitions
-â”œâ”€â”€ tasks/            # Structured task workflows
-â”œâ”€â”€ templates/        # Document templates
-â””â”€â”€ checklists/       # Quality validation checklists
+ personas/          # AI persona definitions
+ tasks/            # Structured task workflows
+ templates/        # Document templates
+ checklists/       # Quality validation checklists
 ```
 
 ## Your First BMAD Session (3 minutes)

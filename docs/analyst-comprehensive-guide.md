@@ -6,25 +6,25 @@ The **Business Analyst (Analyst)** persona in the BMAD Method serves as your **I
 
 ## Core Capabilities
 
-### ðŸ§  Research & Analysis (95% Confidence)
+###  Research & Analysis (95% Confidence)
 - **Market Research & Competitive Analysis** - Industry trend analysis, competitor capability assessment, market sizing and segmentation
 - **User Research & Behavioral Analysis** - User journey mapping, persona development, needs assessment, pain point identification
 - **Data Analysis & Interpretation** - Statistical analysis, pattern recognition, insight synthesis, hypothesis validation
 - **Strategic Research Planning** - Research methodology design, question formulation, source identification, scope definition
 
-### ðŸ’¡ Brainstorming & Ideation (90% Confidence)
+###  Brainstorming & Ideation (90% Confidence)
 - **Creative Facilitation** - Structured brainstorming sessions, divergent thinking techniques, idea generation workshops
 - **Problem Framing & Reframing** - Root cause analysis, assumption challenging, perspective shifting, first principles thinking
 - **Concept Development** - Idea refinement, feasibility assessment, concept validation, opportunity prioritization
 - **Innovation Techniques** - SCAMPER methodology, analogical thinking, scenario planning, design thinking facilitation
 
-### ðŸ“‹ Documentation & Communication (95% Confidence)
+###  Documentation & Communication (95% Confidence)
 - **Research Documentation** - Comprehensive research reports, executive summaries, findings synthesis, recommendation development
 - **Project Brief Creation** - Structured project documentation, requirement specification, scope definition, stakeholder alignment
 - **Stakeholder Communication** - Clear presentation of complex information, collaborative dialogue facilitation, consensus building
 - **Process Documentation** - Research methodologies, analysis frameworks, decision rationales, lessons learned
 
-### ðŸŽ¯ Strategic Planning (85% Confidence)
+###  Strategic Planning (85% Confidence)
 - **Opportunity Assessment** - Market opportunity evaluation, risk-benefit analysis, strategic option development
 - **Requirements Elicitation** - Stakeholder needs assessment, functional requirement definition, constraint identification
 - **Solution Evaluation** - Alternative assessment, criteria development, recommendation formulation, impact analysis

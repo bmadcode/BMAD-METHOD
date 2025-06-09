@@ -1,4 +1,4 @@
-# Infrastructure Review Task
+﻿# Infrastructure Review Task
 
 ## Purpose
 
@@ -64,7 +64,7 @@ To conduct a thorough review of existing infrastructure to identify improvement 
 
 ### 6. Architectural Escalation Assessment
 
-- **DevOps/Platform → Architect Escalation Review:**
+- **DevOps/Platform  Architect Escalation Review:**
   - Evaluate review findings for issues requiring architectural intervention:
     - **Technical Debt Escalation:**
       - Identify infrastructure technical debt that impacts system architecture

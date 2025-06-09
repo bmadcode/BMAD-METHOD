@@ -1,4 +1,4 @@
-# BMAD Documentation Standards
+﻿# BMAD Documentation Standards
 
 ## Overview
 
@@ -80,7 +80,7 @@ These documentation standards were developed with inspiration from:
 
 - Google Developer Documentation Style Guide
 - Microsoft Writing Style Guide
-- The Diátaxis Framework
+- The Ditaxis Framework
 - Write the Docs community best practices
 
 ---

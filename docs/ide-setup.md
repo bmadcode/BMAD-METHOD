@@ -1,4 +1,4 @@
-# IDE Instructions for Agent Configuration
+﻿# IDE Instructions for Agent Configuration
 
 The Uber Orchestrating BMad Agent is mainly recommended for use in Gemini Web, especially for working on the brief, PRD, high level Epics, Stories, Web Deign and Prompt Output. BUT - Everything can also be done in the IDE if desired, see the BMad Agent setup section below.
 
@@ -18,11 +18,11 @@ The BMad Agent requires the full bmad agent folder to be at the root of your pro
 
 To use custom agent modes - review the docs here: https://docs.cursor.com/chat/custom-modes.
 
-- Specifically you will need to enable Custom Modes in: Settings → Features → Chat → Custom modes
+- Specifically you will need to enable Custom Modes in: Settings  Features  Chat  Custom modes
 - Custom Agents can be created and configured with specific tools, models, and custom prompts
 - Cursor allows creating custom agents through a GUI interface
 
-NOTE from Cursor: "We’re considering adding a .cursor/modes.json file to your project to make it easier to create and share custom modes."
+NOTE from Cursor: "Were considering adding a .cursor/modes.json file to your project to make it easier to create and share custom modes."
 
 ## Windsurf
 

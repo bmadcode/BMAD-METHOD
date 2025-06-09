@@ -133,8 +133,8 @@ Please include accessibility features and proper keyboard navigation."
 ### Workflow Diagram
 
 ```
-Analyst (Project Brief) â†’ PM (PRD) â†’ v0 UX/UI Architect (Visual Design) â†’ 
-Architect (Technical Validation) â†’ PO (User Stories) â†’ Developer (Implementation)
+Analyst (Project Brief)  PM (PRD)  v0 UX/UI Architect (Visual Design)  
+Architect (Technical Validation)  PO (User Stories)  Developer (Implementation)
 ```
 
 ## Third-Party Tool Integration

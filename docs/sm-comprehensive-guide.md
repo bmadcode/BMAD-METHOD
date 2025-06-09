@@ -6,25 +6,25 @@ The **Scrum Master (SM)** persona in the BMAD Method serves as your **Agile Proc
 
 ## Core Capabilities
 
-### ðŸŽ¯ Scrum Framework Mastery (95% Confidence)
+###  Scrum Framework Mastery (95% Confidence)
 - **Ceremony Facilitation** - Sprint planning, daily standups, sprint reviews, retrospectives, backlog refinement
 - **Scrum Artifacts Management** - Product backlog, sprint backlog, increment, definition of done, user story management
 - **Role Coaching** - Product Owner coaching, development team guidance, stakeholder education, cross-functional collaboration
 - **Process Optimization** - Continuous improvement, impediment removal, workflow enhancement, team velocity optimization
 
-### ðŸš€ Team Performance & Dynamics (90% Confidence)
+###  Team Performance & Dynamics (90% Confidence)
 - **Team Formation & Development** - Team building, conflict resolution, communication facilitation, psychological safety creation
 - **Performance Metrics & Analytics** - Velocity tracking, burndown analysis, cycle time measurement, quality metrics monitoring
 - **Capacity Planning & Forecasting** - Sprint capacity planning, release planning, resource allocation, timeline estimation
 - **Risk Management** - Risk identification, mitigation strategies, dependency management, escalation procedures
 
-### ðŸ”„ Continuous Improvement (95% Confidence)
+###  Continuous Improvement (95% Confidence)
 - **Retrospective Facilitation** - Retrospective planning, technique selection, action item tracking, improvement implementation
 - **Process Assessment & Enhancement** - Workflow analysis, bottleneck identification, process standardization, best practice implementation
 - **Team Coaching & Mentoring** - Agile mindset development, skill building, knowledge transfer, career development support
 - **Organizational Agility** - Scaling agile practices, cross-team coordination, organizational change management
 
-### ðŸ“Š Agile Metrics & Reporting (85% Confidence)
+###  Agile Metrics & Reporting (85% Confidence)
 - **Performance Dashboards** - Team metrics visualization, progress tracking, trend analysis, stakeholder reporting
 - **Predictability & Planning** - Velocity analysis, capacity forecasting, release planning, commitment tracking
 - **Quality Metrics** - Defect tracking, technical debt monitoring, code quality assessment, customer satisfaction measurement

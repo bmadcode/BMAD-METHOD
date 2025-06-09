@@ -199,9 +199,9 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
    - Mark items as:
-     - âœ… PASS: Requirement clearly met
-     - âŒ FAIL: Requirement not met or insufficient coverage
-     - âš ï¸ PARTIAL: Some aspects covered but needs improvement
+     -  PASS: Requirement clearly met
+     -  FAIL: Requirement not met or insufficient coverage
+     -  PARTIAL: Some aspects covered but needs improvement
      - N/A: Not applicable to this case
 
 5. **Section Analysis**
@@ -1006,7 +1006,7 @@ To design a comprehensive infrastructure architecture that defines all aspects o
 
 ### 5. Implementation Feasibility Review & Collaboration
 
-- **Architect â†’ DevOps/Platform Feedback Loop:**
+- **Architect  DevOps/Platform Feedback Loop:**
   - Present architectural blueprint summary to DevOps/Platform Engineering Agent for feasibility review
   - Request specific feedback on:
     - **Operational Complexity:** Are the proposed patterns implementable with current tooling and expertise?
@@ -1215,7 +1215,7 @@ To implement a comprehensive platform infrastructure stack based on the Infrastr
 ### 1. Confirm Interaction Mode
 
 - Ask the user: "How would you like to proceed with platform infrastructure implementation? We can work:
-  A. **Incrementally (Default & Recommended):** We'll implement each platform layer step-by-step (Foundation â†’ Container Platform â†’ GitOps â†’ Service Mesh â†’ Developer Experience), validating integration at each stage. This ensures thorough testing and operational readiness.
+  A. **Incrementally (Default & Recommended):** We'll implement each platform layer step-by-step (Foundation  Container Platform  GitOps  Service Mesh  Developer Experience), validating integration at each stage. This ensures thorough testing and operational readiness.
   B. **"YOLO" Mode:** I'll implement the complete platform stack in logical groups, with validation at major integration milestones. This is faster but requires comprehensive end-to-end testing."
 - Request the user to select their preferred mode and proceed accordingly.
 
@@ -1230,7 +1230,7 @@ To implement a comprehensive platform infrastructure stack based on the Infrastr
 
 ### 3. Joint Implementation Planning Session
 
-- **Architect â†” DevOps/Platform Collaborative Planning:**
+- **Architect  DevOps/Platform Collaborative Planning:**
   - **Architecture Alignment Review:**
     - Confirm understanding of architectural decisions and rationale with Architect Agent
     - Validate interpretation of infrastructure architecture document
@@ -1871,7 +1871,7 @@ To conduct a thorough review of existing infrastructure to identify improvement 
 
 ### 6. Architectural Escalation Assessment
 
-- **DevOps/Platform â†’ Architect Escalation Review:**
+- **DevOps/Platform  Architect Escalation Review:**
   - Evaluate review findings for issues requiring architectural intervention:
     - **Technical Debt Escalation:**
       - Identify infrastructure technical debt that impacts system architecture
@@ -2003,7 +2003,7 @@ To comprehensively validate platform infrastructure changes against security, re
 
 ### 3. Architecture Design Review Gate
 
-- **DevOps/Platform â†’ Architect Design Review:**
+- **DevOps/Platform  Architect Design Review:**
   - Conduct systematic review of infrastructure architecture document for implementability
   - Evaluate architectural decisions against operational constraints and capabilities:
     - **Implementation Complexity:** Assess if proposed architecture can be implemented with available tools and expertise

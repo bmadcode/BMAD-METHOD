@@ -1,4 +1,4 @@
-# Interactive Documentation Examples
+﻿# Interactive Documentation Examples
 
 This document provides interactive examples and components that enhance the BMAD Method documentation experience.
 
@@ -8,14 +8,14 @@ This document provides interactive examples and components that enhance the BMAD
   <div class="workflow-header">
     <h3>BMAD Method Workflow</h3>
     <div class="workflow-controls">
-      <button class="btn-play" onclick="startWorkflow()">▶️ Start</button>
-      <button class="btn-reset" onclick="resetWorkflow()">🔄 Reset</button>
+      <button class="btn-play" onclick="startWorkflow()"> Start</button>
+      <button class="btn-reset" onclick="resetWorkflow()"> Reset</button>
     </div>
   </div>
   
   <div class="workflow-canvas">
     <div class="workflow-step" id="step-1" data-step="requirements">
-      <div class="step-icon">📋</div>
+      <div class="step-icon"></div>
       <div class="step-title">Requirements</div>
       <div class="step-persona">Product Owner</div>
     </div>
@@ -23,7 +23,7 @@ This document provides interactive examples and components that enhance the BMAD
     <div class="workflow-arrow" id="arrow-1"></div>
     
     <div class="workflow-step" id="step-2" data-step="architecture">
-      <div class="step-icon">🏗️</div>
+      <div class="step-icon"></div>
       <div class="step-title">Architecture</div>
       <div class="step-persona">System Architect</div>
     </div>
@@ -31,7 +31,7 @@ This document provides interactive examples and components that enhance the BMAD
     <div class="workflow-arrow" id="arrow-2"></div>
     
     <div class="workflow-step" id="step-3" data-step="design">
-      <div class="step-icon">🎨</div>
+      <div class="step-icon"></div>
       <div class="step-title">Design</div>
       <div class="step-persona">UX/UI Designer</div>
     </div>
@@ -39,7 +39,7 @@ This document provides interactive examples and components that enhance the BMAD
     <div class="workflow-arrow" id="arrow-3"></div>
     
     <div class="workflow-step" id="step-4" data-step="implementation">
-      <div class="step-icon">💻</div>
+      <div class="step-icon"></div>
       <div class="step-title">Implementation</div>
       <div class="step-persona">Developer</div>
     </div>
@@ -267,7 +267,7 @@ function showStepDetails(stepName) {
     <label class="persona-checkbox">
       <input type="checkbox" value="pm" onchange="updateComparison()">
       <div class="persona-card">
-        <div class="persona-icon">👔</div>
+        <div class="persona-icon"></div>
         <div class="persona-name">Project Manager</div>
       </div>
     </label>
@@ -275,7 +275,7 @@ function showStepDetails(stepName) {
     <label class="persona-checkbox">
       <input type="checkbox" value="architect" onchange="updateComparison()">
       <div class="persona-card">
-        <div class="persona-icon">🏗️</div>
+        <div class="persona-icon"></div>
         <div class="persona-name">System Architect</div>
       </div>
     </label>
@@ -283,7 +283,7 @@ function showStepDetails(stepName) {
     <label class="persona-checkbox">
       <input type="checkbox" value="ux-ui" onchange="updateComparison()">
       <div class="persona-card">
-        <div class="persona-icon">🎨</div>
+        <div class="persona-icon"></div>
         <div class="persona-name">UX/UI Designer</div>
       </div>
     </label>
@@ -291,7 +291,7 @@ function showStepDetails(stepName) {
     <label class="persona-checkbox">
       <input type="checkbox" value="developer" onchange="updateComparison()">
       <div class="persona-card">
-        <div class="persona-icon">💻</div>
+        <div class="persona-icon"></div>
         <div class="persona-name">Developer</div>
       </div>
     </label>
@@ -344,10 +344,10 @@ function showStepDetails(stepName) {
 
 <script>
 const personaData = {
-  pm: { name: 'Project Manager', icon: '👔' },
-  architect: { name: 'System Architect', icon: '🏗️' },
-  'ux-ui': { name: 'UX/UI Designer', icon: '🎨' },
-  developer: { name: 'Developer', icon: '💻' }
+  pm: { name: 'Project Manager', icon: '' },
+  architect: { name: 'System Architect', icon: '' },
+  'ux-ui': { name: 'UX/UI Designer', icon: '' },
+  developer: { name: 'Developer', icon: '' }
 };
 
 function updateComparison() {
@@ -481,7 +481,7 @@ function updateComparison() {
   
   <div class="story-list">
     <div class="story-item completed">
-      <div class="story-status">✅</div>
+      <div class="story-status"></div>
       <div class="story-content">
         <div class="story-title">Story 2.1: "How It Works" Documentation</div>
         <div class="story-points">13 points</div>
@@ -489,7 +489,7 @@ function updateComparison() {
     </div>
     
     <div class="story-item completed">
-      <div class="story-status">✅</div>
+      <div class="story-status"></div>
       <div class="story-content">
         <div class="story-title">Story 2.2: System Architecture Diagrams</div>
         <div class="story-points">8 points</div>
@@ -497,7 +497,7 @@ function updateComparison() {
     </div>
     
     <div class="story-item completed">
-      <div class="story-status">✅</div>
+      <div class="story-status"></div>
       <div class="story-content">
         <div class="story-title">Story 2.3: User Journey Documentation</div>
         <div class="story-points">8 points</div>
@@ -505,7 +505,7 @@ function updateComparison() {
     </div>
     
     <div class="story-item in-progress">
-      <div class="story-status">🔄</div>
+      <div class="story-status"></div>
       <div class="story-content">
         <div class="story-title">Story 2.4: Visual Documentation Elements</div>
         <div class="story-points">5 points</div>

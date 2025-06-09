@@ -201,8 +201,8 @@ Each quality dimension is scored on a 5-point scale:
 The overall quality score is calculated as a weighted average of the dimension scores:
 
 ```
-Overall Score = (Code Quality Ã— 0.25) + (Functionality Ã— 0.20) + (Performance Ã— 0.15) + 
-                (Maintainability Ã— 0.15) + (Testing Ã— 0.15) + (Documentation Ã— 0.10)
+Overall Score = (Code Quality  0.25) + (Functionality  0.20) + (Performance  0.15) + 
+                (Maintainability  0.15) + (Testing  0.15) + (Documentation  0.10)
 ```
 
 ### Quality Levels

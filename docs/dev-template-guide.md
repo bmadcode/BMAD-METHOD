@@ -61,31 +61,31 @@ export default ComponentName;
 
 ```
 project-name/
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ components/
-â”‚   â”‚   â”œâ”€â”€ common/
-â”‚   â”‚   â”‚   â””â”€â”€ [shared components]
-â”‚   â”‚   â”œâ”€â”€ features/
-â”‚   â”‚   â”‚   â””â”€â”€ [feature-specific components]
-â”‚   â”‚   â””â”€â”€ layouts/
-â”‚   â”‚       â””â”€â”€ [layout components]
-â”‚   â”œâ”€â”€ hooks/
-â”‚   â”‚   â””â”€â”€ [custom hooks]
-â”‚   â”œâ”€â”€ utils/
-â”‚   â”‚   â””â”€â”€ [utility functions]
-â”‚   â”œâ”€â”€ services/
-â”‚   â”‚   â””â”€â”€ [API services]
-â”‚   â”œâ”€â”€ types/
-â”‚   â”‚   â””â”€â”€ [TypeScript types/interfaces]
-â”‚   â”œâ”€â”€ styles/
-â”‚   â”‚   â””â”€â”€ [global styles]
-â”‚   â””â”€â”€ pages/
-â”‚       â””â”€â”€ [page components]
-â”œâ”€â”€ public/
-â”‚   â””â”€â”€ [static assets]
-â”œâ”€â”€ tests/
-â”‚   â””â”€â”€ [test files]
-â””â”€â”€ [configuration files]
+ src/
+    components/
+       common/
+          [shared components]
+       features/
+          [feature-specific components]
+       layouts/
+           [layout components]
+    hooks/
+       [custom hooks]
+    utils/
+       [utility functions]
+    services/
+       [API services]
+    types/
+       [TypeScript types/interfaces]
+    styles/
+       [global styles]
+    pages/
+        [page components]
+ public/
+    [static assets]
+ tests/
+    [test files]
+ [configuration files]
 ```
 
 ### Development Templates

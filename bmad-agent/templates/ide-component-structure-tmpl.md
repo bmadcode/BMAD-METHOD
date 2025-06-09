@@ -4,12 +4,12 @@
 
 ```
 {component-name}/
-â”œâ”€â”€ index.ts                 # Main export file
-â”œâ”€â”€ {component-name}.tsx     # Component implementation
-â”œâ”€â”€ {component-name}.test.tsx # Component tests
-â”œâ”€â”€ {component-name}.module.css # Component styles (if using CSS modules)
-â”œâ”€â”€ {component-name}.stories.tsx # Storybook stories (if applicable)
-â””â”€â”€ types.ts                 # TypeScript types (if complex enough to warrant separation)
+ index.ts                 # Main export file
+ {component-name}.tsx     # Component implementation
+ {component-name}.test.tsx # Component tests
+ {component-name}.module.css # Component styles (if using CSS modules)
+ {component-name}.stories.tsx # Storybook stories (if applicable)
+ types.ts                 # TypeScript types (if complex enough to warrant separation)
 ```
 
 ## Component Implementation File ({component-name}.tsx)

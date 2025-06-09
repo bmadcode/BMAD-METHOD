@@ -137,8 +137,8 @@ Sarah integrates at key points in the BMAD workflow:
 ### Workflow Diagram
 
 ```
-Product Manager (John) â†’ System Architect (Fred) â†’ UX/UI Architect (Veronica/Victor) â†’
-Product Owner (Sarah) â†’ Developer (David) + Scrum Master (Mike) + DevOps Engineer (Alex)
+Product Manager (John)  System Architect (Fred)  UX/UI Architect (Veronica/Victor) 
+Product Owner (Sarah)  Developer (David) + Scrum Master (Mike) + DevOps Engineer (Alex)
 ```
 
 ### Handoff Procedures

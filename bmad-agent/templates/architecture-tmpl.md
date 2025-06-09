@@ -47,44 +47,44 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 ```plaintext
 {project-root}/
-â”œâ”€â”€ .github/                    # CI/CD workflows (e.g., GitHub Actions)
-â”‚   â””â”€â”€ workflows/
-â”‚       â””â”€â”€ main.yml
-â”œâ”€â”€ .vscode/                    # VSCode settings (optional)
-â”‚   â””â”€â”€ settings.json
-â”œâ”€â”€ build/                      # Compiled output (if applicable, often git-ignored)
-â”œâ”€â”€ config/                     # Static configuration files (if any)
-â”œâ”€â”€ docs/                       # Project documentation (PRD, Arch, etc.)
-â”‚   â”œâ”€â”€ index.md
-â”‚   â””â”€â”€ ... (other .md files)
-â”œâ”€â”€ infra/                      # Infrastructure as Code (e.g., CDK, Terraform)
-â”‚   â””â”€â”€ lib/
-â”‚   â””â”€â”€ bin/
-â”œâ”€â”€ node_modules/ / venv / target/ # Project dependencies (git-ignored)
-â”œâ”€â”€ scripts/                    # Utility scripts (build, deploy helpers, etc.)
-â”œâ”€â”€ src/                        # Application source code
-â”‚   â”œâ”€â”€ backend/                # Backend-specific application code (if distinct frontend exists)
-â”‚   â”‚   â”œâ”€â”€ core/               # Core business logic, domain models
-â”‚   â”‚   â”œâ”€â”€ services/           # Business services, orchestrators
-â”‚   â”‚   â”œâ”€â”€ adapters/           # Adapters to external systems (DB, APIs)
-â”‚   â”‚   â”œâ”€â”€ controllers/ / routes/ # API endpoint handlers
-â”‚   â”‚   â””â”€â”€ main.ts / app.py    # Backend application entry point
-â”‚   â”œâ”€â”€ frontend/               # Placeholder: See Frontend Architecture Doc for details if used
-â”‚   â”œâ”€â”€ shared/ / common/       # Code shared (e.g., types, utils, domain models if applicable)
-â”‚   â”‚   â””â”€â”€ types/
-â”‚   â””â”€â”€ main.ts / index.ts / app.ts # Main application entry point (if not using backend/frontend split above)
-â”œâ”€â”€ stories/                    # Generated story files for development (optional)
-â”‚   â””â”€â”€ epic1/
-â”œâ”€â”€ test/                       # Automated tests
-â”‚   â”œâ”€â”€ unit/                   # Unit tests (mirroring src structure)
-â”‚   â”œâ”€â”€ integration/            # Integration tests
-â”‚   â””â”€â”€ e2e/                    # End-to-end tests
-â”œâ”€â”€ .env.example                # Example environment variables
-â”œâ”€â”€ .gitignore                  # Git ignore rules
-â”œâ”€â”€ package.json / requirements.txt / pom.xml # Project manifest and dependencies
-â”œâ”€â”€ tsconfig.json / pyproject.toml # Language-specific configuration (if applicable)
-â”œâ”€â”€ Dockerfile                  # Docker build instructions (if applicable)
-â””â”€â”€ README.md                   # Project overview and setup instructions
+ .github/                    # CI/CD workflows (e.g., GitHub Actions)
+    workflows/
+        main.yml
+ .vscode/                    # VSCode settings (optional)
+    settings.json
+ build/                      # Compiled output (if applicable, often git-ignored)
+ config/                     # Static configuration files (if any)
+ docs/                       # Project documentation (PRD, Arch, etc.)
+    index.md
+    ... (other .md files)
+ infra/                      # Infrastructure as Code (e.g., CDK, Terraform)
+    lib/
+    bin/
+ node_modules/ / venv / target/ # Project dependencies (git-ignored)
+ scripts/                    # Utility scripts (build, deploy helpers, etc.)
+ src/                        # Application source code
+    backend/                # Backend-specific application code (if distinct frontend exists)
+       core/               # Core business logic, domain models
+       services/           # Business services, orchestrators
+       adapters/           # Adapters to external systems (DB, APIs)
+       controllers/ / routes/ # API endpoint handlers
+       main.ts / app.py    # Backend application entry point
+    frontend/               # Placeholder: See Frontend Architecture Doc for details if used
+    shared/ / common/       # Code shared (e.g., types, utils, domain models if applicable)
+       types/
+    main.ts / index.ts / app.ts # Main application entry point (if not using backend/frontend split above)
+ stories/                    # Generated story files for development (optional)
+    epic1/
+ test/                       # Automated tests
+    unit/                   # Unit tests (mirroring src structure)
+    integration/            # Integration tests
+    e2e/                    # End-to-end tests
+ .env.example                # Example environment variables
+ .gitignore                  # Git ignore rules
+ package.json / requirements.txt / pom.xml # Project manifest and dependencies
+ tsconfig.json / pyproject.toml # Language-specific configuration (if applicable)
+ Dockerfile                  # Docker build instructions (if applicable)
+ README.md                   # Project overview and setup instructions
 ```
 
 (Adjust the example tree based on the actual project type - e.g., Python would have requirements.txt, etc. The structure above illustrates a potential separation for projects with distinct frontends; for simpler projects or APIs, the `src/` structure might be flatter.)

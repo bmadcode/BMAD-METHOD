@@ -57,15 +57,15 @@ journey
 - **Success Criteria Framework**: Establishing measurable outcomes
 
 #### Decision Points
-- â­ **Project Scope Definition**: Determining boundaries and MVP
+-  **Project Scope Definition**: Determining boundaries and MVP
   - **Solution**: Scope definition template with examples
   - **Success Metric**: 90% of projects stay within initial scope
 
 #### Pain Points
-- ðŸ”´ **Ambiguous Business Requirements**: Unclear objectives from stakeholders
+-  **Ambiguous Business Requirements**: Unclear objectives from stakeholders
   - **Solution**: Requirement clarification prompts and templates
   - **Success Metric**: Reduction in scope changes after initiation
-- ðŸ”´ **Success Criteria Formulation**: Difficulty defining measurable outcomes
+-  **Success Criteria Formulation**: Difficulty defining measurable outcomes
   - **Solution**: SMART goal templates with industry-specific examples
   - **Success Metric**: 100% of projects have quantifiable success metrics
 
@@ -77,15 +77,15 @@ journey
 - **Prioritization Framework**: Method for ranking requirements
 
 #### Decision Points
-- â­ **MVP Feature Selection**: Determining core vs. nice-to-have features
+-  **MVP Feature Selection**: Determining core vs. nice-to-have features
   - **Solution**: Value/effort prioritization matrix
   - **Success Metric**: MVP delivery time reduced by 30%
 
 #### Pain Points
-- ðŸ”´ **Stakeholder Alignment**: Conflicting priorities from different departments
+-  **Stakeholder Alignment**: Conflicting priorities from different departments
   - **Solution**: Stakeholder alignment workshop templates
   - **Success Metric**: Stakeholder consensus achieved before development starts
-- ðŸ”´ **Technical Feasibility**: Uncertainty about implementation possibilities
+-  **Technical Feasibility**: Uncertainty about implementation possibilities
   - **Solution**: Early architect consultation workflow
   - **Success Metric**: Technical roadblocks identified before development
 
@@ -97,15 +97,15 @@ journey
 - **Timeline Generator**: Realistic schedule creation
 
 #### Decision Points
-- â­ **Technology Stack Selection**: Choosing appropriate technologies
+-  **Technology Stack Selection**: Choosing appropriate technologies
   - **Solution**: Technology comparison framework with recommendations
   - **Success Metric**: 95% of projects use recommended technology patterns
 
 #### Pain Points
-- ðŸ”´ **Timeline Estimation**: Difficulty predicting development time
+-  **Timeline Estimation**: Difficulty predicting development time
   - **Solution**: Historical data-based estimation templates
   - **Success Metric**: Delivery estimates within 20% of actual time
-- ðŸ”´ **Resource Allocation**: Uncertainty about required team composition
+-  **Resource Allocation**: Uncertainty about required team composition
   - **Solution**: Skill matrix and resource planning tools
   - **Success Metric**: Reduced mid-project resource adjustments
 
@@ -117,15 +117,15 @@ journey
 - **Implementation Kickoff**: Structured start to development
 
 #### Decision Points
-- â­ **Development Approach**: Waterfall vs. agile implementation
+-  **Development Approach**: Waterfall vs. agile implementation
   - **Solution**: Development methodology decision tree
   - **Success Metric**: 100% team alignment on approach before starting
 
 #### Pain Points
-- ðŸ”´ **Knowledge Transfer**: Ensuring complete understanding by development team
+-  **Knowledge Transfer**: Ensuring complete understanding by development team
   - **Solution**: Knowledge transfer checklist and verification
   - **Success Metric**: Zero "requirements clarification" delays
-- ðŸ”´ **Maintaining Involvement**: Balancing oversight without micromanagement
+-  **Maintaining Involvement**: Balancing oversight without micromanagement
   - **Solution**: RACI matrix for ongoing product owner involvement
   - **Success Metric**: Weekly touchpoints established for all projects
 

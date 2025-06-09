@@ -1251,18 +1251,18 @@ Templates for ensuring analysis quality and validation.
 
 ### Key Performance Indicators
 **Business Metrics**:
-- [Business KPI 1]: [Current baseline] â†’ [Target]
-- [Business KPI 2]: [Current baseline] â†’ [Target]
-- [Business KPI 3]: [Current baseline] â†’ [Target]
+- [Business KPI 1]: [Current baseline]  [Target]
+- [Business KPI 2]: [Current baseline]  [Target]
+- [Business KPI 3]: [Current baseline]  [Target]
 
 **User Metrics**:
-- [User KPI 1]: [Current baseline] â†’ [Target]
-- [User KPI 2]: [Current baseline] â†’ [Target]
-- [User KPI 3]: [Current baseline] â†’ [Target]
+- [User KPI 1]: [Current baseline]  [Target]
+- [User KPI 2]: [Current baseline]  [Target]
+- [User KPI 3]: [Current baseline]  [Target]
 
 **Technical Metrics**:
-- [Technical KPI 1]: [Current baseline] â†’ [Target]
-- [Technical KPI 2]: [Current baseline] â†’ [Target]
+- [Technical KPI 1]: [Current baseline]  [Target]
+- [Technical KPI 2]: [Current baseline]  [Target]
 
 ### Measurement Plan
 **Data Collection**: [How metrics will be collected]
@@ -1723,9 +1723,9 @@ Templates for ensuring analysis quality and validation.
 
 ### Slide 14: Success Metrics
 **Key Performance Indicators**:
-- [Metric 1]: [Current state] â†’ [Target state]
-- [Metric 2]: [Current state] â†’ [Target state]
-- [Metric 3]: [Current state] â†’ [Target state]
+- [Metric 1]: [Current state]  [Target state]
+- [Metric 2]: [Current state]  [Target state]
+- [Metric 3]: [Current state]  [Target state]
 
 **Measurement Plan**:
 - [How success will be measured]

@@ -112,10 +112,10 @@ graph TD
 
 ### Cross-Persona Collaboration
 
-1. **PO â†” PM**: Story prioritization and sprint planning
-2. **Architect â†” UX/UI**: Technical feasibility and design constraints
-3. **BA â†” PO**: Requirements refinement and business value alignment
-4. **PM â†” All**: Coordination, timeline management, and delivery
+1. **PO  PM**: Story prioritization and sprint planning
+2. **Architect  UX/UI**: Technical feasibility and design constraints
+3. **BA  PO**: Requirements refinement and business value alignment
+4. **PM  All**: Coordination, timeline management, and delivery
 
 ### Handoff Protocols
 

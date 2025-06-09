@@ -978,7 +978,7 @@ This assessment evaluates team health across multiple dimensions to identify str
 ### Team Health Dimensions
 
 #### 1. Collaboration and Communication
-**Rating**: [1-5 scale] **Trend**: [â†‘â†“â†’]
+**Rating**: [1-5 scale] **Trend**: []
 
 **Indicators**:
 - [ ] Team members communicate openly and frequently
@@ -993,7 +993,7 @@ This assessment evaluates team health across multiple dimensions to identify str
 - [Area for improvement 2]
 
 #### 2. Technical Excellence
-**Rating**: [1-5 scale] **Trend**: [â†‘â†“â†’]
+**Rating**: [1-5 scale] **Trend**: []
 
 **Indicators**:
 - [ ] Code quality standards are consistently met
@@ -1008,7 +1008,7 @@ This assessment evaluates team health across multiple dimensions to identify str
 - [Area for improvement 2]
 
 #### 3. Process Adherence
-**Rating**: [1-5 scale] **Trend**: [â†‘â†“â†’]
+**Rating**: [1-5 scale] **Trend**: []
 
 **Indicators**:
 - [ ] Scrum ceremonies are effective and well-attended
@@ -1023,7 +1023,7 @@ This assessment evaluates team health across multiple dimensions to identify str
 - [Area for improvement 2]
 
 #### 4. Team Morale and Engagement
-**Rating**: [1-5 scale] **Trend**: [â†‘â†“â†’]
+**Rating**: [1-5 scale] **Trend**: []
 
 **Indicators**:
 - [ ] Team members are engaged and motivated
@@ -1038,7 +1038,7 @@ This assessment evaluates team health across multiple dimensions to identify str
 - [Area for improvement 2]
 
 #### 5. Delivery Performance
-**Rating**: [1-5 scale] **Trend**: [â†‘â†“â†’]
+**Rating**: [1-5 scale] **Trend**: []
 
 **Indicators**:
 - [ ] Sprint goals are consistently achieved
@@ -1224,10 +1224,10 @@ This assessment evaluates team health across multiple dimensions to identify str
 #### Key Metrics
 | Metric | Current Value | Target | Status | Trend |
 |--------|---------------|--------|--------|-------|
-| Velocity | [Points] | [Target] | [Status] | [â†‘â†“â†’] |
-| Sprint Completion | [%] | [Target] | [Status] | [â†‘â†“â†’] |
-| Quality Score | [Score] | [Target] | [Status] | [â†‘â†“â†’] |
-| Team Satisfaction | [Score] | [Target] | [Status] | [â†‘â†“â†’] |
+| Velocity | [Points] | [Target] | [Status] | [] |
+| Sprint Completion | [%] | [Target] | [Status] | [] |
+| Quality Score | [Score] | [Target] | [Status] | [] |
+| Team Satisfaction | [Score] | [Target] | [Status] | [] |
 
 ### Accomplishments
 

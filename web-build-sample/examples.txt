@@ -6,7 +6,7 @@
 **Goal**: Create a modern, responsive dashboard for managing products
 **Target Users**: Store administrators and product managers
 
-## Phase 1: Initial Requirements (Analyst â†’ v0 UX/UI Architect)
+## Phase 1: Initial Requirements (Analyst  v0 UX/UI Architect)
 
 ### Project Brief Summary
 - Need a dashboard for managing e-commerce products
@@ -106,23 +106,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onEdit, onDelete }) 
 ### File Structure Created
 ```
 src/
-â”œâ”€â”€ components/
-â”‚   â”œâ”€â”€ ProductCard/
-â”‚   â”‚   â”œâ”€â”€ ProductCard.tsx
-â”‚   â”‚   â”œâ”€â”€ ProductCard.stories.tsx
-â”‚   â”‚   â””â”€â”€ ProductCard.test.tsx
-â”‚   â”œâ”€â”€ DashboardHeader/
-â”‚   â”‚   â”œâ”€â”€ DashboardHeader.tsx
-â”‚   â”‚   â”œâ”€â”€ DashboardHeader.stories.tsx
-â”‚   â”‚   â””â”€â”€ DashboardHeader.test.tsx
-â”‚   â””â”€â”€ DataTable/
-â”‚       â”œâ”€â”€ DataTable.tsx
-â”‚       â”œâ”€â”€ DataTable.stories.tsx
-â”‚       â””â”€â”€ DataTable.test.tsx
-â”œâ”€â”€ types/
-â”‚   â””â”€â”€ Product.ts
-â””â”€â”€ styles/
-    â””â”€â”€ components.css
+ components/
+    ProductCard/
+       ProductCard.tsx
+       ProductCard.stories.tsx
+       ProductCard.test.tsx
+    DashboardHeader/
+       DashboardHeader.tsx
+       DashboardHeader.stories.tsx
+       DashboardHeader.test.tsx
+    DataTable/
+        DataTable.tsx
+        DataTable.stories.tsx
+        DataTable.test.tsx
+ types/
+    Product.ts
+ styles/
+     components.css
 ```
 
 ### Performance Metrics

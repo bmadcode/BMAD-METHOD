@@ -7,10 +7,10 @@
 
 ## Current Persona Documentation Status
 
-### Well-Documented Personas
+###  Well-Documented Personas
 
 #### v0 UX/UI Architect
-- **Status**: COMPLETE - Recently standardized
+- **Status**:  COMPLETE - Recently standardized
 - **Files**: 
   - `bmad-agent/personas/v0-ux-ui-architect.md` (Web version)
   - `bmad-agent/personas/v0-ux-ui-architect.ide.md` (IDE version)
@@ -18,10 +18,10 @@
 - **Integration Guides**: Complete
 - **Examples**: Multiple examples available
 
-### ðŸ”¶ Partially Documented Personas
+###  Partially Documented Personas
 
 #### Business Analyst (Mary)
-- **Status**: ðŸ”¶ PARTIAL
+- **Status**:  PARTIAL
 - **Files**: `bmad-agent/personas/analyst.md`
 - **Missing**: 
   - Integration guide
@@ -30,7 +30,7 @@
   - Quick-start guide
 
 #### Product Manager (John)
-- **Status**: ðŸ”¶ PARTIAL
+- **Status**:  PARTIAL
 - **Files**: `bmad-agent/personas/pm.md`
 - **Missing**:
   - Comprehensive user guide
@@ -39,7 +39,7 @@
   - Quality assurance checklist
 
 #### System Architect (Fred)
-- **Status**: ðŸ”¶ PARTIAL
+- **Status**:  PARTIAL
 - **Files**: `bmad-agent/personas/architect.md`
 - **Missing**:
   - Technical integration guide
@@ -48,7 +48,7 @@
   - Tool integration guides
 
 #### Product Owner (Sarah)
-- **Status**: ðŸ”¶ PARTIAL
+- **Status**:  PARTIAL
 - **Files**: `bmad-agent/personas/po.md`
 - **Missing**:
   - User story templates
@@ -57,7 +57,7 @@
   - Sprint planning integration
 
 #### Scrum Master (Mike)
-- **Status**: ðŸ”¶ PARTIAL
+- **Status**:  PARTIAL
 - **Files**: 
   - `bmad-agent/personas/sm.md` (Web version)
   - `bmad-agent/personas/sm.ide.md` (IDE version)
@@ -67,10 +67,10 @@
   - Team management best practices
   - Metrics and reporting guides
 
-### ðŸ”´ Minimally Documented Personas
+###  Minimally Documented Personas
 
 #### Developer (David)
-- **Status**: ðŸ”´ MINIMAL
+- **Status**:  MINIMAL
 - **Files**: `bmad-agent/personas/dev.ide.md`
 - **Missing**:
   - Web environment version
@@ -79,7 +79,7 @@
   - Testing methodologies
 
 #### DevOps Engineer (Alex)
-- **Status**: ðŸ”´ MINIMAL
+- **Status**:  MINIMAL
 - **Files**: `bmad-agent/personas/devops-pe.ide.md`
 - **Missing**:
   - Infrastructure templates
@@ -88,7 +88,7 @@
   - Security best practices
 
 #### Design Architect (Emma)
-- **Status**: ðŸ”´ MINIMAL
+- **Status**:  MINIMAL
 - **Files**: `bmad-agent/personas/design-architect.md`
 - **Missing**:
   - Design system creation guides

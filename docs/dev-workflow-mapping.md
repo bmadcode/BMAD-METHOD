@@ -232,12 +232,12 @@ flowchart TD
 
 ### Common Transition Triggers
 
-- **Implementation â†’ Collaboration**: Need for requirement clarification, design feedback, or technical guidance
-- **Implementation â†’ Optimization**: Discovery of performance issues or technical debt
-- **Collaboration â†’ Implementation**: Continuation of implementation after collaboration
-- **Collaboration â†’ Optimization**: Identification of optimization opportunities during collaboration
-- **Optimization â†’ Implementation**: Need for new implementation to support optimization
-- **Optimization â†’ Collaboration**: Need for stakeholder input on optimization approach
+- **Implementation  Collaboration**: Need for requirement clarification, design feedback, or technical guidance
+- **Implementation  Optimization**: Discovery of performance issues or technical debt
+- **Collaboration  Implementation**: Continuation of implementation after collaboration
+- **Collaboration  Optimization**: Identification of optimization opportunities during collaboration
+- **Optimization  Implementation**: Need for new implementation to support optimization
+- **Optimization  Collaboration**: Need for stakeholder input on optimization approach
 
 ## Integration with Other Personas
 

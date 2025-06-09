@@ -55,12 +55,12 @@ journey
 - **Quick Start Guide**: Initial pathway to getting started
 
 #### Decision Points
-- â­ **Continue or Abandon**: Based on perceived value and learning curve
+-  **Continue or Abandon**: Based on perceived value and learning curve
   - **Solution**: Clear, compelling benefits on homepage with minimal scrolling
   - **Success Metric**: 70% of visitors proceed to setup phase
 
 #### Pain Points
-- ðŸ”´ **Information Overload**: Too much theory before practical application
+-  **Information Overload**: Too much theory before practical application
   - **Solution**: Progressive disclosure of information with clear "Start Here" path
   - **Success Metric**: Average time to first action under 5 minutes
 
@@ -72,15 +72,15 @@ journey
 - **Configuration**: Customizing settings for specific needs
 
 #### Decision Points
-- â­ **Web vs. IDE Environment**: Based on existing workflow and preferences
+-  **Web vs. IDE Environment**: Based on existing workflow and preferences
   - **Solution**: Clear comparison table with pros/cons of each approach
   - **Success Metric**: 90% of users successfully complete their chosen setup path
 
 #### Pain Points
-- ðŸ”´ **Technical Hurdles**: Installation issues in specific environments
+-  **Technical Hurdles**: Installation issues in specific environments
   - **Solution**: Troubleshooting guide with common issues and solutions
   - **Success Metric**: Support requests under 5% of new installations
-- ðŸ”´ **Configuration Complexity**: Unclear what settings to change
+-  **Configuration Complexity**: Unclear what settings to change
   - **Solution**: Sensible defaults with clear explanations for customization options
   - **Success Metric**: Average setup time under 10 minutes
 
@@ -92,15 +92,15 @@ journey
 - **AI Interaction**: First conversation with BMAD personas
 
 #### Decision Points
-- â­ **Task Complexity**: Selecting appropriate difficulty for first task
+-  **Task Complexity**: Selecting appropriate difficulty for first task
   - **Solution**: Clearly labeled "beginner" tasks with estimated completion times
   - **Success Metric**: 85% first-task completion rate
 
 #### Pain Points
-- ðŸ”´ **Prompt Uncertainty**: Not knowing how to effectively communicate with AI
+-  **Prompt Uncertainty**: Not knowing how to effectively communicate with AI
   - **Solution**: Prompt templates and examples for common scenarios
   - **Success Metric**: Average time to first successful prompt under 2 minutes
-- ðŸ”´ **Persona Confusion**: Uncertainty about which persona to use
+-  **Persona Confusion**: Uncertainty about which persona to use
   - **Solution**: Persona selection guide with use cases for each
   - **Success Metric**: Correct persona selection rate above 80%
 
@@ -112,15 +112,15 @@ journey
 - **Team Sharing**: Demonstrating to colleagues
 
 #### Decision Points
-- â­ **Adoption Decision**: Whether to continue using BMAD Method
+-  **Adoption Decision**: Whether to continue using BMAD Method
   - **Solution**: Clear path to next steps and more advanced usage
   - **Success Metric**: 75% continue to second task within 24 hours
 
 #### Pain Points
-- ðŸ”´ **Output Customization**: Difficulty modifying generated content
+-  **Output Customization**: Difficulty modifying generated content
   - **Solution**: Edit guides and customization options clearly presented
   - **Success Metric**: Average customization time under 5 minutes
-- ðŸ”´ **Colleague Skepticism**: Resistance from team members
+-  **Colleague Skepticism**: Resistance from team members
   - **Solution**: Shareable success stories and comparison metrics
   - **Success Metric**: Team adoption rate above 50% after demonstration
 

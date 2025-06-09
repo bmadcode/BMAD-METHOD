@@ -1,4 +1,4 @@
-# Design Architect - Quality Standards
+﻿# Design Architect - Quality Standards
 
 ## Overview
 
@@ -26,11 +26,11 @@ Each dimension is evaluated on a 5-point scale:
 - **2 - Fair**: Below standards, requires significant improvement
 - **1 - Poor**: Does not meet standards, requires complete rework
 
-**Overall Quality Score** = Σ(Dimension Score × Weight)
+**Overall Quality Score** = (Dimension Score  Weight)
 
 ### Quality Thresholds
 
-- **Release Ready**: ≥ 4.0 overall score
+- **Release Ready**:  4.0 overall score
 - **Review Required**: 3.0 - 3.9 overall score
 - **Significant Rework**: 2.0 - 2.9 overall score
 - **Complete Rework**: < 2.0 overall score
@@ -420,7 +420,7 @@ Each dimension is evaluated on a 5-point scale:
 - **Testing Complete**: All required testing must be finished
 
 #### Quality Gate Criteria
-- **Overall Score**: ≥ 4.0 for release approval
+- **Overall Score**:  4.0 for release approval
 - **Critical Issues**: Zero critical accessibility or usability issues
 - **Documentation**: Complete and accurate documentation
 - **Stakeholder Sign-off**: Approval from design, development, and product teams

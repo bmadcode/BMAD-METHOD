@@ -7,7 +7,7 @@ This guide provides specific instructions for using the v0 UX/UI IDE Architect p
 1. **Install Cursor AI**: Download and install from [cursor.sh](https://cursor.sh)
 2. **Open Your Project**: Launch Cursor AI and open your frontend project
 3. **Configure AI Settings**:
-   - Open Settings (âš™ï¸)
+   - Open Settings ()
    - Navigate to AI settings
    - Ensure you're using the most capable model available
 

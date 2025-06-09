@@ -28,24 +28,24 @@ Developer success is measured across five key categories:
 #### 1.2 Estimation Accuracy
 - **Definition**: Accuracy of time/effort estimates
 - **Measurement**: Actual Time / Estimated Time (1.0 is perfect)
-- **Target**: Between 0.8 and 1.2 (Â±20% variance)
+- **Target**: Between 0.8 and 1.2 (20% variance)
 - **Data Source**: Time tracking system, project management tool
 
 #### 1.3 Throughput
 - **Definition**: Number of tasks completed per sprint
 - **Measurement**: Count of completed tasks per sprint
-- **Target**: Team average Â±15%
+- **Target**: Team average 15%
 - **Data Source**: Project management tool
 
 #### 1.4 First-Time Acceptance Rate
 - **Definition**: Percentage of work accepted without rework
-- **Measurement**: (Tasks Accepted First Time / Total Tasks) Ã— 100
+- **Measurement**: (Tasks Accepted First Time / Total Tasks)  100
 - **Target**: > 85%
 - **Data Source**: Code review system, project management tool
 
 #### 1.5 On-Time Delivery
 - **Definition**: Percentage of tasks delivered by committed date
-- **Measurement**: (Tasks Delivered On Time / Total Tasks) Ã— 100
+- **Measurement**: (Tasks Delivered On Time / Total Tasks)  100
 - **Target**: > 90%
 - **Data Source**: Project management tool
 
@@ -59,7 +59,7 @@ Developer success is measured across five key categories:
 
 #### 2.2 Test Coverage
 - **Definition**: Percentage of code covered by tests
-- **Measurement**: (Covered Lines / Total Lines) Ã— 100
+- **Measurement**: (Covered Lines / Total Lines)  100
 - **Target**: > 80% overall, > 90% for critical paths
 - **Data Source**: Test coverage tools
 
@@ -123,7 +123,7 @@ Developer success is measured across five key categories:
 
 #### 4.2 Code Review Participation
 - **Definition**: Active participation in code reviews
-- **Measurement**: (Reviews Completed / Reviews Assigned) Ã— 100
+- **Measurement**: (Reviews Completed / Reviews Assigned)  100
 - **Target**: > 90% completion rate
 - **Data Source**: Code review system
 
@@ -194,8 +194,8 @@ Each metric is scored on a scale of 1-5:
 The overall success score is calculated as a weighted average:
 
 ```
-Overall Score = (Delivery Ã— 0.25) + (Quality Ã— 0.25) + (Impact Ã— 0.20) + 
-                (Collaboration Ã— 0.15) + (Growth Ã— 0.15)
+Overall Score = (Delivery  0.25) + (Quality  0.25) + (Impact  0.20) + 
+                (Collaboration  0.15) + (Growth  0.15)
 ```
 
 ### Performance Levels

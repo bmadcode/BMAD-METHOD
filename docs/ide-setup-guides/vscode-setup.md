@@ -85,12 +85,12 @@ Since VS Code doesn't have built-in AI chat, you'll need to use external AI tool
 1. **File Organization**
    ```
    your-project/
-   â”œâ”€â”€ .vscode/
-   â”‚   â”œâ”€â”€ settings.json
-   â”‚   â””â”€â”€ tasks.json
-   â”œâ”€â”€ BMAD-METHOD/
-   â”‚   â””â”€â”€ bmad-agent/personas/
-   â””â”€â”€ src/
+    .vscode/
+       settings.json
+       tasks.json
+    BMAD-METHOD/
+       bmad-agent/personas/
+    src/
    ```
 
 2. **Persona Activation Workflow**

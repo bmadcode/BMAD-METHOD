@@ -879,8 +879,8 @@ breakpoint:
 #### Color Compliance Details
 | Component | Status | Issues | Recommendation |
 |-----------|--------|--------|----------------|
-| [Component] | âœ…/âŒ | [Issue description] | [Fix recommendation] |
-| [Component] | âœ…/âŒ | [Issue description] | [Fix recommendation] |
+| [Component] | / | [Issue description] | [Fix recommendation] |
+| [Component] | / | [Issue description] | [Fix recommendation] |
 
 ### Typography Analysis
 - **Compliant Components**: [Number/Percentage]
@@ -890,8 +890,8 @@ breakpoint:
 #### Typography Compliance Details
 | Component | Font Family | Font Size | Font Weight | Status |
 |-----------|-------------|-----------|-------------|--------|
-| [Component] | [Family] | [Size] | [Weight] | âœ…/âŒ |
-| [Component] | [Family] | [Size] | [Weight] | âœ…/âŒ |
+| [Component] | [Family] | [Size] | [Weight] | / |
+| [Component] | [Family] | [Size] | [Weight] | / |
 
 ### Spacing Analysis
 - **Compliant Components**: [Number/Percentage]
@@ -1062,10 +1062,10 @@ breakpoint:
 ## Success Metrics
 
 ### Improvement Targets
-- **Design Token Compliance**: [Current] â†’ [Target]
-- **Component Consistency**: [Current] â†’ [Target]
-- **Accessibility Compliance**: [Current] â†’ [Target]
-- **Brand Consistency**: [Current] â†’ [Target]
+- **Design Token Compliance**: [Current]  [Target]
+- **Component Consistency**: [Current]  [Target]
+- **Accessibility Compliance**: [Current]  [Target]
+- **Brand Consistency**: [Current]  [Target]
 
 ### Measurement Plan
 - **Next Audit Date**: [Date]
@@ -1325,14 +1325,14 @@ import { ComponentName } from '@/components/ui/component-name'
 ## Best Practices
 
 ### Do's
-- [Best practice 1]
-- [Best practice 2]
-- [Best practice 3]
+-  [Best practice 1]
+-  [Best practice 2]
+-  [Best practice 3]
 
 ### Don'ts
-- âŒ [What to avoid 1]
-- âŒ [What to avoid 2]
-- âŒ [What to avoid 3]
+-  [What to avoid 1]
+-  [What to avoid 2]
+-  [What to avoid 3]
 
 ### Performance Tips
 1. **[Performance tip 1]**: [Description]

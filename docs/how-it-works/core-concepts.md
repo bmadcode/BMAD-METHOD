@@ -4,7 +4,7 @@ Understanding these fundamental concepts is essential to leveraging the full pow
 
 ## The Four Pillars of BMAD
 
-### 1. ðŸŽ­ Orchestrator-Driven Coordination
+### 1.  Orchestrator-Driven Coordination
 
 The **Orchestrator** is the central intelligence that manages all interactions:
 
@@ -32,7 +32,7 @@ graph TD
     J --> K["Ready for Next Request"]
 \```
 
-### 2. ðŸ‘¥ Specialized AI Personas
+### 2.  Specialized AI Personas
 
 Each persona is a domain expert with:
 
@@ -54,7 +54,7 @@ Each persona is a domain expert with:
 | **PO (Oliver)** | Product Strategy | Roadmaps, Feature Specs, Priorities |
 | **Scrum Master (Sam)** | Process Management | Sprint Plans, Retrospectives, Metrics |
 
-### 3. ðŸ“‹ Task-Driven Execution
+### 3.  Task-Driven Execution
 
 Every action in BMAD is structured as a **Task**:
 
@@ -95,7 +95,7 @@ graph LR
     F --> F3["Business Case Development"]
 \```
 
-### 4. ðŸ“„ Template-Driven Standardization
+### 4.  Template-Driven Standardization
 
 All deliverables follow proven templates:
 

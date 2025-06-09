@@ -57,15 +57,15 @@ journey
 - **Design Principles Framework**: Establishing core design values
 
 #### Decision Points
-- â­ **Design System Scope**: Determining breadth and depth of system
+-  **Design System Scope**: Determining breadth and depth of system
   - **Solution**: Scope definition worksheet with prioritization matrix
   - **Success Metric**: 95% of common UI patterns covered in initial release
 
 #### Pain Points
-- ðŸ”´ **Inconsistent Existing Patterns**: Conflicting designs across products
+-  **Inconsistent Existing Patterns**: Conflicting designs across products
   - **Solution**: Pattern reconciliation methodology
   - **Success Metric**: Consolidated pattern library with clear migration path
-- ðŸ”´ **Stakeholder Alignment**: Differing opinions on visual direction
+-  **Stakeholder Alignment**: Differing opinions on visual direction
   - **Solution**: Design direction workshop templates
   - **Success Metric**: Unanimous approval of design principles
 
@@ -77,15 +77,15 @@ journey
 - **Specification Documentation**: Detailed component requirements
 
 #### Decision Points
-- â­ **Component Granularity**: Atomic vs. composite component approach
+-  **Component Granularity**: Atomic vs. composite component approach
   - **Solution**: Component hierarchy planning framework
   - **Success Metric**: 80% of interfaces buildable from component library
 
 #### Pain Points
-- ðŸ”´ **Technical Feasibility**: Ensuring designs can be implemented efficiently
+-  **Technical Feasibility**: Ensuring designs can be implemented efficiently
   - **Solution**: Developer collaboration workflow
   - **Success Metric**: Zero components rejected for technical limitations
-- ðŸ”´ **Accessibility Compliance**: Meeting accessibility standards
+-  **Accessibility Compliance**: Meeting accessibility standards
   - **Solution**: Accessibility checklist and testing protocol
   - **Success Metric**: 100% WCAG AA compliance for all components
 
@@ -97,15 +97,15 @@ journey
 - **Usage Guidelines**: Establishing implementation standards
 
 #### Decision Points
-- â­ **Technology Stack**: Selecting frontend framework and tools
+-  **Technology Stack**: Selecting frontend framework and tools
   - **Solution**: Technology evaluation framework
   - **Success Metric**: Component library compatible with all project requirements
 
 #### Pain Points
-- ðŸ”´ **Documentation Thoroughness**: Balancing detail with usability
+-  **Documentation Thoroughness**: Balancing detail with usability
   - **Solution**: Tiered documentation approach (quick start to deep dive)
   - **Success Metric**: 90% of implementation questions answerable from docs
-- ðŸ”´ **Component Flexibility**: Making components adaptable without fragmentation
+-  **Component Flexibility**: Making components adaptable without fragmentation
   - **Solution**: Prop structure and theming system guidelines
   - **Success Metric**: Components adaptable to all required use cases
 
@@ -117,15 +117,15 @@ journey
 - **Feedback Collection**: Gathering input for improvements
 
 #### Decision Points
-- â­ **Versioning Strategy**: Managing updates and breaking changes
+-  **Versioning Strategy**: Managing updates and breaking changes
   - **Solution**: Semantic versioning policy with migration guides
   - **Success Metric**: Zero production disruptions from design system updates
 
 #### Pain Points
-- ðŸ”´ **Resistance to Adoption**: Teams preferring custom implementations
+-  **Resistance to Adoption**: Teams preferring custom implementations
   - **Solution**: Adoption incentive program and success metrics
   - **Success Metric**: 90% adoption rate across new development
-- ðŸ”´ **System Maintenance**: Keeping system updated and relevant
+-  **System Maintenance**: Keeping system updated and relevant
   - **Solution**: Maintenance schedule and governance model
   - **Success Metric**: Design system updates released quarterly
 

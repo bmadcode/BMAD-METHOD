@@ -133,7 +133,7 @@ You can use specialized standalone IDE agents, such as the `sm.ide.md` (Scrum Ma
 
 ### IDE Agent Orchestrator (`ide-bmad-orchestrator.md`)
 
-A powerful alternative is the `ide-bmad-orchestrator.md`. This agent provides the flexibility of the web orchestratorâ€”allowing a single IDE agent to embody multiple personasâ€”but **without requiring any build step.** It dynamically loads its configuration and all associated resources.
+A powerful alternative is the `ide-bmad-orchestrator.md`. This agent provides the flexibility of the web orchestratorallowing a single IDE agent to embody multiple personasbut **without requiring any build step.** It dynamically loads its configuration and all associated resources.
 
 #### How the IDE Orchestrator Works
 

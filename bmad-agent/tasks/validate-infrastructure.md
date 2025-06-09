@@ -1,4 +1,4 @@
-# Infrastructure Validation Task
+﻿# Infrastructure Validation Task
 
 ## Purpose
 
@@ -32,7 +32,7 @@ To comprehensively validate platform infrastructure changes against security, re
 
 ### 3. Architecture Design Review Gate
 
-- **DevOps/Platform → Architect Design Review:**
+- **DevOps/Platform  Architect Design Review:**
   - Conduct systematic review of infrastructure architecture document for implementability
   - Evaluate architectural decisions against operational constraints and capabilities:
     - **Implementation Complexity:** Assess if proposed architecture can be implemented with available tools and expertise

@@ -75,22 +75,22 @@ small { font-size: 0.875rem; }                /* 14px - Captions */
   <h3>Select Your Persona</h3>
   <div class="persona-grid">
     <div class="persona-card" data-persona="pm">
-      <div class="persona-icon">ðŸ‘”</div>
+      <div class="persona-icon"></div>
       <h4>Project Manager</h4>
       <p>Coordinate projects and manage resources</p>
     </div>
     <div class="persona-card" data-persona="architect">
-      <div class="persona-icon">ðŸ—ï¸</div>
+      <div class="persona-icon"></div>
       <h4>System Architect</h4>
       <p>Design technical architecture and solutions</p>
     </div>
     <div class="persona-card" data-persona="ux-ui">
-      <div class="persona-icon">ðŸŽ¨</div>
+      <div class="persona-icon"></div>
       <h4>UX/UI Designer</h4>
       <p>Create user experiences and interfaces</p>
     </div>
     <div class="persona-card" data-persona="developer">
-      <div class="persona-icon">ðŸ’»</div>
+      <div class="persona-icon"></div>
       <h4>Developer</h4>
       <p>Implement features and technical solutions</p>
     </div>
@@ -200,18 +200,18 @@ personas:
 
 We use a consistent icon system throughout the documentation:
 
-- ðŸŽ­ **Orchestrator**: Central coordination
-- ðŸ‘” **Project Manager**: Planning and coordination
-- ðŸ—ï¸ **Architect**: Technical design
-- ðŸŽ¨ **UX/UI Designer**: User experience
-- ðŸ’» **Developer**: Implementation
-- ðŸ“Š **Analyst**: Data and requirements
-- **Completed**: Finished tasks
-- ðŸ”„ **In Progress**: Active work
-- â³ **Pending**: Waiting to start
-- â­ **Decision Point**: Key choices
-- ðŸ”´ **Pain Point**: Challenges
-- ðŸ’¡ **Solution**: Problem resolution
+-  **Orchestrator**: Central coordination
+-  **Project Manager**: Planning and coordination
+-  **Architect**: Technical design
+-  **UX/UI Designer**: User experience
+-  **Developer**: Implementation
+-  **Analyst**: Data and requirements
+-  **Completed**: Finished tasks
+-  **In Progress**: Active work
+-  **Pending**: Waiting to start
+-  **Decision Point**: Key choices
+-  **Pain Point**: Challenges
+-  **Solution**: Problem resolution
 
 ## Screenshot Standards
 

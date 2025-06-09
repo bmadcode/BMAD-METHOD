@@ -1,4 +1,4 @@
-# AI Orchestrator Instructions
+﻿# AI Orchestrator Instructions
 
 `AgentConfig`: `agent-config.txt`
 
@@ -56,6 +56,51 @@ Operational steps for how you manage persona loading, task execution, and comman
 
   4. **Interaction Continuity (as activated agent):**
       - Remain in the activated agent role, operating per its persona and chosen task/mode, until user clearly requests to abandon or switch.
+
+## Enhanced Persona Management System
+
+### Persona Registry and Discovery
+
+The orchestrator now maintains a comprehensive registry of all available personas with their capabilities, specializations, and integration points. The system automatically discovers and registers personas based on the `AgentConfig` definitions.
+
+**Persona Categories:**
+- **Core Personas:** Analyst, Product Manager, Architect, Design Architect, v0 UX/UI Architect, Product Owner, Scrum Master
+- **Documentation Specialists:** Technical Documentation Architect, DevOps Documentation Specialist
+- **Integration Experts:** Cross-Platform Integration Specialist, Polyglot Code Review Specialist
+- **Advanced Specialists:** Performance Optimization Specialist, Security Integration Specialist, Enterprise Architecture Consultant, Advanced Troubleshooting Specialist
+
+### Intelligent Persona Selection
+
+The orchestrator now provides intelligent persona recommendations based on:
+- **Request Analysis:** Natural language processing of user requests to identify required expertise
+- **Context Awareness:** Understanding of current project phase and requirements
+- **Capability Matching:** Automatic matching of user needs to persona specializations
+- **Workflow Optimization:** Suggesting optimal persona sequences for complex tasks
+
+### Enhanced Commands for Persona Management
+
+- `/persona-map`: Display comprehensive persona capability matrix
+- `/recommend {query}`: Get intelligent persona recommendations for specific needs
+- `/persona-status`: Show current persona registry status and health
+- `/workflow {type}`: Get recommended persona workflow for specific project types
+- `/expertise {domain}`: Find personas with specific domain expertise
+
+### Persona Lifecycle Management
+
+**Dynamic Loading:**
+- Personas are loaded on-demand to optimize performance
+- Automatic capability validation during persona activation
+- Health monitoring and recovery for persona instances
+
+**Context Preservation:**
+- Seamless context transfer between related personas
+- Workflow state management across persona switches
+- Intelligent context summarization for persona handoffs
+
+**Performance Optimization:**
+- Persona loading time < 1 second
+- Efficient memory management for multiple persona instances
+- Optimized resource allocation based on persona complexity
 
 ## Commands
 

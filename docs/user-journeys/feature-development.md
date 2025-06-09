@@ -59,15 +59,15 @@ journey
 - **Technical Design Document**: Architecture and integration details
 
 #### Decision Points
-- â­ **Implementation Approach**: Choosing technology and patterns
+-  **Implementation Approach**: Choosing technology and patterns
   - **Solution**: Implementation strategy template with decision tree
   - **Success Metric**: 90% of approaches approved without revision
 
 #### Pain Points
-- ðŸ”´ **Unclear Requirements**: Missing details or ambiguous specifications
+-  **Unclear Requirements**: Missing details or ambiguous specifications
   - **Solution**: Requirement clarification workflow with PO persona
   - **Success Metric**: Reduction in requirement-related questions
-- ðŸ”´ **Technical Constraints**: Legacy system limitations
+-  **Technical Constraints**: Legacy system limitations
   - **Solution**: Technical constraint analysis template
   - **Success Metric**: All constraints identified before coding begins
 
@@ -79,15 +79,15 @@ journey
 - **Code Optimization**: Performance and quality improvements
 
 #### Decision Points
-- â­ **Technical Tradeoffs**: Balancing quality, performance, and time
+-  **Technical Tradeoffs**: Balancing quality, performance, and time
   - **Solution**: Decision matrix for evaluating tradeoffs
   - **Success Metric**: Documented rationale for all significant decisions
 
 #### Pain Points
-- ðŸ”´ **Integration Challenges**: Difficulties connecting with other systems
+-  **Integration Challenges**: Difficulties connecting with other systems
   - **Solution**: Integration pattern library and troubleshooting guide
   - **Success Metric**: 50% reduction in integration-related delays
-- ðŸ”´ **Technical Roadblocks**: Unexpected implementation challenges
+-  **Technical Roadblocks**: Unexpected implementation challenges
   - **Solution**: Problem-solving workflow with architect persona
   - **Success Metric**: Average resolution time under 4 hours
 
@@ -99,15 +99,15 @@ journey
 - **Quality Metrics**: Measuring code against standards
 
 #### Decision Points
-- â­ **Quality vs. Timeline**: When to refactor vs. when to ship
+-  **Quality vs. Timeline**: When to refactor vs. when to ship
   - **Solution**: Quality threshold guidelines with examples
   - **Success Metric**: 95% of features meet quality standards on first review
 
 #### Pain Points
-- ðŸ”´ **Test Coverage Gaps**: Identifying untested scenarios
+-  **Test Coverage Gaps**: Identifying untested scenarios
   - **Solution**: Test coverage analysis and recommendation tool
   - **Success Metric**: 90%+ test coverage for critical functionality
-- ðŸ”´ **Performance Issues**: Unexpected performance bottlenecks
+-  **Performance Issues**: Unexpected performance bottlenecks
   - **Solution**: Performance optimization patterns and guidelines
   - **Success Metric**: All features meet performance benchmarks
 
@@ -120,15 +120,15 @@ journey
 - **Deployment Checklist**: Pre-deployment verification
 
 #### Decision Points
-- â­ **Release Readiness**: Determining if feature is ready for production
+-  **Release Readiness**: Determining if feature is ready for production
   - **Solution**: Release readiness assessment framework
   - **Success Metric**: Zero critical issues found post-release
 
 #### Pain Points
-- ðŸ”´ **Review Feedback Volume**: Overwhelming number of change requests
+-  **Review Feedback Volume**: Overwhelming number of change requests
   - **Solution**: Prioritized feedback categorization system
   - **Success Metric**: Average review resolution time under 1 day
-- ðŸ”´ **Documentation Burden**: Time-consuming documentation requirements
+-  **Documentation Burden**: Time-consuming documentation requirements
   - **Solution**: AI-assisted documentation generation
   - **Success Metric**: 70% reduction in documentation time
 

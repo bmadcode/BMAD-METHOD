@@ -365,9 +365,9 @@ graph TB
 *This system overview provides the foundation for understanding the BMAD platform architecture and its key components.*
 
 **Story 2.2 Progress Update:**
-- Created `docs/system-architecture/README.md` - Architecture documentation overview
-- Created `docs/system-architecture/system-overview.md` - High-level system architecture
-- ðŸ”„ **In Progress**: Need to create remaining architecture documents
+-  Created `docs/system-architecture/README.md` - Architecture documentation overview
+-  Created `docs/system-architecture/system-overview.md` - High-level system architecture
+-  **In Progress**: Need to create remaining architecture documents
 
 **Story 2.2 Status**: 25% complete (2/8 points)
 

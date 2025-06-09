@@ -573,9 +573,9 @@ This comprehensive template guide provides Product Owners with a complete collec
 ### Metrics and KPIs
 | Metric | Current Value | Target | Trend | Notes |
 |--------|---------------|--------|-------|-------|
-| Velocity | [Points] | [Target] | [â†‘â†“â†’] | [Notes] |
-| Burndown | [Points] | [Target] | [â†‘â†“â†’] | [Notes] |
-| Quality | [%] | [Target] | [â†‘â†“â†’] | [Notes] |
+| Velocity | [Points] | [Target] | [] | [Notes] |
+| Burndown | [Points] | [Target] | [] | [Notes] |
+| Quality | [%] | [Target] | [] | [Notes] |
 
 ### Completed Work
 #### Stories Completed

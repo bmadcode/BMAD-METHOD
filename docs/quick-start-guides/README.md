@@ -71,16 +71,16 @@ I need Veronica to design the user interface for [feature/product]
 ### Common Workflows
 
 #### New Feature Development
-1. John (requirements) â†’ Fred (architecture) â†’ Sarah (stories) â†’ David (implementation)
+1. John (requirements)  Fred (architecture)  Sarah (stories)  David (implementation)
 
 #### UI/UX Improvement
-1. John (requirements) â†’ Veronica (design) â†’ Sarah (stories) â†’ David (implementation)
+1. John (requirements)  Veronica (design)  Sarah (stories)  David (implementation)
 
 #### Technical Debt Reduction
-1. Fred (assessment) â†’ Sarah (stories) â†’ David (implementation)
+1. Fred (assessment)  Sarah (stories)  David (implementation)
 
 #### Infrastructure Improvement
-1. Fred (architecture) â†’ DevOps-PE (implementation) â†’ David (integration)
+1. Fred (architecture)  DevOps-PE (implementation)  David (integration)
 
 ## Getting Help
 

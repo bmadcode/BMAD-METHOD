@@ -57,15 +57,15 @@ journey
 - **Quality Attributes Framework**: Defining non-functional requirements
 
 #### Decision Points
-- â­ **Architecture Scope**: Determining boundaries and focus areas
+-  **Architecture Scope**: Determining boundaries and focus areas
   - **Solution**: Scope definition matrix with priority weighting
   - **Success Metric**: Architecture addresses 100% of critical requirements
 
 #### Pain Points
-- ðŸ”´ **Incomplete Business Requirements**: Missing or ambiguous needs
+-  **Incomplete Business Requirements**: Missing or ambiguous needs
   - **Solution**: Requirement elicitation workshop templates
   - **Success Metric**: Zero major requirement discoveries after design phase
-- ðŸ”´ **Competing Quality Attributes**: Balancing performance, security, etc.
+-  **Competing Quality Attributes**: Balancing performance, security, etc.
   - **Solution**: Trade-off analysis framework
   - **Success Metric**: Documented rationale for all architectural decisions
 
@@ -77,15 +77,15 @@ journey
 - **Integration Architecture**: Planning system connections
 
 #### Decision Points
-- â­ **Technology Selection**: Choosing appropriate tech stack
+-  **Technology Selection**: Choosing appropriate tech stack
   - **Solution**: Technology comparison matrix with weighted criteria
   - **Success Metric**: Selected technologies meet all critical requirements
 
 #### Pain Points
-- ðŸ”´ **Future-Proofing**: Designing for unknown future needs
+-  **Future-Proofing**: Designing for unknown future needs
   - **Solution**: Extensibility pattern library
   - **Success Metric**: Architecture accommodates changes with minimal rework
-- ðŸ”´ **Legacy Integration**: Working with existing systems
+-  **Legacy Integration**: Working with existing systems
   - **Solution**: Legacy integration pattern catalog
   - **Success Metric**: Seamless integration with all required systems
 
@@ -97,15 +97,15 @@ journey
 - **Architecture Refinement**: Incorporating feedback
 
 #### Decision Points
-- â­ **Validation Approach**: Choosing appropriate validation methods
+-  **Validation Approach**: Choosing appropriate validation methods
   - **Solution**: Validation strategy selector based on project type
   - **Success Metric**: Zero critical issues discovered after validation
 
 #### Pain Points
-- ðŸ”´ **Communicating Technical Concepts**: Explaining to non-technical audience
+-  **Communicating Technical Concepts**: Explaining to non-technical audience
   - **Solution**: Visualization templates for different stakeholder types
   - **Success Metric**: Stakeholder comprehension rating above 4/5
-- ðŸ”´ **Addressing Feedback**: Balancing conflicting stakeholder input
+-  **Addressing Feedback**: Balancing conflicting stakeholder input
   - **Solution**: Feedback prioritization framework
   - **Success Metric**: All critical feedback incorporated into final design
 
@@ -117,15 +117,15 @@ journey
 - **Knowledge Transfer**: Educating implementation team
 
 #### Decision Points
-- â­ **Implementation Approach**: Big bang vs. incremental deployment
+-  **Implementation Approach**: Big bang vs. incremental deployment
   - **Solution**: Implementation strategy decision tree
   - **Success Metric**: Zero business disruption during implementation
 
 #### Pain Points
-- ðŸ”´ **Resource Constraints**: Limited implementation resources
+-  **Resource Constraints**: Limited implementation resources
   - **Solution**: Resource optimization planning tool
   - **Success Metric**: Implementation plan feasible with available resources
-- ðŸ”´ **Knowledge Transfer**: Ensuring development team understanding
+-  **Knowledge Transfer**: Ensuring development team understanding
   - **Solution**: Architecture training program template
   - **Success Metric**: Development team confidence rating above 4/5
 

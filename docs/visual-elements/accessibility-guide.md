@@ -83,7 +83,7 @@ Our color system works for users with various types of color vision deficiency:
 }
 
 .status-success::before {
-  content: "âœ“";
+  content: "";
   font-weight: bold;
 }
 
@@ -92,7 +92,7 @@ Our color system works for users with various types of color vision deficiency:
 }
 
 .status-error::before {
-  content: "âœ—";
+  content: "";
   font-weight: bold;
 }
 
@@ -101,7 +101,7 @@ Our color system works for users with various types of color vision deficiency:
 }
 
 .status-warning::before {
-  content: "âš ";
+  content: "";
   font-weight: bold;
 }
 \```
