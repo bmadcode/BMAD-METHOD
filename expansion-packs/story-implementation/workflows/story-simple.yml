@@ -1,0 +1,310 @@
+workflow:
+  id: story-simple
+  name: Simple Story - UX/Content/Minor Changes
+  description: >-
+    Streamlined workflow for UI improvements, content changes, simple bug fixes, and minor backend adjustments.
+    Optimized for changes that don't require comprehensive cross-specialist validation.
+    Includes complexity validation warnings to ensure appropriate workflow selection.
+  type: story-simple
+  
+  visualization: |
+    ```mermaid
+    flowchart TD
+        A[Story Number] --> A1{PO: Story Already<br/>Approved?}
+        A1 -->|Yes| B[Dev: Implement Story]
+        A1 -->|No| A2[PO: Approve Story<br/>Skip Epic if <7 days]
+        A2 --> B
+        
+        B --> C{Dev: Pre-Review<br/>Validation DoD}
+        C -->|Pass| D[Architect: Review<br/>Technical Design]
+        C -->|Fail| C2[Dev: Fix Issues<br/>max 3 retries]
+        C2 --> C
+        
+        D -->|Issues Found| E[Dev: Implement<br/>Architect Fixes]
+        D -->|Pass| F[Architect: Learning<br/>Triage Capture]
+        E --> E2{Dev: Validate Fixes}
+        E2 -->|Pass| F
+        E2 -->|Fail| E3[Dev: Additional Fixes<br/>max 2 retries]
+        E3 --> E2
+        
+        F --> G[Dev: Commit &<br/>Prepare PR Context]
+        G --> H[SM: Update<br/>Epic Progress]
+        H --> I[PO: Create<br/>Comprehensive PR]
+        I --> J[Story: Complete<br/>PR Delivered]
+        
+        %% Styling
+        classDef simple fill:#e1f5fe
+        classDef validation fill:#fff3e0
+        classDef implementation fill:#f3e5f5
+        classDef delivery fill:#e8f5e8
+        
+        class A1,A2 simple
+        class C,D,E,E2 validation
+        class B,E,E3 implementation
+        class F,G,H,I,J delivery
+    ```
+
+  inputs:
+    epic_number:
+      type: string
+      description: The epic number (e.g., "1", "2", "3")
+      required: true
+    story_number:
+      type: string
+      description: The story number within the epic (e.g., "1", "2", "3")  
+      required: true
+
+  outputs:
+    story_file:
+      type: string
+      description: Path to the approved story file
+      format: "docs/stories/epic{epic_number}.story{story_number}.story.md"
+    story_status:
+      type: string
+      description: Final story status
+      expected: "Done"
+    implementation_status:
+      type: string
+      description: Implementation completion status
+      expected: "Complete"
+
+  steps:
+    - step: validate_story_approved
+      agent: po
+      action: approve-story-for-development
+      inputs:
+        - epic_number
+        - story_number
+      condition: "skip_epic_validation_if_same_epic_within_7_days"
+      notes: "REQUIRED: Use Task tool for execution - Validate story readiness, skip epic validation if same epic validated within 7 days"
+      story_status_update: "Approved"
+      
+    - step: implement_story
+      agent: dev
+      action: implement-story-development
+      requires: validate_story_approved
+      inputs:
+        - story_file
+        - epic_number
+        - story_number
+      notes: "REQUIRED: Use Task tool for execution - Complete story implementation with validation (includes project quality gates)"
+      story_status_update: "In Progress"
+      
+    - step: pre_review_validation
+      agent: dev
+      action: execute-checklist
+      requires: implement_story
+      inputs:
+        - story_file
+      checklist: story-dod-checklist.md
+      notes: "REQUIRED: Use Task tool for execution - Final validation before reviews - ensures project quality gates pass"
+      story_status_update: "Review"
+      checklist_completion_tracking: true
+      
+    - step: architect_review
+      agent: architect
+      action: execute-checklist
+      requires: pre_review_validation
+      inputs:
+        - story_file
+      checklist: story-dod-checklist.md
+      notes: "REQUIRED: Use Task tool for execution - Single specialist review for simple changes - validates technical design and implementation"
+      checklist_completion_tracking: true
+      
+    - step: implement_fixes
+      agent: dev
+      action: implement-consolidated-fixes
+      requires: architect_review
+      inputs:
+        - story_file
+        - architect_feedback
+      condition: "if_architect_review_has_issues"
+      notes: "REQUIRED: Use Task tool for execution - Implement fixes from architect review if issues identified"
+      
+    - step: validate_fixes
+      agent: architect
+      action: validate-consolidated-fixes
+      requires: implement_fixes
+      inputs:
+        - story_file
+        - original_feedback
+        - implemented_fixes
+      condition: "if_fixes_were_implemented"
+      notes: "REQUIRED: Use Task tool for execution - Architect validates fixes using story docs"
+      story_status_update: "Implementation Validated"
+      
+    - step: capture_basic_learning
+      agent: architect
+      action: capture-learning-triage
+      requires: [architect_review, validate_fixes]
+      inputs:
+        - story_file
+        - review_feedback
+        - implementation_fixes
+      notes: "REQUIRED: Use Task tool for execution - Extract learnings into structured categories for simple story context"
+      story_status_update: "Learning Extracted"
+      
+    - step: commit_and_prepare_pr
+      agent: dev
+      action: commit-and-prepare-pr
+      requires: capture_basic_learning
+      inputs:
+        - story_file
+        - learning_items
+        - implementation_changes
+      notes: "REQUIRED: Use Task tool for execution - Commit implementation changes and prepare comprehensive PR context"
+      story_status_update: "Changes Committed"
+      
+    - step: update_epic_progress
+      agent: sm
+      action: update-epic-progress
+      requires: commit_and_prepare_pr
+      inputs:
+        - story_file
+        - epic_number
+        - commit_information
+        - learning_items
+      notes: "REQUIRED: Use Task tool for execution - Update epic progress tracking before PR creation"
+      story_status_update: "Epic Progress Updated"
+      
+    - step: create_comprehensive_pr
+      agent: po
+      action: create-comprehensive-pr
+      requires: update_epic_progress
+      inputs:
+        - story_file
+        - commit_information
+        - pr_context
+        - epic_progress_update
+      notes: "REQUIRED: Use Task tool for execution - Create PR with business summary, technical changes, and learning extraction"
+      story_status_update: "Done - Delivered"
+
+  success_criteria:
+    - Story approved for development (epic validation may be skipped if recent)
+    - Story implementation completed with all validations passing
+    - Pre-review validation confirms project quality gates pass
+    - Single architect review validates technical implementation
+    - Any identified issues are resolved and validated
+    - Learning extraction completed with basic triage
+    - Implementation committed with comprehensive context
+    - Epic progress updated with story completion
+    - PR created with business summary and technical details
+    - Story status updated to "Done - Delivered"
+
+  failure_handling:
+    - halt_on_failure: true
+    - Each step must complete successfully before proceeding
+    - Failed steps should be retried after addressing issues
+    
+  retry_protocols:
+    story_approval_failure:
+      - Issue: "Story not ready for development or epic validation fails"
+      - Action: "PO addresses story readiness or epic issues"
+      - Retry: "Re-run validate_story_approved after resolution"
+      - Max_retries: 3
+      
+    pre_review_failure:
+      - Issue: "Project quality gates fail or DoD checklist incomplete"
+      - Action: "Dev fixes technical issues and quality problems"
+      - Retry: "Re-run pre_review_validation after fixes"
+      - Max_retries: 5
+      
+    architect_review_failure:
+      - Issue: "Technical design or implementation issues identified"
+      - Action: "Dev implements architect feedback through implement_fixes step"
+      - Retry: "Proceed to implement_fixes (no retry at review level)"
+      - Notes: "Review outcome flows to fix implementation regardless of pass/fail"
+      
+    fixes_validation_failure:
+      - Issue: "Architect finds fixes incomplete or incorrect"
+      - Action: "Dev implements additional fixes based on specific feedback"
+      - Retry: "Re-run implement_fixes → validate_fixes cycle"
+      - Max_retries: 2
+      - Notes: "Simplified retry cycle for single reviewer context"
+      
+    learning_triage_failure:
+      - Issue: "Learning extraction incomplete or poorly categorized"
+      - Action: "Architect re-analyzes implementation context and feedback patterns"
+      - Retry: "Re-run capture_basic_learning with improved analysis"
+      - Max_retries: 2
+      - Notes: "Focus on actionable learning items for simple story context"
+      
+    commit_preparation_failure:
+      - Issue: "Commit fails or PR context incomplete"
+      - Action: "Dev addresses git issues and completes context preparation"
+      - Retry: "Re-run commit_and_prepare_pr after resolving issues"
+      - Max_retries: 3
+      - Notes: "Ensure all quality gates pass before commit"
+      
+    epic_progress_failure:
+      - Issue: "Epic progress update fails or tracking incomplete"
+      - Action: "SM addresses epic file issues and completes progress tracking"
+      - Retry: "Re-run update_epic_progress after resolving tracking issues"
+      - Max_retries: 2
+      - Notes: "Ensure learning integration before PR creation"
+      
+    pr_creation_failure:
+      - Issue: "PR creation fails or context incomplete"
+      - Action: "PO addresses GitHub/PR platform issues and completes description"
+      - Retry: "Re-run create_comprehensive_pr after resolving platform issues"
+      - Max_retries: 3
+      - Notes: "Ensure comprehensive business and technical context"
+
+  complexity_validation:
+    simple_story_indicators:
+      - "UI positioning/styling changes"
+      - "Content updates without logic changes"  
+      - "Simple configuration changes"
+      - "Documentation updates"
+      - "Small backend changes (single function/endpoint)"
+      - "Bug fixes without architectural impact"
+      - "Parameter tweaks or minor logic adjustments"
+      - "Simple validation or error message updates"
+      
+    complex_story_indicators:
+      - "New business workflows or processes"
+      - "Database schema changes"
+      - "Multiple component integration"
+      - "External system integration"
+      - "Authentication/authorization changes"
+      - "Performance optimization requiring architecture changes"
+      - "Cross-system dependencies"
+      
+    validation_warning: |
+      ⚠️ WARNING: Story complexity may not match selected workflow.
+      Simple workflow selected but story shows complex indicators.
+      Consider using story-implementation workflow for comprehensive validation.
+
+  dependencies:
+    core_bmad_agents:
+      - po (Product Owner)
+      - dev (Developer)
+      - architect (Technical Architect)
+      - sm (Scrum Master)
+    core_bmad_tasks:
+      - execute-checklist
+      - implement-story-development
+    core_bmad_checklists:
+      - story-dod-checklist.md
+      - architect-checklist.md
+    expansion_tasks:
+      - approve-story-for-development
+      - implement-consolidated-fixes
+      - validate-consolidated-fixes
+      - capture-learning-triage
+      - commit-and-prepare-pr
+      - create-comprehensive-pr
+      - update-epic-progress
+
+  handoff_prompts:
+    po_validate_story: "Validate story {epic_number}.{story_number} readiness - may skip epic validation if same epic validated within 7 days"
+    dev_implement: "Story approved. Implement story {epic_number}.{story_number} with validation (project quality gates required)"
+    pre_review: "Implementation complete. Run final validation before architect review - ensure project quality gates pass"
+    architect_review: "Pre-review passed. Conduct technical design and implementation review for simple story"
+    implement_fixes: "Architect review complete. Implement any identified fixes and document changes in story"
+    validate_fixes: "Fixes implemented. Validate fixes using story documentation"
+    capture_learning: "Implementation validated. Extract learnings into structured categories for simple story context"
+    commit_prepare: "Learning extraction complete. Commit implementation changes and prepare comprehensive PR context"
+    update_epic: "Implementation committed. Update epic progress tracking before PR creation"
+    create_pr: "Epic progress updated. Create PR with business summary, technical changes, and learning extraction"
+    workflow_complete: "Story {epic_number}.{story_number} delivered via simple workflow. Epic progress updated with learning integration."
