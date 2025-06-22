@@ -71,6 +71,9 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
     *   **Code Duplication**: "Does this logic already exist in [file/function from semantic search]? If so, fail."
     *   **Syntax & Errors**: "Are there obvious syntax, linting, or TypeScript errors? If so, fail."
     *   **Standards Alignment**: "Does this align with the project's coding standards and the patterns discovered in the initial analysis? If not, fail."
+    *   **Security Vulnerabilities**: "Does this introduce security risks (input validation, authentication, data exposure, hardcoded secrets)? If so, fail."
+    *   **Performance Impact**: "Could this cause performance issues (N+1 queries, memory leaks, inefficient algorithms, excessive resource usage)? If so, fail."
+    *   **Architecture Compliance**: "Does this violate separation of concerns, SOLID principles, or established architectural patterns? If so, fail."
 4.  **Handle Review Failure**: If any check fails, as "The Reviewer," provide specific, actionable feedback. Then, as the `dev` agent, go back to step 2 to create a revised implementation. Repeat this loop until the code is approved.
 5.  **Log a Successful Review**: Once "The Reviewer" approves the code, generate a summary for the `Dev Notes` section of the story:
 
@@ -78,10 +81,10 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
     **Internal Review Summary for Task [Task #]**
     - **Submissions**: [Number]
     - **Failed Attempts**:
-        - **Attempt 1**: [Describe problematic code briefly and why it failed, e.g., "Created duplicate login logic already present in `auth.service.ts`."]
+        - **Attempt 1**: [Describe problematic code briefly and why it failed, e.g., "Created duplicate login logic already present in `auth.service.ts`." or "Introduced SQL injection vulnerability in user query."]
         - **Attempt N**: ...
-    - **Final Solution**: [Describe the approved approach, e.g., "Refactored to use the existing `authenticateUser` function from `auth.service.ts`."]
-    - **Lessons Learned**: [Note any new patterns or insights, e.g., "All authentication logic must be centralized in the auth service; direct token manipulation is an anti-pattern in this codebase."]
+    - **Final Solution**: [Describe the approved approach, e.g., "Refactored to use the existing `authenticateUser` function from `auth.service.ts` with proper input sanitization."]
+    - **Lessons Learned**: [Note any new patterns or insights, e.g., "All authentication logic must be centralized in the auth service; direct token manipulation is an anti-pattern in this codebase. Always validate user inputs before database queries."]
     ```
 
 ## 4. Finalize Story
