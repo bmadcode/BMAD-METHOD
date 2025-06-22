@@ -16,9 +16,15 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
     -   **Action**: Use the built-in IDE semantic search capabilities.
     -   **Query**: Search the entire codebase for implementations, functions, components, or patterns that are semantically related to the user story's title, description, and Acceptance Criteria.
     -   **Goal**: Identify code for potential reuse, and understand existing patterns relevant to the new work. Log these findings internally for use during implementation.
-4.  **Dependency & Standards Analysis**:
+4.  **Dependency & Standards Analysis with Internet Fallback**:
     -   Read the `package.json` (or equivalent) to identify currently installed libraries relevant to the story.
-    -   If any required libraries are marked "latest" or have a version significantly newer than your training data, or if new libraries are needed, perform a targeted internet search for "best practices for [library/feature] in [current year]".
+    -   [[LLM: **Attempt Internet Search:** Perform a targeted internet search for "best practices for [library/feature] in [current year]" for any new or significantly updated libraries.]]
+    -   [[LLM: **On Success:** Silently incorporate the findings and proceed to the next step.]]
+    -   [[LLM: **On Failure (If unable to access the internet):**
+        1. **Announce the situation clearly:** "I am currently unable to access the internet to research the latest standards for this task."
+        2. **Offer a choice to the user:** "Is this expected, or should I attempt to enable access? Alternatively, I can proceed using the best practices from my existing training data."
+        3. **Request explicit instruction to continue:** "Please let me know how you would like to proceed."
+        4. **HALT and await user response.** Once the user confirms to continue (with or without them enabling internet access), proceed to the next step using the available knowledge.]]
 5.  **Initial Complexity Assessment & Mode Declaration**:
     -   Calculate a "Story Complexity" score from 1 to 10.
     -   If Review Mode was forced by the user OR if `Story Complexity` > `agentThresholdStory`, declare: "**Entering high-scrutiny 'Review Mode' for this story. Each task will be individually assessed.**"
