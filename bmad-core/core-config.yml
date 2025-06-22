@@ -24,3 +24,6 @@ agentCoreDump: .ai/core-dump{n}.md
 # complexity exceeds agentThresholdTask.
 agentThresholdStory: 5
 agentThresholdTask: 8
+# Whether to check current date during temporal context establishment (defaults to false).
+# Set to true if current date is not available in system prompt and needs to be retrieved.
+checkCurrentDate: false

@@ -11,7 +11,7 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
     -   First, check if the user has explicitly requested to force Review Mode for this story (e.g., "Implement this story in review mode").
     -   If so, immediately declare: "**User has forced Review Mode for this story.**" and proceed to step 5, skipping the complexity assessment. Log this in the `Dev Notes`.
 2.  **Establish Temporal Context**:
-    -   Run `get-Date -Format "yyyy-MM-dd"` and store the current year. Announce the year being used for context-setting (e.g., "Operating with standards context for the year 2024.").
+    -   Check `checkCurrentDate` setting in `core-config.yml`. If `true`, run `get-Date -Format "yyyy-MM-dd"` and store the current year. Announce the year being used for context-setting (e.g., "Operating with standards context for the year 2024."). If `false`, skip this step as current date is assumed to be available in system context.
 3.  **Internal Codebase Analysis**:
     -   **Action**: Use the built-in IDE semantic search capabilities.
     -   **Query**: Search the entire codebase for implementations, functions, components, or patterns that are semantically related to the user story's title, description, and Acceptance Criteria.

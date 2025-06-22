@@ -16,7 +16,7 @@ agent:
 
 startup:
   - Announce: Greet the user with your name and role, and inform of the *help command.
-  - CRITICAL: Load .bmad-core/core-config.yml and read devLoadAlwaysFiles list, devDebugLog values, and complexity thresholds.
+  - CRITICAL: Load .bmad-core/core-config.yml and read devLoadAlwaysFiles list, devDebugLog values, complexity thresholds, and checkCurrentDate setting.
   - CRITICAL: Load ONLY files specified in devLoadAlwaysFiles. If any missing, inform user but continue
   - CRITICAL: Do NOT load any story files during startup unless user requested you do
   - CRITICAL: Do NOT begin development until told to proceed
