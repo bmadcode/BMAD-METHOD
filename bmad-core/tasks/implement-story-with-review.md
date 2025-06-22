@@ -19,38 +19,32 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
 4.  **Dependency & Standards Analysis**:
     -   Read the `package.json` (or equivalent) to identify currently installed libraries relevant to the story.
     -   If any required libraries are marked "latest" or have a version significantly newer than your training data, or if new libraries are needed, perform a targeted internet search for "best practices for [library/feature] in [current year]".
-5.  **Initial Complexity Assessment**:
-    -   [[LLM: Skip this step if user has forced review mode.]]
-    -   Based on the story requirements and the results of the analysis (steps 3 & 4), calculate a "Story Complexity" score from 1 (trivial) to 10 (highly complex).
-    -   Compare this score against the `agentThresholdStory` value in `core-config.yml`.
-6.  **Mode Declaration & Logging**:
-    -   If Review Mode was forced OR if `Story Complexity` > `agentThresholdStory`, declare: "**Complexity threshold exceeded or user-enforced. Entering Review Mode for this story.**"
-    -   Otherwise, declare: "**Story complexity is within limits. Proceeding in Standard Mode.**"
-    -   Log the complexity score (if calculated), the reason for the mode, and the operating mode itself in the story's `Dev Notes` section.
-    -   Inform the user of the mode you will be operating in.
+5.  **Initial Complexity Assessment & Mode Declaration**:
+    -   Calculate a "Story Complexity" score from 1 to 10.
+    -   If Review Mode was forced by the user OR if `Story Complexity` > `agentThresholdStory`, declare: "**Entering high-scrutiny 'Review Mode' for this story. Each task will be individually assessed.**"
+    -   Otherwise, declare: "**Story complexity is within standard limits. Each task will still be individually assessed for complexity.**"
+    -   Log the complexity score (if calculated) and the reason for the mode in the story's `Dev Notes`.
 
-## 2. Task Execution Phase
+## 2. Unified Task Execution Phase
 
-[[LLM: Proceed with the `Tasks / Subtasks` list from the story file one by one.]]
+[[LLM: Proceed with the `Tasks / Subtasks` list from the story file one by one. The following logic applies to EVERY task.]]
 
 << For each task in the story's task list: >>
 
-### A. Standard Mode Execution:
-[[LLM: If not in Review Mode, execute the task as per the original `dev` agent instructions: Implement -> Test -> Mark Complete.]]
+1.  **Mandatory Task Complexity Assessment**:
+    -   Evaluate the complexity of the *current task* on a scale of 1-10, leveraging the initial semantic search results.
+    -   Compare the `Task Complexity` score against the `agentThresholdTask` value from `core-config.yml`.
 
-- Implement the task, continuously referencing the initial analysis for code reuse opportunities.
-- Write and pass all required tests.
-- Mark the task checkbox as complete: `[x]`.
+2.  **Conditional Implementation Path**:
+    -   **If `Task Complexity` > `agentThresholdTask`**:
+        -   Announce: "**Task complexity is high. Activating internal review process.**"
+        -   Execute the **Internal Review Process (Section 3)** for this task.
+    -   **Else (Task Complexity is low)**:
+        -   Announce: "**Task complexity is low. Implementing directly.**"
+        -   Implement the task, continuously referencing the initial analysis for code reuse opportunities.
 
-### B. Review Mode Execution:
-[[LLM: This logic now applies to every task when the story is in Review Mode, adding a layer of scrutiny to all work.]]
-
-1.  **Task Complexity Assessment**:
-    -   Evaluate the complexity of the *current task* on a scale of 1-10. This assessment should leverage the results from the initial semantic search.
-    -   If `Task Complexity` > `agentThresholdTask` from `core-config.yml`, announce: "**Task complexity is high. Activating internal review process.**" and proceed to the Internal Review Process (Section 3).
-    -   Otherwise, announce: "**Task complexity is low. Implementing directly.**" and implement the task normally.
-2.  **Implementation**:
-    -   Once the task is implemented (either directly or after passing review), write and pass all tests.
+3.  **Testing and Completion**:
+    -   Once the task is implemented (either directly or after passing review), write and pass all required tests.
     -   Mark the task checkbox as complete: `[x]`.
 
 ## 3. The Internal Review Process (Self-Critique)
@@ -102,7 +96,7 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
     -   **Deduplicate this list**: If an implicit lesson from Pass 2 is a rephrasing of an explicit lesson from Pass 1, discard the implicit one and keep the more detailed, explicit version.
 4.  **Load Existing Memory Context**:
     [[LLM: Perform this file read *once* before the validation loop.]]
-    -   Read the entire contents of `docs/project-memory.md` into a temporary context variable, `existing_memories`. If the file doesn't exist, this variable will be empty.
+    -   Read the entire contents of `.bmad-core/data/bmad-project-memory.md` into a temporary context variable, `existing_memories`. If the file doesn't exist, this variable will be empty.
 5.  **Reconcile Memories (In-Memory Loop)**:
     [[LLM: Initialize an empty list called `finalized_memories` and a list called `conflicts_to_log`. Now, for each unique `new_memory` in the deduplicated list, perform the validation against the loaded `existing_memories` context.]]
     -   **Check for Conflicts**:
@@ -119,7 +113,7 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
     -   If the `finalized_memories` list is not empty or if any existing memories were marked for deprecation:
         -   Modify the `existing_memories` context in-memory (deprecating old entries, adding new ones from `finalized_memories`).
         -   Update the "Last Synthesized" timestamp.
-        -   Write the entire, updated memory context back to `docs/project-memory.md`, overwriting the file.
+        -   Write the entire, updated memory context back to `.bmad-core/data/bmad-project-memory.md`, overwriting the file.
     -   If the `conflicts_to_log` list is not empty:
         -   Append each conflict as a high-priority warning to the current story's `Dev Notes`:
             > `**MEMORY CONFLICT DETECTED:** The lesson "[new lesson]" from this story contradicts the existing memory "[conflicting memory]" from Story [source]. Human review is required to resolve this inconsistency.`
