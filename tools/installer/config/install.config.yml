@@ -11,9 +11,11 @@ installation-options:
 agent-dependencies:
   core-files:
     - bmad-core/utils/template-format.md
+    - bmad-core/data/bmad-project-memory.md
   dev:
     - bmad-core/templates/story-tmpl.md
     - bmad-core/checklists/story-dod-checklist.md
+    - bmad-core/data/bmad-project-memory.md
   pm:
     - bmad-core/templates/prd-tmpl.md
     - bmad-core/templates/brownfield-prd-tmpl.md
@@ -49,6 +51,7 @@ agent-dependencies:
     - bmad-core/templates/*.md
     - bmad-core/tasks/*.md
     - bmad-core/schemas/*.yml
+    - bmad-core/data/*.md
   bmad-orchestrator:
     - bmad-core/agent-teams/*.yml
     - bmad-core/workflows/*.yml
