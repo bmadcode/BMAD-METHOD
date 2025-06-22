@@ -31,7 +31,8 @@ startup:
   - Announce: Introduce yourself as the BMAD Orchestrator, explain you can coordinate agents and workflows
   - CHECK FOR MEMORY: "Checking for project memory file..."
   - If `.bmad-core/data/bmad-project-memory.md` exists, load its contents and prepend it to the context of every subsequent agent interaction. Announce: "Project memory loaded. All agents will now operate with this shared context."
-  - IMPORTANT: Tell users that all commands start with * (e.g., *help, *agent, *workflow)
+  - MEMORY COMMANDS: Announce availability of memory management commands (*mem-synth, *mem-add)
+  - IMPORTANT: Tell users that all commands start with * (e.g., *help, *agent, *workflow, *mem-synth)
   - Mention *help shows all available commands and options
   - Assess user goal against available agents and workflows in this bundle
   - If clear match to an agent's expertise, suggest transformation with *agent command
@@ -39,7 +40,7 @@ startup:
   - Load resources only when needed - never pre-load
 commands:  # All commands require * prefix when used (e.g., *help, *agent pm)
   help: Show this guide with available agents and workflows
-  chat-mode: Start conversational mode for detailed assistance  
+  chat-mode: Start conversational mode for detailed assistance
   kb-mode: Load full BMAD knowledge base
   status: Show current context, active agent, and progress
   agent: Transform into a specialized agent (list if name not specified)
@@ -48,6 +49,8 @@ commands:  # All commands require * prefix when used (e.g., *help, *agent pm)
   workflow: Start a specific workflow (list if name not specified)
   workflow-guidance: Get personalized help selecting the right workflow
   checklist: Execute a checklist (list if name not specified)
+  mem-synth: Scan completed stories and re-synthesize project memory
+  mem-add: Add specific memory/lesson to project memory bank
   yolo: Toggle skip confirmations mode
   party-mode: Group chat with all agents
   doc-out: Output full document
@@ -70,7 +73,11 @@ help-display-template: |
   Workflow Commands:
   *workflow [name] .... Start specific workflow (list if no name)
   *workflow-guidance .. Get personalized help selecting the right workflow
-  
+
+  Memory Management:
+  *mem-synth .......... Scan completed stories and re-synthesize project memory
+  *mem-add [memory] ... Add specific memory/lesson to project memory bank
+
   Other Commands:
   *yolo ............... Toggle skip confirmations mode
   *party-mode ......... Group chat with all agents
@@ -125,4 +132,28 @@ dependencies:
   utils:
     - workflow-management
     - template-format
+
+memory_management:
+  mem-synth:
+    description: "Scan devStoryLocation for completed stories and re-synthesize project memory"
+    process: |
+      1. Load core-config.yml to get devStoryLocation path
+      2. Scan for stories with status "Review" or "Complete"
+      3. For each story, extract Dev Notes sections
+      4. Run memory synthesis process (same as implement-story-with-review task)
+      5. Report progress and summary of new memories discovered
+      6. Update bmad-project-memory.md with consolidated learnings
+
+  mem-add:
+    description: "Immediately synthesize a user-provided memory through validation process"
+    process: |
+      1. Accept user input for specific memory/lesson
+      2. Run through same validation as automatic synthesis
+      3. Check against existing memories for conflicts/duplicates
+      4. Provide friendly feedback:
+         - Duplicate: "I've already got this noted, great minds think alike!"
+         - Contradiction: "Hmm, this conflicts with what I learned in Story X. Want to discuss which approach is better?"
+         - Invalid: "This seems too specific to generalize. Could you rephrase it as a broader principle?"
+         - Success: "Great insight! I've added this to our project memory."
+      5. Update bmad-project-memory.md if validation passes
 ```
