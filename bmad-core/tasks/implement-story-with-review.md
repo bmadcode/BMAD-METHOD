@@ -26,10 +26,18 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
         3. **Request explicit instruction to continue:** "Please let me know how you would like to proceed."
         4. **HALT and await user response.** Once the user confirms to continue (with or without them enabling internet access), proceed to the next step using the available knowledge.]]
 5.  **Initial Complexity Assessment & Mode Declaration**:
-    -   Calculate a "Story Complexity" score from 1 to 10.
+    -   Calculate a "Story Complexity" score using Fibonacci scale (1, 2, 3, 5, 8, 13).
     -   If Review Mode was forced by the user OR if `Story Complexity` > `agentThresholdStory`, declare: "**Entering high-scrutiny 'Review Mode' for this story. Each task will be individually assessed.**"
     -   Otherwise, declare: "**Story complexity is within standard limits. Each task will still be individually assessed for complexity.**"
     -   Log the complexity score (if calculated) and the reason for the mode in the story's `Dev Notes`.
+
+**Fibonacci Complexity Guidelines:**
+- **1**: Trivial changes (typos, simple styling)
+- **2**: Minor feature additions (new button, basic validation)
+- **3**: Standard feature implementation (form handling, API calls)
+- **5**: Complex features (authentication, data processing)
+- **8**: Major architectural changes (new services, database schema)
+- **13**: High-risk/high-uncertainty work (new frameworks, complex integrations)
 
 ## 2. Unified Task Execution Phase
 
@@ -38,7 +46,7 @@ To execute a user story with a proactive analysis and review cycle, ensuring ali
 << For each task in the story's task list: >>
 
 1.  **Mandatory Task Complexity Assessment**:
-    -   Evaluate the complexity of the *current task* on a scale of 1-10, leveraging the initial semantic search results.
+    -   Evaluate the complexity of the *current task* using Fibonacci scale (1, 2, 3, 5, 8, 13), leveraging the initial semantic search results.
     -   Compare the `Task Complexity` score against the `agentThresholdTask` value from `core-config.yml`.
 
 2.  **Conditional Implementation Path**:

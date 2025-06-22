@@ -18,9 +18,9 @@ devLoadAlwaysFiles:
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
 agentCoreDump: .ai/core-dump{n}.md
-# Thresholds for the dev agent's integrated review process (Scale 1-10).
+# Thresholds for the dev agent's integrated review process (Fibonacci Scale: 1,2,3,5,8,13).
 # The agent will enter "Review Mode" if a story's complexity exceeds agentThresholdStory.
 # Within Review Mode, it will trigger a self-critique loop for any task whose
 # complexity exceeds agentThresholdTask.
-agentThresholdStory: 6
-agentThresholdTask: 7
+agentThresholdStory: 5
+agentThresholdTask: 8
