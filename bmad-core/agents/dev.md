@@ -64,6 +64,9 @@ task-execution:
 dependencies:
   tasks:
     - implement-story-with-review
+    - story-analysis
+    - internal-review-process
+    - memory-synthesis
     - execute-checklist
   checklists:
     - story-dod-checklist
