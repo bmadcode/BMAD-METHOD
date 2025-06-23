@@ -561,6 +561,7 @@ class V3ToV4Upgrader {
         "claude-code": "Commands created in .claude/commands/",
         windsurf: "Rules created in .windsurf/rules/",
         roo: "Custom modes created in .roomodes",
+        cline: "Rules created in .clinerules/",
       };
 
       // Setup each selected IDE

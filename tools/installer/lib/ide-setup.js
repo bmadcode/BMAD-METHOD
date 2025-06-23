@@ -31,6 +31,8 @@ class IdeSetup {
         return this.setupWindsurf(installDir, selectedAgent);
       case "roo":
         return this.setupRoo(installDir, selectedAgent);
+      case "cline":
+        return this.setupCline(installDir, selectedAgent);
       default:
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -337,6 +339,75 @@ class IdeSetup {
 
     console.log(chalk.green(`\n✓ Roo Code setup complete!`));
     console.log(chalk.dim("Custom modes will be available when you open this project in Roo Code"));
+
+    return true;
+  }
+
+  async setupCline(installDir, selectedAgent) {
+    const clineRulesDir = path.join(installDir, ".clinerules");
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
+
+    await fileManager.ensureDirectory(clineRulesDir);
+
+    // Define agent order for numeric prefixes
+    const agentOrder = {
+      'bmad-master': 1,
+      'bmad-orchestrator': 2,
+      'pm': 3,
+      'analyst': 4,
+      'architect': 5,
+      'po': 6,
+      'sm': 7,
+      'dev': 8,
+      'qa': 9,
+      'ux-expert': 10
+    };
+
+    for (const agentId of agents) {
+      // Check if .bmad-core is a subdirectory (full install) or if agents are in root (single agent install)
+      let agentPath = path.join(installDir, ".bmad-core", "agents", `${agentId}.md`);
+      if (!(await fileManager.pathExists(agentPath))) {
+        agentPath = path.join(installDir, "agents", `${agentId}.md`);
+      }
+
+      if (await fileManager.pathExists(agentPath)) {
+        const agentContent = await fileManager.readFile(agentPath);
+
+        // Get numeric prefix for ordering
+        const order = agentOrder[agentId] || 99;
+        const prefix = order.toString().padStart(2, '0');
+        const mdPath = path.join(clineRulesDir, `${prefix}-${agentId}.md`);
+
+        // Create MD content for Cline (focused on project standards and role)
+        let mdContent = `# ${this.getAgentTitle(agentId)} Agent\n\n`;
+        mdContent += `This rule defines the ${this.getAgentTitle(agentId)} persona and project standards.\n\n`;
+        mdContent += "## Role Definition\n\n";
+        mdContent +=
+          "When the user types `@" + agentId + "`, adopt this persona and follow these guidelines:\n\n";
+        mdContent += "```yml\n";
+        // Extract just the YAML content from the agent file
+        const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+        if (yamlMatch) {
+          mdContent += yamlMatch[1].trim();
+        } else {
+          // If no YAML found, include the whole content minus the header
+          mdContent += agentContent.replace(/^#.*$/m, "").trim();
+        }
+        mdContent += "\n```\n\n";
+        mdContent += "## Project Standards\n\n";
+        mdContent += `- Always maintain consistency with project documentation in .bmad-core/\n`;
+        mdContent += `- Follow the agent's specific guidelines and constraints\n`;
+        mdContent += `- Update relevant project files when making changes\n`;
+        mdContent += `- Reference the complete agent definition in [.bmad-core/agents/${agentId}.md](.bmad-core/agents/${agentId}.md)\n\n`;
+        mdContent += "## Usage\n\n";
+        mdContent += `Type \`@${agentId}\` to activate this ${this.getAgentTitle(agentId)} persona.\n`;
+
+        await fileManager.writeFile(mdPath, mdContent);
+        console.log(chalk.green(`✓ Created rule: ${prefix}-${agentId}.md`));
+      }
+    }
+
+    console.log(chalk.green(`\n✓ Created Cline rules in ${clineRulesDir}`));
 
     return true;
   }

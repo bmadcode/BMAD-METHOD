@@ -92,10 +92,15 @@ ide-configurations:
       # 3. The AI will adopt that agent's full personality and capabilities
   cline:
     name: Cline
-    format: unknown
+    rule-dir: .clinerules/
+    format: multi-file
+    command-suffix: .md
     instructions: |
-      # Cline configuration coming soon
-      # Manual setup: Copy IDE agent files to your Cline configuration
+      # To use BMAD agents in Cline:
+      # 1. Open the Cline chat panel in VS Code
+      # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
+      # 3. The agent will adopt that persona for the conversation
+      # 4. Rules are stored in .clinerules/ directory in your project
 available-agents:
   - id: analyst
     name: Business Analyst

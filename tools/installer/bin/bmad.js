@@ -50,7 +50,7 @@ program
   .option('-t, --team <team>', 'Install specific team with required agents and dependencies')
   .option('-x, --expansion-only', 'Install only expansion packs (no bmad-core)')
   .option('-d, --directory <path>', 'Installation directory (default: .bmad-core)')
-  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, roo, other)')
+  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, roo, cline, other)')
   .option('-e, --expansion-packs <packs...>', 'Install specific expansion packs (can specify multiple)')
   .action(async (options) => {
     try {
@@ -67,7 +67,7 @@ program
         if (options.agent) installType = 'single-agent';
         else if (options.team) installType = 'team';
         else if (options.expansionOnly) installType = 'expansion-only';
-        
+
         const config = {
           installType,
           agent: options.agent,
@@ -164,13 +164,13 @@ async function promptInstallation() {
   // Check if this is an existing v4 installation
   const installDir = path.resolve(answers.directory);
   const state = await installer.detectInstallationState(installDir);
-  
+
   if (state.type === 'v4_existing') {
     console.log(chalk.yellow('\n🔍 Found existing BMAD v4 installation'));
     console.log(`   Directory: ${installDir}`);
     console.log(`   Version: ${state.manifest?.version || 'Unknown'}`);
     console.log(`   Installed: ${state.manifest?.installed_at ? new Date(state.manifest.installed_at).toLocaleDateString() : 'Unknown'}`);
-    
+
     const { shouldUpdate } = await inquirer.prompt([
       {
         type: 'confirm',
@@ -179,7 +179,7 @@ async function promptInstallation() {
         default: true
       }
     ]);
-    
+
     if (shouldUpdate) {
       // Skip other prompts and go directly to update
       answers.installType = 'update';
@@ -256,11 +256,11 @@ async function promptInstallation() {
   if (installType === 'full' || installType === 'team' || installType === 'expansion-only') {
     try {
       const availableExpansionPacks = await installer.getAvailableExpansionPacks();
-      
+
       if (availableExpansionPacks.length > 0) {
         let choices;
         let message;
-        
+
         if (installType === 'expansion-only') {
           message = 'Select expansion packs to install (required):'
           choices = availableExpansionPacks.map(pack => ({
@@ -274,7 +274,7 @@ async function promptInstallation() {
             value: pack.id
           }));
         }
-        
+
         const { expansionPacks } = await inquirer.prompt([
           {
             type: 'checkbox',
@@ -289,7 +289,7 @@ async function promptInstallation() {
             } : undefined
           }
         ]);
-        
+
         // Use selected expansion packs directly
         answers.expansionPacks = expansionPacks;
       } else {
@@ -313,11 +313,12 @@ async function promptInstallation() {
         { name: 'Cursor', value: 'cursor' },
         { name: 'Claude Code', value: 'claude-code' },
         { name: 'Windsurf', value: 'windsurf' },
-        { name: 'Roo Code', value: 'roo' }
+        { name: 'Roo Code', value: 'roo' },
+        { name: 'Cline', value: 'cline' }
       ]
     }
   ]);
-  
+
   // Use selected IDEs directly
   answers.ides = ides;
 
