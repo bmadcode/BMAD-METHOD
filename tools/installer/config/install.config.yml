@@ -101,6 +101,16 @@ ide-configurations:
       # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
       # 3. The agent will adopt that persona for the conversation
       # 4. Rules are stored in .clinerules/ directory in your project
+  gemini:
+    name: Gemini CLI
+    rule-dir: .gemini/agents/
+    format: context-files
+    instructions: |
+      # To use BMAD agents with the Gemini CLI:
+      # 1. The installer creates a .gemini/ directory in your project.
+      # 2. It also configures .gemini/settings.json to load all agent files.
+      # 3. Simply mention the agent in your prompt (e.g., "As @dev, ...").
+      # 4. The Gemini CLI will automatically have the context for that agent.
 available-agents:
   - id: analyst
     name: Business Analyst

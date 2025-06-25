@@ -50,7 +50,7 @@ program
   .option('-t, --team <team>', 'Install specific team with required agents and dependencies')
   .option('-x, --expansion-only', 'Install only expansion packs (no bmad-core)')
   .option('-d, --directory <path>', 'Installation directory (default: .bmad-core)')
-  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, roo, cline, other)')
+  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, roo, cline, gemini, other)')
   .option('-e, --expansion-packs <packs...>', 'Install specific expansion packs (can specify multiple)')
   .action(async (options) => {
     try {
@@ -314,7 +314,8 @@ async function promptInstallation() {
         { name: 'Claude Code', value: 'claude-code' },
         { name: 'Windsurf', value: 'windsurf' },
         { name: 'Roo Code', value: 'roo' },
-        { name: 'Cline', value: 'cline' }
+        { name: 'Cline', value: 'cline' },
+        { name: 'Gemini CLI', value: 'gemini' }
       ]
     }
   ]);

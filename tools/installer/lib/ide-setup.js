@@ -33,6 +33,8 @@ class IdeSetup {
         return this.setupRoo(installDir, selectedAgent);
       case "cline":
         return this.setupCline(installDir, selectedAgent);
+      case "gemini":
+        return this.setupGeminiCli(installDir, selectedAgent);
       default:
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -408,6 +410,63 @@ class IdeSetup {
     }
 
     console.log(chalk.green(`\n✓ Created Cline rules in ${clineRulesDir}`));
+
+    return true;
+  }
+
+  async setupGeminiCli(installDir, selectedAgent) {
+    await initializeModules();
+    const geminiDir = path.join(installDir, ".gemini");
+    const agentsContextDir = path.join(geminiDir, "agents");
+    await fileManager.ensureDirectory(agentsContextDir);
+
+    // Get all available agents
+    const agents = await this.getAllAgentIds(installDir);
+    const agentContextFiles = [];
+
+    for (const agentId of agents) {
+      // Find the source agent file
+      let agentPath = path.join(installDir, ".bmad-core", "agents", `${agentId}.md`);
+      if (!(await fileManager.pathExists(agentPath))) {
+        agentPath = path.join(installDir, "agents", `${agentId}.md`);
+      }
+
+      if (await fileManager.pathExists(agentPath)) {
+        const agentContent = await fileManager.readFile(agentPath);
+        const contextFilePath = path.join(agentsContextDir, `${agentId}.md`);
+
+        // Copy the agent content directly into its own context file
+        await fileManager.writeFile(contextFilePath, agentContent);
+
+        // Store the relative path for settings.json
+        const relativePath = path.relative(geminiDir, contextFilePath);
+        agentContextFiles.push(relativePath.replace(/\\/g, '/')); // Ensure forward slashes for consistency
+        console.log(chalk.green(`✓ Created context file for @${agentId}`));
+      }
+    }
+
+    console.log(chalk.green(`\n✓ Created individual agent context files in ${agentsContextDir}`));
+
+    // Create or update settings.json
+    const settingsPath = path.join(geminiDir, "settings.json");
+    let settings = {};
+
+    if (await fileManager.pathExists(settingsPath)) {
+      try {
+        const existingSettings = await fileManager.readFile(settingsPath);
+        settings = JSON.parse(existingSettings);
+        console.log(chalk.yellow("Found existing .gemini/settings.json. Merging settings..."));
+      } catch (e) {
+        console.error(chalk.red("Error parsing existing settings.json. It will be overwritten."), e);
+        settings = {};
+      }
+    }
+
+    // Set contextFileName to our new array of files
+    settings.contextFileName = agentContextFiles;
+
+    await fileManager.writeFile(settingsPath, JSON.stringify(settings, null, 2));
+    console.log(chalk.green(`✓ Configured .gemini/settings.json to load all agent context files.`));
 
     return true;
   }
