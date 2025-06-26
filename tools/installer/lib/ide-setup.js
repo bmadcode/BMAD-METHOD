@@ -447,6 +447,9 @@ class IdeSetup {
 
     console.log(chalk.green(`\n✓ Created individual agent context files in ${agentsContextDir}`));
 
+    // Add GEMINI.md to the context files array
+    agentContextFiles.push("GEMINI.md");
+
     // Create or update settings.json
     const settingsPath = path.join(geminiDir, "settings.json");
     let settings = {};
