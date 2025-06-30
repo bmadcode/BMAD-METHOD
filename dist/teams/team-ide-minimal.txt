@@ -722,7 +722,7 @@ BMAD transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 5. Type `/help` to see available commands
 
 #### Option 2: IDE Integration
-**Best for**: Cursor, Claude Code, Windsurf, Cline, Roo Code users
+**Best for**: Cursor, Claude Code, Windsurf, Cline, Roo Code, VS Code Copilot users
 
 ```bash
 # Interactive installation (recommended)

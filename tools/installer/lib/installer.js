@@ -372,7 +372,7 @@ class Installer {
     if (ides.length > 0) {
       for (const ide of ides) {
         spinner.text = `Setting up ${ide} integration...`;
-        await ideSetup.setup(ide, installDir, config.agent);
+        await ideSetup.setup(ide, installDir, config.agent, spinner);
       }
     }
 

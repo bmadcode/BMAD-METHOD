@@ -50,7 +50,7 @@ program
   .option('-f, --full', 'Install complete BMAD Method')
   .option('-x, --expansion-only', 'Install only expansion packs (no bmad-core)')
   .option('-d, --directory <path>', 'Installation directory')
-  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, roo, cline, gemini, other)')
+  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, roo, cline, gemini, vs-code-copilot, other)')
   .option('-e, --expansion-packs <packs...>', 'Install specific expansion packs (can specify multiple)')
   .action(async (options) => {
     try {
@@ -236,7 +236,8 @@ async function promptInstallation() {
         { name: 'Windsurf', value: 'windsurf' },
         { name: 'Roo Code', value: 'roo' },
         { name: 'Cline', value: 'cline' },
-        { name: 'Gemini CLI', value: 'gemini' }
+        { name: 'Gemini CLI', value: 'gemini' },
+        { name: 'VS Code Copilot', value: 'vs-code-copilot' }
       ]
     }
   ]);

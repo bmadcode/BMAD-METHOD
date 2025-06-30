@@ -6,11 +6,15 @@ const configLoader = require("./config-loader");
 
 // Dynamic import for ES module
 let chalk;
+let inquirer;
 
 // Initialize ES modules
 async function initializeModules() {
   if (!chalk) {
     chalk = (await import("chalk")).default;
+  }
+  if (!inquirer) {
+    inquirer = (await import("inquirer")).default;
   }
 }
 
@@ -36,7 +40,7 @@ class IdeSetup {
     }
   }
 
-  async setup(ide, installDir, selectedAgent = null) {
+  async setup(ide, installDir, selectedAgent = null, spinner = null) {
     await initializeModules();
     const ideConfig = await configLoader.getIdeConfiguration(ide);
 
@@ -58,6 +62,8 @@ class IdeSetup {
         return this.setupCline(installDir, selectedAgent);
       case "gemini":
         return this.setupGeminiCli(installDir, selectedAgent);
+      case "vs-code-copilot":
+        return this.setupVsCodeCopilot(installDir, selectedAgent, spinner);
       default:
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -506,6 +512,213 @@ class IdeSetup {
     console.log(chalk.green(`✓ Configured .gemini/settings.json to load all agent context files.`));
 
     return true;
+  }
+
+  async setupVsCodeCopilot(installDir, selectedAgent, spinner = null) {
+    await initializeModules();
+    
+    // Configure VS Code workspace settings first to avoid UI conflicts with loading spinners
+    await this.configureVsCodeSettings(installDir, spinner);
+    
+    const chatmodesDir = path.join(installDir, ".github", "chatmodes");
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
+     
+    await fileManager.ensureDirectory(chatmodesDir);
+
+    for (const agentId of agents) {
+      // Find the agent file
+      const agentPath = await this.findAgentPath(agentId, installDir);
+      const chatmodePath = path.join(chatmodesDir, `${agentId}.chatmode.md`);
+
+      if (agentPath) {
+        // Create chat mode file with agent content
+        const agentContent = await fileManager.readFile(agentPath);
+        const agentTitle = await this.getAgentTitle(agentId, installDir);
+        
+        // Extract whenToUse for the description
+        const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+        let description = `Activates the ${agentTitle} agent persona.`;
+        if (yamlMatch) {
+          const whenToUseMatch = yamlMatch[1].match(/whenToUse:\s*"(.*?)"/);
+          if (whenToUseMatch && whenToUseMatch[1]) {
+            description = whenToUseMatch[1];
+          }
+        }
+        
+        let chatmodeContent = `---
+description: "${description.replace(/"/g, '\\"')}"
+tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'usages']
+---
+
+`;
+        chatmodeContent += agentContent;
+
+        await fileManager.writeFile(chatmodePath, chatmodeContent);
+        console.log(chalk.green(`✓ Created chat mode: ${agentId}.chatmode.md`));
+      }
+    }
+
+    console.log(chalk.green(`\n✓ VS Code Copilot setup complete!`));
+    console.log(chalk.dim(`You can now find the BMAD agents in the Chat view's mode selector.`));
+
+    return true;
+  }
+
+  async configureVsCodeSettings(installDir, spinner) {
+    await initializeModules(); // Ensure inquirer is loaded
+    const vscodeDir = path.join(installDir, ".vscode");
+    const settingsPath = path.join(vscodeDir, "settings.json");
+    
+    await fileManager.ensureDirectory(vscodeDir);
+    
+    // Read existing settings if they exist
+    let existingSettings = {};
+    if (await fileManager.pathExists(settingsPath)) {
+      try {
+        const existingContent = await fileManager.readFile(settingsPath);
+        existingSettings = JSON.parse(existingContent);
+        console.log(chalk.yellow("Found existing .vscode/settings.json. Merging BMAD settings..."));
+      } catch (error) {
+        console.warn(chalk.yellow("Could not parse existing settings.json. Creating new one."));
+        existingSettings = {};
+      }
+    }
+    
+    // Clear any previous output and add spacing to avoid conflicts with loaders
+    console.log('\n'.repeat(2));
+    console.log(chalk.blue("🔧 VS Code Copilot Agent Settings Configuration"));
+    console.log(chalk.dim("BMAD works best with specific VS Code settings for optimal agent experience."));
+    console.log(''); // Add extra spacing
+    
+    const { configChoice } = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'configChoice',
+        message: 'How would you like to configure VS Code Copilot settings?',
+        choices: [
+          {
+            name: 'Use recommended defaults (fastest setup)',
+            value: 'defaults'
+          },
+          {
+            name: 'Configure each setting manually (customize to your preferences)',
+            value: 'manual'
+          },
+          {
+            name: 'Skip settings configuration (I\'ll configure manually later)\n',
+            value: 'skip'
+          }
+        ],
+        default: 'defaults'
+      }
+    ]);
+    
+    let bmadSettings = {};
+    
+    if (configChoice === 'skip') {
+      console.log(chalk.yellow("⚠️  Skipping VS Code settings configuration."));
+      console.log(chalk.dim("You can manually configure these settings in .vscode/settings.json:"));
+      console.log(chalk.dim("  • chat.agent.enabled: true"));
+      console.log(chalk.dim("  • chat.agent.maxRequests: 15"));
+      console.log(chalk.dim("  • github.copilot.chat.agent.runTasks: true"));
+      console.log(chalk.dim("  • chat.mcp.discovery.enabled: true"));
+      console.log(chalk.dim("  • github.copilot.chat.agent.autoFix: true"));
+      console.log(chalk.dim("  • chat.tools.autoApprove: false"));
+      return true;
+    }
+    
+    if (configChoice === 'defaults') {
+      // Use recommended defaults
+      bmadSettings = {
+        "chat.agent.enabled": true,
+        "chat.agent.maxRequests": 15,
+        "github.copilot.chat.agent.runTasks": true,
+        "chat.mcp.discovery.enabled": true,
+        "github.copilot.chat.agent.autoFix": true,
+        "chat.tools.autoApprove": false
+      };
+      console.log(chalk.green("✓ Using recommended BMAD defaults for VS Code Copilot settings"));
+    } else {
+      // Manual configuration
+      console.log(chalk.blue("\n📋 Let's configure each setting for your preferences:"));
+      
+      // Pause spinner during manual configuration prompts
+      let spinnerWasActive = false;
+      if (spinner && spinner.isSpinning) {
+        spinner.stop();
+        spinnerWasActive = true;
+      }
+      
+      const manualSettings = await inquirer.prompt([
+        {
+          type: 'input',
+          name: 'maxRequests',
+          message: 'Maximum requests per agent session (recommended: 15)?',
+          default: '15',
+          validate: (input) => {
+            const num = parseInt(input);
+            if (isNaN(num) || num < 1 || num > 50) {
+              return 'Please enter a number between 1 and 50';
+            }
+            return true;
+          }
+        },
+        {
+          type: 'confirm',
+          name: 'runTasks',
+          message: 'Allow agents to run workspace tasks (package.json scripts, etc.)?',
+          default: true
+        },
+        {
+          type: 'confirm',
+          name: 'mcpDiscovery',
+          message: 'Enable MCP (Model Context Protocol) server discovery?',
+          default: true
+        },
+        {
+          type: 'confirm',
+          name: 'autoFix',
+          message: 'Enable automatic error detection and fixing in generated code?',
+          default: true
+        },
+        {
+          type: 'confirm',
+          name: 'autoApprove',
+          message: 'Auto-approve ALL tools without confirmation? (⚠️  EXPERIMENTAL - less secure)',
+          default: false
+        }
+      ]);
+
+      // Restart spinner if it was active before prompts
+      if (spinner && spinnerWasActive) {
+        spinner.start();
+      }
+      
+      bmadSettings = {
+        "chat.agent.enabled": true, // Always enabled - required for BMAD agents
+        "chat.agent.maxRequests": parseInt(manualSettings.maxRequests),
+        "github.copilot.chat.agent.runTasks": manualSettings.runTasks,
+        "chat.mcp.discovery.enabled": manualSettings.mcpDiscovery,
+        "github.copilot.chat.agent.autoFix": manualSettings.autoFix,
+        "chat.tools.autoApprove": manualSettings.autoApprove
+      };
+      
+      console.log(chalk.green("✓ Custom settings configured"));
+    }
+    
+    // Merge settings (existing settings take precedence to avoid overriding user preferences)
+    const mergedSettings = { ...bmadSettings, ...existingSettings };
+    
+    // Write the updated settings
+    await fileManager.writeFile(settingsPath, JSON.stringify(mergedSettings, null, 2));
+    
+    console.log(chalk.green("✓ VS Code workspace settings configured successfully"));
+    console.log(chalk.dim("  Settings written to .vscode/settings.json:"));
+    Object.entries(bmadSettings).forEach(([key, value]) => {
+      console.log(chalk.dim(`  • ${key}: ${value}`));
+    });
+    console.log(chalk.dim(""));
+    console.log(chalk.dim("You can modify these settings anytime in .vscode/settings.json"));
   }
 }
 

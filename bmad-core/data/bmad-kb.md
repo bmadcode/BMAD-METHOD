@@ -78,7 +78,7 @@ BMAD transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 5. Type `/help` to see available commands
 
 #### Option 2: IDE Integration
-**Best for**: Cursor, Claude Code, Windsurf, Cline, Roo Code users
+**Best for**: Cursor, Claude Code, Windsurf, Cline, Roo Code, VS Code Copilot users
 
 ```bash
 # Interactive installation (recommended)
@@ -93,6 +93,7 @@ npx bmad-method install
   - **Windsurf**: Built-in AI capabilities
   - **Cline**: VS Code extension with AI features
   - **Roo Code**: Web-based IDE with agent support
+  - **VS Code Copilot**: AI-powered coding assistant
 
 **Note for VS Code Users**: BMAD-METHOD assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMAD agents. The installer includes built-in support for Cline and Roo.
 
@@ -278,6 +279,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
 - **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
+- **VS Code Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
 
 **Chat Management Guidelines**:
 - **Claude Code, Cursor, Windsurf**: Start new chats when switching agents

@@ -292,7 +292,8 @@ bmad-method/
 │   │   ├── cline-guide.md
 │   │   ├── gemini-cli-guide.md
 │   │   ├── roo-code-guide.md
-│   │   └── windsurf-guide.md
+│   │   ├── windsurf-guide.md
+│   │   └── vs-code-copilot-guide.md
 │   ├── bmad-workflow-guide.md    # Universal workflow guide
 │   ├── core-architecture.md      # This document
 │   ├── expansion-packs.md        # Expansion pack guide
