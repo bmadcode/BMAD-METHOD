@@ -11,6 +11,12 @@ architecture:
   architectureVersion: v4
   architectureSharded: true
   architectureShardedLocation: docs/architecture
+retrospectives:
+  enabled: true
+  retrospectiveLocation: docs/retrospectives
+  retrospectiveFilePattern: qa-epic-retrospective-*.md
+  depth: 3  # Number of recent retrospectives to consider
+  maxDepth: 5  # Maximum allowed depth for safety
 customTechnicalDocuments: null
 devLoadAlwaysFiles:
   - docs/architecture/coding-standards.md

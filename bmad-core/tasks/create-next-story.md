@@ -113,11 +113,33 @@ To identify the next logical story based on project progress and epic definition
     - Any "lessons learned" or notes for future stories
   - Extract relevant insights that might inform the current story's preparation
 
-### 4. Gather & Synthesize Architecture Context
+### 4. Review Recent Retrospectives for Lessons Learned
+
+[[LLM: This step incorporates retrospective insights to improve story quality and avoid repeating past issues]]
+
+- Check if retrospectives are enabled in core-config.yml (`retrospectives.enabled: true`)
+- **If retrospectives are enabled:**
+  - Locate retrospective files in `retrospectiveLocation` using `retrospectiveFilePattern`
+  - Identify the most recent `depth` number of retrospective files (default: 3)
+  - If more than `maxDepth` retrospectives exist, limit to `maxDepth` for cognitive load management
+  - Read each identified retrospective file and extract key insights relevant to story creation:
+    - **Technical Issues to Avoid:** Recurring problems, anti-patterns, or architectural pitfalls
+    - **Successful Practices:** Patterns, tools, or approaches that worked well
+    - **Testing Gaps:** Areas where testing was insufficient or missed critical scenarios
+    - **Architecture Patterns:** Component designs or integration approaches that proved effective
+    - **Process Improvements:** Development workflow enhancements or team collaboration insights
+    - **Quality Recommendations:** Specific QA guidance for similar story types
+  - Synthesize insights into actionable guidance for the current story
+  - Document which retrospectives were reviewed for traceability
+- **If retrospectives are disabled or no retrospective files exist:**
+  - Skip this step and proceed to architecture context gathering
+  - Note in story preparation that retrospective insights were not available
+
+### 5. Gather & Synthesize Architecture Context
 
 [[LLM: CRITICAL - You MUST gather technical details from the architecture documents. NEVER make up technical details not found in these documents.]]
 
-#### 4.1 Determine Architecture Document Strategy
+#### 5.1 Determine Architecture Document Strategy
 
 Based on configuration loaded in Step 0:
 
@@ -134,7 +156,7 @@ Based on configuration loaded in Step 0:
   - If `architectureSharded: true`: Search sharded files by filename relevance
   - If `architectureSharded: false`: Search within monolithic `architectureFile` for relevant sections
 
-#### 4.2 Recommended Reading Order Based on Story Type (v4 Sharded Only)
+#### 5.2 Recommended Reading Order Based on Story Type (v4 Sharded Only)
 
 [[LLM: Use this structured approach ONLY for v4 sharded architecture. For other versions, use best judgment based on file names and content.]]
 
@@ -162,7 +184,7 @@ Based on configuration loaded in Step 0:
 
 - Read both Backend and Frontend sections above
 
-#### 4.3 Extract Story-Specific Technical Details
+#### 5.3 Extract Story-Specific Technical Details
 
 [[LLM: As you read each document, extract ONLY the information directly relevant to implementing the current story. Do NOT include general information unless it directly impacts the story implementation.]]
 
@@ -175,19 +197,19 @@ For each relevant document, extract:
 - Testing requirements specific to the story's features
 - Security or performance considerations affecting the story
 
-#### 4.4 Document Source References
+#### 5.4 Document Source References
 
 [[LLM: ALWAYS cite the source document and section for each technical detail you include. This helps the dev agent verify information if needed.]]
 
 Format references as: `[Source: architecture/{filename}.md#{section}]`
 
-### 5. Verify Project Structure Alignment
+### 6. Verify Project Structure Alignment
 
 - Cross-reference the story's requirements and anticipated file manipulations with the Project Structure Guide from `docs/architecture/unified-project-structure.md`.
 - Ensure any file paths, component locations, or module names implied by the story align with defined structures.
 - Document any structural conflicts, necessary clarifications, or undefined components/paths in a "Project Structure Notes" section within the story draft.
 
-### 6. Populate Story Template with Full Context
+### 7. Populate Story Template with Full Context
 
 - Create a new story file: `{devStoryLocation}/{epicNum}.{storyNum}.story.md` (using location from config).
 - Use the Story Template to structure the file.
@@ -196,6 +218,10 @@ Format references as: `[Source: architecture/{filename}.md#{section}]`
   - `Status: Draft`
   - `Story` (User Story statement from Epic)
   - `Acceptance Criteria (ACs)` (from Epic, to be refined if needed based on context)
+- **`Retrospective Insights` section:**
+  - Populate the "Retrospectives Reviewed" subsection with the specific retrospective files that were analyzed
+  - Fill the "Key Insights Applied" subsection with synthesized, actionable insights relevant to this story
+  - If no retrospectives were available or enabled, use the template's default messaging
 - **`Dev Technical Guidance` section (CRITICAL):**
 
   [[LLM: This section MUST contain ONLY information extracted from the architecture shards. NEVER invent or assume technical details.]]
