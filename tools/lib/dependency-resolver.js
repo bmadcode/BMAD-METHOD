@@ -15,7 +15,7 @@ class DependencyResolver {
     const agentContent = await fs.readFile(agentPath, 'utf8');
     
     // Extract YAML from markdown content
-    const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)\n```/);
+    const yamlMatch = agentContent.replace(/\r/g, "").match(/```ya?ml\n([\s\S]*?)\n```/);
     if (!yamlMatch) {
       throw new Error(`No YAML configuration found in agent ${agentId}`);
     }
