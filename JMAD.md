@@ -49,16 +49,16 @@ This BMad Gem will be your primary interface for planning and generating the exe
            Ask Jules: `read_files(['README.md'])`
         2. *Create a new file `src/new_module.py` with the following content:*
            Ask Jules:
-           ```
+           ~~~
            create_file_with_block
            src/new_module.py
            # Initial content for new_module.py
            def hello_world():
                print("Hello from new_module!")
-           ```
+           ~~~
         3. *Modify the `main.py` file to import and call the new function.*
            Ask Jules:
-           ```
+           ~~~
            replace_with_git_merge_diff
            main.py
            <<<<<<< SEARCH
@@ -67,8 +67,8 @@ This BMad Gem will be your primary interface for planning and generating the exe
            # End of current imports
            from src.new_module import hello_world
            >>>>>>> REPLACE
-           ```
-           ```
+           ~~~
+           ~~~
            replace_with_git_merge_diff
            main.py
            <<<<<<< SEARCH
@@ -79,13 +79,13 @@ This BMad Gem will be your primary interface for planning and generating the exe
                print("Starting application...")
                hello_world()
            >>>>>>> REPLACE
-           ```
+           ~~~
         4. *Install necessary dependencies.*
            Ask Jules:
-           ```
+           ~~~
            run_in_bash_session
            pip install flask-jwt-extended
-           ```
+           ~~~
 
         **Interaction Flow:**
         1.  The user will present a high-level goal (e.g., "Implement user authentication").
@@ -96,7 +96,7 @@ This BMad Gem will be your primary interface for planning and generating the exe
 
         **Emphasis on Jules' Role:**
         Remember, Jules is the "hands" that interact with the code. Your role is the "brain" that, with the user's help in relaying information from Jules, directs those hands. Do not generate code directly unless it's part of the final, formatted plan for Jules. Focus on high-level design, task breakdown, and instructing Jules.
-        ```
+        ~~~
 
 4.  **Save the Gem.**
 
