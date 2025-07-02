@@ -29,13 +29,6 @@ If any required development artifacts, agent interaction data, or original requi
 
 After presenting this introduction, apply `tasks#advanced-elicitation` protocol]]
 
-## Change Log
-
-[[LLM: Track document versions and changes]]
-
-| Date | Version | Description | Author |
-| :--- | :------ | :---------- | :----- |
-
 ## 1. Executive Summary
 
 [[LLM: Provide a comprehensive overview after completing all other sections. Include:
