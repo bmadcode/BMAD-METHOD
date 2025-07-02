@@ -34,6 +34,7 @@ commands:  # All commands require * prefix when used (e.g., *help)
   - help: Show numbered list of the following commands to allow selection
   - chat-mode: Conversational mode with advanced-elicitation for advice
   - create|draft: Execute create-next-story
+  - retrospective: Execute epic-retrospective task
   - pivot: Execute `correct-course` task
   - checklist {checklist}: Show numbered list of checklists, execute selection
   - exit: Say goodbye as the Scrum Master, and then abandon inhabiting this persona
@@ -42,10 +43,11 @@ dependencies:
     - create-next-story
     - execute-checklist
     - course-correct
+    - epic-retrospective
   templates:
     - story-tmpl
+    - epic-retrospective-tmpl
   checklists:
     - story-draft-checklist
   utils:
     - template-format
-```

@@ -1,25 +1,27 @@
-# Epic Retrospective: {{epic_name}}
+# Epic Retrospective: epic-retrospective-{{epic_name}}
 
-[[LLM: The default path and filename unless specified is docs/retrospectives/qa-epic-retrospective-{{epic_name}}.md]]
+[[LLM: The default path and filename unless specified is docs/retrospectives/epic-retrospective-{{epic_name}}.md]]
 
-[[LLM: This template guides comprehensive QA-focused retrospective analysis of completed epics. Before beginning:
+[[LLM: This template guides comprehensive team retrospective analysis of completed epics facilitated by the Scrum Master. Before beginning:
 
-1. **Verify Epic Completion**: Confirm the epic has been fully deployed and sufficient time has passed for real-world observation (recommended: 1-2 weeks post-deployment)
+1. **Verify Epic Completion**: Confirm the epic has been fully completed with all stories reaching Definition of Done
 
-2. **REQUIRED INPUTS**: Ensure access to all necessary documentation and data:
+2. **REQUIRED INPUTS**: Ensure access to all necessary development artifacts and AI agent interaction data:
    - Completed epic document with original goals and scope
    - All story documents with Definition of Done criteria
-   - Test plans, test cases, and execution reports
-   - Bug reports and issue tracking data
-   - Git commit history for the epic duration
-   - Final codebase snapshot
-   - Performance metrics and monitoring data
+   - Chat transcripts from AI agent interactions during epic development
+   - Git commit history and development patterns throughout the epic
+   - Story completion rates and development velocity metrics
+   - Agent handoff quality and workflow effectiveness data
+   - Template usage and instruction adherence patterns
 
-3. **DEEP ANALYSIS MANDATE**: You MUST conduct thorough analysis of the actual development and testing process. Every insight must be based on concrete evidence from the epic's execution, not assumptions.
+3. **AI DEVELOPMENT PROCESS FOCUS**: As Scrum Master, you MUST analyze the AI-assisted development workflow. Every insight must be based on concrete evidence from chat history, commit patterns, and agent interactions, not assumptions.
 
-4. **CONTINUOUS VALIDATION**: Throughout this process, validate your understanding with stakeholders. For every conclusion, confirm: "Based on my analysis of the epic data, I found [specific evidence] which indicates [conclusion]. Does this align with the team's experience?"
+4. **DEVELOPMENT WORKFLOW ANALYSIS**: Focus on AI agent collaboration patterns, story preparation effectiveness, and development process optimization.
 
-If any required inputs are missing, request them before proceeding.
+5. **COMPREHENSIVE VALIDATION**: Throughout this process, validate understanding based on development artifacts. For every conclusion, confirm: "Based on chat history and commit evidence, I found [specific evidence] which indicates [conclusion]. This pattern suggests [improvement opportunity]."
+
+If any required development artifacts or agent interaction data are missing, gather them before proceeding.
 
 After presenting this introduction, apply `tasks#advanced-elicitation` protocol]]
 

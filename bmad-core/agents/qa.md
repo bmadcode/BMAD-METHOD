@@ -43,7 +43,6 @@ commands:  # All commands require * prefix when used (e.g., *help)
 dependencies:
   tasks:
     - review-story
-    - epic-retrospective
   data:
     - technical-preferences
   utils:

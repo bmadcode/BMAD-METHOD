@@ -1,30 +1,30 @@
-# QA Epic Retrospective Task
+# Epic Retrospective Task
 
 ## Purpose
 
-Conduct a comprehensive retrospective analysis of completed epics from a quality assurance standpoint. This task focuses on evaluating the entire development and testing process to identify successes, failures, and areas for improvement in product quality and testing strategy. The resulting retrospective document serves as a learning tool to guide future development cycles and enhance overall quality processes.
+Facilitate a comprehensive retrospective analysis of completed epics from a team and process improvement standpoint. This task focuses on evaluating the AI agent development process, chat interactions, and commit history to identify successes, challenges, and areas for improvement. As the Scrum Master, you facilitate this retrospective to gather insights from development experience and guide future epics toward better AI agent collaboration and more effective development workflows.
 
 ## When to Use This Task
 
 **Use this task when:**
 
-- An epic has been completed and deployed
-- All associated stories have reached their Definition of Done
-- QA wants to capture lessons learned for process improvement
-- Team is ready to invest time in reflective analysis
+- An epic has been completed with all stories reaching Definition of Done
+- AI agent development sessions have concluded for the epic
+- There is sufficient chat history and commit data to analyze
+- The team is ready to invest time in process improvement analysis
 
 **Use alternative retrospective approaches when:**
 
-- Epic is still in progress (use review-story instead)
-- Immediate hotfixes are needed (focus on incident post-mortems)
-- Limited QA involvement in the epic (consider development-focused retrospectives)
-- Epic was abandoned or significantly changed mid-development
+- Epic is still in progress (use review-story instead for individual story feedback)
+- Immediate bug fixes are needed (focus on incident analysis)
+- Epic was abandoned or significantly changed mid-development (consider lessons learned session)
+- Insufficient development history exists for meaningful analysis
 
 ## Instructions
 
 ### 1. Data Collection and Preparation (Required)
 
-Before beginning the analysis, gather all relevant documentation and data from the completed epic:
+As the Scrum Master, gather comprehensive development artifacts and AI agent interaction data:
 
 **Epic Documentation:**
 
@@ -33,68 +33,79 @@ Before beginning the analysis, gather all relevant documentation and data from t
 - [ ] Definition of Done criteria for each story
 - [ ] Acceptance criteria and business requirements
 
-**Testing Documentation:**
+**AI Agent Development Data:**
 
-- [ ] Test plans and test case documentation
-- [ ] Test execution reports and results
-- [ ] Bug reports filed during the epic development
-- [ ] Performance test results (if applicable)
-- [ ] User acceptance testing feedback
+- [ ] Chat transcripts from agent interactions during epic development
+- [ ] Agent handoff quality between SM → Dev → QA → PO workflows
+- [ ] Story preparation effectiveness and clarity
+- [ ] Agent instruction adherence and task completion patterns
+- [ ] Template usage and effectiveness during development
 
-**Development Artifacts:**
+**Development Process Data:**
 
-- [ ] Git commit history for the epic's duration
-- [ ] Final codebase snapshot for the epic
+- [ ] Git commit history and development patterns throughout the epic
+- [ ] Story completion rates and development velocity
+- [ ] Code review outcomes and refactoring patterns
+- [ ] Testing implementation and coverage achieved
+- [ ] Debug log entries and issue resolution patterns
 
-### 2. Quality Analysis
+**Technical Artifacts:**
 
-Conduct a thorough analysis of the collected data from multiple QA perspectives:
+- [ ] Final codebase state for the epic
+- [ ] Test coverage reports and quality metrics
+- [ ] Build and validation outcomes
+- [ ] Architecture adherence and technical debt introduction
 
-#### Test Coverage and Effectiveness Analysis
+### 2. AI Agent Development Process Analysis
 
-**Test Plan Review:**
+Conduct a thorough analysis of the AI-assisted development workflow:
 
-- [ ] Analyze test plan coverage against requirements
-- [ ] Identify gaps between planned and executed tests
-- [ ] Evaluate test case quality and completeness
-- [ ] Review automation vs manual testing balance
+#### Agent Collaboration and Workflow Analysis
 
-**Bug Analysis:**
+**BMAD Agent Effectiveness:**
 
-- [ ] Categorize bugs by severity and type
-- [ ] Analyze bug introduction points in development cycle
-- [ ] Review bug fix effectiveness and regression occurrences
-- [ ] Identify patterns in bug types or areas
+- [ ] Evaluate story preparation quality from SM agent
+- [ ] Assess development task execution by Dev agent
+- [ ] Review code quality improvements from QA agent
+- [ ] Analyze handoff clarity between different agents
 
-#### Documentation and Requirements Analysis
+**Agent Instruction Adherence:**
 
-**Requirements Validation:**
+- [ ] Review how well agents followed story instructions
+- [ ] Assess template usage and consistency
+- [ ] Identify instruction ambiguities that caused confusion
+- [ ] Evaluate agent decision-making quality
 
-- [ ] Verify final product meets acceptance criteria
-- [ ] Identify requirements that were unclear or changed
-- [ ] Assess story Definition of Done effectiveness
-- [ ] Review business value delivery against original goals
+#### Development Process Analysis
 
-**Documentation Quality:**
+**Story Execution Quality:**
 
-- [ ] Evaluate test documentation completeness
-- [ ] Review user documentation accuracy
-- [ ] Assess technical documentation for QA processes
+- [ ] Analyze story completion patterns and blockers
+- [ ] Review task breakdown effectiveness
+- [ ] Assess testing integration during development
+- [ ] Evaluate Definition of Done achievement
 
-#### Codebase and Development Process Analysis
+**Code Quality and Patterns:**
 
-**Code Quality Review:**
+- [ ] Review commit history for development patterns
+- [ ] Assess code quality and architectural consistency
+- [ ] Analyze refactoring effectiveness
+- [ ] Evaluate technical debt management
 
-- [ ] Analyze commit history for quality trends
-- [ ] Review code review effectiveness from QA perspective
-- [ ] Identify areas with high bug density
-- [ ] Assess testability of delivered code
+#### Chat and Communication Analysis
 
-**Process Effectiveness:**
+**Agent Communication Effectiveness:**
 
-- [ ] Evaluate QA involvement throughout development
-- [ ] Review testing environment stability and effectiveness
-- [ ] Analyze deployment and release process quality
+- [ ] Review chat clarity and instruction quality
+- [ ] Assess agent response accuracy and helpfulness
+- [ ] Identify communication breakdowns or misunderstandings
+- [ ] Evaluate iterative improvement patterns
+
+**Development Flow:**
+
+- [ ] Analyze development velocity and momentum
+- [ ] Review blocker identification and resolution
+- [ ] Assess feedback incorporation effectiveness
 
 ### 3. Retrospective Document Generation
 
@@ -102,32 +113,33 @@ Use the epic-retrospective-tmpl.md template to create the comprehensive retrospe
 
 #### What Went Well Section
 
-Focus on QA successes and effective practices:
+Focus on effective AI agent development practices:
 
-- **Testing Strategies:** Note effective testing approaches, tools, or methodologies
-- **Collaboration:** Highlight good communication between QA and development teams
-- **Quality Metrics:** Document areas with low bug counts or high test coverage
-- **Process Improvements:** Recognize successful process changes implemented during the epic
+- **Agent Coordination:** Note effective handoffs and collaboration patterns
+- **Story Quality:** Highlight well-prepared stories that led to smooth development
+- **Development Flow:** Document efficient development patterns and velocity
+- **Code Quality:** Celebrate effective testing, refactoring, and architectural decisions
+- **Template Usage:** Recognize effective use of BMAD templates and processes
 
 #### What Could Be Improved Section
 
-Identify specific areas needing enhancement:
+Identify specific areas needing enhancement in AI agent development:
 
-- **Test Coverage Gaps:** Document areas with insufficient testing
-- **Bug Prevention:** Identify recurring bug types or root causes
-- **Requirements Issues:** Note unclear acceptance criteria or changing requirements
-- **Environment Issues:** Document testing environment problems or limitations
-- **Communication:** Identify breakdowns in QA/Dev collaboration
+- **Agent Instructions:** Note unclear or ambiguous instructions that caused issues
+- **Story Preparation:** Identify gaps in story technical guidance or context
+- **Development Process:** Document workflow inefficiencies or agent confusion
+- **Template Effectiveness:** Note template limitations or unclear sections
+- **Communication Patterns:** Identify areas where agent communication could improve
 
 #### Actionable Recommendations Section
 
-Propose concrete, implementable improvements:
+Propose concrete improvements for future AI agent development:
 
-- **Process Changes:** Specific modifications to QA processes
-- **Tool Improvements:** New tools or better use of existing tools
-- **Training Needs:** Skills development for team members
-- **Documentation Updates:** Improvements to templates or standards
-- **Automation Opportunities:** Areas where manual testing could be automated
+- **Story Template Updates:** Specific improvements to story preparation templates
+- **Agent Instruction Clarity:** Better instruction patterns for agents
+- **Workflow Optimization:** Process improvements for agent handoffs
+- **Template Enhancements:** Updates to BMAD templates and checklists
+- **Development Practice:** Better patterns for AI-assisted development
 
 ### 4. Validation and Review
 
@@ -135,54 +147,55 @@ Before finalizing the retrospective, ensure comprehensive coverage:
 
 **Content Validation:**
 
-- [ ] All major quality issues identified and analyzed
-- [ ] Recommendations are specific and actionable
-- [ ] Both positive and negative aspects are balanced
-- [ ] Data supports all conclusions and recommendations
+- [ ] All major development process issues identified and analyzed
+- [ ] Recommendations are specific, actionable, and focused on AI agent workflows
+- [ ] Both successful and challenging aspects are balanced
+- [ ] Analysis is supported by chat history and commit evidence
 
-**Stakeholder Review:**
+**Process Review:**
 
-- [ ] Development team feedback incorporated
-- [ ] Product Owner perspective considered
-- [ ] Scrum Master/Project Manager input included
-- [ ] Technical Architecture feedback if relevant
+- [ ] Agent workflow effectiveness assessed
+- [ ] Story preparation quality evaluated
+- [ ] Template and instruction clarity reviewed
+- [ ] Development velocity and quality patterns analyzed
 
 **Follow-up Planning:**
 
-- [ ] Recommendations prioritized by impact and effort
-- [ ] Owners assigned for implementing recommendations
-- [ ] Timeline established for process improvements
+- [ ] Recommendations prioritized by impact on future agent development
+- [ ] Template and process updates identified
+- [ ] Agent instruction improvements specified
 - [ ] Success metrics defined for recommended changes
 
 ## Output
 
-A single markdown file named `qa-epic-retrospective-<epic_name>.md` saved in the `docs/retrospectives/` directory.
+A single markdown file named `epic-retrospective-<epic_name>.md` saved in the `docs/retrospectives/` directory.
 
 **File Structure Requirements:**
 
 - Use the epic-retrospective-tmpl.md template
-- Include all sections with substantive content
-- Provide specific examples rather than generic statements
-- Include metrics and data where available
-- Ensure recommendations are actionable with clear next steps
+- Include all sections with focus on AI agent development process
+- Provide specific examples from chat history and commit patterns
+- Include metrics and evidence from development artifacts
+- Ensure recommendations improve future AI agent collaboration
 
 ## Success Criteria
 
 The epic retrospective is successful when:
 
-1. **Comprehensive Analysis:** All aspects of quality and testing are thoroughly reviewed
-2. **Data-Driven Insights:** Conclusions are supported by concrete evidence from the epic
-3. **Actionable Recommendations:** Proposed improvements are specific, measurable, and implementable
-4. **Process Learning:** Document provides clear guidance for future epic development
-5. **Stakeholder Value:** Insights are valuable to development team, product management, and QA processes
-6. **Continuous Improvement:** Recommendations address root causes, not just symptoms
+1. **Comprehensive Process Analysis:** All aspects of AI agent development workflow are reviewed
+2. **Evidence-Based Insights:** Conclusions are supported by chat history and commit data
+3. **Actionable Recommendations:** Proposed improvements are specific to AI agent development
+4. **Process Learning:** Document provides clear guidance for future AI-assisted epic development
+5. **Template Improvement:** Identifies concrete ways to enhance BMAD templates and processes
+6. **Agent Workflow Optimization:** Recommendations improve agent collaboration and effectiveness
 
 ## Important Notes
 
-- **Timing Matters:** Conduct retrospectives while the epic experience is still fresh, but allow time for post-deployment observation
-- **Focus on Learning:** Emphasize learning and improvement over blame or criticism
-- **Data Over Opinion:** Base conclusions on concrete evidence from testing and development artifacts
-- **Actionable Outcomes:** Ensure every recommendation has a clear path to implementation
-- **Follow Through:** Plan to review retrospective recommendations in future epics to ensure continuous improvement
+- **Focus on Development Process:** Analyze AI agent interactions, not real-world deployment outcomes
+- **Chat History Analysis:** Use actual agent conversations to identify patterns and issues
+- **Commit Pattern Review:** Analyze development velocity and code quality trends
+- **Template Effectiveness:** Evaluate how well BMAD templates guided development
+- **Agent Instruction Quality:** Focus on clarity and effectiveness of agent instructions
+- **Iterative Improvement:** Recommendations should enhance future AI agent development cycles
 
-**Agent Responsibility:** The QA agent conducting this retrospective should maintain objectivity while advocating for quality improvements that benefit the entire development process.
+**Agent Responsibility:** The Scrum Master conducting this retrospective should focus on improving the AI-assisted development process, agent collaboration patterns, and template effectiveness for future epics.
