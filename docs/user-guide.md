@@ -112,16 +112,16 @@ The reason #2 and #3 are optional is because now BMAD V4 makes sharding optional
 
 ### Core Development Team
 
-| Agent       | Role               | Primary Functions                              | When to Use                                       |
-| ----------- | ------------------ | ---------------------------------------------- | ------------------------------------------------- |
-| `analyst`   | Business Analyst   | Market research, requirements gathering        | Project planning, competitive analysis            |
-| `pm`        | Product Manager    | PRD creation, feature prioritization           | Strategic planning, roadmaps                      |
-| `architect` | Solution Architect | System design, technical architecture          | Complex systems, scalability planning             |
-| `dev`       | Developer          | Sequential task execution, testing, validation | Story implementation with test-driven development |
-| `qa`        | QA Specialist      | Code review, refactoring, test validation      | Senior developer review via `review-story` task   |
-| `ux-expert` | UX Designer        | UI/UX design, prototypes                       | User experience, interface design                 |
-| `po`        | Product Owner      | Backlog management, story validation           | Story refinement, acceptance criteria             |
-| `sm`        | Scrum Master       | Sprint planning, story creation                | Project management, workflow                      |
+| Agent       | Role               | Primary Functions                               | When to Use                                       |
+| ----------- | ------------------ | ----------------------------------------------- | ------------------------------------------------- |
+| `analyst`   | Business Analyst   | Market research, requirements gathering         | Project planning, competitive analysis            |
+| `pm`        | Product Manager    | PRD creation, feature prioritization            | Strategic planning, roadmaps                      |
+| `architect` | Solution Architect | System design, technical architecture           | Complex systems, scalability planning             |
+| `dev`       | Developer          | Sequential task execution, testing, validation  | Story implementation with test-driven development |
+| `qa`        | QA Specialist      | Code review, refactoring, test validation       | Senior developer review via `review-story` task   |
+| `ux-expert` | UX Designer        | UI/UX design, prototypes                        | User experience, interface design                 |
+| `po`        | Product Owner      | Backlog management, story validation            | Story refinement, acceptance criteria             |
+| `sm`        | Scrum Master       | Sprint planning, story creation, retrospectives | Project management, workflow                      |
 
 ### Meta Agents
 
@@ -1160,6 +1160,13 @@ coreProjectLocation:
 
   customTechnicalDocuments: null # Additional docs for SM
 
+  retrospectives: # Retrospective integration settings
+    enabled: true # Enable retrospective insights in story creation
+    retrospectiveLocation: docs/retrospectives # Where retrospective files are stored
+    retrospectiveFilePattern: epic-retrospective-*.md # Pattern for retrospective files
+    depth: 3 # Number of recent retrospectives to consider (default: 3)
+    maxDepth: 5 # Maximum allowed depth for safety
+
   devLoadAlwaysFiles: # Files dev agent always loads
     - docs/architecture/coding-standards.md
     - docs/architecture/tech-stack.md
@@ -1244,6 +1251,77 @@ devLoadAlwaysFiles:
 ```
 
 This ensures the dev agent always has critical context without needing to search for it.
+
+##### Retrospective Configuration
+
+BMAD V4 introduces intelligent retrospective integration that helps teams learn from past AI agent development experiences and apply those insights to improve future story creation and development workflows:
+
+```yaml
+retrospectives:
+  enabled: true # Enable/disable retrospective integration
+  retrospectiveLocation: docs/retrospectives # Where retrospective files are stored
+  retrospectiveFilePattern: epic-retrospective-*.md # Pattern for retrospective files
+  depth: 3 # Number of recent retrospectives to consider
+  maxDepth: 5 # Maximum allowed depth for safety
+```
+
+**Configuration Options:**
+
+- **enabled**: `true/false` - Controls whether the Scrum Master agent incorporates retrospective insights when creating stories
+- **retrospectiveLocation**: Directory path where retrospective files are stored
+- **retrospectiveFilePattern**: Glob pattern to identify retrospective files (supports wildcards)
+- **depth**: Number of recent retrospectives to analyze (default: 3, based on agile best practices)
+- **maxDepth**: Safety limit to prevent cognitive overload (recommended: 5)
+
+**How It Works:**
+
+When creating new stories, the Scrum Master agent will:
+
+1. Check if retrospectives are enabled
+2. Locate the most recent `depth` number of retrospective files
+3. Extract key insights relevant to the story being created:
+   - Technical patterns that worked well
+   - Common issues to avoid
+   - Testing gaps to address
+   - Process improvements to apply
+4. Include these insights in the story's "Retrospective Insights" section
+
+**Recommended Depth Settings:**
+
+- **New projects**: `depth: 1` (latest retrospective only)
+- **Mature projects**: `depth: 3-4` (pattern recognition across multiple epics)
+- **Large teams**: `depth: 2-3` (manage cognitive load)
+- **Small teams**: `depth: 4-5` (can handle more historical context)
+
+**Example Configurations:**
+
+_Minimal Configuration (new projects):_
+
+```yaml
+retrospectives:
+  enabled: true
+  retrospectiveLocation: docs/retrospectives
+  retrospectiveFilePattern: retrospective-*.md
+  depth: 1
+```
+
+_Comprehensive Configuration (mature projects):_
+
+```yaml
+retrospectives:
+  enabled: true
+  retrospectiveLocation: docs/qa/retrospectives
+  retrospectiveFilePattern: epic-retro-*.md
+  depth: 4
+  maxDepth: 6
+```
+
+_Disabled (existing projects):_
+
+```yaml
+retrospectives:
+  enabled: false
+```
 
 ##### Debug and Export Options
 

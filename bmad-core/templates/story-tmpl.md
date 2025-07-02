@@ -38,6 +38,46 @@ Manual Test Steps: [[LLM: Include how if possible the user can manually test the
 
 {{ f.e. `- dev will create a script with task 3 above that you can run with "npm run test-initiate-launch-sequence" and validate Armageddon is initiated`}}
 
+## Retrospective Insights
+
+[[LLM: This section is populated during story creation if retrospectives are enabled in core-config.yml. Include key learnings from recent retrospectives that are relevant to this story.]]
+
+### Retrospectives Reviewed
+
+[[LLM: List which retrospective files were reviewed, if any]]
+
+{{#if retrospectives_reviewed}}
+- {{retrospective_file_1}} ({{retrospective_date_1}})
+- {{retrospective_file_2}} ({{retrospective_date_2}})
+- {{retrospective_file_3}} ({{retrospective_date_3}})
+{{else}}
+No retrospectives available or retrospectives disabled in configuration.
+{{/if}}
+
+### Key Insights Applied
+
+[[LLM: Synthesize actionable insights from retrospectives that are relevant to this story type/domain]]
+
+{{#if retrospective_insights}}
+**Technical Patterns to Follow:**
+- {{successful_pattern_1}}
+- {{successful_pattern_2}}
+
+**Issues to Avoid:**
+- {{recurring_issue_1}}
+- {{recurring_issue_2}}
+
+**Testing Considerations:**
+- {{testing_insight_1}}
+- {{testing_insight_2}}
+
+**Process Improvements:**
+- {{process_improvement_1}}
+- {{process_improvement_2}}
+{{else}}
+No specific insights identified from retrospectives for this story type.
+{{/if}}
+
 ## Dev Agent Record
 
 ### Agent Model Used: {{Agent Model Name/Version}}
