@@ -1,6 +1,6 @@
 # BMAD Method Guide for Visual Studio Code
 
-This guide covers the setup and usage of the BMAD Method in Visual Studio Code. For the complete workflow, see the [BMAD Workflow Guide](https://www.google.com/search?q=../bmad-workflow-guide.md).
+This guide covers the setup and usage of the BMAD Method in Visual Studio Code. For the complete workflow, see the [BMAD Workflow Guide](../bmad-workflow-guide.md).
 
 ## Installation
 

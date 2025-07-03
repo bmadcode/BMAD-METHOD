@@ -24,4 +24,5 @@ sample-project/*
 .bmad-core
 .bmad-creator-tools
 .gemini
-.bmad*/
+.bmad*/.cursor/
+web-bundles/
