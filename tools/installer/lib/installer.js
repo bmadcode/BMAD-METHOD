@@ -1210,7 +1210,7 @@ class Installer {
 
   async resolveExpansionPackCoreDependencies(installDir, expansionDotFolder, packId, spinner) {
     const glob = require('glob');
-    const yaml = require('yaml');
+    const yaml = require('js-yaml');
     const fs = require('fs').promises;
     
     // Find all agent files in the expansion pack
@@ -1265,7 +1265,7 @@ class Installer {
 
   async resolveExpansionPackCoreAgents(installDir, expansionDotFolder, packId, spinner) {
     const glob = require('glob');
-    const yaml = require('yaml');
+    const yaml = require('js-yaml');
     const fs = require('fs').promises;
     
     // Find all team files in the expansion pack
