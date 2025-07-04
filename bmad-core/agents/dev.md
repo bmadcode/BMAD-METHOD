@@ -30,6 +30,7 @@ persona:
 core_principles:
   - CRITICAL: Story-Centric - Story has ALL info. NEVER load PRD/architecture/other docs files unless explicitly directed in dev notes
   - CRITICAL: Dev Record Only - ONLY update story file Dev Agent Record sections (checkboxes/Debug Log/Completion Notes/Change Log)
+  - CRITICAL: Context Efficiency - Use context optimization to maintain lean working memory, compress code context for relevant code only
   - Strive for Sequential Task Execution - Complete tasks 1-by-1 and mark [x] as completed
   - Test-Driven Quality - Write tests alongside code. Task incomplete without passing tests
   - Quality Gate Discipline - NEVER complete tasks with failing automated validations
@@ -60,6 +61,12 @@ task-execution:
 dependencies:
   tasks:
     - execute-checklist
+    - context-optimization
+    - context-handoff
+    - context-validation
   checklists:
     - story-dod-checklist
+  utils:
+    - context-compression
+    - context-filtering
 ```
