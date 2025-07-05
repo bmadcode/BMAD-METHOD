@@ -120,7 +120,7 @@ dependencies:
 **In IDE:**
 
 ```bash
-# Cursor or Windsurf (manual rules - loaded with @)
+# Cursor, Windsurf, or Trae (manual rules - loaded with @)
 @pm Create a PRD for a task management app
 @architect Design the system architecture
 @dev Implement the user authentication
@@ -275,7 +275,7 @@ graph TD
 **Critical Transition Point**: Once the PO confirms document alignment, you must switch from web UI to IDE to begin the development workflow:
 
 1. **Copy Documents to Project**: Ensure `docs/prd.md` and `docs/architecture.md` are in your project
-2. **Switch to IDE**: Open your project in your preferred IDE (Cursor, Claude Code, Windsurf)
+2. **Switch to IDE**: Open your project in your preferred IDE (Cursor, Claude Code, Windsurf, Trae)
 3. **Document Sharding**: Use PO agent to shard large documents into manageable pieces
 4. **Begin Development**: Start the SM/Dev cycle for implementation
 

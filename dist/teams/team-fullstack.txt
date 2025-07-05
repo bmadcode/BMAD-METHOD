@@ -1400,7 +1400,7 @@ BMad transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 5. Type `/help` to see available commands
 
 #### Option 2: IDE Integration
-**Best for**: Cursor, Claude Code, Windsurf, Cline, Roo Code, Github Copilot users
+**Best for**: Cursor, Claude Code, Windsurf, Trae, Cline, Roo Code, Github Copilot users
 
 ```bash
 # Interactive installation (recommended)
@@ -1413,6 +1413,7 @@ npx bmad-method install
   - **Cursor**: Native AI integration
   - **Claude Code**: Anthropic's official IDE
   - **Windsurf**: Built-in AI capabilities
+  - **Trae**: Built-in AI capabilities
   - **Cline**: VS Code extension with AI features
   - **Roo Code**: Web-based IDE with agent support
   - **Github Copilot**: AI-powered coding assistant
@@ -1600,11 +1601,12 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
 - **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
+- **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
 - **Github Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
 
 **Chat Management Guidelines**:
-- **Claude Code, Cursor, Windsurf**: Start new chats when switching agents
+- **Claude Code, Cursor, Windsurf, Trae**: Start new chats when switching agents
 - **Roo Code**: Switch modes within the same conversation
 
 **Common Task Commands**:
@@ -7296,7 +7298,7 @@ Document the choice and key services that will be used.]]
 
 ### Repository Structure
 
-[[LLM: Define the repository approach based on PRD requirements and platform choice, explain your rationale or ask questions to the user if unsure:
+[[LLM: Define the repository approach based on PRD requirements and platform choice, explain your rationale or ask quetsions to the user if unsure:
 
 1. For modern fullstack apps, monorepo is often preferred
 2. Consider tooling (Nx, Turborepo, Lerna, npm workspaces)

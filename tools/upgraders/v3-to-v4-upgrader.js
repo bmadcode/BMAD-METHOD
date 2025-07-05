@@ -560,6 +560,7 @@ class V3ToV4Upgrader {
         cursor: "Rules created in .cursor/rules/",
         "claude-code": "Commands created in .claude/commands/",
         windsurf: "Rules created in .windsurf/rules/",
+        trae: "Rules created in.trae/rules/",
         roo: "Custom modes created in .roomodes",
         cline: "Rules created in .clinerules/",
       };

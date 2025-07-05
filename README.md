@@ -155,6 +155,7 @@ The BMad Method works with any IDE, but has built-in integration for:
 - `cline` - Cline Rules integration
 - `gemini-cli` - Gemini with @agent commands
 - `windsurf` - Windsurf with manual rule @agent commands
+- `trae` - Trae with manual rule @agent commands
 - `roo` - Roo Code with custom modes (see `.roomodes`)
 - `github-copilot` - GitHub Copilot agent mode integration
 
@@ -287,6 +288,7 @@ See the **[Core Architecture](docs/core-architecture.md)** for the complete sour
 - 🎯 [Cursor Guide](docs/agentic-tools/cursor-guide.md) - Setup and usage for Cursor
 - 🤖 [Claude Code Guide](docs/agentic-tools/claude-code-guide.md) - Setup and usage for Claude Code
 - 🌊 [Windsurf Guide](docs/agentic-tools/windsurf-guide.md) - Setup and usage for Windsurf
+- 🌊 [Trae Guide](docs/agentic-tools/trae-guide.md) - Setup and usage for Trae
 - 🦘 [Roo Code Guide](docs/agentic-tools/roo-code-guide.md) - Setup and usage for Roo Code
 - 🔧 [Cline Guide](docs/agentic-tools/cline-guide.md) - Setup and usage for Cline (VS Code)
 - ✨ [Gemini CLI Guide](docs/agentic-tools/gemini-cli-guide.md) - Setup and usage for Gemini CLI

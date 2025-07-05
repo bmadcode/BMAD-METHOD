@@ -22,7 +22,7 @@ The BMad Method follows a structured approach to AI-assisted software developmen
    ```
 
    - Choose "Complete installation"
-   - Select your IDE (Cursor, Claude Code, Windsurf, Roo Code, or Github Copilot)
+   - Select your IDE (Cursor, Claude Code, Windsurf, Trae, Roo Code, or Github Copilot)
 
 2. **Verify installation**:
    - `.bmad-core/` folder created with all agents
@@ -112,12 +112,13 @@ Follow the SM → Dev cycle for systematic story development:
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
 - **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
+- **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
 - **Github Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
 
 ### Chat Management:
 
-- **Claude Code, Cursor, Windsurf**: Start new chats when switching agents
+- **Claude Code, Cursor, Windsurf, Trae**: Start new chats when switching agents
 - **Roo Code**: Switch modes within the same conversation
 
 ## Available Agents
