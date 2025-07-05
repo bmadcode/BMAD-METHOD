@@ -1347,7 +1347,7 @@ The BMad-Method is built around a modular architecture centered on the `bmad-cor
 
 #### Web UI Environment
 
-- Uses pre-built bundles from `dist/teams` for stand alone 1 upload files for all agents and their assest with an orchestrating agent
+- Uses pre-built bundles from `dist/teams` for stand alone 1 upload files for all agents and their assets with an orchestrating agent
 - Single text files containing all agent dependencies are in `dist/agents/` - these are unnecessary unless you want to create a web agent that is only a single agent and not a team
 - Created by the web-builder tool for upload to web interfaces
 - Provides complete context in one package
