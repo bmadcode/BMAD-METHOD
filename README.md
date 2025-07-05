@@ -383,6 +383,7 @@ Want to help improve the BMad Method. Fork n' Clone the repo
 git clone https://github.com/bmadcode/bmad-method.git
 cd bmad-method
 
+npm install
 npm run build # rebuild the dist folder
 npm run install:bmad # build and install all to a destination folder
 ```
