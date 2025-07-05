@@ -37,6 +37,15 @@ ide-configurations:
       # To use BMad agents in Windsurf:
       # 1. Type @agent-name (e.g., "@dev", "@pm")
       # 2. Windsurf will adopt that agent's persona
+  trae:
+    name: Trae
+    rule-dir: .trae/rules/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Trae:
+      # 1. Type @agent-name (e.g., "@dev", "@pm", "@architect")
+      # 2. Trae will adopt that agent's persona
   roo:
     name: Roo Code
     format: custom-modes
