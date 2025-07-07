@@ -9,5 +9,5 @@ agents:
   - game-developer
   - game-sm
 workflows:
-  - game-dev-greenfield
-  - game-prototype
+  - game-dev-greenfield.md
+  - game-prototype.md

@@ -1,0 +1,120 @@
+template:
+  id: expansion-pack-plan-template-v2
+  name: Expansion Pack Plan
+  version: 2.0
+  output:
+    format: markdown
+    filename: "{{pack_name}}-expansion-pack-plan.md"
+    title: "{{pack_display_name}} Expansion Pack Plan"
+
+workflow:
+  mode: interactive
+
+sections:
+  - id: overview
+    title: Overview
+    template: |
+      - **Pack Name**: {{pack_identifier}}
+      - **Display Name**: {{full_expansion_pack_name}}
+      - **Description**: {{brief_description}}
+      - **Target Domain**: {{industry_domain}}
+      - **Author**: {{author_name_organization}}
+
+  - id: problem-statement
+    title: Problem Statement
+    instruction: What specific challenges does this expansion pack solve?
+    template: "{{problem_description}}"
+
+  - id: target-users
+    title: Target Users
+    instruction: Who will benefit from this expansion pack?
+    template: "{{target_user_description}}"
+
+  - id: components
+    title: Components to Create
+    sections:
+      - id: agents
+        title: Agents
+        type: checklist
+        instruction: List all agents to be created with their roles and dependencies
+        items:
+          - id: orchestrator
+            template: |
+              `{{pack_name}}-orchestrator` - **REQUIRED**: Master orchestrator for {{domain}} workflows
+              - Key commands: {{command_list}}
+              - Manages: {{orchestration_scope}}
+          - id: agent-list
+            repeatable: true
+            template: |
+              `{{agent_name}}` - {{role_description}}
+              - Tasks used: {{task_list}}
+              - Templates used: {{template_list}}
+              - Data required: {{data_requirements}}
+      
+      - id: tasks
+        title: Tasks
+        type: checklist
+        instruction: List all tasks to be created
+        repeatable: true
+        template: "`{{task_name}}.md` - {{purpose}} (used by: {{using_agents}})"
+      
+      - id: templates
+        title: Templates
+        type: checklist
+        instruction: List all templates to be created
+        repeatable: true
+        template: "`{{template_name}}-tmpl.md` - {{document_type}} (used by: {{using_components}})"
+      
+      - id: checklists
+        title: Checklists
+        type: checklist
+        instruction: List all checklists to be created
+        repeatable: true
+        template: "`{{checklist_name}}-checklist.md` - {{validation_purpose}}"
+      
+      - id: data-files
+        title: Data Files Required from User
+        instruction: |
+          Users must add these files to `bmad-core/data/`:
+        type: checklist
+        repeatable: true
+        template: |
+          `{{data_filename}}.{{extension}}` - {{content_description}}
+          - Format: {{file_format}}
+          - Purpose: {{why_needed}}
+          - Example: {{brief_example}}
+
+  - id: workflow-overview
+    title: Workflow Overview
+    type: numbered-list
+    instruction: Describe the typical workflow steps
+    template: "{{workflow_step}}"
+
+  - id: integration-points
+    title: Integration Points
+    template: |
+      - Depends on core agents: {{core_agent_dependencies}}
+      - Extends teams: {{team_updates}}
+
+  - id: success-criteria
+    title: Success Criteria
+    type: checklist
+    items:
+      - "All components created and cross-referenced"
+      - "No orphaned task/template references"
+      - "Data requirements clearly documented"
+      - "Orchestrator provides clear workflow"
+      - "README includes setup instructions"
+
+  - id: user-approval
+    title: User Approval
+    type: checklist
+    items:
+      - "Plan reviewed by user"
+      - "Approval to proceed with implementation"
+
+  - id: next-steps
+    content: |
+      ---
+      
+      **Next Steps**: Once approved, proceed with Phase 3 implementation starting with the orchestrator agent.

@@ -67,6 +67,12 @@ sections:
 - **repeatable**: Boolean - Section can be repeated multiple times
 - **condition**: String - Condition for including section (e.g., "has ui requirements")
 
+#### Agent Permissions
+
+- **owner**: String - Agent role that initially creates/populates this section
+- **editors**: Array - List of agent roles allowed to modify this section
+- **readonly**: Boolean - Section cannot be modified after initial creation
+
 #### Content Guidance
 
 - **examples**: Array of example content (not included in output)
@@ -168,6 +174,29 @@ choices:
 - `packet` - Network packet diagrams
 - `block` - Block diagrams
 - `kanban` - Kanban boards
+
+### Agent Permissions Example
+
+```yaml
+- id: story-details
+  title: Story
+  owner: scrum-master
+  editors: [scrum-master]
+  readonly: false
+  sections:
+    - id: dev-notes
+      title: Dev Notes
+      owner: dev-agent
+      editors: [dev-agent]
+      readonly: false
+      instruction: Implementation notes and technical details
+    - id: qa-results
+      title: QA Results
+      owner: qa-agent
+      editors: [qa-agent]
+      readonly: true
+      instruction: Quality assurance test results
+```
 
 ### Repeatable Sections
 

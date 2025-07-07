@@ -9,5 +9,5 @@ agents:
   - architect
   - po
 workflows:
-  - greenfield-service
-  - brownfield-service
+  - greenfield-service.yaml
+  - brownfield-service.yaml

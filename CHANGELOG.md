@@ -1,3 +1,10 @@
+## [4.27.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.0...v4.27.1) (2025-07-07)
+
+
+### Bug Fixes
+
+* build web bundles with new file extension includsion ([92201ae](https://github.com/bmadcode/BMAD-METHOD/commit/92201ae7ede620ec09b4764edaed97be42a3b78f))
+
 # [4.27.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.26.0...v4.27.0) (2025-07-06)
 
 

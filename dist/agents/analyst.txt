@@ -48,8 +48,9 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 activation-instructions:
   - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
   - Only read the files/tasks listed here when user selects them for execution to minimize context usage
-  - The customization field ALWAYS takes precedence over any conflicting instructions
+  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - Greet the user with your name and role, and inform of the *help command.
 agent:
   name: Mary
   id: analyst
@@ -74,36 +75,32 @@ persona:
     - Maintaining a Broad Perspective - Stay aware of market trends and dynamics
     - Integrity of Information - Ensure accurate sourcing and representation
     - Numbered Options Protocol - Always use numbered lists for selections
-startup:
-  - Greet the user with your name and role, and inform of the *help command.
 commands:
   - help: Show numbered list of the following commands to allow selection
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
-  - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
+  - yolo: Toggle Yolo Mode
   - doc-out: Output full document to current destination file
   - execute-checklist {checklist}: Run task execute-checklist (default->architect-checklist)
-  - research {topic}: execute task create-deep-research-prompt for architectural decisions
+  - research-prompt {topic}: execute task create-deep-research-prompt for architectural decisions
   - brainstorm {topic}: Facilitate structured brainstorming session
-  - elicit: list the options under output set of information
+  - elicit: run the task advanced-elicitation
   - document-project: Analyze and document existing project structure comprehensively
   - exit: Say goodbye as the Business Analyst, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - facilitate-brainstorming-session
-    - create-deep-research-prompt
-    - create-doc
-    - advanced-elicitation
-    - document-project
+    - facilitate-brainstorming-session.md
+    - create-deep-research-prompt.md
+    - create-doc.md
+    - advanced-elicitation.md
+    - document-project.md
   templates:
-    - project-brief-tmpl
-    - market-research-tmpl
-    - competitor-analysis-tmpl
-    - brainstorming-output-tmpl
+    - project-brief-tmpl.yaml
+    - market-research-tmpl.yaml
+    - competitor-analysis-tmpl.yaml
+    - brainstorming-output-tmpl.yaml
   data:
-    - bmad-kb
-    - brainstorming-techniques
-  utils:
-    - template-format
+    - bmad-kb.md
+    - brainstorming-techniques.md
 ```
 ==================== END: .bmad-core/agents/analyst.md ====================
 
@@ -551,97 +548,85 @@ Present these numbered options to the user:
 ==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
-# Create Document from Template Task
+# Create Document from Template (YAML Driven)
 
-## Purpose
+## CRITICAL: Mandatory Elicitation Format
 
-Generate documents from templates by EXECUTING (not just reading) embedded instructions from the perspective of the selected agent persona.
+**When `elicit: true`, ALWAYS use this exact format:**
 
-## CRITICAL RULES
+1. Present section content
+2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
+3. Present numbered options 1-9:
+   - **Option 1:** Always "Proceed to next section"
+   - **Options 2-9:** Select 8 methods from data/elicitation-methods
+   - End with: "Select 1-9 or just type your question/feedback:"
 
-1. **Templates are PROGRAMS** - Execute every [[LLM:]] instruction exactly as written
-2. **NEVER show markup** - Hide all [[LLM:]], {{placeholders}}, @{examples}, and template syntax
-3. **STOP and EXECUTE** - When you see "apply tasks#" or "execute tasks#", STOP and run that task immediately
-4. **WAIT for user input** - At review points and after elicitation tasks
+**NEVER ask yes/no questions or use any other format.**
 
-## Execution Flow
+## Processing Flow
 
-### 0. Check Workflow Plan (if configured)
+1. **Parse YAML template** - Load template metadata and sections
+2. **Set preferences** - Show current mode (Interactive), confirm output file
+3. **Process each section:**
+   - Skip if condition unmet
+   - Check agent permissions (owner/editors) - note if section is restricted to specific agents
+   - Draft content using section instruction
+   - Present content + detailed rationale
+   - **IF elicit: true** → MANDATORY 1-9 options format
+   - Save to file if possible
+4. **Continue until complete**
 
-[[LLM: Check if plan tracking is enabled in core-config.yaml]]
+## Detailed Rationale Requirements
 
-- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
-- If plan exists and this document creation is part of the plan:
-  - Verify this is the expected next step
-  - If out of sequence and `enforceSequence: true`, warn user and halt without user override
-  - If out of sequence and `enforceSequence: false`, ask for confirmation
-- Continue with normal execution after plan check
+When presenting section content, ALWAYS include rationale that explains:
 
-### 1. Identify Template
+- Trade-offs and choices made (what was chosen over alternatives and why)
+- Key assumptions made during drafting
+- Interesting or questionable decisions that need user attention
+- Areas that might need validation
 
-- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
-- Agent-specific templates are listed in agent's dependencies
-- If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
+## Elicitation Results Flow
 
-### 2. Ask Interaction Mode
+After user selects elicitation method (2-9):
 
-> 1. **Incremental** - Section by section with reviews
-> 2. **YOLO Mode** - Complete draft then review (user can type `/yolo` anytime to switch)
+1. Execute method from data/elicitation-methods
+2. Present results with insights
+3. Offer options:
+   - **1. Apply changes and update section**
+   - **2. Return to elicitation menu**
+   - **3. Ask any questions or engage further with this elicitation**
 
-### 3. Execute Template
+## Agent Permissions
 
-- Replace {{placeholders}} with real content
-- Execute [[LLM:]] instructions as you encounter them
-- Process <<REPEAT>> loops and ^^CONDITIONS^^
-- Use @{examples} for guidance but never output them
+When processing sections with agent permission fields:
 
-### 4. Key Execution Patterns
+- **owner**: Note which agent role initially creates/populates the section
+- **editors**: List agent roles allowed to modify the section
+- **readonly**: Mark sections that cannot be modified after creation
 
-**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
+**For sections with restricted access:**
 
-- Draft the content
-- Present it to user
-- IMMEDIATELY execute the task
-- Wait for completion before continuing
+- Include a note in the generated document indicating the responsible agent
+- Example: "_(This section is owned by dev-agent and can only be modified by dev-agent)_"
 
-**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
+## YOLO Mode
 
-- Finish the section
-- STOP and execute the task
-- Wait for user input
+User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 
-### 5. Validation & Final Presentation
+## CRITICAL REMINDERS
 
-- Run any specified checklists
-- Present clean, formatted content only
-- No truncation or summarization
-- Begin directly with content (no preamble)
-- Include any handoff prompts from template
+**❌ NEVER:**
 
-### 6. Update Workflow Plan (if applicable)
+- Ask yes/no questions for elicitation
+- Use any format other than 1-9 numbered options
+- Create new elicitation methods
 
-[[LLM: After successful document creation]]
+**✅ ALWAYS:**
 
-- If plan tracking is enabled and document was part of plan:
-  - Call update-workflow-plan task to mark step complete
-  - Parameters: task: create-doc, step_id: {from plan}, status: complete
-  - Show next recommended step from plan
-
-## Common Mistakes to Avoid
-
-❌ Skipping elicitation tasks
-❌ Showing template markup to users
-❌ Continuing past STOP signals
-❌ Combining multiple review points
-
-✅ Execute ALL instructions in sequence
-✅ Present only clean, formatted content
-✅ Stop at every elicitation point
-✅ Wait for user confirmation when instructed
-
-## Remember
-
-Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
+- Use exact 1-9 format when elicit: true
+- Select options 2-9 from data/elicitation-methods only
+- Provide detailed rationale explaining decisions
+- End with "Select 1-9 or just type your question/feedback:"
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/advanced-elicitation.md ====================
@@ -1084,952 +1069,939 @@ Apply the advanced elicitation task after major sections to refine based on user
 - The goal is PRACTICAL documentation for AI agents doing real work
 ==================== END: .bmad-core/tasks/document-project.md ====================
 
-==================== START: .bmad-core/templates/project-brief-tmpl.md ====================
----
-defaultOutput: docs/brief.md
----
-
-# Project Brief: {{Project Name}}
-
-[[LLM: This template guides creation of a comprehensive Project Brief that serves as the foundational input for product development.
-
-Start by asking the user which mode they prefer:
-
-1. **Interactive Mode** - Work through each section collaboratively
-2. **YOLO Mode** - Generate complete draft for review and refinement
-
-Before beginning, understand what inputs are available (brainstorming results, market research, competitive analysis, initial ideas) and gather project context.]]
-
-## Executive Summary
-
-[[LLM: Create a concise overview that captures the essence of the project. Include:
-
-- Product concept in 1-2 sentences
-- Primary problem being solved
-- Target market identification
-- Key value proposition]]
-
-{{Write executive summary based on information gathered}}
-
-## Problem Statement
-
-[[LLM: Articulate the problem with clarity and evidence. Address:
-
-- Current state and pain points
-- Impact of the problem (quantify if possible)
-- Why existing solutions fall short
-- Urgency and importance of solving this now]]
-
-{{Detailed problem description with supporting evidence}}
-
-## Proposed Solution
-
-[[LLM: Describe the solution approach at a high level. Include:
-
-- Core concept and approach
-- Key differentiators from existing solutions
-- Why this solution will succeed where others haven't
-- High-level vision for the product]]
-
-{{Solution description focusing on the "what" and "why", not implementation details}}
-
-## Target Users
-
-[[LLM: Define and characterize the intended users with specificity. For each user segment include:
-
-- Demographic/firmographic profile
-- Current behaviors and workflows
-- Specific needs and pain points
-- Goals they're trying to achieve]]
-
-### Primary User Segment: {{Segment Name}}
-
-{{Detailed description of primary users}}
-
-### Secondary User Segment: {{Segment Name}}
-
-{{Description of secondary users if applicable}}
-
-## Goals & Success Metrics
-
-[[LLM: Establish clear objectives and how to measure success. Make goals SMART (Specific, Measurable, Achievable, Relevant, Time-bound)]]
-
-### Business Objectives
-
-- {{Objective 1 with metric}}
-- {{Objective 2 with metric}}
-- {{Objective 3 with metric}}
-
-### User Success Metrics
-
-- {{How users will measure value}}
-- {{Engagement metrics}}
-- {{Satisfaction indicators}}
-
-### Key Performance Indicators (KPIs)
-
-- {{KPI 1: Definition and target}}
-- {{KPI 2: Definition and target}}
-- {{KPI 3: Definition and target}}
-
-## MVP Scope
-
-[[LLM: Define the minimum viable product clearly. Be specific about what's in and what's out. Help user distinguish must-haves from nice-to-haves.]]
-
-### Core Features (Must Have)
-
-- **Feature 1:** {{Brief description and why it's essential}}
-- **Feature 2:** {{Brief description and why it's essential}}
-- **Feature 3:** {{Brief description and why it's essential}}
-
-### Out of Scope for MVP
-
-- {{Feature/capability explicitly not in MVP}}
-- {{Feature/capability to be considered post-MVP}}
-
-### MVP Success Criteria
-
-{{Define what constitutes a successful MVP launch}}
-
-## Post-MVP Vision
-
-[[LLM: Outline the longer-term product direction without overcommitting to specifics]]
-
-### Phase 2 Features
-
-{{Next priority features after MVP success}}
-
-### Long-term Vision
-
-{{Where this product could go in 1-2 years}}
-
-### Expansion Opportunities
-
-{{Potential new markets, use cases, or integrations}}
-
-## Technical Considerations
-
-[[LLM: Document known technical constraints and preferences. Note these are initial thoughts, not final decisions.]]
-
-### Platform Requirements
-
-- **Target Platforms:** {{Web, mobile, desktop, etc.}}
-- **Browser/OS Support:** {{Specific requirements}}
-- **Performance Requirements:** {{Load times, concurrent users, etc.}}
-
-### Technology Preferences
-
-- **Frontend:** {{If any preferences exist}}
-- **Backend:** {{If any preferences exist}}
-- **Database:** {{If any preferences exist}}
-- **Hosting/Infrastructure:** {{Cloud preferences, on-prem requirements}}
-
-### Architecture Considerations
-
-- **Repository Structure:** {{Initial thoughts on monorepo vs. polyrepo}}
-- **Service Architecture:** {{Initial thoughts on monolith vs. microservices}}
-- **Integration Requirements:** {{Third-party services, APIs}}
-- **Security/Compliance:** {{Any specific requirements}}
-
-## Constraints & Assumptions
-
-[[LLM: Clearly state limitations and assumptions to set realistic expectations]]
-
-### Constraints
-
-- **Budget:** {{If known}}
-- **Timeline:** {{Target launch date or development timeframe}}
-- **Resources:** {{Team size, skill constraints}}
-- **Technical:** {{Legacy systems, required tech stack}}
-
-### Key Assumptions
-
-- {{Assumption about users, market, or technology}}
-- {{Assumption about resources or support}}
-- {{Assumption about external dependencies}}
-
-## Risks & Open Questions
-
-[[LLM: Identify unknowns and potential challenges proactively]]
-
-### Key Risks
-
-- **Risk 1:** {{Description and potential impact}}
-- **Risk 2:** {{Description and potential impact}}
-- **Risk 3:** {{Description and potential impact}}
-
-### Open Questions
-
-- {{Question needing research or decision}}
-- {{Question about technical approach}}
-- {{Question about market or users}}
-
-### Areas Needing Further Research
-
-- {{Topic requiring deeper investigation}}
-- {{Validation needed before proceeding}}
-
-## Appendices
-
-### A. Research Summary
-
-{{If applicable, summarize key findings from:
-
-- Market research
-- Competitive analysis
-- User interviews
-- Technical feasibility studies}}
-
-### B. Stakeholder Input
-
-{{Key feedback or requirements from stakeholders}}
-
-### C. References
-
-{{Links to relevant documents, research, or examples}}
-
-## Next Steps
-
-### Immediate Actions
-
-1. {{First concrete next step}}
-2. {{Second concrete next step}}
-3. {{Third concrete next step}}
-
-### PM Handoff
-
-This Project Brief provides the full context for {{Project Name}}. Please start in 'PRD Generation Mode', review the brief thoroughly to work with the user to create the PRD section by section as the template indicates, asking for any necessary clarification or suggesting improvements.
-
----
-
-[[LLM: After completing each major section (not subsections), offer advanced elicitation with these custom options for project briefs:
-
-**Project Brief Elicitation Actions** 0. Expand section with more specific details
-
-1. Validate against similar successful products
-2. Stress test assumptions with edge cases
-3. Explore alternative solution approaches
-4. Analyze resource/constraint trade-offs
-5. Generate risk mitigation strategies
-6. Challenge scope from MVP minimalist view
-7. Brainstorm creative feature possibilities
-8. If only we had [resource/capability/time]...
-9. Proceed to next section
-
-These replace the standard elicitation options when working on project brief documents.]]
-==================== END: .bmad-core/templates/project-brief-tmpl.md ====================
-
-==================== START: .bmad-core/templates/market-research-tmpl.md ====================
-# Market Research Report: {{Project/Product Name}}
-
-[[LLM: The default path and filename unless specified is docs/market-research.md]]
-
-[[LLM: This template guides the creation of a comprehensive market research report. Begin by understanding what market insights the user needs and why. Work through each section systematically, using the appropriate analytical frameworks based on the research objectives.]]
-
-## Executive Summary
-
-{{Provide a high-level overview of key findings, market opportunity assessment, and strategic recommendations. Write this section LAST after completing all other sections.}}
-
-## Research Objectives & Methodology
-
-### Research Objectives
-
-{{List the primary objectives of this market research:
-
-- What decisions will this research inform?
-- What specific questions need to be answered?
-- What are the success criteria for this research?}}
-
-### Research Methodology
-
-{{Describe the research approach:
-
-- Data sources used (primary/secondary)
-- Analysis frameworks applied
-- Data collection timeframe
-- Limitations and assumptions}}
-
-## Market Overview
-
-### Market Definition
-
-{{Define the market being analyzed:
-
-- Product/service category
-- Geographic scope
-- Customer segments included
-- Value chain position}}
-
-### Market Size & Growth
-
-[[LLM: Guide through TAM, SAM, SOM calculations with clear assumptions. Use one or more approaches:
-
-- Top-down: Start with industry data, narrow down
-- Bottom-up: Build from customer/unit economics
-- Value theory: Based on value provided vs. alternatives]]
-
-#### Total Addressable Market (TAM)
-
-{{Calculate and explain the total market opportunity}}
-
-#### Serviceable Addressable Market (SAM)
-
-{{Define the portion of TAM you can realistically reach}}
-
-#### Serviceable Obtainable Market (SOM)
-
-{{Estimate the portion you can realistically capture}}
-
-### Market Trends & Drivers
-
-[[LLM: Analyze key trends shaping the market using appropriate frameworks like PESTEL]]
-
-#### Key Market Trends
-
-{{List and explain 3-5 major trends:
-
-- Trend 1: Description and impact
-- Trend 2: Description and impact
-- etc.}}
-
-#### Growth Drivers
-
-{{Identify primary factors driving market growth}}
-
-#### Market Inhibitors
-
-{{Identify factors constraining market growth}}
-
-## Customer Analysis
-
-### Target Segment Profiles
-
-[[LLM: For each segment, create detailed profiles including demographics/firmographics, psychographics, behaviors, needs, and willingness to pay]]
-
-#### Segment 1: {{Segment Name}}
-
-- **Description:** {{Brief overview}}
-- **Size:** {{Number of customers/market value}}
-- **Characteristics:** {{Key demographics/firmographics}}
-- **Needs & Pain Points:** {{Primary problems they face}}
-- **Buying Process:** {{How they make purchasing decisions}}
-- **Willingness to Pay:** {{Price sensitivity and value perception}}
-
-<<REPEAT for each additional segment>>
-
-### Jobs-to-be-Done Analysis
-
-[[LLM: Uncover what customers are really trying to accomplish]]
-
-#### Functional Jobs
-
-{{List practical tasks and objectives customers need to complete}}
-
-#### Emotional Jobs
-
-{{Describe feelings and perceptions customers seek}}
-
-#### Social Jobs
-
-{{Explain how customers want to be perceived by others}}
-
-### Customer Journey Mapping
-
-[[LLM: Map the end-to-end customer experience for primary segments]]
-
-{{For primary customer segment:
-
-1. **Awareness:** How they discover solutions
-2. **Consideration:** Evaluation criteria and process
-3. **Purchase:** Decision triggers and barriers
-4. **Onboarding:** Initial experience expectations
-5. **Usage:** Ongoing interaction patterns
-6. **Advocacy:** Referral and expansion behaviors}}
-
-## Competitive Landscape
-
-### Market Structure
-
-{{Describe the overall competitive environment:
-
-- Number of competitors
-- Market concentration
-- Competitive intensity}}
-
-### Major Players Analysis
-
-{{For top 3-5 competitors:
-
-- Company name and brief description
-- Market share estimate
-- Key strengths and weaknesses
-- Target customer focus
-- Pricing strategy}}
-
-### Competitive Positioning
-
-{{Analyze how competitors are positioned:
-
-- Value propositions
-- Differentiation strategies
-- Market gaps and opportunities}}
-
-## Industry Analysis
-
-### Porter's Five Forces Assessment
-
-[[LLM: Analyze each force with specific evidence and implications]]
-
-#### Supplier Power: {{Low/Medium/High}}
-
-{{Analysis and implications}}
-
-#### Buyer Power: {{Low/Medium/High}}
-
-{{Analysis and implications}}
-
-#### Competitive Rivalry: {{Low/Medium/High}}
-
-{{Analysis and implications}}
-
-#### Threat of New Entry: {{Low/Medium/High}}
-
-{{Analysis and implications}}
-
-#### Threat of Substitutes: {{Low/Medium/High}}
-
-{{Analysis and implications}}
-
-### Technology Adoption Lifecycle Stage
-
-{{Identify where the market is in the adoption curve:
-
-- Current stage and evidence
-- Implications for strategy
-- Expected progression timeline}}
-
-## Opportunity Assessment
-
-### Market Opportunities
-
-[[LLM: Identify specific opportunities based on the analysis]]
-
-#### Opportunity 1: {{Name}}
-
-- **Description:** {{What is the opportunity?}}
-- **Size/Potential:** {{Quantify if possible}}
-- **Requirements:** {{What's needed to capture it?}}
-- **Risks:** {{Key challenges or barriers}}
-
-<<REPEAT for additional opportunities>>
-
-### Strategic Recommendations
-
-#### Go-to-Market Strategy
-
-{{Recommend approach for market entry/expansion:
-
-- Target segment prioritization
-- Positioning strategy
-- Channel strategy
-- Partnership opportunities}}
-
-#### Pricing Strategy
-
-{{Based on willingness to pay analysis and competitive landscape:
-
-- Recommended pricing model
-- Price points/ranges
-- Value metric
-- Competitive positioning}}
-
-#### Risk Mitigation
-
-{{Key risks and mitigation strategies:
-
-- Market risks
-- Competitive risks
-- Execution risks
-- Regulatory/compliance risks}}
-
-## Appendices
-
-### A. Data Sources
-
-{{List all sources used in the research}}
-
-### B. Detailed Calculations
-
-{{Include any complex calculations or models}}
-
-### C. Additional Analysis
-
-{{Any supplementary analysis not included in main body}}
-
----
-
-[[LLM: After completing the document, offer advanced elicitation with these custom options for market research:
-
-**Market Research Elicitation Actions** 0. Expand market sizing calculations with sensitivity analysis
-
-1. Deep dive into a specific customer segment
-2. Analyze an emerging market trend in detail
-3. Compare this market to an analogous market
-4. Stress test market assumptions
-5. Explore adjacent market opportunities
-6. Challenge market definition and boundaries
-7. Generate strategic scenarios (best/base/worst case)
-8. If only we had considered [X market factor]...
-9. Proceed to next section
-
-These replace the standard elicitation options when working on market research documents.]]
-==================== END: .bmad-core/templates/market-research-tmpl.md ====================
-
-==================== START: .bmad-core/templates/competitor-analysis-tmpl.md ====================
-# Competitive Analysis Report: {{Project/Product Name}}
-
-[[LLM: The default path and filename unless specified is docs/competitor-analysis.md]]
-
-[[LLM: This template guides comprehensive competitor analysis. Start by understanding the user's competitive intelligence needs and strategic objectives. Help them identify and prioritize competitors before diving into detailed analysis.]]
-
-## Executive Summary
-
-{{Provide high-level competitive insights, main threats and opportunities, and recommended strategic actions. Write this section LAST after completing all analysis.}}
-
-## Analysis Scope & Methodology
-
-### Analysis Purpose
-
-{{Define the primary purpose:
-
-- New market entry assessment
-- Product positioning strategy
-- Feature gap analysis
-- Pricing strategy development
-- Partnership/acquisition targets
-- Competitive threat assessment}}
-
-### Competitor Categories Analyzed
-
-{{List categories included:
-
-- Direct Competitors: Same product/service, same target market
-- Indirect Competitors: Different product, same need/problem
-- Potential Competitors: Could enter market easily
-- Substitute Products: Alternative solutions
-- Aspirational Competitors: Best-in-class examples}}
-
-### Research Methodology
-
-{{Describe approach:
-
-- Information sources used
-- Analysis timeframe
-- Confidence levels
-- Limitations}}
-
-## Competitive Landscape Overview
-
-### Market Structure
-
-{{Describe the competitive environment:
-
-- Number of active competitors
-- Market concentration (fragmented/consolidated)
-- Competitive dynamics
-- Recent market entries/exits}}
-
-### Competitor Prioritization Matrix
-
-[[LLM: Help categorize competitors by market share and strategic threat level]]
-
-{{Create a 2x2 matrix:
-
-- Priority 1 (Core Competitors): High Market Share + High Threat
-- Priority 2 (Emerging Threats): Low Market Share + High Threat
-- Priority 3 (Established Players): High Market Share + Low Threat
-- Priority 4 (Monitor Only): Low Market Share + Low Threat}}
-
-## Individual Competitor Profiles
-
-[[LLM: Create detailed profiles for each Priority 1 and Priority 2 competitor. For Priority 3 and 4, create condensed profiles.]]
-
-### {{Competitor Name}} - Priority {{1/2/3/4}}
-
-#### Company Overview
-
-- **Founded:** {{Year, founders}}
-- **Headquarters:** {{Location}}
-- **Company Size:** {{Employees, revenue if known}}
-- **Funding:** {{Total raised, key investors}}
-- **Leadership:** {{Key executives}}
-
-#### Business Model & Strategy
-
-- **Revenue Model:** {{How they make money}}
-- **Target Market:** {{Primary customer segments}}
-- **Value Proposition:** {{Core value promise}}
-- **Go-to-Market Strategy:** {{Sales and marketing approach}}
-- **Strategic Focus:** {{Current priorities}}
-
-#### Product/Service Analysis
-
-- **Core Offerings:** {{Main products/services}}
-- **Key Features:** {{Standout capabilities}}
-- **User Experience:** {{UX strengths/weaknesses}}
-- **Technology Stack:** {{If relevant/known}}
-- **Pricing:** {{Model and price points}}
-
-#### Strengths & Weaknesses
-
-**Strengths:**
-
-- {{Strength 1}}
-- {{Strength 2}}
-- {{Strength 3}}
-
-**Weaknesses:**
-
-- {{Weakness 1}}
-- {{Weakness 2}}
-- {{Weakness 3}}
-
-#### Market Position & Performance
-
-- **Market Share:** {{Estimate if available}}
-- **Customer Base:** {{Size, notable clients}}
-- **Growth Trajectory:** {{Trending up/down/stable}}
-- **Recent Developments:** {{Key news, releases}}
-
-<<REPEAT for each priority competitor>>
-
-## Comparative Analysis
-
-### Feature Comparison Matrix
-
-[[LLM: Create a detailed comparison table of key features across competitors]]
-
-| Feature Category            | {{Your Company}}    | {{Competitor 1}}    | {{Competitor 2}}    | {{Competitor 3}}    |
-| --------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| **Core Functionality**      |
-| Feature A                   | {{✓/✗/Partial}}     | {{✓/✗/Partial}}     | {{✓/✗/Partial}}     | {{✓/✗/Partial}}     |
-| Feature B                   | {{✓/✗/Partial}}     | {{✓/✗/Partial}}     | {{✓/✗/Partial}}     | {{✓/✗/Partial}}     |
-| **User Experience**         |
-| Mobile App                  | {{Rating/Status}}   | {{Rating/Status}}   | {{Rating/Status}}   | {{Rating/Status}}   |
-| Onboarding Time             | {{Time}}            | {{Time}}            | {{Time}}            | {{Time}}            |
-| **Integration & Ecosystem** |
-| API Availability            | {{Yes/No/Limited}}  | {{Yes/No/Limited}}  | {{Yes/No/Limited}}  | {{Yes/No/Limited}}  |
-| Third-party Integrations    | {{Number/Key ones}} | {{Number/Key ones}} | {{Number/Key ones}} | {{Number/Key ones}} |
-| **Pricing & Plans**         |
-| Starting Price              | {{$X}}              | {{$X}}              | {{$X}}              | {{$X}}              |
-| Free Tier                   | {{Yes/No}}          | {{Yes/No}}          | {{Yes/No}}          | {{Yes/No}}          |
-
-### SWOT Comparison
-
-[[LLM: Create SWOT analysis for your solution vs. top competitors]]
-
-#### Your Solution
-
-- **Strengths:** {{List key strengths}}
-- **Weaknesses:** {{List key weaknesses}}
-- **Opportunities:** {{List opportunities}}
-- **Threats:** {{List threats}}
-
-#### vs. {{Main Competitor}}
-
-- **Competitive Advantages:** {{Where you're stronger}}
-- **Competitive Disadvantages:** {{Where they're stronger}}
-- **Differentiation Opportunities:** {{How to stand out}}
-
-### Positioning Map
-
-[[LLM: Describe competitor positions on key dimensions]]
-
-{{Create a positioning description using 2 key dimensions relevant to the market, such as:
-
-- Price vs. Features
-- Ease of Use vs. Power
-- Specialization vs. Breadth
-- Self-Serve vs. High-Touch}}
-
-## Strategic Analysis
-
-### Competitive Advantages Assessment
-
-#### Sustainable Advantages
-
-{{Identify moats and defensible positions:
-
-- Network effects
-- Switching costs
-- Brand strength
-- Technology barriers
-- Regulatory advantages}}
-
-#### Vulnerable Points
-
-{{Where competitors could be challenged:
-
-- Weak customer segments
-- Missing features
-- Poor user experience
-- High prices
-- Limited geographic presence}}
-
-### Blue Ocean Opportunities
-
-[[LLM: Identify uncontested market spaces]]
-
-{{List opportunities to create new market space:
-
-- Underserved segments
-- Unaddressed use cases
-- New business models
-- Geographic expansion
-- Different value propositions}}
-
-## Strategic Recommendations
-
-### Differentiation Strategy
-
-{{How to position against competitors:
-
-- Unique value propositions to emphasize
-- Features to prioritize
-- Segments to target
-- Messaging and positioning}}
-
-### Competitive Response Planning
-
-#### Offensive Strategies
-
-{{How to gain market share:
-
-- Target competitor weaknesses
-- Win competitive deals
-- Capture their customers}}
-
-#### Defensive Strategies
-
-{{How to protect your position:
-
-- Strengthen vulnerable areas
-- Build switching costs
-- Deepen customer relationships}}
-
-### Partnership & Ecosystem Strategy
-
-{{Potential collaboration opportunities:
-
-- Complementary players
-- Channel partners
-- Technology integrations
-- Strategic alliances}}
-
-## Monitoring & Intelligence Plan
-
-### Key Competitors to Track
-
-{{Priority list with rationale}}
-
-### Monitoring Metrics
-
-{{What to track:
-
-- Product updates
-- Pricing changes
-- Customer wins/losses
-- Funding/M&A activity
-- Market messaging}}
-
-### Intelligence Sources
-
-{{Where to gather ongoing intelligence:
-
-- Company websites/blogs
-- Customer reviews
-- Industry reports
-- Social media
-- Patent filings}}
-
-### Update Cadence
-
-{{Recommended review schedule:
-
-- Weekly: {{What to check}}
-- Monthly: {{What to review}}
-- Quarterly: {{Deep analysis}}}}
-
----
-
-[[LLM: After completing the document, offer advanced elicitation with these custom options for competitive analysis:
-
-**Competitive Analysis Elicitation Actions** 0. Deep dive on a specific competitor's strategy
-
-1. Analyze competitive dynamics in a specific segment
-2. War game competitive responses to your moves
-3. Explore partnership vs. competition scenarios
-4. Stress test differentiation claims
-5. Analyze disruption potential (yours or theirs)
-6. Compare to competition in adjacent markets
-7. Generate win/loss analysis insights
-8. If only we had known about [competitor X's plan]...
-9. Proceed to next section
-
-These replace the standard elicitation options when working on competitive analysis documents.]]
-==================== END: .bmad-core/templates/competitor-analysis-tmpl.md ====================
-
-==================== START: .bmad-core/templates/brainstorming-output-tmpl.md ====================
----
-defaultOutput: docs/brainstorming-session-results.md
----
-
-# Brainstorming Session Results
-
-**Session Date:** [DATE]
-**Facilitator:** [Agent Role] [Agent Name]
-**Participant:** [USER NAME]
-
-## Executive Summary
-
-**Topic:** [SESSION TOPIC]
-
-**Session Goals:** [STATED GOALS]
-
-**Techniques Used:** [LIST OF TECHNIQUES AND DURATION]
-
-**Total Ideas Generated:** [NUMBER]
-
-**Key Themes Identified:**
-
-- [THEME 1]
-- [THEME 2]
-- [THEME 3]
-
----
-
-## Technique Sessions
-
-### [TECHNIQUE NAME 1] - [DURATION]
-
-**Description:** [BRIEF DESCRIPTION OF TECHNIQUE]
-
-**Ideas Generated:**
-
-1. [USER IDEA 1]
-2. [USER IDEA 2]
-3. [USER IDEA 3]
-[etc.]
-
-**Insights Discovered:**
-
-- [INSIGHT 1]
-- [INSIGHT 2]
-
-**Notable Connections:**
-
-- [CONNECTION OR PATTERN IDENTIFIED]
-
----
-
-### [TECHNIQUE NAME 2] - [DURATION]
-
-[Repeat format for each technique used]
-
----
-
-## Idea Categorization
-
-### Immediate Opportunities
-
-*Ideas ready to implement now*
-
-1. **[IDEA NAME]**
-   - Description: [BRIEF DESCRIPTION]
-   - Why immediate: [RATIONALE]
-   - Resources needed: [BASIC REQUIREMENTS]
-
-### Future Innovations
-
-*Ideas requiring development/research*
-
-1. **[IDEA NAME]**
-   - Description: [BRIEF DESCRIPTION]
-   - Development needed: [WHAT'S REQUIRED]
-   - Timeline estimate: [ROUGH TIMEFRAME]
-
-### Moonshots
-
-*Ambitious, transformative concepts*
-
-1. **[IDEA NAME]**
-   - Description: [BRIEF DESCRIPTION]
-   - Transformative potential: [WHY IT'S A MOONSHOT]
-   - Challenges to overcome: [MAJOR OBSTACLES]
-
-### Insights & Learnings
-
-*Key realizations from the session*
-
-- [INSIGHT 1]: [DESCRIPTION AND IMPLICATIONS]
-- [INSIGHT 2]: [DESCRIPTION AND IMPLICATIONS]
-
----
-
-## Action Planning
-
-### Top 3 Priority Ideas
-
-**#1 Priority: [IDEA NAME]**
-
-- Rationale: [WHY THIS IS TOP PRIORITY]
-- Next steps: [SPECIFIC ACTIONS TO TAKE]
-- Resources needed: [WHAT'S REQUIRED]
-- Timeline: [WHEN TO START/COMPLETE]
-
-**#2 Priority: [IDEA NAME]**
-
-- [Same format]
-
-**#3 Priority: [IDEA NAME]**
-
-- [Same format]
-
----
-
-## Reflection & Follow-up
-
-### What Worked Well
-
-- [SUCCESSFUL ASPECT 1]
-- [SUCCESSFUL ASPECT 2]
-
-### Areas for Further Exploration
-
-- [AREA 1]: [WHY IT NEEDS MORE EXPLORATION]
-- [AREA 2]: [WHY IT NEEDS MORE EXPLORATION]
-
-### Recommended Follow-up Techniques
-
-- [TECHNIQUE 1]: [WHY IT WOULD BE HELPFUL]
-- [TECHNIQUE 2]: [WHY IT WOULD BE HELPFUL]
-
-### Questions That Emerged
-
-- [QUESTION 1]
-- [QUESTION 2]
-- [QUESTION 3]
-
-### Next Session Planning
-
-- **Suggested topics:** [FOLLOW-UP TOPICS]
-- **Recommended timeframe:** [WHEN TO RECONVENE]
-- **Preparation needed:** [WHAT TO RESEARCH/PREPARE]
-
----
-
-*Session facilitated using the BMAD-METHOD brainstorming framework*
-==================== END: .bmad-core/templates/brainstorming-output-tmpl.md ====================
+==================== START: .bmad-core/templates/project-brief-tmpl.yaml ====================
+template:
+  id: project-brief-template-v2
+  name: Project Brief
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/brief.md
+    title: "Project Brief: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  custom_elicitation:
+    title: "Project Brief Elicitation Actions"
+    options:
+      - "Expand section with more specific details"
+      - "Validate against similar successful products"
+      - "Stress test assumptions with edge cases"
+      - "Explore alternative solution approaches"
+      - "Analyze resource/constraint trade-offs"
+      - "Generate risk mitigation strategies"
+      - "Challenge scope from MVP minimalist view"
+      - "Brainstorm creative feature possibilities"
+      - "If only we had [resource/capability/time]..."
+      - "Proceed to next section"
+
+sections:
+  - id: introduction
+    instruction: |
+      This template guides creation of a comprehensive Project Brief that serves as the foundational input for product development.
+      
+      Start by asking the user which mode they prefer:
+      
+      1. **Interactive Mode** - Work through each section collaboratively
+      2. **YOLO Mode** - Generate complete draft for review and refinement
+      
+      Before beginning, understand what inputs are available (brainstorming results, market research, competitive analysis, initial ideas) and gather project context.
+
+  - id: executive-summary
+    title: Executive Summary
+    instruction: |
+      Create a concise overview that captures the essence of the project. Include:
+      - Product concept in 1-2 sentences
+      - Primary problem being solved
+      - Target market identification
+      - Key value proposition
+    template: "{{executive_summary_content}}"
+
+  - id: problem-statement
+    title: Problem Statement
+    instruction: |
+      Articulate the problem with clarity and evidence. Address:
+      - Current state and pain points
+      - Impact of the problem (quantify if possible)
+      - Why existing solutions fall short
+      - Urgency and importance of solving this now
+    template: "{{detailed_problem_description}}"
+
+  - id: proposed-solution
+    title: Proposed Solution
+    instruction: |
+      Describe the solution approach at a high level. Include:
+      - Core concept and approach
+      - Key differentiators from existing solutions
+      - Why this solution will succeed where others haven't
+      - High-level vision for the product
+    template: "{{solution_description}}"
+
+  - id: target-users
+    title: Target Users
+    instruction: |
+      Define and characterize the intended users with specificity. For each user segment include:
+      - Demographic/firmographic profile
+      - Current behaviors and workflows
+      - Specific needs and pain points
+      - Goals they're trying to achieve
+    sections:
+      - id: primary-segment
+        title: "Primary User Segment: {{segment_name}}"
+        template: "{{primary_user_description}}"
+      - id: secondary-segment
+        title: "Secondary User Segment: {{segment_name}}"
+        condition: Has secondary user segment
+        template: "{{secondary_user_description}}"
+
+  - id: goals-metrics
+    title: Goals & Success Metrics
+    instruction: Establish clear objectives and how to measure success. Make goals SMART (Specific, Measurable, Achievable, Relevant, Time-bound)
+    sections:
+      - id: business-objectives
+        title: Business Objectives
+        type: bullet-list
+        template: "- {{objective_with_metric}}"
+      - id: user-success-metrics
+        title: User Success Metrics
+        type: bullet-list
+        template: "- {{user_metric}}"
+      - id: kpis
+        title: Key Performance Indicators (KPIs)
+        type: bullet-list
+        template: "- {{kpi}}: {{definition_and_target}}"
+
+  - id: mvp-scope
+    title: MVP Scope
+    instruction: Define the minimum viable product clearly. Be specific about what's in and what's out. Help user distinguish must-haves from nice-to-haves.
+    sections:
+      - id: core-features
+        title: Core Features (Must Have)
+        type: bullet-list
+        template: "- **{{feature}}:** {{description_and_rationale}}"
+      - id: out-of-scope
+        title: Out of Scope for MVP
+        type: bullet-list
+        template: "- {{feature_or_capability}}"
+      - id: mvp-success-criteria
+        title: MVP Success Criteria
+        template: "{{mvp_success_definition}}"
+
+  - id: post-mvp-vision
+    title: Post-MVP Vision
+    instruction: Outline the longer-term product direction without overcommitting to specifics
+    sections:
+      - id: phase-2-features
+        title: Phase 2 Features
+        template: "{{next_priority_features}}"
+      - id: long-term-vision
+        title: Long-term Vision
+        template: "{{one_two_year_vision}}"
+      - id: expansion-opportunities
+        title: Expansion Opportunities
+        template: "{{potential_expansions}}"
+
+  - id: technical-considerations
+    title: Technical Considerations
+    instruction: Document known technical constraints and preferences. Note these are initial thoughts, not final decisions.
+    sections:
+      - id: platform-requirements
+        title: Platform Requirements
+        template: |
+          - **Target Platforms:** {{platforms}}
+          - **Browser/OS Support:** {{specific_requirements}}
+          - **Performance Requirements:** {{performance_specs}}
+      - id: technology-preferences
+        title: Technology Preferences
+        template: |
+          - **Frontend:** {{frontend_preferences}}
+          - **Backend:** {{backend_preferences}}
+          - **Database:** {{database_preferences}}
+          - **Hosting/Infrastructure:** {{infrastructure_preferences}}
+      - id: architecture-considerations
+        title: Architecture Considerations
+        template: |
+          - **Repository Structure:** {{repo_thoughts}}
+          - **Service Architecture:** {{service_thoughts}}
+          - **Integration Requirements:** {{integration_needs}}
+          - **Security/Compliance:** {{security_requirements}}
+
+  - id: constraints-assumptions
+    title: Constraints & Assumptions
+    instruction: Clearly state limitations and assumptions to set realistic expectations
+    sections:
+      - id: constraints
+        title: Constraints
+        template: |
+          - **Budget:** {{budget_info}}
+          - **Timeline:** {{timeline_info}}
+          - **Resources:** {{resource_info}}
+          - **Technical:** {{technical_constraints}}
+      - id: key-assumptions
+        title: Key Assumptions
+        type: bullet-list
+        template: "- {{assumption}}"
+
+  - id: risks-questions
+    title: Risks & Open Questions
+    instruction: Identify unknowns and potential challenges proactively
+    sections:
+      - id: key-risks
+        title: Key Risks
+        type: bullet-list
+        template: "- **{{risk}}:** {{description_and_impact}}"
+      - id: open-questions
+        title: Open Questions
+        type: bullet-list
+        template: "- {{question}}"
+      - id: research-areas
+        title: Areas Needing Further Research
+        type: bullet-list
+        template: "- {{research_topic}}"
+
+  - id: appendices
+    title: Appendices
+    sections:
+      - id: research-summary
+        title: A. Research Summary
+        condition: Has research findings
+        instruction: |
+          If applicable, summarize key findings from:
+          - Market research
+          - Competitive analysis
+          - User interviews
+          - Technical feasibility studies
+      - id: stakeholder-input
+        title: B. Stakeholder Input
+        condition: Has stakeholder feedback
+        template: "{{stakeholder_feedback}}"
+      - id: references
+        title: C. References
+        template: "{{relevant_links_and_docs}}"
+
+  - id: next-steps
+    title: Next Steps
+    sections:
+      - id: immediate-actions
+        title: Immediate Actions
+        type: numbered-list
+        template: "{{action_item}}"
+      - id: pm-handoff
+        title: PM Handoff
+        content: |
+          This Project Brief provides the full context for {{project_name}}. Please start in 'PRD Generation Mode', review the brief thoroughly to work with the user to create the PRD section by section as the template indicates, asking for any necessary clarification or suggesting improvements.
+==================== END: .bmad-core/templates/project-brief-tmpl.yaml ====================
+
+==================== START: .bmad-core/templates/market-research-tmpl.yaml ====================
+template:
+  id: market-research-template-v2
+  name: Market Research Report
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/market-research.md
+    title: "Market Research Report: {{project_product_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  custom_elicitation:
+    title: "Market Research Elicitation Actions"
+    options:
+      - "Expand market sizing calculations with sensitivity analysis"
+      - "Deep dive into a specific customer segment"
+      - "Analyze an emerging market trend in detail"
+      - "Compare this market to an analogous market"
+      - "Stress test market assumptions"
+      - "Explore adjacent market opportunities"
+      - "Challenge market definition and boundaries"
+      - "Generate strategic scenarios (best/base/worst case)"
+      - "If only we had considered [X market factor]..."
+      - "Proceed to next section"
+
+sections:
+  - id: executive-summary
+    title: Executive Summary
+    instruction: Provide a high-level overview of key findings, market opportunity assessment, and strategic recommendations. Write this section LAST after completing all other sections.
+
+  - id: research-objectives
+    title: Research Objectives & Methodology
+    instruction: This template guides the creation of a comprehensive market research report. Begin by understanding what market insights the user needs and why. Work through each section systematically, using the appropriate analytical frameworks based on the research objectives.
+    sections:
+      - id: objectives
+        title: Research Objectives
+        instruction: |
+          List the primary objectives of this market research:
+          - What decisions will this research inform?
+          - What specific questions need to be answered?
+          - What are the success criteria for this research?
+      - id: methodology
+        title: Research Methodology
+        instruction: |
+          Describe the research approach:
+          - Data sources used (primary/secondary)
+          - Analysis frameworks applied
+          - Data collection timeframe
+          - Limitations and assumptions
+
+  - id: market-overview
+    title: Market Overview
+    sections:
+      - id: market-definition
+        title: Market Definition
+        instruction: |
+          Define the market being analyzed:
+          - Product/service category
+          - Geographic scope
+          - Customer segments included
+          - Value chain position
+      - id: market-size-growth
+        title: Market Size & Growth
+        instruction: |
+          Guide through TAM, SAM, SOM calculations with clear assumptions. Use one or more approaches:
+          - Top-down: Start with industry data, narrow down
+          - Bottom-up: Build from customer/unit economics
+          - Value theory: Based on value provided vs. alternatives
+        sections:
+          - id: tam
+            title: Total Addressable Market (TAM)
+            instruction: Calculate and explain the total market opportunity
+          - id: sam
+            title: Serviceable Addressable Market (SAM)
+            instruction: Define the portion of TAM you can realistically reach
+          - id: som
+            title: Serviceable Obtainable Market (SOM)
+            instruction: Estimate the portion you can realistically capture
+      - id: market-trends
+        title: Market Trends & Drivers
+        instruction: Analyze key trends shaping the market using appropriate frameworks like PESTEL
+        sections:
+          - id: key-trends
+            title: Key Market Trends
+            instruction: |
+              List and explain 3-5 major trends:
+              - Trend 1: Description and impact
+              - Trend 2: Description and impact
+              - etc.
+          - id: growth-drivers
+            title: Growth Drivers
+            instruction: Identify primary factors driving market growth
+          - id: market-inhibitors
+            title: Market Inhibitors
+            instruction: Identify factors constraining market growth
+
+  - id: customer-analysis
+    title: Customer Analysis
+    sections:
+      - id: segment-profiles
+        title: Target Segment Profiles
+        instruction: For each segment, create detailed profiles including demographics/firmographics, psychographics, behaviors, needs, and willingness to pay
+        repeatable: true
+        sections:
+          - id: segment
+            title: "Segment {{segment_number}}: {{segment_name}}"
+            template: |
+              - **Description:** {{brief_overview}}
+              - **Size:** {{number_of_customers_market_value}}
+              - **Characteristics:** {{key_demographics_firmographics}}
+              - **Needs & Pain Points:** {{primary_problems}}
+              - **Buying Process:** {{purchasing_decisions}}
+              - **Willingness to Pay:** {{price_sensitivity}}
+      - id: jobs-to-be-done
+        title: Jobs-to-be-Done Analysis
+        instruction: Uncover what customers are really trying to accomplish
+        sections:
+          - id: functional-jobs
+            title: Functional Jobs
+            instruction: List practical tasks and objectives customers need to complete
+          - id: emotional-jobs
+            title: Emotional Jobs
+            instruction: Describe feelings and perceptions customers seek
+          - id: social-jobs
+            title: Social Jobs
+            instruction: Explain how customers want to be perceived by others
+      - id: customer-journey
+        title: Customer Journey Mapping
+        instruction: Map the end-to-end customer experience for primary segments
+        template: |
+          For primary customer segment:
+          
+          1. **Awareness:** {{discovery_process}}
+          2. **Consideration:** {{evaluation_criteria}}
+          3. **Purchase:** {{decision_triggers}}
+          4. **Onboarding:** {{initial_expectations}}
+          5. **Usage:** {{interaction_patterns}}
+          6. **Advocacy:** {{referral_behaviors}}
+
+  - id: competitive-landscape
+    title: Competitive Landscape
+    sections:
+      - id: market-structure
+        title: Market Structure
+        instruction: |
+          Describe the overall competitive environment:
+          - Number of competitors
+          - Market concentration
+          - Competitive intensity
+      - id: major-players
+        title: Major Players Analysis
+        instruction: |
+          For top 3-5 competitors:
+          - Company name and brief description
+          - Market share estimate
+          - Key strengths and weaknesses
+          - Target customer focus
+          - Pricing strategy
+      - id: competitive-positioning
+        title: Competitive Positioning
+        instruction: |
+          Analyze how competitors are positioned:
+          - Value propositions
+          - Differentiation strategies
+          - Market gaps and opportunities
+
+  - id: industry-analysis
+    title: Industry Analysis
+    sections:
+      - id: porters-five-forces
+        title: Porter's Five Forces Assessment
+        instruction: Analyze each force with specific evidence and implications
+        sections:
+          - id: supplier-power
+            title: "Supplier Power: {{power_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: buyer-power
+            title: "Buyer Power: {{power_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: competitive-rivalry
+            title: "Competitive Rivalry: {{intensity_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: threat-new-entry
+            title: "Threat of New Entry: {{threat_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: threat-substitutes
+            title: "Threat of Substitutes: {{threat_level}}"
+            template: "{{analysis_and_implications}}"
+      - id: adoption-lifecycle
+        title: Technology Adoption Lifecycle Stage
+        instruction: |
+          Identify where the market is in the adoption curve:
+          - Current stage and evidence
+          - Implications for strategy
+          - Expected progression timeline
+
+  - id: opportunity-assessment
+    title: Opportunity Assessment
+    sections:
+      - id: market-opportunities
+        title: Market Opportunities
+        instruction: Identify specific opportunities based on the analysis
+        repeatable: true
+        sections:
+          - id: opportunity
+            title: "Opportunity {{opportunity_number}}: {{name}}"
+            template: |
+              - **Description:** {{what_is_the_opportunity}}
+              - **Size/Potential:** {{quantified_potential}}
+              - **Requirements:** {{needed_to_capture}}
+              - **Risks:** {{key_challenges}}
+      - id: strategic-recommendations
+        title: Strategic Recommendations
+        sections:
+          - id: go-to-market
+            title: Go-to-Market Strategy
+            instruction: |
+              Recommend approach for market entry/expansion:
+              - Target segment prioritization
+              - Positioning strategy
+              - Channel strategy
+              - Partnership opportunities
+          - id: pricing-strategy
+            title: Pricing Strategy
+            instruction: |
+              Based on willingness to pay analysis and competitive landscape:
+              - Recommended pricing model
+              - Price points/ranges
+              - Value metric
+              - Competitive positioning
+          - id: risk-mitigation
+            title: Risk Mitigation
+            instruction: |
+              Key risks and mitigation strategies:
+              - Market risks
+              - Competitive risks
+              - Execution risks
+              - Regulatory/compliance risks
+
+  - id: appendices
+    title: Appendices
+    sections:
+      - id: data-sources
+        title: A. Data Sources
+        instruction: List all sources used in the research
+      - id: calculations
+        title: B. Detailed Calculations
+        instruction: Include any complex calculations or models
+      - id: additional-analysis
+        title: C. Additional Analysis
+        instruction: Any supplementary analysis not included in main body
+==================== END: .bmad-core/templates/market-research-tmpl.yaml ====================
+
+==================== START: .bmad-core/templates/competitor-analysis-tmpl.yaml ====================
+template:
+  id: competitor-analysis-template-v2
+  name: Competitive Analysis Report
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/competitor-analysis.md
+    title: "Competitive Analysis Report: {{project_product_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  custom_elicitation:
+    title: "Competitive Analysis Elicitation Actions"
+    options:
+      - "Deep dive on a specific competitor's strategy"
+      - "Analyze competitive dynamics in a specific segment"
+      - "War game competitive responses to your moves"
+      - "Explore partnership vs. competition scenarios"
+      - "Stress test differentiation claims"
+      - "Analyze disruption potential (yours or theirs)"
+      - "Compare to competition in adjacent markets"
+      - "Generate win/loss analysis insights"
+      - "If only we had known about [competitor X's plan]..."
+      - "Proceed to next section"
+
+sections:
+  - id: executive-summary
+    title: Executive Summary
+    instruction: Provide high-level competitive insights, main threats and opportunities, and recommended strategic actions. Write this section LAST after completing all analysis.
+
+  - id: analysis-scope
+    title: Analysis Scope & Methodology
+    instruction: This template guides comprehensive competitor analysis. Start by understanding the user's competitive intelligence needs and strategic objectives. Help them identify and prioritize competitors before diving into detailed analysis.
+    sections:
+      - id: analysis-purpose
+        title: Analysis Purpose
+        instruction: |
+          Define the primary purpose:
+          - New market entry assessment
+          - Product positioning strategy
+          - Feature gap analysis
+          - Pricing strategy development
+          - Partnership/acquisition targets
+          - Competitive threat assessment
+      - id: competitor-categories
+        title: Competitor Categories Analyzed
+        instruction: |
+          List categories included:
+          - Direct Competitors: Same product/service, same target market
+          - Indirect Competitors: Different product, same need/problem
+          - Potential Competitors: Could enter market easily
+          - Substitute Products: Alternative solutions
+          - Aspirational Competitors: Best-in-class examples
+      - id: research-methodology
+        title: Research Methodology
+        instruction: |
+          Describe approach:
+          - Information sources used
+          - Analysis timeframe
+          - Confidence levels
+          - Limitations
+
+  - id: competitive-landscape
+    title: Competitive Landscape Overview
+    sections:
+      - id: market-structure
+        title: Market Structure
+        instruction: |
+          Describe the competitive environment:
+          - Number of active competitors
+          - Market concentration (fragmented/consolidated)
+          - Competitive dynamics
+          - Recent market entries/exits
+      - id: prioritization-matrix
+        title: Competitor Prioritization Matrix
+        instruction: |
+          Help categorize competitors by market share and strategic threat level
+          
+          Create a 2x2 matrix:
+          - Priority 1 (Core Competitors): High Market Share + High Threat
+          - Priority 2 (Emerging Threats): Low Market Share + High Threat
+          - Priority 3 (Established Players): High Market Share + Low Threat
+          - Priority 4 (Monitor Only): Low Market Share + Low Threat
+
+  - id: competitor-profiles
+    title: Individual Competitor Profiles
+    instruction: Create detailed profiles for each Priority 1 and Priority 2 competitor. For Priority 3 and 4, create condensed profiles.
+    repeatable: true
+    sections:
+      - id: competitor
+        title: "{{competitor_name}} - Priority {{priority_level}}"
+        sections:
+          - id: company-overview
+            title: Company Overview
+            template: |
+              - **Founded:** {{year_founders}}
+              - **Headquarters:** {{location}}
+              - **Company Size:** {{employees_revenue}}
+              - **Funding:** {{total_raised_investors}}
+              - **Leadership:** {{key_executives}}
+          - id: business-model
+            title: Business Model & Strategy
+            template: |
+              - **Revenue Model:** {{revenue_model}}
+              - **Target Market:** {{customer_segments}}
+              - **Value Proposition:** {{value_promise}}
+              - **Go-to-Market Strategy:** {{gtm_approach}}
+              - **Strategic Focus:** {{current_priorities}}
+          - id: product-analysis
+            title: Product/Service Analysis
+            template: |
+              - **Core Offerings:** {{main_products}}
+              - **Key Features:** {{standout_capabilities}}
+              - **User Experience:** {{ux_assessment}}
+              - **Technology Stack:** {{tech_stack}}
+              - **Pricing:** {{pricing_model}}
+          - id: strengths-weaknesses
+            title: Strengths & Weaknesses
+            sections:
+              - id: strengths
+                title: Strengths
+                type: bullet-list
+                template: "- {{strength}}"
+              - id: weaknesses
+                title: Weaknesses
+                type: bullet-list
+                template: "- {{weakness}}"
+          - id: market-position
+            title: Market Position & Performance
+            template: |
+              - **Market Share:** {{market_share_estimate}}
+              - **Customer Base:** {{customer_size_notables}}
+              - **Growth Trajectory:** {{growth_trend}}
+              - **Recent Developments:** {{key_news}}
+
+  - id: comparative-analysis
+    title: Comparative Analysis
+    sections:
+      - id: feature-comparison
+        title: Feature Comparison Matrix
+        instruction: Create a detailed comparison table of key features across competitors
+        type: table
+        columns: ["Feature Category", "{{your_company}}", "{{competitor_1}}", "{{competitor_2}}", "{{competitor_3}}"]
+        rows:
+          - category: "Core Functionality"
+            items:
+              - ["Feature A", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
+              - ["Feature B", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
+          - category: "User Experience"
+            items:
+              - ["Mobile App", "{{rating}}", "{{rating}}", "{{rating}}", "{{rating}}"]
+              - ["Onboarding Time", "{{time}}", "{{time}}", "{{time}}", "{{time}}"]
+          - category: "Integration & Ecosystem"
+            items:
+              - ["API Availability", "{{availability}}", "{{availability}}", "{{availability}}", "{{availability}}"]
+              - ["Third-party Integrations", "{{number}}", "{{number}}", "{{number}}", "{{number}}"]
+          - category: "Pricing & Plans"
+            items:
+              - ["Starting Price", "{{price}}", "{{price}}", "{{price}}", "{{price}}"]
+              - ["Free Tier", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}"]
+      - id: swot-comparison
+        title: SWOT Comparison
+        instruction: Create SWOT analysis for your solution vs. top competitors
+        sections:
+          - id: your-solution
+            title: Your Solution
+            template: |
+              - **Strengths:** {{strengths}}
+              - **Weaknesses:** {{weaknesses}}
+              - **Opportunities:** {{opportunities}}
+              - **Threats:** {{threats}}
+          - id: vs-competitor
+            title: "vs. {{main_competitor}}"
+            template: |
+              - **Competitive Advantages:** {{your_advantages}}
+              - **Competitive Disadvantages:** {{their_advantages}}
+              - **Differentiation Opportunities:** {{differentiation}}
+      - id: positioning-map
+        title: Positioning Map
+        instruction: |
+          Describe competitor positions on key dimensions
+          
+          Create a positioning description using 2 key dimensions relevant to the market, such as:
+          - Price vs. Features
+          - Ease of Use vs. Power
+          - Specialization vs. Breadth
+          - Self-Serve vs. High-Touch
+
+  - id: strategic-analysis
+    title: Strategic Analysis
+    sections:
+      - id: competitive-advantages
+        title: Competitive Advantages Assessment
+        sections:
+          - id: sustainable-advantages
+            title: Sustainable Advantages
+            instruction: |
+              Identify moats and defensible positions:
+              - Network effects
+              - Switching costs
+              - Brand strength
+              - Technology barriers
+              - Regulatory advantages
+          - id: vulnerable-points
+            title: Vulnerable Points
+            instruction: |
+              Where competitors could be challenged:
+              - Weak customer segments
+              - Missing features
+              - Poor user experience
+              - High prices
+              - Limited geographic presence
+      - id: blue-ocean
+        title: Blue Ocean Opportunities
+        instruction: |
+          Identify uncontested market spaces
+          
+          List opportunities to create new market space:
+          - Underserved segments
+          - Unaddressed use cases
+          - New business models
+          - Geographic expansion
+          - Different value propositions
+
+  - id: strategic-recommendations
+    title: Strategic Recommendations
+    sections:
+      - id: differentiation-strategy
+        title: Differentiation Strategy
+        instruction: |
+          How to position against competitors:
+          - Unique value propositions to emphasize
+          - Features to prioritize
+          - Segments to target
+          - Messaging and positioning
+      - id: competitive-response
+        title: Competitive Response Planning
+        sections:
+          - id: offensive-strategies
+            title: Offensive Strategies
+            instruction: |
+              How to gain market share:
+              - Target competitor weaknesses
+              - Win competitive deals
+              - Capture their customers
+          - id: defensive-strategies
+            title: Defensive Strategies
+            instruction: |
+              How to protect your position:
+              - Strengthen vulnerable areas
+              - Build switching costs
+              - Deepen customer relationships
+      - id: partnership-ecosystem
+        title: Partnership & Ecosystem Strategy
+        instruction: |
+          Potential collaboration opportunities:
+          - Complementary players
+          - Channel partners
+          - Technology integrations
+          - Strategic alliances
+
+  - id: monitoring-plan
+    title: Monitoring & Intelligence Plan
+    sections:
+      - id: key-competitors
+        title: Key Competitors to Track
+        instruction: Priority list with rationale
+      - id: monitoring-metrics
+        title: Monitoring Metrics
+        instruction: |
+          What to track:
+          - Product updates
+          - Pricing changes
+          - Customer wins/losses
+          - Funding/M&A activity
+          - Market messaging
+      - id: intelligence-sources
+        title: Intelligence Sources
+        instruction: |
+          Where to gather ongoing intelligence:
+          - Company websites/blogs
+          - Customer reviews
+          - Industry reports
+          - Social media
+          - Patent filings
+      - id: update-cadence
+        title: Update Cadence
+        instruction: |
+          Recommended review schedule:
+          - Weekly: {{weekly_items}}
+          - Monthly: {{monthly_items}}
+          - Quarterly: {{quarterly_analysis}}
+==================== END: .bmad-core/templates/competitor-analysis-tmpl.yaml ====================
+
+==================== START: .bmad-core/templates/brainstorming-output-tmpl.yaml ====================
+template:
+  id: brainstorming-output-template-v2
+  name: Brainstorming Session Results
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/brainstorming-session-results.md
+    title: "Brainstorming Session Results"
+
+workflow:
+  mode: non-interactive
+
+sections:
+  - id: header
+    content: |
+      **Session Date:** {{date}}
+      **Facilitator:** {{agent_role}} {{agent_name}}
+      **Participant:** {{user_name}}
+
+  - id: executive-summary
+    title: Executive Summary
+    sections:
+      - id: summary-details
+        template: |
+          **Topic:** {{session_topic}}
+          
+          **Session Goals:** {{stated_goals}}
+          
+          **Techniques Used:** {{techniques_list}}
+          
+          **Total Ideas Generated:** {{total_ideas}}
+      - id: key-themes
+        title: "Key Themes Identified:"
+        type: bullet-list
+        template: "- {{theme}}"
+
+  - id: technique-sessions
+    title: Technique Sessions
+    repeatable: true
+    sections:
+      - id: technique
+        title: "{{technique_name}} - {{duration}}"
+        sections:
+          - id: description
+            template: "**Description:** {{technique_description}}"
+          - id: ideas-generated
+            title: "Ideas Generated:"
+            type: numbered-list
+            template: "{{idea}}"
+          - id: insights
+            title: "Insights Discovered:"
+            type: bullet-list
+            template: "- {{insight}}"
+          - id: connections
+            title: "Notable Connections:"
+            type: bullet-list
+            template: "- {{connection}}"
+
+  - id: idea-categorization
+    title: Idea Categorization
+    sections:
+      - id: immediate-opportunities
+        title: Immediate Opportunities
+        content: "*Ideas ready to implement now*"
+        repeatable: true
+        type: numbered-list
+        template: |
+          **{{idea_name}}**
+          - Description: {{description}}
+          - Why immediate: {{rationale}}
+          - Resources needed: {{requirements}}
+      - id: future-innovations
+        title: Future Innovations
+        content: "*Ideas requiring development/research*"
+        repeatable: true
+        type: numbered-list
+        template: |
+          **{{idea_name}}**
+          - Description: {{description}}
+          - Development needed: {{development_needed}}
+          - Timeline estimate: {{timeline}}
+      - id: moonshots
+        title: Moonshots
+        content: "*Ambitious, transformative concepts*"
+        repeatable: true
+        type: numbered-list
+        template: |
+          **{{idea_name}}**
+          - Description: {{description}}
+          - Transformative potential: {{potential}}
+          - Challenges to overcome: {{challenges}}
+      - id: insights-learnings
+        title: Insights & Learnings
+        content: "*Key realizations from the session*"
+        type: bullet-list
+        template: "- {{insight}}: {{description_and_implications}}"
+
+  - id: action-planning
+    title: Action Planning
+    sections:
+      - id: top-priorities
+        title: Top 3 Priority Ideas
+        sections:
+          - id: priority-1
+            title: "#1 Priority: {{idea_name}}"
+            template: |
+              - Rationale: {{rationale}}
+              - Next steps: {{next_steps}}
+              - Resources needed: {{resources}}
+              - Timeline: {{timeline}}
+          - id: priority-2
+            title: "#2 Priority: {{idea_name}}"
+            template: |
+              - Rationale: {{rationale}}
+              - Next steps: {{next_steps}}
+              - Resources needed: {{resources}}
+              - Timeline: {{timeline}}
+          - id: priority-3
+            title: "#3 Priority: {{idea_name}}"
+            template: |
+              - Rationale: {{rationale}}
+              - Next steps: {{next_steps}}
+              - Resources needed: {{resources}}
+              - Timeline: {{timeline}}
+
+  - id: reflection-followup
+    title: Reflection & Follow-up
+    sections:
+      - id: what-worked
+        title: What Worked Well
+        type: bullet-list
+        template: "- {{aspect}}"
+      - id: areas-exploration
+        title: Areas for Further Exploration
+        type: bullet-list
+        template: "- {{area}}: {{reason}}"
+      - id: recommended-techniques
+        title: Recommended Follow-up Techniques
+        type: bullet-list
+        template: "- {{technique}}: {{reason}}"
+      - id: questions-emerged
+        title: Questions That Emerged
+        type: bullet-list
+        template: "- {{question}}"
+      - id: next-session
+        title: Next Session Planning
+        template: |
+          - **Suggested topics:** {{followup_topics}}
+          - **Recommended timeframe:** {{timeframe}}
+          - **Preparation needed:** {{preparation}}
+
+  - id: footer
+    content: |
+      ---
+      
+      *Session facilitated using the BMAD-METHOD brainstorming framework*
+==================== END: .bmad-core/templates/brainstorming-output-tmpl.yaml ====================
 
 ==================== START: .bmad-core/data/bmad-kb.md ====================
 # BMad Knowledge Base
@@ -2882,32 +2854,3 @@ Use the **expansion-creator** pack to build your own:
 19. **Metaphor Mapping**: Use extended metaphors to explore solutions
 20. **Question Storming**: Generate questions instead of answers first
 ==================== END: .bmad-core/data/brainstorming-techniques.md ====================
-
-==================== START: .bmad-core/utils/template-format.md ====================
-# Template Format Conventions
-
-Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
-
-## Template Markup Elements
-
-- **{{placeholders}}**: Variables to be replaced with actual content
-- **[[LLM: instructions]]**: Internal processing instructions for AI agents (never shown to users)
-- **REPEAT** sections: Content blocks that may be repeated as needed
-- **^^CONDITION^^** blocks: Conditional content included only if criteria are met
-- **@{examples}**: Example content for guidance (never output to users)
-
-## Processing Rules
-
-- Replace all {{placeholders}} with project-specific content
-- Execute all [[LLM: instructions]] internally without showing users
-- Process conditional and repeat blocks as specified
-- Use examples for guidance but never include them in final output
-- Present only clean, formatted content to users
-
-## Critical Guidelines
-
-- **NEVER display template markup, LLM instructions, or examples to users**
-- Template elements are for AI processing only
-- Focus on faithful template execution and clean output
-- All template-specific instructions are embedded within templates
-==================== END: .bmad-core/utils/template-format.md ====================

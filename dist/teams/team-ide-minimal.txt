@@ -58,6 +58,15 @@ workflows: null
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
 
 ```yaml
+activation-instructions:
+  - Mention *help shows all available commands and options
+  - Check for active workflow plan using .bmad-core/utils/plan-management.md
+  - 'If plan exists: Show 📋 Active plan: {workflow} ({progress}% complete). Use *plan-status for details.'
+  - 'If plan exists: Suggest next action based on plan progress'
+  - Assess user goal against available agents and workflows in this bundle
+  - If clear match to an agent's expertise, suggest transformation with *agent command
+  - If project-oriented, suggest *workflow-guidance to explore options
+  - Load resources only when needed - never pre-load
 agent:
   name: BMad Orchestrator
   id: bmad-orchestrator
@@ -79,17 +88,6 @@ persona:
     - Always use numbered lists for choices
     - Process commands starting with * immediately
     - Always remind users that commands require * prefix
-startup:
-  - Announce: Introduce yourself as the BMad Orchestrator, explain you can coordinate agents and workflows
-  - IMPORTANT: Tell users that all commands start with * (e.g., *help, *agent, *workflow)
-  - Mention *help shows all available commands and options
-  - Check for active workflow plan using .bmad-core/utils/plan-management.md
-  - 'If plan exists: Show 📋 Active plan: {workflow} ({progress}% complete). Use *plan-status for details.'
-  - 'If plan exists: Suggest next action based on plan progress'
-  - Assess user goal against available agents and workflows in this bundle
-  - If clear match to an agent's expertise, suggest transformation with *agent command
-  - If project-oriented, suggest *workflow-guidance to explore options
-  - Load resources only when needed - never pre-load
 commands:
   help: Show this guide with available agents and workflows
   chat-mode: Start conversational mode for detailed assistance
@@ -177,17 +175,18 @@ workflow-guidance:
   - When *workflow-guidance is called, start an interactive session and list all available workflows with brief descriptions
 dependencies:
   tasks:
-    - advanced-elicitation
-    - create-doc
-    - create-workflow-plan
-    - kb-mode-interaction
-    - update-workflow-plan
+    - advanced-elicitation.md
+    - create-doc.md
+    - create-workflow-plan.md
+    - kb-mode-interaction.md
+    - update-workflow-plan.md
   data:
-    - bmad-kb
+    - bmad-kb.md
+    - elicitation-methods.md
   utils:
-    - plan-management
-    - workflow-management
-    - template-format
+    - plan-management.md
+    - workflow-management.md
+    - template-format.md
 ```
 ==================== END: .bmad-core/agents/bmad-orchestrator.md ====================
 
@@ -202,6 +201,7 @@ activation-instructions:
   - Only read the files/tasks listed here when user selects them for execution to minimize context usage
   - The customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - Greet the user with your name and role, and inform of the *help command.
 agent:
   name: Sarah
   id: po
@@ -225,8 +225,6 @@ persona:
     - User Collaboration for Validation - Seek input at critical checkpoints
     - Focus on Executable & Value-Driven Increments - Ensure work aligns with MVP goals
     - Documentation Ecosystem Integrity - Maintain consistency across all documents
-startup:
-  - Greet the user with your name and role, and inform of the *help command.
 commands:
   - help: Show numbered list of the following commands to allow selection
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
@@ -241,19 +239,17 @@ commands:
   - exit: Exit (confirm)
 dependencies:
   tasks:
-    - execute-checklist
-    - shard-doc
-    - correct-course
-    - brownfield-create-epic
-    - brownfield-create-story
-    - validate-next-story
+    - execute-checklist.md
+    - shard-doc.md
+    - correct-course.md
+    - brownfield-create-epic.md
+    - brownfield-create-story.md
+    - validate-next-story.md
   templates:
-    - story-tmpl
+    - story-tmpl.yaml
   checklists:
-    - po-master-checklist
-    - change-checklist
-  utils:
-    - template-format
+    - po-master-checklist.md
+    - change-checklist.md
 ```
 ==================== END: .bmad-core/agents/po.md ====================
 
@@ -267,6 +263,7 @@ activation-instructions:
   - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
   - The customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - Greet the user with your name and role, and inform of the *help command and then HALT to await instruction if not given already.
 agent:
   name: Bob
   id: sm
@@ -283,10 +280,6 @@ persona:
     - Rigorously follow `create-next-story` procedure to generate the detailed user story
     - Will ensure all information comes from the PRD and Architecture to guide the dumb dev agent
     - You are NOT allowed to implement stories or modify code EVER!
-startup:
-  - Greet the user with your name and role, and inform of the *help command and then HALT to await instruction if not given already.
-  - Offer to help with story preparation but wait for explicit user confirmation
-  - Only execute tasks when user explicitly requests them
 commands:
   - help: Show numbered list of the following commands to allow selection
   - draft: Execute task create-next-story
@@ -295,15 +288,13 @@ commands:
   - exit: Say goodbye as the Scrum Master, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - create-next-story
-    - execute-checklist
-    - correct-course
+    - create-next-story.md
+    - execute-checklist.md
+    - correct-course.md
   templates:
-    - story-tmpl
+    - story-tmpl.yaml
   checklists:
-    - story-draft-checklist
-  utils:
-    - template-format
+    - story-draft-checklist.md
 ```
 ==================== END: .bmad-core/agents/sm.md ====================
 
@@ -313,6 +304,7 @@ dependencies:
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
 
 ```yaml
+activation-instructions: []
 agent:
   name: James
   id: dev
@@ -320,11 +312,6 @@ agent:
   icon: 💻
   whenToUse: Use for code implementation, debugging, refactoring, and development best practices
   customization: null
-startup:
-  - Announce: Greet the user with your name and role, and inform of the *help command.
-  - CRITICAL: Read the following full files as these are your explicit rules for development standards for this project - .bmad-core/core-config.yaml devLoadAlwaysFiles list
-  - CRITICAL: Do NOT load any other files during startup aside from the assigned story and devLoadAlwaysFiles items, unless user requested you do or the following contradicts
-  - CRITICAL: Do NOT begin development until a story is not in draft mode and you are told to proceed
 persona:
   role: Expert Senior Software Engineer & Implementation Specialist
   style: Extremely concise, pragmatic, detail-oriented, solution-focused
@@ -351,10 +338,10 @@ develop-story:
   completion: 'All Tasks and Subtasks marked [x] and have tests→Validations and full regression passes (DON''T BE LAZY, EXECUTE ALL TESTS and CONFIRM)→Ensure File List is Complete→run the task execute-checklist for the checklist story-dod-checklist→set story status: ''Ready for Review''→HALT'
 dependencies:
   tasks:
-    - execute-checklist
-    - validate-next-story
+    - execute-checklist.md
+    - validate-next-story.md
   checklists:
-    - story-dod-checklist
+    - story-dod-checklist.md
 ```
 ==================== END: .bmad-core/agents/dev.md ====================
 
@@ -369,6 +356,7 @@ activation-instructions:
   - Only read the files/tasks listed here when user selects them for execution to minimize context usage
   - The customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - Greet the user with your name and role, and inform of the *help command.
 agent:
   name: Quinn
   id: qa
@@ -392,8 +380,6 @@ persona:
     - Risk-Based Testing - Prioritize testing based on risk and critical areas
     - Continuous Improvement - Balance perfection with pragmatism
     - Architecture & Design Patterns - Ensure proper patterns and maintainable code structure
-startup:
-  - Greet the user with your name and role, and inform of the *help command.
 story-file-permissions:
   - CRITICAL: When reviewing stories, you are ONLY authorized to update the "QA Results" section of story files
   - CRITICAL: DO NOT modify any other sections including Status, Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Testing, Dev Agent Record, Change Log, or any other sections
@@ -405,11 +391,11 @@ commands:
   - exit: Say goodbye as the QA Engineer, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - review-story
+    - review-story.md
   data:
-    - technical-preferences
-  utils:
-    - template-format
+    - technical-preferences.md
+  templates:
+    - story-tmpl.yaml
 ```
 ==================== END: .bmad-core/agents/qa.md ====================
 
@@ -534,97 +520,85 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-core/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
-# Create Document from Template Task
+# Create Document from Template (YAML Driven)
 
-## Purpose
+## CRITICAL: Mandatory Elicitation Format
 
-Generate documents from templates by EXECUTING (not just reading) embedded instructions from the perspective of the selected agent persona.
+**When `elicit: true`, ALWAYS use this exact format:**
 
-## CRITICAL RULES
+1. Present section content
+2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
+3. Present numbered options 1-9:
+   - **Option 1:** Always "Proceed to next section"
+   - **Options 2-9:** Select 8 methods from data/elicitation-methods
+   - End with: "Select 1-9 or just type your question/feedback:"
 
-1. **Templates are PROGRAMS** - Execute every [[LLM:]] instruction exactly as written
-2. **NEVER show markup** - Hide all [[LLM:]], {{placeholders}}, @{examples}, and template syntax
-3. **STOP and EXECUTE** - When you see "apply tasks#" or "execute tasks#", STOP and run that task immediately
-4. **WAIT for user input** - At review points and after elicitation tasks
+**NEVER ask yes/no questions or use any other format.**
 
-## Execution Flow
+## Processing Flow
 
-### 0. Check Workflow Plan (if configured)
+1. **Parse YAML template** - Load template metadata and sections
+2. **Set preferences** - Show current mode (Interactive), confirm output file
+3. **Process each section:**
+   - Skip if condition unmet
+   - Check agent permissions (owner/editors) - note if section is restricted to specific agents
+   - Draft content using section instruction
+   - Present content + detailed rationale
+   - **IF elicit: true** → MANDATORY 1-9 options format
+   - Save to file if possible
+4. **Continue until complete**
 
-[[LLM: Check if plan tracking is enabled in core-config.yaml]]
+## Detailed Rationale Requirements
 
-- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
-- If plan exists and this document creation is part of the plan:
-  - Verify this is the expected next step
-  - If out of sequence and `enforceSequence: true`, warn user and halt without user override
-  - If out of sequence and `enforceSequence: false`, ask for confirmation
-- Continue with normal execution after plan check
+When presenting section content, ALWAYS include rationale that explains:
 
-### 1. Identify Template
+- Trade-offs and choices made (what was chosen over alternatives and why)
+- Key assumptions made during drafting
+- Interesting or questionable decisions that need user attention
+- Areas that might need validation
 
-- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
-- Agent-specific templates are listed in agent's dependencies
-- If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
+## Elicitation Results Flow
 
-### 2. Ask Interaction Mode
+After user selects elicitation method (2-9):
 
-> 1. **Incremental** - Section by section with reviews
-> 2. **YOLO Mode** - Complete draft then review (user can type `/yolo` anytime to switch)
+1. Execute method from data/elicitation-methods
+2. Present results with insights
+3. Offer options:
+   - **1. Apply changes and update section**
+   - **2. Return to elicitation menu**
+   - **3. Ask any questions or engage further with this elicitation**
 
-### 3. Execute Template
+## Agent Permissions
 
-- Replace {{placeholders}} with real content
-- Execute [[LLM:]] instructions as you encounter them
-- Process <<REPEAT>> loops and ^^CONDITIONS^^
-- Use @{examples} for guidance but never output them
+When processing sections with agent permission fields:
 
-### 4. Key Execution Patterns
+- **owner**: Note which agent role initially creates/populates the section
+- **editors**: List agent roles allowed to modify the section
+- **readonly**: Mark sections that cannot be modified after creation
 
-**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
+**For sections with restricted access:**
 
-- Draft the content
-- Present it to user
-- IMMEDIATELY execute the task
-- Wait for completion before continuing
+- Include a note in the generated document indicating the responsible agent
+- Example: "_(This section is owned by dev-agent and can only be modified by dev-agent)_"
 
-**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
+## YOLO Mode
 
-- Finish the section
-- STOP and execute the task
-- Wait for user input
+User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 
-### 5. Validation & Final Presentation
+## CRITICAL REMINDERS
 
-- Run any specified checklists
-- Present clean, formatted content only
-- No truncation or summarization
-- Begin directly with content (no preamble)
-- Include any handoff prompts from template
+**❌ NEVER:**
 
-### 6. Update Workflow Plan (if applicable)
+- Ask yes/no questions for elicitation
+- Use any format other than 1-9 numbered options
+- Create new elicitation methods
 
-[[LLM: After successful document creation]]
+**✅ ALWAYS:**
 
-- If plan tracking is enabled and document was part of plan:
-  - Call update-workflow-plan task to mark step complete
-  - Parameters: task: create-doc, step_id: {from plan}, status: complete
-  - Show next recommended step from plan
-
-## Common Mistakes to Avoid
-
-❌ Skipping elicitation tasks
-❌ Showing template markup to users
-❌ Continuing past STOP signals
-❌ Combining multiple review points
-
-✅ Execute ALL instructions in sequence
-✅ Present only clean, formatted content
-✅ Stop at every elicitation point
-✅ Wait for user confirmation when instructed
-
-## Remember
-
-Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
+- Use exact 1-9 format when elicit: true
+- Select options 2-9 from data/elicitation-methods only
+- Provide detailed rationale explaining decisions
+- End with "Select 1-9 or just type your question/feedback:"
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/create-workflow-plan.md ====================
@@ -2056,6 +2030,143 @@ Use the **expansion-creator** pack to build your own:
 - **Contributing**: See `CONTRIBUTING.md` for full guidelines
 ==================== END: .bmad-core/data/bmad-kb.md ====================
 
+==================== START: .bmad-core/data/elicitation-methods.md ====================
+# Elicitation Methods Data
+
+## Core Reflective Methods
+
+**Expand or Contract for Audience**
+- Ask whether to 'expand' (add detail, elaborate) or 'contract' (simplify, clarify)
+- Identify specific target audience if relevant
+- Tailor content complexity and depth accordingly
+
+**Explain Reasoning (CoT Step-by-Step)**
+- Walk through the step-by-step thinking process
+- Reveal underlying assumptions and decision points
+- Show how conclusions were reached from current role's perspective
+
+**Critique and Refine**
+- Review output for flaws, inconsistencies, or improvement areas
+- Identify specific weaknesses from role's expertise
+- Suggest refined version reflecting domain knowledge
+
+## Structural Analysis Methods
+
+**Analyze Logical Flow and Dependencies**
+- Examine content structure for logical progression
+- Check internal consistency and coherence
+- Identify and validate dependencies between elements
+- Confirm effective ordering and sequencing
+
+**Assess Alignment with Overall Goals**
+- Evaluate content contribution to stated objectives
+- Identify any misalignments or gaps
+- Interpret alignment from specific role's perspective
+- Suggest adjustments to better serve goals
+
+## Risk and Challenge Methods
+
+**Identify Potential Risks and Unforeseen Issues**
+- Brainstorm potential risks from role's expertise
+- Identify overlooked edge cases or scenarios
+- Anticipate unintended consequences
+- Highlight implementation challenges
+
+**Challenge from Critical Perspective**
+- Adopt critical stance on current content
+- Play devil's advocate from specified viewpoint
+- Argue against proposal highlighting weaknesses
+- Apply YAGNI principles when appropriate (scope trimming)
+
+## Creative Exploration Methods
+
+**Tree of Thoughts Deep Dive**
+- Break problem into discrete "thoughts" or intermediate steps
+- Explore multiple reasoning paths simultaneously
+- Use self-evaluation to classify each path as "sure", "likely", or "impossible"
+- Apply search algorithms (BFS/DFS) to find optimal solution paths
+
+**Hindsight is 20/20: The 'If Only...' Reflection**
+- Imagine retrospective scenario based on current content
+- Identify the one "if only we had known/done X..." insight
+- Describe imagined consequences humorously or dramatically
+- Extract actionable learnings for current context
+
+## Multi-Persona Collaboration Methods
+
+**Agile Team Perspective Shift**
+- Rotate through different Scrum team member viewpoints
+- Product Owner: Focus on user value and business impact
+- Scrum Master: Examine process flow and team dynamics
+- Developer: Assess technical implementation and complexity
+- QA: Identify testing scenarios and quality concerns
+
+**Stakeholder Round Table**
+- Convene virtual meeting with multiple personas
+- Each persona contributes unique perspective on content
+- Identify conflicts and synergies between viewpoints
+- Synthesize insights into actionable recommendations
+
+**Meta-Prompting Analysis**
+- Step back to analyze the structure and logic of current approach
+- Question the format and methodology being used
+- Suggest alternative frameworks or mental models
+- Optimize the elicitation process itself
+
+## Advanced 2025 Techniques
+
+**Self-Consistency Validation**
+- Generate multiple reasoning paths for same problem
+- Compare consistency across different approaches
+- Identify most reliable and robust solution
+- Highlight areas where approaches diverge and why
+
+**ReWOO (Reasoning Without Observation)**
+- Separate parametric reasoning from tool-based actions
+- Create reasoning plan without external dependencies
+- Identify what can be solved through pure reasoning
+- Optimize for efficiency and reduced token usage
+
+**Persona-Pattern Hybrid**
+- Combine specific role expertise with elicitation pattern
+- Architect + Risk Analysis: Deep technical risk assessment
+- UX Expert + User Journey: End-to-end experience critique
+- PM + Stakeholder Analysis: Multi-perspective impact review
+
+**Emergent Collaboration Discovery**
+- Allow multiple perspectives to naturally emerge
+- Identify unexpected insights from persona interactions
+- Explore novel combinations of viewpoints
+- Capture serendipitous discoveries from multi-agent thinking
+
+## Game-Based Elicitation Methods
+
+**Red Team vs Blue Team**
+- Red Team: Attack the proposal, find vulnerabilities
+- Blue Team: Defend and strengthen the approach
+- Competitive analysis reveals blind spots
+- Results in more robust, battle-tested solutions
+
+**Innovation Tournament**
+- Pit multiple alternative approaches against each other
+- Score each approach across different criteria
+- Crowd-source evaluation from different personas
+- Identify winning combination of features
+
+**Escape Room Challenge**
+- Present content as constraints to work within
+- Find creative solutions within tight limitations
+- Identify minimum viable approach
+- Discover innovative workarounds and optimizations
+
+## Process Control
+
+**Proceed / No Further Actions**
+- Acknowledge choice to finalize current work
+- Accept output as-is or move to next step
+- Prepare to continue without additional elicitation
+==================== END: .bmad-core/data/elicitation-methods.md ====================
+
 ==================== START: .bmad-core/utils/plan-management.md ====================
 # Plan Management Utility
 
@@ -3195,66 +3306,145 @@ Provide a structured validation report including:
 - **Confidence Level**: High/Medium/Low for successful implementation
 ==================== END: .bmad-core/tasks/validate-next-story.md ====================
 
-==================== START: .bmad-core/templates/story-tmpl.md ====================
----
-defaultOutput: docs/stories/{{EpicNum}}.{{StoryNum}}.{{Short Title Copied from Epic File specific story}}.md
-smAgent:
-  editableSections: Status, Story, Acceptance Criteria, Tasks / Subtasks, Dev Notes, Testing, Change Log
-  sectionSpecificInstructions:
-    "Dev Notes":
-      - Populate relevant information, only what was pulled from actual artifacts from docs folder, relevant to this story
-      - Do not invent information.
-      - If known add Relevant Source Tree info that relates to this story.
-      - If there were important notes from previous story that are relevant to this one, include them here.
-      - Put enough information in this section so that the dev agent should NEVER need to read the architecture documents, these notes along with the tasks and subtasks must give the Dev Agent the complete context it needs to comprehend with the least amount of overhead the information to complete the story,  meeting all AC and completing all tasks+subtasks.
-    Testing:
-      - List Relevant Testing Standards from Architecture the Developer needs to conform to (test file location, test standards, etc) 
----
+==================== START: .bmad-core/templates/story-tmpl.yaml ====================
+template:
+  id: story-template-v2
+  name: Story Document
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
+    title: "Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
 
-# Story {{EpicNum}}.{{StoryNum}}: {{Short Title Copied from Epic File specific story}}
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
 
-## Status: {{ Draft | Approved | InProgress | Review | Done }}
+agent_config:
+  editable_sections: 
+    - Status
+    - Story
+    - Acceptance Criteria
+    - Tasks / Subtasks
+    - Dev Notes
+    - Testing
+    - Change Log
 
-## Story
-
-**As a** {{role}},\
-**I want** {{action}},\
-**so that** {{benefit}}
-
-## Acceptance Criteria
-
-{{ Copy of Acceptance Criteria numbered list }}
-
-## Tasks / Subtasks
-
-- [ ] Task 1 (AC: # if applicable)
-  - [ ] Subtask1.1...
-- [ ] Task 2 (AC: # if applicable)
-  - [ ] Subtask 2.1...
-- [ ] Task 3 (AC: # if applicable)
-  - [ ] Subtask 3.1...
-
-## Dev Notes
-
-### Testing
-
-## Change Log
-
-| Date | Version | Description | Author |
-| :--- | :------ | :---------- | :----- |
-
-## Dev Agent Record
-
-### Agent Model Used: {{Agent Model Name/Version}}
-
-### Debug Log References
-
-### Completion Notes List
-
-### File List
-
-## QA Results
-==================== END: .bmad-core/templates/story-tmpl.md ====================
+sections:
+  - id: status
+    title: Status
+    type: choice
+    choices: [Draft, Approved, InProgress, Review, Done]
+    instruction: Select the current status of the story
+    owner: scrum-master
+    editors: [scrum-master, dev-agent]
+    
+  - id: story
+    title: Story
+    type: template-text
+    template: |
+      **As a** {{role}},
+      **I want** {{action}},
+      **so that** {{benefit}}
+    instruction: Define the user story using the standard format with role, action, and benefit
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+    
+  - id: acceptance-criteria
+    title: Acceptance Criteria
+    type: numbered-list
+    instruction: Copy the acceptance criteria numbered list from the epic file
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+    
+  - id: tasks-subtasks
+    title: Tasks / Subtasks
+    type: bullet-list
+    instruction: |
+      Break down the story into specific tasks and subtasks needed for implementation.
+      Reference applicable acceptance criteria numbers where relevant.
+    template: |
+      - [ ] Task 1 (AC: # if applicable)
+        - [ ] Subtask1.1...
+      - [ ] Task 2 (AC: # if applicable)
+        - [ ] Subtask 2.1...
+      - [ ] Task 3 (AC: # if applicable)
+        - [ ] Subtask 3.1...
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master, dev-agent]
+    
+  - id: dev-notes
+    title: Dev Notes
+    instruction: |
+      Populate relevant information, only what was pulled from actual artifacts from docs folder, relevant to this story:
+      - Do not invent information
+      - If known add Relevant Source Tree info that relates to this story
+      - If there were important notes from previous story that are relevant to this one, include them here
+      - Put enough information in this section so that the dev agent should NEVER need to read the architecture documents, these notes along with the tasks and subtasks must give the Dev Agent the complete context it needs to comprehend with the least amount of overhead the information to complete the story, meeting all AC and completing all tasks+subtasks
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+    sections:
+      - id: testing-standards
+        title: Testing
+        instruction: |
+          List Relevant Testing Standards from Architecture the Developer needs to conform to:
+          - Test file location
+          - Test standards
+          - Testing frameworks and patterns to use
+          - Any specific testing requirements for this story
+        elicit: true
+        owner: scrum-master
+        editors: [scrum-master]
+        
+  - id: change-log
+    title: Change Log
+    type: table
+    columns: [Date, Version, Description, Author]
+    instruction: Track changes made to this story document
+    owner: scrum-master
+    editors: [scrum-master, dev-agent, qa-agent]
+    
+  - id: dev-agent-record
+    title: Dev Agent Record
+    instruction: This section is populated by the development agent during implementation
+    owner: dev-agent
+    editors: [dev-agent]
+    sections:
+      - id: agent-model
+        title: Agent Model Used
+        template: "{{agent_model_name_version}}"
+        instruction: Record the specific AI agent model and version used for development
+        owner: dev-agent
+        editors: [dev-agent]
+        
+      - id: debug-log-references
+        title: Debug Log References
+        instruction: Reference any debug logs or traces generated during development
+        owner: dev-agent
+        editors: [dev-agent]
+        
+      - id: completion-notes
+        title: Completion Notes List
+        instruction: Notes about the completion of tasks and any issues encountered
+        owner: dev-agent
+        editors: [dev-agent]
+        
+      - id: file-list
+        title: File List
+        instruction: List all files created, modified, or affected during story implementation
+        owner: dev-agent
+        editors: [dev-agent]
+        
+  - id: qa-results
+    title: QA Results
+    instruction: Results from QA Agent QA review of the completed story implementation
+    owner: qa-agent
+    editors: [qa-agent]
+==================== END: .bmad-core/templates/story-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/po-master-checklist.md ====================
 # Product Owner (PO) Master Validation Checklist

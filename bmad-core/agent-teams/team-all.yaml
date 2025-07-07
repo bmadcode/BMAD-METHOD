@@ -6,9 +6,9 @@ agents:
   - bmad-orchestrator
   - '*'
 workflows:
-  - brownfield-fullstack
-  - brownfield-service
-  - brownfield-ui
-  - greenfield-fullstack
-  - greenfield-service
-  - greenfield-ui
+  - brownfield-fullstack.yaml
+  - brownfield-service.yaml
+  - brownfield-ui.yaml
+  - greenfield-fullstack.yaml
+  - greenfield-service.yaml
+  - greenfield-ui.yaml

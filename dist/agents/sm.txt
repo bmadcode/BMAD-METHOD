@@ -49,6 +49,7 @@ activation-instructions:
   - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
   - The customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - Greet the user with your name and role, and inform of the *help command and then HALT to await instruction if not given already.
 agent:
   name: Bob
   id: sm
@@ -65,10 +66,6 @@ persona:
     - Rigorously follow `create-next-story` procedure to generate the detailed user story
     - Will ensure all information comes from the PRD and Architecture to guide the dumb dev agent
     - You are NOT allowed to implement stories or modify code EVER!
-startup:
-  - Greet the user with your name and role, and inform of the *help command and then HALT to await instruction if not given already.
-  - Offer to help with story preparation but wait for explicit user confirmation
-  - Only execute tasks when user explicitly requests them
 commands:
   - help: Show numbered list of the following commands to allow selection
   - draft: Execute task create-next-story
@@ -77,15 +74,13 @@ commands:
   - exit: Say goodbye as the Scrum Master, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - create-next-story
-    - execute-checklist
-    - correct-course
+    - create-next-story.md
+    - execute-checklist.md
+    - correct-course.md
   templates:
-    - story-tmpl
+    - story-tmpl.yaml
   checklists:
-    - story-draft-checklist
-  utils:
-    - template-format
+    - story-draft-checklist.md
 ```
 ==================== END: .bmad-core/agents/sm.md ====================
 
@@ -378,66 +373,145 @@ The LLM will:
 - **Implicit:** An annotated `change-checklist` (or the record of its completion) reflecting the discussions, findings, and decisions made during the process.
 ==================== END: .bmad-core/tasks/correct-course.md ====================
 
-==================== START: .bmad-core/templates/story-tmpl.md ====================
----
-defaultOutput: docs/stories/{{EpicNum}}.{{StoryNum}}.{{Short Title Copied from Epic File specific story}}.md
-smAgent:
-  editableSections: Status, Story, Acceptance Criteria, Tasks / Subtasks, Dev Notes, Testing, Change Log
-  sectionSpecificInstructions:
-    "Dev Notes":
-      - Populate relevant information, only what was pulled from actual artifacts from docs folder, relevant to this story
-      - Do not invent information.
-      - If known add Relevant Source Tree info that relates to this story.
-      - If there were important notes from previous story that are relevant to this one, include them here.
-      - Put enough information in this section so that the dev agent should NEVER need to read the architecture documents, these notes along with the tasks and subtasks must give the Dev Agent the complete context it needs to comprehend with the least amount of overhead the information to complete the story,  meeting all AC and completing all tasks+subtasks.
-    Testing:
-      - List Relevant Testing Standards from Architecture the Developer needs to conform to (test file location, test standards, etc) 
----
+==================== START: .bmad-core/templates/story-tmpl.yaml ====================
+template:
+  id: story-template-v2
+  name: Story Document
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
+    title: "Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
 
-# Story {{EpicNum}}.{{StoryNum}}: {{Short Title Copied from Epic File specific story}}
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
 
-## Status: {{ Draft | Approved | InProgress | Review | Done }}
+agent_config:
+  editable_sections: 
+    - Status
+    - Story
+    - Acceptance Criteria
+    - Tasks / Subtasks
+    - Dev Notes
+    - Testing
+    - Change Log
 
-## Story
-
-**As a** {{role}},\
-**I want** {{action}},\
-**so that** {{benefit}}
-
-## Acceptance Criteria
-
-{{ Copy of Acceptance Criteria numbered list }}
-
-## Tasks / Subtasks
-
-- [ ] Task 1 (AC: # if applicable)
-  - [ ] Subtask1.1...
-- [ ] Task 2 (AC: # if applicable)
-  - [ ] Subtask 2.1...
-- [ ] Task 3 (AC: # if applicable)
-  - [ ] Subtask 3.1...
-
-## Dev Notes
-
-### Testing
-
-## Change Log
-
-| Date | Version | Description | Author |
-| :--- | :------ | :---------- | :----- |
-
-## Dev Agent Record
-
-### Agent Model Used: {{Agent Model Name/Version}}
-
-### Debug Log References
-
-### Completion Notes List
-
-### File List
-
-## QA Results
-==================== END: .bmad-core/templates/story-tmpl.md ====================
+sections:
+  - id: status
+    title: Status
+    type: choice
+    choices: [Draft, Approved, InProgress, Review, Done]
+    instruction: Select the current status of the story
+    owner: scrum-master
+    editors: [scrum-master, dev-agent]
+    
+  - id: story
+    title: Story
+    type: template-text
+    template: |
+      **As a** {{role}},
+      **I want** {{action}},
+      **so that** {{benefit}}
+    instruction: Define the user story using the standard format with role, action, and benefit
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+    
+  - id: acceptance-criteria
+    title: Acceptance Criteria
+    type: numbered-list
+    instruction: Copy the acceptance criteria numbered list from the epic file
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+    
+  - id: tasks-subtasks
+    title: Tasks / Subtasks
+    type: bullet-list
+    instruction: |
+      Break down the story into specific tasks and subtasks needed for implementation.
+      Reference applicable acceptance criteria numbers where relevant.
+    template: |
+      - [ ] Task 1 (AC: # if applicable)
+        - [ ] Subtask1.1...
+      - [ ] Task 2 (AC: # if applicable)
+        - [ ] Subtask 2.1...
+      - [ ] Task 3 (AC: # if applicable)
+        - [ ] Subtask 3.1...
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master, dev-agent]
+    
+  - id: dev-notes
+    title: Dev Notes
+    instruction: |
+      Populate relevant information, only what was pulled from actual artifacts from docs folder, relevant to this story:
+      - Do not invent information
+      - If known add Relevant Source Tree info that relates to this story
+      - If there were important notes from previous story that are relevant to this one, include them here
+      - Put enough information in this section so that the dev agent should NEVER need to read the architecture documents, these notes along with the tasks and subtasks must give the Dev Agent the complete context it needs to comprehend with the least amount of overhead the information to complete the story, meeting all AC and completing all tasks+subtasks
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+    sections:
+      - id: testing-standards
+        title: Testing
+        instruction: |
+          List Relevant Testing Standards from Architecture the Developer needs to conform to:
+          - Test file location
+          - Test standards
+          - Testing frameworks and patterns to use
+          - Any specific testing requirements for this story
+        elicit: true
+        owner: scrum-master
+        editors: [scrum-master]
+        
+  - id: change-log
+    title: Change Log
+    type: table
+    columns: [Date, Version, Description, Author]
+    instruction: Track changes made to this story document
+    owner: scrum-master
+    editors: [scrum-master, dev-agent, qa-agent]
+    
+  - id: dev-agent-record
+    title: Dev Agent Record
+    instruction: This section is populated by the development agent during implementation
+    owner: dev-agent
+    editors: [dev-agent]
+    sections:
+      - id: agent-model
+        title: Agent Model Used
+        template: "{{agent_model_name_version}}"
+        instruction: Record the specific AI agent model and version used for development
+        owner: dev-agent
+        editors: [dev-agent]
+        
+      - id: debug-log-references
+        title: Debug Log References
+        instruction: Reference any debug logs or traces generated during development
+        owner: dev-agent
+        editors: [dev-agent]
+        
+      - id: completion-notes
+        title: Completion Notes List
+        instruction: Notes about the completion of tasks and any issues encountered
+        owner: dev-agent
+        editors: [dev-agent]
+        
+      - id: file-list
+        title: File List
+        instruction: List all files created, modified, or affected during story implementation
+        owner: dev-agent
+        editors: [dev-agent]
+        
+  - id: qa-results
+    title: QA Results
+    instruction: Results from QA Agent QA review of the completed story implementation
+    owner: qa-agent
+    editors: [qa-agent]
+==================== END: .bmad-core/templates/story-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/story-draft-checklist.md ====================
 # Story Draft Checklist
@@ -597,32 +671,3 @@ Be pragmatic - perfect documentation doesn't exist, but it must be enough to pro
 - NEEDS REVISION: The story requires updates (see issues)
 - BLOCKED: External information required (specify what information)
 ==================== END: .bmad-core/checklists/story-draft-checklist.md ====================
-
-==================== START: .bmad-core/utils/template-format.md ====================
-# Template Format Conventions
-
-Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
-
-## Template Markup Elements
-
-- **{{placeholders}}**: Variables to be replaced with actual content
-- **[[LLM: instructions]]**: Internal processing instructions for AI agents (never shown to users)
-- **REPEAT** sections: Content blocks that may be repeated as needed
-- **^^CONDITION^^** blocks: Conditional content included only if criteria are met
-- **@{examples}**: Example content for guidance (never output to users)
-
-## Processing Rules
-
-- Replace all {{placeholders}} with project-specific content
-- Execute all [[LLM: instructions]] internally without showing users
-- Process conditional and repeat blocks as specified
-- Use examples for guidance but never include them in final output
-- Present only clean, formatted content to users
-
-## Critical Guidelines
-
-- **NEVER display template markup, LLM instructions, or examples to users**
-- Template elements are for AI processing only
-- Focus on faithful template execution and clean output
-- All template-specific instructions are embedded within templates
-==================== END: .bmad-core/utils/template-format.md ====================

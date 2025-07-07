@@ -1,91 +1,79 @@
-# Create Document from Template Task
+# Create Document from Template (YAML Driven)
 
-## Purpose
+## CRITICAL: Mandatory Elicitation Format
 
-Generate documents from templates by EXECUTING (not just reading) embedded instructions from the perspective of the selected agent persona.
+**When `elicit: true`, ALWAYS use this exact format:**
 
-## CRITICAL RULES
+1. Present section content
+2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
+3. Present numbered options 1-9:
+   - **Option 1:** Always "Proceed to next section"
+   - **Options 2-9:** Select 8 methods from data/elicitation-methods
+   - End with: "Select 1-9 or just type your question/feedback:"
 
-1. **Templates are PROGRAMS** - Execute every [[LLM:]] instruction exactly as written
-2. **NEVER show markup** - Hide all [[LLM:]], {{placeholders}}, @{examples}, and template syntax
-3. **STOP and EXECUTE** - When you see "apply tasks#" or "execute tasks#", STOP and run that task immediately
-4. **WAIT for user input** - At review points and after elicitation tasks
+**NEVER ask yes/no questions or use any other format.**
 
-## Execution Flow
+## Processing Flow
 
-### 0. Check Workflow Plan (if configured)
+1. **Parse YAML template** - Load template metadata and sections
+2. **Set preferences** - Show current mode (Interactive), confirm output file
+3. **Process each section:**
+   - Skip if condition unmet
+   - Check agent permissions (owner/editors) - note if section is restricted to specific agents
+   - Draft content using section instruction
+   - Present content + detailed rationale
+   - **IF elicit: true** → MANDATORY 1-9 options format
+   - Save to file if possible
+4. **Continue until complete**
 
-[[LLM: Check if plan tracking is enabled in core-config.yaml]]
+## Detailed Rationale Requirements
 
-- If `workflow.trackProgress: true`, check for active plan using {root}/utils/plan-management.md
-- If plan exists and this document creation is part of the plan:
-  - Verify this is the expected next step
-  - If out of sequence and `enforceSequence: true`, warn user and halt without user override
-  - If out of sequence and `enforceSequence: false`, ask for confirmation
-- Continue with normal execution after plan check
+When presenting section content, ALWAYS include rationale that explains:
 
-### 1. Identify Template
+- Trade-offs and choices made (what was chosen over alternatives and why)
+- Key assumptions made during drafting
+- Interesting or questionable decisions that need user attention
+- Areas that might need validation
 
-- Load from `{root}/templates/*.md` or `{root}/templates directory`
-- Agent-specific templates are listed in agent's dependencies
-- If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
+## Elicitation Results Flow
 
-### 2. Ask Interaction Mode
+After user selects elicitation method (2-9):
 
-> 1. **Incremental** - Section by section with reviews
-> 2. **YOLO Mode** - Complete draft then review (user can type `/yolo` anytime to switch)
+1. Execute method from data/elicitation-methods
+2. Present results with insights
+3. Offer options:
+   - **1. Apply changes and update section**
+   - **2. Return to elicitation menu**
+   - **3. Ask any questions or engage further with this elicitation**
 
-### 3. Execute Template
+## Agent Permissions
 
-- Replace {{placeholders}} with real content
-- Execute [[LLM:]] instructions as you encounter them
-- Process <<REPEAT>> loops and ^^CONDITIONS^^
-- Use @{examples} for guidance but never output them
+When processing sections with agent permission fields:
 
-### 4. Key Execution Patterns
+- **owner**: Note which agent role initially creates/populates the section
+- **editors**: List agent roles allowed to modify the section
+- **readonly**: Mark sections that cannot be modified after creation
 
-**When you see:** `[[LLM: Draft X and immediately execute {root}/tasks/advanced-elicitation.md]]`
+**For sections with restricted access:**
 
-- Draft the content
-- Present it to user
-- IMMEDIATELY execute the task
-- Wait for completion before continuing
+- Include a note in the generated document indicating the responsible agent
+- Example: "_(This section is owned by dev-agent and can only be modified by dev-agent)_"
 
-**When you see:** `[[LLM: After section completion, apply {root}/tasks/Y.md]]`
+## YOLO Mode
 
-- Finish the section
-- STOP and execute the task
-- Wait for user input
+User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 
-### 5. Validation & Final Presentation
+## CRITICAL REMINDERS
 
-- Run any specified checklists
-- Present clean, formatted content only
-- No truncation or summarization
-- Begin directly with content (no preamble)
-- Include any handoff prompts from template
+**❌ NEVER:**
 
-### 6. Update Workflow Plan (if applicable)
+- Ask yes/no questions for elicitation
+- Use any format other than 1-9 numbered options
+- Create new elicitation methods
 
-[[LLM: After successful document creation]]
+**✅ ALWAYS:**
 
-- If plan tracking is enabled and document was part of plan:
-  - Call update-workflow-plan task to mark step complete
-  - Parameters: task: create-doc, step_id: {from plan}, status: complete
-  - Show next recommended step from plan
-
-## Common Mistakes to Avoid
-
-❌ Skipping elicitation tasks
-❌ Showing template markup to users
-❌ Continuing past STOP signals
-❌ Combining multiple review points
-
-✅ Execute ALL instructions in sequence
-✅ Present only clean, formatted content
-✅ Stop at every elicitation point
-✅ Wait for user confirmation when instructed
-
-## Remember
-
-Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
+- Use exact 1-9 format when elicit: true
+- Select options 2-9 from data/elicitation-methods only
+- Provide detailed rationale explaining decisions
+- End with "Select 1-9 or just type your question/feedback:"

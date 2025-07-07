@@ -50,6 +50,7 @@ activation-instructions:
   - Only read the files/tasks listed here when user selects them for execution to minimize context usage
   - The customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - Greet the user with your name and role, and inform of the *help command.
 agent:
   name: John
   id: pm
@@ -71,128 +72,112 @@ persona:
     - Collaborative & iterative approach
     - Proactive risk identification
     - Strategic thinking & outcome-oriented
-startup:
-  - Greet the user with your name and role, and inform of the *help command.
 commands:
   - help: Show numbered list of the following commands to allow selection
-  - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
-  - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
+  - create-doc {template}: execute task create-doc for template provided, if no template then ONLY list dependencies.templates
+  - yolo: Toggle Yolo Mode
   - doc-out: Output full document to current destination file
   - exit: Exit (confirm)
 dependencies:
   tasks:
-    - create-doc
-    - correct-course
-    - create-deep-research-prompt
-    - brownfield-create-epic
-    - brownfield-create-story
-    - execute-checklist
-    - shard-doc
+    - create-doc.md
+    - correct-course.md
+    - create-deep-research-prompt.md
+    - brownfield-create-epic.md
+    - brownfield-create-story.md
+    - execute-checklist.md
+    - shard-doc.md
   templates:
-    - prd-tmpl
-    - brownfield-prd-tmpl
+    - prd-tmpl.yaml
+    - brownfield-prd-tmpl.yaml
   checklists:
-    - pm-checklist
-    - change-checklist
+    - pm-checklist.md
+    - change-checklist.md
   data:
-    - technical-preferences
-  utils:
-    - template-format
+    - technical-preferences.md
 ```
 ==================== END: .bmad-core/agents/pm.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
-# Create Document from Template Task
+# Create Document from Template (YAML Driven)
 
-## Purpose
+## CRITICAL: Mandatory Elicitation Format
 
-Generate documents from templates by EXECUTING (not just reading) embedded instructions from the perspective of the selected agent persona.
+**When `elicit: true`, ALWAYS use this exact format:**
 
-## CRITICAL RULES
+1. Present section content
+2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
+3. Present numbered options 1-9:
+   - **Option 1:** Always "Proceed to next section"
+   - **Options 2-9:** Select 8 methods from data/elicitation-methods
+   - End with: "Select 1-9 or just type your question/feedback:"
 
-1. **Templates are PROGRAMS** - Execute every [[LLM:]] instruction exactly as written
-2. **NEVER show markup** - Hide all [[LLM:]], {{placeholders}}, @{examples}, and template syntax
-3. **STOP and EXECUTE** - When you see "apply tasks#" or "execute tasks#", STOP and run that task immediately
-4. **WAIT for user input** - At review points and after elicitation tasks
+**NEVER ask yes/no questions or use any other format.**
 
-## Execution Flow
+## Processing Flow
 
-### 0. Check Workflow Plan (if configured)
+1. **Parse YAML template** - Load template metadata and sections
+2. **Set preferences** - Show current mode (Interactive), confirm output file
+3. **Process each section:**
+   - Skip if condition unmet
+   - Check agent permissions (owner/editors) - note if section is restricted to specific agents
+   - Draft content using section instruction
+   - Present content + detailed rationale
+   - **IF elicit: true** → MANDATORY 1-9 options format
+   - Save to file if possible
+4. **Continue until complete**
 
-[[LLM: Check if plan tracking is enabled in core-config.yaml]]
+## Detailed Rationale Requirements
 
-- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
-- If plan exists and this document creation is part of the plan:
-  - Verify this is the expected next step
-  - If out of sequence and `enforceSequence: true`, warn user and halt without user override
-  - If out of sequence and `enforceSequence: false`, ask for confirmation
-- Continue with normal execution after plan check
+When presenting section content, ALWAYS include rationale that explains:
 
-### 1. Identify Template
+- Trade-offs and choices made (what was chosen over alternatives and why)
+- Key assumptions made during drafting
+- Interesting or questionable decisions that need user attention
+- Areas that might need validation
 
-- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
-- Agent-specific templates are listed in agent's dependencies
-- If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
+## Elicitation Results Flow
 
-### 2. Ask Interaction Mode
+After user selects elicitation method (2-9):
 
-> 1. **Incremental** - Section by section with reviews
-> 2. **YOLO Mode** - Complete draft then review (user can type `/yolo` anytime to switch)
+1. Execute method from data/elicitation-methods
+2. Present results with insights
+3. Offer options:
+   - **1. Apply changes and update section**
+   - **2. Return to elicitation menu**
+   - **3. Ask any questions or engage further with this elicitation**
 
-### 3. Execute Template
+## Agent Permissions
 
-- Replace {{placeholders}} with real content
-- Execute [[LLM:]] instructions as you encounter them
-- Process <<REPEAT>> loops and ^^CONDITIONS^^
-- Use @{examples} for guidance but never output them
+When processing sections with agent permission fields:
 
-### 4. Key Execution Patterns
+- **owner**: Note which agent role initially creates/populates the section
+- **editors**: List agent roles allowed to modify the section
+- **readonly**: Mark sections that cannot be modified after creation
 
-**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
+**For sections with restricted access:**
 
-- Draft the content
-- Present it to user
-- IMMEDIATELY execute the task
-- Wait for completion before continuing
+- Include a note in the generated document indicating the responsible agent
+- Example: "_(This section is owned by dev-agent and can only be modified by dev-agent)_"
 
-**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
+## YOLO Mode
 
-- Finish the section
-- STOP and execute the task
-- Wait for user input
+User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 
-### 5. Validation & Final Presentation
+## CRITICAL REMINDERS
 
-- Run any specified checklists
-- Present clean, formatted content only
-- No truncation or summarization
-- Begin directly with content (no preamble)
-- Include any handoff prompts from template
+**❌ NEVER:**
 
-### 6. Update Workflow Plan (if applicable)
+- Ask yes/no questions for elicitation
+- Use any format other than 1-9 numbered options
+- Create new elicitation methods
 
-[[LLM: After successful document creation]]
+**✅ ALWAYS:**
 
-- If plan tracking is enabled and document was part of plan:
-  - Call update-workflow-plan task to mark step complete
-  - Parameters: task: create-doc, step_id: {from plan}, status: complete
-  - Show next recommended step from plan
-
-## Common Mistakes to Avoid
-
-❌ Skipping elicitation tasks
-❌ Showing template markup to users
-❌ Continuing past STOP signals
-❌ Combining multiple review points
-
-✅ Execute ALL instructions in sequence
-✅ Present only clean, formatted content
-✅ Stop at every elicitation point
-✅ Wait for user confirmation when instructed
-
-## Remember
-
-Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
+- Use exact 1-9 format when elicit: true
+- Select options 2-9 from data/elicitation-methods only
+- Provide detailed rationale explaining decisions
+- End with "Select 1-9 or just type your question/feedback:"
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/correct-course.md ====================
@@ -1178,479 +1163,493 @@ Document sharded successfully:
 - Ensure the sharding is reversible (could reconstruct the original from shards)
 ==================== END: .bmad-core/tasks/shard-doc.md ====================
 
-==================== START: .bmad-core/templates/prd-tmpl.md ====================
-# {{Project Name}} Product Requirements Document (PRD)
-
-[[LLM: The default path and filename unless specified is docs/prd.md]]
-
-[[LLM: If available, review any provided document or ask if any are optionally available: Project Brief]]
-
-## Goals and Background Context
-
-[[LLM: Populate the 2 child sections based on what we have received from user description or the provided brief. Allow user to review the 2 sections and offer changes before proceeding]]
-
-### Goals
-
-[[LLM: Bullet list of 1 line desired outcomes the PRD will deliver if successful - user and project desires]]
-
-### Background Context
-
-[[LLM: 1-2 short paragraphs summarizing the background context, such as what we learned in the brief without being redundant with the goals, what and why this solves a problem, what the current landscape or need is etc...]]
-
-### Change Log
-
-[[LLM: Track document versions and changes]]
-
-| Date | Version | Description | Author |
-| :--- | :------ | :---------- | :----- |
-
-## Requirements
-
-[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute .bmad-core/tasks/advanced-elicitation.md display]]
-
-### Functional
-
-[[LLM: Each Requirement will be a bullet markdown and an identifier sequence starting with FR`.]]
-@{example: - FR6: The Todo List uses AI to detect and warn against adding potentially duplicate todo items that are worded differently.}
-
-### Non Functional
-
-[[LLM: Each Requirement will be a bullet markdown and an identifier sequence starting with NFR`.]]
-@{example: - NFR1: AWS service usage **must** aim to stay within free-tier limits where feasible.}
-
-^^CONDITION: has_ui^^
-
-## User Interface Design Goals
-
-[[LLM: Capture high-level UI/UX vision to guide Design Architect and to inform story creation. Steps:
-
-1. Pre-fill all subsections with educated guesses based on project context
-2. Present the complete rendered section to user
-3. Clearly let the user know where assumptions were made
-4. Ask targeted questions for unclear/missing elements or areas needing more specification
-5. This is NOT detailed UI spec - focus on product vision and user goals
-6. After section completion, immediately apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
-
-### Overall UX Vision
-
-### Key Interaction Paradigms
-
-### Core Screens and Views
-
-[[LLM: From a product perspective, what are the most critical screens or views necessary to deliver the the PRD values and goals? This is meant to be Conceptual High Level to Drive Rough Epic or User Stories]]
-
-@{example}
-
-- Login Screen
-- Main Dashboard
-- Item Detail Page
-- Settings Page
-  @{/example}
-
-### Accessibility: { None, WCAG, etc }
-
-### Branding
-
-[[LLM: Any known branding elements or style guides that must be incorporated?]]
-
-@{example}
-
-- Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions.
-- Attached is the full color pallet and tokens for our corporate branding.
-  @{/example}
-
-### Target Device and Platforms
-
-@{example}
-"Web Responsive, and all mobile platforms", "IPhone Only", "ASCII Windows Desktop"
-@{/example}
-
-^^/CONDITION: has_ui^^
-
-## Technical Assumptions
-
-[[LLM: Gather technical decisions that will guide the Architect. Steps:
-
-1. Check if `.bmad-core/data/technical-preferences.yaml` or an attached `technical-preferences` file exists - use it to pre-populate choices
-2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
-3. For unknowns, offer guidance based on project goals and MVP scope
-4. Document ALL technical choices with rationale (why this choice fits the project)
-5. These become constraints for the Architect - be specific and complete
-6. After section completion, apply `.bmad-core/tasks/advanced-elicitation.md` protocol.]]
-
-### Repository Structure: { Monorepo, Polyrepo, etc...}
-
-### Service Architecture
-
-[[LLM: CRITICAL DECISION - Document the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo).]]
-
-### Testing requirements
-
-[[LLM: CRITICAL DECISION - Document the testing requirements, unit only, integration, e2e, manual, need for manual testing convenience methods).]]
-
-### Additional Technical Assumptions and Requests
-
-[[LLM: Throughout the entire process of drafting this document, if any other technical assumptions are raised or discovered appropriate for the architect, add them here as additional bulleted items]]
-
-## Epics
-
-[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute .bmad-core/tasks/advanced-elicitation.md display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
-
-CRITICAL: Epics MUST be logically sequential following agile best practices:
-
-- Each epic should deliver a significant, end-to-end, fully deployable increment of testable functionality
-- Epic 1 must establish foundational project infrastructure (app setup, Git, CI/CD, core services) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, even as simple as a health-check route or display of a simple canary page - remember this when we produce the stories for the first epic!
-- Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
-- Not every project needs multiple epics, an epic needs to deliver value. For example, an API completed can deliver value even if a UI is not complete and planned for a separate epic.
-- Err on the side of less epics, but let the user know your rationale and offer options for splitting them if it seems some are too large or focused on disparate things.
-- Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.]]
-
-<<REPEAT: epic_list>>
-
-- Epic{{epic_number}} {{epic_title}}: {{short_goal}}
-
-<</REPEAT>>
-
-@{example: epic_list}
-
-1. Foundation & Core Infrastructure: Establish project setup, authentication, and basic user management
-2. Core Business Entities: Create and manage primary domain objects with CRUD operations
-3. User Workflows & Interactions: Enable key user journeys and business processes
-4. Reporting & Analytics: Provide insights and data visualization for users
-
-@{/example}
-
-[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute .bmad-core/tasks/advanced-elicitation.md display, before moving on to the next epic.]]
-
-<<REPEAT: epic_details>>
-
-## Epic {{epic_number}} {{epic_title}}
-
-{{epic_goal}} [[LLM: Expanded goal - 2-3 sentences describing the objective and value all the stories will achieve]]
-
-[[LLM: CRITICAL STORY SEQUENCING REQUIREMENTS:
-
-- Stories within each epic MUST be logically sequential
-- Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
-- No story should depend on work from a later story or epic
-- Identify and note any direct prerequisite stories
-- Focus on "what" and "why" not "how" (leave technical implementation to Architect) yet be precise enough to support a logical sequential order of operations from story to story.
-- Ensure each story delivers clear user or business value, try to avoid enablers and build them into stories that deliver value.
-- Size stories for AI agent execution: Each story must be completable by a single AI agent in one focused session without context overflow
-- Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
-- If a story seems complex, break it down further as long as it can deliver a vertical slice
-- Each story should result in working, testable code before the agent's context window fills]]
-
-<<REPEAT: story>>
-
-### Story {{epic_number}}.{{story_number}} {{story_title}}
-
-As a {{user_type}},
-I want {{action}},
-so that {{benefit}}.
-
-#### Acceptance Criteria
-
-[[LLM: Define clear, comprehensive, and testable acceptance criteria that:
-
-- Precisely define what "done" means from a functional perspective
-- Are unambiguous and serve as basis for verification
-- Include any critical non-functional requirements from the PRD
-- Consider local testability for backend/data components
-- Specify UI/UX requirements and framework adherence where applicable
-- Avoid cross-cutting concerns that should be in other stories or PRD sections]]
-
-<<REPEAT: criteria>>
-
-- {{criterion number}}: {{criteria}}
-
-<</REPEAT>>
-<</REPEAT>>
-<</REPEAT>>
-
-## Checklist Results Report
-
-[[LLM: Before running the checklist and drafting the prompts, offer to output the full updated PRD. If outputting it, confirm with the user that you will be proceeding to run the checklist and produce the report. Once the user confirms, execute the `pm-checklist` and populate the results in this section.]]
-
-## Next Steps
-
-### Design Architect Prompt
-
-[[LLM: This section will contain the prompt for the Design Architect, keep it short and to the point to initiate create architecture mode using this document as input.]]
-
-### Architect Prompt
-
-[[LLM: This section will contain the prompt for the Architect, keep it short and to the point to initiate create architecture mode using this document as input.]]
-==================== END: .bmad-core/templates/prd-tmpl.md ====================
-
-==================== START: .bmad-core/templates/brownfield-prd-tmpl.md ====================
-# {{Project Name}} Brownfield Enhancement PRD
-
-[[LLM: The default path and filename unless specified is docs/prd.md]]
-
-[[LLM: IMPORTANT - SCOPE ASSESSMENT REQUIRED:
-
-This PRD is for SIGNIFICANT enhancements to existing projects that require comprehensive planning and multiple stories. Before proceeding:
-
-1. **Assess Enhancement Complexity**: If this is a simple feature addition or bug fix that could be completed in 1-2 focused development sessions, STOP and recommend: "For simpler changes, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead. This full PRD process is designed for substantial enhancements that require architectural planning and multiple coordinated stories."
-
-2. **Project Context**: Determine if we're working in an IDE with the project already loaded or if the user needs to provide project information. If project files are available, analyze existing documentation in the docs folder. If insufficient documentation exists, recommend running the document-project task first.
-
-3. **Deep Assessment Requirement**: You MUST thoroughly analyze the existing project structure, patterns, and constraints before making ANY suggestions. Every recommendation must be grounded in actual project analysis, not assumptions.]]
-
-## Intro Project Analysis and Context
-
-[[LLM: Gather comprehensive information about the existing project. This section must be completed before proceeding with requirements.
-
-CRITICAL: Throughout this analysis, explicitly confirm your understanding with the user. For every assumption you make about the existing project, ask: "Based on my analysis, I understand that [assumption]. Is this correct?"
-
-Do not proceed with any recommendations until the user has validated your understanding of the existing system.]]
-
-### Existing Project Overview
-
-[[LLM: Check if document-project analysis was already performed. If yes, reference that output instead of re-analyzing.]]
-
-**Analysis Source**: [[LLM: Indicate one of the following:
-- Document-project output available at: {{path}}
-- IDE-based fresh analysis
-- User-provided information
-]]
-
-**Current Project State**: [[LLM: 
-- If document-project output exists: Extract summary from "High Level Architecture" and "Technical Summary" sections
-- Otherwise: Brief description of what the project currently does and its primary purpose
-]]
-
-### Available Documentation Analysis
-
-[[LLM: 
-If document-project was run:
-- Note: "Document-project analysis available - using existing technical documentation"
-- List key documents created by document-project
-- Skip the missing documentation check below
-
-Otherwise, check for existing documentation:
-]]
-
-**Available Documentation**:
-
-- [ ] Tech Stack Documentation [[LLM: If from document-project, check ✓]]
-- [ ] Source Tree/Architecture [[LLM: If from document-project, check ✓]]
-- [ ] Coding Standards [[LLM: If from document-project, may be partial]]
-- [ ] API Documentation [[LLM: If from document-project, check ✓]]
-- [ ] External API Documentation [[LLM: If from document-project, check ✓]]
-- [ ] UX/UI Guidelines [[LLM: May not be in document-project]]
-- [ ] Technical Debt Documentation [[LLM: If from document-project, check ✓]]
-- [ ] Other: \***\*\_\_\_\*\***
-
-[[LLM: 
-- If document-project was already run: "Using existing project analysis from document-project output."
-- If critical documentation is missing and no document-project: "I recommend running the document-project task first..."
-]]
-
-### Enhancement Scope Definition
-
-[[LLM: Work with user to clearly define what type of enhancement this is. This is critical for scoping and approach.]]
-
-**Enhancement Type**: [[LLM: Determine with user which applies]]
-
-- [ ] New Feature Addition
-- [ ] Major Feature Modification
-- [ ] Integration with New Systems
-- [ ] Performance/Scalability Improvements
-- [ ] UI/UX Overhaul
-- [ ] Technology Stack Upgrade
-- [ ] Bug Fix and Stability Improvements
-- [ ] Other: \***\*\_\_\_\*\***
-
-**Enhancement Description**: [[LLM: 2-3 sentences describing what the user wants to add or change]]
-
-**Impact Assessment**: [[LLM: Assess the scope of impact on existing codebase]]
-
-- [ ] Minimal Impact (isolated additions)
-- [ ] Moderate Impact (some existing code changes)
-- [ ] Significant Impact (substantial existing code changes)
-- [ ] Major Impact (architectural changes required)
-
-### Goals and Background Context
-
-#### Goals
-
-[[LLM: Bullet list of 1-line desired outcomes this enhancement will deliver if successful]]
-
-#### Background Context
-
-[[LLM: 1-2 short paragraphs explaining why this enhancement is needed, what problem it solves, and how it fits with the existing project]]
-
-### Change Log
-
-| Change | Date | Version | Description | Author |
-| ------ | ---- | ------- | ----------- | ------ |
-
-## Requirements
-
-[[LLM: Draft functional and non-functional requirements based on your validated understanding of the existing project. Before presenting requirements, confirm: "These requirements are based on my understanding of your existing system. Please review carefully and confirm they align with your project's reality." Then immediately execute tasks#advanced-elicitation display]]
-
-### Functional
-
-[[LLM: Each Requirement will be a bullet markdown with identifier starting with FR]]
-@{example: - FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality.}
-
-### Non Functional
-
-[[LLM: Each Requirement will be a bullet markdown with identifier starting with NFR. Include constraints from existing system]]
-@{example: - NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%.}
-
-### Compatibility Requirements
-
-[[LLM: Critical for brownfield - what must remain compatible]]
-
-- CR1: [[LLM: Existing API compatibility requirements]]
-- CR2: [[LLM: Database schema compatibility requirements]]
-- CR3: [[LLM: UI/UX consistency requirements]]
-- CR4: [[LLM: Integration compatibility requirements]]
-
-^^CONDITION: has_ui^^
-
-## User Interface Enhancement Goals
-
-[[LLM: For UI changes, capture how they will integrate with existing UI patterns and design systems]]
-
-### Integration with Existing UI
-
-[[LLM: Describe how new UI elements will fit with existing design patterns, style guides, and component libraries]]
-
-### Modified/New Screens and Views
-
-[[LLM: List only the screens/views that will be modified or added]]
-
-### UI Consistency Requirements
-
-[[LLM: Specific requirements for maintaining visual and interaction consistency with existing application]]
-
-^^/CONDITION: has_ui^^
-
-## Technical Constraints and Integration Requirements
-
-[[LLM: This section replaces separate architecture documentation. Gather detailed technical constraints from existing project analysis.]]
-
-### Existing Technology Stack
-
-[[LLM: 
-If document-project output available:
-- Extract from "Actual Tech Stack" table in High Level Architecture section
-- Include version numbers and any noted constraints
-
-Otherwise, document the current technology stack:
-]]
-
-**Languages**: [[LLM: From document-project or fresh analysis]]
-**Frameworks**: [[LLM: From document-project or fresh analysis]]
-**Database**: [[LLM: From document-project or fresh analysis]]
-**Infrastructure**: [[LLM: From document-project or fresh analysis]]
-**External Dependencies**: [[LLM: From document-project "External Services" section or fresh analysis]]
-
-### Integration Approach
-
-[[LLM: Define how the enhancement will integrate with existing architecture]]
-
-**Database Integration Strategy**: [[LLM: How new features will interact with existing database]]
-**API Integration Strategy**: [[LLM: How new APIs will integrate with existing API structure]]
-**Frontend Integration Strategy**: [[LLM: How new UI components will integrate with existing frontend]]
-**Testing Integration Strategy**: [[LLM: How new tests will integrate with existing test suite]]
-
-### Code Organization and Standards
-
-[[LLM: Based on existing project analysis, define how new code will fit existing patterns]]
-
-**File Structure Approach**: [[LLM: How new files will fit existing project structure]]
-**Naming Conventions**: [[LLM: Existing naming conventions that must be followed]]
-**Coding Standards**: [[LLM: Existing coding standards and linting rules]]
-**Documentation Standards**: [[LLM: How new code documentation will match existing patterns]]
-
-### Deployment and Operations
-
-[[LLM: How the enhancement fits existing deployment pipeline]]
-
-**Build Process Integration**: [[LLM: How enhancement builds with existing process]]
-**Deployment Strategy**: [[LLM: How enhancement will be deployed alongside existing features]]
-**Monitoring and Logging**: [[LLM: How enhancement will integrate with existing monitoring]]
-**Configuration Management**: [[LLM: How new configuration will integrate with existing config]]
-
-### Risk Assessment and Mitigation
-
-[[LLM: 
-If document-project output available:
-- Reference "Technical Debt and Known Issues" section
-- Include "Workarounds and Gotchas" that might impact enhancement
-- Note any identified constraints from "Critical Technical Debt"
-
-Build risk assessment incorporating existing known issues:
-]]
-
-**Technical Risks**: [[LLM: Include risks from document-project + new enhancement risks]]
-**Integration Risks**: [[LLM: Reference integration constraints from document-project]]
-**Deployment Risks**: [[LLM: Include deployment gotchas from document-project]]
-**Mitigation Strategies**: [[LLM: Address both existing and new risks]]
-
-## Epic and Story Structure
-
-[[LLM: For brownfield projects, favor a single comprehensive epic unless the user is clearly requesting multiple unrelated enhancements. Before presenting the epic structure, confirm: "Based on my analysis of your existing project, I believe this enhancement should be structured as [single epic/multiple epics] because [rationale based on actual project analysis]. Does this align with your understanding of the work required?" Then present the epic structure and immediately execute tasks#advanced-elicitation display.]]
-
-### Epic Approach
-
-[[LLM: Explain the rationale for epic structure - typically single epic for brownfield unless multiple unrelated features]]
-
-**Epic Structure Decision**: [[LLM: Single Epic or Multiple Epics with rationale]]
-
-## Epic 1: {{enhancement_title}}
-
-[[LLM: Comprehensive epic that delivers the brownfield enhancement while maintaining existing functionality]]
-
-**Epic Goal**: [[LLM: 2-3 sentences describing the complete enhancement objective and value]]
-
-**Integration Requirements**: [[LLM: Key integration points with existing system]]
-
-[[LLM: CRITICAL STORY SEQUENCING FOR BROWNFIELD:
-
-- Stories must ensure existing functionality remains intact
-- Each story should include verification that existing features still work
-- Stories should be sequenced to minimize risk to existing system
-- Include rollback considerations for each story
-- Focus on incremental integration rather than big-bang changes
-- Size stories for AI agent execution in existing codebase context
-- MANDATORY: Present the complete story sequence and ask: "This story sequence is designed to minimize risk to your existing system. Does this order make sense given your project's architecture and constraints?"
-- Stories must be logically sequential with clear dependencies identified
-- Each story must deliver value while maintaining system integrity]]
-
-<<REPEAT: story>>
-
-### Story 1.{{story_number}} {{story_title}}
-
-As a {{user_type}},
-I want {{action}},
-so that {{benefit}}.
-
-#### Acceptance Criteria
-
-[[LLM: Define criteria that include both new functionality and existing system integrity]]
-
-<<REPEAT: criteria>>
-
-- {{criterion number}}: {{criteria}}
-
-<</REPEAT>>
-
-#### Integration Verification
-
-[[LLM: Specific verification steps to ensure existing functionality remains intact]]
-
-- IV1: [[LLM: Existing functionality verification requirement]]
-- IV2: [[LLM: Integration point verification requirement]]
-- IV3: [[LLM: Performance impact verification requirement]]
-
-<</REPEAT>>
-==================== END: .bmad-core/templates/brownfield-prd-tmpl.md ====================
+==================== START: .bmad-core/templates/prd-tmpl.yaml ====================
+template:
+  id: prd-template-v2
+  name: Product Requirements Document
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/prd.md
+    title: "{{project_name}} Product Requirements Document (PRD)"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: goals-context
+    title: Goals and Background Context
+    instruction: |
+      Ask if Project Brief document is available. If NO Project Brief exists, STRONGLY recommend creating one first using project-brief-tmpl (it provides essential foundation: problem statement, target users, success metrics, MVP scope, constraints). If user insists on PRD without brief, gather this information during Goals section. If Project Brief exists, review and use it to populate Goals (bullet list of desired outcomes) and Background Context (1-2 paragraphs on what this solves and why) so we can determine what is and is not in scope for PRD mvp. Either way this is critical to determine the requirements. Include Change Log table.
+    sections:
+      - id: goals
+        title: Goals
+        type: bullet-list
+        instruction: Bullet list of 1 line desired outcomes the PRD will deliver if successful - user and project desires
+      - id: background
+        title: Background Context
+        type: paragraphs
+        instruction: 1-2 short paragraphs summarizing the background context, such as what we learned in the brief without being redundant with the goals, what and why this solves a problem, what the current landscape or need is
+      - id: changelog
+        title: Change Log
+        type: table
+        columns: [Date, Version, Description, Author]
+        instruction: Track document versions and changes
+
+  - id: requirements
+    title: Requirements
+    instruction: Draft the list of functional and non functional requirements under the two child sections
+    elicit: true
+    sections:
+      - id: functional
+        title: Functional
+        type: numbered-list
+        prefix: FR
+        instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with FR
+        examples:
+          - "FR6: The Todo List uses AI to detect and warn against potentially duplicate todo items that are worded differently."
+      - id: non-functional
+        title: Non Functional
+        type: numbered-list
+        prefix: NFR
+        instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with NFR
+        examples:
+          - "NFR1: AWS service usage must aim to stay within free-tier limits where feasible."
+
+  - id: ui-goals
+    title: User Interface Design Goals
+    condition: PRD has UX/UI requirements
+    instruction: |
+      Capture high-level UI/UX vision to guide Design Architect and to inform story creation. Steps:
+      
+      1. Pre-fill all subsections with educated guesses based on project context
+      2. Present the complete rendered section to user
+      3. Clearly let the user know where assumptions were made
+      4. Ask targeted questions for unclear/missing elements or areas needing more specification
+      5. This is NOT detailed UI spec - focus on product vision and user goals
+    elicit: true
+    choices:
+      accessibility: [None, WCAG AA, WCAG AAA]
+      platforms: [Web Responsive, Mobile Only, Desktop Only, Cross-Platform]
+    sections:
+      - id: ux-vision
+        title: Overall UX Vision
+      - id: interaction-paradigms
+        title: Key Interaction Paradigms
+      - id: core-screens
+        title: Core Screens and Views
+        instruction: From a product perspective, what are the most critical screens or views necessary to deliver the the PRD values and goals? This is meant to be Conceptual High Level to Drive Rough Epic or User Stories
+        examples:
+          - "Login Screen"
+          - "Main Dashboard"
+          - "Item Detail Page"
+          - "Settings Page"
+      - id: accessibility
+        title: "Accessibility: {None|WCAG AA|WCAG AAA|Custom Requirements}"
+      - id: branding
+        title: Branding
+        instruction: Any known branding elements or style guides that must be incorporated?
+        examples:
+          - "Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions."
+          - "Attached is the full color pallet and tokens for our corporate branding."
+      - id: target-platforms
+        title: "Target Device and Platforms: {Web Responsive|Mobile Only|Desktop Only|Cross-Platform}"
+        examples:
+          - "Web Responsive, and all mobile platforms"
+          - "iPhone Only"
+          - "ASCII Windows Desktop"
+
+  - id: technical-assumptions
+    title: Technical Assumptions
+    instruction: |
+      Gather technical decisions that will guide the Architect. Steps:
+      
+      1. Check if .bmad-core/data/technical-preferences.yaml or an attached technical-preferences file exists - use it to pre-populate choices
+      2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
+      3. For unknowns, offer guidance based on project goals and MVP scope
+      4. Document ALL technical choices with rationale (why this choice fits the project)
+      5. These become constraints for the Architect - be specific and complete
+    elicit: true
+    choices:
+      repository: [Monorepo, Polyrepo]
+      architecture: [Monolith, Microservices, Serverless]
+      testing: [Unit Only, Unit + Integration, Full Testing Pyramid]
+    sections:
+      - id: repository-structure
+        title: "Repository Structure: {Monorepo|Polyrepo|Multi-repo}"
+      - id: service-architecture
+        title: Service Architecture
+        instruction: "CRITICAL DECISION - Document the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo)."
+      - id: testing-requirements
+        title: Testing Requirements
+        instruction: "CRITICAL DECISION - Document the testing requirements, unit only, integration, e2e, manual, need for manual testing convenience methods)."
+      - id: additional-assumptions
+        title: Additional Technical Assumptions and Requests
+        instruction: Throughout the entire process of drafting this document, if any other technical assumptions are raised or discovered appropriate for the architect, add them here as additional bulleted items
+
+  - id: epic-list
+    title: Epic List
+    instruction: |
+      Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+      
+      CRITICAL: Epics MUST be logically sequential following agile best practices:
+      
+      - Each epic should deliver a significant, end-to-end, fully deployable increment of testable functionality
+      - Epic 1 must establish foundational project infrastructure (app setup, Git, CI/CD, core services) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, even as simple as a health-check route or display of a simple canary page - remember this when we produce the stories for the first epic!
+      - Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
+      - Not every project needs multiple epics, an epic needs to deliver value. For example, an API completed can deliver value even if a UI is not complete and planned for a separate epic.
+      - Err on the side of less epics, but let the user know your rationale and offer options for splitting them if it seems some are too large or focused on disparate things.
+      - Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.
+    elicit: true
+    examples:
+      - "Epic 1: Foundation & Core Infrastructure: Establish project setup, authentication, and basic user management"
+      - "Epic 2: Core Business Entities: Create and manage primary domain objects with CRUD operations"
+      - "Epic 3: User Workflows & Interactions: Enable key user journeys and business processes"
+      - "Epic 4: Reporting & Analytics: Provide insights and data visualization for users"
+
+  - id: epic-details
+    title: Epic {{epic_number}} {{epic_title}}
+    repeatable: true
+    instruction: |
+      After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
+      
+      For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
+      
+      CRITICAL STORY SEQUENCING REQUIREMENTS:
+      
+      - Stories within each epic MUST be logically sequential
+      - Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
+      - No story should depend on work from a later story or epic
+      - Identify and note any direct prerequisite stories
+      - Focus on "what" and "why" not "how" (leave technical implementation to Architect) yet be precise enough to support a logical sequential order of operations from story to story.
+      - Ensure each story delivers clear user or business value, try to avoid enablers and build them into stories that deliver value.
+      - Size stories for AI agent execution: Each story must be completable by a single AI agent in one focused session without context overflow
+      - Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
+      - If a story seems complex, break it down further as long as it can deliver a vertical slice
+    elicit: true
+    template: "{{epic_goal}}"
+    sections:
+      - id: story
+        title: Story {{epic_number}}.{{story_number}} {{story_title}}
+        repeatable: true
+        template: |
+          As a {{user_type}},
+          I want {{action}},
+          so that {{benefit}}.
+        sections:
+          - id: acceptance-criteria
+            title: Acceptance Criteria
+            type: numbered-list
+            item_template: "{{criterion_number}}: {{criteria}}"
+            repeatable: true
+            instruction: |
+              Define clear, comprehensive, and testable acceptance criteria that:
+              
+              - Precisely define what "done" means from a functional perspective
+              - Are unambiguous and serve as basis for verification
+              - Include any critical non-functional requirements from the PRD
+              - Consider local testability for backend/data components
+              - Specify UI/UX requirements and framework adherence where applicable
+              - Avoid cross-cutting concerns that should be in other stories or PRD sections
+
+  - id: checklist-results
+    title: Checklist Results Report
+    instruction: Before running the checklist and drafting the prompts, offer to output the full updated PRD. If outputting it, confirm with the user that you will be proceeding to run the checklist and produce the report. Once the user confirms, execute the pm-checklist and populate the results in this section.
+
+  - id: next-steps
+    title: Next Steps
+    sections:
+      - id: design-architect-prompt
+        title: Design Architect Prompt
+        instruction: This section will contain the prompt for the Design Architect, keep it short and to the point to initiate create architecture mode using this document as input.
+      - id: architect-prompt
+        title: Architect Prompt
+        instruction: This section will contain the prompt for the Architect, keep it short and to the point to initiate create architecture mode using this document as input.
+==================== END: .bmad-core/templates/prd-tmpl.yaml ====================
+
+==================== START: .bmad-core/templates/brownfield-prd-tmpl.yaml ====================
+template:
+  id: brownfield-prd-template-v2
+  name: Brownfield Enhancement PRD
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/prd.md
+    title: "{{project_name}} Brownfield Enhancement PRD"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: intro-analysis
+    title: Intro Project Analysis and Context
+    instruction: |
+      IMPORTANT - SCOPE ASSESSMENT REQUIRED:
+      
+      This PRD is for SIGNIFICANT enhancements to existing projects that require comprehensive planning and multiple stories. Before proceeding:
+      
+      1. **Assess Enhancement Complexity**: If this is a simple feature addition or bug fix that could be completed in 1-2 focused development sessions, STOP and recommend: "For simpler changes, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead. This full PRD process is designed for substantial enhancements that require architectural planning and multiple coordinated stories."
+      
+      2. **Project Context**: Determine if we're working in an IDE with the project already loaded or if the user needs to provide project information. If project files are available, analyze existing documentation in the docs folder. If insufficient documentation exists, recommend running the document-project task first.
+      
+      3. **Deep Assessment Requirement**: You MUST thoroughly analyze the existing project structure, patterns, and constraints before making ANY suggestions. Every recommendation must be grounded in actual project analysis, not assumptions.
+      
+      Gather comprehensive information about the existing project. This section must be completed before proceeding with requirements.
+      
+      CRITICAL: Throughout this analysis, explicitly confirm your understanding with the user. For every assumption you make about the existing project, ask: "Based on my analysis, I understand that [assumption]. Is this correct?"
+      
+      Do not proceed with any recommendations until the user has validated your understanding of the existing system.
+    sections:
+      - id: existing-project-overview
+        title: Existing Project Overview
+        instruction: Check if document-project analysis was already performed. If yes, reference that output instead of re-analyzing.
+        sections:
+          - id: analysis-source
+            title: Analysis Source
+            instruction: |
+              Indicate one of the following:
+              - Document-project output available at: {{path}}
+              - IDE-based fresh analysis
+              - User-provided information
+          - id: current-state
+            title: Current Project State
+            instruction: |
+              - If document-project output exists: Extract summary from "High Level Architecture" and "Technical Summary" sections
+              - Otherwise: Brief description of what the project currently does and its primary purpose
+      - id: documentation-analysis
+        title: Available Documentation Analysis
+        instruction: |
+          If document-project was run:
+          - Note: "Document-project analysis available - using existing technical documentation"
+          - List key documents created by document-project
+          - Skip the missing documentation check below
+          
+          Otherwise, check for existing documentation:
+        sections:
+          - id: available-docs
+            title: Available Documentation
+            type: checklist
+            items:
+              - Tech Stack Documentation [[LLM: If from document-project, check ✓]]
+              - Source Tree/Architecture [[LLM: If from document-project, check ✓]]
+              - Coding Standards [[LLM: If from document-project, may be partial]]
+              - API Documentation [[LLM: If from document-project, check ✓]]
+              - External API Documentation [[LLM: If from document-project, check ✓]]
+              - UX/UI Guidelines [[LLM: May not be in document-project]]
+              - Technical Debt Documentation [[LLM: If from document-project, check ✓]]
+              - "Other: {{other_docs}}"
+            instruction: |
+              - If document-project was already run: "Using existing project analysis from document-project output."
+              - If critical documentation is missing and no document-project: "I recommend running the document-project task first..."
+      - id: enhancement-scope
+        title: Enhancement Scope Definition
+        instruction: Work with user to clearly define what type of enhancement this is. This is critical for scoping and approach.
+        sections:
+          - id: enhancement-type
+            title: Enhancement Type
+            type: checklist
+            instruction: Determine with user which applies
+            items:
+              - New Feature Addition
+              - Major Feature Modification
+              - Integration with New Systems
+              - Performance/Scalability Improvements
+              - UI/UX Overhaul
+              - Technology Stack Upgrade
+              - Bug Fix and Stability Improvements
+              - "Other: {{other_type}}"
+          - id: enhancement-description
+            title: Enhancement Description
+            instruction: 2-3 sentences describing what the user wants to add or change
+          - id: impact-assessment
+            title: Impact Assessment
+            type: checklist
+            instruction: Assess the scope of impact on existing codebase
+            items:
+              - Minimal Impact (isolated additions)
+              - Moderate Impact (some existing code changes)
+              - Significant Impact (substantial existing code changes)
+              - Major Impact (architectural changes required)
+      - id: goals-context
+        title: Goals and Background Context
+        sections:
+          - id: goals
+            title: Goals
+            type: bullet-list
+            instruction: Bullet list of 1-line desired outcomes this enhancement will deliver if successful
+          - id: background
+            title: Background Context
+            type: paragraphs
+            instruction: 1-2 short paragraphs explaining why this enhancement is needed, what problem it solves, and how it fits with the existing project
+      - id: changelog
+        title: Change Log
+        type: table
+        columns: [Change, Date, Version, Description, Author]
+
+  - id: requirements
+    title: Requirements
+    instruction: |
+      Draft functional and non-functional requirements based on your validated understanding of the existing project. Before presenting requirements, confirm: "These requirements are based on my understanding of your existing system. Please review carefully and confirm they align with your project's reality."
+    elicit: true
+    sections:
+      - id: functional
+        title: Functional
+        type: numbered-list
+        prefix: FR
+        instruction: Each Requirement will be a bullet markdown with identifier starting with FR
+        examples:
+          - "FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality."
+      - id: non-functional
+        title: Non Functional
+        type: numbered-list
+        prefix: NFR
+        instruction: Each Requirement will be a bullet markdown with identifier starting with NFR. Include constraints from existing system
+        examples:
+          - "NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%."
+      - id: compatibility
+        title: Compatibility Requirements
+        instruction: Critical for brownfield - what must remain compatible
+        type: numbered-list
+        prefix: CR
+        template: "{{requirement}}: {{description}}"
+        items:
+          - id: cr1
+            template: "CR1: {{existing_api_compatibility}}"
+          - id: cr2
+            template: "CR2: {{database_schema_compatibility}}"
+          - id: cr3
+            template: "CR3: {{ui_ux_consistency}}"
+          - id: cr4
+            template: "CR4: {{integration_compatibility}}"
+
+  - id: ui-enhancement-goals
+    title: User Interface Enhancement Goals
+    condition: Enhancement includes UI changes
+    instruction: For UI changes, capture how they will integrate with existing UI patterns and design systems
+    sections:
+      - id: existing-ui-integration
+        title: Integration with Existing UI
+        instruction: Describe how new UI elements will fit with existing design patterns, style guides, and component libraries
+      - id: modified-screens
+        title: Modified/New Screens and Views
+        instruction: List only the screens/views that will be modified or added
+      - id: ui-consistency
+        title: UI Consistency Requirements
+        instruction: Specific requirements for maintaining visual and interaction consistency with existing application
+
+  - id: technical-constraints
+    title: Technical Constraints and Integration Requirements
+    instruction: This section replaces separate architecture documentation. Gather detailed technical constraints from existing project analysis.
+    sections:
+      - id: existing-tech-stack
+        title: Existing Technology Stack
+        instruction: |
+          If document-project output available:
+          - Extract from "Actual Tech Stack" table in High Level Architecture section
+          - Include version numbers and any noted constraints
+          
+          Otherwise, document the current technology stack:
+        template: |
+          **Languages**: {{languages}}
+          **Frameworks**: {{frameworks}}
+          **Database**: {{database}}
+          **Infrastructure**: {{infrastructure}}
+          **External Dependencies**: {{external_dependencies}}
+      - id: integration-approach
+        title: Integration Approach
+        instruction: Define how the enhancement will integrate with existing architecture
+        template: |
+          **Database Integration Strategy**: {{database_integration}}
+          **API Integration Strategy**: {{api_integration}}
+          **Frontend Integration Strategy**: {{frontend_integration}}
+          **Testing Integration Strategy**: {{testing_integration}}
+      - id: code-organization
+        title: Code Organization and Standards
+        instruction: Based on existing project analysis, define how new code will fit existing patterns
+        template: |
+          **File Structure Approach**: {{file_structure}}
+          **Naming Conventions**: {{naming_conventions}}
+          **Coding Standards**: {{coding_standards}}
+          **Documentation Standards**: {{documentation_standards}}
+      - id: deployment-operations
+        title: Deployment and Operations
+        instruction: How the enhancement fits existing deployment pipeline
+        template: |
+          **Build Process Integration**: {{build_integration}}
+          **Deployment Strategy**: {{deployment_strategy}}
+          **Monitoring and Logging**: {{monitoring_logging}}
+          **Configuration Management**: {{config_management}}
+      - id: risk-assessment
+        title: Risk Assessment and Mitigation
+        instruction: |
+          If document-project output available:
+          - Reference "Technical Debt and Known Issues" section
+          - Include "Workarounds and Gotchas" that might impact enhancement
+          - Note any identified constraints from "Critical Technical Debt"
+          
+          Build risk assessment incorporating existing known issues:
+        template: |
+          **Technical Risks**: {{technical_risks}}
+          **Integration Risks**: {{integration_risks}}
+          **Deployment Risks**: {{deployment_risks}}
+          **Mitigation Strategies**: {{mitigation_strategies}}
+
+  - id: epic-structure
+    title: Epic and Story Structure
+    instruction: |
+      For brownfield projects, favor a single comprehensive epic unless the user is clearly requesting multiple unrelated enhancements. Before presenting the epic structure, confirm: "Based on my analysis of your existing project, I believe this enhancement should be structured as [single epic/multiple epics] because [rationale based on actual project analysis]. Does this align with your understanding of the work required?"
+    elicit: true
+    sections:
+      - id: epic-approach
+        title: Epic Approach
+        instruction: Explain the rationale for epic structure - typically single epic for brownfield unless multiple unrelated features
+        template: "**Epic Structure Decision**: {{epic_decision}} with rationale"
+
+  - id: epic-details
+    title: "Epic 1: {{enhancement_title}}"
+    instruction: |
+      Comprehensive epic that delivers the brownfield enhancement while maintaining existing functionality
+      
+      CRITICAL STORY SEQUENCING FOR BROWNFIELD:
+      - Stories must ensure existing functionality remains intact
+      - Each story should include verification that existing features still work
+      - Stories should be sequenced to minimize risk to existing system
+      - Include rollback considerations for each story
+      - Focus on incremental integration rather than big-bang changes
+      - Size stories for AI agent execution in existing codebase context
+      - MANDATORY: Present the complete story sequence and ask: "This story sequence is designed to minimize risk to your existing system. Does this order make sense given your project's architecture and constraints?"
+      - Stories must be logically sequential with clear dependencies identified
+      - Each story must deliver value while maintaining system integrity
+    template: |
+      **Epic Goal**: {{epic_goal}}
+      
+      **Integration Requirements**: {{integration_requirements}}
+    sections:
+      - id: story
+        title: "Story 1.{{story_number}} {{story_title}}"
+        repeatable: true
+        template: |
+          As a {{user_type}},
+          I want {{action}},
+          so that {{benefit}}.
+        sections:
+          - id: acceptance-criteria
+            title: Acceptance Criteria
+            type: numbered-list
+            instruction: Define criteria that include both new functionality and existing system integrity
+            item_template: "{{criterion_number}}: {{criteria}}"
+          - id: integration-verification
+            title: Integration Verification
+            instruction: Specific verification steps to ensure existing functionality remains intact
+            type: numbered-list
+            prefix: IV
+            items:
+              - template: "IV1: {{existing_functionality_verification}}"
+              - template: "IV2: {{integration_point_verification}}"
+              - template: "IV3: {{performance_impact_verification}}"
+==================== END: .bmad-core/templates/brownfield-prd-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/pm-checklist.md ====================
 # Product Manager (PM) Requirements Checklist
@@ -2220,32 +2219,3 @@ Keep it action-oriented and forward-looking.]]
 
 None Listed
 ==================== END: .bmad-core/data/technical-preferences.md ====================
-
-==================== START: .bmad-core/utils/template-format.md ====================
-# Template Format Conventions
-
-Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
-
-## Template Markup Elements
-
-- **{{placeholders}}**: Variables to be replaced with actual content
-- **[[LLM: instructions]]**: Internal processing instructions for AI agents (never shown to users)
-- **REPEAT** sections: Content blocks that may be repeated as needed
-- **^^CONDITION^^** blocks: Conditional content included only if criteria are met
-- **@{examples}**: Example content for guidance (never output to users)
-
-## Processing Rules
-
-- Replace all {{placeholders}} with project-specific content
-- Execute all [[LLM: instructions]] internally without showing users
-- Process conditional and repeat blocks as specified
-- Use examples for guidance but never include them in final output
-- Present only clean, formatted content to users
-
-## Critical Guidelines
-
-- **NEVER display template markup, LLM instructions, or examples to users**
-- Template elements are for AI processing only
-- Focus on faithful template execution and clean output
-- All template-specific instructions are embedded within templates
-==================== END: .bmad-core/utils/template-format.md ====================

@@ -116,31 +116,20 @@ class DependencyResolver {
     }
 
     try {
-      const extensions = ['.md', '.yaml'];
       let content = null;
       let filePath = null;
 
       // First try bmad-core
-      for (const ext of extensions) {
+      try {
+        filePath = path.join(this.bmadCore, type, id);
+        content = await fs.readFile(filePath, 'utf8');
+      } catch (e) {
+        // If not found in bmad-core, try common folder
         try {
-          filePath = path.join(this.bmadCore, type, `${id}${ext}`);
+          filePath = path.join(this.common, type, id);
           content = await fs.readFile(filePath, 'utf8');
-          break;
-        } catch (e) {
-          // Try next extension
-        }
-      }
-      
-      // If not found in bmad-core, try common folder
-      if (!content) {
-        for (const ext of extensions) {
-          try {
-            filePath = path.join(this.common, type, `${id}${ext}`);
-            content = await fs.readFile(filePath, 'utf8');
-            break;
-          } catch (e) {
-            // Try next extension
-          }
+        } catch (e2) {
+          // File not found in either location
         }
       }
 

@@ -211,6 +211,7 @@ These references map directly to bundle sections:
         parsed["activation-instructions"] = parsed["activation-instructions"].filter(
           (instruction) => {
             return (
+              typeof instruction === 'string' &&
               !instruction.startsWith("IDE-FILE-RESOLUTION:") &&
               !instruction.startsWith("REQUEST-RESOLUTION:")
             );
@@ -393,67 +394,57 @@ These references map directly to bundle sections:
             if (Array.isArray(resources)) {
               for (const resourceName of resources) {
                 let found = false;
-                const extensions = [".md", ".yaml"];
 
                 // Try expansion pack first
-                for (const ext of extensions) {
-                  const resourcePath = path.join(packDir, resourceType, `${resourceName}${ext}`);
-                  try {
-                    const resourceContent = await fs.readFile(resourcePath, "utf8");
-                    const resourceWebPath = this.convertToWebPath(resourcePath, packName);
-                    sections.push(
-                      this.formatSection(resourceWebPath, resourceContent, packName)
-                    );
-                    found = true;
-                    break;
-                  } catch (error) {
-                    // Not in expansion pack, continue
-                  }
+                const resourcePath = path.join(packDir, resourceType, resourceName);
+                try {
+                  const resourceContent = await fs.readFile(resourcePath, "utf8");
+                  const resourceWebPath = this.convertToWebPath(resourcePath, packName);
+                  sections.push(
+                    this.formatSection(resourceWebPath, resourceContent, packName)
+                  );
+                  found = true;
+                } catch (error) {
+                  // Not in expansion pack, continue
                 }
 
                 // If not found in expansion pack, try core
                 if (!found) {
-                  for (const ext of extensions) {
-                    const corePath = path.join(
-                      this.rootDir,
-                      "bmad-core",
-                      resourceType,
-                      `${resourceName}${ext}`
+                  const corePath = path.join(
+                    this.rootDir,
+                    "bmad-core",
+                    resourceType,
+                    resourceName
+                  );
+                  try {
+                    const coreContent = await fs.readFile(corePath, "utf8");
+                    const coreWebPath = this.convertToWebPath(corePath, packName);
+                    sections.push(
+                      this.formatSection(coreWebPath, coreContent, packName)
                     );
-                    try {
-                      const coreContent = await fs.readFile(corePath, "utf8");
-                      const coreWebPath = this.convertToWebPath(corePath, packName);
-                      sections.push(
-                        this.formatSection(coreWebPath, coreContent, packName)
-                      );
-                      found = true;
-                      break;
-                    } catch (error) {
-                      // Not in core either, continue
-                    }
+                    found = true;
+                  } catch (error) {
+                    // Not in core either, continue
                   }
                 }
 
                 // If not found in core, try common folder
                 if (!found) {
-                  for (const ext of extensions) {
-                    const commonPath = path.join(
-                      this.rootDir,
-                      "common",
-                      resourceType,
-                      `${resourceName}${ext}`
+                  const commonPath = path.join(
+                    this.rootDir,
+                    "common",
+                    resourceType,
+                    resourceName
+                  );
+                  try {
+                    const commonContent = await fs.readFile(commonPath, "utf8");
+                    const commonWebPath = this.convertToWebPath(commonPath, packName);
+                    sections.push(
+                      this.formatSection(commonWebPath, commonContent, packName)
                     );
-                    try {
-                      const commonContent = await fs.readFile(commonPath, "utf8");
-                      const commonWebPath = this.convertToWebPath(commonPath, packName);
-                      sections.push(
-                        this.formatSection(commonWebPath, commonContent, packName)
-                      );
-                      found = true;
-                      break;
-                    } catch (error) {
-                      // Not in common either, continue
-                    }
+                    found = true;
+                  } catch (error) {
+                    // Not in common either, continue
                   }
                 }
 
@@ -509,8 +500,7 @@ These references map directly to bundle sections:
         for (const resourceFile of resourceFiles.filter(
           (f) => f.endsWith(".md") || f.endsWith(".yaml")
         )) {
-          const fileName = resourceFile.replace(/\.(md|yaml)$/, "");
-          expansionResources.set(`${resourceDir}#${fileName}`, true);
+          expansionResources.set(`${resourceDir}#${resourceFile}`, true);
         }
       } catch (error) {
         // Directory might not exist, that's fine
@@ -597,55 +587,45 @@ These references map directly to bundle sections:
     // Always prefer expansion pack versions if they exist
     for (const [key, dep] of allDependencies) {
       let found = false;
-      const extensions = [".md", ".yaml"];
 
       // Always check expansion pack first, even if the dependency came from a core agent
       if (expansionResources.has(key)) {
         // We know it exists in expansion pack, find and load it
-        for (const ext of extensions) {
-          const expansionPath = path.join(packDir, dep.type, `${dep.name}${ext}`);
-          try {
-            const content = await fs.readFile(expansionPath, "utf8");
-            const expansionWebPath = this.convertToWebPath(expansionPath, packName);
-            sections.push(this.formatSection(expansionWebPath, content, packName));
-            console.log(`      ✓ Using expansion override for ${key}`);
-            found = true;
-            break;
-          } catch (error) {
-            // Try next extension
-          }
+        const expansionPath = path.join(packDir, dep.type, dep.name);
+        try {
+          const content = await fs.readFile(expansionPath, "utf8");
+          const expansionWebPath = this.convertToWebPath(expansionPath, packName);
+          sections.push(this.formatSection(expansionWebPath, content, packName));
+          console.log(`      ✓ Using expansion override for ${key}`);
+          found = true;
+        } catch (error) {
+          // Try next extension
         }
       }
 
       // If not found in expansion pack (or doesn't exist there), try core
       if (!found) {
-        for (const ext of extensions) {
-          const corePath = path.join(this.rootDir, "bmad-core", dep.type, `${dep.name}${ext}`);
-          try {
-            const content = await fs.readFile(corePath, "utf8");
-            const coreWebPath = this.convertToWebPath(corePath, packName);
-            sections.push(this.formatSection(coreWebPath, content, packName));
-            found = true;
-            break;
-          } catch (error) {
-            // Not in core either, continue
-          }
+        const corePath = path.join(this.rootDir, "bmad-core", dep.type, dep.name);
+        try {
+          const content = await fs.readFile(corePath, "utf8");
+          const coreWebPath = this.convertToWebPath(corePath, packName);
+          sections.push(this.formatSection(coreWebPath, content, packName));
+          found = true;
+        } catch (error) {
+          // Not in core either, continue
         }
       }
 
       // If not found in core, try common folder
       if (!found) {
-        for (const ext of extensions) {
-          const commonPath = path.join(this.rootDir, "common", dep.type, `${dep.name}${ext}`);
-          try {
-            const content = await fs.readFile(commonPath, "utf8");
-            const commonWebPath = this.convertToWebPath(commonPath, packName);
-            sections.push(this.formatSection(commonWebPath, content, packName));
-            found = true;
-            break;
-          } catch (error) {
-            // Not in common either, continue
-          }
+        const commonPath = path.join(this.rootDir, "common", dep.type, dep.name);
+        try {
+          const content = await fs.readFile(commonPath, "utf8");
+          const commonWebPath = this.convertToWebPath(commonPath, packName);
+          sections.push(this.formatSection(commonWebPath, content, packName));
+          found = true;
+        } catch (error) {
+          // Not in common either, continue
         }
       }
 

@@ -1,0 +1,343 @@
+template:
+  id: game-design-doc-template-v2
+  name: Game Design Document (GDD)
+  version: 2.0
+  output:
+    format: markdown
+    filename: "docs/{{game_name}}-game-design-document.md"
+    title: "{{game_title}} Game Design Document (GDD)"
+
+workflow:
+  mode: interactive
+
+sections:
+  - id: initial-setup
+    instruction: |
+      This template creates a comprehensive Game Design Document that will serve as the foundation for all game development work. The GDD should be detailed enough that developers can create user stories and epics from it. Focus on gameplay systems, mechanics, and technical requirements that can be broken down into implementable features.
+      
+      If available, review any provided documents or ask if any are optionally available: Project Brief, Market Research, Competitive Analysis
+
+  - id: executive-summary
+    title: Executive Summary
+    instruction: Create a compelling overview that captures the essence of the game. Present this section first and get user feedback before proceeding.
+    sections:
+      - id: core-concept
+        title: Core Concept
+        instruction: 2-3 sentences that clearly describe what the game is and why players will love it
+      - id: target-audience
+        title: Target Audience
+        instruction: Define the primary and secondary audience with demographics and gaming preferences
+        template: |
+          **Primary:** {{age_range}}, {{player_type}}, {{platform_preference}}
+          **Secondary:** {{secondary_audience}}
+      - id: platform-technical
+        title: Platform & Technical Requirements
+        instruction: Based on the technical preferences or user input, define the target platforms
+        template: |
+          **Primary Platform:** {{platform}}
+          **Engine:** Phaser 3 + TypeScript
+          **Performance Target:** 60 FPS on {{minimum_device}}
+          **Screen Support:** {{resolution_range}}
+      - id: unique-selling-points
+        title: Unique Selling Points
+        instruction: List 3-5 key features that differentiate this game from competitors
+        type: numbered-list
+        template: "{{usp}}"
+
+  - id: core-gameplay
+    title: Core Gameplay
+    instruction: This section defines the fundamental game mechanics. After presenting each subsection, apply `tasks#advanced-elicitation` protocol to ensure completeness.
+    sections:
+      - id: game-pillars
+        title: Game Pillars
+        instruction: Define 3-5 core pillars that guide all design decisions. These should be specific and actionable.
+        type: numbered-list
+        template: |
+          **{{pillar_name}}** - {{description}}
+      - id: core-gameplay-loop
+        title: Core Gameplay Loop
+        instruction: Define the 30-60 second loop that players will repeat. Be specific about timing and player actions.
+        template: |
+          **Primary Loop ({{duration}} seconds):**
+          
+          1. {{action_1}} ({{time_1}}s)
+          2. {{action_2}} ({{time_2}}s)
+          3. {{action_3}} ({{time_3}}s)
+          4. {{reward_feedback}} ({{time_4}}s)
+      - id: win-loss-conditions
+        title: Win/Loss Conditions
+        instruction: Clearly define success and failure states
+        template: |
+          **Victory Conditions:**
+          
+          - {{win_condition_1}}
+          - {{win_condition_2}}
+          
+          **Failure States:**
+          
+          - {{loss_condition_1}}
+          - {{loss_condition_2}}
+
+  - id: game-mechanics
+    title: Game Mechanics
+    instruction: Detail each major mechanic that will need to be implemented. Each mechanic should be specific enough for developers to create implementation stories.
+    sections:
+      - id: primary-mechanics
+        title: Primary Mechanics
+        repeatable: true
+        sections:
+          - id: mechanic
+            title: "{{mechanic_name}}"
+            template: |
+              **Description:** {{detailed_description}}
+              
+              **Player Input:** {{input_method}}
+              
+              **System Response:** {{game_response}}
+              
+              **Implementation Notes:**
+              
+              - {{tech_requirement_1}}
+              - {{tech_requirement_2}}
+              - {{performance_consideration}}
+              
+              **Dependencies:** {{other_mechanics_needed}}
+      - id: controls
+        title: Controls
+        instruction: Define all input methods for different platforms
+        type: table
+        template: |
+          | Action | Desktop | Mobile | Gamepad |
+          | ------ | ------- | ------ | ------- |
+          | {{action}} | {{key}} | {{gesture}} | {{button}} |
+
+  - id: progression-balance
+    title: Progression & Balance
+    instruction: Define how players advance and how difficulty scales. This section should provide clear parameters for implementation.
+    sections:
+      - id: player-progression
+        title: Player Progression
+        template: |
+          **Progression Type:** {{linear|branching|metroidvania}}
+          
+          **Key Milestones:**
+          
+          1. **{{milestone_1}}** - {{unlock_description}}
+          2. **{{milestone_2}}** - {{unlock_description}}
+          3. **{{milestone_3}}** - {{unlock_description}}
+      - id: difficulty-curve
+        title: Difficulty Curve
+        instruction: Provide specific parameters for balancing
+        template: |
+          **Tutorial Phase:** {{duration}} - {{difficulty_description}}
+          **Early Game:** {{duration}} - {{difficulty_description}}
+          **Mid Game:** {{duration}} - {{difficulty_description}}
+          **Late Game:** {{duration}} - {{difficulty_description}}
+      - id: economy-resources
+        title: Economy & Resources
+        condition: has_economy
+        instruction: Define any in-game currencies, resources, or collectibles
+        type: table
+        template: |
+          | Resource | Earn Rate | Spend Rate | Purpose | Cap |
+          | -------- | --------- | ---------- | ------- | --- |
+          | {{resource}} | {{rate}} | {{rate}} | {{use}} | {{max}} |
+
+  - id: level-design-framework
+    title: Level Design Framework
+    instruction: Provide guidelines for level creation that developers can use to create level implementation stories
+    sections:
+      - id: level-types
+        title: Level Types
+        repeatable: true
+        sections:
+          - id: level-type
+            title: "{{level_type_name}}"
+            template: |
+              **Purpose:** {{gameplay_purpose}}
+              **Duration:** {{target_time}}
+              **Key Elements:** {{required_mechanics}}
+              **Difficulty:** {{relative_difficulty}}
+              
+              **Structure Template:**
+              
+              - Introduction: {{intro_description}}
+              - Challenge: {{main_challenge}}
+              - Resolution: {{completion_requirement}}
+      - id: level-progression
+        title: Level Progression
+        template: |
+          **World Structure:** {{linear|hub|open}}
+          **Total Levels:** {{number}}
+          **Unlock Pattern:** {{progression_method}}
+
+  - id: technical-specifications
+    title: Technical Specifications
+    instruction: Define technical requirements that will guide architecture and implementation decisions. Review any existing technical preferences.
+    sections:
+      - id: performance-requirements
+        title: Performance Requirements
+        template: |
+          **Frame Rate:** 60 FPS (minimum 30 FPS on low-end devices)
+          **Memory Usage:** <{{memory_limit}}MB
+          **Load Times:** <{{load_time}}s initial, <{{level_load}}s between levels
+          **Battery Usage:** Optimized for mobile devices
+      - id: platform-specific
+        title: Platform Specific
+        template: |
+          **Desktop:**
+          
+          - Resolution: {{min_resolution}} - {{max_resolution}}
+          - Input: Keyboard, Mouse, Gamepad
+          - Browser: Chrome 80+, Firefox 75+, Safari 13+
+          
+          **Mobile:**
+          
+          - Resolution: {{mobile_min}} - {{mobile_max}}
+          - Input: Touch, Tilt (optional)
+          - OS: iOS 13+, Android 8+
+      - id: asset-requirements
+        title: Asset Requirements
+        instruction: Define asset specifications for the art and audio teams
+        template: |
+          **Visual Assets:**
+          
+          - Art Style: {{style_description}}
+          - Color Palette: {{color_specification}}
+          - Animation: {{animation_requirements}}
+          - UI Resolution: {{ui_specs}}
+          
+          **Audio Assets:**
+          
+          - Music Style: {{music_genre}}
+          - Sound Effects: {{sfx_requirements}}
+          - Voice Acting: {{voice_needs}}
+
+  - id: technical-architecture-requirements
+    title: Technical Architecture Requirements
+    instruction: Define high-level technical requirements that the game architecture must support
+    sections:
+      - id: engine-configuration
+        title: Engine Configuration
+        template: |
+          **Phaser 3 Setup:**
+          
+          - TypeScript: Strict mode enabled
+          - Physics: {{physics_system}} (Arcade/Matter)
+          - Renderer: WebGL with Canvas fallback
+          - Scale Mode: {{scale_mode}}
+      - id: code-architecture
+        title: Code Architecture
+        template: |
+          **Required Systems:**
+          
+          - Scene Management
+          - State Management
+          - Asset Loading
+          - Save/Load System
+          - Input Management
+          - Audio System
+          - Performance Monitoring
+      - id: data-management
+        title: Data Management
+        template: |
+          **Save Data:**
+          
+          - Progress tracking
+          - Settings persistence
+          - Statistics collection
+          - {{additional_data}}
+
+  - id: development-phases
+    title: Development Phases
+    instruction: Break down the development into phases that can be converted to epics
+    sections:
+      - id: phase-1-core-systems
+        title: "Phase 1: Core Systems ({{duration}})"
+        sections:
+          - id: foundation-epic
+            title: "Epic: Foundation"
+            type: bullet-list
+            template: |
+              - Engine setup and configuration
+              - Basic scene management
+              - Core input handling
+              - Asset loading pipeline
+          - id: core-mechanics-epic
+            title: "Epic: Core Mechanics"
+            type: bullet-list
+            template: |
+              - {{primary_mechanic}} implementation
+              - Basic physics and collision
+              - Player controller
+      - id: phase-2-gameplay-features
+        title: "Phase 2: Gameplay Features ({{duration}})"
+        sections:
+          - id: game-systems-epic
+            title: "Epic: Game Systems"
+            type: bullet-list
+            template: |
+              - {{mechanic_2}} implementation
+              - {{mechanic_3}} implementation
+              - Game state management
+          - id: content-creation-epic
+            title: "Epic: Content Creation"
+            type: bullet-list
+            template: |
+              - Level loading system
+              - First playable levels
+              - Basic UI implementation
+      - id: phase-3-polish-optimization
+        title: "Phase 3: Polish & Optimization ({{duration}})"
+        sections:
+          - id: performance-epic
+            title: "Epic: Performance"
+            type: bullet-list
+            template: |
+              - Optimization and profiling
+              - Mobile platform testing
+              - Memory management
+          - id: user-experience-epic
+            title: "Epic: User Experience"
+            type: bullet-list
+            template: |
+              - Audio implementation
+              - Visual effects and polish
+              - Final UI/UX refinement
+
+  - id: success-metrics
+    title: Success Metrics
+    instruction: Define measurable goals for the game
+    sections:
+      - id: technical-metrics
+        title: Technical Metrics
+        type: bullet-list
+        template: |
+          - Frame rate: {{fps_target}}
+          - Load time: {{load_target}}
+          - Crash rate: <{{crash_threshold}}%
+          - Memory usage: <{{memory_target}}MB
+      - id: gameplay-metrics
+        title: Gameplay Metrics
+        type: bullet-list
+        template: |
+          - Tutorial completion: {{completion_rate}}%
+          - Average session: {{session_length}} minutes
+          - Level completion: {{level_completion}}%
+          - Player retention: D1 {{d1}}%, D7 {{d7}}%
+
+  - id: appendices
+    title: Appendices
+    sections:
+      - id: change-log
+        title: Change Log
+        instruction: Track document versions and changes
+        type: table
+        template: |
+          | Date | Version | Description | Author |
+          | :--- | :------ | :---------- | :----- |
+      - id: references
+        title: References
+        instruction: List any competitive analysis, inspiration, or research sources
+        type: bullet-list
+        template: "{{reference}}"
