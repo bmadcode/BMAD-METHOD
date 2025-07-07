@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-core/folder/filename.md ====================`
+- `==================== END: .bmad-core/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-core/personas/analyst.md`, `.bmad-core/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-core/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-core/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agents#pm ====================
+
+==================== START: .bmad-core/agents/pm.md ====================
 # pm
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -98,9 +99,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#pm ====================
+==================== END: .bmad-core/agents/pm.md ====================
 
-==================== START: tasks#create-doc ====================
+==================== START: .bmad-core/tasks/create-doc.md ====================
 # Create Document from Template Task
 
 ## Purpose
@@ -120,7 +121,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -129,7 +130,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -147,14 +148,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task
@@ -192,9 +193,9 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 ## Remember
 
 Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
-==================== END: tasks#create-doc ====================
+==================== END: .bmad-core/tasks/create-doc.md ====================
 
-==================== START: tasks#correct-course ====================
+==================== START: .bmad-core/tasks/correct-course.md ====================
 # Correct Course Task
 
 ## Purpose
@@ -268,9 +269,9 @@ Templates contain precise instructions for a reason. Follow them exactly to ensu
   - A summary of the `change-checklist` analysis (issue, impact, rationale for the chosen path).
   - Specific, clearly drafted proposed edits for all affected project artifacts.
 - **Implicit:** An annotated `change-checklist` (or the record of its completion) reflecting the discussions, findings, and decisions made during the process.
-==================== END: tasks#correct-course ====================
+==================== END: .bmad-core/tasks/correct-course.md ====================
 
-==================== START: tasks#create-deep-research-prompt ====================
+==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -572,9 +573,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: tasks#create-deep-research-prompt ====================
+==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
-==================== START: tasks#brownfield-create-epic ====================
+==================== START: .bmad-core/tasks/brownfield-create-epic.md ====================
 # Create Brownfield Epic Task
 
 ## Purpose
@@ -735,9 +736,9 @@ The epic creation is successful when:
 - If the scope grows beyond 3 stories, consider the full brownfield PRD process
 - Always prioritize existing system integrity over new functionality
 - When in doubt about scope or complexity, escalate to full brownfield planning
-==================== END: tasks#brownfield-create-epic ====================
+==================== END: .bmad-core/tasks/brownfield-create-epic.md ====================
 
-==================== START: tasks#brownfield-create-story ====================
+==================== START: .bmad-core/tasks/brownfield-create-story.md ====================
 # Create Brownfield Story Task
 
 ## Purpose
@@ -885,16 +886,16 @@ The story creation is successful when:
 - Always prioritize existing system integrity
 - When in doubt about integration complexity, use brownfield-create-epic instead
 - Stories should take no more than 4 hours of focused development work
-==================== END: tasks#brownfield-create-story ====================
+==================== END: .bmad-core/tasks/brownfield-create-story.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-core/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-core/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -903,7 +904,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-core/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -981,9 +982,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-core/tasks/execute-checklist.md ====================
 
-==================== START: tasks#shard-doc ====================
+==================== START: .bmad-core/tasks/shard-doc.md ====================
 # Document Sharding Task
 
 ## Purpose
@@ -1175,9 +1176,9 @@ Document sharded successfully:
 - Preserve ALL formatting, including whitespace where significant
 - Handle edge cases like sections with code blocks containing ## symbols
 - Ensure the sharding is reversible (could reconstruct the original from shards)
-==================== END: tasks#shard-doc ====================
+==================== END: .bmad-core/tasks/shard-doc.md ====================
 
-==================== START: templates#prd-tmpl ====================
+==================== START: .bmad-core/templates/prd-tmpl.md ====================
 # {{Project Name}} Product Requirements Document (PRD)
 
 [[LLM: The default path and filename unless specified is docs/prd.md]]
@@ -1205,7 +1206,7 @@ Document sharded successfully:
 
 ## Requirements
 
-[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute tasks#advanced-elicitation display]]
+[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute .bmad-core/tasks/advanced-elicitation.md display]]
 
 ### Functional
 
@@ -1228,7 +1229,7 @@ Document sharded successfully:
 3. Clearly let the user know where assumptions were made
 4. Ask targeted questions for unclear/missing elements or areas needing more specification
 5. This is NOT detailed UI spec - focus on product vision and user goals
-6. After section completion, immediately apply `tasks#advanced-elicitation` protocol]]
+6. After section completion, immediately apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### Overall UX Vision
 
@@ -1270,12 +1271,12 @@ Document sharded successfully:
 
 [[LLM: Gather technical decisions that will guide the Architect. Steps:
 
-1. Check if `data#technical-preferences` or an attached `technical-preferences` file exists - use it to pre-populate choices
+1. Check if `.bmad-core/data/technical-preferences.yaml` or an attached `technical-preferences` file exists - use it to pre-populate choices
 2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
 3. For unknowns, offer guidance based on project goals and MVP scope
 4. Document ALL technical choices with rationale (why this choice fits the project)
 5. These become constraints for the Architect - be specific and complete
-6. After section completion, apply `tasks#advanced-elicitation` protocol.]]
+6. After section completion, apply `.bmad-core/tasks/advanced-elicitation.md` protocol.]]
 
 ### Repository Structure: { Monorepo, Polyrepo, etc...}
 
@@ -1293,7 +1294,7 @@ Document sharded successfully:
 
 ## Epics
 
-[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute tasks#advanced-elicitation display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute .bmad-core/tasks/advanced-elicitation.md display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
 
 CRITICAL: Epics MUST be logically sequential following agile best practices:
 
@@ -1319,7 +1320,7 @@ CRITICAL: Epics MUST be logically sequential following agile best practices:
 
 @{/example}
 
-[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute tasks#advanced-elicitation display, before moving on to the next epic.]]
+[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute .bmad-core/tasks/advanced-elicitation.md display, before moving on to the next epic.]]
 
 <<REPEAT: epic_details>>
 
@@ -1380,9 +1381,9 @@ so that {{benefit}}.
 ### Architect Prompt
 
 [[LLM: This section will contain the prompt for the Architect, keep it short and to the point to initiate create architecture mode using this document as input.]]
-==================== END: templates#prd-tmpl ====================
+==================== END: .bmad-core/templates/prd-tmpl.md ====================
 
-==================== START: templates#brownfield-prd-tmpl ====================
+==================== START: .bmad-core/templates/brownfield-prd-tmpl.md ====================
 # {{Project Name}} Brownfield Enhancement PRD
 
 [[LLM: The default path and filename unless specified is docs/prd.md]]
@@ -1649,9 +1650,9 @@ so that {{benefit}}.
 - IV3: [[LLM: Performance impact verification requirement]]
 
 <</REPEAT>>
-==================== END: templates#brownfield-prd-tmpl ====================
+==================== END: .bmad-core/templates/brownfield-prd-tmpl.md ====================
 
-==================== START: checklists#pm-checklist ====================
+==================== START: .bmad-core/checklists/pm-checklist.md ====================
 # Product Manager (PM) Requirements Checklist
 
 This checklist serves as a comprehensive framework to ensure the Product Requirements Document (PRD) and Epic definitions are complete, well-structured, and appropriately scoped for MVP development. The PM should systematically work through each item during the product definition process.
@@ -2027,9 +2028,9 @@ After presenting the report, ask if the user wants:
 
 - **READY FOR ARCHITECT**: The PRD and epics are comprehensive, properly structured, and ready for architectural design.
 - **NEEDS REFINEMENT**: The requirements documentation requires additional work to address the identified deficiencies.
-==================== END: checklists#pm-checklist ====================
+==================== END: .bmad-core/checklists/pm-checklist.md ====================
 
-==================== START: checklists#change-checklist ====================
+==================== START: .bmad-core/checklists/change-checklist.md ====================
 # Change Navigation Checklist
 
 **Purpose:** To systematically guide the selected Agent and user through the analysis and planning required when a significant change (pivot, tech issue, missing requirement, failed story) is identified during the BMad workflow.
@@ -2212,15 +2213,15 @@ Keep it action-oriented and forward-looking.]]
 - [ ] **Confirm Next Steps:** Reiterate the handoff plan and the next actions to be taken by specific agents.
 
 ---
-==================== END: checklists#change-checklist ====================
+==================== END: .bmad-core/checklists/change-checklist.md ====================
 
-==================== START: data#technical-preferences ====================
+==================== START: .bmad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
 
 None Listed
-==================== END: data#technical-preferences ====================
+==================== END: .bmad-core/data/technical-preferences.md ====================
 
-==================== START: utils#template-format ====================
+==================== START: .bmad-core/utils/template-format.md ====================
 # Template Format Conventions
 
 Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
@@ -2247,4 +2248,4 @@ Templates in the BMad method use standardized markup for AI processing. These co
 - Template elements are for AI processing only
 - Focus on faithful template execution and clean output
 - All template-specific instructions are embedded within templates
-==================== END: utils#template-format ====================
+==================== END: .bmad-core/utils/template-format.md ====================

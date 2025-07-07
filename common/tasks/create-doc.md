@@ -17,7 +17,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using {root}/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -26,7 +26,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `{root}/templates/*.md` or `{root}/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -44,14 +44,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute {root}/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply {root}/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task

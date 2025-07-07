@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-core/folder/filename.md ====================`
+- `==================== END: .bmad-core/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-core/personas/analyst.md`, `.bmad-core/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-core/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-core/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agent-teams#team-fullstack ====================
+
+==================== START: .bmad-core/agent-teams/team-fullstack.yaml ====================
 bundle:
   name: Team Fullstack
   icon: 🚀
@@ -57,9 +58,9 @@ workflows:
   - greenfield-fullstack
   - greenfield-service
   - greenfield-ui
-==================== END: agent-teams#team-fullstack ====================
+==================== END: .bmad-core/agent-teams/team-fullstack.yaml ====================
 
-==================== START: agents#bmad-orchestrator ====================
+==================== START: .bmad-core/agents/bmad-orchestrator.md ====================
 # bmad-orchestrator
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -90,7 +91,7 @@ startup:
   - Announce: Introduce yourself as the BMad Orchestrator, explain you can coordinate agents and workflows
   - IMPORTANT: Tell users that all commands start with * (e.g., *help, *agent, *workflow)
   - Mention *help shows all available commands and options
-  - Check for active workflow plan using utils#plan-management
+  - Check for active workflow plan using .bmad-core/utils/plan-management.md
   - 'If plan exists: Show 📋 Active plan: {workflow} ({progress}% complete). Use *plan-status for details.'
   - 'If plan exists: Suggest next action based on plan progress'
   - Assess user goal against available agents and workflows in this bundle
@@ -196,9 +197,9 @@ dependencies:
     - workflow-management
     - template-format
 ```
-==================== END: agents#bmad-orchestrator ====================
+==================== END: .bmad-core/agents/bmad-orchestrator.md ====================
 
-==================== START: agents#analyst ====================
+==================== START: .bmad-core/agents/analyst.md ====================
 # analyst
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -248,7 +249,7 @@ commands:
   - exit: Say goodbye as the Business Analyst, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - brainstorming-techniques
+    - facilitate-brainstorming-session
     - create-deep-research-prompt
     - create-doc
     - advanced-elicitation
@@ -257,14 +258,16 @@ dependencies:
     - project-brief-tmpl
     - market-research-tmpl
     - competitor-analysis-tmpl
+    - brainstorming-output-tmpl
   data:
     - bmad-kb
+    - brainstorming-techniques
   utils:
     - template-format
 ```
-==================== END: agents#analyst ====================
+==================== END: .bmad-core/agents/analyst.md ====================
 
-==================== START: agents#pm ====================
+==================== START: .bmad-core/agents/pm.md ====================
 # pm
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -324,9 +327,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#pm ====================
+==================== END: .bmad-core/agents/pm.md ====================
 
-==================== START: agents#ux-expert ====================
+==================== START: .bmad-core/agents/ux-expert.md ====================
 # ux-expert
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -381,9 +384,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#ux-expert ====================
+==================== END: .bmad-core/agents/ux-expert.md ====================
 
-==================== START: agents#architect ====================
+==================== START: .bmad-core/agents/architect.md ====================
 # architect
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -446,9 +449,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#architect ====================
+==================== END: .bmad-core/agents/architect.md ====================
 
-==================== START: agents#po ====================
+==================== START: .bmad-core/agents/po.md ====================
 # po
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -512,9 +515,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#po ====================
+==================== END: .bmad-core/agents/po.md ====================
 
-==================== START: tasks#advanced-elicitation ====================
+==================== START: .bmad-core/tasks/advanced-elicitation.md ====================
 # Advanced Elicitation Task
 
 ## Purpose
@@ -522,94 +525,119 @@ dependencies:
 - Provide optional reflective and brainstorming actions to enhance content quality
 - Enable deeper exploration of ideas through structured elicitation techniques
 - Support iterative refinement through multiple analytical perspectives
+- Usable during template-driven document creation or any chat conversation
+
+## Usage Scenarios
+
+### Scenario 1: Template Document Creation
+
+After outputting a section during document creation:
+
+1. **Section Review**: Ask user to review the drafted section
+2. **Offer Elicitation**: Present 9 carefully selected elicitation methods
+3. **Simple Selection**: User types a number (0-8) to engage method, or 9 to proceed
+4. **Execute & Loop**: Apply selected method, then re-offer choices until user proceeds
+
+### Scenario 2: General Chat Elicitation
+
+User can request advanced elicitation on any agent output:
+
+- User says "do advanced elicitation" or similar
+- Agent selects 9 relevant methods for the context
+- Same simple 0-9 selection process
 
 ## Task Instructions
 
-### 1. Section Context and Review
+### 1. Intelligent Method Selection
 
-[[LLM: When invoked after outputting a section:
+**Context Analysis**: Before presenting options, analyze:
 
-1. First, provide a brief 1-2 sentence summary of what the user should look for in the section just presented (e.g., "Please review the technology choices for completeness and alignment with your project needs. Pay special attention to version numbers and any missing categories.")
+- **Content Type**: Technical specs, user stories, architecture, requirements, etc.
+- **Complexity Level**: Simple, moderate, or complex content
+- **Stakeholder Needs**: Who will use this information
+- **Risk Level**: High-impact decisions vs routine items
+- **Creative Potential**: Opportunities for innovation or alternatives
 
-2. If the section contains Mermaid diagrams, explain each diagram briefly before offering elicitation options (e.g., "The component diagram shows the main system modules and their interactions. Notice how the API Gateway routes requests to different services.")
+**Method Selection Strategy**:
 
-3. If the section contains multiple distinct items (like multiple components, multiple patterns, etc.), inform the user they can apply elicitation actions to:
+1. **Always Include Core Methods** (choose 3-4):
+   - Expand or Contract for Audience
+   - Critique and Refine
+   - Identify Potential Risks
+   - Assess Alignment with Goals
 
+2. **Context-Specific Methods** (choose 4-5):
+   - **Technical Content**: Tree of Thoughts, ReWOO, Meta-Prompting
+   - **User-Facing Content**: Agile Team Perspective, Stakeholder Roundtable
+   - **Creative Content**: Innovation Tournament, Escape Room Challenge
+   - **Strategic Content**: Red Team vs Blue Team, Hindsight Reflection
+
+3. **Always Include**: "Proceed / No Further Actions" as option 9
+
+### 2. Section Context and Review
+
+When invoked after outputting a section:
+
+1. **Provide Context Summary**: Give a brief 1-2 sentence summary of what the user should look for in the section just presented
+
+2. **Explain Visual Elements**: If the section contains diagrams, explain them briefly before offering elicitation options
+
+3. **Clarify Scope Options**: If the section contains multiple distinct items, inform the user they can apply elicitation actions to:
    - The entire section as a whole
    - Individual items within the section (specify which item when selecting an action)
 
-4. Then present the action list as specified below.]]
+### 3. Present Elicitation Options
 
-### 2. Ask for Review and Present Action List
+**Review Request Process:**
 
-[[LLM: Ask the user to review the drafted section. In the SAME message, inform them that they can suggest additions, removals, or modifications, OR they can select an action by number from the 'Advanced Reflective, Elicitation & Brainstorming Actions'. If there are multiple items in the section, mention they can specify which item(s) to apply the action to. Then, present ONLY the numbered list (0-9) of these actions. Conclude by stating that selecting 9 will proceed to the next section. Await user selection. If an elicitation action (0-8) is chosen, execute it and then re-offer this combined review/elicitation choice. If option 9 is chosen, or if the user provides direct feedback, proceed accordingly.]]
+- Ask the user to review the drafted section
+- In the SAME message, inform them they can suggest direct changes OR select an elicitation method
+- Present 9 intelligently selected methods (0-8) plus "Proceed" (9)
+- Keep descriptions short - just the method name
+- Await simple numeric selection
 
-**Present the numbered list (0-9) with this exact format:**
+**Action List Presentation Format:**
 
 ```text
-**Advanced Reflective, Elicitation & Brainstorming Actions**
-Choose an action (0-9 - 9 to bypass - HELP for explanation of these options):
+**Advanced Elicitation Options**
+Choose a number (0-8) or 9 to proceed:
 
-0. Expand or Contract for Audience
-1. Explain Reasoning (CoT Step-by-Step)
-2. Critique and Refine
-3. Analyze Logical Flow and Dependencies
-4. Assess Alignment with Overall Goals
-5. Identify Potential Risks and Unforeseen Issues
-6. Challenge from Critical Perspective (Self or Other Persona)
-7. Explore Diverse Alternatives (ToT-Inspired)
-8. Hindsight is 20/20: The 'If Only...' Reflection
+0. [Method Name]
+1. [Method Name]
+2. [Method Name]
+3. [Method Name]
+4. [Method Name]
+5. [Method Name]
+6. [Method Name]
+7. [Method Name]
+8. [Method Name]
 9. Proceed / No Further Actions
 ```
 
-### 2. Processing Guidelines
+**Response Handling:**
 
-**Do NOT show:**
+- **Numbers 0-8**: Execute the selected method, then re-offer the choice
+- **Number 9**: Proceed to next section or continue conversation
+- **Direct Feedback**: Apply user's suggested changes and continue
 
-- The full protocol text with `[[LLM: ...]]` instructions
-- Detailed explanations of each option unless executing or the user asks, when giving the definition you can modify to tie its relevance
-- Any internal template markup
+### 4. Method Execution Framework
 
-**After user selection from the list:**
+**Execution Process:**
 
-- Execute the chosen action according to the protocol instructions below
-- Ask if they want to select another action or proceed with option 9 once complete
-- Continue until user selects option 9 or indicates completion
+1. **Retrieve Method**: Access the specific elicitation method from the elicitation-methods data file
+2. **Apply Context**: Execute the method from your current role's perspective
+3. **Provide Results**: Deliver insights, critiques, or alternatives relevant to the content
+4. **Re-offer Choice**: Present the same 9 options again until user selects 9 or gives direct feedback
 
-## Action Definitions
+**Execution Guidelines:**
 
-0. Expand or Contract for Audience
-   [[LLM: Ask the user whether they want to 'expand' on the content (add more detail, elaborate) or 'contract' it (simplify, clarify, make more concise). Also, ask if there's a specific target audience they have in mind. Once clarified, perform the expansion or contraction from your current role's perspective, tailored to the specified audience if provided.]]
+- **Be Concise**: Focus on actionable insights, not lengthy explanations
+- **Stay Relevant**: Tie all elicitation back to the specific content being analyzed
+- **Identify Personas**: For multi-persona methods, clearly identify which viewpoint is speaking
+- **Maintain Flow**: Keep the process moving efficiently
+==================== END: .bmad-core/tasks/advanced-elicitation.md ====================
 
-1. Explain Reasoning (CoT Step-by-Step)
-   [[LLM: Explain the step-by-step thinking process, characteristic of your role, that you used to arrive at the current proposal for this content.]]
-
-2. Critique and Refine
-   [[LLM: From your current role's perspective, review your last output or the current section for flaws, inconsistencies, or areas for improvement, and then suggest a refined version reflecting your expertise.]]
-
-3. Analyze Logical Flow and Dependencies
-   [[LLM: From your role's standpoint, examine the content's structure for logical progression, internal consistency, and any relevant dependencies. Confirm if elements are presented in an effective order.]]
-
-4. Assess Alignment with Overall Goals
-   [[LLM: Evaluate how well the current content contributes to the stated overall goals of the document, interpreting this from your specific role's perspective and identifying any misalignments you perceive.]]
-
-5. Identify Potential Risks and Unforeseen Issues
-   [[LLM: Based on your role's expertise, brainstorm potential risks, overlooked edge cases, or unintended consequences related to the current content or proposal.]]
-
-6. Challenge from Critical Perspective (Self or Other Persona)
-   [[LLM: Adopt a critical perspective on the current content. If the user specifies another role or persona (e.g., 'as a customer', 'as [Another Persona Name]'), critique the content or play devil's advocate from that specified viewpoint. If no other role is specified, play devil's advocate from your own current persona's viewpoint, arguing against the proposal or current content and highlighting weaknesses or counterarguments specific to your concerns. This can also randomly include YAGNI when appropriate, such as when trimming the scope of an MVP, the perspective might challenge the need for something to cut MVP scope.]]
-
-7. Explore Diverse Alternatives (ToT-Inspired)
-   [[LLM: From your role's perspective, first broadly brainstorm a range of diverse approaches or solutions to the current topic. Then, from this wider exploration, select and present 2 distinct alternatives, detailing the pros, cons, and potential implications you foresee for each.]]
-
-8. Hindsight is 20/20: The 'If Only...' Reflection
-   [[LLM: In your current persona, imagine it's a retrospective for a project based on the current content. What's the one 'if only we had known/done X...' that your role would humorously or dramatically highlight, along with the imagined consequences?]]
-
-9. Proceed / No Further Actions
-   [[LLM: Acknowledge the user's choice to finalize the current work, accept the AI's last output as is, or move on to the next step without selecting another action from this list. Prepare to proceed accordingly.]]
-==================== END: tasks#advanced-elicitation ====================
-
-==================== START: tasks#create-doc ====================
+==================== START: .bmad-core/tasks/create-doc.md ====================
 # Create Document from Template Task
 
 ## Purpose
@@ -629,7 +657,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -638,7 +666,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -656,14 +684,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task
@@ -701,9 +729,9 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 ## Remember
 
 Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
-==================== END: tasks#create-doc ====================
+==================== END: .bmad-core/tasks/create-doc.md ====================
 
-==================== START: tasks#create-workflow-plan ====================
+==================== START: .bmad-core/tasks/create-workflow-plan.md ====================
 # Create Workflow Plan Task
 
 ## Purpose
@@ -993,9 +1021,9 @@ BMad Orchestrator: "Based on your answers, I recommend the brownfield-fullstack 
 
 BMad Orchestrator: "I've created a workflow plan at docs/workflow-plan.md. This shows all the steps we'll go through, what documents will be created, and where you'll need to make decisions. Would you like to review it together?"
 ```
-==================== END: tasks#create-workflow-plan ====================
+==================== END: .bmad-core/tasks/create-workflow-plan.md ====================
 
-==================== START: tasks#kb-mode-interaction ====================
+==================== START: .bmad-core/tasks/kb-mode-interaction.md ====================
 # KB Mode Interaction Task
 
 ## Purpose
@@ -1066,9 +1094,9 @@ Or ask me about anything else related to BMad-Method!
 **User**: Tell me about workflows
 
 **Assistant**: [Provides focused information about workflows from the KB, then offers to explore specific workflow types or related topics]
-==================== END: tasks#kb-mode-interaction ====================
+==================== END: .bmad-core/tasks/kb-mode-interaction.md ====================
 
-==================== START: tasks#update-workflow-plan ====================
+==================== START: .bmad-core/tasks/update-workflow-plan.md ====================
 # Update Workflow Plan Task
 
 ## Purpose
@@ -1317,9 +1345,9 @@ The update is successful when:
 - Consider creating backup before major updates
 - Updates should enhance, not complicate, the workflow experience
 - If plan becomes too cluttered, suggest creating fresh plan for next phase
-==================== END: tasks#update-workflow-plan ====================
+==================== END: .bmad-core/tasks/update-workflow-plan.md ====================
 
-==================== START: data#bmad-kb ====================
+==================== START: .bmad-core/data/bmad-kb.md ====================
 # BMad Knowledge Base
 
 ## Overview
@@ -1355,13 +1383,15 @@ BMad transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 
 ### The Two-Phase Approach
 
-**Phase 1: Planning (Web UI - Cost Effective)**
+#### Phase 1: Planning (Web UI - Cost Effective)
+
 - Use large context windows (Gemini's 1M tokens)
 - Generate comprehensive documents (PRD, Architecture)
 - Leverage multiple agents for brainstorming
 - Create once, use throughout development
 
-**Phase 2: Development (IDE - Implementation)**
+#### Phase 2: Development (IDE - Implementation)
+
 - Shard documents into manageable pieces
 - Execute focused SM → Dev cycles
 - One story at a time, sequential progress
@@ -1391,6 +1421,7 @@ BMad transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 ### Quick Start Options
 
 #### Option 1: Web UI
+
 **Best for**: ChatGPT, Claude, Gemini users who want to start immediately
 
 1. Navigate to `dist/teams/`
@@ -1400,6 +1431,7 @@ BMad transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 5. Type `/help` to see available commands
 
 #### Option 2: IDE Integration
+
 **Best for**: Cursor, Claude Code, Windsurf, Trae, Cline, Roo Code, Github Copilot users
 
 ```bash
@@ -1408,6 +1440,7 @@ npx bmad-method install
 ```
 
 **Installation Steps**:
+
 - Choose "Complete installation"
 - Select your IDE from supported options:
   - **Cursor**: Native AI integration
@@ -1416,11 +1449,12 @@ npx bmad-method install
   - **Trae**: Built-in AI capabilities
   - **Cline**: VS Code extension with AI features
   - **Roo Code**: Web-based IDE with agent support
-  - **Github Copilot**: AI-powered coding assistant
+  - **GitHub Copilot**: VS Code extension with AI peer programming assistant
 
 **Note for VS Code Users**: BMad-Method assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
 
 **Verify Installation**:
+
 - `.bmad-core/` folder created with all agents
 - IDE-specific integration files created
 - All agent commands/rules/modes available
@@ -1430,12 +1464,14 @@ npx bmad-method install
 ### Environment Selection Guide
 
 **Use Web UI for**:
+
 - Initial planning and documentation (PRD, architecture)
 - Cost-effective document creation (especially with Gemini)
 - Brainstorming and analysis phases
 - Multi-agent consultation and planning
 
 **Use IDE for**:
+
 - Active development and coding
 - File operations and project integration
 - Document sharding and story management
@@ -1448,35 +1484,41 @@ npx bmad-method install
 **Can you do everything in IDE?** Yes, but understand the tradeoffs:
 
 **Pros of IDE-Only**:
+
 - Single environment workflow
 - Direct file operations from start
 - No copy/paste between environments
 - Immediate project integration
 
 **Cons of IDE-Only**:
+
 - Higher token costs for large document creation
 - Smaller context windows (varies by IDE/model)
 - May hit limits during planning phases
 - Less cost-effective for brainstorming
 
 **Using Web Agents in IDE**:
+
 - **NOT RECOMMENDED**: Web agents (PM, Architect) have rich dependencies designed for large contexts
 - **Why it matters**: Dev agents are kept lean to maximize coding context
 - **The principle**: "Dev agents code, planning agents plan" - mixing breaks this optimization
 
 **About bmad-master and bmad-orchestrator**:
+
 - **bmad-master**: CAN do any task without switching agents, BUT...
 - **Still use specialized agents for planning**: PM, Architect, and UX Expert have tuned personas that produce better results
 - **Why specialization matters**: Each agent's personality and focus creates higher quality outputs
 - **If using bmad-master/orchestrator**: Fine for planning phases, but...
 
 **CRITICAL RULE for Development**:
+
 - **ALWAYS use SM agent for story creation** - Never use bmad-master/orchestrator
 - **ALWAYS use Dev agent for implementation** - Never use bmad-master/orchestrator
 - **Why this matters**: SM and Dev agents are specifically optimized for the development workflow
 - **No exceptions**: Even if using bmad-master for everything else, switch to SM → Dev for implementation
 
 **Best Practice for IDE-Only**:
+
 1. Use PM/Architect/UX agents for planning (better than bmad-master)
 2. Create documents directly in project
 3. Shard immediately after creation
@@ -1500,17 +1542,20 @@ This configuration file acts as a map for BMad agents, telling them exactly wher
 ### Key Configuration Areas
 
 #### PRD Configuration
+
 - **prdVersion**: Tells agents if PRD follows v3 or v4 conventions
 - **prdSharded**: Whether epics are embedded (false) or in separate files (true)
 - **prdShardedLocation**: Where to find sharded epic files
 - **epicFilePattern**: Pattern for epic filenames (e.g., `epic-{n}*.md`)
 
 #### Architecture Configuration
+
 - **architectureVersion**: v3 (monolithic) or v4 (sharded)
 - **architectureSharded**: Whether architecture is split into components
 - **architectureShardedLocation**: Where sharded architecture files live
 
 #### Developer Files
+
 - **devLoadAlwaysFiles**: List of files the dev agent loads for every task
 - **devDebugLog**: Where dev agent logs repeated failures
 - **agentCoreDump**: Export location for chat conversations
@@ -1525,6 +1570,7 @@ This configuration file acts as a map for BMad agents, telling them exactly wher
 ### Common Configurations
 
 **Legacy V3 Project**:
+
 ```yaml
 prdVersion: v3
 prdSharded: false
@@ -1533,6 +1579,7 @@ architectureSharded: false
 ```
 
 **V4 Optimized Project**:
+
 ```yaml
 prdVersion: v4
 prdSharded: true
@@ -1598,18 +1645,21 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 #### IDE-Specific Syntax
 
 **Agent Loading by IDE**:
+
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
 - **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
 - **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
-- **Github Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
+- **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
 
 **Chat Management Guidelines**:
+
 - **Claude Code, Cursor, Windsurf, Trae**: Start new chats when switching agents
 - **Roo Code**: Switch modes within the same conversation
 
 **Common Task Commands**:
+
 - `*help` - Show available commands
 - `*status` - Show current context/progress
 - `*exit` - Exit the agent mode
@@ -1618,6 +1668,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 - `*create` - Run create-next-story task (SM agent)
 
 **In Web UI**:
+
 ```text
 /pm create-doc prd
 /architect review system design
@@ -1631,16 +1682,19 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 ### Pre-Built Teams
 
 #### Team All
+
 - **Includes**: All 10 agents + orchestrator
 - **Use Case**: Complete projects requiring all roles
 - **Bundle**: `team-all.txt`
 
 #### Team Fullstack
+
 - **Includes**: PM, Architect, Developer, QA, UX Expert
 - **Use Case**: End-to-end web/mobile development
 - **Bundle**: `team-fullstack.txt`
 
 #### Team No-UI
+
 - **Includes**: PM, Architect, Developer, QA (no UX Expert)
 - **Use Case**: Backend services, APIs, system development
 - **Bundle**: `team-no-ui.txt`
@@ -1654,22 +1708,26 @@ The BMad-Method is built around a modular architecture centered on the `bmad-cor
 ### Key Architectural Components
 
 #### 1. Agents (`bmad-core/agents/`)
+
 - **Purpose**: Each markdown file defines a specialized AI agent for a specific Agile role (PM, Dev, Architect, etc.)
 - **Structure**: Contains YAML headers specifying the agent's persona, capabilities, and dependencies
 - **Dependencies**: Lists of tasks, templates, checklists, and data files the agent can use
 - **Startup Instructions**: Can load project-specific documentation for immediate context
 
 #### 2. Agent Teams (`bmad-core/agent-teams/`)
+
 - **Purpose**: Define collections of agents bundled together for specific purposes
 - **Examples**: `team-all.yaml` (comprehensive bundle), `team-fullstack.yaml` (full-stack development)
 - **Usage**: Creates pre-packaged contexts for web UI environments
 
 #### 3. Workflows (`bmad-core/workflows/`)
+
 - **Purpose**: YAML files defining prescribed sequences of steps for specific project types
 - **Types**: Greenfield (new projects) and Brownfield (existing projects) for UI, service, and fullstack development
 - **Structure**: Defines agent interactions, artifacts created, and transition conditions
 
 #### 4. Reusable Resources
+
 - **Templates** (`bmad-core/templates/`): Markdown templates for PRDs, architecture specs, user stories
 - **Tasks** (`bmad-core/tasks/`): Instructions for specific repeatable actions like "shard-doc" or "create-next-story"
 - **Checklists** (`bmad-core/checklists/`): Quality assurance checklists for validation and review
@@ -1709,6 +1767,7 @@ BMad employs a sophisticated template system with three key components:
 ### Technical Preferences Integration
 
 The `technical-preferences.md` file serves as a persistent technical profile that:
+
 - Ensures consistency across all agents and projects
 - Eliminates repetitive technology specification
 - Provides personalized recommendations aligned with user preferences
@@ -1717,6 +1776,7 @@ The `technical-preferences.md` file serves as a persistent technical profile tha
 ### Build and Delivery Process
 
 The `web-builder.js` tool creates web-ready bundles by:
+
 1. Reading agent or team definition files
 2. Recursively resolving all dependencies
 3. Concatenating content into single text files with clear separators
@@ -1731,11 +1791,13 @@ This architecture enables seamless operation across environments while maintaini
 **Ideal for cost efficiency with Gemini's massive context:**
 
 **For Brownfield Projects - Start Here!**:
+
 1. **Upload entire project to Gemini Web** (GitHub URL, files, or zip)
 2. **Document existing system**: `/analyst` → `*document-project`
 3. **Creates comprehensive docs** from entire codebase analysis
 
 **For All Projects**:
+
 1. **Optional Analysis**: `/analyst` - Market research, competitive analysis
 2. **Project Brief**: Create foundation document (Analyst or user)
 3. **PRD Creation**: `/pm create-doc prd` - Comprehensive product requirements
@@ -1746,12 +1808,14 @@ This architecture enables seamless operation across environments while maintaini
 #### Example Planning Prompts
 
 **For PRD Creation**:
+
 ```text
 "I want to build a [type] application that [core purpose].
 Help me brainstorm features and create a comprehensive PRD."
 ```
 
 **For Architecture Design**:
+
 ```text
 "Based on this PRD, design a scalable technical architecture
 that can handle [specific requirements]."
@@ -1769,7 +1833,7 @@ that can handle [specific requirements]."
 
 **Prerequisites**: Planning documents must exist in `docs/` folder
 
-1. **Document Sharding** (CRITICAL STEP): 
+1. **Document Sharding** (CRITICAL STEP):
    - Documents created by PM/Architect (in Web or IDE) MUST be sharded for development
    - Two methods to shard:
      a) **Manual**: Drag `shard-doc` task + document file into chat
@@ -1783,32 +1847,33 @@ that can handle [specific requirements]."
    - Source tree document and coding standards for dev agent reference
    - Sharded docs for SM agent story creation
 
-**Resulting Folder Structure**:
+Resulting Folder Structure:
+
 - `docs/prd/` - Broken down PRD sections
 - `docs/architecture/` - Broken down architecture sections
 - `docs/stories/` - Generated user stories
 
-3. **Development Cycle** (Sequential, one story at a time):
+1. **Development Cycle** (Sequential, one story at a time):
 
    **CRITICAL CONTEXT MANAGEMENT**:
    - **Context windows matter!** Always use fresh, clean context windows
    - **Model selection matters!** Use most powerful thinking model for SM story creation
    - **ALWAYS start new chat between SM, Dev, and QA work**
 
-   **Step 1 - Story Creation**: 
+   **Step 1 - Story Creation**:
    - **NEW CLEAN CHAT** → Select powerful model → `@sm` → `*create`
    - SM executes create-next-story task
    - Review generated story in `docs/stories/`
    - Update status from "Draft" to "Approved"
-   
-   **Step 2 - Story Implementation**: 
+
+   **Step 2 - Story Implementation**:
    - **NEW CLEAN CHAT** → `@dev`
    - Agent asks which story to implement
    - Include story file content to save dev agent lookup time
    - Dev follows tasks/subtasks, marking completion
    - Dev maintains File List of all changes
    - Dev marks story as "Review" when complete with all tests passing
-   
+
    **Step 3 - Senior QA Review**:
    - **NEW CLEAN CHAT** → `@qa` → execute review-story task
    - QA performs senior developer code review
@@ -1816,7 +1881,7 @@ that can handle [specific requirements]."
    - QA appends results to story's QA Results section
    - If approved: Status → "Done"
    - If changes needed: Status stays "Review" with unchecked items for dev
-   
+
    **Step 4 - Repeat**: Continue SM → Dev → QA cycle until all epic stories complete
 
 **Important**: Only 1 story in progress at a time, worked sequentially until all epic stories complete.
@@ -1824,6 +1889,7 @@ that can handle [specific requirements]."
 ### Status Tracking Workflow
 
 Stories progress through defined statuses:
+
 - **Draft** → **Approved** → **InProgress** → **Done**
 
 Each status change requires user verification and approval before proceeding.
@@ -1831,6 +1897,7 @@ Each status change requires user verification and approval before proceeding.
 ### Workflow Types
 
 #### Greenfield Development
+
 - Business analysis and market research
 - Product requirements and feature definition  
 - System architecture and design
@@ -1844,6 +1911,7 @@ Each status change requires user verification and approval before proceeding.
 **Complete Brownfield Workflow Options**:
 
 **Option 1: PRD-First (Recommended for Large Codebases/Monorepos)**:
+
 1. **Upload project to Gemini Web** (GitHub URL, files, or zip)
 2. **Create PRD first**: `@pm` → `*create-doc brownfield-prd`
 3. **Focused documentation**: `@analyst` → `*document-project`
@@ -1854,18 +1922,19 @@ Each status change requires user verification and approval before proceeding.
    - Avoids bloating docs with unused code
 
 **Option 2: Document-First (Good for Smaller Projects)**:
+
 1. **Upload project to Gemini Web**
 2. **Document everything**: `@analyst` → `*document-project`
 3. **Then create PRD**: `@pm` → `*create-doc brownfield-prd`
    - More thorough but can create excessive documentation
 
-2. **Requirements Gathering**:
+4. **Requirements Gathering**:
    - **Brownfield PRD**: Use PM agent with `brownfield-prd-tmpl`
    - **Analyzes**: Existing system, constraints, integration points
    - **Defines**: Enhancement scope, compatibility requirements, risk assessment
    - **Creates**: Epic and story structure for changes
 
-3. **Architecture Planning**:
+5. **Architecture Planning**:
    - **Brownfield Architecture**: Use Architect agent with `brownfield-architecture-tmpl`
    - **Integration Strategy**: How new features integrate with existing system
    - **Migration Planning**: Gradual rollout and backwards compatibility
@@ -1874,10 +1943,12 @@ Each status change requires user verification and approval before proceeding.
 **Brownfield-Specific Resources**:
 
 **Templates**:
+
 - `brownfield-prd-tmpl.md`: Comprehensive enhancement planning with existing system analysis
 - `brownfield-architecture-tmpl.md`: Integration-focused architecture for existing systems
 
 **Tasks**:
+
 - `document-project`: Generates comprehensive documentation from existing codebase
 - `brownfield-create-epic`: Creates single epic for focused enhancements (when full PRD is overkill)
 - `brownfield-create-story`: Creates individual story for small, isolated changes
@@ -1885,18 +1956,21 @@ Each status change requires user verification and approval before proceeding.
 **When to Use Each Approach**:
 
 **Full Brownfield Workflow** (Recommended for):
+
 - Major feature additions
 - System modernization
 - Complex integrations
 - Multiple related changes
 
 **Quick Epic/Story Creation** (Use when):
+
 - Single, focused enhancement
 - Isolated bug fixes
 - Small feature additions
 - Well-documented existing system
 
 **Critical Success Factors**:
+
 1. **Documentation First**: Always run `document-project` if docs are outdated/missing
 2. **Context Matters**: Provide agents access to relevant code sections
 3. **Integration Focus**: Emphasize compatibility and non-breaking changes
@@ -1912,6 +1986,7 @@ Each status change requires user verification and approval before proceeding.
 - `docs/architecture.md` - System Architecture Document
 
 **Why These Names Matter**:
+
 - Agents automatically reference these files during development
 - Sharding tasks expect these specific filenames
 - Workflow automation depends on standard naming
@@ -1930,6 +2005,7 @@ Each status change requires user verification and approval before proceeding.
 Templates with Level 2 headings (`##`) can be automatically sharded:
 
 **Original PRD**:
+
 ```markdown
 ## Goals and Background Context
 ## Requirements  
@@ -1938,6 +2014,7 @@ Templates with Level 2 headings (`##`) can be automatically sharded:
 ```
 
 **After Sharding**:
+
 - `docs/prd/goals-and-background-context.md`
 - `docs/prd/requirements.md`
 - `docs/prd/user-interface-design-goals.md`
@@ -1950,12 +2027,14 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sh
 ### Environment-Specific Usage
 
 **Web UI Best For**:
+
 - Initial planning and documentation phases
 - Cost-effective large document creation
 - Agent consultation and brainstorming
 - Multi-agent workflows with orchestrator
 
 **IDE Best For**:
+
 - Active development and implementation
 - File operations and project integration
 - Story management and development cycles
@@ -1990,6 +2069,7 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sh
 For full details, see `CONTRIBUTING.md`. Key points:
 
 **Fork Workflow**:
+
 1. Fork the repository
 2. Create feature branches
 3. Submit PRs to `next` branch (default) or `main` for critical fixes only
@@ -1997,12 +2077,14 @@ For full details, see `CONTRIBUTING.md`. Key points:
 5. One feature/fix per PR
 
 **PR Requirements**:
+
 - Clear descriptions (max 200 words) with What/Why/How/Testing
 - Use conventional commits (feat:, fix:, docs:)
 - Atomic commits - one logical change per commit
 - Must align with guiding principles
 
 **Core Principles** (from GUIDING-PRINCIPLES.md):
+
 - **Dev Agents Must Be Lean**: Minimize dependencies, save context for code
 - **Natural Language First**: Everything in markdown, no code in core
 - **Core vs Expansion Packs**: Core for universal needs, packs for specialized domains
@@ -2024,12 +2106,14 @@ Expansion packs extend BMad-Method beyond traditional software development into 
 ### Available Expansion Packs
 
 **Technical Packs**:
+
 - **Infrastructure/DevOps**: Cloud architects, SRE experts, security specialists
 - **Game Development**: Game designers, level designers, narrative writers
 - **Mobile Development**: iOS/Android specialists, mobile UX experts
 - **Data Science**: ML engineers, data scientists, visualization experts
 
 **Non-Technical Packs**:
+
 - **Business Strategy**: Consultants, financial analysts, marketing strategists
 - **Creative Writing**: Plot architects, character developers, world builders
 - **Health & Wellness**: Fitness trainers, nutritionists, habit engineers
@@ -2037,6 +2121,7 @@ Expansion packs extend BMad-Method beyond traditional software development into 
 - **Legal Support**: Contract analysts, compliance checkers
 
 **Specialty Packs**:
+
 - **Expansion Creator**: Tools to build your own expansion packs
 - **RPG Game Master**: Tabletop gaming assistance
 - **Life Event Planning**: Wedding planners, event coordinators
@@ -2046,11 +2131,13 @@ Expansion packs extend BMad-Method beyond traditional software development into 
 
 1. **Browse Available Packs**: Check `expansion-packs/` directory
 2. **Get Inspiration**: See `docs/expansion-packs.md` for detailed examples and ideas
-3. **Install via CLI**: 
+3. **Install via CLI**:
+
    ```bash
    npx bmad-method install
    # Select "Install expansion pack" option
    ```
+
 4. **Use in Your Workflow**: Installed packs integrate seamlessly with existing agents
 
 ### Creating Custom Expansion Packs
@@ -2071,9 +2158,9 @@ Use the **expansion-creator** pack to build your own:
 - **Documentation**: Check `docs/` folder for project-specific context
 - **Community**: Discord and GitHub resources available for support
 - **Contributing**: See `CONTRIBUTING.md` for full guidelines
-==================== END: data#bmad-kb ====================
+==================== END: .bmad-core/data/bmad-kb.md ====================
 
-==================== START: utils#plan-management ====================
+==================== START: .bmad-core/utils/plan-management.md ====================
 # Plan Management Utility
 
 ## Purpose
@@ -2084,14 +2171,10 @@ Provides utilities for agents and tasks to interact with workflow plans, check p
 
 ### 1. Check Plan Existence
 
-[[LLM: When any agent starts or task begins, check if a workflow plan exists]]
-
-```
 Check for workflow plan:
+
 1. Look for docs/workflow-plan.md (default location)
-2. Check core-config.yaml for custom plan location
-3. Return plan status (exists/not exists)
-```
+2. Return plan status to user (exists/not exists) - if not exists then HALT.
 
 ### 2. Parse Plan Status
 
@@ -2132,7 +2215,7 @@ Check for workflow plan:
 
 **Warning Templates:**
 
-```
+```text
 SEQUENCE WARNING: 
 The workflow plan shows you should complete "{expected_step}" next.
 You're attempting to: "{requested_action}"
@@ -2166,7 +2249,7 @@ In flexible mode: Allow with confirmation
 
 **For Agents (startup sequence)**:
 
-```
+```text
 1. Check if plan exists using this utility
 2. If exists:
    - Parse current status
@@ -2177,7 +2260,7 @@ In flexible mode: Allow with confirmation
 
 **For Tasks (pre-execution)**:
 
-```
+```text
 1. Check if plan exists
 2. If exists:
    - Verify this task aligns with plan
@@ -2193,7 +2276,7 @@ In flexible mode: Allow with confirmation
 
 [[LLM: Standard format for showing plan status]]
 
-```
+```text
 📋 Workflow Plan Status
 ━━━━━━━━━━━━━━━━━━━━
 Workflow: {workflow_name}
@@ -2246,7 +2329,7 @@ If user wants to abandon plan:
 
 ### Example 1: Agent Startup Check
 
-```
+```text
 BMad Master starting...
 
 [Check for plan]
@@ -2260,7 +2343,7 @@ Use *agent pm to switch, or *plan-status to see full progress.
 
 ### Example 2: Task Sequence Warning
 
-```
+```text
 User: *task create-next-story
 
 [Plan check triggered]
@@ -2276,7 +2359,7 @@ Would you like to:
 
 ### Example 3: Automatic Plan Update
 
-```
+```text
 [After completing create-doc task for PRD]
 
 ✅ Plan Updated: Marked "Create PRD" as complete
@@ -2297,9 +2380,9 @@ Would you like to:
 - Malformed plan: Warn but continue, treat as no plan
 - Update failures: Log but don't block task completion
 - Parse errors: Fallback to basic text search
-==================== END: utils#plan-management ====================
+==================== END: .bmad-core/utils/plan-management.md ====================
 
-==================== START: utils#workflow-management ====================
+==================== START: .bmad-core/utils/workflow-management.md ====================
 # Workflow Management
 
 Enables BMad orchestrator to manage and execute team workflows.
@@ -2369,9 +2452,9 @@ Handle conditional paths by asking clarifying questions when needed.
 ## Agent Integration
 
 Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
-==================== END: utils#workflow-management ====================
+==================== END: .bmad-core/utils/workflow-management.md ====================
 
-==================== START: utils#template-format ====================
+==================== START: .bmad-core/utils/template-format.md ====================
 # Template Format Conventions
 
 Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
@@ -2398,250 +2481,148 @@ Templates in the BMad method use standardized markup for AI processing. These co
 - Template elements are for AI processing only
 - Focus on faithful template execution and clean output
 - All template-specific instructions are embedded within templates
-==================== END: utils#template-format ====================
+==================== END: .bmad-core/utils/template-format.md ====================
 
-==================== START: tasks#brainstorming-techniques ====================
-# Brainstorming Techniques Task
+==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
+---
+docOutputLocation: docs/brainstorming-session-results.md
+template: brainstorming-output-tmpl
+---
 
-This task provides a comprehensive toolkit of creative brainstorming techniques for ideation and innovative thinking. The analyst can use these techniques to facilitate productive brainstorming sessions with users.
+# Facilitate Brainstorming Session Task
+
+Facilitate interactive brainstorming sessions with users. Be creative and adaptive in applying techniques.
 
 ## Process
 
-### 1. Session Setup
+### Step 1: Session Setup
 
-[[LLM: Begin by understanding the brainstorming context and goals. Ask clarifying questions if needed to determine the best approach.]]
+Ask 4 context questions (don't preview what happens next):
 
-1. **Establish Context**
+1. What are we brainstorming about?
+2. Any constraints or parameters?
+3. Goal: broad exploration or focused ideation?
+4. Do you want a structured document output to reference later? (Y/N)
 
-   - Understand the problem space or opportunity area
-   - Identify any constraints or parameters
-   - Determine session goals (divergent exploration vs. focused ideation)
+### Step 2: Present Approach Options
 
-2. **Select Technique Approach**
-   - Option A: User selects specific techniques
-   - Option B: Analyst recommends techniques based on context
-   - Option C: Random technique selection for creative variety
-   - Option D: Progressive technique flow (start broad, narrow down)
+After getting answers to Step 1, present 4 approach options (numbered):
 
-### 2. Core Brainstorming Techniques
+1. User selects specific techniques
+2. Analyst recommends techniques based on context
+3. Random technique selection for creative variety
+4. Progressive technique flow (start broad, narrow down)
 
-#### Creative Expansion Techniques
+### Step 3: Execute Techniques Interactively
 
-1. **"What If" Scenarios**
-   [[LLM: Generate provocative what-if questions that challenge assumptions and expand thinking beyond current limitations.]]
+**KEY PRINCIPLES:**
 
-   - What if we had unlimited resources?
-   - What if this problem didn't exist?
-   - What if we approached this from a child's perspective?
-   - What if we had to solve this in 24 hours?
+- **FACILITATOR ROLE**: Guide user to generate their own ideas through questions, prompts, and examples
+- **CONTINUOUS ENGAGEMENT**: Keep user engaged with chosen technique until they want to switch or are satisfied
+- **CAPTURE OUTPUT**: If document output requested, capture all ideas generated in each technique section
 
-2. **Analogical Thinking**
-   [[LLM: Help user draw parallels between their challenge and other domains, industries, or natural systems.]]
+**Technique Selection:**
+If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number (e.g., "7" for Mind Mapping).
 
-   - "How might this work like [X] but for [Y]?"
-   - Nature-inspired solutions (biomimicry)
-   - Cross-industry pattern matching
-   - Historical precedent analysis
+**Technique Execution:**
 
-3. **Reversal/Inversion**
-   [[LLM: Flip the problem or approach it from the opposite angle to reveal new insights.]]
+1. Apply selected technique according to data file description
+2. Keep engaging with technique until user indicates they want to:
+   - Choose a different technique
+   - Apply current ideas to a new technique  
+   - Move to convergent phase
+   - End session
 
-   - What if we did the exact opposite?
-   - How could we make this problem worse? (then reverse)
-   - Start from the end goal and work backward
-   - Reverse roles or perspectives
+**Output Capture (if requested):**
+For each technique used, capture:
 
-4. **First Principles Thinking**
-   [[LLM: Break down to fundamental truths and rebuild from scratch.]]
-   - What are the absolute fundamentals here?
-   - What assumptions can we challenge?
-   - If we started from zero, what would we build?
-   - What laws of physics/economics/human nature apply?
+- Technique name and duration
+- Key ideas generated by user
+- Insights and patterns identified
+- User's reflections on the process
 
-#### Structured Ideation Frameworks
+### Step 4: Session Flow
 
-1. **SCAMPER Method**
-   [[LLM: Guide through each SCAMPER prompt systematically.]]
+1. **Warm-up** (5-10 min) - Build creative confidence
+2. **Divergent** (20-30 min) - Generate quantity over quality
+3. **Convergent** (15-20 min) - Group and categorize ideas
+4. **Synthesis** (10-15 min) - Refine and develop concepts
 
-   - **S** = Substitute: What can be substituted?
-   - **C** = Combine: What can be combined or integrated?
-   - **A** = Adapt: What can be adapted from elsewhere?
-   - **M** = Modify/Magnify: What can be emphasized or reduced?
-   - **P** = Put to other uses: What else could this be used for?
-   - **E** = Eliminate: What can be removed or simplified?
-   - **R**= Reverse/Rearrange: What can be reversed or reordered?
+### Step 5: Document Output (if requested)
 
-2. **Six Thinking Hats**
-   [[LLM: Cycle through different thinking modes, spending focused time in each.]]
+Generate structured document with these sections:
 
-   - White Hat: Facts and information
-   - Red Hat: Emotions and intuition
-   - Black Hat: Caution and critical thinking
-   - Yellow Hat: Optimism and benefits
-   - Green Hat: Creativity and alternatives
-   - Blue Hat: Process and control
+**Executive Summary**
 
-3. **Mind Mapping**
-   [[LLM: Create text-based mind maps with clear hierarchical structure.]]
+- Session topic and goals
+- Techniques used and duration
+- Total ideas generated
+- Key themes and patterns identified
 
-   ```plaintext
-   Central Concept
-   ├── Branch 1
-   │   ├── Sub-idea 1.1
-   │   └── Sub-idea 1.2
-   ├── Branch 2
-   │   ├── Sub-idea 2.1
-   │   └── Sub-idea 2.2
-   └── Branch 3
-       └── Sub-idea 3.1
-   ```
+**Technique Sections** (for each technique used)
 
-#### Collaborative Techniques
+- Technique name and description
+- Ideas generated (user's own words)
+- Insights discovered
+- Notable connections or patterns
 
-1. **"Yes, And..." Building**
-   [[LLM: Accept every idea and build upon it without judgment. Encourage wild ideas and defer criticism.]]
+**Idea Categorization**
 
-   - Accept the premise of each idea
-   - Add to it with "Yes, and..."
-   - Build chains of connected ideas
-   - Explore tangents freely
+- **Immediate Opportunities** - Ready to implement now
+- **Future Innovations** - Requires development/research
+- **Moonshots** - Ambitious, transformative concepts
+- **Insights & Learnings** - Key realizations from session
 
-2. **Brainwriting/Round Robin**
-   [[LLM: Simulate multiple perspectives by generating ideas from different viewpoints.]]
+**Action Planning**
 
-   - Generate ideas from stakeholder perspectives
-   - Build on previous ideas in rounds
-   - Combine unrelated ideas
-   - Cross-pollinate concepts
+- Top 3 priority ideas with rationale
+- Next steps for each priority
+- Resources/research needed
+- Timeline considerations
 
-3. **Random Stimulation**
-   [[LLM: Use random words, images, or concepts as creative triggers.]]
-   - Random word association
-   - Picture/metaphor inspiration
-   - Forced connections between unrelated items
-   - Constraint-based creativity
+**Reflection & Follow-up**
 
-#### Deep Exploration Techniques
-
-1. **Five Whys**
-   [[LLM: Dig deeper into root causes and underlying motivations.]]
-
-   - Why does this problem exist? → Answer → Why? (repeat 5 times)
-   - Uncover hidden assumptions
-   - Find root causes, not symptoms
-   - Identify intervention points
-
-2. **Morphological Analysis**
-   [[LLM: Break down into parameters and systematically explore combinations.]]
-
-   - List key parameters/dimensions
-   - Identify possible values for each
-   - Create combination matrix
-   - Explore unusual combinations
-
-3. **Provocation Technique (PO)**
-   [[LLM: Make deliberately provocative statements to jar thinking.]]
-   - PO: Cars have square wheels
-   - PO: Customers pay us to take products
-   - PO: The problem solves itself
-   - Extract useful ideas from provocations
-
-### 3. Technique Selection Guide
-
-[[LLM: Help user select appropriate techniques based on their needs.]]
-
-**For Initial Exploration:**
-
-- What If Scenarios
-- First Principles
-- Mind Mapping
-
-**For Stuck/Blocked Thinking:**
-
-- Random Stimulation
-- Reversal/Inversion
-- Provocation Technique
-
-**For Systematic Coverage:**
-
-- SCAMPER
-- Morphological Analysis
-- Six Thinking Hats
-
-**For Deep Understanding:**
-
-- Five Whys
-- Analogical Thinking
-- First Principles
-
-**For Team/Collaborative Settings:**
-
-- Brainwriting
-- "Yes, And..."
-- Six Thinking Hats
-
-### 4. Session Flow Management
-
-[[LLM: Guide the brainstorming session with appropriate pacing and technique transitions.]]
-
-1. **Warm-up Phase** (5-10 min)
-
-   - Start with accessible techniques
-   - Build creative confidence
-   - Establish "no judgment" atmosphere
-
-2. **Divergent Phase** (20-30 min)
-
-   - Use expansion techniques
-   - Generate quantity over quality
-   - Encourage wild ideas
-
-3. **Convergent Phase** (15-20 min)
-
-   - Group and categorize ideas
-   - Identify patterns and themes
-   - Select promising directions
-
-4. **Synthesis Phase** (10-15 min)
-   - Combine complementary ideas
-   - Refine and develop concepts
-   - Prepare summary of insights
-
-### 5. Output Format
-
-[[LLM: Present brainstorming results in an organized, actionable format.]]
-
-**Session Summary:**
-
-- Techniques used
-- Number of ideas generated
-- Key themes identified
-
-**Idea Categories:**
-
-1. **Immediate Opportunities** - Ideas that could be implemented now
-2. **Future Innovations** - Ideas requiring more development
-3. **Moonshots** - Ambitious, transformative ideas
-4. **Insights & Learnings** - Key realizations from the session
-
-**Next Steps:**
-
-- Which ideas to explore further
+- What worked well in this session
+- Areas for further exploration
 - Recommended follow-up techniques
-- Suggested research areas
+- Questions that emerged for future sessions
 
-## Important Notes
+## Key Principles
 
-- Maintain energy and momentum throughout the session
-- Defer judgment - all ideas are valid during generation
-- Quantity leads to quality - aim for many ideas
+- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them
+- **INTERACTIVE DIALOGUE**: Ask questions, wait for responses, build on their ideas
+- **ONE TECHNIQUE AT A TIME**: Don't mix multiple techniques in one response
+- **CONTINUOUS ENGAGEMENT**: Stay with one technique until user wants to switch
+- **DRAW IDEAS OUT**: Use prompts and examples to help them generate their own ideas
+- **REAL-TIME ADAPTATION**: Monitor engagement and adjust approach as needed
+- Maintain energy and momentum
+- Defer judgment during generation
+- Quantity leads to quality (aim for 100 ideas in 60 minutes)
 - Build on ideas collaboratively
-- Document everything - even "silly" ideas can spark breakthroughs
-- Take breaks if energy flags
-- End with clear next actions
-==================== END: tasks#brainstorming-techniques ====================
+- Document everything if output requested
 
-==================== START: tasks#create-deep-research-prompt ====================
+## Advanced Engagement Strategies
+
+**Energy Management**
+
+- Check engagement levels: "How are you feeling about this direction?"
+- Offer breaks or technique switches if energy flags
+- Use encouraging language and celebrate idea generation
+
+**Depth vs. Breadth**
+
+- Ask follow-up questions to deepen ideas: "Tell me more about that..."
+- Use "Yes, and..." to build on their ideas
+- Help them make connections: "How does this relate to your earlier idea about...?"
+
+**Transition Management**
+
+- Always ask before switching techniques: "Ready to try a different approach?"
+- Offer options: "Should we explore this idea deeper or generate more alternatives?"
+- Respect their process and timing
+==================== END: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
+
+==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -2943,9 +2924,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: tasks#create-deep-research-prompt ====================
+==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
-==================== START: tasks#document-project ====================
+==================== START: .bmad-core/tasks/document-project.md ====================
 # Document an Existing Project
 
 ## Purpose
@@ -3263,9 +3244,9 @@ Apply the advanced elicitation task after major sections to refine based on user
 - Documents technical debt, workarounds, and constraints honestly
 - For brownfield projects with PRD: Provides clear enhancement impact analysis
 - The goal is PRACTICAL documentation for AI agents doing real work
-==================== END: tasks#document-project ====================
+==================== END: .bmad-core/tasks/document-project.md ====================
 
-==================== START: templates#project-brief-tmpl ====================
+==================== START: .bmad-core/templates/project-brief-tmpl.md ====================
 ---
 defaultOutput: docs/brief.md
 ---
@@ -3498,9 +3479,9 @@ This Project Brief provides the full context for {{Project Name}}. Please start 
 9. Proceed to next section
 
 These replace the standard elicitation options when working on project brief documents.]]
-==================== END: templates#project-brief-tmpl ====================
+==================== END: .bmad-core/templates/project-brief-tmpl.md ====================
 
-==================== START: templates#market-research-tmpl ====================
+==================== START: .bmad-core/templates/market-research-tmpl.md ====================
 # Market Research Report: {{Project/Product Name}}
 
 [[LLM: The default path and filename unless specified is docs/market-research.md]]
@@ -3764,9 +3745,9 @@ These replace the standard elicitation options when working on project brief doc
 9. Proceed to next section
 
 These replace the standard elicitation options when working on market research documents.]]
-==================== END: templates#market-research-tmpl ====================
+==================== END: .bmad-core/templates/market-research-tmpl.md ====================
 
-==================== START: templates#competitor-analysis-tmpl ====================
+==================== START: .bmad-core/templates/competitor-analysis-tmpl.md ====================
 # Competitive Analysis Report: {{Project/Product Name}}
 
 [[LLM: The default path and filename unless specified is docs/competitor-analysis.md]]
@@ -4058,9 +4039,200 @@ These replace the standard elicitation options when working on market research d
 9. Proceed to next section
 
 These replace the standard elicitation options when working on competitive analysis documents.]]
-==================== END: templates#competitor-analysis-tmpl ====================
+==================== END: .bmad-core/templates/competitor-analysis-tmpl.md ====================
 
-==================== START: tasks#correct-course ====================
+==================== START: .bmad-core/templates/brainstorming-output-tmpl.md ====================
+---
+defaultOutput: docs/brainstorming-session-results.md
+---
+
+# Brainstorming Session Results
+
+**Session Date:** [DATE]
+**Facilitator:** [Agent Role] [Agent Name]
+**Participant:** [USER NAME]
+
+## Executive Summary
+
+**Topic:** [SESSION TOPIC]
+
+**Session Goals:** [STATED GOALS]
+
+**Techniques Used:** [LIST OF TECHNIQUES AND DURATION]
+
+**Total Ideas Generated:** [NUMBER]
+
+**Key Themes Identified:**
+
+- [THEME 1]
+- [THEME 2]
+- [THEME 3]
+
+---
+
+## Technique Sessions
+
+### [TECHNIQUE NAME 1] - [DURATION]
+
+**Description:** [BRIEF DESCRIPTION OF TECHNIQUE]
+
+**Ideas Generated:**
+
+1. [USER IDEA 1]
+2. [USER IDEA 2]
+3. [USER IDEA 3]
+[etc.]
+
+**Insights Discovered:**
+
+- [INSIGHT 1]
+- [INSIGHT 2]
+
+**Notable Connections:**
+
+- [CONNECTION OR PATTERN IDENTIFIED]
+
+---
+
+### [TECHNIQUE NAME 2] - [DURATION]
+
+[Repeat format for each technique used]
+
+---
+
+## Idea Categorization
+
+### Immediate Opportunities
+
+*Ideas ready to implement now*
+
+1. **[IDEA NAME]**
+   - Description: [BRIEF DESCRIPTION]
+   - Why immediate: [RATIONALE]
+   - Resources needed: [BASIC REQUIREMENTS]
+
+### Future Innovations
+
+*Ideas requiring development/research*
+
+1. **[IDEA NAME]**
+   - Description: [BRIEF DESCRIPTION]
+   - Development needed: [WHAT'S REQUIRED]
+   - Timeline estimate: [ROUGH TIMEFRAME]
+
+### Moonshots
+
+*Ambitious, transformative concepts*
+
+1. **[IDEA NAME]**
+   - Description: [BRIEF DESCRIPTION]
+   - Transformative potential: [WHY IT'S A MOONSHOT]
+   - Challenges to overcome: [MAJOR OBSTACLES]
+
+### Insights & Learnings
+
+*Key realizations from the session*
+
+- [INSIGHT 1]: [DESCRIPTION AND IMPLICATIONS]
+- [INSIGHT 2]: [DESCRIPTION AND IMPLICATIONS]
+
+---
+
+## Action Planning
+
+### Top 3 Priority Ideas
+
+**#1 Priority: [IDEA NAME]**
+
+- Rationale: [WHY THIS IS TOP PRIORITY]
+- Next steps: [SPECIFIC ACTIONS TO TAKE]
+- Resources needed: [WHAT'S REQUIRED]
+- Timeline: [WHEN TO START/COMPLETE]
+
+**#2 Priority: [IDEA NAME]**
+
+- [Same format]
+
+**#3 Priority: [IDEA NAME]**
+
+- [Same format]
+
+---
+
+## Reflection & Follow-up
+
+### What Worked Well
+
+- [SUCCESSFUL ASPECT 1]
+- [SUCCESSFUL ASPECT 2]
+
+### Areas for Further Exploration
+
+- [AREA 1]: [WHY IT NEEDS MORE EXPLORATION]
+- [AREA 2]: [WHY IT NEEDS MORE EXPLORATION]
+
+### Recommended Follow-up Techniques
+
+- [TECHNIQUE 1]: [WHY IT WOULD BE HELPFUL]
+- [TECHNIQUE 2]: [WHY IT WOULD BE HELPFUL]
+
+### Questions That Emerged
+
+- [QUESTION 1]
+- [QUESTION 2]
+- [QUESTION 3]
+
+### Next Session Planning
+
+- **Suggested topics:** [FOLLOW-UP TOPICS]
+- **Recommended timeframe:** [WHEN TO RECONVENE]
+- **Preparation needed:** [WHAT TO RESEARCH/PREPARE]
+
+---
+
+*Session facilitated using the BMAD-METHOD brainstorming framework*
+==================== END: .bmad-core/templates/brainstorming-output-tmpl.md ====================
+
+==================== START: .bmad-core/data/brainstorming-techniques.md ====================
+# Brainstorming Techniques Data
+
+## Creative Expansion
+
+1. **What If Scenarios**: Ask one provocative question, get their response, then ask another
+2. **Analogical Thinking**: Give one example analogy, ask them to find 2-3 more
+3. **Reversal/Inversion**: Pose the reverse question, let them work through it
+4. **First Principles Thinking**: Ask "What are the fundamentals?" and guide them to break it down
+
+## Structured Frameworks
+
+5. **SCAMPER Method**: Go through one letter at a time, wait for their ideas before moving to next
+6. **Six Thinking Hats**: Present one hat, ask for their thoughts, then move to next hat
+7. **Mind Mapping**: Start with central concept, ask them to suggest branches
+
+## Collaborative Techniques
+
+8. **"Yes, And..." Building**: They give idea, you "yes and" it, they "yes and" back - alternate
+9. **Brainwriting/Round Robin**: They suggest idea, you build on it, ask them to build on yours
+10. **Random Stimulation**: Give one random prompt/word, ask them to make connections
+
+## Deep Exploration
+
+11. **Five Whys**: Ask "why" and wait for their answer before asking next "why"
+12. **Morphological Analysis**: Ask them to list parameters first, then explore combinations together
+13. **Provocation Technique (PO)**: Give one provocative statement, ask them to extract useful ideas
+
+## Advanced Techniques
+
+14. **Forced Relationships**: Connect two unrelated concepts and ask them to find the bridge
+15. **Assumption Reversal**: Challenge their core assumptions and ask them to build from there
+16. **Role Playing**: Ask them to brainstorm from different stakeholder perspectives
+17. **Time Shifting**: "How would you solve this in 1995? 2030?"
+18. **Resource Constraints**: "What if you had only $10 and 1 hour?"
+19. **Metaphor Mapping**: Use extended metaphors to explore solutions
+20. **Question Storming**: Generate questions instead of answers first
+==================== END: .bmad-core/data/brainstorming-techniques.md ====================
+
+==================== START: .bmad-core/tasks/correct-course.md ====================
 # Correct Course Task
 
 ## Purpose
@@ -4134,9 +4306,9 @@ These replace the standard elicitation options when working on competitive analy
   - A summary of the `change-checklist` analysis (issue, impact, rationale for the chosen path).
   - Specific, clearly drafted proposed edits for all affected project artifacts.
 - **Implicit:** An annotated `change-checklist` (or the record of its completion) reflecting the discussions, findings, and decisions made during the process.
-==================== END: tasks#correct-course ====================
+==================== END: .bmad-core/tasks/correct-course.md ====================
 
-==================== START: tasks#brownfield-create-epic ====================
+==================== START: .bmad-core/tasks/brownfield-create-epic.md ====================
 # Create Brownfield Epic Task
 
 ## Purpose
@@ -4297,9 +4469,9 @@ The epic creation is successful when:
 - If the scope grows beyond 3 stories, consider the full brownfield PRD process
 - Always prioritize existing system integrity over new functionality
 - When in doubt about scope or complexity, escalate to full brownfield planning
-==================== END: tasks#brownfield-create-epic ====================
+==================== END: .bmad-core/tasks/brownfield-create-epic.md ====================
 
-==================== START: tasks#brownfield-create-story ====================
+==================== START: .bmad-core/tasks/brownfield-create-story.md ====================
 # Create Brownfield Story Task
 
 ## Purpose
@@ -4447,16 +4619,16 @@ The story creation is successful when:
 - Always prioritize existing system integrity
 - When in doubt about integration complexity, use brownfield-create-epic instead
 - Stories should take no more than 4 hours of focused development work
-==================== END: tasks#brownfield-create-story ====================
+==================== END: .bmad-core/tasks/brownfield-create-story.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-core/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-core/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -4465,7 +4637,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-core/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -4543,9 +4715,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-core/tasks/execute-checklist.md ====================
 
-==================== START: tasks#shard-doc ====================
+==================== START: .bmad-core/tasks/shard-doc.md ====================
 # Document Sharding Task
 
 ## Purpose
@@ -4737,9 +4909,9 @@ Document sharded successfully:
 - Preserve ALL formatting, including whitespace where significant
 - Handle edge cases like sections with code blocks containing ## symbols
 - Ensure the sharding is reversible (could reconstruct the original from shards)
-==================== END: tasks#shard-doc ====================
+==================== END: .bmad-core/tasks/shard-doc.md ====================
 
-==================== START: templates#prd-tmpl ====================
+==================== START: .bmad-core/templates/prd-tmpl.md ====================
 # {{Project Name}} Product Requirements Document (PRD)
 
 [[LLM: The default path and filename unless specified is docs/prd.md]]
@@ -4767,7 +4939,7 @@ Document sharded successfully:
 
 ## Requirements
 
-[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute tasks#advanced-elicitation display]]
+[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute .bmad-core/tasks/advanced-elicitation.md display]]
 
 ### Functional
 
@@ -4790,7 +4962,7 @@ Document sharded successfully:
 3. Clearly let the user know where assumptions were made
 4. Ask targeted questions for unclear/missing elements or areas needing more specification
 5. This is NOT detailed UI spec - focus on product vision and user goals
-6. After section completion, immediately apply `tasks#advanced-elicitation` protocol]]
+6. After section completion, immediately apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### Overall UX Vision
 
@@ -4832,12 +5004,12 @@ Document sharded successfully:
 
 [[LLM: Gather technical decisions that will guide the Architect. Steps:
 
-1. Check if `data#technical-preferences` or an attached `technical-preferences` file exists - use it to pre-populate choices
+1. Check if `.bmad-core/data/technical-preferences.yaml` or an attached `technical-preferences` file exists - use it to pre-populate choices
 2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
 3. For unknowns, offer guidance based on project goals and MVP scope
 4. Document ALL technical choices with rationale (why this choice fits the project)
 5. These become constraints for the Architect - be specific and complete
-6. After section completion, apply `tasks#advanced-elicitation` protocol.]]
+6. After section completion, apply `.bmad-core/tasks/advanced-elicitation.md` protocol.]]
 
 ### Repository Structure: { Monorepo, Polyrepo, etc...}
 
@@ -4855,7 +5027,7 @@ Document sharded successfully:
 
 ## Epics
 
-[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute tasks#advanced-elicitation display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute .bmad-core/tasks/advanced-elicitation.md display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
 
 CRITICAL: Epics MUST be logically sequential following agile best practices:
 
@@ -4881,7 +5053,7 @@ CRITICAL: Epics MUST be logically sequential following agile best practices:
 
 @{/example}
 
-[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute tasks#advanced-elicitation display, before moving on to the next epic.]]
+[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute .bmad-core/tasks/advanced-elicitation.md display, before moving on to the next epic.]]
 
 <<REPEAT: epic_details>>
 
@@ -4942,9 +5114,9 @@ so that {{benefit}}.
 ### Architect Prompt
 
 [[LLM: This section will contain the prompt for the Architect, keep it short and to the point to initiate create architecture mode using this document as input.]]
-==================== END: templates#prd-tmpl ====================
+==================== END: .bmad-core/templates/prd-tmpl.md ====================
 
-==================== START: templates#brownfield-prd-tmpl ====================
+==================== START: .bmad-core/templates/brownfield-prd-tmpl.md ====================
 # {{Project Name}} Brownfield Enhancement PRD
 
 [[LLM: The default path and filename unless specified is docs/prd.md]]
@@ -5211,9 +5383,9 @@ so that {{benefit}}.
 - IV3: [[LLM: Performance impact verification requirement]]
 
 <</REPEAT>>
-==================== END: templates#brownfield-prd-tmpl ====================
+==================== END: .bmad-core/templates/brownfield-prd-tmpl.md ====================
 
-==================== START: checklists#pm-checklist ====================
+==================== START: .bmad-core/checklists/pm-checklist.md ====================
 # Product Manager (PM) Requirements Checklist
 
 This checklist serves as a comprehensive framework to ensure the Product Requirements Document (PRD) and Epic definitions are complete, well-structured, and appropriately scoped for MVP development. The PM should systematically work through each item during the product definition process.
@@ -5589,9 +5761,9 @@ After presenting the report, ask if the user wants:
 
 - **READY FOR ARCHITECT**: The PRD and epics are comprehensive, properly structured, and ready for architectural design.
 - **NEEDS REFINEMENT**: The requirements documentation requires additional work to address the identified deficiencies.
-==================== END: checklists#pm-checklist ====================
+==================== END: .bmad-core/checklists/pm-checklist.md ====================
 
-==================== START: checklists#change-checklist ====================
+==================== START: .bmad-core/checklists/change-checklist.md ====================
 # Change Navigation Checklist
 
 **Purpose:** To systematically guide the selected Agent and user through the analysis and planning required when a significant change (pivot, tech issue, missing requirement, failed story) is identified during the BMad workflow.
@@ -5774,15 +5946,15 @@ Keep it action-oriented and forward-looking.]]
 - [ ] **Confirm Next Steps:** Reiterate the handoff plan and the next actions to be taken by specific agents.
 
 ---
-==================== END: checklists#change-checklist ====================
+==================== END: .bmad-core/checklists/change-checklist.md ====================
 
-==================== START: data#technical-preferences ====================
+==================== START: .bmad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
 
 None Listed
-==================== END: data#technical-preferences ====================
+==================== END: .bmad-core/data/technical-preferences.md ====================
 
-==================== START: tasks#generate-ai-frontend-prompt ====================
+==================== START: .bmad-core/tasks/generate-ai-frontend-prompt.md ====================
 # Create AI Frontend Prompt Task
 
 ## Purpose
@@ -5834,9 +6006,9 @@ You will now synthesize the inputs and the above principles into a final, compre
    - Output the complete, generated prompt in a clear, copy-pasteable format (e.g., a large code block).
    - Explain the structure of the prompt and why certain information was included, referencing the principles above.
    - <important_note>Conclude by reminding the user that all AI-generated code will require careful human review, testing, and refinement to be considered production-ready.</important_note>
-==================== END: tasks#generate-ai-frontend-prompt ====================
+==================== END: .bmad-core/tasks/generate-ai-frontend-prompt.md ====================
 
-==================== START: templates#front-end-spec-tmpl ====================
+==================== START: .bmad-core/templates/front-end-spec-tmpl.md ====================
 # {{Project Name}} UI/UX Specification
 
 [[LLM: The default path and filename unless specified is docs/front-end-spec.md]]
@@ -6250,9 +6422,9 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 ## Checklist Results
 
 [[LLM: If a UI/UX checklist exists, run it against this document and report results here.]]
-==================== END: templates#front-end-spec-tmpl ====================
+==================== END: .bmad-core/templates/front-end-spec-tmpl.md ====================
 
-==================== START: templates#architecture-tmpl ====================
+==================== START: .bmad-core/templates/architecture-tmpl.md ====================
 # {{Project Name}} Architecture Document
 
 [[LLM: If available, review any provided relevant documents to gather all relevant context before beginning. If at a minimum you cannot local `docs/prd.md` ask the user what docs will provide the basis for the architecture.]]
@@ -6263,7 +6435,7 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 
 [[LLM: This section establishes the document's purpose and scope. Keep the content below but ensure project name is properly substituted.
 
-After presenting this section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 This document outlines the overall project architecture for {{Project Name}}, including backend systems, shared services, and non-UI specific concerns. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development, ensuring consistency and adherence to chosen patterns and technologies.
 
@@ -6308,7 +6480,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 Document the decision here before proceeding with the architecture design. In none, just say N/A
 
-After presenting this starter template section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this starter template section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### Change Log
 
@@ -6319,7 +6491,7 @@ After presenting this starter template section, apply `tasks#advanced-elicitatio
 
 ## High Level Architecture
 
-[[LLM: This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together (Introduction, Technical Summary, High Level Overview, Project Diagram, and Architectural Patterns), then apply `tasks#advanced-elicitation` protocol to the complete High Level Architecture section. The user can choose to refine the entire section or specific subsections.]]
+[[LLM: This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together (Introduction, Technical Summary, High Level Overview, Project Diagram, and Architectural Patterns), then apply `.bmad-core/tasks/advanced-elicitation.md` protocol to the complete High Level Architecture section. The user can choose to refine the entire section or specific subsections.]]
 
 ### Technical Summary
 
@@ -6341,7 +6513,7 @@ After presenting this starter template section, apply `tasks#advanced-elicitatio
 4. Primary user interaction flow or data flow at a conceptual level
 5. Key architectural decisions and their rationale
 
-After presenting this section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### High Level Project Diagram
 
@@ -6355,7 +6527,7 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 
 Use appropriate Mermaid diagram type (graph TD, C4, sequence) based on what best represents the architecture
 
-After presenting the diagram, apply `tasks#advanced-elicitation` protocol]]
+After presenting the diagram, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### Architectural and Design Patterns
 
@@ -6387,13 +6559,13 @@ Common patterns to consider:
 
 @{/example}
 
-[[LLM: After presenting the patterns, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the patterns, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Tech Stack
 
 [[LLM: This is the DEFINITIVE technology selection section. Work with the user to make specific choices:
 
-1. Review PRD technical assumptions and any preferences from `data#technical-preferences` or an attached `technical-preferences`
+1. Review PRD technical assumptions and any preferences from `.bmad-core/data/technical-preferences.yaml` or an attached `technical-preferences`
 2. For each category, present 2-3 viable options with pros/cons
 3. Make a clear recommendation based on project needs
 4. Get explicit user approval for each selection
@@ -6409,7 +6581,7 @@ Key decisions to finalize - before displaying the table, ensure you are aware of
 - Database and storage solutions - if unclear suggest sql or nosql or other types depending on the project and depending on cloud provider offer a suggestion
 - Development tools
 
-Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away apply `tasks#advanced-elicitation` display - this statement and the options should be rendered and then prompt right all before allowing user input.]]
+Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away apply `.bmad-core/tasks/advanced-elicitation.md` display - this statement and the options should be rendered and then prompt right all before allowing user input.]]
 
 ### Cloud Infrastructure
 
@@ -6453,7 +6625,7 @@ Upon render of the table, ensure the user is aware of the importance of this sec
 
 Create a clear conceptual model before moving to database schema.
 
-After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
+After presenting all data models, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 <<REPEAT: data_model>>
 
@@ -6487,7 +6659,7 @@ After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
 - Technology specifics based on tech stack choices
 
 5. Create component diagrams where helpful
-6. After presenting all components, apply `tasks#advanced-elicitation` protocol]]
+6. After presenting all components, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 <<REPEAT: component>>
 
@@ -6514,7 +6686,7 @@ After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
 - Sequence diagrams for complex interactions
   Choose the most appropriate for clarity
 
-After presenting the diagrams, apply `tasks#advanced-elicitation` protocol]]
+After presenting the diagrams, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## External APIs
 
@@ -6568,7 +6740,7 @@ If no external APIs are needed, state this explicitly and skip to next section.]
 
 ^^/CONDITION: has_external_apis^^
 
-[[LLM: After presenting external APIs (or noting their absence), apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting external APIs (or noting their absence), apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Core Workflows
 
@@ -6582,7 +6754,7 @@ If no external APIs are needed, state this explicitly and skip to next section.]
 
 Focus on workflows that clarify architecture decisions or complex interactions.
 
-After presenting the workflow diagrams, apply `tasks#advanced-elicitation` protocol]]
+After presenting the workflow diagrams, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## REST API Spec
 
@@ -6616,7 +6788,7 @@ servers:
 
 ^^/CONDITION: has_rest_api^^
 
-[[LLM: After presenting the REST API spec (or noting its absence if not applicable), apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the REST API spec (or noting its absence if not applicable), apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Database Schema
 
@@ -6630,7 +6802,7 @@ servers:
 
 Present schema in format appropriate to database type (SQL DDL, JSON schema, etc.)
 
-After presenting the database schema, apply `tasks#advanced-elicitation` protocol]]
+After presenting the database schema, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Source Tree
 
@@ -6645,7 +6817,7 @@ After presenting the database schema, apply `tasks#advanced-elicitation` protoco
 
 Adapt the structure based on project needs. For monorepos, show service separation. For serverless, show function organization. Include language-specific conventions.
 
-After presenting the structure, apply `tasks#advanced-elicitation` protocol to refine based on user feedback.]]
+After presenting the structure, apply `.bmad-core/tasks/advanced-elicitation.md` protocol to refine based on user feedback.]]
 
 ```plaintext
 {{project-root}}/
@@ -6688,7 +6860,7 @@ project-root/
 @{/example}
 ```
 
-[[LLM: After presenting the source tree structure, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the source tree structure, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Infrastructure and Deployment
 
@@ -6733,7 +6905,7 @@ Get user input on deployment preferences and CI/CD tool choices.]]
 - **Trigger Conditions:** {{rollback_triggers}}
 - **Recovery Time Objective:** {{rto}}
 
-[[LLM: After presenting the infrastructure and deployment section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the infrastructure and deployment section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Error Handling Strategy
 
@@ -6784,7 +6956,7 @@ This section guides both AI and human developers in consistent error handling.]]
 - **Compensation Logic:** {{compensation_patterns}}
 - **Idempotency:** {{idempotency_approach}}
 
-[[LLM: After presenting the error handling strategy, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the error handling strategy, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Coding Standards
 
@@ -6845,7 +7017,7 @@ Avoid obvious rules like "use SOLID principles" or "write clean code"]]
 
 ^^/CONDITION: has_language_specifics^^
 
-[[LLM: After presenting the coding standards, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the coding standards, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Test Strategy and Standards
 
@@ -6858,7 +7030,7 @@ Avoid obvious rules like "use SOLID principles" or "write clean code"]]
 5. Determine integration test infrastructure
 6. Plan for test data and external dependencies
 
-Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference. Apply `tasks#advanced-elicitation` after initial draft.]]
+Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference. Apply `.bmad-core/tasks/advanced-elicitation.md` after initial draft.]]
 
 ### Testing Philosophy
 
@@ -6919,7 +7091,7 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - **Performance Tests:** {{perf_test_approach}}
 - **Security Tests:** {{security_test_approach}}
 
-[[LLM: After presenting the test strategy section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the test strategy section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Security
 
@@ -6983,7 +7155,7 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - **DAST Tool:** {{dynamic_analysis}}
 - **Penetration Testing:** {{pentest_schedule}}
 
-[[LLM: After presenting the security section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the security section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Checklist Results Report
 
@@ -7029,9 +7201,9 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - Reference to this architecture and coding standards
 - First epic/story to implement
 - Key technical decisions to follow]]
-==================== END: templates#architecture-tmpl ====================
+==================== END: .bmad-core/templates/architecture-tmpl.md ====================
 
-==================== START: templates#front-end-architecture-tmpl ====================
+==================== START: .bmad-core/templates/front-end-architecture-tmpl.md ====================
 # {{Project Name}} Frontend Architecture Document
 
 [[LLM: The default path and filename unless specified is docs/ui-architecture.md]]
@@ -7207,9 +7379,9 @@ Document the starter template decision and any constraints it imposes before pro
 - Key import patterns
 - File naming conventions
 - Project-specific patterns and utilities]]
-==================== END: templates#front-end-architecture-tmpl ====================
+==================== END: .bmad-core/templates/front-end-architecture-tmpl.md ====================
 
-==================== START: templates#fullstack-architecture-tmpl ====================
+==================== START: .bmad-core/templates/fullstack-architecture-tmpl.md ====================
 # {{Project Name}} Fullstack Architecture Document
 
 [[LLM: The default path and filename unless specified is docs/architecture.md]]
@@ -8228,9 +8400,9 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 ## Checklist Results Report
 
 [[LLM: Before running the checklist, offer to output the full architecture document. Once user confirms, execute the `architect-checklist` and populate results here.]]
-==================== END: templates#fullstack-architecture-tmpl ====================
+==================== END: .bmad-core/templates/fullstack-architecture-tmpl.md ====================
 
-==================== START: templates#brownfield-architecture-tmpl ====================
+==================== START: .bmad-core/templates/brownfield-architecture-tmpl.md ====================
 # {{Project Name}} Brownfield Enhancement Architecture
 
 [[LLM: The default path and filename unless specified is docs/architecture.md]]
@@ -8775,9 +8947,9 @@ Present risk assessment and apply `tasks#advanced-elicitation` protocol]]
 - Key technical decisions based on real project constraints
 - Existing system compatibility requirements with specific verification steps
 - Clear sequencing of implementation to minimize risk to existing functionality]]
-==================== END: templates#brownfield-architecture-tmpl ====================
+==================== END: .bmad-core/templates/brownfield-architecture-tmpl.md ====================
 
-==================== START: checklists#architect-checklist ====================
+==================== START: .bmad-core/checklists/architect-checklist.md ====================
 # Architect Solution Validation Checklist
 
 This checklist serves as a comprehensive framework for the Architect to validate the technical design and architecture before development execution. The Architect should systematically work through each item, ensuring the architecture is robust, scalable, secure, and aligned with the product requirements.
@@ -9221,9 +9393,9 @@ Now that you've completed the checklist, generate a comprehensive validation rep
    - Component design clarity
 
 After presenting the report, ask the user if they would like detailed analysis of any specific section, especially those with warnings or failures.]]
-==================== END: checklists#architect-checklist ====================
+==================== END: .bmad-core/checklists/architect-checklist.md ====================
 
-==================== START: tasks#validate-next-story ====================
+==================== START: .bmad-core/tasks/validate-next-story.md ====================
 # Validate Next Story Task
 
 ## Purpose
@@ -9358,9 +9530,9 @@ Provide a structured validation report including:
 - **NO-GO**: Story requires fixes before implementation
 - **Implementation Readiness Score**: 1-10 scale
 - **Confidence Level**: High/Medium/Low for successful implementation
-==================== END: tasks#validate-next-story ====================
+==================== END: .bmad-core/tasks/validate-next-story.md ====================
 
-==================== START: templates#story-tmpl ====================
+==================== START: .bmad-core/templates/story-tmpl.md ====================
 ---
 defaultOutput: docs/stories/{{EpicNum}}.{{StoryNum}}.{{Short Title Copied from Epic File specific story}}.md
 smAgent:
@@ -9419,9 +9591,9 @@ smAgent:
 ### File List
 
 ## QA Results
-==================== END: templates#story-tmpl ====================
+==================== END: .bmad-core/templates/story-tmpl.md ====================
 
-==================== START: checklists#po-master-checklist ====================
+==================== START: .bmad-core/checklists/po-master-checklist.md ====================
 # Product Owner (PO) Master Validation Checklist
 
 This checklist serves as a comprehensive framework for the Product Owner to validate project plans before development execution. It adapts intelligently based on project type (greenfield vs brownfield) and includes UI/UX considerations when applicable.
@@ -9863,9 +10035,9 @@ After presenting the report, ask if the user wants:
 - **APPROVED**: The plan is comprehensive, properly sequenced, and ready for implementation.
 - **CONDITIONAL**: The plan requires specific adjustments before proceeding.
 - **REJECTED**: The plan requires significant revision to address critical deficiencies.
-==================== END: checklists#po-master-checklist ====================
+==================== END: .bmad-core/checklists/po-master-checklist.md ====================
 
-==================== START: workflows#brownfield-fullstack ====================
+==================== START: .bmad-core/workflows/brownfield-fullstack.yaml ====================
 workflow:
   id: brownfield-fullstack
   name: Brownfield Full-Stack Enhancement
@@ -10163,9 +10335,9 @@ workflow:
       {{if missing_context}}: May need to gather additional context from user during story creation.
     
     complete: "All planning artifacts validated and development can begin. Stories will be created based on available documentation format."
-==================== END: workflows#brownfield-fullstack ====================
+==================== END: .bmad-core/workflows/brownfield-fullstack.yaml ====================
 
-==================== START: workflows#brownfield-service ====================
+==================== START: .bmad-core/workflows/brownfield-service.yaml ====================
 workflow:
   id: brownfield-service
   name: Brownfield Service/API Enhancement
@@ -10353,9 +10525,9 @@ workflow:
     architect_to_po: "Architecture complete. Save it as docs/architecture.md. Please validate all artifacts for service integration safety."
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
-==================== END: workflows#brownfield-service ====================
+==================== END: .bmad-core/workflows/brownfield-service.yaml ====================
 
-==================== START: workflows#brownfield-ui ====================
+==================== START: .bmad-core/workflows/brownfield-ui.yaml ====================
 workflow:
   id: brownfield-ui
   name: Brownfield UI/Frontend Enhancement
@@ -10553,9 +10725,9 @@ workflow:
     architect_to_po: "Architecture complete. Save it as docs/architecture.md. Please validate all artifacts for UI integration safety."
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
-==================== END: workflows#brownfield-ui ====================
+==================== END: .bmad-core/workflows/brownfield-ui.yaml ====================
 
-==================== START: workflows#greenfield-fullstack ====================
+==================== START: .bmad-core/workflows/greenfield-fullstack.yaml ====================
 workflow:
   id: greenfield-fullstack
   name: Greenfield Full-Stack Application Development
@@ -10796,9 +10968,9 @@ workflow:
     updated_to_po: "All documents ready in docs/ folder. Please validate all artifacts for consistency."
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
-==================== END: workflows#greenfield-fullstack ====================
+==================== END: .bmad-core/workflows/greenfield-fullstack.yaml ====================
 
-==================== START: workflows#greenfield-service ====================
+==================== START: .bmad-core/workflows/greenfield-service.yaml ====================
 workflow:
   id: greenfield-service
   name: Greenfield Service/API Development
@@ -10937,7 +11109,7 @@ workflow:
         All stories implemented and reviewed!
         Service development phase complete.
         
-        Reference: data#bmad-kb:IDE Development Workflow
+        Reference: .bmad-core/data/bmad-kb.md#IDE Development Workflow
 
   flow_diagram: |
     ```mermaid
@@ -11005,9 +11177,9 @@ workflow:
     updated_to_po: "All documents ready in docs/ folder. Please validate all artifacts for consistency."
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
-==================== END: workflows#greenfield-service ====================
+==================== END: .bmad-core/workflows/greenfield-service.yaml ====================
 
-==================== START: workflows#greenfield-ui ====================
+==================== START: .bmad-core/workflows/greenfield-ui.yaml ====================
 workflow:
   id: greenfield-ui
   name: Greenfield UI/Frontend Development
@@ -11243,4 +11415,4 @@ workflow:
     updated_to_po: "All documents ready in docs/ folder. Please validate all artifacts for consistency."
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
-==================== END: workflows#greenfield-ui ====================
+==================== END: .bmad-core/workflows/greenfield-ui.yaml ====================

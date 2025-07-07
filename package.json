@@ -1,6 +1,6 @@
 {
   "name": "bmad-method",
-  "version": "4.26.0",
+  "version": "4.27.0",
   "description": "Breakthrough Method of Agile AI-driven Development",
   "main": "tools/cli.js",
   "bin": {

@@ -1,3 +1,18 @@
+# [4.27.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.26.0...v4.27.0) (2025-07-06)
+
+
+### Bug Fixes
+
+* readme consolidation and version bumps ([0a61d3d](https://github.com/bmadcode/BMAD-METHOD/commit/0a61d3de4af880f6e3bf934a92b1827754ed8ce6))
+
+
+### Features
+
+* big improvement to advanced elicitation ([1bc9960](https://github.com/bmadcode/BMAD-METHOD/commit/1bc9960808098fba6b43850311799022319df841))
+* experimental doc creator v2 and template system ([b785371](https://github.com/bmadcode/BMAD-METHOD/commit/b78537115da06b01e140833fd1d73950c7f2e41f))
+* Massive improvement to the brainstorming task! ([9f53caf](https://github.com/bmadcode/BMAD-METHOD/commit/9f53caf4c6f9c67195b1aae14d54987f81d76e07))
+* WIP create-docv2 ([c107af0](https://github.com/bmadcode/BMAD-METHOD/commit/c107af05984718c1af2cf80118353e8d2e6f906f))
+
 # [4.26.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.25.1...v4.26.0) (2025-07-06)
 
 

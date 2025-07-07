@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
+- `==================== END: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-2d-phaser-game-dev/personas/analyst.md`, `.bmad-2d-phaser-game-dev/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-2d-phaser-game-dev/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-2d-phaser-game-dev/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agents#game-sm ====================
+
+==================== START: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
 # game-sm
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -90,9 +91,9 @@ dependencies:
   checklists:
     - game-story-dod-checklist
 ```
-==================== END: agents#game-sm ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
 
-==================== START: tasks#create-game-story ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 # Create Game Development Story Task
 
 ## Purpose
@@ -152,7 +153,7 @@ Before creating stories, ensure you have:
 ### 3. Template Execution
 
 **Load Template:**
-Use `templates#game-story-tmpl` following all embedded LLM instructions
+Use `.bmad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedded LLM instructions
 
 **Key Focus Areas:**
 
@@ -188,7 +189,7 @@ Use `templates#game-story-tmpl` following all embedded LLM instructions
 ### 5. Quality Assurance
 
 **Apply Checklist:**
-Execute `checklists#game-story-dod-checklist` against completed story
+Execute `.bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` against completed story
 
 **Story Criteria:**
 
@@ -309,16 +310,16 @@ Execute `checklists#game-story-dod-checklist` against completed story
 - Testing → Done
 
 This task ensures game development stories are immediately actionable and enable efficient AI-driven development of game features.
-==================== END: tasks#create-game-story ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-2d-phaser-game-dev/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -327,7 +328,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-2d-phaser-game-dev/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -405,9 +406,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 
-==================== START: templates#game-story-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.md ====================
 # Story: {{Story Title}}
 
 **Epic:** {{Epic Name}}  
@@ -643,9 +644,9 @@ class {{ClassName}} extends {{PhaseClass}} {
 
 - {{future_enhancement_1}}
 - {{future_optimization_1}}
-==================== END: templates#game-story-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.md ====================
 
-==================== START: checklists#game-story-dod-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 # Game Development Story Definition of Done Checklist
 
 ## Story Completeness
@@ -806,4 +807,4 @@ class {{ClassName}} extends {{PhaseClass}} {
 
 **Additional Notes:**
 _Any specific concerns, recommendations, or clarifications needed before development begins._
-==================== END: checklists#game-story-dod-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================

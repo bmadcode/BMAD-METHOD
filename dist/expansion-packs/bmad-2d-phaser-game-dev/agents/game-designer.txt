@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
+- `==================== END: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-2d-phaser-game-dev/personas/analyst.md`, `.bmad-2d-phaser-game-dev/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-2d-phaser-game-dev/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-2d-phaser-game-dev/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agents#game-designer ====================
+
+==================== START: .bmad-2d-phaser-game-dev/agents/game-designer.md ====================
 # game-designer
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -97,9 +98,9 @@ dependencies:
   checklists:
     - game-design-checklist
 ```
-==================== END: agents#game-designer ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/game-designer.md ====================
 
-==================== START: tasks#create-doc ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-doc.md ====================
 # Create Document from Template Task
 
 ## Purpose
@@ -119,7 +120,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using .bmad-2d-phaser-game-dev/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -128,7 +129,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `.bmad-2d-phaser-game-dev/templates/*.md` or `.bmad-2d-phaser-game-dev/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -146,14 +147,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply .bmad-2d-phaser-game-dev/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task
@@ -191,16 +192,16 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 ## Remember
 
 Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
-==================== END: tasks#create-doc ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-doc.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-2d-phaser-game-dev/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -209,7 +210,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-2d-phaser-game-dev/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -287,9 +288,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 
-==================== START: tasks#game-design-brainstorming ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 # Game Design Brainstorming Techniques Task
 
 This task provides a comprehensive toolkit of creative brainstorming techniques specifically designed for game design ideation and innovative thinking. The game designer can use these techniques to facilitate productive brainstorming sessions focused on game mechanics, player experience, and creative concepts.
@@ -598,9 +599,9 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 - Consider accessibility and inclusivity from the start
 - Balance innovation with market viability
 - Plan for iteration based on player feedback
-==================== END: tasks#game-design-brainstorming ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 
-==================== START: tasks#create-deep-research-prompt ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -902,9 +903,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: tasks#create-deep-research-prompt ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
 
-==================== START: tasks#advanced-elicitation ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 # Advanced Game Design Elicitation Task
 
 ## Purpose
@@ -1016,9 +1017,9 @@ The questions and perspectives offered should always consider:
 - Performance implications for 60 FPS targets
 - Cross-platform compatibility (desktop and mobile)
 - Game development best practices and common pitfalls
-==================== END: tasks#advanced-elicitation ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 
-==================== START: templates#game-design-doc-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.md ====================
 # {{Game Title}} Game Design Document (GDD)
 
 [[LLM: This template creates a comprehensive Game Design Document that will serve as the foundation for all game development work. The GDD should be detailed enough that developers can create user stories and epics from it. Focus on gameplay systems, mechanics, and technical requirements that can be broken down into implementable features.
@@ -1350,9 +1351,9 @@ If available, review any provided documents or ask if any are optionally availab
 - {{reference_1}}
 - {{reference_2}}
 - {{reference_3}}
-==================== END: templates#game-design-doc-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.md ====================
 
-==================== START: templates#level-design-doc-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.md ====================
 # {{Game Title}} Level Design Document
 
 [[LLM: This template creates comprehensive level design documentation that guides both content creation and technical implementation. This document should provide enough detail for developers to create level loading systems and for designers to create specific levels.
@@ -1823,9 +1824,9 @@ Difficulty
 - Mechanic integration effectiveness: {{integration_score}}
 - Player guidance clarity: {{guidance_score}}
 - Content accessibility: {{accessibility_rate}}%
-==================== END: templates#level-design-doc-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.md ====================
 
-==================== START: templates#game-brief-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.md ====================
 # {{Game Title}} Game Brief
 
 [[LLM: This template creates a comprehensive game brief that serves as the foundation for all subsequent game development work. The brief should capture the essential vision, scope, and requirements needed to create a detailed Game Design Document.
@@ -2171,9 +2172,9 @@ This brief is typically created early in the ideation process, often after brain
 
 | Date | Version | Description | Author |
 | :--- | :------ | :---------- | :----- |
-==================== END: templates#game-brief-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.md ====================
 
-==================== START: checklists#game-design-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 # Game Design Document Quality Checklist
 
 ## Document Completeness
@@ -2375,4 +2376,4 @@ _List any critical items that need attention before moving to implementation pha
 
 **Next Steps:**
 _Outline immediate next actions for the team based on this assessment._
-==================== END: checklists#game-design-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================

@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
+- `==================== END: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-2d-phaser-game-dev/personas/analyst.md`, `.bmad-2d-phaser-game-dev/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-2d-phaser-game-dev/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-2d-phaser-game-dev/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agent-teams#phaser-2d-nodejs-game-team ====================
+
+==================== START: .bmad-2d-phaser-game-dev/agent-teams/phaser-2d-nodejs-game-team.yaml ====================
 bundle:
   name: Phaser 2D NodeJS Game Team
   icon: 🎮
@@ -52,9 +53,9 @@ agents:
 workflows:
   - game-dev-greenfield
   - game-prototype
-==================== END: agent-teams#phaser-2d-nodejs-game-team ====================
+==================== END: .bmad-2d-phaser-game-dev/agent-teams/phaser-2d-nodejs-game-team.yaml ====================
 
-==================== START: agents#analyst ====================
+==================== START: .bmad-2d-phaser-game-dev/agents/analyst.md ====================
 # analyst
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -104,7 +105,7 @@ commands:
   - exit: Say goodbye as the Business Analyst, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - brainstorming-techniques
+    - facilitate-brainstorming-session
     - create-deep-research-prompt
     - create-doc
     - advanced-elicitation
@@ -113,14 +114,16 @@ dependencies:
     - project-brief-tmpl
     - market-research-tmpl
     - competitor-analysis-tmpl
+    - brainstorming-output-tmpl
   data:
     - bmad-kb
+    - brainstorming-techniques
   utils:
     - template-format
 ```
-==================== END: agents#analyst ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/analyst.md ====================
 
-==================== START: agents#bmad-orchestrator ====================
+==================== START: .bmad-2d-phaser-game-dev/agents/bmad-orchestrator.md ====================
 # bmad-orchestrator
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -151,7 +154,7 @@ startup:
   - Announce: Introduce yourself as the BMad Orchestrator, explain you can coordinate agents and workflows
   - IMPORTANT: Tell users that all commands start with * (e.g., *help, *agent, *workflow)
   - Mention *help shows all available commands and options
-  - Check for active workflow plan using utils#plan-management
+  - Check for active workflow plan using .bmad-2d-phaser-game-dev/utils/plan-management.md
   - 'If plan exists: Show 📋 Active plan: {workflow} ({progress}% complete). Use *plan-status for details.'
   - 'If plan exists: Suggest next action based on plan progress'
   - Assess user goal against available agents and workflows in this bundle
@@ -257,9 +260,9 @@ dependencies:
     - workflow-management
     - template-format
 ```
-==================== END: agents#bmad-orchestrator ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/bmad-orchestrator.md ====================
 
-==================== START: agents#game-designer ====================
+==================== START: .bmad-2d-phaser-game-dev/agents/game-designer.md ====================
 # game-designer
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -318,9 +321,9 @@ dependencies:
   checklists:
     - game-design-checklist
 ```
-==================== END: agents#game-designer ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/game-designer.md ====================
 
-==================== START: agents#game-developer ====================
+==================== START: .bmad-2d-phaser-game-dev/agents/game-developer.md ====================
 # game-developer
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -387,9 +390,9 @@ dependencies:
   data:
     - development-guidelines
 ```
-==================== END: agents#game-developer ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/game-developer.md ====================
 
-==================== START: agents#game-sm ====================
+==================== START: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
 # game-sm
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -441,250 +444,148 @@ dependencies:
   checklists:
     - game-story-dod-checklist
 ```
-==================== END: agents#game-sm ====================
+==================== END: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
 
-==================== START: tasks#brainstorming-techniques ====================
-# Brainstorming Techniques Task
+==================== START: .bmad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
+---
+docOutputLocation: docs/brainstorming-session-results.md
+template: brainstorming-output-tmpl
+---
 
-This task provides a comprehensive toolkit of creative brainstorming techniques for ideation and innovative thinking. The analyst can use these techniques to facilitate productive brainstorming sessions with users.
+# Facilitate Brainstorming Session Task
+
+Facilitate interactive brainstorming sessions with users. Be creative and adaptive in applying techniques.
 
 ## Process
 
-### 1. Session Setup
+### Step 1: Session Setup
 
-[[LLM: Begin by understanding the brainstorming context and goals. Ask clarifying questions if needed to determine the best approach.]]
+Ask 4 context questions (don't preview what happens next):
 
-1. **Establish Context**
+1. What are we brainstorming about?
+2. Any constraints or parameters?
+3. Goal: broad exploration or focused ideation?
+4. Do you want a structured document output to reference later? (Y/N)
 
-   - Understand the problem space or opportunity area
-   - Identify any constraints or parameters
-   - Determine session goals (divergent exploration vs. focused ideation)
+### Step 2: Present Approach Options
 
-2. **Select Technique Approach**
-   - Option A: User selects specific techniques
-   - Option B: Analyst recommends techniques based on context
-   - Option C: Random technique selection for creative variety
-   - Option D: Progressive technique flow (start broad, narrow down)
+After getting answers to Step 1, present 4 approach options (numbered):
 
-### 2. Core Brainstorming Techniques
+1. User selects specific techniques
+2. Analyst recommends techniques based on context
+3. Random technique selection for creative variety
+4. Progressive technique flow (start broad, narrow down)
 
-#### Creative Expansion Techniques
+### Step 3: Execute Techniques Interactively
 
-1. **"What If" Scenarios**
-   [[LLM: Generate provocative what-if questions that challenge assumptions and expand thinking beyond current limitations.]]
+**KEY PRINCIPLES:**
 
-   - What if we had unlimited resources?
-   - What if this problem didn't exist?
-   - What if we approached this from a child's perspective?
-   - What if we had to solve this in 24 hours?
+- **FACILITATOR ROLE**: Guide user to generate their own ideas through questions, prompts, and examples
+- **CONTINUOUS ENGAGEMENT**: Keep user engaged with chosen technique until they want to switch or are satisfied
+- **CAPTURE OUTPUT**: If document output requested, capture all ideas generated in each technique section
 
-2. **Analogical Thinking**
-   [[LLM: Help user draw parallels between their challenge and other domains, industries, or natural systems.]]
+**Technique Selection:**
+If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number (e.g., "7" for Mind Mapping).
 
-   - "How might this work like [X] but for [Y]?"
-   - Nature-inspired solutions (biomimicry)
-   - Cross-industry pattern matching
-   - Historical precedent analysis
+**Technique Execution:**
 
-3. **Reversal/Inversion**
-   [[LLM: Flip the problem or approach it from the opposite angle to reveal new insights.]]
+1. Apply selected technique according to data file description
+2. Keep engaging with technique until user indicates they want to:
+   - Choose a different technique
+   - Apply current ideas to a new technique  
+   - Move to convergent phase
+   - End session
 
-   - What if we did the exact opposite?
-   - How could we make this problem worse? (then reverse)
-   - Start from the end goal and work backward
-   - Reverse roles or perspectives
+**Output Capture (if requested):**
+For each technique used, capture:
 
-4. **First Principles Thinking**
-   [[LLM: Break down to fundamental truths and rebuild from scratch.]]
-   - What are the absolute fundamentals here?
-   - What assumptions can we challenge?
-   - If we started from zero, what would we build?
-   - What laws of physics/economics/human nature apply?
+- Technique name and duration
+- Key ideas generated by user
+- Insights and patterns identified
+- User's reflections on the process
 
-#### Structured Ideation Frameworks
+### Step 4: Session Flow
 
-1. **SCAMPER Method**
-   [[LLM: Guide through each SCAMPER prompt systematically.]]
+1. **Warm-up** (5-10 min) - Build creative confidence
+2. **Divergent** (20-30 min) - Generate quantity over quality
+3. **Convergent** (15-20 min) - Group and categorize ideas
+4. **Synthesis** (10-15 min) - Refine and develop concepts
 
-   - **S** = Substitute: What can be substituted?
-   - **C** = Combine: What can be combined or integrated?
-   - **A** = Adapt: What can be adapted from elsewhere?
-   - **M** = Modify/Magnify: What can be emphasized or reduced?
-   - **P** = Put to other uses: What else could this be used for?
-   - **E** = Eliminate: What can be removed or simplified?
-   - **R**= Reverse/Rearrange: What can be reversed or reordered?
+### Step 5: Document Output (if requested)
 
-2. **Six Thinking Hats**
-   [[LLM: Cycle through different thinking modes, spending focused time in each.]]
+Generate structured document with these sections:
 
-   - White Hat: Facts and information
-   - Red Hat: Emotions and intuition
-   - Black Hat: Caution and critical thinking
-   - Yellow Hat: Optimism and benefits
-   - Green Hat: Creativity and alternatives
-   - Blue Hat: Process and control
+**Executive Summary**
 
-3. **Mind Mapping**
-   [[LLM: Create text-based mind maps with clear hierarchical structure.]]
+- Session topic and goals
+- Techniques used and duration
+- Total ideas generated
+- Key themes and patterns identified
 
-   ```plaintext
-   Central Concept
-   ├── Branch 1
-   │   ├── Sub-idea 1.1
-   │   └── Sub-idea 1.2
-   ├── Branch 2
-   │   ├── Sub-idea 2.1
-   │   └── Sub-idea 2.2
-   └── Branch 3
-       └── Sub-idea 3.1
-   ```
+**Technique Sections** (for each technique used)
 
-#### Collaborative Techniques
+- Technique name and description
+- Ideas generated (user's own words)
+- Insights discovered
+- Notable connections or patterns
 
-1. **"Yes, And..." Building**
-   [[LLM: Accept every idea and build upon it without judgment. Encourage wild ideas and defer criticism.]]
+**Idea Categorization**
 
-   - Accept the premise of each idea
-   - Add to it with "Yes, and..."
-   - Build chains of connected ideas
-   - Explore tangents freely
+- **Immediate Opportunities** - Ready to implement now
+- **Future Innovations** - Requires development/research
+- **Moonshots** - Ambitious, transformative concepts
+- **Insights & Learnings** - Key realizations from session
 
-2. **Brainwriting/Round Robin**
-   [[LLM: Simulate multiple perspectives by generating ideas from different viewpoints.]]
+**Action Planning**
 
-   - Generate ideas from stakeholder perspectives
-   - Build on previous ideas in rounds
-   - Combine unrelated ideas
-   - Cross-pollinate concepts
+- Top 3 priority ideas with rationale
+- Next steps for each priority
+- Resources/research needed
+- Timeline considerations
 
-3. **Random Stimulation**
-   [[LLM: Use random words, images, or concepts as creative triggers.]]
-   - Random word association
-   - Picture/metaphor inspiration
-   - Forced connections between unrelated items
-   - Constraint-based creativity
+**Reflection & Follow-up**
 
-#### Deep Exploration Techniques
-
-1. **Five Whys**
-   [[LLM: Dig deeper into root causes and underlying motivations.]]
-
-   - Why does this problem exist? → Answer → Why? (repeat 5 times)
-   - Uncover hidden assumptions
-   - Find root causes, not symptoms
-   - Identify intervention points
-
-2. **Morphological Analysis**
-   [[LLM: Break down into parameters and systematically explore combinations.]]
-
-   - List key parameters/dimensions
-   - Identify possible values for each
-   - Create combination matrix
-   - Explore unusual combinations
-
-3. **Provocation Technique (PO)**
-   [[LLM: Make deliberately provocative statements to jar thinking.]]
-   - PO: Cars have square wheels
-   - PO: Customers pay us to take products
-   - PO: The problem solves itself
-   - Extract useful ideas from provocations
-
-### 3. Technique Selection Guide
-
-[[LLM: Help user select appropriate techniques based on their needs.]]
-
-**For Initial Exploration:**
-
-- What If Scenarios
-- First Principles
-- Mind Mapping
-
-**For Stuck/Blocked Thinking:**
-
-- Random Stimulation
-- Reversal/Inversion
-- Provocation Technique
-
-**For Systematic Coverage:**
-
-- SCAMPER
-- Morphological Analysis
-- Six Thinking Hats
-
-**For Deep Understanding:**
-
-- Five Whys
-- Analogical Thinking
-- First Principles
-
-**For Team/Collaborative Settings:**
-
-- Brainwriting
-- "Yes, And..."
-- Six Thinking Hats
-
-### 4. Session Flow Management
-
-[[LLM: Guide the brainstorming session with appropriate pacing and technique transitions.]]
-
-1. **Warm-up Phase** (5-10 min)
-
-   - Start with accessible techniques
-   - Build creative confidence
-   - Establish "no judgment" atmosphere
-
-2. **Divergent Phase** (20-30 min)
-
-   - Use expansion techniques
-   - Generate quantity over quality
-   - Encourage wild ideas
-
-3. **Convergent Phase** (15-20 min)
-
-   - Group and categorize ideas
-   - Identify patterns and themes
-   - Select promising directions
-
-4. **Synthesis Phase** (10-15 min)
-   - Combine complementary ideas
-   - Refine and develop concepts
-   - Prepare summary of insights
-
-### 5. Output Format
-
-[[LLM: Present brainstorming results in an organized, actionable format.]]
-
-**Session Summary:**
-
-- Techniques used
-- Number of ideas generated
-- Key themes identified
-
-**Idea Categories:**
-
-1. **Immediate Opportunities** - Ideas that could be implemented now
-2. **Future Innovations** - Ideas requiring more development
-3. **Moonshots** - Ambitious, transformative ideas
-4. **Insights & Learnings** - Key realizations from the session
-
-**Next Steps:**
-
-- Which ideas to explore further
+- What worked well in this session
+- Areas for further exploration
 - Recommended follow-up techniques
-- Suggested research areas
+- Questions that emerged for future sessions
 
-## Important Notes
+## Key Principles
 
-- Maintain energy and momentum throughout the session
-- Defer judgment - all ideas are valid during generation
-- Quantity leads to quality - aim for many ideas
+- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them
+- **INTERACTIVE DIALOGUE**: Ask questions, wait for responses, build on their ideas
+- **ONE TECHNIQUE AT A TIME**: Don't mix multiple techniques in one response
+- **CONTINUOUS ENGAGEMENT**: Stay with one technique until user wants to switch
+- **DRAW IDEAS OUT**: Use prompts and examples to help them generate their own ideas
+- **REAL-TIME ADAPTATION**: Monitor engagement and adjust approach as needed
+- Maintain energy and momentum
+- Defer judgment during generation
+- Quantity leads to quality (aim for 100 ideas in 60 minutes)
 - Build on ideas collaboratively
-- Document everything - even "silly" ideas can spark breakthroughs
-- Take breaks if energy flags
-- End with clear next actions
-==================== END: tasks#brainstorming-techniques ====================
+- Document everything if output requested
 
-==================== START: tasks#create-deep-research-prompt ====================
+## Advanced Engagement Strategies
+
+**Energy Management**
+
+- Check engagement levels: "How are you feeling about this direction?"
+- Offer breaks or technique switches if energy flags
+- Use encouraging language and celebrate idea generation
+
+**Depth vs. Breadth**
+
+- Ask follow-up questions to deepen ideas: "Tell me more about that..."
+- Use "Yes, and..." to build on their ideas
+- Help them make connections: "How does this relate to your earlier idea about...?"
+
+**Transition Management**
+
+- Always ask before switching techniques: "Ready to try a different approach?"
+- Offer options: "Should we explore this idea deeper or generate more alternatives?"
+- Respect their process and timing
+==================== END: .bmad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
+
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -986,9 +887,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: tasks#create-deep-research-prompt ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
 
-==================== START: tasks#create-doc ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-doc.md ====================
 # Create Document from Template Task
 
 ## Purpose
@@ -1008,7 +909,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using .bmad-2d-phaser-game-dev/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -1017,7 +918,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `.bmad-2d-phaser-game-dev/templates/*.md` or `.bmad-2d-phaser-game-dev/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -1035,14 +936,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply .bmad-2d-phaser-game-dev/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task
@@ -1080,9 +981,9 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 ## Remember
 
 Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
-==================== END: tasks#create-doc ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-doc.md ====================
 
-==================== START: tasks#advanced-elicitation ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 # Advanced Game Design Elicitation Task
 
 ## Purpose
@@ -1194,9 +1095,9 @@ The questions and perspectives offered should always consider:
 - Performance implications for 60 FPS targets
 - Cross-platform compatibility (desktop and mobile)
 - Game development best practices and common pitfalls
-==================== END: tasks#advanced-elicitation ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 
-==================== START: tasks#document-project ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/document-project.md ====================
 # Document an Existing Project
 
 ## Purpose
@@ -1514,9 +1415,9 @@ Apply the advanced elicitation task after major sections to refine based on user
 - Documents technical debt, workarounds, and constraints honestly
 - For brownfield projects with PRD: Provides clear enhancement impact analysis
 - The goal is PRACTICAL documentation for AI agents doing real work
-==================== END: tasks#document-project ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/document-project.md ====================
 
-==================== START: templates#project-brief-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/project-brief-tmpl.md ====================
 ---
 defaultOutput: docs/brief.md
 ---
@@ -1749,9 +1650,9 @@ This Project Brief provides the full context for {{Project Name}}. Please start 
 9. Proceed to next section
 
 These replace the standard elicitation options when working on project brief documents.]]
-==================== END: templates#project-brief-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/project-brief-tmpl.md ====================
 
-==================== START: templates#market-research-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/market-research-tmpl.md ====================
 # Market Research Report: {{Project/Product Name}}
 
 [[LLM: The default path and filename unless specified is docs/market-research.md]]
@@ -2015,9 +1916,9 @@ These replace the standard elicitation options when working on project brief doc
 9. Proceed to next section
 
 These replace the standard elicitation options when working on market research documents.]]
-==================== END: templates#market-research-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/market-research-tmpl.md ====================
 
-==================== START: templates#competitor-analysis-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/competitor-analysis-tmpl.md ====================
 # Competitive Analysis Report: {{Project/Product Name}}
 
 [[LLM: The default path and filename unless specified is docs/competitor-analysis.md]]
@@ -2309,9 +2210,161 @@ These replace the standard elicitation options when working on market research d
 9. Proceed to next section
 
 These replace the standard elicitation options when working on competitive analysis documents.]]
-==================== END: templates#competitor-analysis-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/competitor-analysis-tmpl.md ====================
 
-==================== START: data#bmad-kb ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.md ====================
+---
+defaultOutput: docs/brainstorming-session-results.md
+---
+
+# Brainstorming Session Results
+
+**Session Date:** [DATE]
+**Facilitator:** [Agent Role] [Agent Name]
+**Participant:** [USER NAME]
+
+## Executive Summary
+
+**Topic:** [SESSION TOPIC]
+
+**Session Goals:** [STATED GOALS]
+
+**Techniques Used:** [LIST OF TECHNIQUES AND DURATION]
+
+**Total Ideas Generated:** [NUMBER]
+
+**Key Themes Identified:**
+
+- [THEME 1]
+- [THEME 2]
+- [THEME 3]
+
+---
+
+## Technique Sessions
+
+### [TECHNIQUE NAME 1] - [DURATION]
+
+**Description:** [BRIEF DESCRIPTION OF TECHNIQUE]
+
+**Ideas Generated:**
+
+1. [USER IDEA 1]
+2. [USER IDEA 2]
+3. [USER IDEA 3]
+[etc.]
+
+**Insights Discovered:**
+
+- [INSIGHT 1]
+- [INSIGHT 2]
+
+**Notable Connections:**
+
+- [CONNECTION OR PATTERN IDENTIFIED]
+
+---
+
+### [TECHNIQUE NAME 2] - [DURATION]
+
+[Repeat format for each technique used]
+
+---
+
+## Idea Categorization
+
+### Immediate Opportunities
+
+*Ideas ready to implement now*
+
+1. **[IDEA NAME]**
+   - Description: [BRIEF DESCRIPTION]
+   - Why immediate: [RATIONALE]
+   - Resources needed: [BASIC REQUIREMENTS]
+
+### Future Innovations
+
+*Ideas requiring development/research*
+
+1. **[IDEA NAME]**
+   - Description: [BRIEF DESCRIPTION]
+   - Development needed: [WHAT'S REQUIRED]
+   - Timeline estimate: [ROUGH TIMEFRAME]
+
+### Moonshots
+
+*Ambitious, transformative concepts*
+
+1. **[IDEA NAME]**
+   - Description: [BRIEF DESCRIPTION]
+   - Transformative potential: [WHY IT'S A MOONSHOT]
+   - Challenges to overcome: [MAJOR OBSTACLES]
+
+### Insights & Learnings
+
+*Key realizations from the session*
+
+- [INSIGHT 1]: [DESCRIPTION AND IMPLICATIONS]
+- [INSIGHT 2]: [DESCRIPTION AND IMPLICATIONS]
+
+---
+
+## Action Planning
+
+### Top 3 Priority Ideas
+
+**#1 Priority: [IDEA NAME]**
+
+- Rationale: [WHY THIS IS TOP PRIORITY]
+- Next steps: [SPECIFIC ACTIONS TO TAKE]
+- Resources needed: [WHAT'S REQUIRED]
+- Timeline: [WHEN TO START/COMPLETE]
+
+**#2 Priority: [IDEA NAME]**
+
+- [Same format]
+
+**#3 Priority: [IDEA NAME]**
+
+- [Same format]
+
+---
+
+## Reflection & Follow-up
+
+### What Worked Well
+
+- [SUCCESSFUL ASPECT 1]
+- [SUCCESSFUL ASPECT 2]
+
+### Areas for Further Exploration
+
+- [AREA 1]: [WHY IT NEEDS MORE EXPLORATION]
+- [AREA 2]: [WHY IT NEEDS MORE EXPLORATION]
+
+### Recommended Follow-up Techniques
+
+- [TECHNIQUE 1]: [WHY IT WOULD BE HELPFUL]
+- [TECHNIQUE 2]: [WHY IT WOULD BE HELPFUL]
+
+### Questions That Emerged
+
+- [QUESTION 1]
+- [QUESTION 2]
+- [QUESTION 3]
+
+### Next Session Planning
+
+- **Suggested topics:** [FOLLOW-UP TOPICS]
+- **Recommended timeframe:** [WHEN TO RECONVENE]
+- **Preparation needed:** [WHAT TO RESEARCH/PREPARE]
+
+---
+
+*Session facilitated using the BMAD-METHOD brainstorming framework*
+==================== END: .bmad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.md ====================
+
+==================== START: .bmad-2d-phaser-game-dev/data/bmad-kb.md ====================
 # Game Development BMad Knowledge Base
 
 ## Overview
@@ -2566,9 +2619,48 @@ game-project/
 - Memory management and garbage collection optimization
 
 This knowledge base provides the foundation for effective game development using the BMad-Method framework with specialized focus on 2D game creation using Phaser 3 and TypeScript.
-==================== END: data#bmad-kb ====================
+==================== END: .bmad-2d-phaser-game-dev/data/bmad-kb.md ====================
 
-==================== START: utils#template-format ====================
+==================== START: .bmad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
+# Brainstorming Techniques Data
+
+## Creative Expansion
+
+1. **What If Scenarios**: Ask one provocative question, get their response, then ask another
+2. **Analogical Thinking**: Give one example analogy, ask them to find 2-3 more
+3. **Reversal/Inversion**: Pose the reverse question, let them work through it
+4. **First Principles Thinking**: Ask "What are the fundamentals?" and guide them to break it down
+
+## Structured Frameworks
+
+5. **SCAMPER Method**: Go through one letter at a time, wait for their ideas before moving to next
+6. **Six Thinking Hats**: Present one hat, ask for their thoughts, then move to next hat
+7. **Mind Mapping**: Start with central concept, ask them to suggest branches
+
+## Collaborative Techniques
+
+8. **"Yes, And..." Building**: They give idea, you "yes and" it, they "yes and" back - alternate
+9. **Brainwriting/Round Robin**: They suggest idea, you build on it, ask them to build on yours
+10. **Random Stimulation**: Give one random prompt/word, ask them to make connections
+
+## Deep Exploration
+
+11. **Five Whys**: Ask "why" and wait for their answer before asking next "why"
+12. **Morphological Analysis**: Ask them to list parameters first, then explore combinations together
+13. **Provocation Technique (PO)**: Give one provocative statement, ask them to extract useful ideas
+
+## Advanced Techniques
+
+14. **Forced Relationships**: Connect two unrelated concepts and ask them to find the bridge
+15. **Assumption Reversal**: Challenge their core assumptions and ask them to build from there
+16. **Role Playing**: Ask them to brainstorm from different stakeholder perspectives
+17. **Time Shifting**: "How would you solve this in 1995? 2030?"
+18. **Resource Constraints**: "What if you had only $10 and 1 hour?"
+19. **Metaphor Mapping**: Use extended metaphors to explore solutions
+20. **Question Storming**: Generate questions instead of answers first
+==================== END: .bmad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
+
+==================== START: .bmad-2d-phaser-game-dev/utils/template-format.md ====================
 # Template Format Conventions
 
 Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
@@ -2595,9 +2687,9 @@ Templates in the BMad method use standardized markup for AI processing. These co
 - Template elements are for AI processing only
 - Focus on faithful template execution and clean output
 - All template-specific instructions are embedded within templates
-==================== END: utils#template-format ====================
+==================== END: .bmad-2d-phaser-game-dev/utils/template-format.md ====================
 
-==================== START: tasks#create-workflow-plan ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
 # Create Workflow Plan Task
 
 ## Purpose
@@ -2887,9 +2979,9 @@ BMad Orchestrator: "Based on your answers, I recommend the brownfield-fullstack 
 
 BMad Orchestrator: "I've created a workflow plan at docs/workflow-plan.md. This shows all the steps we'll go through, what documents will be created, and where you'll need to make decisions. Would you like to review it together?"
 ```
-==================== END: tasks#create-workflow-plan ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
 
-==================== START: tasks#kb-mode-interaction ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
 # KB Mode Interaction Task
 
 ## Purpose
@@ -2960,9 +3052,9 @@ Or ask me about anything else related to BMad-Method!
 **User**: Tell me about workflows
 
 **Assistant**: [Provides focused information about workflows from the KB, then offers to explore specific workflow types or related topics]
-==================== END: tasks#kb-mode-interaction ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
 
-==================== START: tasks#update-workflow-plan ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
 # Update Workflow Plan Task
 
 ## Purpose
@@ -3211,9 +3303,9 @@ The update is successful when:
 - Consider creating backup before major updates
 - Updates should enhance, not complicate, the workflow experience
 - If plan becomes too cluttered, suggest creating fresh plan for next phase
-==================== END: tasks#update-workflow-plan ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
 
-==================== START: utils#plan-management ====================
+==================== START: .bmad-2d-phaser-game-dev/utils/plan-management.md ====================
 # Plan Management Utility
 
 ## Purpose
@@ -3224,14 +3316,10 @@ Provides utilities for agents and tasks to interact with workflow plans, check p
 
 ### 1. Check Plan Existence
 
-[[LLM: When any agent starts or task begins, check if a workflow plan exists]]
-
-```
 Check for workflow plan:
+
 1. Look for docs/workflow-plan.md (default location)
-2. Check core-config.yaml for custom plan location
-3. Return plan status (exists/not exists)
-```
+2. Return plan status to user (exists/not exists) - if not exists then HALT.
 
 ### 2. Parse Plan Status
 
@@ -3272,7 +3360,7 @@ Check for workflow plan:
 
 **Warning Templates:**
 
-```
+```text
 SEQUENCE WARNING: 
 The workflow plan shows you should complete "{expected_step}" next.
 You're attempting to: "{requested_action}"
@@ -3306,7 +3394,7 @@ In flexible mode: Allow with confirmation
 
 **For Agents (startup sequence)**:
 
-```
+```text
 1. Check if plan exists using this utility
 2. If exists:
    - Parse current status
@@ -3317,7 +3405,7 @@ In flexible mode: Allow with confirmation
 
 **For Tasks (pre-execution)**:
 
-```
+```text
 1. Check if plan exists
 2. If exists:
    - Verify this task aligns with plan
@@ -3333,7 +3421,7 @@ In flexible mode: Allow with confirmation
 
 [[LLM: Standard format for showing plan status]]
 
-```
+```text
 📋 Workflow Plan Status
 ━━━━━━━━━━━━━━━━━━━━
 Workflow: {workflow_name}
@@ -3386,7 +3474,7 @@ If user wants to abandon plan:
 
 ### Example 1: Agent Startup Check
 
-```
+```text
 BMad Master starting...
 
 [Check for plan]
@@ -3400,7 +3488,7 @@ Use *agent pm to switch, or *plan-status to see full progress.
 
 ### Example 2: Task Sequence Warning
 
-```
+```text
 User: *task create-next-story
 
 [Plan check triggered]
@@ -3416,7 +3504,7 @@ Would you like to:
 
 ### Example 3: Automatic Plan Update
 
-```
+```text
 [After completing create-doc task for PRD]
 
 ✅ Plan Updated: Marked "Create PRD" as complete
@@ -3437,9 +3525,9 @@ Would you like to:
 - Malformed plan: Warn but continue, treat as no plan
 - Update failures: Log but don't block task completion
 - Parse errors: Fallback to basic text search
-==================== END: utils#plan-management ====================
+==================== END: .bmad-2d-phaser-game-dev/utils/plan-management.md ====================
 
-==================== START: utils#workflow-management ====================
+==================== START: .bmad-2d-phaser-game-dev/utils/workflow-management.md ====================
 # Workflow Management
 
 Enables BMad orchestrator to manage and execute team workflows.
@@ -3509,16 +3597,16 @@ Handle conditional paths by asking clarifying questions when needed.
 ## Agent Integration
 
 Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
-==================== END: utils#workflow-management ====================
+==================== END: .bmad-2d-phaser-game-dev/utils/workflow-management.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-2d-phaser-game-dev/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -3527,7 +3615,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-2d-phaser-game-dev/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -3605,9 +3693,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 
-==================== START: tasks#game-design-brainstorming ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 # Game Design Brainstorming Techniques Task
 
 This task provides a comprehensive toolkit of creative brainstorming techniques specifically designed for game design ideation and innovative thinking. The game designer can use these techniques to facilitate productive brainstorming sessions focused on game mechanics, player experience, and creative concepts.
@@ -3916,9 +4004,9 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 - Consider accessibility and inclusivity from the start
 - Balance innovation with market viability
 - Plan for iteration based on player feedback
-==================== END: tasks#game-design-brainstorming ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 
-==================== START: templates#game-design-doc-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.md ====================
 # {{Game Title}} Game Design Document (GDD)
 
 [[LLM: This template creates a comprehensive Game Design Document that will serve as the foundation for all game development work. The GDD should be detailed enough that developers can create user stories and epics from it. Focus on gameplay systems, mechanics, and technical requirements that can be broken down into implementable features.
@@ -4250,9 +4338,9 @@ If available, review any provided documents or ask if any are optionally availab
 - {{reference_1}}
 - {{reference_2}}
 - {{reference_3}}
-==================== END: templates#game-design-doc-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.md ====================
 
-==================== START: templates#level-design-doc-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.md ====================
 # {{Game Title}} Level Design Document
 
 [[LLM: This template creates comprehensive level design documentation that guides both content creation and technical implementation. This document should provide enough detail for developers to create level loading systems and for designers to create specific levels.
@@ -4723,9 +4811,9 @@ Difficulty
 - Mechanic integration effectiveness: {{integration_score}}
 - Player guidance clarity: {{guidance_score}}
 - Content accessibility: {{accessibility_rate}}%
-==================== END: templates#level-design-doc-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.md ====================
 
-==================== START: templates#game-brief-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.md ====================
 # {{Game Title}} Game Brief
 
 [[LLM: This template creates a comprehensive game brief that serves as the foundation for all subsequent game development work. The brief should capture the essential vision, scope, and requirements needed to create a detailed Game Design Document.
@@ -5071,9 +5159,9 @@ This brief is typically created early in the ideation process, often after brain
 
 | Date | Version | Description | Author |
 | :--- | :------ | :---------- | :----- |
-==================== END: templates#game-brief-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.md ====================
 
-==================== START: checklists#game-design-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 # Game Design Document Quality Checklist
 
 ## Document Completeness
@@ -5275,9 +5363,9 @@ _List any critical items that need attention before moving to implementation pha
 
 **Next Steps:**
 _Outline immediate next actions for the team based on this assessment._
-==================== END: checklists#game-design-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 
-==================== START: templates#game-architecture-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-architecture-tmpl.md ====================
 # {{Game Title}} Game Architecture Document
 
 [[LLM: This template creates a comprehensive game architecture document specifically for Phaser 3 + TypeScript projects. This should provide the technical foundation for all game development stories and epics.
@@ -5838,9 +5926,9 @@ export const GameBalance = {
 - Zero TypeScript errors in strict mode
 - Consistent adherence to coding standards
 - Comprehensive documentation coverage
-==================== END: templates#game-architecture-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-architecture-tmpl.md ====================
 
-==================== START: checklists#game-story-dod-checklist ====================
+==================== START: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 # Game Development Story Definition of Done Checklist
 
 ## Story Completeness
@@ -6001,9 +6089,9 @@ export const GameBalance = {
 
 **Additional Notes:**
 _Any specific concerns, recommendations, or clarifications needed before development begins._
-==================== END: checklists#game-story-dod-checklist ====================
+==================== END: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 
-==================== START: data#development-guidelines ====================
+==================== START: .bmad-2d-phaser-game-dev/data/development-guidelines.md ====================
 # Game Development Guidelines
 
 ## Overview
@@ -6655,9 +6743,9 @@ src/
 - **Asset Streaming**: Background loading for upcoming content
 
 These guidelines ensure consistent, high-quality game development that meets performance targets and maintains code quality across all implementation stories.
-==================== END: data#development-guidelines ====================
+==================== END: .bmad-2d-phaser-game-dev/data/development-guidelines.md ====================
 
-==================== START: tasks#create-game-story ====================
+==================== START: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 # Create Game Development Story Task
 
 ## Purpose
@@ -6717,7 +6805,7 @@ Before creating stories, ensure you have:
 ### 3. Template Execution
 
 **Load Template:**
-Use `templates#game-story-tmpl` following all embedded LLM instructions
+Use `.bmad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedded LLM instructions
 
 **Key Focus Areas:**
 
@@ -6753,7 +6841,7 @@ Use `templates#game-story-tmpl` following all embedded LLM instructions
 ### 5. Quality Assurance
 
 **Apply Checklist:**
-Execute `checklists#game-story-dod-checklist` against completed story
+Execute `.bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` against completed story
 
 **Story Criteria:**
 
@@ -6874,9 +6962,9 @@ Execute `checklists#game-story-dod-checklist` against completed story
 - Testing → Done
 
 This task ensures game development stories are immediately actionable and enable efficient AI-driven development of game features.
-==================== END: tasks#create-game-story ====================
+==================== END: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 
-==================== START: templates#game-story-tmpl ====================
+==================== START: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.md ====================
 # Story: {{Story Title}}
 
 **Epic:** {{Epic Name}}  
@@ -7112,9 +7200,9 @@ class {{ClassName}} extends {{PhaseClass}} {
 
 - {{future_enhancement_1}}
 - {{future_optimization_1}}
-==================== END: templates#game-story-tmpl ====================
+==================== END: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.md ====================
 
-==================== START: workflows#game-dev-greenfield ====================
+==================== START: .bmad-2d-phaser-game-dev/workflows/game-dev-greenfield.yaml ====================
 workflow:
   id: game-dev-greenfield
   name: Game Development - Greenfield Project
@@ -7298,9 +7386,9 @@ workflow:
       - Testing framework in place
       - Team roles and responsibilities defined
       - First implementation stories created and ready
-==================== END: workflows#game-dev-greenfield ====================
+==================== END: .bmad-2d-phaser-game-dev/workflows/game-dev-greenfield.yaml ====================
 
-==================== START: workflows#game-prototype ====================
+==================== START: .bmad-2d-phaser-game-dev/workflows/game-prototype.yaml ====================
 workflow:
   id: game-prototype
   name: Game Prototype Development
@@ -7476,4 +7564,4 @@ workflow:
     technical_to_stories: Technical plan complete. Create focused implementation stories for prototype development.
     stories_to_implementation: Stories ready. Begin iterative implementation with frequent playtesting and design validation.
     prototype_to_evaluation: Prototype playable. Evaluate core mechanics, gather feedback, and determine next development steps.
-==================== END: workflows#game-prototype ====================
+==================== END: .bmad-2d-phaser-game-dev/workflows/game-prototype.yaml ====================

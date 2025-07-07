@@ -25,7 +25,7 @@
 
 ## Requirements
 
-[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute tasks#advanced-elicitation display]]
+[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute {root}/tasks/advanced-elicitation.md display]]
 
 ### Functional
 
@@ -48,7 +48,7 @@
 3. Clearly let the user know where assumptions were made
 4. Ask targeted questions for unclear/missing elements or areas needing more specification
 5. This is NOT detailed UI spec - focus on product vision and user goals
-6. After section completion, immediately apply `tasks#advanced-elicitation` protocol]]
+6. After section completion, immediately apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ### Overall UX Vision
 
@@ -90,12 +90,12 @@
 
 [[LLM: Gather technical decisions that will guide the Architect. Steps:
 
-1. Check if `data#technical-preferences` or an attached `technical-preferences` file exists - use it to pre-populate choices
+1. Check if `{root}/data/technical-preferences.yaml` or an attached `technical-preferences` file exists - use it to pre-populate choices
 2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
 3. For unknowns, offer guidance based on project goals and MVP scope
 4. Document ALL technical choices with rationale (why this choice fits the project)
 5. These become constraints for the Architect - be specific and complete
-6. After section completion, apply `tasks#advanced-elicitation` protocol.]]
+6. After section completion, apply `{root}/tasks/advanced-elicitation.md` protocol.]]
 
 ### Repository Structure: { Monorepo, Polyrepo, etc...}
 
@@ -113,7 +113,7 @@
 
 ## Epics
 
-[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute tasks#advanced-elicitation display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute {root}/tasks/advanced-elicitation.md display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
 
 CRITICAL: Epics MUST be logically sequential following agile best practices:
 
@@ -139,7 +139,7 @@ CRITICAL: Epics MUST be logically sequential following agile best practices:
 
 @{/example}
 
-[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute tasks#advanced-elicitation display, before moving on to the next epic.]]
+[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute {root}/tasks/advanced-elicitation.md display, before moving on to the next epic.]]
 
 <<REPEAT: epic_details>>
 

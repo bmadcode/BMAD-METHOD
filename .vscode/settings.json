@@ -32,6 +32,7 @@
     "playtesting",
     "pointerdown",
     "pointerup",
+    "Polyrepo",
     "replayability",
     "roguelike",
     "roomodes",
@@ -43,6 +44,7 @@
     "tekton",
     "tilemap",
     "tileset",
+    "Trae",
     "VNET"
   ]
 }

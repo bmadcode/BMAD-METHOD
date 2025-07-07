@@ -8,7 +8,7 @@
 
 [[LLM: This section establishes the document's purpose and scope. Keep the content below but ensure project name is properly substituted.
 
-After presenting this section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this section, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 This document outlines the overall project architecture for {{Project Name}}, including backend systems, shared services, and non-UI specific concerns. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development, ensuring consistency and adherence to chosen patterns and technologies.
 
@@ -53,7 +53,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 Document the decision here before proceeding with the architecture design. In none, just say N/A
 
-After presenting this starter template section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this starter template section, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ### Change Log
 
@@ -64,7 +64,7 @@ After presenting this starter template section, apply `tasks#advanced-elicitatio
 
 ## High Level Architecture
 
-[[LLM: This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together (Introduction, Technical Summary, High Level Overview, Project Diagram, and Architectural Patterns), then apply `tasks#advanced-elicitation` protocol to the complete High Level Architecture section. The user can choose to refine the entire section or specific subsections.]]
+[[LLM: This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together (Introduction, Technical Summary, High Level Overview, Project Diagram, and Architectural Patterns), then apply `{root}/tasks/advanced-elicitation.md` protocol to the complete High Level Architecture section. The user can choose to refine the entire section or specific subsections.]]
 
 ### Technical Summary
 
@@ -86,7 +86,7 @@ After presenting this starter template section, apply `tasks#advanced-elicitatio
 4. Primary user interaction flow or data flow at a conceptual level
 5. Key architectural decisions and their rationale
 
-After presenting this section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this section, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ### High Level Project Diagram
 
@@ -100,7 +100,7 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 
 Use appropriate Mermaid diagram type (graph TD, C4, sequence) based on what best represents the architecture
 
-After presenting the diagram, apply `tasks#advanced-elicitation` protocol]]
+After presenting the diagram, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ### Architectural and Design Patterns
 
@@ -132,13 +132,13 @@ Common patterns to consider:
 
 @{/example}
 
-[[LLM: After presenting the patterns, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the patterns, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Tech Stack
 
 [[LLM: This is the DEFINITIVE technology selection section. Work with the user to make specific choices:
 
-1. Review PRD technical assumptions and any preferences from `data#technical-preferences` or an attached `technical-preferences`
+1. Review PRD technical assumptions and any preferences from `{root}/data/technical-preferences.yaml` or an attached `technical-preferences`
 2. For each category, present 2-3 viable options with pros/cons
 3. Make a clear recommendation based on project needs
 4. Get explicit user approval for each selection
@@ -154,7 +154,7 @@ Key decisions to finalize - before displaying the table, ensure you are aware of
 - Database and storage solutions - if unclear suggest sql or nosql or other types depending on the project and depending on cloud provider offer a suggestion
 - Development tools
 
-Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away apply `tasks#advanced-elicitation` display - this statement and the options should be rendered and then prompt right all before allowing user input.]]
+Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away apply `{root}/tasks/advanced-elicitation.md` display - this statement and the options should be rendered and then prompt right all before allowing user input.]]
 
 ### Cloud Infrastructure
 
@@ -198,7 +198,7 @@ Upon render of the table, ensure the user is aware of the importance of this sec
 
 Create a clear conceptual model before moving to database schema.
 
-After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
+After presenting all data models, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 <<REPEAT: data_model>>
 
@@ -232,7 +232,7 @@ After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
 - Technology specifics based on tech stack choices
 
 5. Create component diagrams where helpful
-6. After presenting all components, apply `tasks#advanced-elicitation` protocol]]
+6. After presenting all components, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 <<REPEAT: component>>
 
@@ -259,7 +259,7 @@ After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
 - Sequence diagrams for complex interactions
   Choose the most appropriate for clarity
 
-After presenting the diagrams, apply `tasks#advanced-elicitation` protocol]]
+After presenting the diagrams, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## External APIs
 
@@ -313,7 +313,7 @@ If no external APIs are needed, state this explicitly and skip to next section.]
 
 ^^/CONDITION: has_external_apis^^
 
-[[LLM: After presenting external APIs (or noting their absence), apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting external APIs (or noting their absence), apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Core Workflows
 
@@ -327,7 +327,7 @@ If no external APIs are needed, state this explicitly and skip to next section.]
 
 Focus on workflows that clarify architecture decisions or complex interactions.
 
-After presenting the workflow diagrams, apply `tasks#advanced-elicitation` protocol]]
+After presenting the workflow diagrams, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## REST API Spec
 
@@ -361,7 +361,7 @@ servers:
 
 ^^/CONDITION: has_rest_api^^
 
-[[LLM: After presenting the REST API spec (or noting its absence if not applicable), apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the REST API spec (or noting its absence if not applicable), apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Database Schema
 
@@ -375,7 +375,7 @@ servers:
 
 Present schema in format appropriate to database type (SQL DDL, JSON schema, etc.)
 
-After presenting the database schema, apply `tasks#advanced-elicitation` protocol]]
+After presenting the database schema, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Source Tree
 
@@ -390,7 +390,7 @@ After presenting the database schema, apply `tasks#advanced-elicitation` protoco
 
 Adapt the structure based on project needs. For monorepos, show service separation. For serverless, show function organization. Include language-specific conventions.
 
-After presenting the structure, apply `tasks#advanced-elicitation` protocol to refine based on user feedback.]]
+After presenting the structure, apply `{root}/tasks/advanced-elicitation.md` protocol to refine based on user feedback.]]
 
 ```plaintext
 {{project-root}}/
@@ -433,7 +433,7 @@ project-root/
 @{/example}
 ```
 
-[[LLM: After presenting the source tree structure, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the source tree structure, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Infrastructure and Deployment
 
@@ -478,7 +478,7 @@ Get user input on deployment preferences and CI/CD tool choices.]]
 - **Trigger Conditions:** {{rollback_triggers}}
 - **Recovery Time Objective:** {{rto}}
 
-[[LLM: After presenting the infrastructure and deployment section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the infrastructure and deployment section, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Error Handling Strategy
 
@@ -529,7 +529,7 @@ This section guides both AI and human developers in consistent error handling.]]
 - **Compensation Logic:** {{compensation_patterns}}
 - **Idempotency:** {{idempotency_approach}}
 
-[[LLM: After presenting the error handling strategy, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the error handling strategy, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Coding Standards
 
@@ -590,7 +590,7 @@ Avoid obvious rules like "use SOLID principles" or "write clean code"]]
 
 ^^/CONDITION: has_language_specifics^^
 
-[[LLM: After presenting the coding standards, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the coding standards, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Test Strategy and Standards
 
@@ -603,7 +603,7 @@ Avoid obvious rules like "use SOLID principles" or "write clean code"]]
 5. Determine integration test infrastructure
 6. Plan for test data and external dependencies
 
-Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference. Apply `tasks#advanced-elicitation` after initial draft.]]
+Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference. Apply `{root}/tasks/advanced-elicitation.md` after initial draft.]]
 
 ### Testing Philosophy
 
@@ -664,7 +664,7 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - **Performance Tests:** {{perf_test_approach}}
 - **Security Tests:** {{security_test_approach}}
 
-[[LLM: After presenting the test strategy section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the test strategy section, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Security
 
@@ -728,7 +728,7 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - **DAST Tool:** {{dynamic_analysis}}
 - **Penetration Testing:** {{pentest_schedule}}
 
-[[LLM: After presenting the security section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the security section, apply `{root}/tasks/advanced-elicitation.md` protocol]]
 
 ## Checklist Results Report
 

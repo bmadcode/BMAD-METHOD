@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-core/folder/filename.md ====================`
+- `==================== END: .bmad-core/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-core/personas/analyst.md`, `.bmad-core/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-core/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-core/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agents#ux-expert ====================
+
+==================== START: .bmad-core/agents/ux-expert.md ====================
 # ux-expert
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -93,9 +94,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#ux-expert ====================
+==================== END: .bmad-core/agents/ux-expert.md ====================
 
-==================== START: tasks#generate-ai-frontend-prompt ====================
+==================== START: .bmad-core/tasks/generate-ai-frontend-prompt.md ====================
 # Create AI Frontend Prompt Task
 
 ## Purpose
@@ -147,9 +148,9 @@ You will now synthesize the inputs and the above principles into a final, compre
    - Output the complete, generated prompt in a clear, copy-pasteable format (e.g., a large code block).
    - Explain the structure of the prompt and why certain information was included, referencing the principles above.
    - <important_note>Conclude by reminding the user that all AI-generated code will require careful human review, testing, and refinement to be considered production-ready.</important_note>
-==================== END: tasks#generate-ai-frontend-prompt ====================
+==================== END: .bmad-core/tasks/generate-ai-frontend-prompt.md ====================
 
-==================== START: tasks#create-deep-research-prompt ====================
+==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -451,9 +452,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: tasks#create-deep-research-prompt ====================
+==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
-==================== START: tasks#create-doc ====================
+==================== START: .bmad-core/tasks/create-doc.md ====================
 # Create Document from Template Task
 
 ## Purpose
@@ -473,7 +474,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -482,7 +483,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -500,14 +501,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task
@@ -545,16 +546,16 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 ## Remember
 
 Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
-==================== END: tasks#create-doc ====================
+==================== END: .bmad-core/tasks/create-doc.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-core/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-core/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -563,7 +564,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-core/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -641,9 +642,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-core/tasks/execute-checklist.md ====================
 
-==================== START: templates#front-end-spec-tmpl ====================
+==================== START: .bmad-core/templates/front-end-spec-tmpl.md ====================
 # {{Project Name}} UI/UX Specification
 
 [[LLM: The default path and filename unless specified is docs/front-end-spec.md]]
@@ -1057,15 +1058,15 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 ## Checklist Results
 
 [[LLM: If a UI/UX checklist exists, run it against this document and report results here.]]
-==================== END: templates#front-end-spec-tmpl ====================
+==================== END: .bmad-core/templates/front-end-spec-tmpl.md ====================
 
-==================== START: data#technical-preferences ====================
+==================== START: .bmad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
 
 None Listed
-==================== END: data#technical-preferences ====================
+==================== END: .bmad-core/data/technical-preferences.md ====================
 
-==================== START: utils#template-format ====================
+==================== START: .bmad-core/utils/template-format.md ====================
 # Template Format Conventions
 
 Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
@@ -1092,4 +1093,4 @@ Templates in the BMad method use standardized markup for AI processing. These co
 - Template elements are for AI processing only
 - Focus on faithful template execution and clean output
 - All template-specific instructions are embedded within templates
-==================== END: utils#template-format ====================
+==================== END: .bmad-core/utils/template-format.md ====================

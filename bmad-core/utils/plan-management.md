@@ -8,14 +8,10 @@ Provides utilities for agents and tasks to interact with workflow plans, check p
 
 ### 1. Check Plan Existence
 
-[[LLM: When any agent starts or task begins, check if a workflow plan exists]]
-
-```
 Check for workflow plan:
+
 1. Look for docs/workflow-plan.md (default location)
-2. Check core-config.yaml for custom plan location
-3. Return plan status (exists/not exists)
-```
+2. Return plan status to user (exists/not exists) - if not exists then HALT.
 
 ### 2. Parse Plan Status
 
@@ -56,7 +52,7 @@ Check for workflow plan:
 
 **Warning Templates:**
 
-```
+```text
 SEQUENCE WARNING: 
 The workflow plan shows you should complete "{expected_step}" next.
 You're attempting to: "{requested_action}"
@@ -90,7 +86,7 @@ In flexible mode: Allow with confirmation
 
 **For Agents (startup sequence)**:
 
-```
+```text
 1. Check if plan exists using this utility
 2. If exists:
    - Parse current status
@@ -101,7 +97,7 @@ In flexible mode: Allow with confirmation
 
 **For Tasks (pre-execution)**:
 
-```
+```text
 1. Check if plan exists
 2. If exists:
    - Verify this task aligns with plan
@@ -117,7 +113,7 @@ In flexible mode: Allow with confirmation
 
 [[LLM: Standard format for showing plan status]]
 
-```
+```text
 📋 Workflow Plan Status
 ━━━━━━━━━━━━━━━━━━━━
 Workflow: {workflow_name}
@@ -170,7 +166,7 @@ If user wants to abandon plan:
 
 ### Example 1: Agent Startup Check
 
-```
+```text
 BMad Master starting...
 
 [Check for plan]
@@ -184,7 +180,7 @@ Use *agent pm to switch, or *plan-status to see full progress.
 
 ### Example 2: Task Sequence Warning
 
-```
+```text
 User: *task create-next-story
 
 [Plan check triggered]
@@ -200,7 +196,7 @@ Would you like to:
 
 ### Example 3: Automatic Plan Update
 
-```
+```text
 [After completing create-doc task for PRD]
 
 ✅ Plan Updated: Marked "Create PRD" as complete

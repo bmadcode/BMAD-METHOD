@@ -66,7 +66,7 @@ class IdeSetup {
       case "gemini":
         return this.setupGeminiCli(installDir, selectedAgent);
       case "github-copilot":
-        return this.setupVsCodeCopilot(installDir, selectedAgent, spinner);
+        return this.setupGitHubCopilot(installDir, selectedAgent, spinner);
       default:
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -566,7 +566,7 @@ class IdeSetup {
     return true;
   }
 
-  async setupVsCodeCopilot(installDir, selectedAgent, spinner = null) {
+  async setupGitHubCopilot(installDir, selectedAgent, spinner = null) {
     await initializeModules();
     
     // Configure VS Code workspace settings first to avoid UI conflicts with loading spinners

@@ -38,6 +38,7 @@ commands:
   - task {task}: Execute task, if not found or none specified, ONLY list available dependencies/tasks listed below
   - list {task|template|util|checklist|workflow}: List resources by type ONLY from the corresponding dependencies sub item below
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
+  - create-prd-alpha: Execute task create-doc2 with .bmad-core/templates/prd-tmpl2.yaml (EXPERIMENTAL)
   - execute-checklist {checklist}: Run task execute-checklist (no checklist = ONLY show available checklists listed under dependencies/checklist below)
   - shard-doc {document} {destination}: run the task shard-doc against the optionally provided document to the specified destination
   - plan: Execute the task Create workflow plan
@@ -59,12 +60,13 @@ execution:
 dependencies:
   tasks:
     - advanced-elicitation
-    - brainstorming-techniques
+    - facilitate-brainstorming-session
     - brownfield-create-epic
     - brownfield-create-story
     - correct-course
     - create-deep-research-prompt
     - create-doc
+    - create-doc2
     - create-workflow-plan
     - document-project
     - create-next-story
@@ -83,10 +85,12 @@ dependencies:
     - fullstack-architecture-tmpl
     - market-research-tmpl
     - prd-tmpl
+    - prd-tmpl2
     - project-brief-tmpl
     - story-tmpl
   data:
     - bmad-kb
+    - brainstorming-techniques
     - technical-preferences
   utils:
     - plan-management

@@ -51,7 +51,7 @@ commands:
   - exit: Say goodbye as the Business Analyst, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - brainstorming-techniques
+    - facilitate-brainstorming-session
     - create-deep-research-prompt
     - create-doc
     - advanced-elicitation
@@ -60,8 +60,10 @@ dependencies:
     - project-brief-tmpl
     - market-research-tmpl
     - competitor-analysis-tmpl
+    - brainstorming-output-tmpl
   data:
     - bmad-kb
+    - brainstorming-techniques
   utils:
     - template-format
 ```

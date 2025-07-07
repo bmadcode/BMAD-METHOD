@@ -26,7 +26,7 @@ class DependencyResolver {
     const dependencies = {
       agent: {
         id: agentId,
-        path: `agents#${agentId}`,
+        path: agentPath,
         content: agentContent,
         config: agentConfig
       },
@@ -56,7 +56,7 @@ class DependencyResolver {
     const dependencies = {
       team: {
         id: teamId,
-        path: `agent-teams#${teamId}`,
+        path: teamPath,
         content: teamContent,
         config: teamConfig
       },
@@ -152,7 +152,7 @@ class DependencyResolver {
       const resource = {
         type,
         id,
-        path: `${type}#${id}`,
+        path: filePath,
         content
       };
 

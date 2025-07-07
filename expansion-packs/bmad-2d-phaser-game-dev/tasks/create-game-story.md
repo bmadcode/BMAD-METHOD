@@ -57,7 +57,7 @@ Before creating stories, ensure you have:
 ### 3. Template Execution
 
 **Load Template:**
-Use `templates#game-story-tmpl` following all embedded LLM instructions
+Use `{root}/templates/game-story-tmpl.md` following all embedded LLM instructions
 
 **Key Focus Areas:**
 
@@ -93,7 +93,7 @@ Use `templates#game-story-tmpl` following all embedded LLM instructions
 ### 5. Quality Assurance
 
 **Apply Checklist:**
-Execute `checklists#game-story-dod-checklist` against completed story
+Execute `{root}/checklists/game-story-dod-checklist.md` against completed story
 
 **Story Criteria:**
 

@@ -86,6 +86,6 @@ ide-configurations:
       # 1. The installer creates a .github/chatmodes/ directory in your project
       # 2. Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
       # 3. The agent will adopt that persona for the conversation
-      # 4. Requires VS Code 1.99+ with `chat.agent.enabled: true` in settings
+      # 4. Requires VS Code 1.101+ with `chat.agent.enabled: true` in settings
       # 5. Agent files are stored in .github/chatmodes/
-      # 6. Use `/help` to see available commands and agents
+      # 6. Use `*help` to see available commands and agents

@@ -8,14 +8,14 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: folder#filename ====================`
-- `==================== END: folder#filename ====================`
+- `==================== START: .bmad-core/folder/filename.md ====================`
+- `==================== END: .bmad-core/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always `folder#filename` (e.g., `personas#analyst`, `tasks#create-story`)
-- If a section is specified (e.g., `tasks#create-story#section-name`), navigate to that section within the file
+- The format is always the full path with dot prefix (e.g., `.bmad-core/personas/analyst.md`, `.bmad-core/tasks/create-story.md`)
+- If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
 
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: utils#template-format ====================`
-- `tasks: create-story` → Look for `==================== START: tasks#create-story ====================`
+- `utils: template-format` → Look for `==================== START: .bmad-core/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .bmad-core/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -38,7 +38,8 @@ These references map directly to bundle sections:
 
 ---
 
-==================== START: agents#architect ====================
+
+==================== START: .bmad-core/agents/architect.md ====================
 # architect
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -101,9 +102,9 @@ dependencies:
   utils:
     - template-format
 ```
-==================== END: agents#architect ====================
+==================== END: .bmad-core/agents/architect.md ====================
 
-==================== START: tasks#create-doc ====================
+==================== START: .bmad-core/tasks/create-doc.md ====================
 # Create Document from Template Task
 
 ## Purpose
@@ -123,7 +124,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 [[LLM: Check if plan tracking is enabled in core-config.yaml]]
 
-- If `workflow.trackProgress: true`, check for active plan using utils#plan-management
+- If `workflow.trackProgress: true`, check for active plan using .bmad-core/utils/plan-management.md
 - If plan exists and this document creation is part of the plan:
   - Verify this is the expected next step
   - If out of sequence and `enforceSequence: true`, warn user and halt without user override
@@ -132,7 +133,7 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 1. Identify Template
 
-- Load from `templates#*` or `{root}/templates directory`
+- Load from `.bmad-core/templates/*.md` or `.bmad-core/templates directory`
 - Agent-specific templates are listed in agent's dependencies
 - If agent has `templates: [prd-tmpl, architecture-tmpl]` for example, then offer to create "PRD" and "Architecture" documents
 
@@ -150,14 +151,14 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 
 ### 4. Key Execution Patterns
 
-**When you see:** `[[LLM: Draft X and immediately execute tasks#advanced-elicitation]]`
+**When you see:** `[[LLM: Draft X and immediately execute .bmad-core/tasks/advanced-elicitation.md]]`
 
 - Draft the content
 - Present it to user
 - IMMEDIATELY execute the task
 - Wait for completion before continuing
 
-**When you see:** `[[LLM: After section completion, apply tasks#Y]]`
+**When you see:** `[[LLM: After section completion, apply .bmad-core/tasks/Y.md]]`
 
 - Finish the section
 - STOP and execute the task
@@ -195,9 +196,9 @@ Generate documents from templates by EXECUTING (not just reading) embedded instr
 ## Remember
 
 Templates contain precise instructions for a reason. Follow them exactly to ensure document quality and completeness.
-==================== END: tasks#create-doc ====================
+==================== END: .bmad-core/tasks/create-doc.md ====================
 
-==================== START: tasks#create-deep-research-prompt ====================
+==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -499,9 +500,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: tasks#create-deep-research-prompt ====================
+==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
-==================== START: tasks#document-project ====================
+==================== START: .bmad-core/tasks/document-project.md ====================
 # Document an Existing Project
 
 ## Purpose
@@ -819,16 +820,16 @@ Apply the advanced elicitation task after major sections to refine based on user
 - Documents technical debt, workarounds, and constraints honestly
 - For brownfield projects with PRD: Provides clear enhancement impact analysis
 - The goal is PRACTICAL documentation for AI agents doing real work
-==================== END: tasks#document-project ====================
+==================== END: .bmad-core/tasks/document-project.md ====================
 
-==================== START: tasks#execute-checklist ====================
+==================== START: .bmad-core/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-core/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -837,7 +838,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
+     - Load the appropriate checklist from .bmad-core/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -915,9 +916,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: tasks#execute-checklist ====================
+==================== END: .bmad-core/tasks/execute-checklist.md ====================
 
-==================== START: templates#architecture-tmpl ====================
+==================== START: .bmad-core/templates/architecture-tmpl.md ====================
 # {{Project Name}} Architecture Document
 
 [[LLM: If available, review any provided relevant documents to gather all relevant context before beginning. If at a minimum you cannot local `docs/prd.md` ask the user what docs will provide the basis for the architecture.]]
@@ -928,7 +929,7 @@ The LLM will:
 
 [[LLM: This section establishes the document's purpose and scope. Keep the content below but ensure project name is properly substituted.
 
-After presenting this section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 This document outlines the overall project architecture for {{Project Name}}, including backend systems, shared services, and non-UI specific concerns. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development, ensuring consistency and adherence to chosen patterns and technologies.
 
@@ -973,7 +974,7 @@ If the project includes a significant user interface, a separate Frontend Archit
 
 Document the decision here before proceeding with the architecture design. In none, just say N/A
 
-After presenting this starter template section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this starter template section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### Change Log
 
@@ -984,7 +985,7 @@ After presenting this starter template section, apply `tasks#advanced-elicitatio
 
 ## High Level Architecture
 
-[[LLM: This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together (Introduction, Technical Summary, High Level Overview, Project Diagram, and Architectural Patterns), then apply `tasks#advanced-elicitation` protocol to the complete High Level Architecture section. The user can choose to refine the entire section or specific subsections.]]
+[[LLM: This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together (Introduction, Technical Summary, High Level Overview, Project Diagram, and Architectural Patterns), then apply `.bmad-core/tasks/advanced-elicitation.md` protocol to the complete High Level Architecture section. The user can choose to refine the entire section or specific subsections.]]
 
 ### Technical Summary
 
@@ -1006,7 +1007,7 @@ After presenting this starter template section, apply `tasks#advanced-elicitatio
 4. Primary user interaction flow or data flow at a conceptual level
 5. Key architectural decisions and their rationale
 
-After presenting this section, apply `tasks#advanced-elicitation` protocol]]
+After presenting this section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### High Level Project Diagram
 
@@ -1020,7 +1021,7 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 
 Use appropriate Mermaid diagram type (graph TD, C4, sequence) based on what best represents the architecture
 
-After presenting the diagram, apply `tasks#advanced-elicitation` protocol]]
+After presenting the diagram, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ### Architectural and Design Patterns
 
@@ -1052,13 +1053,13 @@ Common patterns to consider:
 
 @{/example}
 
-[[LLM: After presenting the patterns, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the patterns, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Tech Stack
 
 [[LLM: This is the DEFINITIVE technology selection section. Work with the user to make specific choices:
 
-1. Review PRD technical assumptions and any preferences from `data#technical-preferences` or an attached `technical-preferences`
+1. Review PRD technical assumptions and any preferences from `.bmad-core/data/technical-preferences.yaml` or an attached `technical-preferences`
 2. For each category, present 2-3 viable options with pros/cons
 3. Make a clear recommendation based on project needs
 4. Get explicit user approval for each selection
@@ -1074,7 +1075,7 @@ Key decisions to finalize - before displaying the table, ensure you are aware of
 - Database and storage solutions - if unclear suggest sql or nosql or other types depending on the project and depending on cloud provider offer a suggestion
 - Development tools
 
-Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away apply `tasks#advanced-elicitation` display - this statement and the options should be rendered and then prompt right all before allowing user input.]]
+Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away apply `.bmad-core/tasks/advanced-elicitation.md` display - this statement and the options should be rendered and then prompt right all before allowing user input.]]
 
 ### Cloud Infrastructure
 
@@ -1118,7 +1119,7 @@ Upon render of the table, ensure the user is aware of the importance of this sec
 
 Create a clear conceptual model before moving to database schema.
 
-After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
+After presenting all data models, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 <<REPEAT: data_model>>
 
@@ -1152,7 +1153,7 @@ After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
 - Technology specifics based on tech stack choices
 
 5. Create component diagrams where helpful
-6. After presenting all components, apply `tasks#advanced-elicitation` protocol]]
+6. After presenting all components, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 <<REPEAT: component>>
 
@@ -1179,7 +1180,7 @@ After presenting all data models, apply `tasks#advanced-elicitation` protocol]]
 - Sequence diagrams for complex interactions
   Choose the most appropriate for clarity
 
-After presenting the diagrams, apply `tasks#advanced-elicitation` protocol]]
+After presenting the diagrams, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## External APIs
 
@@ -1233,7 +1234,7 @@ If no external APIs are needed, state this explicitly and skip to next section.]
 
 ^^/CONDITION: has_external_apis^^
 
-[[LLM: After presenting external APIs (or noting their absence), apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting external APIs (or noting their absence), apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Core Workflows
 
@@ -1247,7 +1248,7 @@ If no external APIs are needed, state this explicitly and skip to next section.]
 
 Focus on workflows that clarify architecture decisions or complex interactions.
 
-After presenting the workflow diagrams, apply `tasks#advanced-elicitation` protocol]]
+After presenting the workflow diagrams, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## REST API Spec
 
@@ -1281,7 +1282,7 @@ servers:
 
 ^^/CONDITION: has_rest_api^^
 
-[[LLM: After presenting the REST API spec (or noting its absence if not applicable), apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the REST API spec (or noting its absence if not applicable), apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Database Schema
 
@@ -1295,7 +1296,7 @@ servers:
 
 Present schema in format appropriate to database type (SQL DDL, JSON schema, etc.)
 
-After presenting the database schema, apply `tasks#advanced-elicitation` protocol]]
+After presenting the database schema, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Source Tree
 
@@ -1310,7 +1311,7 @@ After presenting the database schema, apply `tasks#advanced-elicitation` protoco
 
 Adapt the structure based on project needs. For monorepos, show service separation. For serverless, show function organization. Include language-specific conventions.
 
-After presenting the structure, apply `tasks#advanced-elicitation` protocol to refine based on user feedback.]]
+After presenting the structure, apply `.bmad-core/tasks/advanced-elicitation.md` protocol to refine based on user feedback.]]
 
 ```plaintext
 {{project-root}}/
@@ -1353,7 +1354,7 @@ project-root/
 @{/example}
 ```
 
-[[LLM: After presenting the source tree structure, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the source tree structure, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Infrastructure and Deployment
 
@@ -1398,7 +1399,7 @@ Get user input on deployment preferences and CI/CD tool choices.]]
 - **Trigger Conditions:** {{rollback_triggers}}
 - **Recovery Time Objective:** {{rto}}
 
-[[LLM: After presenting the infrastructure and deployment section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the infrastructure and deployment section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Error Handling Strategy
 
@@ -1449,7 +1450,7 @@ This section guides both AI and human developers in consistent error handling.]]
 - **Compensation Logic:** {{compensation_patterns}}
 - **Idempotency:** {{idempotency_approach}}
 
-[[LLM: After presenting the error handling strategy, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the error handling strategy, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Coding Standards
 
@@ -1510,7 +1511,7 @@ Avoid obvious rules like "use SOLID principles" or "write clean code"]]
 
 ^^/CONDITION: has_language_specifics^^
 
-[[LLM: After presenting the coding standards, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the coding standards, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Test Strategy and Standards
 
@@ -1523,7 +1524,7 @@ Avoid obvious rules like "use SOLID principles" or "write clean code"]]
 5. Determine integration test infrastructure
 6. Plan for test data and external dependencies
 
-Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference. Apply `tasks#advanced-elicitation` after initial draft.]]
+Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference. Apply `.bmad-core/tasks/advanced-elicitation.md` after initial draft.]]
 
 ### Testing Philosophy
 
@@ -1584,7 +1585,7 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - **Performance Tests:** {{perf_test_approach}}
 - **Security Tests:** {{security_test_approach}}
 
-[[LLM: After presenting the test strategy section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the test strategy section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Security
 
@@ -1648,7 +1649,7 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - **DAST Tool:** {{dynamic_analysis}}
 - **Penetration Testing:** {{pentest_schedule}}
 
-[[LLM: After presenting the security section, apply `tasks#advanced-elicitation` protocol]]
+[[LLM: After presenting the security section, apply `.bmad-core/tasks/advanced-elicitation.md` protocol]]
 
 ## Checklist Results Report
 
@@ -1694,9 +1695,9 @@ Note: Basic info goes in Coding Standards for dev agent. This detailed section i
 - Reference to this architecture and coding standards
 - First epic/story to implement
 - Key technical decisions to follow]]
-==================== END: templates#architecture-tmpl ====================
+==================== END: .bmad-core/templates/architecture-tmpl.md ====================
 
-==================== START: templates#front-end-architecture-tmpl ====================
+==================== START: .bmad-core/templates/front-end-architecture-tmpl.md ====================
 # {{Project Name}} Frontend Architecture Document
 
 [[LLM: The default path and filename unless specified is docs/ui-architecture.md]]
@@ -1872,9 +1873,9 @@ Document the starter template decision and any constraints it imposes before pro
 - Key import patterns
 - File naming conventions
 - Project-specific patterns and utilities]]
-==================== END: templates#front-end-architecture-tmpl ====================
+==================== END: .bmad-core/templates/front-end-architecture-tmpl.md ====================
 
-==================== START: templates#fullstack-architecture-tmpl ====================
+==================== START: .bmad-core/templates/fullstack-architecture-tmpl.md ====================
 # {{Project Name}} Fullstack Architecture Document
 
 [[LLM: The default path and filename unless specified is docs/architecture.md]]
@@ -2893,9 +2894,9 @@ After presenting this section, apply `tasks#advanced-elicitation` protocol]]
 ## Checklist Results Report
 
 [[LLM: Before running the checklist, offer to output the full architecture document. Once user confirms, execute the `architect-checklist` and populate results here.]]
-==================== END: templates#fullstack-architecture-tmpl ====================
+==================== END: .bmad-core/templates/fullstack-architecture-tmpl.md ====================
 
-==================== START: templates#brownfield-architecture-tmpl ====================
+==================== START: .bmad-core/templates/brownfield-architecture-tmpl.md ====================
 # {{Project Name}} Brownfield Enhancement Architecture
 
 [[LLM: The default path and filename unless specified is docs/architecture.md]]
@@ -3440,9 +3441,9 @@ Present risk assessment and apply `tasks#advanced-elicitation` protocol]]
 - Key technical decisions based on real project constraints
 - Existing system compatibility requirements with specific verification steps
 - Clear sequencing of implementation to minimize risk to existing functionality]]
-==================== END: templates#brownfield-architecture-tmpl ====================
+==================== END: .bmad-core/templates/brownfield-architecture-tmpl.md ====================
 
-==================== START: checklists#architect-checklist ====================
+==================== START: .bmad-core/checklists/architect-checklist.md ====================
 # Architect Solution Validation Checklist
 
 This checklist serves as a comprehensive framework for the Architect to validate the technical design and architecture before development execution. The Architect should systematically work through each item, ensuring the architecture is robust, scalable, secure, and aligned with the product requirements.
@@ -3886,15 +3887,15 @@ Now that you've completed the checklist, generate a comprehensive validation rep
    - Component design clarity
 
 After presenting the report, ask the user if they would like detailed analysis of any specific section, especially those with warnings or failures.]]
-==================== END: checklists#architect-checklist ====================
+==================== END: .bmad-core/checklists/architect-checklist.md ====================
 
-==================== START: data#technical-preferences ====================
+==================== START: .bmad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
 
 None Listed
-==================== END: data#technical-preferences ====================
+==================== END: .bmad-core/data/technical-preferences.md ====================
 
-==================== START: utils#template-format ====================
+==================== START: .bmad-core/utils/template-format.md ====================
 # Template Format Conventions
 
 Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
@@ -3921,4 +3922,4 @@ Templates in the BMad method use standardized markup for AI processing. These co
 - Template elements are for AI processing only
 - Focus on faithful template execution and clean output
 - All template-specific instructions are embedded within templates
-==================== END: utils#template-format ====================
+==================== END: .bmad-core/utils/template-format.md ====================
