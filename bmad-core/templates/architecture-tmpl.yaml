@@ -629,7 +629,6 @@ sections:
       After completing the architecture:
       
       1. If project has UI components:
-      - Recommend engaging Design Architect agent
       - Use "Frontend Architecture Mode"
       - Provide this document as input
       
@@ -640,19 +639,12 @@ sections:
       
       3. Include specific prompts for next agents if needed
     sections:
-      - id: design-architect-prompt
-        title: Design Architect Prompt
+      - id: architect-prompt
+        title: Architect Prompt
         condition: Project has UI components
         instruction: |
-          Create a brief prompt to hand off to Design Architect for Frontend Architecture creation. Include:
+          Create a brief prompt to hand off to Architect for Frontend Architecture creation. Include:
           - Reference to this architecture document
           - Key UI requirements from PRD
           - Any frontend-specific decisions made here
           - Request for detailed frontend architecture
-      - id: developer-handoff
-        title: Developer Handoff
-        instruction: |
-          Create a brief prompt for developers starting implementation. Include:
-          - Reference to this architecture and coding standards
-          - First epic/story to implement
-          - Key technical decisions to follow

@@ -137,5 +137,4 @@ dependencies:
   utils:
     - plan-management.md
     - workflow-management.md
-    - template-format.md
 ```

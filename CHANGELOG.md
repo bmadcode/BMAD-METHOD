@@ -1,3 +1,24 @@
+## [4.27.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.3...v4.27.4) (2025-07-07)
+
+
+### Bug Fixes
+
+* doc updates ([1b86cd4](https://github.com/bmadcode/BMAD-METHOD/commit/1b86cd4db3644ca2b2b4a94821cc8b5690d78e0a))
+
+## [4.27.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.2...v4.27.3) (2025-07-07)
+
+
+### Bug Fixes
+
+* remove test zoo folder ([908dcd7](https://github.com/bmadcode/BMAD-METHOD/commit/908dcd7e9afae3fd23cd894c0d09855fc9c42d0e))
+
+## [4.27.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.1...v4.27.2) (2025-07-07)
+
+
+### Bug Fixes
+
+* improve output ([a5ffe7b](https://github.com/bmadcode/BMAD-METHOD/commit/a5ffe7b9b209ae02a9d97adf60fe73c0bc9701e4))
+
 ## [4.27.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.0...v4.27.1) (2025-07-07)
 
 

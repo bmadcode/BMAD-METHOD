@@ -1360,9 +1360,9 @@ sections:
   - id: next-steps
     title: Next Steps
     sections:
-      - id: design-architect-prompt
-        title: Design Architect Prompt
-        instruction: This section will contain the prompt for the Design Architect, keep it short and to the point to initiate create architecture mode using this document as input.
+      - id: ux-expert-prompt
+        title: UX Expert Prompt
+        instruction: This section will contain the prompt for the UX Expert, keep it short and to the point to initiate create architecture mode using this document as input.
       - id: architect-prompt
         title: Architect Prompt
         instruction: This section will contain the prompt for the Architect, keep it short and to the point to initiate create architecture mode using this document as input.

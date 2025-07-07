@@ -194,7 +194,6 @@ dependencies:
   utils:
     - plan-management.md
     - workflow-management.md
-    - template-format.md
 ```
 ==================== END: .bmad-core/agents/bmad-orchestrator.md ====================
 
@@ -1724,16 +1723,9 @@ The BMad-Method is built around a modular architecture centered on the `bmad-cor
 
 BMad employs a sophisticated template system with three key components:
 
-1. **Template Format** (`utils/template-format.md`): Defines markup language for variable substitution and AI processing directives
-2. **Document Creation** (`tasks/create-doc.md`): Orchestrates template selection and user interaction
+1. **Template Format** (`utils/bmad-doc-template.md`): Defines markup language for variable substitution and AI processing directives from yaml templates
+2. **Document Creation** (`tasks/create-doc.md`): Orchestrates template selection and user interaction to transform yaml spec to final markdown output
 3. **Advanced Elicitation** (`tasks/advanced-elicitation.md`): Provides interactive refinement through structured brainstorming
-
-**Template Features**:
-
-- **Self-contained**: Templates embed both output structure and processing instructions
-- **Variable Substitution**: `{{placeholders}}` for dynamic content
-- **AI Processing Directives**: `[[LLM: instructions]]` for AI-only processing
-- **Interactive Refinement**: Built-in elicitation processes for quality improvement
 
 ### Technical Preferences Integration
 
@@ -2561,35 +2553,6 @@ Handle conditional paths by asking clarifying questions when needed.
 
 Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
 ==================== END: .bmad-core/utils/workflow-management.md ====================
-
-==================== START: .bmad-core/utils/template-format.md ====================
-# Template Format Conventions
-
-Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
-
-## Template Markup Elements
-
-- **{{placeholders}}**: Variables to be replaced with actual content
-- **[[LLM: instructions]]**: Internal processing instructions for AI agents (never shown to users)
-- **REPEAT** sections: Content blocks that may be repeated as needed
-- **^^CONDITION^^** blocks: Conditional content included only if criteria are met
-- **@{examples}**: Example content for guidance (never output to users)
-
-## Processing Rules
-
-- Replace all {{placeholders}} with project-specific content
-- Execute all [[LLM: instructions]] internally without showing users
-- Process conditional and repeat blocks as specified
-- Use examples for guidance but never include them in final output
-- Present only clean, formatted content to users
-
-## Critical Guidelines
-
-- **NEVER display template markup, LLM instructions, or examples to users**
-- Template elements are for AI processing only
-- Focus on faithful template execution and clean output
-- All template-specific instructions are embedded within templates
-==================== END: .bmad-core/utils/template-format.md ====================
 
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
 ---
@@ -5203,9 +5166,9 @@ sections:
   - id: next-steps
     title: Next Steps
     sections:
-      - id: design-architect-prompt
-        title: Design Architect Prompt
-        instruction: This section will contain the prompt for the Design Architect, keep it short and to the point to initiate create architecture mode using this document as input.
+      - id: ux-expert-prompt
+        title: UX Expert Prompt
+        instruction: This section will contain the prompt for the UX Expert, keep it short and to the point to initiate create architecture mode using this document as input.
       - id: architect-prompt
         title: Architect Prompt
         instruction: This section will contain the prompt for the Architect, keep it short and to the point to initiate create architecture mode using this document as input.
@@ -7101,7 +7064,6 @@ sections:
       After completing the architecture:
       
       1. If project has UI components:
-      - Recommend engaging Design Architect agent
       - Use "Frontend Architecture Mode"
       - Provide this document as input
       
@@ -7112,22 +7074,15 @@ sections:
       
       3. Include specific prompts for next agents if needed
     sections:
-      - id: design-architect-prompt
-        title: Design Architect Prompt
+      - id: architect-prompt
+        title: Architect Prompt
         condition: Project has UI components
         instruction: |
-          Create a brief prompt to hand off to Design Architect for Frontend Architecture creation. Include:
+          Create a brief prompt to hand off to Architect for Frontend Architecture creation. Include:
           - Reference to this architecture document
           - Key UI requirements from PRD
           - Any frontend-specific decisions made here
           - Request for detailed frontend architecture
-      - id: developer-handoff
-        title: Developer Handoff
-        instruction: |
-          Create a brief prompt for developers starting implementation. Include:
-          - Reference to this architecture and coding standards
-          - First epic/story to implement
-          - Key technical decisions to follow
 ==================== END: .bmad-core/templates/architecture-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/front-end-architecture-tmpl.yaml ====================

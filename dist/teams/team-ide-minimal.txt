@@ -186,7 +186,6 @@ dependencies:
   utils:
     - plan-management.md
     - workflow-management.md
-    - template-format.md
 ```
 ==================== END: .bmad-core/agents/bmad-orchestrator.md ====================
 
@@ -1623,16 +1622,9 @@ The BMad-Method is built around a modular architecture centered on the `bmad-cor
 
 BMad employs a sophisticated template system with three key components:
 
-1. **Template Format** (`utils/template-format.md`): Defines markup language for variable substitution and AI processing directives
-2. **Document Creation** (`tasks/create-doc.md`): Orchestrates template selection and user interaction
+1. **Template Format** (`utils/bmad-doc-template.md`): Defines markup language for variable substitution and AI processing directives from yaml templates
+2. **Document Creation** (`tasks/create-doc.md`): Orchestrates template selection and user interaction to transform yaml spec to final markdown output
 3. **Advanced Elicitation** (`tasks/advanced-elicitation.md`): Provides interactive refinement through structured brainstorming
-
-**Template Features**:
-
-- **Self-contained**: Templates embed both output structure and processing instructions
-- **Variable Substitution**: `{{placeholders}}` for dynamic content
-- **AI Processing Directives**: `[[LLM: instructions]]` for AI-only processing
-- **Interactive Refinement**: Built-in elicitation processes for quality improvement
 
 ### Technical Preferences Integration
 
@@ -2460,35 +2452,6 @@ Handle conditional paths by asking clarifying questions when needed.
 
 Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
 ==================== END: .bmad-core/utils/workflow-management.md ====================
-
-==================== START: .bmad-core/utils/template-format.md ====================
-# Template Format Conventions
-
-Templates in the BMad method use standardized markup for AI processing. These conventions ensure consistent document generation.
-
-## Template Markup Elements
-
-- **{{placeholders}}**: Variables to be replaced with actual content
-- **[[LLM: instructions]]**: Internal processing instructions for AI agents (never shown to users)
-- **REPEAT** sections: Content blocks that may be repeated as needed
-- **^^CONDITION^^** blocks: Conditional content included only if criteria are met
-- **@{examples}**: Example content for guidance (never output to users)
-
-## Processing Rules
-
-- Replace all {{placeholders}} with project-specific content
-- Execute all [[LLM: instructions]] internally without showing users
-- Process conditional and repeat blocks as specified
-- Use examples for guidance but never include them in final output
-- Present only clean, formatted content to users
-
-## Critical Guidelines
-
-- **NEVER display template markup, LLM instructions, or examples to users**
-- Template elements are for AI processing only
-- Focus on faithful template execution and clean output
-- All template-specific instructions are embedded within templates
-==================== END: .bmad-core/utils/template-format.md ====================
 
 ==================== START: .bmad-core/tasks/execute-checklist.md ====================
 # Checklist Validation Task
