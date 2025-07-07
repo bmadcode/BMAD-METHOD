@@ -9,5 +9,5 @@ agents:
   - game-developer
   - game-sm
 workflows:
-  - unity-game-dev-greenfield
-  - unity-game-prototype
+  - unity-game-dev-greenfield.md
+  - unity-game-prototype.md

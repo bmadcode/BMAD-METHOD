@@ -164,7 +164,7 @@ workflow:
       - Cross-platform input handling with the new Input System
       - Comprehensive error handling and graceful degradation
     playtesting_integration:
-      - Test core mechanics early and frequently in the Unity Editor
+      - Test core mechanics early and frequently
       - Validate game balance through metrics and player feedback
       - Iterate on design based on implementation discoveries
       - Document design changes and rationale
