@@ -508,12 +508,35 @@ Assets/
 
 ### Story Implementation Process
 
-1.  **Read Story Requirements:** Understand acceptance criteria and technical specifications.
-2.  **Plan Implementation:** Identify scripts, prefabs, and scenes to create/modify.
-3.  **Implement Feature:** Write clean C# code following all guidelines.
-4.  **Test in Editor:** Thoroughly test the feature in Play Mode.
-5.  **Write Automated Tests:** Create unit or integration tests for the new logic.
-6.  **Update Story:** Mark tasks as complete and add notes.
+1. **Read Story Requirements:**
+
+   - Understand acceptance criteria
+   - Identify technical requirements
+   - Review performance constraints
+
+2. **Plan Implementation:**
+
+   - Identify files to create/modify
+   - Consider Unity's component-based architecture
+   - Plan testing approach
+
+3. **Implement Feature:**
+
+   - Write clean C# code following all guidelines
+   - Use established patterns
+   - Maintain stable FPS performance
+
+4. **Test Implementation:**
+
+   - Write edit mode tests for game logic
+   - Write play mode tests for integration testing
+   - Test cross-platform functionality
+   - Validate performance targets
+
+5. **Update Documentation:**
+   - Mark story checkboxes complete
+   - Document any deviations
+   - Update architecture if needed
 
 ### Code Review Checklist
 
