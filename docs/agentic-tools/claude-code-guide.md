@@ -7,7 +7,7 @@ For the complete workflow, see the [BMad Workflow Guide](../bmad-workflow-guide.
 When running `npx bmad-method install`, select **Claude Code** as your IDE. This creates:
 
 - `.bmad-core/` folder with all agents
-- `.claude/commands/` folder with agent command files (`.md`)
+- `.claude/commands/BMad` folder with agent command files (`.md`)
 
 ## Using BMad Agents in Claude Code
 

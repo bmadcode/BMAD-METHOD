@@ -131,7 +131,7 @@ class IdeSetup {
   }
 
   async setupClaudeCode(installDir, selectedAgent) {
-    const commandsDir = path.join(installDir, ".claude", "commands");
+    const commandsDir = path.join(installDir, ".claude", "commands", "BMad");
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(commandsDir);
