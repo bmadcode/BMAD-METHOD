@@ -15,7 +15,7 @@ The BMad Method is a natural language framework for AI-assisted software develop
 
 - **Everything is markdown**: Agents, tasks, templates - all written in plain English
 - **No code in core**: The framework itself contains no programming code, only natural language instructions
-- **Self-contained templates**: Templates include their own generation instructions using `[[LLM: ...]]` markup
+- **Self-contained templates**: Templates are defined as YAML files with structured sections that include metadata, workflow configuration, and detailed instructions for content generation
 
 ### 3. Agent and Task Design
 
@@ -60,22 +60,28 @@ See [Expansion Packs Guide](../docs/expansion-packs.md) for detailed examples an
    - This keeps context overhead minimal
 6. **Reuse common tasks** - Don't create new document creation tasks
    - Use the existing `create-doc` task
-   - Pass the appropriate template with embedded LLM instructions
+   - Pass the appropriate YAML template with structured sections
    - This maintains consistency and reduces duplication
 
 ### Template Rules
 
-1. Include generation instructions with `[[LLM: ...]]` markup
-2. Provide clear structure for output
-3. Make templates reusable across agents
-4. Use standardized markup elements:
-   - `{{placeholders}}` for variables to be replaced
-   - `[[LLM: instructions]]` for AI-only processing (never shown to users)
-   - `REPEAT` sections for repeatable content blocks
-   - `^^CONDITION^^` blocks for conditional content
-   - `@{examples}` for guidance examples (never output to users)
-5. NEVER display template markup or LLM instructions to users
-6. Focus on clean output - all processing instructions stay internal
+Templates follow the [BMad Document Template](common/utils/bmad-doc-template.md) specification using YAML format:
+
+1. **Structure**: Templates are defined in YAML with clear metadata, workflow configuration, and section hierarchy
+2. **Separation of Concerns**: Instructions for LLMs are in `instruction` fields, separate from content
+3. **Reusability**: Templates are agent-agnostic and can be used across different agents
+4. **Key Components**:
+   - `template` block for metadata (id, name, version, output settings)
+   - `workflow` block for interaction mode configuration
+   - `sections` array defining document structure with nested subsections
+   - Each section has `id`, `title`, and `instruction` fields
+5. **Advanced Features**:
+   - Variable substitution using `{{variable_name}}` syntax
+   - Conditional sections with `condition` field
+   - Repeatable sections with `repeatable: true`
+   - Agent permissions with `owner` and `editors` fields
+   - Examples arrays for guidance (never included in output)
+6. **Clean Output**: YAML structure ensures all processing logic stays separate from generated content
 
 ## Remember
 

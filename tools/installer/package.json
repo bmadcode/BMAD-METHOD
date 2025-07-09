@@ -1,6 +1,6 @@
 {
   "name": "bmad-method",
-  "version": "4.27.4",
+  "version": "4.27.6",
   "description": "BMad Method installer - AI-powered Agile development framework",
   "main": "lib/installer.js",
   "bin": {

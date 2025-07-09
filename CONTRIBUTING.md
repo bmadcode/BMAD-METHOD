@@ -4,7 +4,7 @@ Thank you for considering contributing to this project! This document outlines t
 
 🆕 **New to GitHub or pull requests?** Check out our [beginner-friendly Pull Request Guide](docs/how-to-contribute-with-pull-requests.md) first!
 
-📋 **Before contributing**, please read our [Guiding Principles](GUIDING-PRINCIPLES.md) to understand the BMad Method's core philosophy and architectural decisions.
+📋 **Before contributing**, please read our [Guiding Principles](docs/GUIDING-PRINCIPLES.md) to understand the BMad Method's core philosophy and architectural decisions.
 
 Also note, we use the discussions feature in GitHub to have a community to discuss potential ideas, uses, additions and enhancements.
 
@@ -52,7 +52,7 @@ By participating in this project, you agree to abide by our Code of Conduct. Ple
 
 Please only propose small granular commits! If its large or significant, please discuss in the discussions tab and open up an issue first. I do not want you to waste your time on a potentially very large PR to have it rejected because it is not aligned or deviates from other planned changes. Communicate and lets work together to build and improve this great community project!
 
-**Important**: All contributions must align with our [Guiding Principles](GUIDING-PRINCIPLES.md). Key points:
+**Important**: All contributions must align with our [Guiding Principles](docs/GUIDING-PRINCIPLES.md). Key points:
 
 - Keep dev agents lean - they need context for coding, not documentation
 - Web/planning agents can be larger with more complex tasks

@@ -244,7 +244,7 @@ class Installer {
       spinner.text = "Copying complete .bmad-core folder...";
       const sourceDir = configLoader.getBmadCorePath();
       const bmadCoreDestDir = path.join(installDir, ".bmad-core");
-      await fileManager.copyDirectory(sourceDir, bmadCoreDestDir);
+      await fileManager.copyDirectoryWithRootReplacement(sourceDir, bmadCoreDestDir, ".bmad-core");
       
       // Copy common/ items to .bmad-core
       spinner.text = "Copying common utilities...";
@@ -263,7 +263,7 @@ class Installer {
       // Single agent installation
       spinner.text = `Installing ${config.agent} agent...`;
 
-      // Copy agent file
+      // Copy agent file with {root} replacement
       const agentPath = configLoader.getAgentPath(config.agent);
       const destAgentPath = path.join(
         installDir,
@@ -271,7 +271,7 @@ class Installer {
         "agents",
         `${config.agent}.md`
       );
-      await fileManager.copyFile(agentPath, destAgentPath);
+      await fileManager.copyFileWithRootReplacement(agentPath, destAgentPath, ".bmad-core");
       files.push(`.bmad-core/agents/${config.agent}.md`);
 
       // Copy dependencies
@@ -284,15 +284,16 @@ class Installer {
         spinner.text = `Copying dependency: ${dep}`;
 
         if (dep.includes("*")) {
-          // Handle glob patterns
+          // Handle glob patterns with {root} replacement
           const copiedFiles = await fileManager.copyGlobPattern(
             dep.replace(".bmad-core/", ""),
             sourceBase,
-            path.join(installDir, ".bmad-core")
+            path.join(installDir, ".bmad-core"),
+            ".bmad-core"
           );
           files.push(...copiedFiles.map(f => `.bmad-core/${f}`));
         } else {
-          // Handle single files
+          // Handle single files with {root} replacement if needed
           const sourcePath = path.join(
             sourceBase,
             dep.replace(".bmad-core/", "")
@@ -302,7 +303,16 @@ class Installer {
             dep
           );
 
-          if (await fileManager.copyFile(sourcePath, destPath)) {
+          const needsRootReplacement = dep.endsWith('.md') || dep.endsWith('.yaml') || dep.endsWith('.yml');
+          let success = false;
+          
+          if (needsRootReplacement) {
+            success = await fileManager.copyFileWithRootReplacement(sourcePath, destPath, ".bmad-core");
+          } else {
+            success = await fileManager.copyFile(sourcePath, destPath);
+          }
+
+          if (success) {
             files.push(dep);
           }
         }
@@ -325,19 +335,29 @@ class Installer {
         spinner.text = `Copying team dependency: ${dep}`;
         
         if (dep.includes("*")) {
-          // Handle glob patterns
+          // Handle glob patterns with {root} replacement
           const copiedFiles = await fileManager.copyGlobPattern(
             dep.replace(".bmad-core/", ""),
             sourceBase,
-            path.join(installDir, ".bmad-core")
+            path.join(installDir, ".bmad-core"),
+            ".bmad-core"
           );
           files.push(...copiedFiles.map(f => `.bmad-core/${f}`));
         } else {
-          // Handle single files
+          // Handle single files with {root} replacement if needed
           const sourcePath = path.join(sourceBase, dep.replace(".bmad-core/", ""));
           const destPath = path.join(installDir, dep);
           
-          if (await fileManager.copyFile(sourcePath, destPath)) {
+          const needsRootReplacement = dep.endsWith('.md') || dep.endsWith('.yaml') || dep.endsWith('.yml');
+          let success = false;
+          
+          if (needsRootReplacement) {
+            success = await fileManager.copyFileWithRootReplacement(sourcePath, destPath, ".bmad-core");
+          } else {
+            success = await fileManager.copyFile(sourcePath, destPath);
+          }
+
+          if (success) {
             files.push(dep);
           }
         }
@@ -373,8 +393,15 @@ class Installer {
     if (ides.length > 0) {
       for (const ide of ides) {
         spinner.text = `Setting up ${ide} integration...`;
-        await ideSetup.setup(ide, installDir, config.agent, spinner);
+        const preConfiguredSettings = ide === 'github-copilot' ? config.githubCopilotConfig : null;
+        await ideSetup.setup(ide, installDir, config.agent, spinner, preConfiguredSettings);
       }
+    }
+
+    // Modify core-config.yaml if sharding preferences were provided
+    if (config.installType !== "expansion-only" && (config.prdSharded !== undefined || config.architectureSharded !== undefined)) {
+      spinner.text = "Configuring document sharding settings...";
+      await fileManager.modifyCoreConfig(installDir, config);
     }
 
     // Create manifest (skip for expansion-only installations)
@@ -1165,32 +1192,41 @@ class Installer {
               nodir: true
             });
 
-            // Copy each file to the expansion pack's dot folder
+            // Copy each file to the expansion pack's dot folder with {root} replacement
             for (const file of files) {
               const sourcePath = path.join(sourceFolder, file);
               const destPath = path.join(expansionDotFolder, folder, file);
               
-              if (await fileManager.copyFile(sourcePath, destPath)) {
+              const needsRootReplacement = file.endsWith('.md') || file.endsWith('.yaml') || file.endsWith('.yml');
+              let success = false;
+              
+              if (needsRootReplacement) {
+                success = await fileManager.copyFileWithRootReplacement(sourcePath, destPath, `.${packId}`);
+              } else {
+                success = await fileManager.copyFile(sourcePath, destPath);
+              }
+              
+              if (success) {
                 installedFiles.push(path.join(`.${packId}`, folder, file));
               }
             }
           }
         }
 
-        // Copy config.yaml
+        // Copy config.yaml with {root} replacement
         const configPath = path.join(expansionPackDir, 'config.yaml');
         if (await fileManager.pathExists(configPath)) {
           const configDestPath = path.join(expansionDotFolder, 'config.yaml');
-          if (await fileManager.copyFile(configPath, configDestPath)) {
+          if (await fileManager.copyFileWithRootReplacement(configPath, configDestPath, `.${packId}`)) {
             installedFiles.push(path.join(`.${packId}`, 'config.yaml'));
           }
         }
         
-        // Copy README if it exists
+        // Copy README if it exists with {root} replacement
         const readmePath = path.join(expansionPackDir, 'README.md');
         if (await fileManager.pathExists(readmePath)) {
           const readmeDestPath = path.join(expansionDotFolder, 'README.md');
-          if (await fileManager.copyFile(readmePath, readmeDestPath)) {
+          if (await fileManager.copyFileWithRootReplacement(readmePath, readmeDestPath, `.${packId}`)) {
             installedFiles.push(path.join(`.${packId}`, 'README.md'));
           }
         }
@@ -1251,7 +1287,7 @@ class Installer {
       const yamlContent = extractYamlFromAgent(agentContent);
       if (yamlContent) {
         try {
-          const agentConfig = yaml.parse(yamlContent);
+          const agentConfig = yaml.load(yamlContent);
           const dependencies = agentConfig.dependencies || {};
           
           // Check for core dependencies (those that don't exist in the expansion pack)
@@ -1270,9 +1306,9 @@ class Installer {
                 if (await fileManager.pathExists(coreDepPath)) {
                   spinner.text = `Copying core dependency ${dep} for ${packId}...`;
                   
-                  // Copy from core to expansion pack dot folder
+                  // Copy from core to expansion pack dot folder with {root} replacement
                   const destPath = path.join(expansionDotFolder, depType, depFileName);
-                  await fileManager.copyFile(coreDepPath, destPath);
+                  await fileManager.copyFileWithRootReplacement(coreDepPath, destPath, `.${packId}`);
                   
                   console.log(chalk.dim(`  Added core dependency: ${depType}/${depFileName}`));
                 } else {
@@ -1314,7 +1350,7 @@ class Installer {
       const teamContent = await fs.readFile(teamPath, 'utf8');
       
       try {
-        const teamConfig = yaml.parse(teamContent);
+        const teamConfig = yaml.load(teamContent);
         const agents = teamConfig.agents || [];
         
         // Add bmad-orchestrator if not present (required for all teams)
@@ -1331,9 +1367,9 @@ class Installer {
             if (await fileManager.pathExists(coreAgentPath)) {
               spinner.text = `Copying core agent ${agentId} for ${packId}...`;
               
-              // Copy agent file
+              // Copy agent file with {root} replacement
               const destPath = path.join(expansionDotFolder, 'agents', `${agentId}.md`);
-              await fileManager.copyFile(coreAgentPath, destPath);
+              await fileManager.copyFileWithRootReplacement(coreAgentPath, destPath, `.${packId}`);
               existingAgents.add(agentId);
               
               console.log(chalk.dim(`  Added core agent: ${agentId}`));
@@ -1345,7 +1381,7 @@ class Installer {
               if (yamlContent) {
                 try {
                   
-                  const agentConfig = yaml.parse(yamlContent);
+                  const agentConfig = yaml.load(yamlContent);
                   const dependencies = agentConfig.dependencies || {};
                   
                   // Copy all dependencies for this agent
@@ -1363,7 +1399,7 @@ class Installer {
                         
                         if (await fileManager.pathExists(coreDepPath)) {
                           const destDepPath = path.join(expansionDotFolder, depType, depFileName);
-                          await fileManager.copyFile(coreDepPath, destDepPath);
+                          await fileManager.copyFileWithRootReplacement(coreDepPath, destDepPath, `.${packId}`);
                           console.log(chalk.dim(`    Added agent dependency: ${depType}/${depFileName}`));
                         } else {
                           // Try common folder

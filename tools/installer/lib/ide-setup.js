@@ -41,7 +41,7 @@ class IdeSetup {
     }
   }
 
-  async setup(ide, installDir, selectedAgent = null, spinner = null) {
+  async setup(ide, installDir, selectedAgent = null, spinner = null, preConfiguredSettings = null) {
     await initializeModules();
     const ideConfig = await configLoader.getIdeConfiguration(ide);
 
@@ -66,7 +66,7 @@ class IdeSetup {
       case "gemini":
         return this.setupGeminiCli(installDir, selectedAgent);
       case "github-copilot":
-        return this.setupGitHubCopilot(installDir, selectedAgent, spinner);
+        return this.setupGitHubCopilot(installDir, selectedAgent, spinner, preConfiguredSettings);
       default:
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -566,11 +566,11 @@ class IdeSetup {
     return true;
   }
 
-  async setupGitHubCopilot(installDir, selectedAgent, spinner = null) {
+  async setupGitHubCopilot(installDir, selectedAgent, spinner = null, preConfiguredSettings = null) {
     await initializeModules();
     
     // Configure VS Code workspace settings first to avoid UI conflicts with loading spinners
-    await this.configureVsCodeSettings(installDir, spinner);
+    await this.configureVsCodeSettings(installDir, spinner, preConfiguredSettings);
     
     const chatmodesDir = path.join(installDir, ".github", "chatmodes");
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
@@ -616,7 +616,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     return true;
   }
 
-  async configureVsCodeSettings(installDir, spinner) {
+  async configureVsCodeSettings(installDir, spinner, preConfiguredSettings = null) {
     await initializeModules(); // Ensure inquirer is loaded
     const vscodeDir = path.join(installDir, ".vscode");
     const settingsPath = path.join(vscodeDir, "settings.json");
@@ -636,34 +636,42 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
       }
     }
     
-    // Clear any previous output and add spacing to avoid conflicts with loaders
-    console.log('\n'.repeat(2));
-    console.log(chalk.blue("🔧 Github Copilot Agent Settings Configuration"));
-    console.log(chalk.dim("BMad works best with specific VS Code settings for optimal agent experience."));
-    console.log(''); // Add extra spacing
-    
-    const { configChoice } = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'configChoice',
-        message: 'How would you like to configure Github Copilot settings?',
-        choices: [
-          {
-            name: 'Use recommended defaults (fastest setup)',
-            value: 'defaults'
-          },
-          {
-            name: 'Configure each setting manually (customize to your preferences)',
-            value: 'manual'
-          },
-          {
-            name: 'Skip settings configuration (I\'ll configure manually later)\n',
-            value: 'skip'
-          }
-        ],
-        default: 'defaults'
-      }
-    ]);
+    // Use pre-configured settings if provided, otherwise prompt
+    let configChoice;
+    if (preConfiguredSettings && preConfiguredSettings.configChoice) {
+      configChoice = preConfiguredSettings.configChoice;
+      console.log(chalk.dim(`Using pre-configured GitHub Copilot settings: ${configChoice}`));
+    } else {
+      // Clear any previous output and add spacing to avoid conflicts with loaders
+      console.log('\n'.repeat(2));
+      console.log(chalk.blue("🔧 Github Copilot Agent Settings Configuration"));
+      console.log(chalk.dim("BMad works best with specific VS Code settings for optimal agent experience."));
+      console.log(''); // Add extra spacing
+      
+      const response = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'configChoice',
+          message: chalk.yellow('How would you like to configure GitHub Copilot settings?'),
+          choices: [
+            {
+              name: 'Use recommended defaults (fastest setup)',
+              value: 'defaults'
+            },
+            {
+              name: 'Configure each setting manually (customize to your preferences)',
+              value: 'manual'
+            },
+            {
+              name: 'Skip settings configuration (I\'ll configure manually later)',
+              value: 'skip'
+            }
+          ],
+          default: 'defaults'
+        }
+      ]);
+      configChoice = response.configChoice;
+    }
     
     let bmadSettings = {};
     

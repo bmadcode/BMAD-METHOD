@@ -11,7 +11,6 @@ To identify the next logical story based on project progress and epic definition
 - Load `.bmad-core/core-config.yaml` from the project root
 - If the file does not exist, HALT and inform the user: "core-config.yaml not found. This file is required for story creation. You can either: 1) Copy it from GITHUB bmad-core/core-config.yaml and configure it for your project OR 2) Run the BMad installer against your project to upgrade and add the file automatically. Please add and configure core-config.yaml before proceeding."
 - Extract key configurations: `devStoryLocation`, `prd.*`, `architecture.*`, `workflow.*`
-- If `workflow.trackProgress: true`, use `utils/plan-management.md` to check plan sequence and warn if out of order
 
 ### 1. Identify Next Story for Preparation
 
