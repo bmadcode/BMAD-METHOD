@@ -523,23 +523,13 @@ class IdeSetup {
         const settings = JSON.parse(settingsContent);
         let updated = false;
         
-        // Handle both contextFileName and contextFileNames properties
+        // Handle contextFileName property
         if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
           const originalLength = settings.contextFileName.length;
           settings.contextFileName = settings.contextFileName.filter(
             (fileName) => !fileName.startsWith("agents/")
           );
           if (settings.contextFileName.length !== originalLength) {
-            updated = true;
-          }
-        }
-        
-        if (settings.contextFileNames && Array.isArray(settings.contextFileNames)) {
-          const originalLength = settings.contextFileNames.length;
-          settings.contextFileNames = settings.contextFileNames.filter(
-            (fileName) => !fileName.startsWith("agents/")
-          );
-          if (settings.contextFileNames.length !== originalLength) {
             updated = true;
           }
         }
