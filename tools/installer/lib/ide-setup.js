@@ -579,7 +579,7 @@ class IdeSetup {
         
         // Create properly formatted agent rule content (similar to trae)
         let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
-        agentRuleContent += `This rule is triggered when the user types \`@${agentId}\` and activates the ${await this.getAgentTitle(
+        agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
           agentId,
           installDir
         )} agent persona.\n\n`;
@@ -601,7 +601,7 @@ class IdeSetup {
         const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
         agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
         agentRuleContent += "## Usage\n\n";
-        agentRuleContent += `When the user types \`@${agentId}\`, activate this ${await this.getAgentTitle(
+        agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
           agentId,
           installDir
         )} persona and follow all instructions defined in the YAML configuration above.\n`;
