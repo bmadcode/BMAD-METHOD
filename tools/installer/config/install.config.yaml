@@ -75,7 +75,7 @@ ide-configurations:
       # To use BMad agents with the Gemini CLI:
       # 1. The installer creates a .gemini/bmad-method/ directory in your project.
       # 2. It concatenates all agent files into a single GEMINI.md file.
-      # 3. Simply mention the agent in your prompt (e.g., "As @dev, ...").
+      # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
       # 4. The Gemini CLI will automatically have the context for that agent.
   github-copilot:
     name: Github Copilot

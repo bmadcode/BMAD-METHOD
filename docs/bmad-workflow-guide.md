@@ -111,6 +111,7 @@ Follow the SM → Dev cycle for systematic story development:
 
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
+- **Gemini CLI**: `*agent-name` (e.g., `*bmad-master`)
 - **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
 - **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
