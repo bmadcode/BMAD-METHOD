@@ -1,3 +1,10 @@
+# [4.28.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.6...v4.28.0) (2025-07-12)
+
+
+### Features
+
+* bmad-master can load kb properly ([3c13c56](https://github.com/bmadcode/BMAD-METHOD/commit/3c13c564988f9750e043939dd770aea4196a7e7a))
+
 ## [4.27.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.5...v4.27.6) (2025-07-08)
 
 
