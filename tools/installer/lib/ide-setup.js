@@ -512,12 +512,53 @@ class IdeSetup {
   async setupGeminiCli(installDir, selectedAgent) {
     await initializeModules();
     const geminiDir = path.join(installDir, ".gemini");
-    const agentsContextDir = path.join(geminiDir, "agents");
-    await fileManager.ensureDirectory(agentsContextDir);
+    const bmadMethodDir = path.join(geminiDir, "bmad-method");
+    await fileManager.ensureDirectory(bmadMethodDir);
+
+    // Update logic for existing settings.json
+    const settingsPath = path.join(geminiDir, "settings.json");
+    if (await fileManager.pathExists(settingsPath)) {
+      try {
+        const settingsContent = await fileManager.readFile(settingsPath);
+        const settings = JSON.parse(settingsContent);
+        let updated = false;
+        
+        // Handle contextFileName property
+        if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
+          const originalLength = settings.contextFileName.length;
+          settings.contextFileName = settings.contextFileName.filter(
+            (fileName) => !fileName.startsWith("agents/")
+          );
+          if (settings.contextFileName.length !== originalLength) {
+            updated = true;
+          }
+        }
+        
+        if (updated) {
+          await fileManager.writeFile(
+            settingsPath,
+            JSON.stringify(settings, null, 2)
+          );
+          console.log(chalk.green("✓ Updated .gemini/settings.json - removed agent file references"));
+        }
+      } catch (error) {
+        console.warn(
+          chalk.yellow("Could not update .gemini/settings.json"),
+          error
+        );
+      }
+    }
+
+    // Remove old agents directory
+    const agentsDir = path.join(geminiDir, "agents");
+    if (await fileManager.pathExists(agentsDir)) {
+      await fileManager.removeDirectory(agentsDir);
+      console.log(chalk.green("✓ Removed old .gemini/agents directory"));
+    }
 
     // Get all available agents
     const agents = await this.getAllAgentIds(installDir);
-    const agentContextFiles = [];
+    let concatenatedContent = "";
 
     for (const agentId of agents) {
       // Find the source agent file
@@ -525,43 +566,46 @@ class IdeSetup {
 
       if (agentPath) {
         const agentContent = await fileManager.readFile(agentPath);
-        const contextFilePath = path.join(agentsContextDir, `${agentId}.md`);
-
-        // Copy the agent content directly into its own context file
-        await fileManager.writeFile(contextFilePath, agentContent);
-
-        // Store the relative path for settings.json
-        const relativePath = path.relative(geminiDir, contextFilePath);
-        agentContextFiles.push(relativePath.replace(/\\/g, '/')); // Ensure forward slashes for consistency
-        console.log(chalk.green(`✓ Created context file for @${agentId}`));
+        
+        // Create properly formatted agent rule content (similar to trae)
+        let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
+        agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
+          agentId,
+          installDir
+        )} agent persona.\n\n`;
+        agentRuleContent += "## Agent Activation\n\n";
+        agentRuleContent +=
+          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
+        agentRuleContent += "```yaml\n";
+        // Extract just the YAML content from the agent file
+        const yamlContent = extractYamlFromAgent(agentContent);
+        if (yamlContent) {
+          agentRuleContent += yamlContent;
+        }
+        else {
+          // If no YAML found, include the whole content minus the header
+          agentRuleContent += agentContent.replace(/^#.*$/m, "").trim();
+        }
+        agentRuleContent += "\n```\n\n";
+        agentRuleContent += "## File Reference\n\n";
+        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
+        agentRuleContent += "## Usage\n\n";
+        agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
+          agentId,
+          installDir
+        )} persona and follow all instructions defined in the YAML configuration above.\n`;
+        
+        // Add to concatenated content with separator
+        concatenatedContent += agentRuleContent + "\n\n---\n\n";
+        console.log(chalk.green(`✓ Added context for @${agentId}`));
       }
     }
 
-    console.log(chalk.green(`\n✓ Created individual agent context files in ${agentsContextDir}`));
-
-    // Add GEMINI.md to the context files array
-    agentContextFiles.push("GEMINI.md");
-
-    // Create or update settings.json
-    const settingsPath = path.join(geminiDir, "settings.json");
-    let settings = {};
-
-    if (await fileManager.pathExists(settingsPath)) {
-      try {
-        const existingSettings = await fileManager.readFile(settingsPath);
-        settings = JSON.parse(existingSettings);
-        console.log(chalk.yellow("Found existing .gemini/settings.json. Merging settings..."));
-      } catch (e) {
-        console.error(chalk.red("Error parsing existing settings.json. It will be overwritten."), e);
-        settings = {};
-      }
-    }
-
-    // Set contextFileName to our new array of files
-    settings.contextFileName = agentContextFiles;
-
-    await fileManager.writeFile(settingsPath, JSON.stringify(settings, null, 2));
-    console.log(chalk.green(`✓ Configured .gemini/settings.json to load all agent context files.`));
+    // Write the concatenated content to GEMINI.md
+    const geminiMdPath = path.join(bmadMethodDir, "GEMINI.md");
+    await fileManager.writeFile(geminiMdPath, concatenatedContent);
+    console.log(chalk.green(`\n✓ Created GEMINI.md in ${bmadMethodDir}`));
 
     return true;
   }

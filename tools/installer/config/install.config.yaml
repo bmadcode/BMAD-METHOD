@@ -68,13 +68,14 @@ ide-configurations:
       # 4. Rules are stored in .clinerules/ directory in your project
   gemini:
     name: Gemini CLI
-    rule-dir: .gemini/agents/
-    format: context-files
+    rule-dir: .gemini/bmad-method/
+    format: single-file
+    command-suffix: .md
     instructions: |
       # To use BMad agents with the Gemini CLI:
-      # 1. The installer creates a .gemini/ directory in your project.
-      # 2. It also configures .gemini/settings.json to load all agent files.
-      # 3. Simply mention the agent in your prompt (e.g., "As @dev, ...").
+      # 1. The installer creates a .gemini/bmad-method/ directory in your project.
+      # 2. It concatenates all agent files into a single GEMINI.md file.
+      # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
       # 4. The Gemini CLI will automatically have the context for that agent.
   github-copilot:
     name: Github Copilot
