@@ -1,3 +1,10 @@
+## [4.29.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.0...v4.29.1) (2025-07-13)
+
+
+### Bug Fixes
+
+* brianstorming facilitation output ([f62c05a](https://github.com/bmadcode/BMAD-METHOD/commit/f62c05ab0f54e6c26c67cd9ac11200b172d11076))
+
 # [4.29.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.28.0...v4.29.0) (2025-07-13)
 
 
