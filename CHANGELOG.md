@@ -1,3 +1,10 @@
+# [4.29.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.28.0...v4.29.0) (2025-07-13)
+
+
+### Features
+
+* Claude Code slash commands for Tasks and Agents! ([e9e541a](https://github.com/bmadcode/BMAD-METHOD/commit/e9e541a52e45f6632b2f8c91d10e39c077c1ecc9))
+
 # [4.28.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.27.6...v4.28.0) (2025-07-12)
 
 
