@@ -18,8 +18,3 @@ devLoadAlwaysFiles:
   - docs/architecture/source-tree.md
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
-workflow:
-  planFile: docs/workflow-plan.md
-  trackProgress: true
-  enforceSequence: false
-  updateOnCompletion: true

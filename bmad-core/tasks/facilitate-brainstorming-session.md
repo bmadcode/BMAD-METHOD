@@ -1,6 +1,6 @@
 ---
 docOutputLocation: docs/brainstorming-session-results.md
-template: brainstorming-output-tmpl
+template: "{root}/templates/brainstorming-output-tmpl.md"
 ---
 
 # Facilitate Brainstorming Session Task

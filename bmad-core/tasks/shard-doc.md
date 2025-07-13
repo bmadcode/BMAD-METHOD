@@ -8,20 +8,20 @@
 
 ## Primary Method: Automatic with markdown-tree
 
-[[LLM: First, check if markdownExploder is set to true in bmad-core/core-config.yaml. If it is, attempt to run the command: `md-tree explode {input file} {output path}`.
+[[LLM: First, check if markdownExploder is set to true in {root}/core-config.yaml. If it is, attempt to run the command: `md-tree explode {input file} {output path}`.
 
 If the command succeeds, inform the user that the document has been sharded successfully and STOP - do not proceed further.
 
 If the command fails (especially with an error indicating the command is not found or not available), inform the user: "The markdownExploder setting is enabled but the md-tree command is not available. Please either:
 
 1. Install @kayvan/markdown-tree-parser globally with: `npm install -g @kayvan/markdown-tree-parser`
-2. Or set markdownExploder to false in bmad-core/core-config.yaml
+2. Or set markdownExploder to false in {root}/core-config.yaml
 
 **IMPORTANT: STOP HERE - do not proceed with manual sharding until one of the above actions is taken.**"
 
 If markdownExploder is set to false, inform the user: "The markdownExploder setting is currently false. For better performance and reliability, you should:
 
-1. Set markdownExploder to true in bmad-core/core-config.yaml
+1. Set markdownExploder to true in {root}/core-config.yaml
 2. Install @kayvan/markdown-tree-parser globally with: `npm install -g @kayvan/markdown-tree-parser`
 
 I will now proceed with the manual sharding process."
@@ -61,8 +61,6 @@ If the user has @kayvan/markdown-tree-parser installed, use it and skip the manu
 
 ## Manual Method (if @kayvan/markdown-tree-parser is not available or user indicated manual method)
 
-[[LLM: Only proceed with the manual instructions below if the user cannot or does not want to use @kayvan/markdown-tree-parser.]]
-
 ### Task Instructions
 
 1. Identify Document and Target Location
@@ -73,7 +71,7 @@ If the user has @kayvan/markdown-tree-parser installed, use it and skip the manu
 
 2. Parse and Extract Sections
 
-[[LLM: When sharding the document:
+CRITICAL AEGNT SHARDING RULES:
 
 1. Read the entire document content
 2. Identify all level 2 sections (## headings)
@@ -134,8 +132,6 @@ Create an `index.md` file in the sharded folder that:
 
 ### 5. Preserve Special Content
 
-[[LLM: Pay special attention to preserving:
-
 1. **Code blocks**: Must capture complete blocks including:
 
    ```language
@@ -157,7 +153,7 @@ Create an `index.md` file in the sharded folder that:
 
 6. **Links and references**: Keep all markdown links intact
 
-7. **Template markup**: If documents contain {{placeholders}} or [[LLM instructions]], preserve exactly]]
+7. **Template markup**: If documents contain {{placeholders}} ,preserve exactly
 
 ### 6. Validation
 

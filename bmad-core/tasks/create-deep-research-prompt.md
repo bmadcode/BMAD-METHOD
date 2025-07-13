@@ -14,7 +14,7 @@ Generate well-structured research prompts that:
 
 ## Research Type Selection
 
-[[LLM: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.]]
+CRITICAL: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.
 
 ### 1. Research Focus Options
 
@@ -77,14 +77,12 @@ Present these numbered options to the user:
    - Consider regulatory and legal implications
 
 9. **Custom Research Focus**
-   [[LLM: Allow user to define their own specific research focus.]]
+
    - User-defined research objectives
    - Specialized domain investigation
    - Cross-functional research needs
 
 ### 2. Input Processing
-
-[[LLM: Based on the selected research type and any provided inputs (project brief, brainstorming results, etc.), extract relevant context and constraints.]]
 
 **If Project Brief provided:**
 
@@ -118,11 +116,11 @@ Present these numbered options to the user:
 
 ### 3. Research Prompt Structure
 
-[[LLM: Based on the selected research type and context, collaboratively develop a comprehensive research prompt with these components.]]
+CRITICAL: collaboratively develop a comprehensive research prompt with these components.
 
 #### A. Research Objectives
 
-[[LLM: Work with the user to articulate clear, specific objectives for the research.]]
+CRITICAL: collaborate with the user to articulate clear, specific objectives for the research.
 
 - Primary research goal and purpose
 - Key decisions the research will inform
@@ -131,7 +129,7 @@ Present these numbered options to the user:
 
 #### B. Research Questions
 
-[[LLM: Develop specific, actionable research questions organized by theme.]]
+CRITICAL: collaborate with the user to develop specific, actionable research questions organized by theme.
 
 **Core Questions:**
 
@@ -146,8 +144,6 @@ Present these numbered options to the user:
 - Future-looking considerations
 
 #### C. Research Methodology
-
-[[LLM: Specify appropriate research methods based on the type and objectives.]]
 
 **Data Collection Methods:**
 
@@ -165,8 +161,6 @@ Present these numbered options to the user:
 
 #### D. Output Requirements
 
-[[LLM: Define how research findings should be structured and presented.]]
-
 **Format Specifications:**
 
 - Executive summary requirements
@@ -182,8 +176,6 @@ Present these numbered options to the user:
 - Risk and uncertainty documentation
 
 ### 4. Prompt Generation
-
-[[LLM: Synthesize all elements into a comprehensive, ready-to-use research prompt.]]
 
 **Research Prompt Template:**
 
@@ -253,8 +245,6 @@ Present these numbered options to the user:
 
 ### 5. Review and Refinement
 
-[[LLM: Present the draft research prompt for user review and refinement.]]
-
 1. **Present Complete Prompt**
 
    - Show the full research prompt
@@ -275,8 +265,6 @@ Present these numbered options to the user:
    - Clarify ambiguities
 
 ### 6. Next Steps Guidance
-
-[[LLM: Provide clear guidance on how to use the research prompt.]]
 
 **Execution Options:**
 

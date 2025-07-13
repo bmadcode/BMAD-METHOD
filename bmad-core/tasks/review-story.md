@@ -1,8 +1,6 @@
 # review-story
 
-When a developer marks a story as "Ready for Review", perform a comprehensive senior developer code review with the ability to refactor and improve code directly.
-
-[[LLM: QA Agent executing review-story task as Senior Developer]]
+When a developer agent marks a story as "Ready for Review", perform a comprehensive senior developer code review with the ability to refactor and improve code directly.
 
 ## Prerequisites
 
@@ -131,6 +129,7 @@ After review and any refactoring, append your results to the story file in the Q
 ## Blocking Conditions
 
 Stop the review and request clarification if:
+
 - Story file is incomplete or missing critical sections
 - File List is empty or clearly incomplete
 - No tests exist when they were required
@@ -140,6 +139,7 @@ Stop the review and request clarification if:
 ## Completion
 
 After review:
+
 1. If all items are checked and approved: Update story status to "Done"
 2. If unchecked items remain: Keep status as "Review" for dev to address
 3. Always provide constructive feedback and explanations for learning

@@ -46,14 +46,12 @@ dependencies:
     - correct-course.md
     - create-deep-research-prompt.md
     - create-doc.md
-    - create-workflow-plan.md
     - document-project.md
     - create-next-story.md
     - execute-checklist.md
     - generate-ai-frontend-prompt.md
     - index-docs.md
     - shard-doc.md
-    - update-workflow-plan.md
   templates:
     - architecture-tmpl.yaml
     - brownfield-architecture-tmpl.yaml

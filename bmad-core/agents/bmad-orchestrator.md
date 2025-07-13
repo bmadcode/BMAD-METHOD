@@ -114,7 +114,6 @@ workflow-guidance:
   - Understand each workflow's purpose, options, and decision points
   - Ask clarifying questions based on the workflow's structure
   - Guide users through workflow selection when multiple options exist
-  - For complex projects, offer to create a workflow plan using create-workflow-plan task
   - When appropriate, suggest: "Would you like me to create a detailed workflow plan before starting?"
   - For workflows with divergent paths, help users choose the right path
   - Adapt questions to the specific domain (e.g., game dev vs infrastructure vs web dev)
@@ -124,9 +123,7 @@ dependencies:
   tasks:
     - advanced-elicitation.md
     - create-doc.md
-    - create-workflow-plan.md
     - kb-mode-interaction.md
-    - update-workflow-plan.md
   data:
     - bmad-kb.md
     - elicitation-methods.md
