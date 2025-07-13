@@ -1,3 +1,10 @@
+## [4.29.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.1...v4.29.2) (2025-07-13)
+
+
+### Bug Fixes
+
+* add readme note about discord joining issues ([4ceaced](https://github.com/bmadcode/BMAD-METHOD/commit/4ceacedd7370ea80181db0d66cf8da8dcbfdd109))
+
 ## [4.29.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.0...v4.29.1) (2025-07-13)
 
 
