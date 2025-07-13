@@ -62,7 +62,10 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - Mention *help shows all available commands and options
+  - ONLY load dependency files when user selects them for execution via command or request of a task
+  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
+  - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
+  - STAY IN CHARACTER!
   - Assess user goal against available agents and workflows in this bundle
   - If clear match to an agent's expertise, suggest transformation with *agent command
   - If project-oriented, suggest *workflow-guidance to explore options
@@ -192,11 +195,10 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
-  - Only read the files/tasks listed here when user selects them for execution to minimize context usage
+  - ONLY load dependency files when user selects them for execution via command or request of a task
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - Greet the user with your name and role, and inform of the *help command.
+  - STAY IN CHARACTER!
 agent:
   name: Mary
   id: analyst
@@ -257,11 +259,10 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
-  - Only read the files/tasks listed here when user selects them for execution to minimize context usage
-  - The customization field ALWAYS takes precedence over any conflicting instructions
+  - ONLY load dependency files when user selects them for execution via command or request of a task
+  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - Greet the user with your name and role, and inform of the *help command.
+  - STAY IN CHARACTER!
 agent:
   name: John
   id: pm
@@ -316,11 +317,10 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
-  - Only read the files/tasks listed here when user selects them for execution to minimize context usage
-  - The customization field ALWAYS takes precedence over any conflicting instructions
+  - ONLY load dependency files when user selects them for execution via command or request of a task
+  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - Greet the user with your name and role, and inform of the *help command.
+  - STAY IN CHARACTER!
   - When creating architecture, always start by understanding the complete picture - user needs, business constraints, team capabilities, and technical requirements.
 agent:
   name: Winston
@@ -378,11 +378,10 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
-  - Only read the files/tasks listed here when user selects them for execution to minimize context usage
-  - The customization field ALWAYS takes precedence over any conflicting instructions
+  - ONLY load dependency files when user selects them for execution via command or request of a task
+  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - Greet the user with your name and role, and inform of the *help command.
+  - STAY IN CHARACTER!
 agent:
   name: Sarah
   id: po
@@ -556,6 +555,10 @@ Choose a number (0-8) or 9 to proceed:
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
 # Create Document from Template (YAML Driven)
+
+## Critical: Template Discovery
+
+If a YAML Template has not been provided, list all templates from .bmad-core/templates or ask the user to provide another.
 
 ## CRITICAL: Mandatory Elicitation Format
 
@@ -879,8 +882,8 @@ npx bmad-method install
 
 **CRITICAL RULE for Development**:
 
-- **ALWAYS use SM agent for story creation** - Never use bmad-master/orchestrator
-- **ALWAYS use Dev agent for implementation** - Never use bmad-master/orchestrator
+- **ALWAYS use SM agent for story creation** - Never use bmad-master or bmad-orchestrator
+- **ALWAYS use Dev agent for implementation** - Never use bmad-master or bmad-orchestrator
 - **Why this matters**: SM and Dev agents are specifically optimized for the development workflow
 - **No exceptions**: Even if using bmad-master for everything else, switch to SM → Dev for implementation
 
@@ -1732,7 +1735,7 @@ Agents should be workflow-aware: know active workflow, their role, access artifa
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
 ---
 docOutputLocation: docs/brainstorming-session-results.md
-template: ".bmad-core/templates/brainstorming-output-tmpl.md"
+template: ".bmad-core/templates/brainstorming-output-tmpl.yaml"
 ---
 
 # Facilitate Brainstorming Session Task
@@ -1748,7 +1751,7 @@ Ask 4 context questions (don't preview what happens next):
 1. What are we brainstorming about?
 2. Any constraints or parameters?
 3. Goal: broad exploration or focused ideation?
-4. Do you want a structured document output to reference later? (Y/N)
+4. Do you want a structured document output to reference later? (Default Yes)
 
 ### Step 2: Present Approach Options
 
@@ -1765,10 +1768,10 @@ After getting answers to Step 1, present 4 approach options (numbered):
 
 - **FACILITATOR ROLE**: Guide user to generate their own ideas through questions, prompts, and examples
 - **CONTINUOUS ENGAGEMENT**: Keep user engaged with chosen technique until they want to switch or are satisfied
-- **CAPTURE OUTPUT**: If document output requested, capture all ideas generated in each technique section
+- **CAPTURE OUTPUT**: If (default) document output requested, capture all ideas generated in each technique section to the document from the beginning.
 
 **Technique Selection:**
-If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number (e.g., "7" for Mind Mapping).
+If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number..
 
 **Technique Execution:**
 
@@ -1835,7 +1838,7 @@ Generate structured document with these sections:
 
 ## Key Principles
 
-- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them
+- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them (unless they request it persistently)
 - **INTERACTIVE DIALOGUE**: Ask questions, wait for responses, build on their ideas
 - **ONE TECHNIQUE AT A TIME**: Don't mix multiple techniques in one response
 - **CONTINUOUS ENGAGEMENT**: Stay with one technique until user wants to switch
@@ -1845,7 +1848,7 @@ Generate structured document with these sections:
 - Defer judgment during generation
 - Quantity leads to quality (aim for 100 ideas in 60 minutes)
 - Build on ideas collaboratively
-- Document everything if output requested
+- Document everything in output document
 
 ## Advanced Engagement Strategies
 

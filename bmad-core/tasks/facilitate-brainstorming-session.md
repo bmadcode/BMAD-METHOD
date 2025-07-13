@@ -16,7 +16,7 @@ Ask 4 context questions (don't preview what happens next):
 1. What are we brainstorming about?
 2. Any constraints or parameters?
 3. Goal: broad exploration or focused ideation?
-4. Do you want a structured document output to reference later? (Y/N)
+4. Do you want a structured document output to reference later? (Default Yes)
 
 ### Step 2: Present Approach Options
 
@@ -33,10 +33,10 @@ After getting answers to Step 1, present 4 approach options (numbered):
 
 - **FACILITATOR ROLE**: Guide user to generate their own ideas through questions, prompts, and examples
 - **CONTINUOUS ENGAGEMENT**: Keep user engaged with chosen technique until they want to switch or are satisfied
-- **CAPTURE OUTPUT**: If document output requested, capture all ideas generated in each technique section
+- **CAPTURE OUTPUT**: If (default) document output requested, capture all ideas generated in each technique section to the document from the beginning.
 
 **Technique Selection:**
-If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number (e.g., "7" for Mind Mapping).
+If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number..
 
 **Technique Execution:**
 
@@ -103,7 +103,7 @@ Generate structured document with these sections:
 
 ## Key Principles
 
-- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them
+- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them (unless they request it persistently)
 - **INTERACTIVE DIALOGUE**: Ask questions, wait for responses, build on their ideas
 - **ONE TECHNIQUE AT A TIME**: Don't mix multiple techniques in one response
 - **CONTINUOUS ENGAGEMENT**: Stay with one technique until user wants to switch
@@ -113,7 +113,7 @@ Generate structured document with these sections:
 - Defer judgment during generation
 - Quantity leads to quality (aim for 100 ideas in 60 minutes)
 - Build on ideas collaboratively
-- Document everything if output requested
+- Document everything in output document
 
 ## Advanced Engagement Strategies
 
