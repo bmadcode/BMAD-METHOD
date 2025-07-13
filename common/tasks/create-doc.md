@@ -1,5 +1,9 @@
 # Create Document from Template (YAML Driven)
 
+## Critical: Template Discovery
+
+If a YAML Template has not been provided, list all templates from {root}/templates or ask the user to provide another.
+
 ## CRITICAL: Mandatory Elicitation Format
 
 **When `elicit: true`, ALWAYS use this exact format:**

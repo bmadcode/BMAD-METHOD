@@ -232,7 +232,6 @@ workflow-guidance:
   - Understand each workflow's purpose, options, and decision points
   - Ask clarifying questions based on the workflow's structure
   - Guide users through workflow selection when multiple options exist
-  - For complex projects, offer to create a workflow plan using create-workflow-plan task
   - When appropriate, suggest: Would you like me to create a detailed workflow plan before starting?
   - For workflows with divergent paths, help users choose the right path
   - Adapt questions to the specific domain (e.g., game dev vs infrastructure vs web dev)
@@ -242,9 +241,7 @@ dependencies:
   tasks:
     - advanced-elicitation.md
     - create-doc.md
-    - create-workflow-plan.md
     - kb-mode-interaction.md
-    - update-workflow-plan.md
   data:
     - bmad-kb.md
     - elicitation-methods.md
@@ -431,7 +428,7 @@ dependencies:
 ==================== START: .bmad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
 ---
 docOutputLocation: docs/brainstorming-session-results.md
-template: brainstorming-output-tmpl
+template: ".bmad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.md"
 ---
 
 # Facilitate Brainstorming Session Task
@@ -584,7 +581,7 @@ Generate well-structured research prompts that:
 
 ## Research Type Selection
 
-[[LLM: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.]]
+CRITICAL: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.
 
 ### 1. Research Focus Options
 
@@ -647,14 +644,12 @@ Present these numbered options to the user:
    - Consider regulatory and legal implications
 
 9. **Custom Research Focus**
-   [[LLM: Allow user to define their own specific research focus.]]
+
    - User-defined research objectives
    - Specialized domain investigation
    - Cross-functional research needs
 
 ### 2. Input Processing
-
-[[LLM: Based on the selected research type and any provided inputs (project brief, brainstorming results, etc.), extract relevant context and constraints.]]
 
 **If Project Brief provided:**
 
@@ -688,11 +683,11 @@ Present these numbered options to the user:
 
 ### 3. Research Prompt Structure
 
-[[LLM: Based on the selected research type and context, collaboratively develop a comprehensive research prompt with these components.]]
+CRITICAL: collaboratively develop a comprehensive research prompt with these components.
 
 #### A. Research Objectives
 
-[[LLM: Work with the user to articulate clear, specific objectives for the research.]]
+CRITICAL: collaborate with the user to articulate clear, specific objectives for the research.
 
 - Primary research goal and purpose
 - Key decisions the research will inform
@@ -701,7 +696,7 @@ Present these numbered options to the user:
 
 #### B. Research Questions
 
-[[LLM: Develop specific, actionable research questions organized by theme.]]
+CRITICAL: collaborate with the user to develop specific, actionable research questions organized by theme.
 
 **Core Questions:**
 
@@ -716,8 +711,6 @@ Present these numbered options to the user:
 - Future-looking considerations
 
 #### C. Research Methodology
-
-[[LLM: Specify appropriate research methods based on the type and objectives.]]
 
 **Data Collection Methods:**
 
@@ -735,8 +728,6 @@ Present these numbered options to the user:
 
 #### D. Output Requirements
 
-[[LLM: Define how research findings should be structured and presented.]]
-
 **Format Specifications:**
 
 - Executive summary requirements
@@ -752,8 +743,6 @@ Present these numbered options to the user:
 - Risk and uncertainty documentation
 
 ### 4. Prompt Generation
-
-[[LLM: Synthesize all elements into a comprehensive, ready-to-use research prompt.]]
 
 **Research Prompt Template:**
 
@@ -823,8 +812,6 @@ Present these numbered options to the user:
 
 ### 5. Review and Refinement
 
-[[LLM: Present the draft research prompt for user review and refinement.]]
-
 1. **Present Complete Prompt**
 
    - Show the full research prompt
@@ -845,8 +832,6 @@ Present these numbered options to the user:
    - Clarify ambiguities
 
 ### 6. Next Steps Guidance
-
-[[LLM: Provide clear guidance on how to use the research prompt.]]
 
 **Execution Options:**
 
@@ -1078,9 +1063,9 @@ Generate comprehensive documentation for existing projects optimized for AI deve
 
 ### 1. Initial Project Analysis
 
-[[LLM: First, check if a PRD or requirements document exists in context. If yes, use it to focus your documentation efforts on relevant areas only.
+**CRITICAL:** First, check if a PRD or requirements document exists in context. If yes, use it to focus your documentation efforts on relevant areas only.
 
-**IF PRD EXISTS**: 
+**IF PRD EXISTS**:
 
 - Review the PRD to understand what enhancement/feature is planned
 - Identify which modules, services, or areas will be affected
@@ -1126,11 +1111,10 @@ Ask the user these elicitation questions to better understand their needs:
 - Are there any existing documentation standards or formats you prefer?
 - What level of technical detail should the documentation target? (junior developers, senior developers, mixed team)
 - Is there a specific feature or enhancement you're planning? (This helps focus documentation)
-  ]]
 
 ### 2. Deep Codebase Analysis
 
-[[LLM: Before generating documentation, conduct extensive analysis of the existing codebase:
+CRITICAL: Before generating documentation, conduct extensive analysis of the existing codebase:
 
 1. **Explore Key Areas**:
    - Entry points (main files, index files, app initializers)
@@ -1153,13 +1137,14 @@ Ask the user these elicitation questions to better understand their needs:
    - Document workarounds and technical debt
    - Note areas that differ from standard patterns
 
-**IF PRD PROVIDED**: Also analyze what would need to change for the enhancement]]
+**IF PRD PROVIDED**: Also analyze what would need to change for the enhancement
 
 ### 3. Core Documentation Generation
 
 [[LLM: Generate a comprehensive BROWNFIELD architecture document that reflects the ACTUAL state of the codebase.
 
 **CRITICAL**: This is NOT an aspirational architecture document. Document what EXISTS, including:
+
 - Technical debt and workarounds
 - Inconsistent patterns between different parts
 - Legacy code that can't be changed
@@ -1171,13 +1156,16 @@ Ask the user these elicitation questions to better understand their needs:
 # [Project Name] Brownfield Architecture Document
 
 ## Introduction
+
 This document captures the CURRENT STATE of the [Project Name] codebase, including technical debt, workarounds, and real-world patterns. It serves as a reference for AI agents working on enhancements.
 
 ### Document Scope
+
 [If PRD provided: "Focused on areas relevant to: {enhancement description}"]
 [If no PRD: "Comprehensive documentation of entire system"]
 
 ### Change Log
+
 | Date | Version | Description | Author |
 |------|---------|-------------|--------|
 | [Date] | 1.0 | Initial brownfield analysis | [Analyst] |
@@ -1185,6 +1173,7 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 ## Quick Reference - Key Files and Entry Points
 
 ### Critical Files for Understanding the System
+
 - **Main Entry**: `src/index.js` (or actual entry point)
 - **Configuration**: `config/app.config.js`, `.env.example`
 - **Core Business Logic**: `src/services/`, `src/domain/`
@@ -1193,22 +1182,25 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 - **Key Algorithms**: [List specific files with complex logic]
 
 ### If PRD Provided - Enhancement Impact Areas
+
 [Highlight which files/modules will be affected by the planned enhancement]
 
 ## High Level Architecture
 
 ### Technical Summary
-[Real assessment of architecture - mention if it's well-structured or has issues]
 
 ### Actual Tech Stack (from package.json/requirements.txt)
+
 | Category | Technology | Version | Notes |
 |----------|------------|---------|--------|
 | Runtime | Node.js | 16.x | [Any constraints] |
 | Framework | Express | 4.18.2 | [Custom middleware?] |
 | Database | PostgreSQL | 13 | [Connection pooling setup] |
-| [etc...] |
+
+etc...
 
 ### Repository Structure Reality Check
+
 - Type: [Monorepo/Polyrepo/Hybrid]
 - Package Manager: [npm/yarn/pnpm]
 - Notable: [Any unusual structure decisions]
@@ -1216,7 +1208,8 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 ## Source Tree and Module Organization
 
 ### Project Structure (Actual)
-```
+
+```text
 project-root/
 ├── src/
 │   ├── controllers/     # HTTP request handlers
@@ -1230,6 +1223,7 @@ project-root/
 ```
 
 ### Key Modules and Their Purpose
+
 - **User Management**: `src/services/userService.js` - Handles all user operations
 - **Authentication**: `src/middleware/auth.js` - JWT-based, custom implementation
 - **Payment Processing**: `src/legacy/payment.js` - CRITICAL: Do not refactor, tightly coupled
@@ -1238,12 +1232,14 @@ project-root/
 ## Data Models and APIs
 
 ### Data Models
+
 Instead of duplicating, reference actual model files:
 - **User Model**: See `src/models/User.js`
 - **Order Model**: See `src/models/Order.js`
 - **Related Types**: TypeScript definitions in `src/types/`
 
 ### API Specifications
+
 - **OpenAPI Spec**: `docs/api/openapi.yaml` (if exists)
 - **Postman Collection**: `docs/api/postman-collection.json`
 - **Manual Endpoints**: [List any undocumented endpoints discovered]
@@ -1251,12 +1247,14 @@ Instead of duplicating, reference actual model files:
 ## Technical Debt and Known Issues
 
 ### Critical Technical Debt
+
 1. **Payment Service**: Legacy code in `src/legacy/payment.js` - tightly coupled, no tests
 2. **User Service**: Different pattern than other services, uses callbacks instead of promises
 3. **Database Migrations**: Manually tracked, no proper migration tool
 4. **[Other significant debt]**
 
 ### Workarounds and Gotchas
+
 - **Environment Variables**: Must set `NODE_ENV=production` even for staging (historical reason)
 - **Database Connections**: Connection pool hardcoded to 10, changing breaks payment service
 - **[Other workarounds developers need to know]**
@@ -1264,13 +1262,16 @@ Instead of duplicating, reference actual model files:
 ## Integration Points and External Dependencies
 
 ### External Services
+
 | Service | Purpose | Integration Type | Key Files |
 |---------|---------|------------------|-----------|
 | Stripe | Payments | REST API | `src/integrations/stripe/` |
 | SendGrid | Emails | SDK | `src/services/emailService.js` |
-| [etc...] |
+
+etc...
 
 ### Internal Integration Points
+
 - **Frontend Communication**: REST API on port 3000, expects specific headers
 - **Background Jobs**: Redis queue, see `src/workers/`
 - **[Other integrations]**
@@ -1278,11 +1279,13 @@ Instead of duplicating, reference actual model files:
 ## Development and Deployment
 
 ### Local Development Setup
+
 1. Actual steps that work (not ideal steps)
 2. Known issues with setup
 3. Required environment variables (see `.env.example`)
 
 ### Build and Deployment Process
+
 - **Build Command**: `npm run build` (webpack config in `webpack.config.js`)
 - **Deployment**: Manual deployment via `scripts/deploy.sh`
 - **Environments**: Dev, Staging, Prod (see `config/environments/`)
@@ -1290,12 +1293,14 @@ Instead of duplicating, reference actual model files:
 ## Testing Reality
 
 ### Current Test Coverage
+
 - Unit Tests: 60% coverage (Jest)
 - Integration Tests: Minimal, in `tests/integration/`
 - E2E Tests: None
 - Manual Testing: Primary QA method
 
 ### Running Tests
+
 ```bash
 npm test           # Runs unit tests
 npm run test:integration  # Runs integration tests (requires local DB)
@@ -1304,6 +1309,7 @@ npm run test:integration  # Runs integration tests (requires local DB)
 ## If Enhancement PRD Provided - Impact Analysis
 
 ### Files That Will Need Modification
+
 Based on the enhancement requirements, these files will be affected:
 - `src/services/userService.js` - Add new user fields
 - `src/models/User.js` - Update schema
@@ -1311,11 +1317,13 @@ Based on the enhancement requirements, these files will be affected:
 - [etc...]
 
 ### New Files/Modules Needed
+
 - `src/services/newFeatureService.js` - New business logic
 - `src/models/NewFeature.js` - New data model
 - [etc...]
 
 ### Integration Considerations
+
 - Will need to integrate with existing auth middleware
 - Must follow existing response format in `src/utils/responseFormatter.js`
 - [Other integration points]
@@ -1323,6 +1331,7 @@ Based on the enhancement requirements, these files will be affected:
 ## Appendix - Useful Commands and Scripts
 
 ### Frequently Used Commands
+
 ```bash
 npm run dev         # Start development server
 npm run build       # Production build
@@ -1331,13 +1340,12 @@ npm run seed        # Seed test data
 ```
 
 ### Debugging and Troubleshooting
+
 - **Logs**: Check `logs/app.log` for application logs
 - **Debug Mode**: Set `DEBUG=app:*` for verbose logging
 - **Common Issues**: See `docs/troubleshooting.md`]]
 
 ### 4. Document Delivery
-
-[[LLM: After generating the complete architecture document:
 
 1. **In Web UI (Gemini, ChatGPT, Claude)**:
    - Present the entire document in one response (or multiple if too long)
@@ -1350,6 +1358,7 @@ npm run seed        # Seed test data
    - Can be sharded later using PO agent if desired
 
 The document should be comprehensive enough that future agents can understand:
+
 - The actual state of the system (not idealized)
 - Where to find key files and logic
 - What technical debt exists
@@ -1358,7 +1367,7 @@ The document should be comprehensive enough that future agents can understand:
 
 ### 5. Quality Assurance
 
-[[LLM: Before finalizing the document:
+CRITICAL: Before finalizing the document:
 
 1. **Accuracy Check**: Verify all technical details match the actual codebase
 2. **Completeness Review**: Ensure all major system components are documented
@@ -1366,7 +1375,7 @@ The document should be comprehensive enough that future agents can understand:
 4. **Clarity Assessment**: Check that explanations are clear for AI agents
 5. **Navigation**: Ensure document has clear section structure for easy reference
 
-Apply the advanced elicitation task after major sections to refine based on user feedback.]]
+Apply the advanced elicitation task after major sections to refine based on user feedback.
 
 ## Success Criteria
 
@@ -2617,302 +2626,11 @@ This knowledge base provides the foundation for effective game development using
 20. **Question Storming**: Generate questions instead of answers first
 ==================== END: .bmad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
-# Create Workflow Plan Task
-
-## Purpose
-
-Guide users through workflow selection and create a detailed plan document that outlines the selected workflow steps, decision points, and expected outputs. This task helps users understand what will happen before starting a complex workflow and provides a checklist to track progress.
-
-## Task Instructions
-
-### 1. Understand User's Goal
-
-[[LLM: Start with discovery questions to understand what the user wants to accomplish]]
-
-Ask the user:
-
-1. **Project Type**:
-   - Are you starting a new project (greenfield) or enhancing an existing one (brownfield)?
-   - What type of application? (web app, service/API, UI only, full-stack)
-
-2. **For Greenfield**:
-   - Do you need a quick prototype or production-ready application?
-   - Will this have a UI component?
-   - Single service or multiple services?
-
-3. **For Brownfield**:
-   - What's the scope of the enhancement?
-     - Single bug fix or small feature (few hours)
-     - Small enhancement (1-3 stories)
-     - Major feature requiring coordination
-     - Architectural changes or modernization
-   - Do you have existing documentation?
-   - Are you following existing patterns or introducing new ones?
-
-### 2. Recommend Appropriate Workflow
-
-Based on the answers, recommend:
-
-**Greenfield Options:**
-
-- `greenfield-fullstack` - Complete web application
-- `greenfield-service` - Backend API/service only
-- `greenfield-ui` - Frontend only
-
-**Brownfield Options:**
-
-- `brownfield-create-story` - Single small change
-- `brownfield-create-epic` - Small feature (1-3 stories)
-- `brownfield-fullstack` - Major enhancement
-
-**Simplified Option:**
-
-- For users unsure or wanting flexibility, suggest starting with individual agent tasks
-
-### 3. Explain Selected Workflow
-
-[[LLM: Once workflow is selected, provide clear explanation]]
-
-For the selected workflow, explain:
-
-1. **Overview**: What this workflow accomplishes
-2. **Duration**: Estimated time for planning phase
-3. **Outputs**: What documents will be created
-4. **Decision Points**: Where user input will be needed
-5. **Requirements**: What information should be ready
-
-### 4. Create Workflow Plan Document
-
-[[LLM: Generate a comprehensive plan document with the following structure]]
-
-```markdown
-# Workflow Plan: {{Workflow Name}}
-
-<!-- WORKFLOW-PLAN-META
-workflow-id: {{workflow-id}}
-status: active
-created: {{ISO-8601 timestamp}}
-updated: {{ISO-8601 timestamp}}
-version: 1.0
--->
-
-**Created Date**: {{current date}}
-**Project**: {{project name}}
-**Type**: {{greenfield/brownfield}}
-**Status**: Active
-**Estimated Planning Duration**: {{time estimate}}
-
-## Objective
-
-{{Clear description of what will be accomplished}}
-
-## Selected Workflow
-
-**Workflow**: `{{workflow-id}}`
-**Reason**: {{Why this workflow fits the user's needs}}
-
-## Workflow Steps
-
-### Planning Phase
-
-- [ ] Step 1: {{step name}} <!-- step-id: 1.1, agent: {{agent}}, task: {{task}} -->
-  - **Agent**: {{agent name}}
-  - **Action**: {{what happens}}
-  - **Output**: {{what's created}}
-  - **User Input**: {{if any}}
-
-- [ ] Step 2: {{step name}} <!-- step-id: 1.2, agent: {{agent}}, task: {{task}} -->
-  - **Agent**: {{agent name}}
-  - **Action**: {{what happens}}
-  - **Output**: {{what's created}}
-  - **Decision Point**: {{if any}} <!-- decision-id: D1 -->
-
-{{Continue for all planning steps}}
-
-### Development Phase (IDE)
-
-- [ ] Document Sharding <!-- step-id: 2.1, agent: po, task: shard-doc -->
-  - Prepare documents for story creation
-
-- [ ] Story Development Cycle <!-- step-id: 2.2, repeats: true -->
-  - [ ] Create story (SM agent) <!-- step-id: 2.2.1, agent: sm, task: create-next-story -->
-  - [ ] Review story (optional) <!-- step-id: 2.2.2, agent: analyst, optional: true -->
-  - [ ] Implement story (Dev agent) <!-- step-id: 2.2.3, agent: dev -->
-  - [ ] QA review (optional) <!-- step-id: 2.2.4, agent: qa, optional: true -->
-  - [ ] Repeat for all stories
-
-- [ ] Epic Retrospective (optional) <!-- step-id: 2.3, agent: po, optional: true -->
-
-## Key Decision Points
-
-1. **{{Decision Name}}** (Step {{n}}): <!-- decision-id: D1, status: pending -->
-   - Trigger: {{what causes this decision}}
-   - Options: {{available choices}}
-   - Impact: {{how it affects the workflow}}
-   - Decision Made: _Pending_
-
-{{List all decision points}}
-
-## Expected Outputs
-
-### Planning Documents
-- [ ] {{document 1}} - {{description}}
-- [ ] {{document 2}} - {{description}}
-{{etc...}}
-
-### Development Artifacts
-- [ ] Stories in `docs/stories/`
-- [ ] Implementation code
-- [ ] Tests
-- [ ] Updated documentation
-
-## Prerequisites Checklist
-
-Before starting this workflow, ensure you have:
-
-- [ ] {{prerequisite 1}}
-- [ ] {{prerequisite 2}}
-- [ ] {{prerequisite 3}}
-{{etc...}}
-
-## Customization Options
-
-Based on your project needs, you may:
-- Skip {{optional step}} if {{condition}}
-- Add {{additional step}} if {{condition}}
-- Choose {{alternative}} instead of {{default}}
-
-## Risk Considerations
-
-{{For brownfield only}}
-- Integration complexity: {{assessment}}
-- Rollback strategy: {{approach}}
-- Testing requirements: {{special needs}}
-
-## Next Steps
-
-1. Review this plan and confirm it matches your expectations
-2. Gather any missing prerequisites
-3. Start workflow with: `*task workflow {{workflow-id}}`
-4. Or begin with first agent: `@{{first-agent}}`
-
-## Notes
-
-{{Any additional context or warnings}}
-
----
-*This plan can be updated as you progress through the workflow. Check off completed items to track progress.*
-```
-
-### 5. Save and Present Plan
-
-1. Save the plan as `docs/workflow-plan.md`
-2. Inform user: "Workflow plan created at docs/workflow-plan.md"
-3. Offer options:
-   - Review the plan together
-   - Start the workflow now
-   - Gather prerequisites first
-   - Modify the plan
-
-### 6. Plan Variations
-
-[[LLM: Adjust plan detail based on workflow complexity]]
-
-**For Simple Workflows** (create-story, create-epic):
-
-- Simpler checklist format
-- Focus on immediate next steps
-- Less detailed explanations
-
-**For Complex Workflows** (full greenfield/brownfield):
-
-- Detailed step breakdowns
-- All decision points documented
-- Comprehensive output descriptions
-- Risk mitigation sections
-
-**For Brownfield Workflows**:
-
-- Include existing system impact analysis
-- Document integration checkpoints
-- Add rollback considerations
-- Note documentation dependencies
-
-### 7. Interactive Planning Mode
-
-[[LLM: If user wants to customize the workflow]]
-
-If user wants to modify the standard workflow:
-
-1. Present workflow steps as options
-2. Allow skipping optional steps
-3. Let user reorder certain steps
-4. Document customizations in plan
-5. Warn about dependencies if steps are skipped
-
-### 8. Execution Guidance
-
-After plan is created, provide clear guidance:
-
-```text
-Your workflow plan is ready! Here's how to proceed:
-
-1. **Review the plan**: Check that all steps align with your goals
-2. **Gather prerequisites**: Use the checklist to ensure you're ready
-3. **Start execution**:
-   - Full workflow: `*task workflow {{workflow-id}}`
-   - Step by step: Start with `@{{first-agent}}`
-4. **Track progress**: Check off steps in the plan as completed
-
-Would you like to:
-a) Review the plan together
-b) Start the workflow now
-c) Gather prerequisites first
-d) Modify the plan
-```
-
-## Success Criteria
-
-The workflow plan is successful when:
-
-1. User clearly understands what will happen
-2. All decision points are documented
-3. Prerequisites are identified
-4. Expected outputs are clear
-5. User feels confident to proceed
-6. Plan serves as useful progress tracker
-
-## Integration with BMad Master and Orchestrator
-
-When used by BMad Master or BMad Orchestrator, this task should:
-
-1. Be offered when user asks about workflows
-2. Be suggested before starting complex workflows
-3. Create a plan that the agent can reference during execution
-4. Allow the agent to track progress against the plan
-
-## Example Usage
-
-```text
-User: "I need to add a payment system to my existing app"
-
-BMad Orchestrator: "Let me help you create a workflow plan for that enhancement. I'll ask a few questions to recommend the best approach..."
-
-[Runs through discovery questions]
-
-BMad Orchestrator: "Based on your answers, I recommend the brownfield-fullstack workflow. Let me create a detailed plan for you..."
-
-[Creates and saves plan]
-
-BMad Orchestrator: "I've created a workflow plan at docs/workflow-plan.md. This shows all the steps we'll go through, what documents will be created, and where you'll need to make decisions. Would you like to review it together?"
-```
-==================== END: .bmad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
-
 ==================== START: .bmad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
 # KB Mode Interaction Task
 
 ## Purpose
+
 Provide a user-friendly interface to the BMad knowledge base without overwhelming users with information upfront.
 
 ## Instructions
@@ -2920,11 +2638,11 @@ Provide a user-friendly interface to the BMad knowledge base without overwhelmin
 When entering KB mode (*kb-mode), follow these steps:
 
 ### 1. Welcome and Guide
-Announce entering KB mode with a brief, friendly introduction:
 
-"I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method."
+Announce entering KB mode with a brief, friendly introduction.
 
 ### 2. Present Topic Areas
+
 Offer a concise list of main topic areas the user might want to explore:
 
 **What would you like to know more about?**
@@ -2941,19 +2659,23 @@ Offer a concise list of main topic areas the user might want to explore:
 Or ask me about anything else related to BMad-Method!
 
 ### 3. Respond Contextually
+
 - Wait for user's specific question or topic selection
 - Provide focused, relevant information from the knowledge base
 - Offer to dive deeper or explore related topics
 - Keep responses concise unless user asks for detailed explanations
 
 ### 4. Interactive Exploration
+
 - After answering, suggest related topics they might find helpful
 - Maintain conversational flow rather than data dumping
 - Use examples when appropriate
 - Reference specific documentation sections when relevant
 
 ### 5. Exit Gracefully
+
 When user is done or wants to exit KB mode:
+
 - Summarize key points discussed if helpful
 - Remind them they can return to KB mode anytime with *kb-mode
 - Suggest next steps based on what was discussed
@@ -2981,257 +2703,6 @@ Or ask me about anything else related to BMad-Method!
 
 **Assistant**: [Provides focused information about workflows from the KB, then offers to explore specific workflow types or related topics]
 ==================== END: .bmad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
-
-==================== START: .bmad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
-# Update Workflow Plan Task
-
-## Purpose
-
-Update the status of steps in an active workflow plan, mark completions, add notes about deviations, and maintain an accurate record of workflow progress. This task can be called directly by users or automatically by other tasks upon completion.
-
-## Task Instructions
-
-### 0. Load Plan Configuration
-
-[[LLM: First load core-config.yaml to get plan settings]]
-
-Check workflow configuration:
-
-- `workflow.planFile` - Location of the plan (default: docs/workflow-plan.md)
-- `workflow.trackProgress` - Whether tracking is enabled
-- `workflow.updateOnCompletion` - Whether to auto-update on task completion
-
-If tracking is disabled, inform user and exit.
-
-### 1. Verify Plan Exists
-
-[[LLM: Check if workflow plan exists at configured location]]
-
-If no plan exists:
-
-```
-No active workflow plan found at {location}.
-Would you like to create one? Use *plan command.
-```
-
-### 2. Determine Update Type
-
-[[LLM: Ask user what type of update they want to make]]
-
-Present options:
-
-```
-What would you like to update in the workflow plan?
-
-1. Mark step as complete
-2. Update current step
-3. Add deviation note
-4. Mark decision point resolution
-5. Update overall status
-6. View current plan status only
-
-Please select an option (1-6):
-```
-
-### 3. Parse Current Plan
-
-[[LLM: Read and parse the plan to understand current state]]
-
-Extract:
-
-- All steps with their checkbox status
-- Step IDs from comments (if present)
-- Current completion percentage
-- Any existing deviation notes
-- Decision points and their status
-
-### 4. Execute Updates
-
-#### 4.1 Mark Step Complete
-
-If user selected option 1:
-
-1. Show numbered list of incomplete steps
-2. Ask which step to mark complete
-3. Update the checkbox from `[ ]` to `[x]`
-4. Add completion timestamp: `<!-- completed: YYYY-MM-DD HH:MM -->`
-5. If this was the current step, identify next step
-
-#### 4.2 Update Current Step
-
-If user selected option 2:
-
-1. Show all steps with current status
-2. Ask which step is now current
-3. Add/move `<!-- current-step -->` marker
-4. Optionally add note about why sequence changed
-
-#### 4.3 Add Deviation Note
-
-If user selected option 3:
-
-1. Ask for deviation description
-2. Ask which step this relates to (or general)
-3. Insert note in appropriate location:
-
-```markdown
-> **Deviation Note** (YYYY-MM-DD): {user_note}
-> Related to: Step X.Y or General workflow
-```
-
-#### 4.4 Mark Decision Resolution
-
-If user selected option 4:
-
-1. Show pending decision points
-2. Ask which decision was made
-3. Record the decision and chosen path
-4. Update related steps based on decision
-
-#### 4.5 Update Overall Status
-
-If user selected option 5:
-
-1. Show current overall status
-2. Provide options:
-   - Active (continuing with plan)
-   - Paused (temporarily stopped)
-   - Abandoned (no longer following)
-   - Complete (all steps done)
-3. Update plan header with new status
-
-### 5. Automatic Updates (When Called by Tasks)
-
-[[LLM: When called automatically by another task]]
-
-If called with parameters:
-
-```
-task: {task_name}
-step_id: {step_identifier}
-status: complete|skipped|failed
-note: {optional_note}
-```
-
-Automatically:
-
-1. Find the corresponding step
-2. Update its status
-3. Add completion metadata
-4. Add note if provided
-5. Calculate new progress percentage
-
-### 6. Generate Update Summary
-
-After updates, show summary:
-
-```
-✅ Workflow Plan Updated
-
-Changes made:
-- {change_1}
-- {change_2}
-
-New Status:
-- Progress: {X}% complete ({completed}/{total} steps)
-- Current Step: {current_step}
-- Next Recommended: {next_step}
-
-Plan location: {file_path}
-```
-
-### 7. Integration with Other Tasks
-
-[[LLM: How other tasks should call this]]
-
-Other tasks can integrate by:
-
-1. **After Task Completion**:
-
-```
-At end of task execution:
-- Check if task corresponds to a plan step
-- If yes, call update-workflow-plan with:
-  - task: {current_task_name}
-  - step_id: {matching_step}
-  - status: complete
-```
-
-2. **On Task Failure**:
-
-```
-If task fails:
-- Call update-workflow-plan with:
-  - task: {current_task_name}
-  - status: failed
-  - note: {failure_reason}
-```
-
-### 8. Plan Status Display
-
-[[LLM: When user selects view status only]]
-
-Display comprehensive status:
-
-```markdown
-📋 Workflow Plan Status
-━━━━━━━━━━━━━━━━━━━━
-Workflow: {workflow_name}
-Status: {Active|Paused|Complete}
-Progress: {X}% complete ({completed}/{total} steps)
-Last Updated: {timestamp}
-
-✅ Completed Steps:
-- [x] Step 1.1: {description} (completed: {date})
-- [x] Step 1.2: {description} (completed: {date})
-
-🔄 Current Step:
-- [ ] Step 2.1: {description} <!-- current-step -->
-  Agent: {agent_name}
-  Task: {task_name}
-
-📌 Upcoming Steps:
-- [ ] Step 2.2: {description}
-- [ ] Step 3.1: {description}
-
-⚠️ Deviations/Notes:
-{any_deviation_notes}
-
-📊 Decision Points:
-- Decision 1: {status} - {choice_made}
-- Decision 2: Pending
-
-💡 Next Action:
-Based on the plan, you should {recommended_action}
-```
-
-## Success Criteria
-
-The update is successful when:
-
-1. Plan accurately reflects current workflow state
-2. All updates are clearly timestamped
-3. Deviations are documented with reasons
-4. Progress calculation is correct
-5. Next steps are clear to user
-6. Plan remains readable and well-formatted
-
-## Error Handling
-
-- **Plan file not found**: Offer to create new plan
-- **Malformed plan**: Attempt basic updates, warn user
-- **Write permission error**: Show changes that would be made
-- **Step not found**: Show available steps, ask for clarification
-- **Concurrent updates**: Implement simple locking or warn about conflicts
-
-## Notes
-
-- Always preserve plan history (don't delete old information)
-- Keep updates atomic to prevent corruption
-- Consider creating backup before major updates
-- Updates should enhance, not complicate, the workflow experience
-- If plan becomes too cluttered, suggest creating fresh plan for next phase
-==================== END: .bmad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/data/elicitation-methods.md ====================
 # Elicitation Methods Data
