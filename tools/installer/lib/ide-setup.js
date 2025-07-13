@@ -702,7 +702,7 @@ class IdeSetup {
         const agentContent = await fileManager.readFile(agentPath);
 
         // Extract YAML content
-        const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+        const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
         if (yamlMatch) {
           const yaml = yamlMatch[1];
 
