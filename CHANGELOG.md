@@ -1,3 +1,10 @@
+## [4.29.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.2...v4.29.3) (2025-07-13)
+
+
+### Bug Fixes
+
+* annoying YAML lint error ([afea271](https://github.com/bmadcode/BMAD-METHOD/commit/afea271e5e3b14a0da497e241b6521ba5a80b85b))
+
 ## [4.29.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.1...v4.29.2) (2025-07-13)
 
 
