@@ -1,3 +1,10 @@
+## [4.29.5](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.4...v4.29.5) (2025-07-14)
+
+
+### Bug Fixes
+
+* windows regex issue ([9f48c1a](https://github.com/bmadcode/BMAD-METHOD/commit/9f48c1a869a9cc54fb5e7d899c2af7a5cef70e10))
+
 ## [4.29.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.3...v4.29.4) (2025-07-14)
 
 
