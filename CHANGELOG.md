@@ -1,3 +1,10 @@
+## [4.29.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.5...v4.29.6) (2025-07-14)
+
+
+### Bug Fixes
+
+* improve agent task folowing in agressing cost saving ide model combos ([3621c33](https://github.com/bmadcode/BMAD-METHOD/commit/3621c330e65f328e7326f93a5fe27e65b08907e7))
+
 ## [4.29.5](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.4...v4.29.5) (2025-07-14)
 
 
