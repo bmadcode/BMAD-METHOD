@@ -454,7 +454,7 @@ class IdeSetup {
       if (await fileManager.pathExists(agentPath)) {
         try {
           const agentContent = await fileManager.readFile(agentPath);
-          const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+          const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
           
           if (yamlMatch) {
             const yaml = yamlMatch[1];
@@ -945,7 +945,7 @@ class IdeSetup {
         const agentTitle = await this.getAgentTitle(agentId, installDir);
         
         // Extract whenToUse for the description
-        const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+        const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
         let description = `Activates the ${agentTitle} agent persona.`;
         if (yamlMatch) {
           const whenToUseMatch = yamlMatch[1].match(/whenToUse:\s*"(.*?)"/);
