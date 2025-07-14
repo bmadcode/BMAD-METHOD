@@ -1,3 +1,10 @@
+## [4.29.4](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.3...v4.29.4) (2025-07-14)
+
+
+### Bug Fixes
+
+* empty .roomodes, support Windows-style newlines in YAML block regex ([#311](https://github.com/bmadcode/BMAD-METHOD/issues/311)) ([551e30b](https://github.com/bmadcode/BMAD-METHOD/commit/551e30b65e1f04386f0bd0193f726828df684d5b))
+
 ## [4.29.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.2...v4.29.3) (2025-07-13)
 
 
