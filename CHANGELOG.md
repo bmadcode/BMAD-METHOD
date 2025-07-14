@@ -1,3 +1,10 @@
+## [4.29.7](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.6...v4.29.7) (2025-07-14)
+
+
+### Bug Fixes
+
+* bundle build ([0723eed](https://github.com/bmadcode/BMAD-METHOD/commit/0723eed88140e76146dfbfdddd49afe86e8522ee))
+
 ## [4.29.6](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.5...v4.29.6) (2025-07-14)
 
 
