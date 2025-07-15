@@ -1,3 +1,10 @@
+# [4.30.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.7...v4.30.0) (2025-07-15)
+
+
+### Features
+
+* installer is now VERY clear about IDE selection being a multiselect ([e24b6f8](https://github.com/bmadcode/BMAD-METHOD/commit/e24b6f84fd9e4ff4b99263019b5021ca2b145b2f))
+
 ## [4.29.7](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.6...v4.29.7) (2025-07-14)
 
 
