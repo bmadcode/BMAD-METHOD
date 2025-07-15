@@ -46,11 +46,10 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
-  - Only read the files/tasks listed here when user selects them for execution to minimize context usage
+  - ONLY load dependency files when user selects them for execution via command or request of a task
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - Greet the user with your name and role, and inform of the *help command.
+  - STAY IN CHARACTER!
 agent:
   name: Mary
   id: analyst
@@ -107,7 +106,7 @@ dependencies:
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
 ---
 docOutputLocation: docs/brainstorming-session-results.md
-template: brainstorming-output-tmpl
+template: ".bmad-core/templates/brainstorming-output-tmpl.yaml"
 ---
 
 # Facilitate Brainstorming Session Task
@@ -123,7 +122,7 @@ Ask 4 context questions (don't preview what happens next):
 1. What are we brainstorming about?
 2. Any constraints or parameters?
 3. Goal: broad exploration or focused ideation?
-4. Do you want a structured document output to reference later? (Y/N)
+4. Do you want a structured document output to reference later? (Default Yes)
 
 ### Step 2: Present Approach Options
 
@@ -140,10 +139,10 @@ After getting answers to Step 1, present 4 approach options (numbered):
 
 - **FACILITATOR ROLE**: Guide user to generate their own ideas through questions, prompts, and examples
 - **CONTINUOUS ENGAGEMENT**: Keep user engaged with chosen technique until they want to switch or are satisfied
-- **CAPTURE OUTPUT**: If document output requested, capture all ideas generated in each technique section
+- **CAPTURE OUTPUT**: If (default) document output requested, capture all ideas generated in each technique section to the document from the beginning.
 
 **Technique Selection:**
-If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number (e.g., "7" for Mind Mapping).
+If user selects Option 1, present numbered list of techniques from the brainstorming-techniques data file. User can select by number..
 
 **Technique Execution:**
 
@@ -210,7 +209,7 @@ Generate structured document with these sections:
 
 ## Key Principles
 
-- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them
+- **YOU ARE A FACILITATOR**: Guide the user to brainstorm, don't brainstorm for them (unless they request it persistently)
 - **INTERACTIVE DIALOGUE**: Ask questions, wait for responses, build on their ideas
 - **ONE TECHNIQUE AT A TIME**: Don't mix multiple techniques in one response
 - **CONTINUOUS ENGAGEMENT**: Stay with one technique until user wants to switch
@@ -220,7 +219,7 @@ Generate structured document with these sections:
 - Defer judgment during generation
 - Quantity leads to quality (aim for 100 ideas in 60 minutes)
 - Build on ideas collaboratively
-- Document everything if output requested
+- Document everything in output document
 
 ## Advanced Engagement Strategies
 
@@ -260,7 +259,7 @@ Generate well-structured research prompts that:
 
 ## Research Type Selection
 
-[[LLM: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.]]
+CRITICAL: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.
 
 ### 1. Research Focus Options
 
@@ -323,14 +322,12 @@ Present these numbered options to the user:
    - Consider regulatory and legal implications
 
 9. **Custom Research Focus**
-   [[LLM: Allow user to define their own specific research focus.]]
+
    - User-defined research objectives
    - Specialized domain investigation
    - Cross-functional research needs
 
 ### 2. Input Processing
-
-[[LLM: Based on the selected research type and any provided inputs (project brief, brainstorming results, etc.), extract relevant context and constraints.]]
 
 **If Project Brief provided:**
 
@@ -364,11 +361,11 @@ Present these numbered options to the user:
 
 ### 3. Research Prompt Structure
 
-[[LLM: Based on the selected research type and context, collaboratively develop a comprehensive research prompt with these components.]]
+CRITICAL: collaboratively develop a comprehensive research prompt with these components.
 
 #### A. Research Objectives
 
-[[LLM: Work with the user to articulate clear, specific objectives for the research.]]
+CRITICAL: collaborate with the user to articulate clear, specific objectives for the research.
 
 - Primary research goal and purpose
 - Key decisions the research will inform
@@ -377,7 +374,7 @@ Present these numbered options to the user:
 
 #### B. Research Questions
 
-[[LLM: Develop specific, actionable research questions organized by theme.]]
+CRITICAL: collaborate with the user to develop specific, actionable research questions organized by theme.
 
 **Core Questions:**
 
@@ -392,8 +389,6 @@ Present these numbered options to the user:
 - Future-looking considerations
 
 #### C. Research Methodology
-
-[[LLM: Specify appropriate research methods based on the type and objectives.]]
 
 **Data Collection Methods:**
 
@@ -411,8 +406,6 @@ Present these numbered options to the user:
 
 #### D. Output Requirements
 
-[[LLM: Define how research findings should be structured and presented.]]
-
 **Format Specifications:**
 
 - Executive summary requirements
@@ -428,8 +421,6 @@ Present these numbered options to the user:
 - Risk and uncertainty documentation
 
 ### 4. Prompt Generation
-
-[[LLM: Synthesize all elements into a comprehensive, ready-to-use research prompt.]]
 
 **Research Prompt Template:**
 
@@ -499,8 +490,6 @@ Present these numbered options to the user:
 
 ### 5. Review and Refinement
 
-[[LLM: Present the draft research prompt for user review and refinement.]]
-
 1. **Present Complete Prompt**
 
    - Show the full research prompt
@@ -521,8 +510,6 @@ Present these numbered options to the user:
    - Clarify ambiguities
 
 ### 6. Next Steps Guidance
-
-[[LLM: Provide clear guidance on how to use the research prompt.]]
 
 **Execution Options:**
 
@@ -550,16 +537,38 @@ Present these numbered options to the user:
 ==================== START: .bmad-core/tasks/create-doc.md ====================
 # Create Document from Template (YAML Driven)
 
+## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
+
+**THIS IS AN EXECUTABLE WORKFLOW - NOT REFERENCE MATERIAL**
+
+When this task is invoked:
+
+1. **DISABLE ALL EFFICIENCY OPTIMIZATIONS** - This workflow requires full user interaction
+2. **MANDATORY STEP-BY-STEP EXECUTION** - Each section must be processed sequentially with user feedback
+3. **ELICITATION IS REQUIRED** - When `elicit: true`, you MUST use the 1-9 format and wait for user response
+4. **NO SHORTCUTS ALLOWED** - Complete documents cannot be created without following this workflow
+
+**VIOLATION INDICATOR:** If you create a complete document without user interaction, you have violated this workflow.
+
+## Critical: Template Discovery
+
+If a YAML Template has not been provided, list all templates from .bmad-core/templates or ask the user to provide another.
+
 ## CRITICAL: Mandatory Elicitation Format
 
-**When `elicit: true`, ALWAYS use this exact format:**
+**When `elicit: true`, this is a HARD STOP requiring user interaction:**
+
+**YOU MUST:**
 
 1. Present section content
 2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
-3. Present numbered options 1-9:
+3. **STOP and present numbered options 1-9:**
    - **Option 1:** Always "Proceed to next section"
    - **Options 2-9:** Select 8 methods from data/elicitation-methods
    - End with: "Select 1-9 or just type your question/feedback:"
+4. **WAIT FOR USER RESPONSE** - Do not proceed until user selects option or provides feedback
+
+**WORKFLOW VIOLATION:** Creating content for elicit=true sections without user interaction violates this task.
 
 **NEVER ask yes/no questions or use any other format.**
 
@@ -760,9 +769,9 @@ Generate comprehensive documentation for existing projects optimized for AI deve
 
 ### 1. Initial Project Analysis
 
-[[LLM: First, check if a PRD or requirements document exists in context. If yes, use it to focus your documentation efforts on relevant areas only.
+**CRITICAL:** First, check if a PRD or requirements document exists in context. If yes, use it to focus your documentation efforts on relevant areas only.
 
-**IF PRD EXISTS**: 
+**IF PRD EXISTS**:
 
 - Review the PRD to understand what enhancement/feature is planned
 - Identify which modules, services, or areas will be affected
@@ -808,11 +817,10 @@ Ask the user these elicitation questions to better understand their needs:
 - Are there any existing documentation standards or formats you prefer?
 - What level of technical detail should the documentation target? (junior developers, senior developers, mixed team)
 - Is there a specific feature or enhancement you're planning? (This helps focus documentation)
-  ]]
 
 ### 2. Deep Codebase Analysis
 
-[[LLM: Before generating documentation, conduct extensive analysis of the existing codebase:
+CRITICAL: Before generating documentation, conduct extensive analysis of the existing codebase:
 
 1. **Explore Key Areas**:
    - Entry points (main files, index files, app initializers)
@@ -835,13 +843,14 @@ Ask the user these elicitation questions to better understand their needs:
    - Document workarounds and technical debt
    - Note areas that differ from standard patterns
 
-**IF PRD PROVIDED**: Also analyze what would need to change for the enhancement]]
+**IF PRD PROVIDED**: Also analyze what would need to change for the enhancement
 
 ### 3. Core Documentation Generation
 
 [[LLM: Generate a comprehensive BROWNFIELD architecture document that reflects the ACTUAL state of the codebase.
 
 **CRITICAL**: This is NOT an aspirational architecture document. Document what EXISTS, including:
+
 - Technical debt and workarounds
 - Inconsistent patterns between different parts
 - Legacy code that can't be changed
@@ -853,13 +862,16 @@ Ask the user these elicitation questions to better understand their needs:
 # [Project Name] Brownfield Architecture Document
 
 ## Introduction
+
 This document captures the CURRENT STATE of the [Project Name] codebase, including technical debt, workarounds, and real-world patterns. It serves as a reference for AI agents working on enhancements.
 
 ### Document Scope
+
 [If PRD provided: "Focused on areas relevant to: {enhancement description}"]
 [If no PRD: "Comprehensive documentation of entire system"]
 
 ### Change Log
+
 | Date | Version | Description | Author |
 |------|---------|-------------|--------|
 | [Date] | 1.0 | Initial brownfield analysis | [Analyst] |
@@ -867,6 +879,7 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 ## Quick Reference - Key Files and Entry Points
 
 ### Critical Files for Understanding the System
+
 - **Main Entry**: `src/index.js` (or actual entry point)
 - **Configuration**: `config/app.config.js`, `.env.example`
 - **Core Business Logic**: `src/services/`, `src/domain/`
@@ -875,22 +888,25 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 - **Key Algorithms**: [List specific files with complex logic]
 
 ### If PRD Provided - Enhancement Impact Areas
+
 [Highlight which files/modules will be affected by the planned enhancement]
 
 ## High Level Architecture
 
 ### Technical Summary
-[Real assessment of architecture - mention if it's well-structured or has issues]
 
 ### Actual Tech Stack (from package.json/requirements.txt)
+
 | Category | Technology | Version | Notes |
 |----------|------------|---------|--------|
 | Runtime | Node.js | 16.x | [Any constraints] |
 | Framework | Express | 4.18.2 | [Custom middleware?] |
 | Database | PostgreSQL | 13 | [Connection pooling setup] |
-| [etc...] |
+
+etc...
 
 ### Repository Structure Reality Check
+
 - Type: [Monorepo/Polyrepo/Hybrid]
 - Package Manager: [npm/yarn/pnpm]
 - Notable: [Any unusual structure decisions]
@@ -898,7 +914,8 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 ## Source Tree and Module Organization
 
 ### Project Structure (Actual)
-```
+
+```text
 project-root/
 ├── src/
 │   ├── controllers/     # HTTP request handlers
@@ -912,6 +929,7 @@ project-root/
 ```
 
 ### Key Modules and Their Purpose
+
 - **User Management**: `src/services/userService.js` - Handles all user operations
 - **Authentication**: `src/middleware/auth.js` - JWT-based, custom implementation
 - **Payment Processing**: `src/legacy/payment.js` - CRITICAL: Do not refactor, tightly coupled
@@ -920,12 +938,14 @@ project-root/
 ## Data Models and APIs
 
 ### Data Models
+
 Instead of duplicating, reference actual model files:
 - **User Model**: See `src/models/User.js`
 - **Order Model**: See `src/models/Order.js`
 - **Related Types**: TypeScript definitions in `src/types/`
 
 ### API Specifications
+
 - **OpenAPI Spec**: `docs/api/openapi.yaml` (if exists)
 - **Postman Collection**: `docs/api/postman-collection.json`
 - **Manual Endpoints**: [List any undocumented endpoints discovered]
@@ -933,12 +953,14 @@ Instead of duplicating, reference actual model files:
 ## Technical Debt and Known Issues
 
 ### Critical Technical Debt
+
 1. **Payment Service**: Legacy code in `src/legacy/payment.js` - tightly coupled, no tests
 2. **User Service**: Different pattern than other services, uses callbacks instead of promises
 3. **Database Migrations**: Manually tracked, no proper migration tool
 4. **[Other significant debt]**
 
 ### Workarounds and Gotchas
+
 - **Environment Variables**: Must set `NODE_ENV=production` even for staging (historical reason)
 - **Database Connections**: Connection pool hardcoded to 10, changing breaks payment service
 - **[Other workarounds developers need to know]**
@@ -946,13 +968,16 @@ Instead of duplicating, reference actual model files:
 ## Integration Points and External Dependencies
 
 ### External Services
+
 | Service | Purpose | Integration Type | Key Files |
 |---------|---------|------------------|-----------|
 | Stripe | Payments | REST API | `src/integrations/stripe/` |
 | SendGrid | Emails | SDK | `src/services/emailService.js` |
-| [etc...] |
+
+etc...
 
 ### Internal Integration Points
+
 - **Frontend Communication**: REST API on port 3000, expects specific headers
 - **Background Jobs**: Redis queue, see `src/workers/`
 - **[Other integrations]**
@@ -960,11 +985,13 @@ Instead of duplicating, reference actual model files:
 ## Development and Deployment
 
 ### Local Development Setup
+
 1. Actual steps that work (not ideal steps)
 2. Known issues with setup
 3. Required environment variables (see `.env.example`)
 
 ### Build and Deployment Process
+
 - **Build Command**: `npm run build` (webpack config in `webpack.config.js`)
 - **Deployment**: Manual deployment via `scripts/deploy.sh`
 - **Environments**: Dev, Staging, Prod (see `config/environments/`)
@@ -972,12 +999,14 @@ Instead of duplicating, reference actual model files:
 ## Testing Reality
 
 ### Current Test Coverage
+
 - Unit Tests: 60% coverage (Jest)
 - Integration Tests: Minimal, in `tests/integration/`
 - E2E Tests: None
 - Manual Testing: Primary QA method
 
 ### Running Tests
+
 ```bash
 npm test           # Runs unit tests
 npm run test:integration  # Runs integration tests (requires local DB)
@@ -986,6 +1015,7 @@ npm run test:integration  # Runs integration tests (requires local DB)
 ## If Enhancement PRD Provided - Impact Analysis
 
 ### Files That Will Need Modification
+
 Based on the enhancement requirements, these files will be affected:
 - `src/services/userService.js` - Add new user fields
 - `src/models/User.js` - Update schema
@@ -993,11 +1023,13 @@ Based on the enhancement requirements, these files will be affected:
 - [etc...]
 
 ### New Files/Modules Needed
+
 - `src/services/newFeatureService.js` - New business logic
 - `src/models/NewFeature.js` - New data model
 - [etc...]
 
 ### Integration Considerations
+
 - Will need to integrate with existing auth middleware
 - Must follow existing response format in `src/utils/responseFormatter.js`
 - [Other integration points]
@@ -1005,6 +1037,7 @@ Based on the enhancement requirements, these files will be affected:
 ## Appendix - Useful Commands and Scripts
 
 ### Frequently Used Commands
+
 ```bash
 npm run dev         # Start development server
 npm run build       # Production build
@@ -1013,13 +1046,12 @@ npm run seed        # Seed test data
 ```
 
 ### Debugging and Troubleshooting
+
 - **Logs**: Check `logs/app.log` for application logs
 - **Debug Mode**: Set `DEBUG=app:*` for verbose logging
 - **Common Issues**: See `docs/troubleshooting.md`]]
 
 ### 4. Document Delivery
-
-[[LLM: After generating the complete architecture document:
 
 1. **In Web UI (Gemini, ChatGPT, Claude)**:
    - Present the entire document in one response (or multiple if too long)
@@ -1032,6 +1064,7 @@ npm run seed        # Seed test data
    - Can be sharded later using PO agent if desired
 
 The document should be comprehensive enough that future agents can understand:
+
 - The actual state of the system (not idealized)
 - Where to find key files and logic
 - What technical debt exists
@@ -1040,7 +1073,7 @@ The document should be comprehensive enough that future agents can understand:
 
 ### 5. Quality Assurance
 
-[[LLM: Before finalizing the document:
+CRITICAL: Before finalizing the document:
 
 1. **Accuracy Check**: Verify all technical details match the actual codebase
 2. **Completeness Review**: Ensure all major system components are documented
@@ -1048,7 +1081,7 @@ The document should be comprehensive enough that future agents can understand:
 4. **Clarity Assessment**: Check that explanations are clear for AI agents
 5. **Navigation**: Ensure document has clear section structure for easy reference
 
-Apply the advanced elicitation task after major sections to refine based on user feedback.]]
+Apply the advanced elicitation task after major sections to refine based on user feedback.
 
 ## Success Criteria
 
@@ -2168,8 +2201,8 @@ npx bmad-method install
 
 **CRITICAL RULE for Development**:
 
-- **ALWAYS use SM agent for story creation** - Never use bmad-master/orchestrator
-- **ALWAYS use Dev agent for implementation** - Never use bmad-master/orchestrator
+- **ALWAYS use SM agent for story creation** - Never use bmad-master or bmad-orchestrator
+- **ALWAYS use Dev agent for implementation** - Never use bmad-master or bmad-orchestrator
 - **Why this matters**: SM and Dev agents are specifically optimized for the development workflow
 - **No exceptions**: Even if using bmad-master for everything else, switch to SM → Dev for implementation
 

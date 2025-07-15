@@ -131,19 +131,64 @@ class IdeSetup {
   }
 
   async setupClaudeCode(installDir, selectedAgent) {
-    const commandsDir = path.join(installDir, ".claude", "commands");
-    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
+    // Setup bmad-core commands
+    const coreSlashPrefix = await this.getCoreSlashPrefix(installDir);
+    const coreAgents = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
+    const coreTasks = await this.getCoreTaskIds(installDir);
+    await this.setupClaudeCodeForPackage(installDir, "core", coreSlashPrefix, coreAgents, coreTasks, ".bmad-core");
 
-    await fileManager.ensureDirectory(commandsDir);
+    // Setup expansion pack commands
+    const expansionPacks = await this.getInstalledExpansionPacks(installDir);
+    for (const packInfo of expansionPacks) {
+      const packSlashPrefix = await this.getExpansionPackSlashPrefix(packInfo.path);
+      const packAgents = await this.getExpansionPackAgents(packInfo.path);
+      const packTasks = await this.getExpansionPackTasks(packInfo.path);
+      
+      if (packAgents.length > 0 || packTasks.length > 0) {
+        // Use the actual directory name where the expansion pack is installed
+        const rootPath = path.relative(installDir, packInfo.path);
+        await this.setupClaudeCodeForPackage(installDir, packInfo.name, packSlashPrefix, packAgents, packTasks, rootPath);
+      }
+    }
 
-    for (const agentId of agents) {
-      // Find the agent file
-      const agentPath = await this.findAgentPath(agentId, installDir);
-      const commandPath = path.join(commandsDir, `${agentId}.md`);
+    return true;
+  }
+
+  async setupClaudeCodeForPackage(installDir, packageName, slashPrefix, agentIds, taskIds, rootPath) {
+    const commandsBaseDir = path.join(installDir, ".claude", "commands", slashPrefix);
+    const agentsDir = path.join(commandsBaseDir, "agents");
+    const tasksDir = path.join(commandsBaseDir, "tasks");
+
+    // Ensure directories exist
+    await fileManager.ensureDirectory(agentsDir);
+    await fileManager.ensureDirectory(tasksDir);
+
+    // Setup agents
+    for (const agentId of agentIds) {
+      // Find the agent file - for expansion packs, prefer the expansion pack version
+      let agentPath;
+      if (packageName !== "core") {
+        // For expansion packs, first try to find the agent in the expansion pack directory
+        const expansionPackPath = path.join(installDir, rootPath, "agents", `${agentId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          agentPath = expansionPackPath;
+        } else {
+          // Fall back to core if not found in expansion pack
+          agentPath = await this.findAgentPath(agentId, installDir);
+        }
+      } else {
+        // For core, use the normal search
+        agentPath = await this.findAgentPath(agentId, installDir);
+      }
+      
+      const commandPath = path.join(agentsDir, `${agentId}.md`);
 
       if (agentPath) {
         // Create command file with agent content
-        const agentContent = await fileManager.readFile(agentPath);
+        let agentContent = await fileManager.readFile(agentPath);
+        
+        // Replace {root} placeholder with the appropriate root path for this context
+        agentContent = agentContent.replace(/{root}/g, rootPath);
 
         // Add command header
         let commandContent = `# /${agentId} Command\n\n`;
@@ -151,13 +196,50 @@ class IdeSetup {
         commandContent += agentContent;
 
         await fileManager.writeFile(commandPath, commandContent);
-        console.log(chalk.green(`✓ Created command: /${agentId}`));
+        console.log(chalk.green(`✓ Created agent command: /${agentId}`));
       }
     }
 
-    console.log(chalk.green(`\n✓ Created Claude Code commands in ${commandsDir}`));
+    // Setup tasks
+    for (const taskId of taskIds) {
+      // Find the task file - for expansion packs, prefer the expansion pack version
+      let taskPath;
+      if (packageName !== "core") {
+        // For expansion packs, first try to find the task in the expansion pack directory
+        const expansionPackPath = path.join(installDir, rootPath, "tasks", `${taskId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          taskPath = expansionPackPath;
+        } else {
+          // Fall back to core if not found in expansion pack
+          taskPath = await this.findTaskPath(taskId, installDir);
+        }
+      } else {
+        // For core, use the normal search
+        taskPath = await this.findTaskPath(taskId, installDir);
+      }
+      
+      const commandPath = path.join(tasksDir, `${taskId}.md`);
 
-    return true;
+      if (taskPath) {
+        // Create command file with task content
+        let taskContent = await fileManager.readFile(taskPath);
+        
+        // Replace {root} placeholder with the appropriate root path for this context
+        taskContent = taskContent.replace(/{root}/g, rootPath);
+
+        // Add command header
+        let commandContent = `# /${taskId} Task\n\n`;
+        commandContent += `When this command is used, execute the following task:\n\n`;
+        commandContent += taskContent;
+
+        await fileManager.writeFile(commandPath, commandContent);
+        console.log(chalk.green(`✓ Created task command: /${taskId}`));
+      }
+    }
+
+    console.log(chalk.green(`\n✓ Created Claude Code commands for ${packageName} in ${commandsBaseDir}`));
+    console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
+    console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
   }
 
   async setupWindsurf(installDir, selectedAgent) {
@@ -311,6 +393,49 @@ class IdeSetup {
     return [...new Set(allAgentIds)];
   }
 
+  async getCoreAgentIds(installDir) {
+    const allAgentIds = [];
+    
+    // Check core agents in .bmad-core or root only
+    let agentsDir = path.join(installDir, ".bmad-core", "agents");
+    if (!(await fileManager.pathExists(agentsDir))) {
+      agentsDir = path.join(installDir, "bmad-core", "agents");
+    }
+    
+    if (await fileManager.pathExists(agentsDir)) {
+      const glob = require("glob");
+      const agentFiles = glob.sync("*.md", { cwd: agentsDir });
+      allAgentIds.push(...agentFiles.map((file) => path.basename(file, ".md")));
+    }
+    
+    return [...new Set(allAgentIds)];
+  }
+
+  async getCoreTaskIds(installDir) {
+    const allTaskIds = [];
+    
+    // Check core tasks in .bmad-core or root only
+    let tasksDir = path.join(installDir, ".bmad-core", "tasks");
+    if (!(await fileManager.pathExists(tasksDir))) {
+      tasksDir = path.join(installDir, "bmad-core", "tasks");
+    }
+    
+    if (await fileManager.pathExists(tasksDir)) {
+      const glob = require("glob");
+      const taskFiles = glob.sync("*.md", { cwd: tasksDir });
+      allTaskIds.push(...taskFiles.map((file) => path.basename(file, ".md")));
+    }
+    
+    // Check common tasks
+    const commonTasksDir = path.join(installDir, "common", "tasks");
+    if (await fileManager.pathExists(commonTasksDir)) {
+      const commonTaskFiles = glob.sync("*.md", { cwd: commonTasksDir });
+      allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, ".md")));
+    }
+    
+    return [...new Set(allTaskIds)];
+  }
+
   async getAgentTitle(agentId, installDir) {
     // Try to find the agent file in various locations
     const possiblePaths = [
@@ -329,7 +454,7 @@ class IdeSetup {
       if (await fileManager.pathExists(agentPath)) {
         try {
           const agentContent = await fileManager.readFile(agentPath);
-          const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+          const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
           
           if (yamlMatch) {
             const yaml = yamlMatch[1];
@@ -348,6 +473,194 @@ class IdeSetup {
     return agentId.split('-').map(word => 
       word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
+  }
+
+  async getAllTaskIds(installDir) {
+    const glob = require("glob");
+    const allTaskIds = [];
+    
+    // Check core tasks in .bmad-core or root
+    let tasksDir = path.join(installDir, ".bmad-core", "tasks");
+    if (!(await fileManager.pathExists(tasksDir))) {
+      tasksDir = path.join(installDir, "bmad-core", "tasks");
+    }
+    
+    if (await fileManager.pathExists(tasksDir)) {
+      const taskFiles = glob.sync("*.md", { cwd: tasksDir });
+      allTaskIds.push(...taskFiles.map((file) => path.basename(file, ".md")));
+    }
+    
+    // Check common tasks
+    const commonTasksDir = path.join(installDir, "common", "tasks");
+    if (await fileManager.pathExists(commonTasksDir)) {
+      const commonTaskFiles = glob.sync("*.md", { cwd: commonTasksDir });
+      allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, ".md")));
+    }
+    
+    // Also check for expansion pack tasks in dot folders
+    const expansionDirs = glob.sync(".*/tasks", { cwd: installDir });
+    for (const expDir of expansionDirs) {
+      const fullExpDir = path.join(installDir, expDir);
+      const expTaskFiles = glob.sync("*.md", { cwd: fullExpDir });
+      allTaskIds.push(...expTaskFiles.map((file) => path.basename(file, ".md")));
+    }
+    
+    // Check expansion-packs folder tasks
+    const expansionPacksDir = path.join(installDir, "expansion-packs");
+    if (await fileManager.pathExists(expansionPacksDir)) {
+      const expPackDirs = glob.sync("*/tasks", { cwd: expansionPacksDir });
+      for (const expDir of expPackDirs) {
+        const fullExpDir = path.join(expansionPacksDir, expDir);
+        const expTaskFiles = glob.sync("*.md", { cwd: fullExpDir });
+        allTaskIds.push(...expTaskFiles.map((file) => path.basename(file, ".md")));
+      }
+    }
+    
+    // Remove duplicates
+    return [...new Set(allTaskIds)];
+  }
+
+  async findTaskPath(taskId, installDir) {
+    // Try to find the task file in various locations
+    const possiblePaths = [
+      path.join(installDir, ".bmad-core", "tasks", `${taskId}.md`),
+      path.join(installDir, "bmad-core", "tasks", `${taskId}.md`),
+      path.join(installDir, "common", "tasks", `${taskId}.md`)
+    ];
+    
+    // Also check expansion pack directories
+    const glob = require("glob");
+    
+    // Check dot folder expansion packs
+    const expansionDirs = glob.sync(".*/tasks", { cwd: installDir });
+    for (const expDir of expansionDirs) {
+      possiblePaths.push(path.join(installDir, expDir, `${taskId}.md`));
+    }
+    
+    // Check expansion-packs folder
+    const expansionPacksDir = path.join(installDir, "expansion-packs");
+    if (await fileManager.pathExists(expansionPacksDir)) {
+      const expPackDirs = glob.sync("*/tasks", { cwd: expansionPacksDir });
+      for (const expDir of expPackDirs) {
+        possiblePaths.push(path.join(expansionPacksDir, expDir, `${taskId}.md`));
+      }
+    }
+    
+    for (const taskPath of possiblePaths) {
+      if (await fileManager.pathExists(taskPath)) {
+        return taskPath;
+      }
+    }
+    
+    return null;
+  }
+
+  async getCoreSlashPrefix(installDir) {
+    try {
+      const coreConfigPath = path.join(installDir, ".bmad-core", "core-config.yaml");
+      if (!(await fileManager.pathExists(coreConfigPath))) {
+        // Try bmad-core directory
+        const altConfigPath = path.join(installDir, "bmad-core", "core-config.yaml");
+        if (await fileManager.pathExists(altConfigPath)) {
+          const configContent = await fileManager.readFile(altConfigPath);
+          const config = yaml.load(configContent);
+          return config.slashPrefix || "BMad";
+        }
+        return "BMad"; // fallback
+      }
+      
+      const configContent = await fileManager.readFile(coreConfigPath);
+      const config = yaml.load(configContent);
+      return config.slashPrefix || "BMad";
+    } catch (error) {
+      console.warn(`Failed to read core slashPrefix, using default 'BMad': ${error.message}`);
+      return "BMad";
+    }
+  }
+
+  async getInstalledExpansionPacks(installDir) {
+    const expansionPacks = [];
+    
+    // Check for dot-prefixed expansion packs in install directory
+    const glob = require("glob");
+    const dotExpansions = glob.sync(".bmad-*", { cwd: installDir });
+    
+    for (const dotExpansion of dotExpansions) {
+      if (dotExpansion !== ".bmad-core") {
+        const packPath = path.join(installDir, dotExpansion);
+        const packName = dotExpansion.substring(1); // remove the dot
+        expansionPacks.push({
+          name: packName,
+          path: packPath
+        });
+      }
+    }
+    
+    // Check for expansion-packs directory style
+    const expansionPacksDir = path.join(installDir, "expansion-packs");
+    if (await fileManager.pathExists(expansionPacksDir)) {
+      const packDirs = glob.sync("*", { cwd: expansionPacksDir });
+      
+      for (const packDir of packDirs) {
+        const packPath = path.join(expansionPacksDir, packDir);
+        if ((await fileManager.pathExists(packPath)) && 
+            (await fileManager.pathExists(path.join(packPath, "config.yaml")))) {
+          expansionPacks.push({
+            name: packDir,
+            path: packPath
+          });
+        }
+      }
+    }
+    
+    return expansionPacks;
+  }
+
+  async getExpansionPackSlashPrefix(packPath) {
+    try {
+      const configPath = path.join(packPath, "config.yaml");
+      if (await fileManager.pathExists(configPath)) {
+        const configContent = await fileManager.readFile(configPath);
+        const config = yaml.load(configContent);
+        return config.slashPrefix || path.basename(packPath);
+      }
+    } catch (error) {
+      console.warn(`Failed to read expansion pack slashPrefix from ${packPath}: ${error.message}`);
+    }
+    
+    return path.basename(packPath); // fallback to directory name
+  }
+
+  async getExpansionPackAgents(packPath) {
+    const agentsDir = path.join(packPath, "agents");
+    if (!(await fileManager.pathExists(agentsDir))) {
+      return [];
+    }
+    
+    try {
+      const glob = require("glob");
+      const agentFiles = glob.sync("*.md", { cwd: agentsDir });
+      return agentFiles.map(file => path.basename(file, ".md"));
+    } catch (error) {
+      console.warn(`Failed to read expansion pack agents from ${packPath}: ${error.message}`);
+      return [];
+    }
+  }
+
+  async getExpansionPackTasks(packPath) {
+    const tasksDir = path.join(packPath, "tasks");
+    if (!(await fileManager.pathExists(tasksDir))) {
+      return [];
+    }
+    
+    try {
+      const glob = require("glob");
+      const taskFiles = glob.sync("*.md", { cwd: tasksDir });
+      return taskFiles.map(file => path.basename(file, ".md"));
+    } catch (error) {
+      console.warn(`Failed to read expansion pack tasks from ${packPath}: ${error.message}`);
+      return [];
+    }
   }
 
   async setupRoo(installDir, selectedAgent) {
@@ -389,7 +702,7 @@ class IdeSetup {
         const agentContent = await fileManager.readFile(agentPath);
 
         // Extract YAML content
-        const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+        const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
         if (yamlMatch) {
           const yaml = yamlMatch[1];
 
@@ -509,15 +822,56 @@ class IdeSetup {
     return true;
   }
 
-  async setupGeminiCli(installDir, selectedAgent) {
+  async setupGeminiCli(installDir) {
     await initializeModules();
     const geminiDir = path.join(installDir, ".gemini");
-    const agentsContextDir = path.join(geminiDir, "agents");
-    await fileManager.ensureDirectory(agentsContextDir);
+    const bmadMethodDir = path.join(geminiDir, "bmad-method");
+    await fileManager.ensureDirectory(bmadMethodDir);
+
+    // Update logic for existing settings.json
+    const settingsPath = path.join(geminiDir, "settings.json");
+    if (await fileManager.pathExists(settingsPath)) {
+      try {
+        const settingsContent = await fileManager.readFile(settingsPath);
+        const settings = JSON.parse(settingsContent);
+        let updated = false;
+        
+        // Handle contextFileName property
+        if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
+          const originalLength = settings.contextFileName.length;
+          settings.contextFileName = settings.contextFileName.filter(
+            (fileName) => !fileName.startsWith("agents/")
+          );
+          if (settings.contextFileName.length !== originalLength) {
+            updated = true;
+          }
+        }
+        
+        if (updated) {
+          await fileManager.writeFile(
+            settingsPath,
+            JSON.stringify(settings, null, 2)
+          );
+          console.log(chalk.green("✓ Updated .gemini/settings.json - removed agent file references"));
+        }
+      } catch (error) {
+        console.warn(
+          chalk.yellow("Could not update .gemini/settings.json"),
+          error
+        );
+      }
+    }
+
+    // Remove old agents directory
+    const agentsDir = path.join(geminiDir, "agents");
+    if (await fileManager.pathExists(agentsDir)) {
+      await fileManager.removeDirectory(agentsDir);
+      console.log(chalk.green("✓ Removed old .gemini/agents directory"));
+    }
 
     // Get all available agents
     const agents = await this.getAllAgentIds(installDir);
-    const agentContextFiles = [];
+    let concatenatedContent = "";
 
     for (const agentId of agents) {
       // Find the source agent file
@@ -525,43 +879,46 @@ class IdeSetup {
 
       if (agentPath) {
         const agentContent = await fileManager.readFile(agentPath);
-        const contextFilePath = path.join(agentsContextDir, `${agentId}.md`);
-
-        // Copy the agent content directly into its own context file
-        await fileManager.writeFile(contextFilePath, agentContent);
-
-        // Store the relative path for settings.json
-        const relativePath = path.relative(geminiDir, contextFilePath);
-        agentContextFiles.push(relativePath.replace(/\\/g, '/')); // Ensure forward slashes for consistency
-        console.log(chalk.green(`✓ Created context file for @${agentId}`));
+        
+        // Create properly formatted agent rule content (similar to trae)
+        let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
+        agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
+          agentId,
+          installDir
+        )} agent persona.\n\n`;
+        agentRuleContent += "## Agent Activation\n\n";
+        agentRuleContent +=
+          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
+        agentRuleContent += "```yaml\n";
+        // Extract just the YAML content from the agent file
+        const yamlContent = extractYamlFromAgent(agentContent);
+        if (yamlContent) {
+          agentRuleContent += yamlContent;
+        }
+        else {
+          // If no YAML found, include the whole content minus the header
+          agentRuleContent += agentContent.replace(/^#.*$/m, "").trim();
+        }
+        agentRuleContent += "\n```\n\n";
+        agentRuleContent += "## File Reference\n\n";
+        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
+        agentRuleContent += "## Usage\n\n";
+        agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
+          agentId,
+          installDir
+        )} persona and follow all instructions defined in the YAML configuration above.\n`;
+        
+        // Add to concatenated content with separator
+        concatenatedContent += agentRuleContent + "\n\n---\n\n";
+        console.log(chalk.green(`✓ Added context for @${agentId}`));
       }
     }
 
-    console.log(chalk.green(`\n✓ Created individual agent context files in ${agentsContextDir}`));
-
-    // Add GEMINI.md to the context files array
-    agentContextFiles.push("GEMINI.md");
-
-    // Create or update settings.json
-    const settingsPath = path.join(geminiDir, "settings.json");
-    let settings = {};
-
-    if (await fileManager.pathExists(settingsPath)) {
-      try {
-        const existingSettings = await fileManager.readFile(settingsPath);
-        settings = JSON.parse(existingSettings);
-        console.log(chalk.yellow("Found existing .gemini/settings.json. Merging settings..."));
-      } catch (e) {
-        console.error(chalk.red("Error parsing existing settings.json. It will be overwritten."), e);
-        settings = {};
-      }
-    }
-
-    // Set contextFileName to our new array of files
-    settings.contextFileName = agentContextFiles;
-
-    await fileManager.writeFile(settingsPath, JSON.stringify(settings, null, 2));
-    console.log(chalk.green(`✓ Configured .gemini/settings.json to load all agent context files.`));
+    // Write the concatenated content to GEMINI.md
+    const geminiMdPath = path.join(bmadMethodDir, "GEMINI.md");
+    await fileManager.writeFile(geminiMdPath, concatenatedContent);
+    console.log(chalk.green(`\n✓ Created GEMINI.md in ${bmadMethodDir}`));
 
     return true;
   }
@@ -588,7 +945,7 @@ class IdeSetup {
         const agentTitle = await this.getAgentTitle(agentId, installDir);
         
         // Extract whenToUse for the description
-        const yamlMatch = agentContent.match(/```ya?ml\n([\s\S]*?)```/);
+        const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
         let description = `Activates the ${agentTitle} agent persona.`;
         if (yamlMatch) {
           const whenToUseMatch = yamlMatch[1].match(/whenToUse:\s*"(.*?)"/);

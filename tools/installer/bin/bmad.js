@@ -124,7 +124,19 @@ program
 
 async function promptInstallation() {
   await initializeModules();
-  console.log(chalk.bold.blue(`\nWelcome to BMad Method Installer v${version}\n`));
+  
+  // Display ASCII logo
+  console.log(chalk.bold.cyan(`
+██████╗ ███╗   ███╗ █████╗ ██████╗       ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ 
+██╔══██╗████╗ ████║██╔══██╗██╔══██╗      ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗
+██████╔╝██╔████╔██║███████║██║  ██║█████╗██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║
+██╔══██╗██║╚██╔╝██║██╔══██║██║  ██║╚════╝██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║
+██████╔╝██║ ╚═╝ ██║██║  ██║██████╔╝      ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝
+╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝       ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
+  `));
+  
+  console.log(chalk.bold.magenta('🚀 Universal AI Agent Framework for Any Domain'));
+  console.log(chalk.bold.blue(`✨ Installer v${version}\n`));
 
   const answers = {};
 
@@ -277,23 +289,55 @@ async function promptInstallation() {
   }
 
   // Ask for IDE configuration
-  const { ides } = await inquirer.prompt([
-    {
-      type: 'checkbox',
-      name: 'ides',
-      message: 'Which IDE(s) are you using? (press Enter to skip IDE setup, or select any to configure):',
-      choices: [
-        { name: 'Cursor', value: 'cursor' },
-        { name: 'Claude Code', value: 'claude-code' },
-        { name: 'Windsurf', value: 'windsurf' },
-        { name: 'Trae', value: 'trae' }, // { name: 'Trae', value: 'trae'}
-        { name: 'Roo Code', value: 'roo' },
-        { name: 'Cline', value: 'cline' },
-        { name: 'Gemini CLI', value: 'gemini' },
-        { name: 'Github Copilot', value: 'github-copilot' }
-      ]
+  let ides = [];
+  let ideSelectionComplete = false;
+  
+  while (!ideSelectionComplete) {
+    console.log(chalk.cyan('\n🛠️  IDE Configuration'));
+    console.log(chalk.bold.yellow.bgRed(' ⚠️  IMPORTANT: This is a MULTISELECT! Use SPACEBAR to toggle each IDE! '));
+    console.log(chalk.bold.magenta('🔸 Use arrow keys to navigate'));
+    console.log(chalk.bold.magenta('🔸 Use SPACEBAR to select/deselect IDEs'));
+    console.log(chalk.bold.magenta('🔸 Press ENTER when finished selecting\n'));
+    
+    const ideResponse = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'ides',
+        message: 'Which IDE(s) do you want to configure? (Select with SPACEBAR, confirm with ENTER):',
+        choices: [
+          { name: 'Cursor', value: 'cursor' },
+          { name: 'Claude Code', value: 'claude-code' },
+          { name: 'Windsurf', value: 'windsurf' },
+          { name: 'Trae', value: 'trae' }, // { name: 'Trae', value: 'trae'}
+          { name: 'Roo Code', value: 'roo' },
+          { name: 'Cline', value: 'cline' },
+          { name: 'Gemini CLI', value: 'gemini' },
+          { name: 'Github Copilot', value: 'github-copilot' }
+        ]
+      }
+    ]);
+    
+    ides = ideResponse.ides;
+
+    // Confirm no IDE selection if none selected
+    if (ides.length === 0) {
+      const { confirmNoIde } = await inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'confirmNoIde',
+          message: chalk.red('⚠️  You have NOT selected any IDEs. This means NO IDE integration will be set up. Is this correct?'),
+          default: false
+        }
+      ]);
+      
+      if (!confirmNoIde) {
+        console.log(chalk.bold.red('\n🔄 Returning to IDE selection. Remember to use SPACEBAR to select IDEs!\n'));
+        continue; // Go back to IDE selection only
+      }
     }
-  ]);
+    
+    ideSelectionComplete = true;
+  }
 
   // Use selected IDEs directly
   answers.ides = ides;

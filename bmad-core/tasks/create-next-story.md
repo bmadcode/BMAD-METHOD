@@ -8,7 +8,7 @@ To identify the next logical story based on project progress and epic definition
 
 ### 0. Load Core Configuration and Check Workflow
 
-- Load `.bmad-core/core-config.yaml` from the project root
+- Load `{root}/core-config.yaml` from the project root
 - If the file does not exist, HALT and inform the user: "core-config.yaml not found. This file is required for story creation. You can either: 1) Copy it from GITHUB bmad-core/core-config.yaml and configure it for your project OR 2) Run the BMad installer against your project to upgrade and add the file automatically. Please add and configure core-config.yaml before proceeding."
 - Extract key configurations: `devStoryLocation`, `prd.*`, `architecture.*`, `workflow.*`
 
@@ -102,12 +102,11 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
 - Verify all source references are included for technical details
 - Ensure tasks align with both epic requirements and architecture constraints
 - Update status to "Draft" and save the story file
-- If `workflow.trackProgress: true` and `workflow.updateOnCompletion: true`, call update-workflow-plan task to mark story creation step complete
-- Execute `tasks/execute-checklist` `checklists/story-draft-checklist`
+- Execute `{root}/tasks/execute-checklist` `{root}/checklists/story-draft-checklist`
 - Provide summary to user including:
   - Story created: `{devStoryLocation}/{epicNum}.{storyNum}.story.md`
   - Status: Draft
   - Key technical components included from architecture docs
   - Any deviations or conflicts noted between epic and architecture
   - Checklist Results
-  - Next steps: For Complex stories, suggest the user carefully review the story draft and also optionally have the PO run the task `validate-next-story`
+  - Next steps: For Complex stories, suggest the user carefully review the story draft and also optionally have the PO run the task `{root}/tasks/validate-next-story`

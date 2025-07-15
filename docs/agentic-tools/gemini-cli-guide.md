@@ -6,23 +6,22 @@ For the complete workflow, see the [BMad Workflow Guide](../bmad-workflow-guide.
 
 When running `npx bmad-method install`, select **Gemini CLI** as your IDE. This creates:
 
-- `.gemini/agents/` directory with all agent context files
-- `.gemini/settings.json` configured to load all agents automatically
+- `.gemini/bmad-method/` directory with all agent context in GEMINI.md file
 
 ## Using BMad Agents with Gemini CLI
 
 Simply mention the agent in your prompt:
 
-- "As @dev, implement the login feature"
-- "Acting as @architect, review this system design"
-- "@sm, create the next story for our project"
+- "As \*dev, implement the login feature"
+- "Acting as \*architect, review this system design"
+- "\*sm, create the next story for our project"
 
 The Gemini CLI automatically loads the appropriate agent context.
 
 ## Gemini CLI-Specific Features
 
-- **Context files**: All agents loaded as context in `.gemini/agents/`
-- **Automatic loading**: Settings.json ensures agents are always available
+- **Context files**: All agents loaded as context in `.gemini/bmad-method/GEMINI.md`
+- **Automatic loading**: GEMINI.md ensures agents are always available
 - **Natural language**: No special syntax needed, just mention the agent
 
 ## Tips for Gemini CLI Users

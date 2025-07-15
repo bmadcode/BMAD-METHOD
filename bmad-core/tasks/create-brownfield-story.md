@@ -22,20 +22,7 @@ Create detailed, implementation-ready stories for brownfield projects where trad
 
 ## Task Execution Instructions
 
-### 0. Check Workflow Plan and Documentation Context
-
-[[LLM: Check for workflow plan first, then available documentation]]
-
-#### 0.1 Check Workflow Plan
-
-- Load core-config.yaml and check if `workflow.trackProgress: true`
-- If yes, check for active plan at `workflow.planFile`
-- If plan exists:
-  - Verify story creation aligns with current plan step
-  - If out of sequence, warn user (enforce based on config)
-  - Note which step this story creation corresponds to
-
-#### 0.2 Determine Documentation Context
+### 0. Documentation Context
 
 Check for available documentation in this order:
 
@@ -68,7 +55,7 @@ Based on available documentation:
 
 #### 1.2 Gather Essential Context
 
-[[LLM: For brownfield stories, you MUST gather enough context for safe implementation. Be prepared to ask the user for missing information.]]
+CRITICAL: For brownfield stories, you MUST gather enough context for safe implementation. Be prepared to ask the user for missing information.
 
 **Required Information Checklist:**
 
@@ -78,21 +65,7 @@ Based on available documentation:
 - [ ] What technical constraints exist?
 - [ ] Are there any "gotchas" or workarounds to know about?
 
-If any required information is missing, ask the user:
-
-```
-I need additional context for this brownfield story:
-
-Missing Information:
-- [List specific missing items]
-
-Please provide:
-1. [Specific question about integration]
-2. [Specific question about patterns]
-3. [Specific question about constraints]
-
-Or point me to documentation that contains this information.
-```
+If any required information is missing, list the missing information and ask the user to provide it.
 
 ### 2. Extract Technical Context from Available Sources
 
@@ -117,8 +90,6 @@ If using brownfield PRD:
 
 #### 2.3 From User Documentation
 
-[[LLM: When working with non-BMad documentation, actively extract and organize the information into categories the Dev agent will need]]
-
 Ask the user to help identify:
 
 - Relevant technical specifications
@@ -138,12 +109,13 @@ Start with the story template, filling in what's known:
 ## Status: Draft
 
 ## Story
+
 As a {{user_type}},
 I want {{enhancement_capability}},
 so that {{value_delivered}}.
 
 ## Context Source
-[[LLM: Document where story requirements came from]]
+
 - Source Document: {{document name/type}}
 - Enhancement Type: {{single feature/bug fix/integration/etc}}
 - Existing System Impact: {{brief assessment}}
@@ -151,7 +123,7 @@ so that {{value_delivered}}.
 
 #### 3.2 Develop Acceptance Criteria
 
-[[LLM: For brownfield, ALWAYS include criteria about maintaining existing functionality]]
+Critical: For brownfield, ALWAYS include criteria about maintaining existing functionality
 
 Standard structure:
 
@@ -163,7 +135,7 @@ Standard structure:
 
 #### 3.3 Gather Technical Guidance
 
-[[LLM: This is where you'll need to be interactive with the user if information is missing]]
+Critical: This is where you'll need to be interactive with the user if information is missing
 
 Create Dev Technical Guidance section with available information:
 
@@ -180,22 +152,8 @@ Create Dev Technical Guidance section with available information:
 [From documentation or user input]
 
 ### Missing Information
-[[LLM: List anything you couldn't find that dev will need]]
-- [ ] {{missing item 1}}
-- [ ] {{missing item 2}}
-```
 
-If critical information is missing, pause and ask:
-
-```
-To complete the technical guidance for this story, I need:
-
-1. **{{Missing Category}}**: 
-   - Specifically: {{what you need to know}}
-   - Why needed: {{how it impacts implementation}}
-   
-Can you provide this information or point me to relevant code/docs?
-```
+Critical: List anything you couldn't find that dev will need and ask for the missing information
 
 ### 4. Task Generation with Safety Checks
 
@@ -236,7 +194,7 @@ Example task structure for brownfield:
 
 ### 5. Risk Assessment and Mitigation
 
-[[LLM: CRITICAL for brownfield - always include risk assessment]]
+CRITICAL: for brownfield - always include risk assessment
 
 Add section for brownfield-specific risks:
 
@@ -324,15 +282,6 @@ Next Steps:
 4. Dev agent can then implement with safety checks
 ```
 
-### 9. Update Workflow Plan (if applicable)
-
-[[LLM: After successful story creation]]
-
-- If workflow plan tracking is enabled and story was created successfully:
-  - Call update-workflow-plan task to mark step complete
-  - Parameters: task: create-brownfield-story, step_id: {from plan check}, status: complete
-  - If plan shows next recommended step, include it in handoff message
-
 ## Success Criteria
 
 The brownfield story creation is successful when:
@@ -348,7 +297,7 @@ The brownfield story creation is successful when:
 ## Important Notes
 
 - This task is specifically for brownfield projects with non-standard documentation
-- Always prioritize existing system safety over new features
+- Always prioritize existing system stability over new features
 - When in doubt, add exploration and verification tasks
 - It's better to ask the user for clarification than make assumptions
 - Each story should be self-contained for the dev agent

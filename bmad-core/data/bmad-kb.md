@@ -162,8 +162,8 @@ npx bmad-method install
 
 **CRITICAL RULE for Development**:
 
-- **ALWAYS use SM agent for story creation** - Never use bmad-master/orchestrator
-- **ALWAYS use Dev agent for implementation** - Never use bmad-master/orchestrator
+- **ALWAYS use SM agent for story creation** - Never use bmad-master or bmad-orchestrator
+- **ALWAYS use Dev agent for implementation** - Never use bmad-master or bmad-orchestrator
 - **Why this matters**: SM and Dev agents are specifically optimized for the development workflow
 - **No exceptions**: Even if using bmad-master for everything else, switch to SM → Dev for implementation
 
