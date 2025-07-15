@@ -1,3 +1,10 @@
+## [4.30.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.0...v4.30.1) (2025-07-15)
+
+
+### Bug Fixes
+
+* added logo to installer, because why not... ([2cea37a](https://github.com/bmadcode/BMAD-METHOD/commit/2cea37aa8c1924ddf5aa476f4c312837f2615a70))
+
 # [4.30.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.29.7...v4.30.0) (2025-07-15)
 
 
