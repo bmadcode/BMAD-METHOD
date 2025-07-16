@@ -7,6 +7,7 @@ agents:
   - analyst
   - pm
   - ux-expert
+  - ux-reviewer
   - architect
   - po
 workflows:
