@@ -1,0 +1,7 @@
+# UX Analysis outputs
+*.png
+*.jpg
+*.json
+*.md
+reports/
+screenshots/

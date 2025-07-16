@@ -1,0 +1,39 @@
+{
+  "name": "bmad-ux-automation",
+  "version": "1.0.0",
+  "description": "BMAD native UX automation tools for comprehensive website analysis",
+  "main": "ux-orchestrator.js",
+  "bin": {
+    "bmad-ux": "./ux-cli.js"
+  },
+  "scripts": {
+    "quick": "node ux-cli.js quick",
+    "deep": "node ux-cli.js deep",
+    "screenshot": "node ux-cli.js screenshot",
+    "accessibility": "node ux-cli.js accessibility",
+    "performance": "node ux-cli.js performance",
+    "mobile": "node ux-cli.js mobile",
+    "demo": "node ux-cli.js demo",
+    "install": "node setup.js"
+  },
+  "dependencies": {
+    "playwright": "^1.54.1",
+    "commander": "^11.0.0",
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "jest": "^29.6.2"
+  },
+  "keywords": [
+    "ux",
+    "automation",
+    "testing",
+    "accessibility",
+    "performance",
+    "screenshots",
+    "bmad"
+  ],
+  "author": "BMAD Method",
+  "license": "MIT"
+}
