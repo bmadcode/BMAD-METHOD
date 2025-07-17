@@ -690,7 +690,9 @@ class IdeSetup {
 
     for (const agentId of agents) {
       // Skip if already exists
-      if (existingModes.includes(`bmad-${agentId}`)) {
+      // Check both with and without bmad- prefix to handle both cases
+      const checkSlug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
+      if (existingModes.includes(checkSlug)) {
         console.log(chalk.dim(`Skipping ${agentId} - already exists in .roomodes`));
         continue;
       }
@@ -720,7 +722,9 @@ class IdeSetup {
             : `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
 
           // Build mode entry with proper formatting (matching exact indentation)
-          newModesContent += ` - slug: bmad-${agentId}\n`;
+          // Avoid double "bmad-" prefix for agents that already have it
+          const slug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
+          newModesContent += ` - slug: ${slug}\n`;
           newModesContent += `   name: '${icon} ${title}'\n`;
           newModesContent += `   roleDefinition: ${roleDefinition}\n`;
           newModesContent += `   whenToUse: ${whenToUse}\n`;

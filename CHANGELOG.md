@@ -1,3 +1,10 @@
+## [4.30.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.1...v4.30.2) (2025-07-17)
+
+
+### Bug Fixes
+
+* remove z2 ([dcb36a9](https://github.com/bmadcode/BMAD-METHOD/commit/dcb36a9b44b6644f6b2723c9067abaa9b0bc1999))
+
 ## [4.30.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.0...v4.30.1) (2025-07-15)
 
 
