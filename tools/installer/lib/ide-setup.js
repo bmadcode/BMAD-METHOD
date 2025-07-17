@@ -960,7 +960,7 @@ class IdeSetup {
         
         let chatmodeContent = `---
 description: "${description.replace(/"/g, '\\"')}"
-tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'usages']
+tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'usages', 'editFiles', 'runCommands', 'runTasks', 'runTests', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure']
 ---
 
 `;
