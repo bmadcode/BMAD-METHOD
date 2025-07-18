@@ -37,7 +37,7 @@ Use Google's Gemini for collaborative planning with the full team:
 2. **Create a new Gem**:
    - Give it a title and description (e.g., "BMad Team Fullstack")
 3. **Load team-fullstack**:
-   - Copy contents of: `dist/teams/team-fullstack.txt` from your project
+   - Copy contents of: `web-bundles/teams/team-fullstack.txt` from your project
    - Paste this content into the Gem setup to configure the team
 4. **Collaborate with the team**:
    - Business Analyst: Requirements gathering
