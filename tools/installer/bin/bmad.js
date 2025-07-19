@@ -4,17 +4,8 @@ const { program } = require('commander');
 const path = require('path');
 const fs = require('fs').promises;
 const yaml = require('js-yaml');
-
-// Dynamic imports for ES modules
-let chalk, inquirer;
-
-// Initialize ES modules
-async function initializeModules() {
-  if (!chalk) {
-    chalk = (await import('chalk')).default;
-    inquirer = (await import('inquirer')).default;
-  }
-}
+const chalk = require('chalk');
+const inquirer = require('inquirer');
 
 // Handle both execution contexts (from root via npx or from installer directory)
 let version;
@@ -54,12 +45,12 @@ program
   .option('-e, --expansion-packs <packs...>', 'Install specific expansion packs (can specify multiple)')
   .action(async (options) => {
     try {
-      await initializeModules();
       if (!options.full && !options.expansionOnly) {
         // Interactive mode
         const answers = await promptInstallation();
         if (!answers._alreadyInstalled) {
           await installer.install(answers);
+          process.exit(0);
         }
       } else {
         // Direct mode
@@ -73,9 +64,9 @@ program
           expansionPacks: options.expansionPacks || []
         };
         await installer.install(config);
+        process.exit(0);
       }
     } catch (error) {
-      if (!chalk) await initializeModules();
       console.error(chalk.red('Installation failed:'), error.message);
       process.exit(1);
     }
@@ -90,7 +81,6 @@ program
     try {
       await installer.update();
     } catch (error) {
-      if (!chalk) await initializeModules();
       console.error(chalk.red('Update failed:'), error.message);
       process.exit(1);
     }
@@ -103,7 +93,6 @@ program
     try {
       await installer.listExpansionPacks();
     } catch (error) {
-      if (!chalk) await initializeModules();
       console.error(chalk.red('Error:'), error.message);
       process.exit(1);
     }
@@ -116,14 +105,12 @@ program
     try {
       await installer.showStatus();
     } catch (error) {
-      if (!chalk) await initializeModules();
       console.error(chalk.red('Error:'), error.message);
       process.exit(1);
     }
   });
 
 async function promptInstallation() {
-  await initializeModules();
   
   // Display ASCII logo
   console.log(chalk.bold.cyan(`
@@ -184,7 +171,7 @@ async function promptInstallation() {
       : `(v${currentVersion} → v${newVersion})`;
     bmadOptionText = `Update ${coreShortTitle} ${versionInfo} .bmad-core`;
   } else {
-    bmadOptionText = `Install ${coreShortTitle} (v${coreConfig.version || version}) .bmad-core`;
+    bmadOptionText = `${coreShortTitle} (v${coreConfig.version || version}) .bmad-core`;
   }
   
   choices.push({
@@ -204,9 +191,9 @@ async function promptInstallation() {
       const versionInfo = currentVersion === newVersion 
         ? `(v${currentVersion} - reinstall)`
         : `(v${currentVersion} → v${newVersion})`;
-      packOptionText = `Update ${pack.description} ${versionInfo} .${pack.id}`;
+      packOptionText = `Update ${pack.shortTitle} ${versionInfo} .${pack.id}`;
     } else {
-      packOptionText = `Install ${pack.description} (v${pack.version}) .${pack.id}`;
+      packOptionText = `${pack.shortTitle} (v${pack.version}) .${pack.id}`;
     }
     
     choices.push({

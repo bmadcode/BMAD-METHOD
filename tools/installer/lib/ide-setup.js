@@ -1,26 +1,17 @@
 const path = require("path");
 const fs = require("fs-extra");
 const yaml = require("js-yaml");
+const chalk = require("chalk");
+const inquirer = require("inquirer");
 const fileManager = require("./file-manager");
 const configLoader = require("./config-loader");
 const { extractYamlFromAgent } = require("../../lib/yaml-utils");
+const BaseIdeSetup = require("./ide-base-setup");
+const resourceLocator = require("./resource-locator");
 
-// Dynamic import for ES module
-let chalk;
-let inquirer;
-
-// Initialize ES modules
-async function initializeModules() {
-  if (!chalk) {
-    chalk = (await import("chalk")).default;
-  }
-  if (!inquirer) {
-    inquirer = (await import("inquirer")).default;
-  }
-}
-
-class IdeSetup {
+class IdeSetup extends BaseIdeSetup {
   constructor() {
+    super();
     this.ideAgentConfig = null;
   }
 
@@ -42,7 +33,6 @@ class IdeSetup {
   }
 
   async setup(ide, installDir, selectedAgent = null, spinner = null, preConfiguredSettings = null) {
-    await initializeModules();
     const ideConfig = await configLoader.getIdeConfiguration(ide);
 
     if (!ideConfig) {
@@ -80,53 +70,17 @@ class IdeSetup {
     await fileManager.ensureDirectory(cursorRulesDir);
 
     for (const agentId of agents) {
-      // Find the agent file
       const agentPath = await this.findAgentPath(agentId, installDir);
 
       if (agentPath) {
-        const agentContent = await fileManager.readFile(agentPath);
+        const mdcContent = await this.createAgentRuleContent(agentId, agentPath, installDir, 'mdc');
         const mdcPath = path.join(cursorRulesDir, `${agentId}.mdc`);
-
-        // Create MDC content with proper format
-        let mdcContent = "---\n";
-        mdcContent += "description: \n";
-        mdcContent += "globs: []\n";
-        mdcContent += "alwaysApply: false\n";
-        mdcContent += "---\n\n";
-        mdcContent += `# ${agentId.toUpperCase()} Agent Rule\n\n`;
-        mdcContent += `This rule is triggered when the user types \`@${agentId}\` and activates the ${await this.getAgentTitle(
-          agentId,
-          installDir
-        )} agent persona.\n\n`;
-        mdcContent += "## Agent Activation\n\n";
-        mdcContent +=
-          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
-        mdcContent += "```yaml\n";
-        // Extract just the YAML content from the agent file
-        const yamlContent = extractYamlFromAgent(agentContent);
-        if (yamlContent) {
-          mdcContent += yamlContent;
-        } else {
-          // If no YAML found, include the whole content minus the header
-          mdcContent += agentContent.replace(/^#.*$/m, "").trim();
-        }
-        mdcContent += "\n```\n\n";
-        mdcContent += "## File Reference\n\n";
-        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
-        mdcContent += `The complete agent definition is available in [${relativePath}](mdc:${relativePath}).\n\n`;
-        mdcContent += "## Usage\n\n";
-        mdcContent += `When the user types \`@${agentId}\`, activate this ${await this.getAgentTitle(
-          agentId,
-          installDir
-        )} persona and follow all instructions defined in the YAML configuration above.\n`;
-
         await fileManager.writeFile(mdcPath, mdcContent);
         console.log(chalk.green(`✓ Created rule: ${agentId}.mdc`));
       }
     }
 
     console.log(chalk.green(`\n✓ Created Cursor rules in ${cursorRulesDir}`));
-
     return true;
   }
 
@@ -827,7 +781,6 @@ class IdeSetup {
   }
 
   async setupGeminiCli(installDir) {
-    await initializeModules();
     const geminiDir = path.join(installDir, ".gemini");
     const bmadMethodDir = path.join(geminiDir, "bmad-method");
     await fileManager.ensureDirectory(bmadMethodDir);
@@ -928,8 +881,6 @@ class IdeSetup {
   }
 
   async setupGitHubCopilot(installDir, selectedAgent, spinner = null, preConfiguredSettings = null) {
-    await initializeModules();
-    
     // Configure VS Code workspace settings first to avoid UI conflicts with loading spinners
     await this.configureVsCodeSettings(installDir, spinner, preConfiguredSettings);
     
@@ -978,7 +929,6 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
   }
 
   async configureVsCodeSettings(installDir, spinner, preConfiguredSettings = null) {
-    await initializeModules(); // Ensure inquirer is loaded
     const vscodeDir = path.join(installDir, ".vscode");
     const settingsPath = path.join(vscodeDir, "settings.json");
     

@@ -1,18 +1,11 @@
 const fs = require("fs-extra");
 const path = require("path");
 const crypto = require("crypto");
-const glob = require("glob");
 const yaml = require("js-yaml");
-
-// Dynamic import for ES module
-let chalk;
-
-// Initialize ES modules
-async function initializeModules() {
-  if (!chalk) {
-    chalk = (await import("chalk")).default;
-  }
-}
+const chalk = require("chalk");
+const { createReadStream, createWriteStream, promises: fsPromises } = require('fs');
+const { pipeline } = require('stream/promises');
+const resourceLocator = require('./resource-locator');
 
 class FileManager {
   constructor() {
@@ -23,10 +16,19 @@ class FileManager {
   async copyFile(source, destination) {
     try {
       await fs.ensureDir(path.dirname(destination));
-      await fs.copy(source, destination);
+      
+      // Use streaming for large files (> 10MB)
+      const stats = await fs.stat(source);
+      if (stats.size > 10 * 1024 * 1024) {
+        await pipeline(
+          createReadStream(source),
+          createWriteStream(destination)
+        );
+      } else {
+        await fs.copy(source, destination);
+      }
       return true;
     } catch (error) {
-      await initializeModules();
       console.error(chalk.red(`Failed to copy ${source}:`), error.message);
       return false;
     }
@@ -35,10 +37,28 @@ class FileManager {
   async copyDirectory(source, destination) {
     try {
       await fs.ensureDir(destination);
-      await fs.copy(source, destination);
+      
+      // Use streaming copy for large directories
+      const files = await resourceLocator.findFiles('**/*', {
+        cwd: source,
+        nodir: true
+      });
+      
+      // Process files in batches to avoid memory issues
+      const batchSize = 50;
+      for (let i = 0; i < files.length; i += batchSize) {
+        const batch = files.slice(i, i + batchSize);
+        await Promise.all(
+          batch.map(file => 
+            this.copyFile(
+              path.join(source, file),
+              path.join(destination, file)
+            )
+          )
+        );
+      }
       return true;
     } catch (error) {
-      await initializeModules();
       console.error(
         chalk.red(`Failed to copy directory ${source}:`),
         error.message
@@ -48,7 +68,7 @@ class FileManager {
   }
 
   async copyGlobPattern(pattern, sourceDir, destDir, rootValue = null) {
-    const files = glob.sync(pattern, { cwd: sourceDir });
+    const files = await resourceLocator.findFiles(pattern, { cwd: sourceDir });
     const copied = [];
 
     for (const file of files) {
@@ -75,12 +95,15 @@ class FileManager {
 
   async calculateFileHash(filePath) {
     try {
-      const content = await fs.readFile(filePath);
-      return crypto
-        .createHash("sha256")
-        .update(content)
-        .digest("hex")
-        .slice(0, 16);
+      // Use streaming for hash calculation to reduce memory usage
+      const stream = createReadStream(filePath);
+      const hash = crypto.createHash("sha256");
+      
+      for await (const chunk of stream) {
+        hash.update(chunk);
+      }
+      
+      return hash.digest("hex").slice(0, 16);
     } catch (error) {
       return null;
     }
@@ -94,7 +117,7 @@ class FileManager {
     );
 
     // Read version from core-config.yaml
-    const coreConfigPath = path.join(__dirname, "../../../bmad-core/core-config.yaml");
+    const coreConfigPath = path.join(resourceLocator.getBmadCorePath(), "core-config.yaml");
     let coreVersion = "unknown";
     try {
       const coreConfigContent = await fs.readFile(coreConfigPath, "utf8");
@@ -304,7 +327,6 @@ class FileManager {
       
       return true;
     } catch (error) {
-      await initializeModules();
       console.error(chalk.red(`Failed to modify core-config.yaml:`), error.message);
       return false;
     }
@@ -312,22 +334,35 @@ class FileManager {
 
   async copyFileWithRootReplacement(source, destination, rootValue) {
     try {
-      // Read the source file content
-      const fs = require('fs').promises;
-      const content = await fs.readFile(source, 'utf8');
+      // Check file size to determine if we should stream
+      const stats = await fs.stat(source);
       
-      // Replace {root} with the specified root value
-      const updatedContent = content.replace(/\{root\}/g, rootValue);
-      
-      // Ensure directory exists
-      await this.ensureDirectory(path.dirname(destination));
-      
-      // Write the updated content
-      await fs.writeFile(destination, updatedContent, 'utf8');
+      if (stats.size > 5 * 1024 * 1024) { // 5MB threshold
+        // Use streaming for large files
+        const { Transform } = require('stream');
+        const replaceStream = new Transform({
+          transform(chunk, encoding, callback) {
+            const modified = chunk.toString().replace(/\{root\}/g, rootValue);
+            callback(null, modified);
+          }
+        });
+        
+        await this.ensureDirectory(path.dirname(destination));
+        await pipeline(
+          createReadStream(source, { encoding: 'utf8' }),
+          replaceStream,
+          createWriteStream(destination, { encoding: 'utf8' })
+        );
+      } else {
+        // Regular approach for smaller files
+        const content = await fsPromises.readFile(source, 'utf8');
+        const updatedContent = content.replace(/\{root\}/g, rootValue);
+        await this.ensureDirectory(path.dirname(destination));
+        await fsPromises.writeFile(destination, updatedContent, 'utf8');
+      }
       
       return true;
     } catch (error) {
-      await initializeModules();
       console.error(chalk.red(`Failed to copy ${source} with root replacement:`), error.message);
       return false;
     }
@@ -335,11 +370,10 @@ class FileManager {
 
   async copyDirectoryWithRootReplacement(source, destination, rootValue, fileExtensions = ['.md', '.yaml', '.yml']) {
     try {
-      await initializeModules(); // Ensure chalk is initialized
       await this.ensureDirectory(destination);
       
       // Get all files in source directory
-      const files = glob.sync('**/*', { 
+      const files = await resourceLocator.findFiles('**/*', { 
         cwd: source, 
         nodir: true 
       });
@@ -369,7 +403,6 @@ class FileManager {
       
       return true;
     } catch (error) {
-      await initializeModules();
       console.error(chalk.red(`Failed to copy directory ${source} with root replacement:`), error.message);
       return false;
     }

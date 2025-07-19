@@ -1,26 +1,19 @@
 const path = require("node:path");
+const fs = require("fs-extra");
+const chalk = require("chalk");
+const ora = require("ora");
+const inquirer = require("inquirer");
 const fileManager = require("./file-manager");
 const configLoader = require("./config-loader");
 const ideSetup = require("./ide-setup");
 const { extractYamlFromAgent } = require("../../lib/yaml-utils");
-
-// Dynamic imports for ES modules
-let chalk, ora, inquirer;
-
-// Initialize ES modules
-async function initializeModules() {
-  if (!chalk) {
-    chalk = (await import("chalk")).default;
-    ora = (await import("ora")).default;
-    inquirer = (await import("inquirer")).default;
-  }
-}
+const resourceLocator = require("./resource-locator");
 
 class Installer {
   async getCoreVersion() {
     const yaml = require("js-yaml");
     const fs = require("fs-extra");
-    const coreConfigPath = path.join(__dirname, "../../../bmad-core/core-config.yaml");
+    const coreConfigPath = path.join(resourceLocator.getBmadCorePath(), "core-config.yaml");
     try {
       const coreConfigContent = await fs.readFile(coreConfigPath, "utf8");
       const coreConfig = yaml.load(coreConfigContent);
@@ -32,11 +25,8 @@ class Installer {
   }
 
   async install(config) {
-    // Initialize ES modules
-    await initializeModules();
-    
     const spinner = ora("Analyzing installation directory...").start();
-
+    
     try {
       // Store the original CWD where npx was executed
       const originalCwd = process.env.INIT_CWD || process.env.PWD || process.cwd();
@@ -59,7 +49,7 @@ class Installer {
       // Check if directory exists and handle non-existent directories
       if (!(await fileManager.pathExists(installDir))) {
         spinner.stop();
-        console.log(chalk.yellow(`\nThe directory ${chalk.bold(installDir)} does not exist.`));
+        console.log(`\nThe directory ${installDir} does not exist.`);
         
         const { action } = await inquirer.prompt([
           {
@@ -84,7 +74,7 @@ class Installer {
         ]);
 
         if (action === 'cancel') {
-          console.log(chalk.red('Installation cancelled.'));
+            console.log('Installation cancelled.');
           process.exit(0);
         } else if (action === 'change') {
           const { newDirectory } = await inquirer.prompt([
@@ -106,10 +96,10 @@ class Installer {
         } else if (action === 'create') {
           try {
             await fileManager.ensureDirectory(installDir);
-            console.log(chalk.green(`✓ Created directory: ${installDir}`));
+            console.log(`✓ Created directory: ${installDir}`);
           } catch (error) {
-            console.error(chalk.red(`Failed to create directory: ${error.message}`));
-            console.error(chalk.yellow('You may need to check permissions or use a different path.'));
+            console.error(`Failed to create directory: ${error.message}`);
+            console.error('You may need to check permissions or use a different path.');
             process.exit(1);
           }
         }
@@ -161,14 +151,17 @@ class Installer {
           );
       }
     } catch (error) {
-      spinner.fail("Installation failed");
+      // Check if modules were initialized
+      if (spinner) {
+        spinner.fail("Installation failed");
+      } else {
+        console.error("Installation failed:", error.message);
+      }
       throw error;
     }
   }
 
   async detectInstallationState(installDir) {
-    // Ensure modules are initialized
-    await initializeModules();
     const state = {
       type: "clean",
       hasV4Manifest: false,
@@ -212,8 +205,7 @@ class Installer {
     }
 
     // Check if directory has other files
-    const glob = require("glob");
-    const files = glob.sync("**/*", {
+    const files = await resourceLocator.findFiles("**/*", {
       cwd: installDir,
       nodir: true,
       ignore: ["**/.git/**", "**/node_modules/**"],
@@ -233,8 +225,6 @@ class Installer {
   }
 
   async performFreshInstall(config, installDir, spinner, options = {}) {
-    // Ensure modules are initialized
-    await initializeModules();
     spinner.text = "Installing BMad Method...";
 
     let files = [];
@@ -242,7 +232,7 @@ class Installer {
     if (config.installType === "full") {
       // Full installation - copy entire .bmad-core folder as a subdirectory
       spinner.text = "Copying complete .bmad-core folder...";
-      const sourceDir = configLoader.getBmadCorePath();
+      const sourceDir = resourceLocator.getBmadCorePath();
       const bmadCoreDestDir = path.join(installDir, ".bmad-core");
       await fileManager.copyDirectoryWithRootReplacement(sourceDir, bmadCoreDestDir, ".bmad-core");
       
@@ -251,14 +241,12 @@ class Installer {
       await this.copyCommonItems(installDir, ".bmad-core", spinner);
 
       // Get list of all files for manifest
-      const glob = require("glob");
-      files = glob
-        .sync("**/*", {
-          cwd: bmadCoreDestDir,
-          nodir: true,
-          ignore: ["**/.git/**", "**/node_modules/**"],
-        })
-        .map((file) => path.join(".bmad-core", file));
+      const foundFiles = await resourceLocator.findFiles("**/*", {
+        cwd: bmadCoreDestDir,
+        nodir: true,
+        ignore: ["**/.git/**", "**/node_modules/**"],
+      });
+      files = foundFiles.map((file) => path.join(".bmad-core", file));
     } else if (config.installType === "single-agent") {
       // Single agent installation
       spinner.text = `Installing ${config.agent} agent...`;
@@ -275,10 +263,10 @@ class Installer {
       files.push(`.bmad-core/agents/${config.agent}.md`);
 
       // Copy dependencies
-      const dependencies = await configLoader.getAgentDependencies(
+      const { all: dependencies } = await resourceLocator.getAgentDependencies(
         config.agent
       );
-      const sourceBase = configLoader.getBmadCorePath();
+      const sourceBase = resourceLocator.getBmadCorePath();
 
       for (const dep of dependencies) {
         spinner.text = `Copying dependency: ${dep}`;
@@ -328,7 +316,7 @@ class Installer {
       
       // Get team dependencies
       const teamDependencies = await configLoader.getTeamDependencies(config.team);
-      const sourceBase = configLoader.getBmadCorePath();
+      const sourceBase = resourceLocator.getBmadCorePath();
       
       // Install all team dependencies
       for (const dep of teamDependencies) {
@@ -415,8 +403,6 @@ class Installer {
   }
 
   async handleExistingV4Installation(config, installDir, state, spinner) {
-    // Ensure modules are initialized
-    await initializeModules();
     spinner.stop();
 
     const currentVersion = state.manifest.version;
@@ -443,7 +429,7 @@ class Installer {
     const hasIntegrityIssues = hasMissingFiles || hasModifiedFiles;
     
     if (hasIntegrityIssues) {
-      console.log(chalk.red("\n⚠️  Installation issues detected:"));
+        console.log(chalk.red("\n⚠️  Installation issues detected:"));
       if (hasMissingFiles) {
         console.log(chalk.red(`   Missing files: ${integrity.missing.length}`));
         if (integrity.missing.length <= 5) {
@@ -473,7 +459,7 @@ class Installer {
     let choices = [];
     
     if (versionCompare < 0) {
-      console.log(chalk.cyan("\n⬆️  Upgrade available for BMad core"));
+        console.log(chalk.cyan("\n⬆️  Upgrade available for BMad core"));
       choices.push({ name: `Upgrade BMad core (v${currentVersion} → v${newVersion})`, value: "upgrade" });
     } else if (versionCompare === 0) {
       if (hasIntegrityIssues) {
@@ -483,10 +469,10 @@ class Installer {
           value: "repair" 
         });
       }
-      console.log(chalk.yellow("\n⚠️  Same version already installed"));
+        console.log(chalk.yellow("\n⚠️  Same version already installed"));
       choices.push({ name: `Force reinstall BMad core (v${currentVersion} - reinstall)`, value: "reinstall" });
     } else {
-      console.log(chalk.yellow("\n⬇️  Installed version is newer than available"));
+        console.log(chalk.yellow("\n⬇️  Installed version is newer than available"));
       choices.push({ name: `Downgrade BMad core (v${currentVersion} → v${newVersion})`, value: "reinstall" });
     }
     
@@ -515,7 +501,7 @@ class Installer {
         return await this.performReinstall(config, installDir, spinner);
       case "expansions":
         // Ask which expansion packs to install
-        const availableExpansionPacks = await this.getAvailableExpansionPacks();
+        const availableExpansionPacks = await resourceLocator.getExpansionPacks();
         
         if (availableExpansionPacks.length === 0) {
           console.log(chalk.yellow("No expansion packs available."));
@@ -528,7 +514,7 @@ class Installer {
             name: 'selectedPacks',
             message: 'Select expansion packs to install/update:',
             choices: availableExpansionPacks.map(pack => ({
-              name: `${pack.name} v${pack.version} - ${pack.description}`,
+              name: `${pack.name} (v${pack.version}) .${pack.id}`,
               value: pack.id,
               checked: state.expansionPacks[pack.id] !== undefined
             }))
@@ -557,8 +543,6 @@ class Installer {
   }
 
   async handleV3Installation(config, installDir, state, spinner) {
-    // Ensure modules are initialized
-    await initializeModules();
     spinner.stop();
 
     console.log(
@@ -598,8 +582,6 @@ class Installer {
   }
 
   async handleUnknownInstallation(config, installDir, state, spinner) {
-    // Ensure modules are initialized
-    await initializeModules();
     spinner.stop();
 
     console.log(chalk.yellow("\n⚠️  Directory contains existing files"));
@@ -740,7 +722,7 @@ class Installer {
 
       // Restore missing and modified files
       spinner.text = "Restoring files...";
-      const sourceBase = configLoader.getBmadCorePath();
+      const sourceBase = resourceLocator.getBmadCorePath();
       const filesToRestore = [...integrity.missing, ...integrity.modified];
       
       for (const file of filesToRestore) {
@@ -915,8 +897,6 @@ class Installer {
 
   // Legacy method for backward compatibility
   async update() {
-    // Initialize ES modules
-    await initializeModules();
     console.log(chalk.yellow('The "update" command is deprecated.'));
     console.log(
       'Please use "install" instead - it will detect and offer to update existing installations.'
@@ -935,9 +915,7 @@ class Installer {
   }
 
   async listAgents() {
-    // Initialize ES modules
-    await initializeModules();
-    const agents = await configLoader.getAvailableAgents();
+    const agents = await resourceLocator.getAvailableAgents();
 
     console.log(chalk.bold("\nAvailable BMad Agents:\n"));
 
@@ -951,9 +929,7 @@ class Installer {
   }
 
   async listExpansionPacks() {
-    // Initialize ES modules
-    await initializeModules();
-    const expansionPacks = await this.getAvailableExpansionPacks();
+    const expansionPacks = await resourceLocator.getExpansionPacks();
 
     console.log(chalk.bold("\nAvailable BMad Expansion Packs:\n"));
 
@@ -978,8 +954,6 @@ class Installer {
   }
 
   async showStatus() {
-    // Initialize ES modules
-    await initializeModules();
     const installDir = await this.findInstallation();
 
     if (!installDir) {
@@ -1029,11 +1003,11 @@ class Installer {
   }
 
   async getAvailableAgents() {
-    return configLoader.getAvailableAgents();
+    return resourceLocator.getAvailableAgents();
   }
 
   async getAvailableExpansionPacks() {
-    return configLoader.getAvailableExpansionPacks();
+    return resourceLocator.getExpansionPacks();
   }
 
   async getAvailableTeams() {
@@ -1046,13 +1020,12 @@ class Installer {
     }
 
     const installedFiles = [];
-    const glob = require('glob');
 
     for (const packId of selectedPacks) {
       spinner.text = `Installing expansion pack: ${packId}...`;
       
       try {
-        const expansionPacks = await this.getAvailableExpansionPacks();
+        const expansionPacks = await resourceLocator.getExpansionPacks();
         const pack = expansionPacks.find(p => p.id === packId);
         
         if (!pack) {
@@ -1112,7 +1085,7 @@ class Installer {
               spinner.start();
               continue;
             } else if (action === 'cancel') {
-              console.log(chalk.red('Installation cancelled.'));
+                console.log('Installation cancelled.');
               process.exit(0);
             } else if (action === 'repair') {
               // Repair the expansion pack
@@ -1151,7 +1124,7 @@ class Installer {
               spinner.start();
               continue;
             } else if (action === 'cancel') {
-              console.log(chalk.red('Installation cancelled.'));
+                console.log('Installation cancelled.');
               process.exit(0);
             }
           }
@@ -1161,7 +1134,7 @@ class Installer {
           await fileManager.removeDirectory(expansionDotFolder);
         }
 
-        const expansionPackDir = pack.packPath;
+        const expansionPackDir = pack.path;
         
         // Ensure dedicated dot folder exists for this expansion pack
         expansionDotFolder = path.join(installDir, `.${packId}`);
@@ -1187,7 +1160,7 @@ class Installer {
           // Check if folder exists in expansion pack
           if (await fileManager.pathExists(sourceFolder)) {
             // Get all files in this folder
-            const files = glob.sync('**/*', {
+            const files = await resourceLocator.findFiles('**/*', {
               cwd: sourceFolder,
               nodir: true
             });
@@ -1236,7 +1209,7 @@ class Installer {
         await this.copyCommonItems(installDir, `.${packId}`, spinner);
         
         // Check and resolve core dependencies
-        await this.resolveExpansionPackCoreDependencies(installDir, expansionDotFolder, packId, spinner);
+        await this.resolveExpansionPackCoreDependencies(installDir, expansionDotFolder, packId, pack, spinner);
         
         // Check and resolve core agents referenced by teams
         await this.resolveExpansionPackCoreAgents(installDir, expansionDotFolder, packId, spinner);
@@ -1252,30 +1225,30 @@ class Installer {
         };
         
         // Get all files installed in this expansion pack
-        const expansionPackFiles = glob.sync('**/*', {
+        const foundFiles = await resourceLocator.findFiles('**/*', {
           cwd: expansionDotFolder,
           nodir: true
-        }).map(f => path.join(`.${packId}`, f));
+        });
+        const expansionPackFiles = foundFiles.map(f => path.join(`.${packId}`, f));
         
         await fileManager.createExpansionPackManifest(installDir, packId, expansionConfig, expansionPackFiles);
 
         console.log(chalk.green(`✓ Installed expansion pack: ${pack.name} to ${`.${packId}`}`));
       } catch (error) {
-        console.error(chalk.red(`Failed to install expansion pack ${packId}: ${error.message}`));
-        console.error(chalk.red(`Stack trace: ${error.stack}`));
+        console.error(`Failed to install expansion pack ${packId}: ${error.message}`);
+        console.error(`Stack trace: ${error.stack}`);
       }
     }
 
     return installedFiles;
   }
 
-  async resolveExpansionPackCoreDependencies(installDir, expansionDotFolder, packId, spinner) {
-    const glob = require('glob');
+  async resolveExpansionPackCoreDependencies(installDir, expansionDotFolder, packId, pack, spinner) {
     const yaml = require('js-yaml');
     const fs = require('fs').promises;
     
     // Find all agent files in the expansion pack
-    const agentFiles = glob.sync('agents/*.md', {
+    const agentFiles = await resourceLocator.findFiles('agents/*.md', {
       cwd: expansionDotFolder
     });
 
@@ -1295,48 +1268,59 @@ class Installer {
             const deps = dependencies[depType] || [];
             
             for (const dep of deps) {
-              const depFileName = dep.endsWith('.md') ? dep : `${dep}.md`;
+              const depFileName = dep.endsWith('.md') || dep.endsWith('.yaml') ? dep : 
+                                  (depType === 'templates' ? `${dep}.yaml` : `${dep}.md`);
               const expansionDepPath = path.join(expansionDotFolder, depType, depFileName);
               
-              // Check if dependency exists in expansion pack
+              // Check if dependency exists in expansion pack dot folder
               if (!(await fileManager.pathExists(expansionDepPath))) {
-                // Try to find it in core
-                const coreDepPath = path.join(configLoader.getBmadCorePath(), depType, depFileName);
+                // Try to find it in expansion pack source
+                const sourceDepPath = path.join(pack.path, depType, depFileName);
                 
-                if (await fileManager.pathExists(coreDepPath)) {
-                  spinner.text = `Copying core dependency ${dep} for ${packId}...`;
-                  
-                  // Copy from core to expansion pack dot folder with {root} replacement
+                if (await fileManager.pathExists(sourceDepPath)) {
+                  // Copy from expansion pack source
+                  spinner.text = `Copying ${packId} dependency ${dep}...`;
                   const destPath = path.join(expansionDotFolder, depType, depFileName);
-                  await fileManager.copyFileWithRootReplacement(coreDepPath, destPath, `.${packId}`);
-                  
-                  console.log(chalk.dim(`  Added core dependency: ${depType}/${depFileName}`));
+                  await fileManager.copyFileWithRootReplacement(sourceDepPath, destPath, `.${packId}`);
+                  console.log(chalk.dim(`  Added ${packId} dependency: ${depType}/${depFileName}`));
                 } else {
-                  console.warn(chalk.yellow(`  Warning: Dependency ${depType}/${dep} not found in core or expansion pack`));
+                  // Try to find it in core
+                  const coreDepPath = path.join(resourceLocator.getBmadCorePath(), depType, depFileName);
+                  
+                    if (await fileManager.pathExists(coreDepPath)) {
+                      spinner.text = `Copying core dependency ${dep} for ${packId}...`;
+                      
+                      // Copy from core to expansion pack dot folder with {root} replacement
+                      const destPath = path.join(expansionDotFolder, depType, depFileName);
+                      await fileManager.copyFileWithRootReplacement(coreDepPath, destPath, `.${packId}`);
+                      
+                      console.log(chalk.dim(`  Added core dependency: ${depType}/${depFileName}`));
+                    } else {
+                      console.warn(chalk.yellow(`  Warning: Dependency ${depType}/${dep} not found in core or expansion pack`));
+                    }
+                  }
                 }
-              }
             }
           }
         } catch (error) {
-          console.warn(chalk.yellow(`  Warning: Could not parse agent dependencies: ${error.message}`));
+          console.warn(`  Warning: Could not parse agent dependencies: ${error.message}`);
         }
       }
     }
   }
 
   async resolveExpansionPackCoreAgents(installDir, expansionDotFolder, packId, spinner) {
-    const glob = require('glob');
     const yaml = require('js-yaml');
     const fs = require('fs').promises;
     
     // Find all team files in the expansion pack
-    const teamFiles = glob.sync('agent-teams/*.yaml', {
+    const teamFiles = await resourceLocator.findFiles('agent-teams/*.yaml', {
       cwd: expansionDotFolder
     });
 
     // Also get existing agents in the expansion pack
     const existingAgents = new Set();
-    const agentFiles = glob.sync('agents/*.md', {
+    const agentFiles = await resourceLocator.findFiles('agents/*.md', {
       cwd: expansionDotFolder
     });
     for (const agentFile of agentFiles) {
@@ -1362,7 +1346,7 @@ class Installer {
         for (const agentId of agents) {
           if (!existingAgents.has(agentId)) {
             // Agent not in expansion pack, try to get from core
-            const coreAgentPath = path.join(configLoader.getBmadCorePath(), 'agents', `${agentId}.md`);
+            const coreAgentPath = path.join(resourceLocator.getBmadCorePath(), 'agents', `${agentId}.md`);
             
             if (await fileManager.pathExists(coreAgentPath)) {
               spinner.text = `Copying core agent ${agentId} for ${packId}...`;
@@ -1389,13 +1373,14 @@ class Installer {
                     const deps = dependencies[depType] || [];
                     
                     for (const dep of deps) {
-                      const depFileName = dep.endsWith('.md') || dep.endsWith('.yaml') ? dep : `${dep}.md`;
+                      const depFileName = dep.endsWith('.md') || dep.endsWith('.yaml') ? dep : 
+                                          (depType === 'templates' ? `${dep}.yaml` : `${dep}.md`);
                       const expansionDepPath = path.join(expansionDotFolder, depType, depFileName);
                       
                       // Check if dependency exists in expansion pack
                       if (!(await fileManager.pathExists(expansionDepPath))) {
                         // Try to find it in core
-                        const coreDepPath = path.join(configLoader.getBmadCorePath(), depType, depFileName);
+                        const coreDepPath = path.join(resourceLocator.getBmadCorePath(), depType, depFileName);
                         
                         if (await fileManager.pathExists(coreDepPath)) {
                           const destDepPath = path.join(expansionDotFolder, depType, depFileName);
@@ -1415,7 +1400,7 @@ class Installer {
                     }
                   }
                 } catch (error) {
-                  console.warn(chalk.yellow(`  Warning: Could not parse agent ${agentId} dependencies: ${error.message}`));
+                  console.warn(`  Warning: Could not parse agent ${agentId} dependencies: ${error.message}`);
                 }
               }
             } else {
@@ -1424,7 +1409,7 @@ class Installer {
           }
         }
       } catch (error) {
-        console.warn(chalk.yellow(`  Warning: Could not parse team file ${teamFile}: ${error.message}`));
+        console.warn(`  Warning: Could not parse team file ${teamFile}: ${error.message}`);
       }
     }
   }
@@ -1456,15 +1441,13 @@ class Installer {
   }
 
   async installWebBundles(webBundlesDirectory, config, spinner) {
-    // Ensure modules are initialized
-    await initializeModules();
     
     try {
       // Find the dist directory in the BMad installation
       const distDir = configLoader.getDistPath();
       
       if (!(await fileManager.pathExists(distDir))) {
-        console.warn(chalk.yellow('Web bundles not found. Run "npm run build" to generate them.'));
+        console.warn('Web bundles not found. Run "npm run build" to generate them.');
         return;
       }
 
@@ -1522,15 +1505,12 @@ class Installer {
         console.log(chalk.green(`✓ Installed ${copiedCount} selected web bundles to: ${webBundlesDirectory}`));
       }
     } catch (error) {
-      console.error(chalk.red(`Failed to install web bundles: ${error.message}`));
+      console.error(`Failed to install web bundles: ${error.message}`);
     }
   }
 
   async copyCommonItems(installDir, targetSubdir, spinner) {
-    // Ensure modules are initialized
-    await initializeModules();
     
-    const glob = require('glob');
     const fs = require('fs').promises;
     const sourceBase = path.dirname(path.dirname(path.dirname(path.dirname(__filename)))); // Go up to project root
     const commonPath = path.join(sourceBase, 'common');
@@ -1539,12 +1519,12 @@ class Installer {
     
     // Check if common/ exists
     if (!(await fileManager.pathExists(commonPath))) {
-      console.warn(chalk.yellow('Warning: common/ folder not found'));
+      console.warn('Warning: common/ folder not found');
       return copiedFiles;
     }
     
     // Copy all items from common/ to target
-    const commonItems = glob.sync('**/*', {
+    const commonItems = await resourceLocator.findFiles('**/*', {
       cwd: commonPath,
       nodir: true
     });
@@ -1641,7 +1621,7 @@ class Installer {
         if (file.endsWith('install-manifest.yaml')) continue;
         
         const relativePath = file.replace(`.${packId}/`, '');
-        const sourcePath = path.join(pack.packPath, relativePath);
+        const sourcePath = path.join(pack.path, relativePath);
         const destPath = path.join(installDir, file);
         
         // Check if this is a common/ file that needs special processing
@@ -1677,8 +1657,8 @@ class Installer {
       }
       
     } catch (error) {
-      spinner.fail(`Failed to repair ${pack.name}`);
-      console.error(chalk.red(`Error: ${error.message}`));
+      if (spinner) spinner.fail(`Failed to repair ${pack.name}`);
+      console.error(`Error: ${error.message}`);
     }
   }
 
@@ -1730,7 +1710,7 @@ class Installer {
       }
       
     } catch (error) {
-      console.warn(chalk.yellow(`Warning: Could not cleanup legacy .yml files: ${error.message}`));
+      console.warn(`Warning: Could not cleanup legacy .yml files: ${error.message}`);
     }
   }
 
