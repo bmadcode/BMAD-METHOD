@@ -14,7 +14,7 @@ A pull request (PR) is how you propose changes to a project on GitHub. Think of 
 
 - **For bug fixes**: Create an issue using the [bug report template](https://github.com/bmadcode/bmad-method/issues/new?template=bug_report.md)
 - **For new features**:
-  1. Discuss in Discord [#general-dev channel](https://discord.gg/g6ypHytrCB)
+  1. Discuss in Discord [#general-dev channel](https://discord.gg/gk8jAdXWmj)
   2. Create an issue using the [feature request template](https://github.com/bmadcode/bmad-method/issues/new?template=feature_request.md)
 - **For large changes**: Always open an issue first to discuss alignment
 
@@ -131,7 +131,7 @@ git push origin fix/typo-in-readme
 
 ## Need Help?
 
-- 💬 Join our [Discord Community](https://discord.gg/g6ypHytrCB) for real-time help:
+- 💬 Join our [Discord Community](https://discord.gg/gk8jAdXWmj) for real-time help:
   - **#general-dev** - Technical questions and feature discussions
   - **#bugs-issues** - Get help with bugs before filing issues
 - 💬 Ask questions in [GitHub Discussions](https://github.com/bmadcode/bmad-method/discussions)

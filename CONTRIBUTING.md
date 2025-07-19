@@ -8,7 +8,7 @@ Thank you for considering contributing to this project! This document outlines t
 
 Also note, we use the discussions feature in GitHub to have a community to discuss potential ideas, uses, additions and enhancements.
 
-💬 **Discord Community**: Join our [Discord server](https://discord.gg/g6ypHytrCB) for real-time discussions:
+💬 **Discord Community**: Join our [Discord server](https://discord.gg/gk8jAdXWmj) for real-time discussions:
 
 - **#general-dev** - Technical discussions, feature ideas, and development questions
 - **#bugs-issues** - Bug reports and issue discussions
