@@ -46,6 +46,7 @@
     "glob": "^11.0.3",
     "inquirer": "^12.6.3",
     "js-yaml": "^4.1.0",
+    "minimatch": "^10.0.3",
     "ora": "^8.2.0"
   },
   "keywords": [
