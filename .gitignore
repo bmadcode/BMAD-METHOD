@@ -29,8 +29,3 @@ sample-project/*
 .gemini
 .bmad*/.cursor/
 web-bundles/
-docs/architecture/
-docs/prd/
-docs/stories/
-docs/project-architecture.md
-biome.json
