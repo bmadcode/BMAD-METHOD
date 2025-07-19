@@ -2,12 +2,9 @@
 
 const { Command } = require('commander');
 const fs = require('fs-extra');
-const path = require('path');
+const path = require('node:path');
 const { glob } = require('glob');
 const { minimatch } = require('minimatch');
-const { promisify } = require('util');
-const { exec } = require('child_process');
-const execAsync = promisify(exec);
 
 /**
  * Recursively discover all files in a directory
@@ -16,27 +13,23 @@ const execAsync = promisify(exec);
  */
 async function discoverFiles(rootDir) {
   try {
+    const gitignorePath = path.join(rootDir, '.gitignore');
+    const gitignorePatterns = await parseGitignore(gitignorePath);
+
+    const combinedIgnores = [
+    ...gitignorePatterns,
+    '.git/**',
+    'flattened-codebase.xml',
+    'repomix-output.xml'
+  ];
+
     // Use glob to recursively find all files, excluding common ignore patterns
     const files = await glob('**/*', {
       cwd: rootDir,
       nodir: true, // Only files, not directories
       dot: true,   // Include hidden files
       follow: false, // Don't follow symbolic links
-      ignore: [
-        // Standard ignore patterns
-        'node_modules/**',
-        '.git/**',
-        'build/**',
-        'dist/**',
-        '.next/**',
-        'coverage/**',
-        '.nyc_output/**',
-        'tmp/**',
-        'temp/**',
-        '.gitignore',
-        '.gitattributes',
-        '.gitmodules'
-      ]
+      ignore: combinedIgnores
     });
     
     return files.map(file => path.resolve(rootDir, file));
@@ -192,7 +185,7 @@ async function aggregateFileContents(files, rootDir, spinner = null) {
  * @param {string} projectRoot - The project root directory
  * @returns {string} XML content
  */
-function generateXMLOutput(aggregatedContent, projectRoot) {
+function generateXMLOutput(aggregatedContent) {
   const { textFiles } = aggregatedContent;
   
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -204,21 +197,36 @@ function generateXMLOutput(aggregatedContent, projectRoot) {
   for (const file of textFiles) {
     xml += `  <file path="${escapeXml(file.path)}">`;
     
-    // Use CDATA for code content to preserve formatting and handle special characters
-    if (file.content.trim()) {
-      xml += `<![CDATA[${file.content}]]>`;
+    // Use CDATA for code content, handling CDATA end sequences properly
+    if (file.content?.trim()) {
+      const indentedContent = indentFileContent(file.content);
+      if (file.content.includes(']]>')) {
+        // If content contains ]]>, split it and wrap each part in CDATA
+        xml += splitAndWrapCDATA(indentedContent);
+      } else {
+        xml += `<![CDATA[
+${indentedContent}
+    ]]>`;
+      }
+    } else if (file.content) {
+      // Handle empty or whitespace-only content
+      const indentedContent = indentFileContent(file.content);
+      xml += `<![CDATA[
+${indentedContent}
+    ]]>`;
     }
     
     xml += `</file>
 `;
   }
   
-  xml += `</files>`;
+  xml += `</files>
+`;
   return xml;
 }
 
 /**
- * Escape XML special characters
+ * Escape XML special characters for attributes
  * @param {string} str - String to escape
  * @returns {string} Escaped string
  */
@@ -232,6 +240,37 @@ function escapeXml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
+}
+
+/**
+ * Indent file content with 4 spaces for each line
+ * @param {string} content - Content to indent
+ * @returns {string} Indented content
+ */
+function indentFileContent(content) {
+  if (typeof content !== 'string') {
+    return String(content);
+  }
+  
+  // Split content into lines and add 4 spaces of indentation to each line
+  return content.split('\n').map(line => `    ${line}`).join('\n');
+}
+
+/**
+ * Split content containing ]]> and wrap each part in CDATA
+ * @param {string} content - Content to process
+ * @returns {string} Content with properly wrapped CDATA sections
+ */
+function splitAndWrapCDATA(content) {
+  if (typeof content !== 'string') {
+    return String(content);
+  }
+  
+  // Replace ]]> with ]]]]><![CDATA[> to escape it within CDATA
+  const escapedContent = content.replace(/]]>/g, ']]]]><![CDATA[>');
+  return `<![CDATA[
+${escapedContent}
+    ]]>`;
 }
 
 /**
@@ -365,7 +404,7 @@ program
       
       // Generate XML output
       const xmlSpinner = ora('🔧 Generating XML output...').start();
-      const xmlOutput = generateXMLOutput(aggregatedContent, process.cwd());
+      const xmlOutput = generateXMLOutput(aggregatedContent);
       await fs.writeFile(options.output, xmlOutput);
       xmlSpinner.succeed('📝 XML generation completed');
       
