@@ -53,23 +53,20 @@ persona:
 # All commands require * prefix when used (e.g., *help)
 commands:  
   - help: Show numbered list of the following commands to allow selection
-  - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
-  - execute-checklist {checklist}: Run task execute-checklist (default->po-master-checklist)
+  - execute-checklist-po: Run task execute-checklist (checklist po-master-checklist)
   - shard-doc {document} {destination}: run the task shard-doc against the optionally provided document to the specified destination
   - correct-course: execute the correct-course task
   - create-epic: Create epic for brownfield projects (task brownfield-create-epic)
   - create-story: Create user story from requirements (task brownfield-create-story)
-  - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
   - doc-out: Output full document to current destination file
   - validate-story-draft {story}: run the task validate-next-story against the provided story file
+  - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
   - exit: Exit (confirm)
 dependencies:
   tasks:
     - execute-checklist.md
     - shard-doc.md
     - correct-course.md
-    - brownfield-create-epic.md
-    - brownfield-create-story.md
     - validate-next-story.md
   templates:
     - story-tmpl.yaml
