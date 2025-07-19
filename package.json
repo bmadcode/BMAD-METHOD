@@ -13,6 +13,8 @@
     "build:teams": "node tools/cli.js build --teams-only",
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
+    "flatten": "node tools/flattener/main.js",
+    "test": "jest",
     "install:bmad": "node tools/installer/bin/bmad.js install",
     "format": "prettier --write \"**/*.md\"",
     "version:patch": "node tools/version-bump.js patch",
@@ -65,12 +67,13 @@
     "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "husky": "^9.1.7",
+    "jest": "^30.0.4",
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "semantic-release": "^22.0.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
     "yaml-lint": "^1.7.0"
   },
   "lint-staged": {

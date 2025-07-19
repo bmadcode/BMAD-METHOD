@@ -21,6 +21,7 @@ CLAUDE.md
 test-project-install/*
 sample-project/*
 .claude
+.vscode/
 .windsurf/
 .trae/
 .bmad-core
@@ -28,3 +29,9 @@ sample-project/*
 .gemini
 .bmad*/.cursor/
 web-bundles/
+docs/architecture/
+docs/prd/
+docs/stories/
+docs/project-architecture.md
+tests/
+custom-output.xml

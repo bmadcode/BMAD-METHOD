@@ -149,4 +149,13 @@ program
     });
   });
 
+program
+  .command('flatten')
+  .description('Flatten codebase to XML format')
+  .option('-o, --output <path>', 'Output file path', 'flattened-codebase.xml')
+  .action(async (options) => {
+    const flattener = require('./flattener/main');
+    await flattener.parseAsync(['flatten', '--output', options.output], { from: 'user' });
+  });
+
 program.parse();
