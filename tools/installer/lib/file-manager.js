@@ -116,15 +116,14 @@ class FileManager {
       this.manifestFile
     );
 
-    // Read version from core-config.yaml
-    const coreConfigPath = path.join(resourceLocator.getBmadCorePath(), "core-config.yaml");
+    // Read version from package.json
     let coreVersion = "unknown";
     try {
-      const coreConfigContent = await fs.readFile(coreConfigPath, "utf8");
-      const coreConfig = yaml.load(coreConfigContent);
-      coreVersion = coreConfig.version || "unknown";
+      const packagePath = path.join(__dirname, '..', '..', '..', 'package.json');
+      const packageJson = require(packagePath);
+      coreVersion = packageJson.version;
     } catch (error) {
-      console.warn("Could not read version from core-config.yaml, using 'unknown'");
+      console.warn("Could not read version from package.json, using 'unknown'");
     }
 
     const manifest = {

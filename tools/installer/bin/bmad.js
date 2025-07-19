@@ -165,13 +165,13 @@ async function promptInstallation() {
   let bmadOptionText;
   if (state.type === 'v4_existing') {
     const currentVersion = state.manifest?.version || 'unknown';
-    const newVersion = coreConfig.version || 'unknown'; // Use version from core-config.yaml
+    const newVersion = version; // Always use package.json version
     const versionInfo = currentVersion === newVersion 
       ? `(v${currentVersion} - reinstall)`
       : `(v${currentVersion} → v${newVersion})`;
     bmadOptionText = `Update ${coreShortTitle} ${versionInfo} .bmad-core`;
   } else {
-    bmadOptionText = `${coreShortTitle} (v${coreConfig.version || version}) .bmad-core`;
+    bmadOptionText = `${coreShortTitle} (v${version}) .bmad-core`;
   }
   
   choices.push({

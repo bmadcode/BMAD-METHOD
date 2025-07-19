@@ -1,6 +1,6 @@
 {
   "name": "bmad-method",
-  "version": "4.30.2",
+  "version": "4.31.0",
   "description": "Breakthrough Method of Agile AI-driven Development",
   "main": "tools/cli.js",
   "bin": {
@@ -20,10 +20,6 @@
     "version:patch": "node tools/version-bump.js patch",
     "version:minor": "node tools/version-bump.js minor",
     "version:major": "node tools/version-bump.js major",
-    "version:core": "node tools/bump-core-version.js",
-    "version:core:major": "node tools/bump-core-version.js major",
-    "version:core:minor": "node tools/bump-core-version.js minor",
-    "version:core:patch": "node tools/bump-core-version.js patch",
     "version:expansion": "node tools/bump-expansion-version.js",
     "version:expansion:set": "node tools/update-expansion-version.js",
     "version:all": "node tools/bump-all-versions.js",

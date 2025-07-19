@@ -31,21 +31,20 @@ function bumpVersion(currentVersion, type) {
 async function bumpAllVersions() {
   const updatedItems = [];
   
-  // First, bump the core version
-  const coreConfigPath = path.join(__dirname, '..', 'bmad-core', 'core-config.yaml');
+  // First, bump the core version (package.json)
+  const packagePath = path.join(__dirname, '..', 'package.json');
   try {
-    const coreConfigContent = fs.readFileSync(coreConfigPath, 'utf8');
-    const coreConfig = yaml.load(coreConfigContent);
-    const oldCoreVersion = coreConfig.version || '1.0.0';
+    const packageContent = fs.readFileSync(packagePath, 'utf8');
+    const packageJson = JSON.parse(packageContent);
+    const oldCoreVersion = packageJson.version || '1.0.0';
     const newCoreVersion = bumpVersion(oldCoreVersion, bumpType);
     
-    coreConfig.version = newCoreVersion;
+    packageJson.version = newCoreVersion;
     
-    const updatedCoreYaml = yaml.dump(coreConfig, { indent: 2 });
-    fs.writeFileSync(coreConfigPath, updatedCoreYaml);
+    fs.writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + '\n');
     
     updatedItems.push({ type: 'core', name: 'BMad Core', oldVersion: oldCoreVersion, newVersion: newCoreVersion });
-    console.log(`✓ BMad Core: ${oldCoreVersion} → ${newCoreVersion}`);
+    console.log(`✓ BMad Core (package.json): ${oldCoreVersion} → ${newCoreVersion}`);
   } catch (error) {
     console.error(`✗ Failed to update BMad Core: ${error.message}`);
   }

@@ -11,15 +11,13 @@ const resourceLocator = require("./resource-locator");
 
 class Installer {
   async getCoreVersion() {
-    const yaml = require("js-yaml");
-    const fs = require("fs-extra");
-    const coreConfigPath = path.join(resourceLocator.getBmadCorePath(), "core-config.yaml");
     try {
-      const coreConfigContent = await fs.readFile(coreConfigPath, "utf8");
-      const coreConfig = yaml.load(coreConfigContent);
-      return coreConfig.version || "unknown";
+      // Always use package.json version
+      const packagePath = path.join(__dirname, '..', '..', '..', 'package.json');
+      const packageJson = require(packagePath);
+      return packageJson.version;
     } catch (error) {
-      console.warn("Could not read version from core-config.yaml, using 'unknown'");
+      console.warn("Could not read version from package.json, using 'unknown'");
       return "unknown";
     }
   }
