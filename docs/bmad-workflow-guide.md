@@ -40,20 +40,21 @@ Use Google's Gemini for collaborative planning with the full team:
    - Copy contents of: `dist/teams/team-fullstack.txt` from your project
    - Paste this content into the Gem setup to configure the team
 4. **Collaborate with the team**:
+
    - Business Analyst: Requirements gathering
    - Product Manager: Feature prioritization
    - Solution Architect: Technical design
    - UX Expert: User experience design
 
-### Example Gemini Sessions:
+   **Example Gemini Sessions**
 
-```text
-"I want to build a [type] application that [core purpose].
-Help me brainstorm features and create a comprehensive PRD."
+   ```text
+   "I want to build a [type] application that [core purpose].
+   Help me brainstorm features and create a comprehensive PRD."
 
-"Based on this PRD, design a scalable technical architecture
-that can handle [specific requirements]."
-```
+   "Based on this PRD, design a scalable technical architecture
+   that can handle [specific requirements]."
+   ```
 
 5. **Export planning documents**:
    - Copy the PRD output and save as `docs/prd.md` in your project
@@ -65,11 +66,14 @@ Switch back to your IDE for document management:
 
 1. **Load bmad-master agent** (syntax varies by IDE)
 2. **Shard the PRD**:
-   ```
+
+   ```text
    *shard-doc docs/prd.md prd
    ```
+
 3. **Shard the architecture**:
-   ```
+
+   ```text
    *shard-doc docs/architecture.md architecture
    ```
 
@@ -94,20 +98,26 @@ Follow the SM → Dev cycle for systematic story development:
 
 1. **Start new chat/conversation**
 2. **Load Dev agent**
-3. **Agent asks**: Which story to implement
-4. **Follow development tasks**
-5. **Complete implementation**
-6. **Update status**: Change to "Done"
+3. **Execute**: `{selected-story}` (runs execute-checklist task)
+4. **Review generated report** in `{selected-story}`
+
+#### Story Review (Quality Assurance)
+
+1. **Start new chat/conversation**
+2. **Load QA agent**
+3. **Execute**: `*review {selected-story}` (runs review-story task)
+4. **Review generated report** in `{selected-story}`
 
 #### Repeat Until Complete
 
 - **SM**: Create next story → Review → Approve
-- **Dev**: Implement story → Complete → Mark done
+- **Dev**: Implement story → Complete → Mark Ready for Review
+- **QA**: Review story → Mark done
 - **Continue**: Until all features implemented
 
 ## IDE-Specific Syntax
 
-### Agent Loading Syntax by IDE:
+### Agent Loading Syntax by IDE
 
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
@@ -116,21 +126,21 @@ Follow the SM → Dev cycle for systematic story development:
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-bmad-master`)
 - **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
 
-### Chat Management:
+### Chat Management
 
 - **Claude Code, Cursor, Windsurf, Trae**: Start new chats when switching agents
 - **Roo Code**: Switch modes within the same conversation
 
 ## Available Agents
 
-### Core Development Agents:
+### Core Development Agents
 
 - **bmad-master**: Universal task executor, document management
 - **sm**: Scrum Master for story creation and agile process
 - **dev**: Full-stack developer for implementation
 - **architect**: Solution architect for technical design
 
-### Specialized Agents:
+### Specialized Agents
 
 - **pm**: Product manager for planning and prioritization
 - **analyst**: Business analyst for requirements

@@ -36,3 +36,4 @@ docs/project-architecture.md
 tests/
 custom-output.xml
 flattened-codebase.xml
+biome.json
