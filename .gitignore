@@ -37,3 +37,4 @@ tests/
 custom-output.xml
 flattened-codebase.xml
 biome.json
+__tests__/

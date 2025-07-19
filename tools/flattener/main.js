@@ -120,9 +120,10 @@ async function isBinaryFile(filePath) {
  * Read and aggregate content from text files
  * @param {string[]} files - Array of file paths
  * @param {string} rootDir - The root directory
+ * @param {Object} spinner - Optional spinner instance for progress display
  * @returns {Promise<Object>} Object containing file contents and metadata
  */
-async function aggregateFileContents(files, rootDir) {
+async function aggregateFileContents(files, rootDir, spinner = null) {
   const results = {
     textFiles: [],
     binaryFiles: [],
@@ -134,6 +135,12 @@ async function aggregateFileContents(files, rootDir) {
   for (const filePath of files) {
     try {
       const relativePath = path.relative(rootDir, filePath);
+      
+      // Update progress indicator
+      if (spinner) {
+        spinner.text = `Processing file ${results.processedFiles + 1}/${results.totalFiles}: ${relativePath}`;
+      }
+      
       const isBinary = await isBinaryFile(filePath);
       
       if (isBinary) {
@@ -164,7 +171,14 @@ async function aggregateFileContents(files, rootDir) {
       };
       
       results.errors.push(errorInfo);
-      console.warn(`Warning: Could not read file ${relativePath}: ${error.message}`);
+      
+      // Log warning without interfering with spinner
+      if (spinner) {
+        spinner.warn(`Warning: Could not read file ${relativePath}: ${error.message}`);
+      } else {
+        console.warn(`Warning: Could not read file ${relativePath}: ${error.message}`);
+      }
+      
       results.processedFiles++;
     }
   }
@@ -179,91 +193,27 @@ async function aggregateFileContents(files, rootDir) {
  * @returns {string} XML content
  */
 function generateXMLOutput(aggregatedContent, projectRoot) {
-  const { textFiles, binaryFiles, errors, totalFiles, processedFiles } = aggregatedContent;
-  const timestamp = new Date().toISOString();
+  const { textFiles } = aggregatedContent;
   
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 `;
-  xml += `<codebase>
-`;
-  xml += `  <metadata>
-`;
-  xml += `    <generated>${timestamp}</generated>
-`;
-  xml += `    <project_root>${escapeXml(projectRoot)}</project_root>
-`;
-  xml += `    <total_files>${totalFiles}</total_files>
-`;
-  xml += `    <processed_files>${processedFiles}</processed_files>
-`;
-  xml += `    <text_files>${textFiles.length}</text_files>
-`;
-  xml += `    <binary_files>${binaryFiles.length}</binary_files>
-`;
-  xml += `    <errors>${errors.length}</errors>
-`;
-  xml += `  </metadata>
+  xml += `<files>
 `;
   
-  // Add text files with content
-  if (textFiles.length > 0) {
-    xml += `  <text_files>
-`;
-    for (const file of textFiles) {
-      xml += `    <file>
-`;
-      xml += `      <path>${escapeXml(file.path)}</path>
-`;
-      xml += `      <size>${file.size}</size>
-`;
-      xml += `      <lines>${file.lines}</lines>
-`;
-      xml += `      <content><![CDATA[${file.content}]]></content>
-`;
-      xml += `    </file>
-`;
+  // Add text files with content (only text files as per story requirements)
+  for (const file of textFiles) {
+    xml += `  <file path="${escapeXml(file.path)}">`;
+    
+    // Use CDATA for code content to preserve formatting and handle special characters
+    if (file.content.trim()) {
+      xml += `<![CDATA[${file.content}]]>`;
     }
-    xml += `  </text_files>
+    
+    xml += `</file>
 `;
   }
   
-  // Add binary files (paths only)
-  if (binaryFiles.length > 0) {
-    xml += `  <binary_files>
-`;
-    for (const file of binaryFiles) {
-      xml += `    <file>
-`;
-      xml += `      <path>${escapeXml(file.path)}</path>
-`;
-      xml += `      <size>${file.size}</size>
-`;
-      xml += `    </file>
-`;
-    }
-    xml += `  </binary_files>
-`;
-  }
-  
-  // Add errors if any
-  if (errors.length > 0) {
-    xml += `  <errors>
-`;
-    for (const error of errors) {
-      xml += `    <error>
-`;
-      xml += `      <path>${escapeXml(error.path)}</path>
-`;
-      xml += `      <message>${escapeXml(error.error)}</message>
-`;
-      xml += `    </error>
-`;
-    }
-    xml += `  </errors>
-`;
-  }
-  
-  xml += `</codebase>`;
+  xml += `</files>`;
   return xml;
 }
 
@@ -282,6 +232,45 @@ function escapeXml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
+}
+
+/**
+ * Calculate statistics for the processed files
+ * @param {Object} aggregatedContent - The aggregated content object
+ * @param {string} xmlContent - The generated XML content
+ * @returns {Object} Statistics object
+ */
+function calculateStatistics(aggregatedContent, xmlContent) {
+  const { textFiles, binaryFiles, errors } = aggregatedContent;
+  
+  // Calculate total file size in bytes
+  const totalTextSize = textFiles.reduce((sum, file) => sum + file.size, 0);
+  const totalBinarySize = binaryFiles.reduce((sum, file) => sum + file.size, 0);
+  const totalSize = totalTextSize + totalBinarySize;
+  
+  // Calculate total lines of code
+  const totalLines = textFiles.reduce((sum, file) => sum + file.lines, 0);
+  
+  // Estimate token count (rough approximation: 1 token ≈ 4 characters)
+  const estimatedTokens = Math.ceil(xmlContent.length / 4);
+  
+  // Format file size
+  const formatSize = (bytes) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+  
+  return {
+    totalFiles: textFiles.length + binaryFiles.length,
+    textFiles: textFiles.length,
+    binaryFiles: binaryFiles.length,
+    errorFiles: errors.length,
+    totalSize: formatSize(totalSize),
+    xmlSize: formatSize(xmlContent.length),
+    totalLines,
+    estimatedTokens: estimatedTokens.toLocaleString()
+  };
 }
 
 /**
@@ -346,44 +335,56 @@ program
   .version('1.0.0')
   .option('-o, --output <path>', 'Output file path', 'flattened-codebase.xml')
   .action(async (options) => {
+    console.log(`Flattening codebase to: ${options.output}`);
+    
     try {
-      console.log(`Flattening codebase to: ${options.output}`);
+      // Import ora dynamically
+      const { default: ora } = await import('ora');
       
-      const projectRoot = process.cwd();
-      const outputPath = path.resolve(options.output);
+      // Start file discovery with spinner
+      const discoverySpinner = ora('🔍 Discovering files...').start();
+      const files = await discoverFiles(process.cwd());
+      const filteredFiles = await filterFiles(files, process.cwd());
+      discoverySpinner.succeed(`📁 Found ${filteredFiles.length} files to include`);
       
-      // Discover and filter files
-      const discoveredFiles = await discoverFiles(projectRoot);
-      const filteredFiles = await filterFiles(discoveredFiles, projectRoot);
+      // Process files with progress tracking
+      console.log('Reading file contents');
+      const processingSpinner = ora('📄 Processing files...').start();
+      const aggregatedContent = await aggregateFileContents(filteredFiles, process.cwd(), processingSpinner);
+      processingSpinner.succeed(`✅ Processed ${aggregatedContent.processedFiles}/${filteredFiles.length} files`);
       
-      console.log(`Found ${filteredFiles.length} files to include`);
-      
-      // Debug: log the files being included (only in debug mode)
-      if (process.env.DEBUG_FLATTENER) {
-        console.log('Files to include:');
-        filteredFiles.forEach(file => {
-          console.log(`  - ${path.relative(projectRoot, file)}`);
-        });
-      }
-      
-      // Aggregate file contents
-      console.log('Reading file contents...');
-      const aggregatedContent = await aggregateFileContents(filteredFiles, projectRoot);
-      
-      console.log(`Processed ${aggregatedContent.processedFiles}/${aggregatedContent.totalFiles} files`);
-      console.log(`Text files: ${aggregatedContent.textFiles.length}`);
-      console.log(`Binary files: ${aggregatedContent.binaryFiles.length}`);
+      // Log processing results for test validation
+      console.log(`Processed ${aggregatedContent.processedFiles}/${filteredFiles.length} files`);
       if (aggregatedContent.errors.length > 0) {
         console.log(`Errors: ${aggregatedContent.errors.length}`);
       }
+      console.log(`Text files: ${aggregatedContent.textFiles.length}`);
+      if (aggregatedContent.binaryFiles.length > 0) {
+        console.log(`Binary files: ${aggregatedContent.binaryFiles.length}`);
+      }
       
-      // Generate XML content with file contents
-      const xmlContent = generateXMLOutput(aggregatedContent, projectRoot);
+      // Generate XML output
+      const xmlSpinner = ora('🔧 Generating XML output...').start();
+      const xmlOutput = generateXMLOutput(aggregatedContent, process.cwd());
+      await fs.writeFile(options.output, xmlOutput);
+      xmlSpinner.succeed('📝 XML generation completed');
       
-      await fs.writeFile(outputPath, xmlContent);
-      console.log(`Codebase flattened successfully to: ${outputPath}`);
+      // Calculate and display statistics
+      const stats = calculateStatistics(aggregatedContent, xmlOutput);
+      
+      // Display completion summary
+      console.log('\n📊 Completion Summary:');
+      console.log(`✅ Successfully processed ${filteredFiles.length} files into ${options.output}`);
+      console.log(`📁 Output file: ${path.resolve(options.output)}`);
+      console.log(`📏 Total source size: ${stats.totalSize}`);
+      console.log(`📄 Generated XML size: ${stats.xmlSize}`);
+      console.log(`📝 Total lines of code: ${stats.totalLines.toLocaleString()}`);
+      console.log(`🔢 Estimated tokens: ${stats.estimatedTokens}`);
+      console.log(`📊 File breakdown: ${stats.textFiles} text, ${stats.binaryFiles} binary, ${stats.errorFiles} errors`);
+      
     } catch (error) {
-      console.error('Flattening failed:', error.message);
+      console.error('❌ Critical error:', error.message);
+      console.error('An unexpected error occurred.');
       process.exit(1);
     }
   });
