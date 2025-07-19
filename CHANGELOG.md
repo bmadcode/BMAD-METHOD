@@ -1,3 +1,10 @@
+## [4.30.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.2...v4.30.3) (2025-07-19)
+
+
+### Bug Fixes
+
+* improve code in the installer to be more memory efficient ([849e428](https://github.com/bmadcode/BMAD-METHOD/commit/849e42871ab845098fd196217bce83e43c736b8a))
+
 ## [4.30.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.1...v4.30.2) (2025-07-17)
 
 
