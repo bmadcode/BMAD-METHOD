@@ -110,6 +110,46 @@ npm run install:bmad # build and install all to a destination folder
 
 BMad's natural language framework works in ANY domain. Expansion packs provide specialized AI agents for creative writing, business strategy, health & wellness, education, and more. Also expansion packs can expand the core BMad-Method with specific functionality that is not generic for all cases. [See the Expansion Packs Guide](docs/expansion-packs.md) and learn to create your own!
 
+## Codebase Flattener Tool
+
+The BMad-Method includes a powerful codebase flattener tool designed to prepare your project files for AI model consumption. This tool aggregates your entire codebase into a single XML file, making it easy to share your project context with AI assistants for analysis, debugging, or development assistance.
+
+### Features
+
+- **AI-Optimized Output**: Generates clean XML format specifically designed for AI model consumption
+- **Smart Filtering**: Automatically respects `.gitignore` patterns to exclude unnecessary files
+- **Binary File Detection**: Intelligently identifies and excludes binary files, focusing on source code
+- **Progress Tracking**: Real-time progress indicators and comprehensive completion statistics
+- **Flexible Output**: Customizable output file location and naming
+
+### Usage
+
+```bash
+# Basic usage - creates flattened-codebase.xml in current directory
+npm run flatten
+
+# Specify custom output file
+npm run flatten -- --output my-project.xml
+npm run flatten -- -o /path/to/output/codebase.xml
+```
+
+### Example Output
+
+The tool will display progress and provide a comprehensive summary:
+
+```
+📊 Completion Summary:
+✅ Successfully processed 156 files into flattened-codebase.xml
+📁 Output file: /path/to/your/project/flattened-codebase.xml
+📏 Total source size: 2.3 MB
+📄 Generated XML size: 2.1 MB
+📝 Total lines of code: 15,847
+🔢 Estimated tokens: 542,891
+📊 File breakdown: 142 text, 14 binary, 0 errors
+```
+
+The generated XML file contains all your project's source code in a structured format that AI models can easily parse and understand, making it perfect for code reviews, architecture discussions, or getting AI assistance with your BMad-Method projects.
+
 ## Documentation & Resources
 
 ### Essential Guides
