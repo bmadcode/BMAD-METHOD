@@ -14,7 +14,6 @@
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
     "flatten": "node tools/flattener/main.js",
-    "test": "jest",
     "install:bmad": "node tools/installer/bin/bmad.js install",
     "format": "prettier --write \"**/*.md\"",
     "version:patch": "node tools/version-bump.js patch",
@@ -44,7 +43,7 @@
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
     "minimatch": "^10.0.3",
-    "ora": "^8.2.0"
+    "ora": "^5.4.1"
   },
   "keywords": [
     "agile",
