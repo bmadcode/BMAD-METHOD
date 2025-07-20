@@ -1,0 +1,41 @@
+{
+  "assistants": {
+    "bmad-method": {
+      "description": "BMad Method AI Agent Framework",
+      "version": "4.31.0",
+      "assistants_dir": ".zed/assistants",
+      "usage": {
+        "activation": "Type @agent-name to activate a specific agent",
+        "examples": [
+          "@dev - Activate the Developer agent",
+          "@pm - Activate the Product Manager agent", 
+          "@architect - Activate the Architect agent",
+          "@qa - Activate the QA agent",
+          "@po - Activate the Product Owner agent",
+          "@sm - Activate the Scrum Master agent",
+          "@analyst - Activate the Analyst agent",
+          "@ux-expert - Activate the UX Expert agent"
+        ]
+      },
+      "project_integration": {
+        "documentation": ".bmad-core/",
+        "templates": ".bmad-core/templates/",
+        "tasks": ".bmad-core/tasks/",
+        "checklists": ".bmad-core/checklists/",
+        "data": ".bmad-core/data/"
+      },
+      "features": {
+        "file_access": "Full access to project files",
+        "context_awareness": "Understands project structure and conventions",
+        "template_system": "Access to BMad document templates",
+        "task_execution": "Can execute specific BMad tasks",
+        "quality_assurance": "Access to BMad checklists and validation"
+      }
+    }
+  },
+  "setup_instructions": {
+    "installation": "Run 'npx bmad-method install' and select 'zed' as your IDE",
+    "activation": "Open Zed AI assistant panel (Cmd+I on Mac, Ctrl+I on Windows/Linux)",
+    "usage": "Type @agent-name to activate specific BMad agents"
+  }
+} 

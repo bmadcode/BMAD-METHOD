@@ -53,6 +53,8 @@ class IdeSetup extends BaseIdeSetup {
         return this.setupRoo(installDir, selectedAgent);
       case "cline":
         return this.setupCline(installDir, selectedAgent);
+      case "zed":
+        return this.setupZed(installDir, selectedAgent);
       case "gemini":
         return this.setupGeminiCli(installDir, selectedAgent);
       case "github-copilot":
@@ -776,6 +778,85 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     console.log(chalk.green(`\n✓ Created Cline rules in ${clineRulesDir}`));
+
+    return true;
+  }
+
+  async setupZed(installDir, selectedAgent) {
+    const zedAssistantsDir = path.join(installDir, ".zed", "assistants");
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
+
+    await fileManager.ensureDirectory(zedAssistantsDir);
+
+    // Load dynamic agent ordering from configuration
+    const config = await this.loadIdeAgentConfig();
+    const agentOrder = config['zed-order'] || config['cline-order'] || {}; // Use Zed-specific ordering, fallback to cline
+
+    for (const agentId of agents) {
+      // Find the agent file
+      const agentPath = await this.findAgentPath(agentId, installDir);
+
+      if (agentPath) {
+        const agentContent = await fileManager.readFile(agentPath);
+
+        // Get numeric prefix for ordering
+        const order = agentOrder[agentId] || 99;
+        const prefix = order.toString().padStart(2, '0');
+        const mdPath = path.join(zedAssistantsDir, `${prefix}-${agentId}.md`);
+
+        // Create MD content for Zed (similar to Cline but optimized for Zed's assistant system)
+        let mdContent = `# ${await this.getAgentTitle(agentId, installDir)} Assistant\n\n`;
+        mdContent += `This assistant defines the ${await this.getAgentTitle(agentId, installDir)} persona for Zed AI.\n\n`;
+        mdContent += "## Assistant Activation\n\n";
+        mdContent +=
+          "When the user types `@" + agentId + "` or `@agent-name`, adopt this persona and follow these guidelines:\n\n";
+        mdContent += "```yaml\n";
+        // Extract just the YAML content from the agent file
+        const yamlContent = extractYamlFromAgent(agentContent);
+        if (yamlContent) {
+          mdContent += yamlContent;
+        } else {
+          // If no YAML found, include the whole content minus the header
+          mdContent += agentContent.replace(/^#.*$/m, "").trim();
+        }
+        mdContent += "\n```\n\n";
+        mdContent += "## Project Context\n\n";
+        mdContent += `- Maintain consistency with project documentation in .bmad-core/\n`;
+        mdContent += `- Follow the agent's specific guidelines and constraints\n`;
+        mdContent += `- Update relevant project files when making changes\n`;
+        mdContent += `- Work within the project's file structure and conventions\n`;
+        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        mdContent += `- Reference the complete agent definition in [${relativePath}](${relativePath})\n\n`;
+        mdContent += "## Zed Integration\n\n";
+        mdContent += `- Use Zed's file system access to read and modify project files\n`;
+        mdContent += `- Leverage Zed's AI capabilities for code generation and analysis\n`;
+        mdContent += `- Follow Zed's coding standards and best practices\n\n`;
+        mdContent += "## Usage\n\n";
+        mdContent += `Type \`@${agentId}\` to activate this ${await this.getAgentTitle(agentId, installDir)} assistant.\n`;
+
+        await fileManager.writeFile(mdPath, mdContent);
+        console.log(chalk.green(`✓ Created assistant: ${prefix}-${agentId}.md`));
+      }
+    }
+
+    // Create Zed configuration file
+    const zedConfigPath = path.join(installDir, ".zed", "bmad-config.json");
+    const zedConfigContent = await fileManager.readFile(path.join(__dirname, '..', 'config', 'zed-config.json'));
+    await fileManager.writeFile(zedConfigPath, zedConfigContent);
+    console.log(chalk.green(`✓ Created Zed configuration: bmad-config.json`));
+
+    // Create Zed README file
+    const zedReadmePath = path.join(installDir, ".zed", "README.md");
+    const zedReadmeContent = await fileManager.readFile(path.join(__dirname, '..', 'config', 'zed-readme.md'));
+    await fileManager.writeFile(zedReadmePath, zedReadmeContent);
+    console.log(chalk.green(`✓ Created Zed README: README.md`));
+
+    console.log(chalk.green(`\n✓ Created Zed assistants in ${zedAssistantsDir}`));
+    console.log(chalk.dim("Assistants will be available when you open this project in Zed"));
+    console.log(chalk.cyan("\n📋 Zed Integration Complete!"));
+    console.log(chalk.dim("• Open Zed AI assistant panel (Cmd+I on Mac, Ctrl+I on Windows/Linux)"));
+    console.log(chalk.dim("• Type @agent-name to activate BMad agents"));
+    console.log(chalk.dim("• Example: @dev, @pm, @architect, @qa"));
 
     return true;
   }

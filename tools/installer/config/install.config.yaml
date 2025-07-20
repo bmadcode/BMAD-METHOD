@@ -66,6 +66,17 @@ ide-configurations:
       # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
       # 3. The agent will adopt that persona for the conversation
       # 4. Rules are stored in .clinerules/ directory in your project
+  zed:
+    name: Zed
+    rule-dir: .zed/assistants/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Zed:
+      # 1. Open the AI assistant panel (Cmd+I on Mac, Ctrl+I on Windows/Linux)
+      # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
+      # 3. The agent will adopt that persona for the conversation
+      # 4. Assistants are stored in .zed/assistants/ directory in your project
   gemini:
     name: Gemini CLI
     rule-dir: .gemini/bmad-method/
