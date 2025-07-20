@@ -67,7 +67,6 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "husky": "^9.1.7",
-    "jest": "^30.0.4",
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "semantic-release": "^22.0.0",
