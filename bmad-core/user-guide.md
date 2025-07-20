@@ -1,12 +1,12 @@
 # BMad-Method BMAd Code User Guide
 
-This guide will help you understand and effectively use the BMad Method for agile ai driven planning and development.
+This guide will help you understand and effectively use the BMad Method for agile AI driven planning and development.
 
 ## The BMad Plan and Execute Workflow
 
-First, here is the full standard Greenfield Planning + Execution Workflow. Brownfield is very similar, but its suggested to understand this greenfield first, even if on a simple project before tackling a brownfield project. The BMad Method needs to be installed to the root of your new project folder. For the planning phase, you can optionally perform it with powerful web agents, potentially resulting in higher quality results at a fraction of the cost it would take to complete if providing your own API key or credits in some Agentic tools. For planning, powerful thinking models and larger context - along with working as a partner with the agents will net the best results.
+First, here is the full standard Greenfield Planning + Execution Workflow. Brownfield is very similar, but it's suggested to understand this greenfield first, even if on a simple project before tackling a brownfield project. The BMad Method needs to be installed to the root of your new project folder. For the planning phase, you can optionally perform it with powerful web agents, potentially resulting in higher quality results at a fraction of the cost it would take to complete if providing your own API key or credits in some Agentic tools. For planning, powerful thinking models and larger context - along with working as a partner with the agents will net the best results.
 
-If you are going to use the BMad Method with a Brownfield project (an existing project), review [Working in the Brownfield](./working-in-the-brownfield.md)
+If you are going to use the BMad Method with a Brownfield project (an existing project), review **[Working in the Brownfield](./working-in-the-brownfield.md)**.
 
 If you do not see the diagrams that following rendering, you can install Markdown All in One along with the Markdown Preview Mermaid Support plugins to VSCode (or one of the forked clones). With these plugin's, if you right click on the tab when open, there should be a Open Preview option, or check the IDE documentation.
 
@@ -132,7 +132,7 @@ graph TD
 If you want to do the planning in the Web with Claude (Sonnet 4 or Opus), Gemini Gem (2.5 Pro), or Custom GPT's:
 
 1. Navigate to `dist/teams/`
-2. Copy `team-fullstack.txt` content
+2. Copy `team-fullstack.txt`
 3. Create new Gemini Gem or CustomGPT
 4. Upload file with instructions: "Your critical operating instructions are attached, do not break character as directed"
 5. Type `/help` to see available commands
@@ -152,7 +152,7 @@ There are two bmad agents - in the future they will be consolidated into the sin
 
 This agent can do any task or command that all other agents can do, aside from actual story implementation. Additionally, this agent can help explain the BMad Method when in the web by accessing the knowledge base and explaining anything to you about the process.
 
-If you dont want to bother switching between different agents aside from the dev, this is the agent for you.
+If you don't want to bother switching between different agents aside from the dev, this is the agent for you. Just remember that as the context grows, the performance of the agent degrades, therefore it is important to instruct the agent to compact the conversation and start a new conversation with the compacted conversation as the initial message. Do this often, preferably after each story is implemented.
 
 ### BMad-Orchestrator
 
@@ -210,6 +210,7 @@ dependencies:
 - **Agent Selection**: Use appropriate agent for task
 - **Iterative Development**: Work in small, focused tasks
 - **File Organization**: Maintain clean project structure
+- **Commit Regularly**: Save your work frequently
 
 ## Technical Preferences System
 
@@ -236,7 +237,7 @@ devLoadAlwaysFiles:
 
 You will want to verify from sharding your architecture that these documents exist, that they are as lean as possible, and contain exactly the information you want your dev agent to ALWAYS load into it's context. These are the rules the agent will follow.
 
-As your project grows and the code starts to build consistent patterns, coding standards should be reduced to just the items that the agent makes mistakes at still - must with the better models, they will look at surrounding code in files and not need a rule from that file to guide them.
+As your project grows and the code starts to build consistent patterns, coding standards should be reduced to include only the standards that the agent still makes with. The agent will look at surrounding code in files to infer the coding standards that are relevant to the current task.
 
 ## Getting Help
 

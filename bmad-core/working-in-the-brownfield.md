@@ -2,10 +2,10 @@
 
 > **HIGHLY RECOMMENDED: Use Gemini Web or Gemini CLI for Brownfield Documentation Generation!**
 >
-> Gemini Web's 1M+ token context window or Gemini CLI (when its working) can analyze your ENTIRE codebase or critical sections of it all at once (obviously within reason):
+> Gemini Web's 1M+ token context window or Gemini CLI (when it's working) can analyze your ENTIRE codebase, or critical sections of it, all at once (obviously within reason):
 >
 > - Upload via GitHub URL or use gemini cli in the project folder
-> - If in the web: Upload up to 1000 files or the zipped project or just give it the github url
+> - If working in the web: use the flattener-tool to flatten your project into a single file, then upload that file to your web agent.
 
 ## What is Brownfield Development?
 
@@ -22,9 +22,12 @@ Brownfield development refers to adding features, fixing bugs, or modernizing ex
 
 ## When NOT to use a Brownfield Flow
 
-If you have just completed an MVP with BMad, and you want to continue with post-MVP, its easier to just talk to the PM and ask him to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
+If you have just completed an MVP with BMad, and you want to continue with post-MVP, its easier to just talk to the PM and ask it to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
 
 ## The Complete Brownfield Workflow
+
+1. **Follow the [<ins>User Guide - Installation</ins>](user-guide.md#installation) steps to setup your agent in the web.**
+2. **Generate a 'flattened' single file of your entire codebase** run: ```npm run flatten```
 
 ### Choose Your Approach
 
@@ -48,7 +51,7 @@ If you have just completed an MVP with BMad, and you want to continue with post-
 
 #### Phase 1: Define Requirements First
 
-**In Gemini Web (with your codebase uploaded):**
+**In Gemini Web (with your flattened-codebase.xml uploaded):**
 
 ```bash
 @pm
@@ -104,8 +107,7 @@ For example, if you say "Add payment processing to user service":
 1. **Go to Gemini Web** (gemini.google.com)
 2. **Upload your project**:
    - **Option A**: Paste your GitHub repository URL directly
-   - **Option B**: Upload up to 1000 files from your src/project folder
-   - **Option C**: Zip your project and upload the archive
+   - **Option B**: Upload your flattened-codebase.xml file
 3. **Load the analyst agent**: Upload `dist/agents/analyst.txt`
 4. **Run documentation**: Type `*document-project`
 
@@ -113,7 +115,7 @@ The analyst will generate comprehensive documentation of everything.
 
 #### Phase 2: Plan Your Enhancement
 
-#### Option A: Full Brownfield Workflow (Recommended for Major Changes)
+##### Option A: Full Brownfield Workflow (Recommended for Major Changes)
 
 **1. Create Brownfield PRD**:
 
@@ -157,7 +159,7 @@ The architect will:
 - **Identify technical risks**
 - **Define compatibility requirements**
 
-#### Option B: Quick Enhancement (For Focused Changes)
+##### Option B: Quick Enhancement (For Focused Changes)
 
 **For Single Epic Without Full PRD**:
 
@@ -203,24 +205,7 @@ The PO ensures:
 
 ### Phase 4: Transition to Development
 
-Follow the enhanced IDE Development Workflow:
-
-1. **Ensure documents are in project**:
-
-   - Copy `docs/prd.md` (or brownfield-prd.md)
-   - Copy `docs/architecture.md` (or brownfield-architecture.md)
-
-2. **Shard documents**:
-
-   ```bash
-   @po
-   # Ask to shard docs/prd.md
-   ```
-
-3. **Development cycle**:
-   - **SM** creates stories with integration awareness
-   - **Dev** implements with existing code respect
-   - **QA** reviews for compatibility and improvements
+**Follow the [<ins>Enhanced IDE Development Workflow</ins>](enhanced-ide-development-workflow.md)**
 
 ## Brownfield Best Practices
 
