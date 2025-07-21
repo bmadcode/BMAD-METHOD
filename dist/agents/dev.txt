@@ -503,76 +503,70 @@ echo "" >> $AUDIT_REPORT
 
 ### Simulation Pattern Detection
 
-```bash
-echo "=== SIMULATION PATTERN DETECTION ===" | tee -a $AUDIT_REPORT
+Now scanning for simulation patterns using the Grep tool for efficient analysis:
 
-# Pattern 1: Random data generation
-echo "" >> $AUDIT_REPORT
-echo "## Random Data Generation Patterns" >> $AUDIT_REPORT
-echo "Random data generation:" | tee -a $AUDIT_REPORT
-for ext in $PROJECT_FILE_EXT; do
-    grep -r "Random\.|Math\.random|random\(\)|rand\(\)" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
-done
-RANDOM_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Random\.|Math\.random|random\(\)|rand\(\)" {} \; 2>/dev/null | wc -l)
-echo "**Count:** $RANDOM_COUNT instances" | tee -a $AUDIT_REPORT
+**Pattern 1: Random Data Generation**
+- Detecting Random.NextDouble(), Math.random, random(), rand() patterns
+- These indicate simulation rather than real data sources
 
-# Pattern 2: Mock async operations  
-echo "" >> $AUDIT_REPORT
-echo "## Mock Async Operations" >> $AUDIT_REPORT
-echo "Mock async operations:" | tee -a $AUDIT_REPORT
-for ext in $PROJECT_FILE_EXT; do
-    grep -r "Task\.FromResult|Promise\.resolve|async.*return.*mock|await.*mock" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
-done
-TASK_MOCK_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Task\.FromResult|Promise\.resolve" {} \; 2>/dev/null | wc -l)
-echo "**Count:** $TASK_MOCK_COUNT instances" | tee -a $AUDIT_REPORT
+**Pattern 2: Mock Async Operations**
+- Detecting Task.FromResult, Promise.resolve patterns
+- These bypass real asynchronous operations
 
-# Pattern 3: Unimplemented methods
-echo "" >> $AUDIT_REPORT
-echo "## Unimplemented Methods" >> $AUDIT_REPORT
-echo "Unimplemented methods:" | tee -a $AUDIT_REPORT
-for ext in $PROJECT_FILE_EXT; do
-    grep -r "NotImplementedException|todo!|unimplemented!|panic!|raise NotImplementedError|NotImplemented" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
-done
-NOT_IMPL_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "NotImplementedException|todo!|unimplemented!|panic!|raise NotImplementedError" {} \; 2>/dev/null | wc -l)
-echo "**Count:** $NOT_IMPL_COUNT instances" | tee -a $AUDIT_REPORT
+**Pattern 3: Unimplemented Methods**
+- Detecting NotImplementedException, todo!, unimplemented! patterns
+- These indicate incomplete implementation
 
-# Pattern 4: TODO comments
-echo "" >> $AUDIT_REPORT
-echo "## TODO Comments" >> $AUDIT_REPORT
-echo "TODO comments in critical path:" | tee -a $AUDIT_REPORT
-for ext in $PROJECT_FILE_EXT; do
-    grep -r "TODO:|FIXME:|HACK:|XXX:|BUG:" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
-done
-TODO_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "TODO:|FIXME:|HACK:|XXX:|BUG:" {} \; 2>/dev/null | wc -l)
-echo "**Count:** $TODO_COUNT instances" | tee -a $AUDIT_REPORT
+**Pattern 4: TODO Comments**
+- Detecting TODO:, FIXME:, HACK:, XXX:, BUG: patterns
+- These indicate incomplete or problematic code
 
-# Pattern 5: Simulation methods
-echo "" >> $AUDIT_REPORT  
-echo "## Simulation Methods" >> $AUDIT_REPORT
-echo "Simulation methods:" | tee -a $AUDIT_REPORT
-for ext in $PROJECT_FILE_EXT; do
-    grep -r "Simulate.*\(|Mock.*\(|Fake.*\(|Stub.*\(|dummy.*\(" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
-done
-SIMULATE_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Simulate.*\(" {} \; 2>/dev/null | wc -l)
-MOCK_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Mock.*\(" {} \; 2>/dev/null | wc -l)
-FAKE_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Fake.*\(" {} \; 2>/dev/null | wc -l)
-TOTAL_SIM_COUNT=$((SIMULATE_COUNT + MOCK_COUNT + FAKE_COUNT))
-echo "**Count:** $TOTAL_SIM_COUNT instances (Simulate: $SIMULATE_COUNT, Mock: $MOCK_COUNT, Fake: $FAKE_COUNT)" | tee -a $AUDIT_REPORT
+**Pattern 5: Simulation Methods**
+- Detecting Simulate(), Mock(), Fake(), Stub(), dummy() patterns
+- These indicate test/simulation code in production paths
 
-# Pattern 6: Hardcoded test data
-echo "" >> $AUDIT_REPORT
-echo "## Hardcoded Test Data" >> $AUDIT_REPORT
-echo "Hardcoded arrays and test data:" | tee -a $AUDIT_REPORT
-for ext in $PROJECT_FILE_EXT; do
-    grep -r "new\[\].*{.*}|= \[.*\]|Array\[.*\]|list.*=.*\[" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | head -20 | tee -a $AUDIT_REPORT || true
-done
-ARRAY_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "new\[\].*{.*}" {} \; 2>/dev/null | wc -l)
-LIST_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "= \[.*\]" {} \; 2>/dev/null | wc -l)
-echo "**Count:** Arrays: $ARRAY_COUNT, Lists: $LIST_COUNT" | tee -a $AUDIT_REPORT
+**Pattern 6: Hardcoded Test Data**
+- Detecting hardcoded arrays and list patterns
+- These may indicate simulation rather than real data processing
 
-echo "" | tee -a $AUDIT_REPORT
-echo "Automated scan complete. Report saved to: $AUDIT_REPORT"
-```
+Now executing pattern detection and generating comprehensive report...
+
+**Execute Pattern Detection Using Grep Tool:**
+
+1. **Random Data Generation Patterns:**
+   - Use Grep tool with pattern: `Random\.|Math\.random|random\(\)|rand\(\)`
+   - Search in detected source path with appropriate file extensions
+   - Count instances and document findings in report
+
+2. **Mock Async Operations:**
+   - Use Grep tool with pattern: `Task\.FromResult|Promise\.resolve|async.*return.*mock|await.*mock`
+   - Identify bypassed asynchronous operations
+   - Document mock patterns that need real implementation
+
+3. **Unimplemented Methods:**
+   - Use Grep tool with pattern: `NotImplementedException|todo!|unimplemented!|panic!|raise NotImplementedError`
+   - Find incomplete method implementations
+   - Critical for reality validation
+
+4. **TODO Comments:**
+   - Use Grep tool with pattern: `TODO:|FIXME:|HACK:|XXX:|BUG:`
+   - Identify code marked for improvement
+   - Assess impact on completion claims
+
+5. **Simulation Methods:**
+   - Use Grep tool with pattern: `Simulate.*\(|Mock.*\(|Fake.*\(|Stub.*\(|dummy.*\(`
+   - Find simulation/test code in production paths
+   - Calculate composite simulation score impact
+
+6. **Hardcoded Test Data:**
+   - Use Grep tool with pattern: `new\[\].*\{.*\}|= \[.*\]|Array\[.*\]|list.*=.*\[`
+   - Detect hardcoded arrays and lists
+   - Assess if real data processing is implemented
+
+**Pattern Count Variables for Scoring:**
+- Set RANDOM_COUNT, TASK_MOCK_COUNT, NOT_IMPL_COUNT, TODO_COUNT, TOTAL_SIM_COUNT
+- Use these counts in composite scoring algorithm
+- Generate detailed findings report in tmp/reality-audit-[timestamp].md
 
 ## Phase 2: Build and Runtime Validation
 
