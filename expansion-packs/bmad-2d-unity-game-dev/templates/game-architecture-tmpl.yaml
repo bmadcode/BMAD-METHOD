@@ -244,6 +244,486 @@ sections:
           - Sequence diagrams for complex game loops (Update, FixedUpdate flows)
           Choose the most appropriate for clarity and Unity-specific understanding
 
+  - id: gameplay-systems
+    title: Gameplay Systems Architecture
+    instruction: |
+      Define the core gameplay systems that drive the player experience. Focus on game-specific logic and mechanics.
+    elicit: true
+    sections:
+      - id: gameplay-overview
+        title: Gameplay Systems Overview
+        template: |
+          **Core Game Loop:** {{core_game_loop_description}}
+
+          **Player Actions:** {{primary_player_actions}}
+
+          **Game State Flow:** {{game_state_transitions}}
+      - id: gameplay-components
+        title: Gameplay Component Architecture
+        template: |
+          **Player Controller Components:**
+          - {{player_controller_components}}
+
+          **Game Logic Components:**
+          - {{game_logic_components}}
+
+          **Interaction Systems:**
+          - {{interaction_system_components}}
+
+  - id: component-architecture
+    title: Component Architecture Details
+    instruction: |
+      Define detailed Unity component architecture patterns and conventions for the game.
+    elicit: true
+    sections:
+      - id: monobehaviour-patterns
+        title: MonoBehaviour Patterns
+        template: |
+          **Component Composition:** {{component_composition_approach}}
+
+          **Lifecycle Management:** {{lifecycle_management_patterns}}
+
+          **Component Communication:** {{component_communication_methods}}
+      - id: scriptableobject-usage
+        title: ScriptableObject Architecture
+        template: |
+          **Data Architecture:** {{scriptableobject_data_patterns}}
+
+          **Configuration Management:** {{config_scriptableobject_usage}}
+
+          **Runtime Data:** {{runtime_scriptableobject_patterns}}
+
+  - id: physics-config
+    title: Physics Configuration
+    instruction: |
+      Define Unity 2D physics setup and configuration for the game.
+    elicit: true
+    sections:
+      - id: physics-settings
+        title: Physics Settings
+        template: |
+          **Physics 2D Settings:** {{physics_2d_configuration}}
+
+          **Collision Layers:** {{collision_layer_matrix}}
+
+          **Physics Materials:** {{physics_materials_setup}}
+      - id: rigidbody-patterns
+        title: Rigidbody Patterns
+        template: |
+          **Player Physics:** {{player_rigidbody_setup}}
+
+          **Object Physics:** {{object_physics_patterns}}
+
+          **Performance Optimization:** {{physics_optimization_strategies}}
+
+  - id: input-system
+    title: Input System Architecture
+    instruction: |
+      Define input handling using Unity's Input System package.
+    elicit: true
+    sections:
+      - id: input-actions
+        title: Input Actions Configuration
+        template: |
+          **Input Action Assets:** {{input_action_asset_structure}}
+
+          **Action Maps:** {{input_action_maps}}
+
+          **Control Schemes:** {{control_schemes_definition}}
+      - id: input-handling
+        title: Input Handling Patterns
+        template: |
+          **Player Input:** {{player_input_component_usage}}
+
+          **UI Input:** {{ui_input_handling_patterns}}
+
+          **Input Validation:** {{input_validation_strategies}}
+
+  - id: state-machines
+    title: State Machine Architecture
+    instruction: |
+      Define state machine patterns for game states, player states, and AI behavior.
+    elicit: true
+    sections:
+      - id: game-state-machine
+        title: Game State Machine
+        template: |
+          **Game States:** {{game_state_definitions}}
+
+          **State Transitions:** {{game_state_transition_rules}}
+
+          **State Management:** {{game_state_manager_implementation}}
+      - id: entity-state-machines
+        title: Entity State Machines
+        template: |
+          **Player States:** {{player_state_machine_design}}
+
+          **AI Behavior States:** {{ai_state_machine_patterns}}
+
+          **Object States:** {{object_state_management}}
+
+  - id: ui-architecture
+    title: UI Architecture
+    instruction: |
+      Define Unity UI system architecture using UGUI or UI Toolkit.
+    elicit: true
+    sections:
+      - id: ui-system-choice
+        title: UI System Selection
+        template: |
+          **UI Framework:** {{ui_framework_choice}} (UGUI/UI Toolkit)
+
+          **UI Scaling:** {{ui_scaling_strategy}}
+
+          **Canvas Setup:** {{canvas_configuration}}
+      - id: ui-navigation
+        title: UI Navigation System
+        template: |
+          **Screen Management:** {{screen_management_system}}
+
+          **Navigation Flow:** {{ui_navigation_patterns}}
+
+          **Back Button Handling:** {{back_button_implementation}}
+
+  - id: ui-components
+    title: UI Component System
+    instruction: |
+      Define reusable UI components and their implementation patterns.
+    elicit: true
+    sections:
+      - id: ui-component-library
+        title: UI Component Library
+        template: |
+          **Base Components:** {{base_ui_components}}
+
+          **Custom Components:** {{custom_ui_components}}
+
+          **Component Prefabs:** {{ui_prefab_organization}}
+      - id: ui-data-binding
+        title: UI Data Binding
+        template: |
+          **Data Binding Patterns:** {{ui_data_binding_approach}}
+
+          **UI Events:** {{ui_event_system}}
+
+          **View Model Patterns:** {{ui_viewmodel_implementation}}
+
+  - id: ui-state-management
+    title: UI State Management
+    instruction: |
+      Define how UI state is managed across the game.
+    elicit: true
+    sections:
+      - id: ui-state-patterns
+        title: UI State Patterns
+        template: |
+          **State Persistence:** {{ui_state_persistence}}
+
+          **Screen State:** {{screen_state_management}}
+
+          **UI Configuration:** {{ui_configuration_management}}
+
+  - id: scene-management
+    title: Scene Management Architecture
+    instruction: |
+      Define scene loading, unloading, and transition strategies.
+    elicit: true
+    sections:
+      - id: scene-structure
+        title: Scene Structure
+        template: |
+          **Scene Organization:** {{scene_organization_strategy}}
+
+          **Scene Hierarchy:** {{scene_hierarchy_patterns}}
+
+          **Persistent Scenes:** {{persistent_scene_usage}}
+      - id: scene-loading
+        title: Scene Loading System
+        template: |
+          **Loading Strategies:** {{scene_loading_patterns}}
+
+          **Async Loading:** {{async_scene_loading_implementation}}
+
+          **Loading Screens:** {{loading_screen_management}}
+
+  - id: data-persistence
+    title: Data Persistence Architecture
+    instruction: |
+      Define save system and data persistence strategies.
+    elicit: true
+    sections:
+      - id: save-data-structure
+        title: Save Data Structure
+        template: |
+          **Save Data Models:** {{save_data_model_design}}
+
+          **Serialization Format:** {{serialization_format_choice}}
+
+          **Data Validation:** {{save_data_validation}}
+      - id: persistence-strategy
+        title: Persistence Strategy
+        template: |
+          **Save Triggers:** {{save_trigger_events}}
+
+          **Auto-Save:** {{auto_save_implementation}}
+
+          **Cloud Save:** {{cloud_save_integration}}
+
+  - id: save-system
+    title: Save System Implementation
+    instruction: |
+      Define detailed save system implementation patterns.
+    elicit: true
+    sections:
+      - id: save-load-api
+        title: Save/Load API
+        template: |
+          **Save Interface:** {{save_interface_design}}
+
+          **Load Interface:** {{load_interface_design}}
+
+          **Error Handling:** {{save_load_error_handling}}
+      - id: save-file-management
+        title: Save File Management
+        template: |
+          **File Structure:** {{save_file_structure}}
+
+          **Backup Strategy:** {{save_backup_strategy}}
+
+          **Migration:** {{save_data_migration_strategy}}
+
+  - id: analytics-integration
+    title: Analytics Integration
+    instruction: |
+      Define analytics tracking and integration patterns.
+    condition: Game requires analytics tracking
+    elicit: true
+    sections:
+      - id: analytics-events
+        title: Analytics Event Design
+        template: |
+          **Event Categories:** {{analytics_event_categories}}
+
+          **Custom Events:** {{custom_analytics_events}}
+
+          **Player Progression:** {{progression_analytics}}
+      - id: analytics-implementation
+        title: Analytics Implementation
+        template: |
+          **Analytics SDK:** {{analytics_sdk_choice}}
+
+          **Event Tracking:** {{event_tracking_patterns}}
+
+          **Privacy Compliance:** {{analytics_privacy_considerations}}
+
+  - id: multiplayer-architecture
+    title: Multiplayer Architecture
+    instruction: |
+      Define multiplayer system architecture if applicable.
+    condition: Game includes multiplayer features
+    elicit: true
+    sections:
+      - id: networking-approach
+        title: Networking Approach
+        template: |
+          **Networking Solution:** {{networking_solution_choice}}
+
+          **Architecture Pattern:** {{multiplayer_architecture_pattern}}
+
+          **Synchronization:** {{state_synchronization_strategy}}
+      - id: multiplayer-systems
+        title: Multiplayer System Components
+        template: |
+          **Client Components:** {{multiplayer_client_components}}
+
+          **Server Components:** {{multiplayer_server_components}}
+
+          **Network Messages:** {{network_message_design}}
+
+  - id: rendering-pipeline
+    title: Rendering Pipeline Configuration
+    instruction: |
+      Define Unity rendering pipeline setup and optimization.
+    elicit: true
+    sections:
+      - id: render-pipeline-setup
+        title: Render Pipeline Setup
+        template: |
+          **Pipeline Choice:** {{render_pipeline_choice}} (URP/Built-in)
+
+          **Pipeline Asset:** {{render_pipeline_asset_config}}
+
+          **Quality Settings:** {{quality_settings_configuration}}
+      - id: rendering-optimization
+        title: Rendering Optimization
+        template: |
+          **Batching Strategies:** {{sprite_batching_optimization}}
+
+          **Draw Call Optimization:** {{draw_call_reduction_strategies}}
+
+          **Texture Optimization:** {{texture_optimization_settings}}
+
+  - id: shader-guidelines
+    title: Shader Guidelines
+    instruction: |
+      Define shader usage and custom shader guidelines.
+    elicit: true
+    sections:
+      - id: shader-usage
+        title: Shader Usage Patterns
+        template: |
+          **Built-in Shaders:** {{builtin_shader_usage}}
+
+          **Custom Shaders:** {{custom_shader_requirements}}
+
+          **Shader Variants:** {{shader_variant_management}}
+      - id: shader-performance
+        title: Shader Performance Guidelines
+        template: |
+          **Mobile Optimization:** {{mobile_shader_optimization}}
+
+          **Performance Budgets:** {{shader_performance_budgets}}
+
+          **Profiling Guidelines:** {{shader_profiling_approach}}
+
+  - id: sprite-management
+    title: Sprite Management
+    instruction: |
+      Define sprite asset management and optimization strategies.
+    elicit: true
+    sections:
+      - id: sprite-organization
+        title: Sprite Organization
+        template: |
+          **Atlas Strategy:** {{sprite_atlas_organization}}
+
+          **Sprite Naming:** {{sprite_naming_conventions}}
+
+          **Import Settings:** {{sprite_import_settings}}
+      - id: sprite-optimization
+        title: Sprite Optimization
+        template: |
+          **Compression Settings:** {{sprite_compression_settings}}
+
+          **Resolution Strategy:** {{sprite_resolution_strategy}}
+
+          **Memory Optimization:** {{sprite_memory_optimization}}
+
+  - id: particle-systems
+    title: Particle System Architecture
+    instruction: |
+      Define particle system usage and optimization.
+    elicit: true
+    sections:
+      - id: particle-design
+        title: Particle System Design
+        template: |
+          **Effect Categories:** {{particle_effect_categories}}
+
+          **Prefab Organization:** {{particle_prefab_organization}}
+
+          **Pooling Strategy:** {{particle_pooling_implementation}}
+      - id: particle-performance
+        title: Particle Performance
+        template: |
+          **Performance Budgets:** {{particle_performance_budgets}}
+
+          **Mobile Optimization:** {{particle_mobile_optimization}}
+
+          **LOD Strategy:** {{particle_lod_implementation}}
+
+  - id: audio-architecture
+    title: Audio Architecture
+    instruction: |
+      Define audio system architecture and implementation.
+    elicit: true
+    sections:
+      - id: audio-system-design
+        title: Audio System Design
+        template: |
+          **Audio Manager:** {{audio_manager_implementation}}
+
+          **Audio Sources:** {{audio_source_management}}
+
+          **3D Audio:** {{spatial_audio_implementation}}
+      - id: audio-categories
+        title: Audio Categories
+        template: |
+          **Music System:** {{music_system_architecture}}
+
+          **Sound Effects:** {{sfx_system_design}}
+
+          **Voice/Dialog:** {{dialog_system_implementation}}
+
+  - id: audio-mixing
+    title: Audio Mixing Configuration
+    instruction: |
+      Define Unity Audio Mixer setup and configuration.
+    elicit: true
+    sections:
+      - id: mixer-setup
+        title: Audio Mixer Setup
+        template: |
+          **Mixer Groups:** {{audio_mixer_group_structure}}
+
+          **Effects Chain:** {{audio_effects_configuration}}
+
+          **Snapshot System:** {{audio_snapshot_usage}}
+      - id: dynamic-mixing
+        title: Dynamic Audio Mixing
+        template: |
+          **Volume Control:** {{volume_control_implementation}}
+
+          **Dynamic Range:** {{dynamic_range_management}}
+
+          **Platform Optimization:** {{platform_audio_optimization}}
+
+  - id: sound-banks
+    title: Sound Bank Management
+    instruction: |
+      Define sound asset organization and loading strategies.
+    elicit: true
+    sections:
+      - id: sound-organization
+        title: Sound Asset Organization
+        template: |
+          **Bank Structure:** {{sound_bank_organization}}
+
+          **Loading Strategy:** {{audio_loading_patterns}}
+
+          **Memory Management:** {{audio_memory_management}}
+      - id: sound-streaming
+        title: Audio Streaming
+        template: |
+          **Streaming Strategy:** {{audio_streaming_implementation}}
+
+          **Compression Settings:** {{audio_compression_settings}}
+
+          **Platform Considerations:** {{platform_audio_considerations}}
+
+  - id: unity-conventions
+    title: Unity Development Conventions
+    instruction: |
+      Define Unity-specific development conventions and best practices.
+    elicit: true
+    sections:
+      - id: unity-best-practices
+        title: Unity Best Practices
+        template: |
+          **Component Design:** {{unity_component_best_practices}}
+
+          **Performance Guidelines:** {{unity_performance_guidelines}}
+
+          **Memory Management:** {{unity_memory_best_practices}}
+      - id: unity-workflow
+        title: Unity Workflow Conventions
+        template: |
+          **Scene Workflow:** {{scene_workflow_conventions}}
+
+          **Prefab Workflow:** {{prefab_workflow_conventions}}
+
+          **Asset Workflow:** {{asset_workflow_conventions}}
+
   - id: external-integrations
     title: External Integrations
     condition: Game requires external service integrations
