@@ -1181,6 +1181,139 @@ echo "=== AUDIT COMPLETE ===" | tee -a $AUDIT_REPORT
 echo "Report location: $AUDIT_REPORT" | tee -a $AUDIT_REPORT
 ```
 
+## Phase 10: Automatic Next Steps Presentation
+
+**CRITICAL USER EXPERIENCE ENHANCEMENT:** Always present clear options based on audit results.
+
+```bash
+echo "" | tee -a $AUDIT_REPORT
+echo "=== YOUR OPTIONS BASED ON AUDIT RESULTS ===" | tee -a $AUDIT_REPORT
+
+# Present options based on reality score and specific issues found
+if [ $REALITY_SCORE -ge 90 ]; then
+    echo "🎯 **Grade A (${REALITY_SCORE}/100) - EXCELLENT QUALITY**" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 1: Mark Complete & Continue (Recommended)**" | tee -a $AUDIT_REPORT
+    echo "✅ All quality gates passed" | tee -a $AUDIT_REPORT
+    echo "✅ Reality score exceeds all thresholds" | tee -a $AUDIT_REPORT
+    echo "✅ Ready for production deployment" | tee -a $AUDIT_REPORT
+    echo "📝 Action: Set story status to 'Complete'" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 2: Optional Enhancements**" | tee -a $AUDIT_REPORT
+    echo "💡 Consider performance optimization" | tee -a $AUDIT_REPORT
+    echo "💡 Add additional edge case testing" | tee -a $AUDIT_REPORT
+    echo "💡 Enhance documentation" | tee -a $AUDIT_REPORT
+    
+elif [ $REALITY_SCORE -ge 80 ]; then
+    echo "🎯 **Grade B (${REALITY_SCORE}/100) - GOOD QUALITY**" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 1: Accept Current State (Recommended)**" | tee -a $AUDIT_REPORT
+    echo "✅ Passes quality gates (≥80)" | tee -a $AUDIT_REPORT
+    echo "✅ Ready for development continuation" | tee -a $AUDIT_REPORT
+    echo "📝 Action: Mark complete with minor notes" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 2: Push to Grade A (Optional)**" | tee -a $AUDIT_REPORT
+    echo "🔧 Address minor simulation patterns" | tee -a $AUDIT_REPORT
+    echo "📈 Estimated effort: 30-60 minutes" | tee -a $AUDIT_REPORT
+    echo "🎯 Target: Reach 90+ score" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 3: Document & Continue**" | tee -a $AUDIT_REPORT
+    echo "📋 Document known limitations" | tee -a $AUDIT_REPORT
+    echo "📝 Add to technical debt backlog" | tee -a $AUDIT_REPORT
+    echo "➡️ Move to next development priorities" | tee -a $AUDIT_REPORT
+    
+elif [ $REALITY_SCORE -ge 70 ]; then
+    echo "🎯 **Grade C (${REALITY_SCORE}/100) - REQUIRES ATTENTION**" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 1: Quick Fixes (Recommended)**" | tee -a $AUDIT_REPORT
+    echo "🔧 Address critical simulation patterns" | tee -a $AUDIT_REPORT
+    echo "📈 Estimated effort: 1-2 hours" | tee -a $AUDIT_REPORT
+    echo "🎯 Target: Reach 80+ to pass quality gates" | tee -a $AUDIT_REPORT
+    echo "📝 Action: Use *create-remediation command" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 2: Split Story Approach**" | tee -a $AUDIT_REPORT
+    echo "✂️ Mark implementation complete (if code is good)" | tee -a $AUDIT_REPORT
+    echo "🆕 Create follow-up story for integration/testing issues" | tee -a $AUDIT_REPORT
+    echo "📝 Action: Separate code completion from environment validation" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 3: Accept Technical Debt**" | tee -a $AUDIT_REPORT
+    echo "⚠️ Document known issues clearly" | tee -a $AUDIT_REPORT
+    echo "📋 Add to technical debt tracking" | tee -a $AUDIT_REPORT
+    echo "⏰ Schedule for future resolution" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 4: Minimum Viable Completion**" | tee -a $AUDIT_REPORT
+    echo "🚀 Quick validation to prove functionality" | tee -a $AUDIT_REPORT
+    echo "📈 Estimated effort: 30-60 minutes" | tee -a $AUDIT_REPORT
+    echo "🎯 Goal: Basic end-to-end proof without full integration" | tee -a $AUDIT_REPORT
+    
+else
+    echo "🎯 **Grade D/F (${REALITY_SCORE}/100) - SIGNIFICANT ISSUES**" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 1: Execute Auto-Remediation (Recommended)**" | tee -a $AUDIT_REPORT
+    echo "🚨 Automatic remediation story will be generated" | tee -a $AUDIT_REPORT
+    echo "📝 Action: Use *audit-validation command to trigger auto-remediation" | tee -a $AUDIT_REPORT
+    echo "🔄 Process: Fix issues → Re-audit → Repeat until score ≥80" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 2: Major Refactor Approach**" | tee -a $AUDIT_REPORT
+    echo "🔨 Significant rework required" | tee -a $AUDIT_REPORT
+    echo "📈 Estimated effort: 4-8 hours" | tee -a $AUDIT_REPORT
+    echo "🎯 Target: Address simulation patterns and build failures" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**Option 3: Restart with New Approach**" | tee -a $AUDIT_REPORT
+    echo "🆕 Consider different technical approach" | tee -a $AUDIT_REPORT
+    echo "📚 Review architectural decisions" | tee -a $AUDIT_REPORT
+    echo "💡 Leverage lessons learned from current attempt" | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    echo "**❌ NOT RECOMMENDED: Accept Current State**" | tee -a $AUDIT_REPORT
+    echo "⚠️ Too many critical issues for production" | tee -a $AUDIT_REPORT
+    echo "🚫 Would introduce significant technical debt" | tee -a $AUDIT_REPORT
+fi
+
+# Provide specific next commands based on situation
+echo "" | tee -a $AUDIT_REPORT
+echo "### 🎯 **IMMEDIATE NEXT COMMANDS:**" | tee -a $AUDIT_REPORT
+
+if [ $REALITY_SCORE -ge 80 ]; then
+    echo "✅ **Ready to Continue:** Quality gates passed" | tee -a $AUDIT_REPORT
+    echo "   • No immediate action required" | tee -a $AUDIT_REPORT
+    echo "   • Consider: Mark story complete" | tee -a $AUDIT_REPORT
+    echo "   • Optional: *Push2Git (if using auto-push)" | tee -a $AUDIT_REPORT
+else
+    echo "🔧 **Remediation Required:** Quality gates failed" | tee -a $AUDIT_REPORT
+    echo "   • Recommended: *audit-validation (triggers auto-remediation)" | tee -a $AUDIT_REPORT
+    echo "   • Alternative: *create-remediation (manual remediation story)" | tee -a $AUDIT_REPORT
+    echo "   • After fixes: Re-run *reality-audit to validate improvements" | tee -a $AUDIT_REPORT
+fi
+
+if [ $BUILD_EXIT_CODE -ne 0 ] || [ $ERROR_COUNT -gt 0 ]; then
+    echo "🚨 **Build Issues Detected:**" | tee -a $AUDIT_REPORT
+    echo "   • Immediate: Fix compilation errors before proceeding" | tee -a $AUDIT_REPORT
+    echo "   • Command: *build-context (for build investigation)" | tee -a $AUDIT_REPORT
+fi
+
+if [ $CRITICAL_PATTERNS -gt 3 ]; then
+    echo "⚠️ **Critical Simulation Patterns:**" | tee -a $AUDIT_REPORT
+    echo "   • Priority: Address NotImplementedException and simulation methods" | tee -a $AUDIT_REPORT
+    echo "   • Command: *create-remediation (focus on critical patterns)" | tee -a $AUDIT_REPORT
+fi
+
+echo "" | tee -a $AUDIT_REPORT
+echo "### 💬 **RECOMMENDED APPROACH:**" | tee -a $AUDIT_REPORT
+
+if [ $REALITY_SCORE -ge 90 ]; then
+    echo "🏆 **Excellent work!** Mark complete and continue with next priorities." | tee -a $AUDIT_REPORT
+elif [ $REALITY_SCORE -ge 80 ]; then
+    echo "✅ **Good quality.** Accept current state or do minor improvements." | tee -a $AUDIT_REPORT
+elif [ $REALITY_SCORE -ge 70 ]; then
+    echo "⚡ **Quick fixes recommended.** 1-2 hours of work to reach quality gates." | tee -a $AUDIT_REPORT
+else
+    echo "🚨 **Major issues found.** Use auto-remediation to generate systematic fix plan." | tee -a $AUDIT_REPORT
+fi
+
+echo "" | tee -a $AUDIT_REPORT
+echo "**Questions? Ask your QA agent: 'What should I do next?' or 'Which option do you recommend?'**" | tee -a $AUDIT_REPORT
+```
+
 ## Definition of "Actually Complete"
 
 ### Quality Gates (All Must Pass)
