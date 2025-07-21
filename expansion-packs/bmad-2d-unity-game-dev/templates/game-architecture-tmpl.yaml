@@ -1,7 +1,7 @@
 template:
-  id: game-architecture-template-v2
+  id: game-architecture-template-v3
   name: Game Architecture Document
-  version: 2.0
+  version: 3.0
   output:
     format: markdown
     filename: docs/game-architecture.md

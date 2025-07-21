@@ -1,7 +1,7 @@
 template:
-  id: game-story-template-v2
+  id: game-story-template-v3
   name: Game Development Story
-  version: 2.0
+  version: 3.0
   output:
     format: markdown
     filename: "stories/{{epic_name}}/{{story_id}}-{{story_name}}.md"
