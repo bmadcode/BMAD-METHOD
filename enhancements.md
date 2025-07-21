@@ -6,7 +6,7 @@
 
 ## 🎯 What's New
 
-### ✨ Seven Game-Changing Features
+### ✨ Eight Game-Changing Features
 
 | Feature | Purpose | Key Innovation |
 |---------|---------|----------------|
@@ -17,6 +17,7 @@
 | **🔗 Loop Detection & Escalation** | Break debugging cycles automatically | Copy-paste prompts for external LLM collaboration |
 | **📤 Auto Git Push** | Streamline perfect completions | Intelligent push with comprehensive criteria validation |
 | **📋 Dual-Track Progress** | Ensure story file updates during development | Automatic story checkbox and file list updates with validation gates |
+| **🔧 Task Execution Enforcement** | Prevent automation workflow failures | Mandatory task file execution with Read tool validation |
 
 ---
 
@@ -63,6 +64,11 @@
 - Automatic story file checkbox updates `[x]` after each task completion
 - Incremental File List updates with new/modified/deleted files
 - Validation gates prevent proceeding without story file updates
+
+**🔧 Task Execution Enforcement (Reliability)**
+- Mandatory execution of configured task files, not generic Task tool
+- Pre-execution validation ensures task files exist and are accessible  
+- Prevents automation workflow bypass that causes quality framework failures
 
 ---
 
@@ -132,18 +138,21 @@
 ## 📁 Implementation Details
 
 ### Core Framework Files
-- `bmad-core/agents/dev.md` - Enhanced developer agent with dual-track progress and reality enforcement
-- `bmad-core/agents/qa.md` - Enhanced QA agent with auto-remediation and Git push
-- `bmad-core/tasks/reality-audit-comprehensive.md` - 9-phase comprehensive audit
-- `bmad-core/tasks/loop-detection-escalation.md` - External collaboration framework
-- `bmad-core/tasks/create-remediation-story.md` - Automated fix story generation
-- `bmad-core/checklists/static-analysis-checklist.md` - Code quality validation
+- `bmad-core/agents/dev.md` - Enhanced developer agent with dual-track progress and task execution enforcement
+- `bmad-core/agents/qa.md` - Enhanced QA agent with auto-remediation, Git push, and mandatory task file execution
+- `bmad-core/tasks/reality-audit-comprehensive.md` - 9-phase comprehensive audit with automation triggers
+- `bmad-core/tasks/loop-detection-escalation.md` - External collaboration framework with copy-paste prompts
+- `bmad-core/tasks/create-remediation-story.md` - Automated fix story generation with regression prevention
+- `bmad-core/checklists/static-analysis-checklist.md` - Code quality validation standards
+- `bmad-core/checklists/task-execution-validation.md` - Task file execution compliance verification
 
 ### Enterprise Features
 - **Multi-language project detection** (Node.js, .NET, Java, Rust, Python, Go, Ruby, PHP)
 - **Cross-platform compatibility** (Windows, Linux, macOS)
 - **Complete audit trails** for compliance and accountability
 - **Scalable architecture** for projects of any size
+- **Reliable task execution** prevents automation workflow failures
+- **File organization** with `/tmp` folder for temporary reports and analysis
 
 ---
 

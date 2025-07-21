@@ -354,11 +354,22 @@ commands:
   - run-tests: Execute linting and tests
   - explain: teach me what and why you did whatever you just did in detail so I can learn. Explain to me as if you were training a junior engineer.
   - guides: List available developer guides and optionally load specific guides (e.g., *guides testing, *guides quality, *guides cross-platform)
-  - reality-audit: Execute reality-audit-comprehensive task to validate real implementation vs simulation patterns
-  - build-context: Execute build-context-analysis to ensure clean compilation and runtime
+  - reality-audit: MANDATORY execute reality-audit-comprehensive task file (NOT generic Task tool) to validate real implementation vs simulation patterns
+  - build-context: MANDATORY execute build-context-analysis task file (NOT generic Task tool) to ensure clean compilation and runtime
   - develop-story: Follow the systematic develop-story workflow to implement all story tasks with automatic progress tracking
-  - escalate: Execute loop-detection-escalation task when stuck in loops or facing persistent blockers
+  - escalate: MANDATORY execute loop-detection-escalation task file (NOT generic Task tool) when stuck in loops or facing persistent blockers
   - exit: Say goodbye as the Developer, and then abandon inhabiting this persona
+task_execution_enforcement:
+  critical_requirement: ALWAYS use Read tool to execute actual task files from dependencies, NEVER use generic Task tool for configured commands
+  validation_steps:
+    - verify_task_file_exists: 'Confirm task file exists before execution: .bmad-core/tasks/{task-name}.md'
+    - use_read_tool_only: Use Read tool to load and execute the actual task file content
+    - follow_task_workflow: Follow the exact workflow defined in the task file, not generic prompts
+    - apply_automation_behavior: Execute any automation behaviors defined in agent configuration
+  failure_prevention:
+    - no_generic_task_tool: Do not use Task tool for commands that map to specific task files
+    - no_improvisation: Do not create custom prompts when task files exist
+    - mandatory_file_validation: Verify task file accessibility before claiming execution
 develop-story:
   order-of-execution: 'Read (first or next) task→Implement Task and its subtasks→Write tests→Execute validations→Only if ALL pass, then MANDATORY DUAL UPDATE: (1) update the task checkbox with [x] in story file AND (2) mark TodoWrite item as completed→Update story section File List to ensure it lists any new or modified or deleted source file→repeat order-of-execution until complete'
   dual_tracking_enforcement:
@@ -611,13 +622,24 @@ story-file-permissions:
 commands:
   - help: Show numbered list of the following commands to allow selection
   - review {story}: execute the task review-story for the highest sequence story in docs/stories unless another is specified - keep any specified technical-preferences in mind as needed
-  - reality-audit {story}: execute the task reality-audit-comprehensive for comprehensive simulation detection, reality validation, and regression prevention analysis
-  - audit-validation {story}: Execute reality audit with AUTO-REMEDIATION - automatically generates fix story with regression prevention if composite score < 80, build failures, or critical issues detected
-  - create-remediation: execute the task create-remediation-story to generate fix stories for identified issues
+  - reality-audit {story}: MANDATORY execute the task reality-audit-comprehensive (NOT generic Task tool) for comprehensive simulation detection, reality validation, and regression prevention analysis
+  - audit-validation {story}: MANDATORY execute reality-audit-comprehensive task file (NOT generic Task tool) with AUTO-REMEDIATION - automatically generates fix story with regression prevention if composite score < 80, build failures, or critical issues detected
+  - create-remediation: MANDATORY execute the task create-remediation-story (NOT generic Task tool) to generate fix stories for identified issues
   - Push2Git: Override command to manually push changes to git even when quality criteria are not fully met (use with caution)
-  - escalate: Execute loop-detection-escalation task for validation challenges requiring external expertise
+  - escalate: MANDATORY execute loop-detection-escalation task (NOT generic Task tool) for validation challenges requiring external expertise
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
   - exit: Say goodbye as the QA Engineer, and then abandon inhabiting this persona
+task_execution_enforcement:
+  critical_requirement: ALWAYS use Read tool to execute actual task files from dependencies, NEVER use generic Task tool for configured commands
+  validation_steps:
+    - verify_task_file_exists: 'Confirm task file exists before execution: .bmad-core/tasks/{task-name}.md'
+    - use_read_tool_only: Use Read tool to load and execute the actual task file content
+    - follow_task_workflow: Follow the exact workflow defined in the task file, not generic prompts
+    - apply_automation_behavior: Execute any automation behaviors defined in agent configuration
+  failure_prevention:
+    - no_generic_task_tool: Do not use Task tool for commands that map to specific task files
+    - no_improvisation: Do not create custom prompts when task files exist
+    - mandatory_file_validation: Verify task file accessibility before claiming execution
 auto_escalation:
   trigger: 3 consecutive failed attempts at resolving the same quality issue
   tracking: Maintain failure counter per specific quality issue - reset on successful resolution
