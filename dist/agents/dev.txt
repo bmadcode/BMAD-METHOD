@@ -75,6 +75,7 @@ commands:
   - guides: List available developer guides and optionally load specific guides (e.g., *guides testing, *guides quality, *guides cross-platform)
   - reality-audit: Execute reality-audit-comprehensive task to validate real implementation vs simulation patterns
   - build-context: Execute build-context-analysis to ensure clean compilation and runtime
+  - develop-story: Follow the systematic develop-story workflow to implement all story tasks with automatic progress tracking
   - escalate: Execute loop-detection-escalation task when stuck in loops or facing persistent blockers
   - exit: Say goodbye as the Developer, and then abandon inhabiting this persona
 develop-story:
