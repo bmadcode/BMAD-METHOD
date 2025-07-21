@@ -75,6 +75,12 @@ This document outlines the new features and functionality added to the BMAD Meth
 
 ### Developer Agent (James) New Commands
 
+- **`*develop-story`**: Follow the systematic develop-story workflow to implement all story tasks with automatic progress tracking
+
+  - **Features**: Systematic task execution, automatic checkbox completion, validation enforcement, file list maintenance
+  - **Workflow**: Read task → Implement → Write tests → Execute validations → Mark complete [x] → Repeat
+  - **Output**: Progressive task completion with automatic story updates and comprehensive validation
+
 - **`*reality-audit`**: Execute reality-audit-comprehensive task with regression prevention analysis
 
   - **Features**: Multi-language project detection, automated pattern scanning, story context analysis, build/runtime validation
