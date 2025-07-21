@@ -118,7 +118,10 @@ echo "Run Command: $RUN_CMD"
 echo ""
 
 # Create audit report file
-AUDIT_REPORT="reality-audit-$(date +%Y%m%d-%H%M).md"
+# Create tmp directory if it doesn't exist
+mkdir -p tmp
+
+AUDIT_REPORT="tmp/reality-audit-$(date +%Y%m%d-%H%M).md"
 echo "# Reality Audit Report" > $AUDIT_REPORT
 echo "Date: $(date)" >> $AUDIT_REPORT
 echo "Project: $PROJECT_NAME" >> $AUDIT_REPORT
@@ -876,3 +879,160 @@ This comprehensive reality audit combines automated simulation detection, manual
 - Triggers create-remediation-story.md when needed
 - Provides audit reports for documentation
 - Supports all major project types and build systems
+- **Automatic Git Push on Perfect Completion** when all criteria are met
+
+---
+
+## Phase 10: Automatic Git Push Validation
+
+### Git Push Criteria Assessment
+
+**CRITICAL: Only proceed with automatic Git push if ALL criteria are met:**
+
+```bash
+# Git Push Validation Function
+validate_git_push_criteria() {
+    local git_push_eligible=true
+    # Ensure tmp directory exists
+    mkdir -p tmp
+    local criteria_report="tmp/git-push-validation-$(date +%Y%m%d-%H%M).md"
+    
+    echo "=== AUTOMATIC GIT PUSH VALIDATION ===" > $criteria_report
+    echo "Date: $(date)" >> $criteria_report
+    echo "Story: $STORY_NAME" >> $criteria_report
+    echo "" >> $criteria_report
+    
+    # Criterion 1: Story Completion
+    echo "## Criterion 1: Story Completion Assessment" >> $criteria_report
+    if [ "$STORY_COMPLETION_PERCENT" -eq 100 ]; then
+        echo "✅ **Story Completion:** 100% - All tasks marked complete [x]" >> $criteria_report
+    else
+        echo "❌ **Story Completion:** ${STORY_COMPLETION_PERCENT}% - Incomplete tasks detected" >> $criteria_report
+        git_push_eligible=false
+    fi
+    
+    # Criterion 2: Quality Scores
+    echo "" >> $criteria_report
+    echo "## Criterion 2: Quality Score Assessment" >> $criteria_report
+    if [ "$COMPOSITE_REALITY_SCORE" -ge 80 ] && [ "$REGRESSION_PREVENTION_SCORE" -ge 80 ] && [ "$TECHNICAL_DEBT_SCORE" -ge 70 ]; then
+        echo "✅ **Quality Scores:** Composite=$COMPOSITE_REALITY_SCORE, Regression=$REGRESSION_PREVENTION_SCORE, TechDebt=$TECHNICAL_DEBT_SCORE" >> $criteria_report
+    else
+        echo "❌ **Quality Scores:** Below thresholds - Composite=$COMPOSITE_REALITY_SCORE (<80), Regression=$REGRESSION_PREVENTION_SCORE (<80), TechDebt=$TECHNICAL_DEBT_SCORE (<70)" >> $criteria_report
+        git_push_eligible=false
+    fi
+    
+    # Criterion 3: Build Status
+    echo "" >> $criteria_report
+    echo "## Criterion 3: Build Validation" >> $criteria_report
+    if [ "$BUILD_SUCCESS" = "true" ] && [ "$BUILD_WARNINGS_COUNT" -eq 0 ]; then
+        echo "✅ **Build Status:** Clean success with no warnings" >> $criteria_report
+    else
+        echo "❌ **Build Status:** Build failures or warnings detected" >> $criteria_report
+        git_push_eligible=false
+    fi
+    
+    # Criterion 4: Simulation Patterns
+    echo "" >> $criteria_report
+    echo "## Criterion 4: Simulation Pattern Check" >> $criteria_report
+    if [ "$SIMULATION_PATTERNS_COUNT" -eq 0 ]; then
+        echo "✅ **Simulation Patterns:** Zero detected - Real implementation confirmed" >> $criteria_report
+    else
+        echo "❌ **Simulation Patterns:** $SIMULATION_PATTERNS_COUNT patterns detected" >> $criteria_report
+        git_push_eligible=false
+    fi
+    
+    # Final Decision
+    echo "" >> $criteria_report
+    echo "## Final Git Push Decision" >> $criteria_report
+    if [ "$git_push_eligible" = "true" ]; then
+        echo "🚀 **DECISION: AUTOMATIC GIT PUSH APPROVED**" >> $criteria_report
+        echo "All criteria met - proceeding with automatic commit and push" >> $criteria_report
+        execute_automatic_git_push
+    else
+        echo "🛑 **DECISION: AUTOMATIC GIT PUSH DENIED**" >> $criteria_report
+        echo "One or more criteria failed - manual *Push2Git command available if override needed" >> $criteria_report
+        echo "" >> $criteria_report
+        echo "**Override Available:** Use *Push2Git command to manually push despite issues" >> $criteria_report
+    fi
+    
+    echo "📋 **Criteria Report:** $criteria_report"
+}
+
+# Automatic Git Push Execution
+execute_automatic_git_push() {
+    echo ""
+    echo "🚀 **EXECUTING AUTOMATIC GIT PUSH**"
+    echo "All quality criteria validated - proceeding with commit and push..."
+    
+    # Generate intelligent commit message
+    local commit_msg="Complete story implementation with QA validation
+
+Story: $STORY_NAME
+Quality Scores: Composite=${COMPOSITE_REALITY_SCORE}, Regression=${REGRESSION_PREVENTION_SCORE}, TechDebt=${TECHNICAL_DEBT_SCORE}
+Build Status: Clean success
+Simulation Patterns: Zero detected
+All Tasks: Complete
+
+Automatically validated and pushed by BMAD QA Agent"
+
+    # Execute git operations
+    git add . 2>/dev/null
+    if git commit -m "$commit_msg" 2>/dev/null; then
+        echo "✅ **Commit Created:** Story implementation committed successfully"
+        
+        # Attempt push (may require authentication)
+        if git push 2>/dev/null; then
+            echo "✅ **Push Successful:** Changes pushed to remote repository"
+            echo "🎯 **STORY COMPLETE:** All quality gates passed, changes pushed automatically"
+        else
+            echo "⚠️  **Push Failed:** Authentication required - use GitHub Desktop or configure git credentials"
+            echo "💡 **Suggestion:** Complete the push manually through GitHub Desktop"
+        fi
+    else
+        echo "❌ **Commit Failed:** No changes to commit or git error occurred"
+    fi
+}
+```
+
+### Manual Override Command
+
+If automatic push criteria are not met but user wants to override:
+
+```bash
+# Manual Push Override (for *Push2Git command)
+execute_manual_git_override() {
+    echo "⚠️  **MANUAL GIT PUSH OVERRIDE REQUESTED**"
+    echo "WARNING: Quality criteria not fully met - proceeding with manual override"
+    
+    local override_msg="Manual override push - quality criteria not fully met
+
+Story: $STORY_NAME  
+Quality Issues Present: Check reality audit report
+Override Reason: User manual decision
+Pushed via: BMAD QA Agent *Push2Git command
+
+⚠️ Review and fix quality issues in subsequent commits"
+
+    git add . 2>/dev/null
+    if git commit -m "$override_msg" 2>/dev/null; then
+        echo "✅ **Override Commit Created**"
+        if git push 2>/dev/null; then
+            echo "✅ **Override Push Successful:** Changes pushed despite quality issues"
+        else
+            echo "❌ **Override Push Failed:** Authentication or git error"
+        fi
+    else
+        echo "❌ **Override Commit Failed:** No changes or git error"
+    fi
+}
+```
+
+### Usage Integration
+
+This Git push validation automatically executes at the end of every `*reality-audit` command:
+
+1. **Automatic Assessment:** All criteria checked automatically
+2. **Conditional Push:** Only pushes when 100% quality criteria met
+3. **Override Available:** `*Push2Git` command bypasses quality gates
+4. **Detailed Reporting:** Complete criteria assessment documented
+5. **Intelligent Commit Messages:** Context-aware commit descriptions

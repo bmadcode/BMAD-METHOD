@@ -28,3 +28,6 @@ sample-project/*
 .gemini
 .bmad*/.cursor/
 web-bundles/
+
+# BMAD temporary files
+tmp/

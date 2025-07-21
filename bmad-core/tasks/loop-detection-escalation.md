@@ -45,7 +45,10 @@ echo "Issue ID: issue-$(date +%Y%m%d-%H%M)"
 echo ""
 
 # Create tracking report
-LOOP_REPORT="loop-tracking-$(date +%Y%m%d-%H%M).md"
+# Create tmp directory if it doesn't exist
+mkdir -p tmp
+
+LOOP_REPORT="tmp/loop-tracking-$(date +%Y%m%d-%H%M).md"
 echo "# Loop Detection Tracking Report" > $LOOP_REPORT
 echo "Date: $(date)" >> $LOOP_REPORT
 echo "Issue ID: issue-$(date +%Y%m%d-%H%M)" >> $LOOP_REPORT
@@ -293,7 +296,9 @@ select_collaborator() {
 
 # Generate copy-paste prompt for external LLM collaboration
 generate_external_prompt() {
-    EXTERNAL_PROMPT="external-llm-prompt-$(date +%Y%m%d-%H%M).md"
+    # Ensure tmp directory exists
+    mkdir -p tmp
+    EXTERNAL_PROMPT="tmp/external-llm-prompt-$(date +%Y%m%d-%H%M).md"
     
     cat > $EXTERNAL_PROMPT << 'EOF'
 # COLLABORATION REQUEST - Copy & Paste This Entire Message

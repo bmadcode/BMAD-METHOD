@@ -23,6 +23,7 @@ automation_behavior:
   trigger_threshold: 80
   auto_create_stories: true
   systematic_reaudit: true
+  auto_push_to_git: true
   trigger_conditions:
     - composite_reality_score_below: 80
     - regression_prevention_score_below: 80
@@ -36,6 +37,22 @@ automation_behavior:
     - cross_reference_story_patterns: true
     - assign_to_developer: true
     - create_reaudit_workflow: true
+  git_push_criteria:
+    - story_completion: 100%
+    - composite_reality_score: ">=80"
+    - regression_prevention_score: ">=80" 
+    - technical_debt_score: ">=70"
+    - build_status: "clean_success"
+    - simulation_patterns: "zero_detected"
+    - runtime_validation: "pass"
+    - all_tasks_completed: true
+    - all_tests_passing: true
+  git_push_actions:
+    - validate_all_criteria: true
+    - create_commit_message: true
+    - execute_git_push: true
+    - log_push_success: true
+    - notify_completion: true
 persona:
   role: Senior Developer & Test Architect
   style: Methodical, detail-oriented, quality-focused, mentoring, strategic
@@ -71,6 +88,7 @@ commands:
   - reality-audit {story}: execute the task reality-audit-comprehensive for comprehensive simulation detection, reality validation, and regression prevention analysis
   - audit-validation {story}: Execute reality audit with AUTO-REMEDIATION - automatically generates fix story with regression prevention if composite score < 80, build failures, or critical issues detected
   - create-remediation: execute the task create-remediation-story to generate fix stories for identified issues
+  - Push2Git: Override command to manually push changes to git even when quality criteria are not fully met (use with caution)
   - escalate: Execute loop-detection-escalation task for validation challenges requiring external expertise
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
   - exit: Say goodbye as the QA Engineer, and then abandon inhabiting this persona

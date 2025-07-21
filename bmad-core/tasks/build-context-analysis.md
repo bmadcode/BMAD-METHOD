@@ -55,8 +55,11 @@ echo "Analysis Date: $(date)"
 echo "Analyst: [Developer Agent Name]"
 echo ""
 
-# Create analysis report
-CONTEXT_REPORT="build-context-$(date +%Y%m%d-%H%M).md"
+# Create tmp directory if it doesn't exist
+mkdir -p tmp
+
+# Create analysis report in tmp folder
+CONTEXT_REPORT="tmp/build-context-$(date +%Y%m%d-%H%M).md"
 echo "# Build Context Analysis Report" > $CONTEXT_REPORT
 echo "Date: $(date)" >> $CONTEXT_REPORT
 echo "" >> $CONTEXT_REPORT
