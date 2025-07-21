@@ -221,23 +221,20 @@ persona:
     - Documentation Ecosystem Integrity - Maintain consistency across all documents
 commands:
   - help: Show numbered list of the following commands to allow selection
-  - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
-  - execute-checklist {checklist}: Run task execute-checklist (default->po-master-checklist)
+  - execute-checklist-po: Run task execute-checklist (checklist po-master-checklist)
   - shard-doc {document} {destination}: run the task shard-doc against the optionally provided document to the specified destination
   - correct-course: execute the correct-course task
   - create-epic: Create epic for brownfield projects (task brownfield-create-epic)
   - create-story: Create user story from requirements (task brownfield-create-story)
-  - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
   - doc-out: Output full document to current destination file
   - validate-story-draft {story}: run the task validate-next-story against the provided story file
+  - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
   - exit: Exit (confirm)
 dependencies:
   tasks:
     - execute-checklist.md
     - shard-doc.md
     - correct-course.md
-    - brownfield-create-epic.md
-    - brownfield-create-story.md
     - validate-next-story.md
   templates:
     - story-tmpl.yaml
@@ -276,9 +273,9 @@ persona:
     - You are NOT allowed to implement stories or modify code EVER!
 commands:
   - help: Show numbered list of the following commands to allow selection
-  - draft: Execute task create-next-story
-  - correct-course: Execute task correct-course
-  - checklist {checklist}: Show numbered list of checklists if not provided, execute task execute-checklist
+  - draft: Execute task create-next-story.md
+  - correct-course: Execute task correct-course.md
+  - story-checklist: Execute task execute-checklist.md with checklist story-draft-checklist.md
   - exit: Say goodbye as the Scrum Master, and then abandon inhabiting this persona
 dependencies:
   tasks:
@@ -298,11 +295,7 @@ dependencies:
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
 
 ```yaml
-activation-instructions:
-  - ONLY load dependency files when user selects them for execution via command or request of a task
-  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
-  - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - STAY IN CHARACTER!
+activation-instructions: []
 agent:
   name: James
   id: dev
@@ -319,11 +312,20 @@ core_principles:
   - CRITICAL: Story has ALL info you will need aside from what you loaded during the startup commands. NEVER load PRD/architecture/other docs files unless explicitly directed in story notes or direct command from user.
   - CRITICAL: ONLY update story file Dev Agent Record sections (checkboxes/Debug Log/Completion Notes/Change Log)
   - CRITICAL: FOLLOW THE develop-story command when the user tells you to implement the story
+  - CRITICAL: NO SIMULATION PATTERNS - Zero tolerance for Random.NextDouble(), Task.FromResult(), NotImplementedException, SimulateX() methods in production code
+  - CRITICAL: REAL IMPLEMENTATION ONLY - All methods must contain actual business logic, not placeholders or mock data
+  - Reality Validation Required - Execute reality-audit-comprehensive before claiming completion
+  - Build Success Mandatory - Clean Release mode compilation required before completion
   - Numbered Options - Always use numbered lists when presenting choices to the user
+  - Developer Guides Access: Use *guides command to access developer guides on-demand for implementation standards, cross-platform development, testing patterns, code quality configuration, environment setup, and component documentation
 commands:
   - help: Show numbered list of the following commands to allow selection
   - run-tests: Execute linting and tests
   - explain: teach me what and why you did whatever you just did in detail so I can learn. Explain to me as if you were training a junior engineer.
+  - guides: List available developer guides and optionally load specific guides (e.g., *guides testing, *guides quality, *guides cross-platform)
+  - reality-audit: Execute reality-audit-comprehensive task to validate real implementation vs simulation patterns
+  - build-context: Execute build-context-analysis to ensure clean compilation and runtime
+  - escalate: Execute loop-detection-escalation task when stuck in loops or facing persistent blockers
   - exit: Say goodbye as the Developer, and then abandon inhabiting this persona
 develop-story:
   order-of-execution: Read (first or next) task→Implement Task and its subtasks→Write tests→Execute validations→Only if ALL pass, then update the task checkbox with [x]→Update story section File List to ensure it lists and new or modified or deleted source file→repeat order-of-execution until complete
@@ -331,15 +333,30 @@ develop-story:
     - CRITICAL: ONLY UPDATE THE STORY FILE WITH UPDATES TO SECTIONS INDICATED BELOW. DO NOT MODIFY ANY OTHER SECTIONS.
     - CRITICAL: You are ONLY authorized to edit these specific sections of story files - Tasks / Subtasks Checkboxes, Dev Agent Record section and all its subsections, Agent Model Used, Debug Log References, Completion Notes List, File List, Change Log, Status
     - CRITICAL: DO NOT modify Status, Story, Acceptance Criteria, Dev Notes, Testing sections, or any other sections not listed above
-  blocking: 'HALT for: Unapproved deps needed, confirm with user | Ambiguous after story check | 3 failures attempting to implement or fix something repeatedly | Missing config | Failing regression'
+  blocking: 'HALT for: Unapproved deps needed, confirm with user | Ambiguous after story check | Missing config | Failing regression'
+  auto_escalation:
+    trigger: 3 consecutive failed attempts at the same task/issue
+    tracking: Maintain attempt counter per specific issue/task - reset on successful progress
+    action: 'AUTOMATIC: Execute loop-detection-escalation task → Generate copy-paste prompt for external LLM collaboration → Present to user'
+    examples:
+      - Build fails 3 times with same error despite different fix attempts
+      - Test implementation fails 3 times with different approaches
+      - Same validation error persists after 3 different solutions tried
+      - Reality audit fails 3 times on same simulation pattern despite fixes
   ready-for-review: Code matches requirements + All validations pass + Follows standards + File List complete
-  completion: 'All Tasks and Subtasks marked [x] and have tests→Validations and full regression passes (DON''T BE LAZY, EXECUTE ALL TESTS and CONFIRM)→Ensure File List is Complete→run the task execute-checklist for the checklist story-dod-checklist→set story status: ''Ready for Review''→HALT'
+  completion: 'All Tasks and Subtasks marked [x] and have tests→Validations and full regression passes (DON''T BE LAZY, EXECUTE ALL TESTS and CONFIRM)→Ensure File List is Complete→run the task execute-checklist for the checklist story-dod-checklist→MANDATORY: run the task reality-audit-comprehensive to validate no simulation patterns→set story status: ''Ready for Review''→HALT'
 dependencies:
   tasks:
     - execute-checklist.md
     - validate-next-story.md
+    - reality-audit-comprehensive.md
+    - complete-api-contract-remediation.md
+    - loop-detection-escalation.md
   checklists:
     - story-dod-checklist.md
+    - reality-audit-comprehensive.md
+    - build-context-analysis.md
+    - loop-detection-escalation.md
 ```
 ==================== END: .bmad-core/agents/dev.md ====================
 
@@ -350,10 +367,11 @@ CRITICAL: Read the full YAML, start activation to alter your state of being, fol
 
 ```yaml
 activation-instructions:
-  - ONLY load dependency files when user selects them for execution via command or request of a task
-  - The agent.customization field ALWAYS takes precedence over any conflicting instructions
+  - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
+  - Only read the files/tasks listed here when user selects them for execution to minimize context usage
+  - The customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
-  - STAY IN CHARACTER!
+  - Greet the user with your name and role, and inform of the *help command.
 agent:
   name: Quinn
   id: qa
@@ -361,6 +379,24 @@ agent:
   icon: 🧪
   whenToUse: Use for senior code review, refactoring, test planning, quality assurance, and mentoring through code improvements
   customization: null
+automation_behavior:
+  always_auto_remediate: true
+  trigger_threshold: 80
+  auto_create_stories: true
+  systematic_reaudit: true
+  trigger_conditions:
+    - composite_reality_score_below: 80
+    - regression_prevention_score_below: 80
+    - technical_debt_score_below: 70
+    - build_failures: true
+    - critical_simulation_patterns: 3+
+    - runtime_failures: true
+  auto_actions:
+    - generate_remediation_story: true
+    - include_regression_prevention: true
+    - cross_reference_story_patterns: true
+    - assign_to_developer: true
+    - create_reaudit_workflow: true
 persona:
   role: Senior Developer & Test Architect
   style: Methodical, detail-oriented, quality-focused, mentoring, strategic
@@ -368,15 +404,23 @@ persona:
   focus: Code excellence through review, refactoring, and comprehensive testing strategies
   core_principles:
     - Senior Developer Mindset - Review and improve code as a senior mentoring juniors
+    - Reality Validation - Distinguish real implementation from simulation/mock patterns using systematic detection
     - Active Refactoring - Don't just identify issues, fix them with clear explanations
     - Test Strategy & Architecture - Design holistic testing strategies across all levels
     - Code Quality Excellence - Enforce best practices, patterns, and clean code principles
+    - Anti-Simulation Enforcement - Zero tolerance for Random.NextDouble(), Task.FromResult(), NotImplementedException in production
     - Shift-Left Testing - Integrate testing early in development lifecycle
     - Performance & Security - Proactively identify and fix performance/security issues
+    - Evidence-Based Assessment - Use objective metrics and automated scanning for completion validation
     - Mentorship Through Action - Explain WHY and HOW when making improvements
     - Risk-Based Testing - Prioritize testing based on risk and critical areas
+    - Build & Runtime Validation - Ensure clean compilation and functional execution before approval
     - Continuous Improvement - Balance perfection with pragmatism
     - Architecture & Design Patterns - Ensure proper patterns and maintainable code structure
+    - Loop Detection & Escalation - Systematically track validation attempts and trigger collaboration when stuck in repetitive patterns
+    - BMAD-Method Automation - Always auto-generate remediation stories with regression prevention when quality gates fail (composite score < 80, regression prevention < 80, technical debt < 70)
+    - Auto-Trigger at Composite Threshold - Audit → Auto-remediate with regression prevention → Systematic fixing workflow, never just report without remediation
+    - No Manual Handoffs - Complete workflow automation from detection to fix-story creation
 story-file-permissions:
   - CRITICAL: When reviewing stories, you are ONLY authorized to update the "QA Results" section of story files
   - CRITICAL: DO NOT modify any other sections including Status, Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Testing, Dev Agent Record, Change Log, or any other sections
@@ -384,11 +428,31 @@ story-file-permissions:
 commands:
   - help: Show numbered list of the following commands to allow selection
   - review {story}: execute the task review-story for the highest sequence story in docs/stories unless another is specified - keep any specified technical-preferences in mind as needed
+  - reality-audit {story}: execute the task reality-audit-comprehensive for comprehensive simulation detection, reality validation, and regression prevention analysis
+  - audit-validation {story}: Execute reality audit with AUTO-REMEDIATION - automatically generates fix story with regression prevention if composite score < 80, build failures, or critical issues detected
+  - create-remediation: execute the task create-remediation-story to generate fix stories for identified issues
+  - escalate: Execute loop-detection-escalation task for validation challenges requiring external expertise
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
   - exit: Say goodbye as the QA Engineer, and then abandon inhabiting this persona
+auto_escalation:
+  trigger: 3 consecutive failed attempts at resolving the same quality issue
+  tracking: Maintain failure counter per specific quality issue - reset on successful resolution
+  action: 'AUTOMATIC: Execute loop-detection-escalation task → Generate copy-paste prompt for external LLM collaboration → Present to user'
+  examples:
+    - Same reality audit failure persists after 3 different remediation attempts
+    - Composite quality score stays below 80% after 3 fix cycles
+    - Same regression prevention issue fails 3 times despite different approaches
+    - Build/runtime validation fails 3 times on same error after different solutions
 dependencies:
   tasks:
     - review-story.md
+    - reality-audit-comprehensive.md
+    - reality-audit.md
+    - loop-detection-escalation.md
+    - create-remediation-story.md
+  checklists:
+    - reality-audit-comprehensive.md
+    - loop-detection-escalation.md
   data:
     - technical-preferences.md
   templates:
@@ -2072,319 +2136,6 @@ Document sharded successfully:
 - **Implicit:** An annotated change-checklist (or the record of its completion) reflecting the discussions, findings, and decisions made during the process.
 ==================== END: .bmad-core/tasks/correct-course.md ====================
 
-==================== START: .bmad-core/tasks/brownfield-create-epic.md ====================
-# Create Brownfield Epic Task
-
-## Purpose
-
-Create a single epic for smaller brownfield enhancements that don't require the full PRD and Architecture documentation process. This task is for isolated features or modifications that can be completed within a focused scope.
-
-## When to Use This Task
-
-**Use this task when:**
-
-- The enhancement can be completed in 1-3 stories
-- No significant architectural changes are required
-- The enhancement follows existing project patterns
-- Integration complexity is minimal
-- Risk to existing system is low
-
-**Use the full brownfield PRD/Architecture process when:**
-
-- The enhancement requires multiple coordinated stories
-- Architectural planning is needed
-- Significant integration work is required
-- Risk assessment and mitigation planning is necessary
-
-## Instructions
-
-### 1. Project Analysis (Required)
-
-Before creating the epic, gather essential information about the existing project:
-
-**Existing Project Context:**
-
-- [ ] Project purpose and current functionality understood
-- [ ] Existing technology stack identified
-- [ ] Current architecture patterns noted
-- [ ] Integration points with existing system identified
-
-**Enhancement Scope:**
-
-- [ ] Enhancement clearly defined and scoped
-- [ ] Impact on existing functionality assessed
-- [ ] Required integration points identified
-- [ ] Success criteria established
-
-### 2. Epic Creation
-
-Create a focused epic following this structure:
-
-#### Epic Title
-
-{{Enhancement Name}} - Brownfield Enhancement
-
-#### Epic Goal
-
-{{1-2 sentences describing what the epic will accomplish and why it adds value}}
-
-#### Epic Description
-
-**Existing System Context:**
-
-- Current relevant functionality: {{brief description}}
-- Technology stack: {{relevant existing technologies}}
-- Integration points: {{where new work connects to existing system}}
-
-**Enhancement Details:**
-
-- What's being added/changed: {{clear description}}
-- How it integrates: {{integration approach}}
-- Success criteria: {{measurable outcomes}}
-
-#### Stories
-
-List 1-3 focused stories that complete the epic:
-
-1. **Story 1:** {{Story title and brief description}}
-2. **Story 2:** {{Story title and brief description}}
-3. **Story 3:** {{Story title and brief description}}
-
-#### Compatibility Requirements
-
-- [ ] Existing APIs remain unchanged
-- [ ] Database schema changes are backward compatible
-- [ ] UI changes follow existing patterns
-- [ ] Performance impact is minimal
-
-#### Risk Mitigation
-
-- **Primary Risk:** {{main risk to existing system}}
-- **Mitigation:** {{how risk will be addressed}}
-- **Rollback Plan:** {{how to undo changes if needed}}
-
-#### Definition of Done
-
-- [ ] All stories completed with acceptance criteria met
-- [ ] Existing functionality verified through testing
-- [ ] Integration points working correctly
-- [ ] Documentation updated appropriately
-- [ ] No regression in existing features
-
-### 3. Validation Checklist
-
-Before finalizing the epic, ensure:
-
-**Scope Validation:**
-
-- [ ] Epic can be completed in 1-3 stories maximum
-- [ ] No architectural documentation is required
-- [ ] Enhancement follows existing patterns
-- [ ] Integration complexity is manageable
-
-**Risk Assessment:**
-
-- [ ] Risk to existing system is low
-- [ ] Rollback plan is feasible
-- [ ] Testing approach covers existing functionality
-- [ ] Team has sufficient knowledge of integration points
-
-**Completeness Check:**
-
-- [ ] Epic goal is clear and achievable
-- [ ] Stories are properly scoped
-- [ ] Success criteria are measurable
-- [ ] Dependencies are identified
-
-### 4. Handoff to Story Manager
-
-Once the epic is validated, provide this handoff to the Story Manager:
-
----
-
-**Story Manager Handoff:**
-
-"Please develop detailed user stories for this brownfield epic. Key considerations:
-
-- This is an enhancement to an existing system running {{technology stack}}
-- Integration points: {{list key integration points}}
-- Existing patterns to follow: {{relevant existing patterns}}
-- Critical compatibility requirements: {{key requirements}}
-- Each story must include verification that existing functionality remains intact
-
-The epic should maintain system integrity while delivering {{epic goal}}."
-
----
-
-## Success Criteria
-
-The epic creation is successful when:
-
-1. Enhancement scope is clearly defined and appropriately sized
-2. Integration approach respects existing system architecture
-3. Risk to existing functionality is minimized
-4. Stories are logically sequenced for safe implementation
-5. Compatibility requirements are clearly specified
-6. Rollback plan is feasible and documented
-
-## Important Notes
-
-- This task is specifically for SMALL brownfield enhancements
-- If the scope grows beyond 3 stories, consider the full brownfield PRD process
-- Always prioritize existing system integrity over new functionality
-- When in doubt about scope or complexity, escalate to full brownfield planning
-==================== END: .bmad-core/tasks/brownfield-create-epic.md ====================
-
-==================== START: .bmad-core/tasks/brownfield-create-story.md ====================
-# Create Brownfield Story Task
-
-## Purpose
-
-Create a single user story for very small brownfield enhancements that can be completed in one focused development session. This task is for minimal additions or bug fixes that require existing system integration awareness.
-
-## When to Use This Task
-
-**Use this task when:**
-
-- The enhancement can be completed in a single story
-- No new architecture or significant design is required
-- The change follows existing patterns exactly
-- Integration is straightforward with minimal risk
-- Change is isolated with clear boundaries
-
-**Use brownfield-create-epic when:**
-
-- The enhancement requires 2-3 coordinated stories
-- Some design work is needed
-- Multiple integration points are involved
-
-**Use the full brownfield PRD/Architecture process when:**
-
-- The enhancement requires multiple coordinated stories
-- Architectural planning is needed
-- Significant integration work is required
-
-## Instructions
-
-### 1. Quick Project Assessment
-
-Gather minimal but essential context about the existing project:
-
-**Current System Context:**
-
-- [ ] Relevant existing functionality identified
-- [ ] Technology stack for this area noted
-- [ ] Integration point(s) clearly understood
-- [ ] Existing patterns for similar work identified
-
-**Change Scope:**
-
-- [ ] Specific change clearly defined
-- [ ] Impact boundaries identified
-- [ ] Success criteria established
-
-### 2. Story Creation
-
-Create a single focused story following this structure:
-
-#### Story Title
-
-{{Specific Enhancement}} - Brownfield Addition
-
-#### User Story
-
-As a {{user type}},
-I want {{specific action/capability}},
-So that {{clear benefit/value}}.
-
-#### Story Context
-
-**Existing System Integration:**
-
-- Integrates with: {{existing component/system}}
-- Technology: {{relevant tech stack}}
-- Follows pattern: {{existing pattern to follow}}
-- Touch points: {{specific integration points}}
-
-#### Acceptance Criteria
-
-**Functional Requirements:**
-
-1. {{Primary functional requirement}}
-2. {{Secondary functional requirement (if any)}}
-3. {{Integration requirement}}
-
-**Integration Requirements:** 4. Existing {{relevant functionality}} continues to work unchanged 5. New functionality follows existing {{pattern}} pattern 6. Integration with {{system/component}} maintains current behavior
-
-**Quality Requirements:** 7. Change is covered by appropriate tests 8. Documentation is updated if needed 9. No regression in existing functionality verified
-
-#### Technical Notes
-
-- **Integration Approach:** {{how it connects to existing system}}
-- **Existing Pattern Reference:** {{link or description of pattern to follow}}
-- **Key Constraints:** {{any important limitations or requirements}}
-
-#### Definition of Done
-
-- [ ] Functional requirements met
-- [ ] Integration requirements verified
-- [ ] Existing functionality regression tested
-- [ ] Code follows existing patterns and standards
-- [ ] Tests pass (existing and new)
-- [ ] Documentation updated if applicable
-
-### 3. Risk and Compatibility Check
-
-**Minimal Risk Assessment:**
-
-- **Primary Risk:** {{main risk to existing system}}
-- **Mitigation:** {{simple mitigation approach}}
-- **Rollback:** {{how to undo if needed}}
-
-**Compatibility Verification:**
-
-- [ ] No breaking changes to existing APIs
-- [ ] Database changes (if any) are additive only
-- [ ] UI changes follow existing design patterns
-- [ ] Performance impact is negligible
-
-### 4. Validation Checklist
-
-Before finalizing the story, confirm:
-
-**Scope Validation:**
-
-- [ ] Story can be completed in one development session
-- [ ] Integration approach is straightforward
-- [ ] Follows existing patterns exactly
-- [ ] No design or architecture work required
-
-**Clarity Check:**
-
-- [ ] Story requirements are unambiguous
-- [ ] Integration points are clearly specified
-- [ ] Success criteria are testable
-- [ ] Rollback approach is simple
-
-## Success Criteria
-
-The story creation is successful when:
-
-1. Enhancement is clearly defined and appropriately scoped for single session
-2. Integration approach is straightforward and low-risk
-3. Existing system patterns are identified and will be followed
-4. Rollback plan is simple and feasible
-5. Acceptance criteria include existing functionality verification
-
-## Important Notes
-
-- This task is for VERY SMALL brownfield changes only
-- If complexity grows during analysis, escalate to brownfield-create-epic
-- Always prioritize existing system integrity
-- When in doubt about integration complexity, use brownfield-create-epic instead
-- Stories should take no more than 4 hours of focused development work
-==================== END: .bmad-core/tasks/brownfield-create-story.md ====================
-
 ==================== START: .bmad-core/tasks/validate-next-story.md ====================
 # Validate Next Story Task
 
@@ -3565,6 +3316,1456 @@ Be pragmatic - perfect documentation doesn't exist, but it must be enough to pro
 - BLOCKED: External information required (specify what information)
 ==================== END: .bmad-core/checklists/story-draft-checklist.md ====================
 
+==================== START: .bmad-core/tasks/reality-audit-comprehensive.md ====================
+# Reality Audit Comprehensive
+
+## Task Overview
+
+Comprehensive reality audit that systematically detects simulation patterns, validates real implementation, and provides objective scoring to prevent "bull in a china shop" completion claims. This consolidated framework combines automated detection, manual validation, and enforcement gates.
+
+## Context
+
+This enhanced audit provides QA agents with systematic tools to distinguish between real implementation and simulation-based development. It enforces accountability by requiring evidence-based assessment rather than subjective evaluation, consolidating all reality validation capabilities into a single comprehensive framework.
+
+## Execution Approach
+
+**CRITICAL INTEGRATION VALIDATION WITH REGRESSION PREVENTION** - This framework addresses both simulation mindset and regression risks. Be brutally honest about what is REAL vs SIMULATED, and ensure no functionality loss or technical debt introduction.
+
+1. **Execute automated simulation detection** (Phase 1)
+2. **Perform build and runtime validation** (Phase 2)
+3. **Execute story context analysis** (Phase 3) - NEW
+4. **Assess regression risks** (Phase 4) - NEW  
+5. **Evaluate technical debt impact** (Phase 5) - NEW
+6. **Perform manual validation checklist** (Phase 6)
+7. **Calculate comprehensive reality score** (Phase 7) - ENHANCED
+8. **Apply enforcement gates** (Phase 8)
+9. **Generate regression-safe remediation** (Phase 9) - ENHANCED
+
+The goal is ZERO simulations AND ZERO regressions in critical path code.
+
+---
+
+## Phase 1: Automated Simulation Detection
+
+### Project Structure Detection
+
+Execute these commands systematically and document all findings:
+
+```bash
+#!/bin/bash
+echo "=== REALITY AUDIT COMPREHENSIVE SCAN ==="
+echo "Audit Date: $(date)"
+echo "Auditor: [QA Agent Name]"
+echo ""
+
+# Detect project structure dynamically
+if find . -maxdepth 3 -name "*.sln" -o -name "*.csproj" | head -1 | grep -q .; then
+    # .NET Project
+    if [ -d "src" ]; then
+        PROJECT_SRC_PATH="src"
+        PROJECT_FILE_EXT="*.cs"
+    else
+        PROJECT_SRC_PATH=$(find . -maxdepth 3 -name "*.csproj" -exec dirname {} \; | head -1)
+        PROJECT_FILE_EXT="*.cs"
+    fi
+    PROJECT_NAME=$(find . -maxdepth 3 -name "*.csproj" | head -1 | xargs basename -s .csproj)
+    BUILD_CMD="dotnet build -c Release --no-restore"
+    RUN_CMD="dotnet run --no-build"
+    ERROR_PATTERN="error CS"
+    WARN_PATTERN="warning CS"
+elif [ -f "package.json" ]; then
+    # Node.js Project
+    PROJECT_SRC_PATH=$([ -d "src" ] && echo "src" || echo ".")
+    PROJECT_FILE_EXT="*.js *.ts *.jsx *.tsx"
+    PROJECT_NAME=$(grep '"name"' package.json | sed 's/.*"name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' | head -1)
+    BUILD_CMD=$(grep -q '"build"' package.json && echo "npm run build" || echo "npm install")
+    RUN_CMD=$(grep -q '"start"' package.json && echo "npm start" || echo "node index.js")
+    ERROR_PATTERN="ERROR"
+    WARN_PATTERN="WARN"
+elif [ -f "pom.xml" ] || [ -f "build.gradle" ]; then
+    # Java Project
+    PROJECT_SRC_PATH=$([ -d "src/main/java" ] && echo "src/main/java" || echo "src")
+    PROJECT_FILE_EXT="*.java"
+    PROJECT_NAME=$(basename "$(pwd)")
+    BUILD_CMD=$([ -f "pom.xml" ] && echo "mvn compile" || echo "gradle build")
+    RUN_CMD=$([ -f "pom.xml" ] && echo "mvn exec:java" || echo "gradle run")
+    ERROR_PATTERN="ERROR"
+    WARN_PATTERN="WARNING"
+elif [ -f "Cargo.toml" ]; then
+    # Rust Project
+    PROJECT_SRC_PATH="src"
+    PROJECT_FILE_EXT="*.rs"
+    PROJECT_NAME=$(grep '^name' Cargo.toml | sed 's/name[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/' | head -1)
+    BUILD_CMD="cargo build --release"
+    RUN_CMD="cargo run"
+    ERROR_PATTERN="error"
+    WARN_PATTERN="warning"
+elif [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
+    # Python Project
+    PROJECT_SRC_PATH=$([ -d "src" ] && echo "src" || echo ".")
+    PROJECT_FILE_EXT="*.py"
+    PROJECT_NAME=$(basename "$(pwd)")
+    BUILD_CMD="python -m py_compile **/*.py"
+    RUN_CMD="python main.py"
+    ERROR_PATTERN="ERROR"
+    WARN_PATTERN="WARNING"
+elif [ -f "go.mod" ]; then
+    # Go Project
+    PROJECT_SRC_PATH="."
+    PROJECT_FILE_EXT="*.go"
+    PROJECT_NAME=$(head -1 go.mod | awk '{print $2}' | sed 's/.*\///')
+    BUILD_CMD="go build ./..."
+    RUN_CMD="go run ."
+    ERROR_PATTERN="error"
+    WARN_PATTERN="warning"
+else
+    # Generic fallback
+    PROJECT_SRC_PATH=$([ -d "src" ] && echo "src" || echo ".")
+    PROJECT_FILE_EXT="*"
+    PROJECT_NAME=$(basename "$(pwd)")
+    BUILD_CMD="make"
+    RUN_CMD="./main"
+    ERROR_PATTERN="error"
+    WARN_PATTERN="warning"
+fi
+
+echo "Project: $PROJECT_NAME"
+echo "Source Path: $PROJECT_SRC_PATH"
+echo "File Extensions: $PROJECT_FILE_EXT"
+echo "Build Command: $BUILD_CMD"
+echo "Run Command: $RUN_CMD"
+echo ""
+
+# Create audit report file
+AUDIT_REPORT="reality-audit-$(date +%Y%m%d-%H%M).md"
+echo "# Reality Audit Report" > $AUDIT_REPORT
+echo "Date: $(date)" >> $AUDIT_REPORT
+echo "Project: $PROJECT_NAME" >> $AUDIT_REPORT
+echo "Source Path: $PROJECT_SRC_PATH" >> $AUDIT_REPORT
+echo "" >> $AUDIT_REPORT
+```
+
+### Simulation Pattern Detection
+
+```bash
+echo "=== SIMULATION PATTERN DETECTION ===" | tee -a $AUDIT_REPORT
+
+# Pattern 1: Random data generation
+echo "" >> $AUDIT_REPORT
+echo "## Random Data Generation Patterns" >> $AUDIT_REPORT
+echo "Random data generation:" | tee -a $AUDIT_REPORT
+for ext in $PROJECT_FILE_EXT; do
+    grep -r "Random\.|Math\.random|random\(\)|rand\(\)" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
+done
+RANDOM_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Random\.|Math\.random|random\(\)|rand\(\)" {} \; 2>/dev/null | wc -l)
+echo "**Count:** $RANDOM_COUNT instances" | tee -a $AUDIT_REPORT
+
+# Pattern 2: Mock async operations  
+echo "" >> $AUDIT_REPORT
+echo "## Mock Async Operations" >> $AUDIT_REPORT
+echo "Mock async operations:" | tee -a $AUDIT_REPORT
+for ext in $PROJECT_FILE_EXT; do
+    grep -r "Task\.FromResult|Promise\.resolve|async.*return.*mock|await.*mock" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
+done
+TASK_MOCK_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Task\.FromResult|Promise\.resolve" {} \; 2>/dev/null | wc -l)
+echo "**Count:** $TASK_MOCK_COUNT instances" | tee -a $AUDIT_REPORT
+
+# Pattern 3: Unimplemented methods
+echo "" >> $AUDIT_REPORT
+echo "## Unimplemented Methods" >> $AUDIT_REPORT
+echo "Unimplemented methods:" | tee -a $AUDIT_REPORT
+for ext in $PROJECT_FILE_EXT; do
+    grep -r "NotImplementedException|todo!|unimplemented!|panic!|raise NotImplementedError|NotImplemented" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
+done
+NOT_IMPL_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "NotImplementedException|todo!|unimplemented!|panic!|raise NotImplementedError" {} \; 2>/dev/null | wc -l)
+echo "**Count:** $NOT_IMPL_COUNT instances" | tee -a $AUDIT_REPORT
+
+# Pattern 4: TODO comments
+echo "" >> $AUDIT_REPORT
+echo "## TODO Comments" >> $AUDIT_REPORT
+echo "TODO comments in critical path:" | tee -a $AUDIT_REPORT
+for ext in $PROJECT_FILE_EXT; do
+    grep -r "TODO:|FIXME:|HACK:|XXX:|BUG:" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
+done
+TODO_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "TODO:|FIXME:|HACK:|XXX:|BUG:" {} \; 2>/dev/null | wc -l)
+echo "**Count:** $TODO_COUNT instances" | tee -a $AUDIT_REPORT
+
+# Pattern 5: Simulation methods
+echo "" >> $AUDIT_REPORT  
+echo "## Simulation Methods" >> $AUDIT_REPORT
+echo "Simulation methods:" | tee -a $AUDIT_REPORT
+for ext in $PROJECT_FILE_EXT; do
+    grep -r "Simulate.*\(|Mock.*\(|Fake.*\(|Stub.*\(|dummy.*\(" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | tee -a $AUDIT_REPORT || true
+done
+SIMULATE_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Simulate.*\(" {} \; 2>/dev/null | wc -l)
+MOCK_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Mock.*\(" {} \; 2>/dev/null | wc -l)
+FAKE_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "Fake.*\(" {} \; 2>/dev/null | wc -l)
+TOTAL_SIM_COUNT=$((SIMULATE_COUNT + MOCK_COUNT + FAKE_COUNT))
+echo "**Count:** $TOTAL_SIM_COUNT instances (Simulate: $SIMULATE_COUNT, Mock: $MOCK_COUNT, Fake: $FAKE_COUNT)" | tee -a $AUDIT_REPORT
+
+# Pattern 6: Hardcoded test data
+echo "" >> $AUDIT_REPORT
+echo "## Hardcoded Test Data" >> $AUDIT_REPORT
+echo "Hardcoded arrays and test data:" | tee -a $AUDIT_REPORT
+for ext in $PROJECT_FILE_EXT; do
+    grep -r "new\[\].*{.*}|= \[.*\]|Array\[.*\]|list.*=.*\[" "$PROJECT_SRC_PATH/" --include="$ext" -n 2>/dev/null | head -20 | tee -a $AUDIT_REPORT || true
+done
+ARRAY_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "new\[\].*{.*}" {} \; 2>/dev/null | wc -l)
+LIST_COUNT=$(find "$PROJECT_SRC_PATH" -name "$PROJECT_FILE_EXT" -exec grep -l "= \[.*\]" {} \; 2>/dev/null | wc -l)
+echo "**Count:** Arrays: $ARRAY_COUNT, Lists: $LIST_COUNT" | tee -a $AUDIT_REPORT
+
+echo "" | tee -a $AUDIT_REPORT
+echo "Automated scan complete. Report saved to: $AUDIT_REPORT"
+```
+
+## Phase 2: Build and Runtime Validation
+
+```bash
+echo "=== BUILD AND RUNTIME VALIDATION ===" | tee -a $AUDIT_REPORT
+
+# Build validation
+echo "" >> $AUDIT_REPORT
+echo "## Build Validation" >> $AUDIT_REPORT
+echo "Build Command: $BUILD_CMD" | tee -a $AUDIT_REPORT
+$BUILD_CMD > build-audit.txt 2>&1
+BUILD_EXIT_CODE=$?
+ERROR_COUNT=$(grep -ci "$ERROR_PATTERN" build-audit.txt 2>/dev/null || echo 0)
+WARNING_COUNT=$(grep -ci "$WARN_PATTERN" build-audit.txt 2>/dev/null || echo 0)
+
+echo "Build Exit Code: $BUILD_EXIT_CODE" | tee -a $AUDIT_REPORT
+echo "Error Count: $ERROR_COUNT" | tee -a $AUDIT_REPORT
+echo "Warning Count: $WARNING_COUNT" | tee -a $AUDIT_REPORT
+
+# Runtime validation
+echo "" >> $AUDIT_REPORT
+echo "## Runtime Validation" >> $AUDIT_REPORT
+echo "Run Command: timeout 30s $RUN_CMD" | tee -a $AUDIT_REPORT
+timeout 30s $RUN_CMD > runtime-audit.txt 2>&1
+RUNTIME_EXIT_CODE=$?
+echo "Runtime Exit Code: $RUNTIME_EXIT_CODE" | tee -a $AUDIT_REPORT
+
+# Integration testing
+echo "" >> $AUDIT_REPORT
+echo "## Integration Testing" >> $AUDIT_REPORT
+if [[ "$RUN_CMD" == *"dotnet"* ]]; then
+    PROJECT_FILE=$(find . -maxdepth 3 -name "*.csproj" | head -1)
+    BASE_CMD="dotnet run --project \"$PROJECT_FILE\" --no-build --"
+elif [[ "$RUN_CMD" == *"npm"* ]]; then
+    BASE_CMD="npm start --"
+elif [[ "$RUN_CMD" == *"mvn"* ]]; then
+    BASE_CMD="mvn exec:java -Dexec.args="
+elif [[ "$RUN_CMD" == *"gradle"* ]]; then
+    BASE_CMD="gradle run --args="
+elif [[ "$RUN_CMD" == *"cargo"* ]]; then
+    BASE_CMD="cargo run --"
+elif [[ "$RUN_CMD" == *"go"* ]]; then
+    BASE_CMD="go run . --"
+else
+    BASE_CMD="$RUN_CMD"
+fi
+
+echo "Testing database connectivity..." | tee -a $AUDIT_REPORT
+$BASE_CMD --test-database-connection 2>/dev/null && echo "✓ Database test passed" | tee -a $AUDIT_REPORT || echo "✗ Database test failed or N/A" | tee -a $AUDIT_REPORT
+
+echo "Testing file operations..." | tee -a $AUDIT_REPORT  
+$BASE_CMD --test-file-operations 2>/dev/null && echo "✓ File operations test passed" | tee -a $AUDIT_REPORT || echo "✗ File operations test failed or N/A" | tee -a $AUDIT_REPORT
+
+echo "Testing network operations..." | tee -a $AUDIT_REPORT
+$BASE_CMD --test-network-operations 2>/dev/null && echo "✓ Network test passed" | tee -a $AUDIT_REPORT || echo "✗ Network test failed or N/A" | tee -a $AUDIT_REPORT
+```
+
+## Phase 3: Story Context Analysis
+
+### Previous Implementation Pattern Learning
+
+Analyze existing stories to understand established patterns and prevent regression:
+
+```bash
+echo "=== STORY CONTEXT ANALYSIS ===" | tee -a $AUDIT_REPORT
+
+# Find all completed stories in the project
+STORY_DIR="docs/stories"
+if [ -d "$STORY_DIR" ]; then
+    echo "## Story Pattern Analysis" >> $AUDIT_REPORT
+    echo "Analyzing previous implementations for pattern consistency..." | tee -a $AUDIT_REPORT
+    
+    # Find completed stories
+    COMPLETED_STORIES=$(find "$STORY_DIR" -name "*.md" -exec grep -l "Status.*Complete\|Status.*Ready for Review" {} \; 2>/dev/null)
+    echo "Completed stories found: $(echo "$COMPLETED_STORIES" | wc -l)" | tee -a $AUDIT_REPORT
+    
+    # Analyze architectural patterns
+    echo "" >> $AUDIT_REPORT
+    echo "### Architectural Pattern Analysis" >> $AUDIT_REPORT
+    
+    # Look for common implementation patterns
+    for story in $COMPLETED_STORIES; do
+        if [ -f "$story" ]; then
+            echo "#### Story: $(basename "$story")" >> $AUDIT_REPORT
+            
+            # Extract technical approach from completed stories
+            echo "Technical approach patterns:" >> $AUDIT_REPORT
+            grep -A 5 -B 2 "Technical\|Implementation\|Approach\|Pattern" "$story" >> $AUDIT_REPORT 2>/dev/null || echo "No technical patterns found" >> $AUDIT_REPORT
+            echo "" >> $AUDIT_REPORT
+        fi
+    done
+    
+    # Analyze change patterns
+    echo "### Change Pattern Analysis" >> $AUDIT_REPORT
+    for story in $COMPLETED_STORIES; do
+        if [ -f "$story" ]; then
+            # Look for file change patterns
+            echo "#### File Change Patterns from $(basename "$story"):" >> $AUDIT_REPORT
+            grep -A 10 "File List\|Files Modified\|Files Added" "$story" >> $AUDIT_REPORT 2>/dev/null || echo "No file patterns found" >> $AUDIT_REPORT
+            echo "" >> $AUDIT_REPORT
+        fi
+    done
+    
+else
+    echo "No stories directory found - skipping pattern analysis" | tee -a $AUDIT_REPORT
+fi
+```
+
+### Architectural Decision Learning
+
+Extract architectural decisions from previous stories:
+
+```bash
+# Analyze architectural decisions
+echo "## Architectural Decision Analysis" >> $AUDIT_REPORT
+
+# Look for architectural decisions in stories
+if [ -d "$STORY_DIR" ]; then
+    echo "### Previous Architectural Decisions:" >> $AUDIT_REPORT
+    
+    # Find architecture-related content
+    grep -r -n -A 3 -B 1 "architect\|pattern\|design\|structure" "$STORY_DIR" --include="*.md" >> $AUDIT_REPORT 2>/dev/null || echo "No architectural decisions found" >> $AUDIT_REPORT
+    
+    echo "" >> $AUDIT_REPORT
+    echo "### Technology Choices:" >> $AUDIT_REPORT
+    
+    # Find technology decisions
+    grep -r -n -A 2 -B 1 "technology\|framework\|library\|dependency" "$STORY_DIR" --include="*.md" >> $AUDIT_REPORT 2>/dev/null || echo "No technology decisions found" >> $AUDIT_REPORT
+fi
+
+# Analyze current implementation against patterns
+echo "" >> $AUDIT_REPORT
+echo "### Pattern Compliance Assessment:" >> $AUDIT_REPORT
+
+# Store pattern analysis results
+PATTERN_COMPLIANCE_SCORE=100
+ARCHITECTURAL_CONSISTENCY_SCORE=100
+```
+
+## Phase 4: Regression Risk Assessment
+
+### Functional Regression Analysis
+
+Identify potential functionality impacts:
+
+```bash
+echo "=== REGRESSION RISK ASSESSMENT ===" | tee -a $AUDIT_REPORT
+
+echo "## Functional Impact Analysis" >> $AUDIT_REPORT
+
+# Analyze current changes against existing functionality
+if [ -d ".git" ]; then
+    echo "### Recent Changes Analysis:" >> $AUDIT_REPORT
+    echo "Recent commits that might affect functionality:" >> $AUDIT_REPORT
+    git log --oneline -20 --grep="feat\|fix\|refactor\|break" >> $AUDIT_REPORT 2>/dev/null || echo "No recent functional changes found" >> $AUDIT_REPORT
+    
+    echo "" >> $AUDIT_REPORT
+    echo "### Modified Files Impact:" >> $AUDIT_REPORT
+    
+    # Find recently modified files
+    MODIFIED_FILES=$(git diff --name-only HEAD~5..HEAD 2>/dev/null)
+    if [ -n "$MODIFIED_FILES" ]; then
+        echo "Files modified in recent commits:" >> $AUDIT_REPORT
+        echo "$MODIFIED_FILES" >> $AUDIT_REPORT
+        
+        # Analyze impact of each file
+        echo "" >> $AUDIT_REPORT
+        echo "### File Impact Assessment:" >> $AUDIT_REPORT
+        
+        for file in $MODIFIED_FILES; do
+            if [ -f "$file" ]; then
+                echo "#### Impact of $file:" >> $AUDIT_REPORT
+                
+                # Look for public interfaces, APIs, or exported functions
+                case "$file" in
+                    *.cs)
+                        grep -n "public.*class\|public.*interface\|public.*method" "$file" >> $AUDIT_REPORT 2>/dev/null || echo "No public interfaces found" >> $AUDIT_REPORT
+                        ;;
+                    *.js|*.ts)
+                        grep -n "export\|module\.exports" "$file" >> $AUDIT_REPORT 2>/dev/null || echo "No exports found" >> $AUDIT_REPORT
+                        ;;
+                    *.java)
+                        grep -n "public.*class\|public.*interface\|public.*method" "$file" >> $AUDIT_REPORT 2>/dev/null || echo "No public interfaces found" >> $AUDIT_REPORT
+                        ;;
+                    *.py)
+                        grep -n "def.*\|class.*" "$file" >> $AUDIT_REPORT 2>/dev/null || echo "No class/function definitions found" >> $AUDIT_REPORT
+                        ;;
+                esac
+                echo "" >> $AUDIT_REPORT
+            fi
+        done
+    else
+        echo "No recently modified files found" >> $AUDIT_REPORT
+    fi
+fi
+
+# Calculate regression risk score
+REGRESSION_RISK_SCORE=100
+```
+
+### Integration Point Analysis
+
+Assess integration and dependency impacts:
+
+```bash
+echo "## Integration Impact Analysis" >> $AUDIT_REPORT
+
+# Analyze integration points
+echo "### External Integration Points:" >> $AUDIT_REPORT
+
+# Look for external dependencies and integrations
+case "$PROJECT_FILE_EXT" in
+    "*.cs")
+        # .NET dependencies
+        find . -name "*.csproj" -exec grep -n "PackageReference\|ProjectReference" {} \; >> $AUDIT_REPORT 2>/dev/null
+        ;;
+    "*.js"|"*.ts")
+        # Node.js dependencies  
+        if [ -f "package.json" ]; then
+            echo "Package dependencies:" >> $AUDIT_REPORT
+            grep -A 20 '"dependencies"' package.json >> $AUDIT_REPORT 2>/dev/null
+        fi
+        ;;
+    "*.java")
+        # Java dependencies
+        find . -name "pom.xml" -exec grep -n "<dependency>" {} \; >> $AUDIT_REPORT 2>/dev/null
+        find . -name "build.gradle" -exec grep -n "implementation\|compile" {} \; >> $AUDIT_REPORT 2>/dev/null
+        ;;
+esac
+
+echo "" >> $AUDIT_REPORT
+echo "### Database Integration Assessment:" >> $AUDIT_REPORT
+
+# Look for database integration patterns
+for ext in $PROJECT_FILE_EXT; do
+    grep -r -n "connection\|database\|sql\|query" "$PROJECT_SRC_PATH/" --include="$ext" | head -10 >> $AUDIT_REPORT 2>/dev/null || echo "No database integration detected" >> $AUDIT_REPORT
+done
+
+echo "" >> $AUDIT_REPORT
+echo "### API Integration Assessment:" >> $AUDIT_REPORT
+
+# Look for API integration patterns  
+for ext in $PROJECT_FILE_EXT; do
+    grep -r -n "http\|api\|endpoint\|service" "$PROJECT_SRC_PATH/" --include="$ext" | head -10 >> $AUDIT_REPORT 2>/dev/null || echo "No API integration detected" >> $AUDIT_REPORT
+done
+```
+
+## Phase 5: Technical Debt Impact Assessment
+
+### Code Quality Impact Analysis
+
+Evaluate potential technical debt introduction:
+
+```bash
+echo "=== TECHNICAL DEBT ASSESSMENT ===" | tee -a $AUDIT_REPORT
+
+echo "## Code Quality Impact Analysis" >> $AUDIT_REPORT
+
+# Analyze code complexity
+echo "### Code Complexity Assessment:" >> $AUDIT_REPORT
+
+# Find complex files (basic metrics)
+for ext in $PROJECT_FILE_EXT; do
+    echo "#### Files by size (potential complexity):" >> $AUDIT_REPORT
+    find "$PROJECT_SRC_PATH" -name "$ext" -exec wc -l {} \; | sort -rn | head -10 >> $AUDIT_REPORT 2>/dev/null || echo "No source files found" >> $AUDIT_REPORT
+done
+
+echo "" >> $AUDIT_REPORT
+echo "### Maintainability Assessment:" >> $AUDIT_REPORT
+
+# Look for maintainability issues
+echo "#### Potential Maintainability Issues:" >> $AUDIT_REPORT
+
+# Look for code smells
+for ext in $PROJECT_FILE_EXT; do
+    # Large methods/functions
+    case "$ext" in
+        "*.cs")
+            grep -r -n -A 20 "public.*{" "$PROJECT_SRC_PATH/" --include="$ext" | grep -c ".*{" | head -5 >> $AUDIT_REPORT 2>/dev/null
+            ;;
+        "*.js"|"*.ts") 
+            grep -r -n "function.*{" "$PROJECT_SRC_PATH/" --include="$ext" | head -10 >> $AUDIT_REPORT 2>/dev/null
+            ;;
+        "*.java")
+            grep -r -n "public.*{" "$PROJECT_SRC_PATH/" --include="$ext" | head -10 >> $AUDIT_REPORT 2>/dev/null
+            ;;
+    esac
+done
+
+# Look for duplication patterns
+echo "" >> $AUDIT_REPORT  
+echo "#### Code Duplication Assessment:" >> $AUDIT_REPORT
+
+# Basic duplication detection
+for ext in $PROJECT_FILE_EXT; do
+    # Find similar patterns (simple approach)
+    find "$PROJECT_SRC_PATH" -name "$ext" -exec basename {} \; | sort | uniq -c | grep -v "1 " >> $AUDIT_REPORT 2>/dev/null || echo "No obvious duplication in file names" >> $AUDIT_REPORT
+done
+
+# Calculate technical debt score
+TECHNICAL_DEBT_SCORE=100
+```
+
+### Architecture Consistency Check
+
+Verify alignment with established patterns:
+
+```bash
+echo "## Architecture Consistency Analysis" >> $AUDIT_REPORT
+
+# Compare current approach with established patterns
+echo "### Pattern Consistency Assessment:" >> $AUDIT_REPORT
+
+# This will be populated based on story analysis from Phase 3
+echo "Current implementation pattern consistency: [Will be calculated based on story analysis]" >> $AUDIT_REPORT
+echo "Architectural decision compliance: [Will be assessed against previous decisions]" >> $AUDIT_REPORT
+echo "Technology choice consistency: [Will be evaluated against established stack]" >> $AUDIT_REPORT
+
+echo "" >> $AUDIT_REPORT
+echo "### Recommendations for Technical Debt Prevention:" >> $AUDIT_REPORT
+echo "- Follow established patterns identified in story analysis" >> $AUDIT_REPORT
+echo "- Maintain consistency with previous architectural decisions" >> $AUDIT_REPORT
+echo "- Ensure new code follows existing code quality standards" >> $AUDIT_REPORT
+echo "- Verify integration approaches match established patterns" >> $AUDIT_REPORT
+
+# Store results for comprehensive scoring
+PATTERN_CONSISTENCY_ISSUES=0
+ARCHITECTURAL_VIOLATIONS=0
+```
+
+## Phase 6: Manual Validation Checklist
+
+### End-to-End Integration Proof
+
+**Prove the entire data path works with real applications:**
+
+- [ ] **Real Application Test**: Code tested with actual target application
+- [ ] **Real Data Flow**: Actual data flows through all components (not test data)
+- [ ] **Real Environment**: Testing performed in target environment (not dev simulation)
+- [ ] **Real Performance**: Measurements taken on actual target hardware
+- [ ] **Real Error Conditions**: Tested with actual failure scenarios
+
+**Evidence Required:**
+- [ ] Screenshot/log of real application running with your changes
+- [ ] Performance measurements from actual hardware
+- [ ] Error logs from real failure conditions
+
+### Dependency Reality Check
+
+**Ensure all dependencies are real, not mocked:**
+
+- [ ] **No Critical Mocks**: Zero mock implementations in production code path
+- [ ] **Real External Services**: All external dependencies use real implementations
+- [ ] **Real Hardware Access**: Operations use real hardware
+- [ ] **Real IPC**: Inter-process communication uses real protocols, not simulation
+
+**Mock Inventory:**
+- [ ] List all mocks/simulations remaining: ________________
+- [ ] Each mock has replacement timeline: ________________
+- [ ] Critical path has zero mocks: ________________
+
+### Performance Reality Validation
+
+**All performance claims must be backed by real measurements:**
+
+- [ ] **Measured Throughput**: Actual data throughput measured under load
+- [ ] **Cross-Platform Parity**: Performance verified on both Windows/Linux
+- [ ] **Real Timing**: Stopwatch measurements, not estimates
+- [ ] **Memory Usage**: Real memory tracking, not calculated estimates
+
+**Performance Evidence:**
+- [ ] Benchmark results attached to story
+- [ ] Performance within specified bounds
+- [ ] No performance regressions detected
+
+### Data Flow Reality Check
+
+**Verify real data movement through system:**
+
+- [ ] **Database Operations**: Real connections tested
+- [ ] **File Operations**: Real files read/written
+- [ ] **Network Operations**: Real endpoints contacted
+- [ ] **External APIs**: Real API calls made
+
+### Error Handling Reality
+
+**Exception handling must be proven, not assumed:**
+
+- [ ] **Real Exception Types**: Actual exceptions caught and handled
+- [ ] **Retry Logic**: Real retry mechanisms tested
+- [ ] **Circuit Breaker**: Real failure detection verified
+- [ ] **Recovery**: Actual recovery times measured
+
+## Phase 7: Comprehensive Reality Scoring with Regression Prevention
+
+### Calculate Comprehensive Reality Score
+
+```bash
+echo "=== COMPREHENSIVE REALITY SCORING WITH REGRESSION PREVENTION ===" | tee -a $AUDIT_REPORT
+
+# Initialize component scores
+SIMULATION_SCORE=100
+REGRESSION_PREVENTION_SCORE=100
+TECHNICAL_DEBT_SCORE=100
+
+echo "## Component Score Calculation" >> $AUDIT_REPORT
+
+# Calculate Simulation Reality Score
+echo "### Simulation Pattern Scoring:" >> $AUDIT_REPORT
+SIMULATION_SCORE=$((SIMULATION_SCORE - (RANDOM_COUNT * 20)))
+SIMULATION_SCORE=$((SIMULATION_SCORE - (TASK_MOCK_COUNT * 15)))
+SIMULATION_SCORE=$((SIMULATION_SCORE - (NOT_IMPL_COUNT * 30)))
+SIMULATION_SCORE=$((SIMULATION_SCORE - (TODO_COUNT * 5)))
+SIMULATION_SCORE=$((SIMULATION_SCORE - (TOTAL_SIM_COUNT * 25)))
+
+# Deduct for build/runtime failures
+if [ $BUILD_EXIT_CODE -ne 0 ]; then
+    SIMULATION_SCORE=$((SIMULATION_SCORE - 50))
+fi
+
+if [ $ERROR_COUNT -gt 0 ]; then
+    SIMULATION_SCORE=$((SIMULATION_SCORE - (ERROR_COUNT * 10)))
+fi
+
+if [ $RUNTIME_EXIT_CODE -ne 0 ] && [ $RUNTIME_EXIT_CODE -ne 124 ]; then
+    SIMULATION_SCORE=$((SIMULATION_SCORE - 30))
+fi
+
+# Ensure simulation score doesn't go below 0
+if [ $SIMULATION_SCORE -lt 0 ]; then
+    SIMULATION_SCORE=0
+fi
+
+echo "**Simulation Reality Score: $SIMULATION_SCORE/100**" >> $AUDIT_REPORT
+
+# Calculate Regression Prevention Score
+echo "### Regression Prevention Scoring:" >> $AUDIT_REPORT
+
+# Deduct for regression risks (scores set in previous phases)
+REGRESSION_PREVENTION_SCORE=${REGRESSION_RISK_SCORE:-100}
+PATTERN_COMPLIANCE_DEDUCTION=$((PATTERN_CONSISTENCY_ISSUES * 15))
+ARCHITECTURAL_DEDUCTION=$((ARCHITECTURAL_VIOLATIONS * 20))
+
+REGRESSION_PREVENTION_SCORE=$((REGRESSION_PREVENTION_SCORE - PATTERN_COMPLIANCE_DEDUCTION))
+REGRESSION_PREVENTION_SCORE=$((REGRESSION_PREVENTION_SCORE - ARCHITECTURAL_DEDUCTION))
+
+# Ensure regression score doesn't go below 0
+if [ $REGRESSION_PREVENTION_SCORE -lt 0 ]; then
+    REGRESSION_PREVENTION_SCORE=0
+fi
+
+echo "**Regression Prevention Score: $REGRESSION_PREVENTION_SCORE/100**" >> $AUDIT_REPORT
+
+# Calculate Technical Debt Score
+echo "### Technical Debt Impact Scoring:" >> $AUDIT_REPORT
+TECHNICAL_DEBT_SCORE=${TECHNICAL_DEBT_SCORE:-100}
+
+# Factor in architectural consistency
+if [ $ARCHITECTURAL_CONSISTENCY_SCORE -lt 100 ]; then
+    CONSISTENCY_DEDUCTION=$((100 - ARCHITECTURAL_CONSISTENCY_SCORE))
+    TECHNICAL_DEBT_SCORE=$((TECHNICAL_DEBT_SCORE - CONSISTENCY_DEDUCTION))
+fi
+
+# Ensure technical debt score doesn't go below 0  
+if [ $TECHNICAL_DEBT_SCORE -lt 0 ]; then
+    TECHNICAL_DEBT_SCORE=0
+fi
+
+echo "**Technical Debt Prevention Score: $TECHNICAL_DEBT_SCORE/100**" >> $AUDIT_REPORT
+
+# Calculate Composite Reality Score with Weighted Components
+echo "### Composite Scoring:" >> $AUDIT_REPORT
+echo "Score component weights:" >> $AUDIT_REPORT
+echo "- Simulation Reality: 40%" >> $AUDIT_REPORT  
+echo "- Regression Prevention: 35%" >> $AUDIT_REPORT
+echo "- Technical Debt Prevention: 25%" >> $AUDIT_REPORT
+
+COMPOSITE_REALITY_SCORE=$(( (SIMULATION_SCORE * 40 + REGRESSION_PREVENTION_SCORE * 35 + TECHNICAL_DEBT_SCORE * 25) / 100 ))
+
+echo "**Composite Reality Score: $COMPOSITE_REALITY_SCORE/100**" >> $AUDIT_REPORT
+
+# Set final score for compatibility with existing workflows
+REALITY_SCORE=$COMPOSITE_REALITY_SCORE
+
+echo "" >> $AUDIT_REPORT
+echo "## Reality Scoring Matrix" >> $AUDIT_REPORT
+echo "| Pattern Found | Instance Count | Score Impact | Points Deducted |" >> $AUDIT_REPORT
+echo "|---------------|----------------|--------------|-----------------|" >> $AUDIT_REPORT
+echo "| Random Data Generation | $RANDOM_COUNT | High | $((RANDOM_COUNT * 20)) |" >> $AUDIT_REPORT
+echo "| Mock Async Operations | $TASK_MOCK_COUNT | High | $((TASK_MOCK_COUNT * 15)) |" >> $AUDIT_REPORT
+echo "| NotImplementedException | $NOT_IMPL_COUNT | Critical | $((NOT_IMPL_COUNT * 30)) |" >> $AUDIT_REPORT
+echo "| TODO Comments | $TODO_COUNT | Medium | $((TODO_COUNT * 5)) |" >> $AUDIT_REPORT
+echo "| Simulation Methods | $TOTAL_SIM_COUNT | High | $((TOTAL_SIM_COUNT * 25)) |" >> $AUDIT_REPORT
+echo "| Build Failures | $BUILD_EXIT_CODE | Critical | $([ $BUILD_EXIT_CODE -ne 0 ] && echo 50 || echo 0) |" >> $AUDIT_REPORT
+echo "| Compilation Errors | $ERROR_COUNT | High | $((ERROR_COUNT * 10)) |" >> $AUDIT_REPORT
+echo "| Runtime Failures | $([ $RUNTIME_EXIT_CODE -ne 0 ] && [ $RUNTIME_EXIT_CODE -ne 124 ] && echo 1 || echo 0) | High | $([ $RUNTIME_EXIT_CODE -ne 0 ] && [ $RUNTIME_EXIT_CODE -ne 124 ] && echo 30 || echo 0) |" >> $AUDIT_REPORT
+echo "" >> $AUDIT_REPORT
+echo "**Total Reality Score: $REALITY_SCORE / 100**" >> $AUDIT_REPORT
+
+echo "Final Reality Score: $REALITY_SCORE / 100" | tee -a $AUDIT_REPORT
+```
+
+### Score Interpretation and Enforcement
+
+```bash
+echo "" >> $AUDIT_REPORT
+echo "## Reality Score Interpretation" >> $AUDIT_REPORT
+
+if [ $REALITY_SCORE -ge 90 ]; then
+    GRADE="A"
+    STATUS="EXCELLENT"
+    ACTION="APPROVED FOR COMPLETION"
+elif [ $REALITY_SCORE -ge 80 ]; then
+    GRADE="B"  
+    STATUS="GOOD"
+    ACTION="APPROVED FOR COMPLETION"
+elif [ $REALITY_SCORE -ge 70 ]; then
+    GRADE="C"
+    STATUS="ACCEPTABLE"
+    ACTION="REQUIRES MINOR REMEDIATION"
+elif [ $REALITY_SCORE -ge 60 ]; then
+    GRADE="D"
+    STATUS="POOR"
+    ACTION="REQUIRES MAJOR REMEDIATION"
+else
+    GRADE="F"
+    STATUS="UNACCEPTABLE"
+    ACTION="BLOCKED - RETURN TO DEVELOPMENT"
+fi
+
+echo "- **Grade: $GRADE ($REALITY_SCORE/100)**" >> $AUDIT_REPORT
+echo "- **Status: $STATUS**" >> $AUDIT_REPORT
+echo "- **Action: $ACTION**" >> $AUDIT_REPORT
+
+echo "Reality Assessment: $GRADE ($STATUS) - $ACTION" | tee -a $AUDIT_REPORT
+```
+
+## Phase 8: Enforcement Gates
+
+### Enhanced Quality Gates (All Must Pass)
+
+- [ ] **Build Success**: Build command returns 0 errors
+- [ ] **Runtime Success**: Application starts and responds to requests
+- [ ] **Data Flow Success**: Real data moves through system without simulation
+- [ ] **Integration Success**: External dependencies accessible and functional
+- [ ] **Performance Success**: Real measurements obtained, not estimates
+- [ ] **Contract Compliance**: Zero architectural violations
+- [ ] **Simulation Score**: Simulation reality score ≥ 80 (B grade or better)
+- [ ] **Regression Prevention**: Regression prevention score ≥ 80 (B grade or better)
+- [ ] **Technical Debt Prevention**: Technical debt score ≥ 70 (C grade or better)
+- [ ] **Composite Reality Score**: Overall score ≥ 80 (B grade or better)
+
+## Phase 9: Regression-Safe Automated Remediation
+
+```bash
+echo "=== REMEDIATION DECISION ===" | tee -a $AUDIT_REPORT
+
+# Check if remediation is needed
+REMEDIATION_NEEDED=false
+
+if [ $REALITY_SCORE -lt 80 ]; then
+    echo "✋ Reality score below threshold: $REALITY_SCORE/100" | tee -a $AUDIT_REPORT
+    REMEDIATION_NEEDED=true
+fi
+
+if [ $BUILD_EXIT_CODE -ne 0 ] || [ $ERROR_COUNT -gt 0 ]; then
+    echo "✋ Build failures detected: Exit code $BUILD_EXIT_CODE, Errors: $ERROR_COUNT" | tee -a $AUDIT_REPORT
+    REMEDIATION_NEEDED=true
+fi
+
+if [ $RUNTIME_EXIT_CODE -ne 0 ] && [ $RUNTIME_EXIT_CODE -ne 124 ]; then
+    echo "✋ Runtime failures detected: Exit code $RUNTIME_EXIT_CODE" | tee -a $AUDIT_REPORT
+    REMEDIATION_NEEDED=true
+fi
+
+CRITICAL_PATTERNS=$((NOT_IMPL_COUNT + RANDOM_COUNT))
+if [ $CRITICAL_PATTERNS -gt 3 ]; then
+    echo "✋ Critical simulation patterns detected: $CRITICAL_PATTERNS instances" | tee -a $AUDIT_REPORT
+    REMEDIATION_NEEDED=true
+fi
+
+if [ "$REMEDIATION_NEEDED" == "true" ]; then
+    echo "" | tee -a $AUDIT_REPORT
+    echo "🚨 **REMEDIATION REQUIRED** - Auto-generating remediation story..." | tee -a $AUDIT_REPORT
+    echo "" | tee -a $AUDIT_REPORT
+    
+    # Set variables for create-remediation-story.md
+    export REALITY_SCORE
+    export BUILD_EXIT_CODE
+    export ERROR_COUNT
+    export RUNTIME_EXIT_CODE
+    export RANDOM_COUNT
+    export TASK_MOCK_COUNT
+    export NOT_IMPL_COUNT
+    export TODO_COUNT
+    export TOTAL_SIM_COUNT
+    
+    echo "📝 **REMEDIATION STORY CREATION TRIGGERED**" | tee -a $AUDIT_REPORT
+    echo "👩‍💻 **NEXT ACTION:** Execute create-remediation-story.md" | tee -a $AUDIT_REPORT
+    echo "🔄 **PROCESS:** Developer implements fixes → QA re-audits → Repeat until score ≥ 80" | tee -a $AUDIT_REPORT
+    echo "🎯 **TARGET:** Achieve 80+ reality score with clean build/runtime" | tee -a $AUDIT_REPORT
+else
+    echo "" | tee -a $AUDIT_REPORT
+    echo "✅ **NO REMEDIATION NEEDED** - Implementation meets quality standards" | tee -a $AUDIT_REPORT
+    echo "📊 Reality Score: $REALITY_SCORE/100" | tee -a $AUDIT_REPORT
+    echo "🏗️ Build Status: $([ $BUILD_EXIT_CODE -eq 0 ] && [ $ERROR_COUNT -eq 0 ] && echo "✅ SUCCESS" || echo "❌ FAILED")" | tee -a $AUDIT_REPORT
+    echo "⚡ Runtime Status: $([ $RUNTIME_EXIT_CODE -eq 0 ] || [ $RUNTIME_EXIT_CODE -eq 124 ] && echo "✅ SUCCESS" || echo "❌ FAILED")" | tee -a $AUDIT_REPORT
+fi
+
+echo "" | tee -a $AUDIT_REPORT
+echo "=== AUDIT COMPLETE ===" | tee -a $AUDIT_REPORT
+echo "Report location: $AUDIT_REPORT" | tee -a $AUDIT_REPORT
+```
+
+## Definition of "Actually Complete"
+
+### Quality Gates (All Must Pass)
+
+- [ ] **Build Success**: Build command returns 0 errors
+- [ ] **Runtime Success**: Application starts and responds to requests
+- [ ] **Data Flow Success**: Real data moves through system without simulation
+- [ ] **Integration Success**: External dependencies accessible and functional
+- [ ] **Performance Success**: Real measurements obtained, not estimates
+- [ ] **Contract Compliance**: Zero architectural violations
+- [ ] **Simulation Score**: Reality score ≥ 80 (B grade or better)
+
+### Final Assessment Options
+
+- [ ] **APPROVED FOR COMPLETION:** All criteria met, reality score ≥ 80
+- [ ] **REQUIRES REMEDIATION:** Simulation patterns found, reality score < 80  
+- [ ] **BLOCKED:** Build failures or critical simulation patterns prevent completion
+
+### Variables Available for Integration
+
+The following variables are exported for use by other tools:
+
+```bash
+# Core scoring variables
+REALITY_SCORE=[calculated score 0-100]
+BUILD_EXIT_CODE=[build command exit code]
+ERROR_COUNT=[compilation error count]
+RUNTIME_EXIT_CODE=[runtime command exit code]
+
+# Pattern detection counts
+RANDOM_COUNT=[Random.NextDouble instances]
+TASK_MOCK_COUNT=[Task.FromResult instances]  
+NOT_IMPL_COUNT=[NotImplementedException instances]
+TODO_COUNT=[TODO comment count]
+TOTAL_SIM_COUNT=[total simulation method count]
+
+# Project context
+PROJECT_NAME=[detected project name]
+PROJECT_SRC_PATH=[detected source path]
+PROJECT_FILE_EXT=[detected file extensions]
+BUILD_CMD=[detected build command]
+RUN_CMD=[detected run command]
+```
+
+---
+
+## Summary
+
+This comprehensive reality audit combines automated simulation detection, manual validation, objective scoring, and enforcement gates into a single cohesive framework. It prevents "bull in a china shop" completion claims by requiring evidence-based assessment and automatically triggering remediation when quality standards are not met.
+
+**Key Features:**
+- **Universal project detection** across multiple languages/frameworks
+- **Automated simulation pattern scanning** with 6 distinct pattern types
+- **Objective reality scoring** with clear grade boundaries (A-F)
+- **Manual validation checklist** for human verification
+- **Enforcement gates** preventing completion of poor-quality implementations
+- **Automatic remediation triggering** when issues are detected
+- **Comprehensive evidence documentation** for audit trails
+
+**Integration Points:**
+- Exports standardized variables for other BMAD tools
+- Triggers create-remediation-story.md when needed
+- Provides audit reports for documentation
+- Supports all major project types and build systems
+==================== END: .bmad-core/tasks/reality-audit-comprehensive.md ====================
+
+==================== START: .bmad-core/tasks/loop-detection-escalation.md ====================
+# Loop Detection & Escalation
+
+## Task Overview
+
+Systematically track solution attempts, detect loop scenarios, and trigger collaborative escalation when agents get stuck repeating unsuccessful approaches. This consolidated framework combines automatic detection with structured collaboration preparation for external AI agents.
+
+## Context
+
+Prevents agents from endlessly repeating failed solutions by implementing automatic escalation triggers and structured collaboration preparation. Ensures efficient use of context windows and systematic knowledge sharing while maintaining detailed audit trails of solution attempts.
+
+## Execution Approach
+
+**LOOP PREVENTION PROTOCOL** - This system addresses systematic "retry the same approach" behavior that wastes time and context.
+
+1. **Track each solution attempt** systematically with outcomes
+2. **Detect loop patterns** automatically using defined triggers
+3. **Prepare collaboration context** for external agents
+4. **Execute escalation** when conditions are met
+5. **Document learnings** from collaborative solutions
+
+The goal is efficient problem-solving through systematic collaboration when internal approaches reach limitations.
+
+---
+
+## Phase 1: Pre-Escalation Tracking
+
+### Problem Definition Setup
+
+Before attempting any solutions, establish clear problem context:
+
+- [ ] **Issue clearly defined:** Specific error message, file location, or failure description documented
+- [ ] **Root cause hypothesis:** Current understanding of what's causing the issue
+- [ ] **Context captured:** Relevant code snippets, configuration files, or environment details
+- [ ] **Success criteria defined:** What exactly needs to happen for issue to be resolved
+- [ ] **Environment documented:** Platform, versions, dependencies affecting the issue
+
+### Solution Attempt Tracking
+
+Track each solution attempt using this systematic format:
+
+```bash
+echo "=== LOOP DETECTION TRACKING ===" 
+echo "Issue Tracking Started: $(date)"
+echo "Issue ID: issue-$(date +%Y%m%d-%H%M)"
+echo ""
+
+# Create tracking report
+LOOP_REPORT="loop-tracking-$(date +%Y%m%d-%H%M).md"
+echo "# Loop Detection Tracking Report" > $LOOP_REPORT
+echo "Date: $(date)" >> $LOOP_REPORT
+echo "Issue ID: issue-$(date +%Y%m%d-%H%M)" >> $LOOP_REPORT
+echo "" >> $LOOP_REPORT
+
+echo "## Problem Definition" >> $LOOP_REPORT
+echo "**Issue Description:** [Specific error or failure]" >> $LOOP_REPORT
+echo "**Error Location:** [File, line, or component]" >> $LOOP_REPORT
+echo "**Root Cause Hypothesis:** [Current understanding]" >> $LOOP_REPORT
+echo "**Success Criteria:** [What needs to work]" >> $LOOP_REPORT
+echo "**Environment:** [Platform, versions, dependencies]" >> $LOOP_REPORT
+echo "" >> $LOOP_REPORT
+
+echo "## Solution Attempt Log" >> $LOOP_REPORT
+ATTEMPT_COUNT=0
+```
+
+**For each solution attempt, document:**
+
+```markdown
+### Attempt #[N]: [Brief description]
+- **Start Time:** [timestamp]
+- **Approach:** [Description of solution attempted]
+- **Hypothesis:** [Why this approach should work]
+- **Actions Taken:** [Specific steps executed]
+- **Code Changes:** [Files modified and how]
+- **Test Results:** [What happened when tested]
+- **Result:** [Success/Failure/Partial success]
+- **Learning:** [What this attempt revealed about the problem]
+- **New Information:** [Any new understanding gained]
+- **Next Hypothesis:** [How this changes understanding of the issue]
+- **End Time:** [timestamp]
+- **Duration:** [time spent on this attempt]
+```
+
+### Automated Attempt Logging
+
+```bash
+# Function to log solution attempts
+log_attempt() {
+    local attempt_num=$1
+    local approach="$2"
+    local result="$3"
+    local learning="$4"
+    
+    ATTEMPT_COUNT=$((ATTEMPT_COUNT + 1))
+    
+    echo "" >> $LOOP_REPORT
+    echo "### Attempt #$ATTEMPT_COUNT: $approach" >> $LOOP_REPORT
+    echo "- **Start Time:** $(date)" >> $LOOP_REPORT
+    echo "- **Approach:** $approach" >> $LOOP_REPORT
+    echo "- **Result:** $result" >> $LOOP_REPORT
+    echo "- **Learning:** $learning" >> $LOOP_REPORT
+    echo "- **Duration:** [manual entry required]" >> $LOOP_REPORT
+    
+    # Check for escalation triggers after each attempt
+    check_escalation_triggers
+}
+
+# Function to check escalation triggers
+check_escalation_triggers() {
+    local should_escalate=false
+    
+    echo "## Escalation Check #$ATTEMPT_COUNT" >> $LOOP_REPORT
+    echo "Time: $(date)" >> $LOOP_REPORT
+    
+    # Check attempt count trigger
+    if [ $ATTEMPT_COUNT -ge 3 ]; then
+        echo "🚨 **TRIGGER**: 3+ failed attempts detected ($ATTEMPT_COUNT attempts)" >> $LOOP_REPORT
+        should_escalate=true
+    fi
+    
+    # Check for repetitive patterns (manual analysis required)
+    echo "- **Repetitive Approaches:** [Manual assessment needed]" >> $LOOP_REPORT
+    echo "- **Circular Reasoning:** [Manual assessment needed]" >> $LOOP_REPORT
+    echo "- **Diminishing Returns:** [Manual assessment needed]" >> $LOOP_REPORT
+    
+    # Time-based trigger (manual tracking required)
+    echo "- **Time Threshold:** [Manual time tracking needed - trigger at 90+ minutes]" >> $LOOP_REPORT
+    echo "- **Context Window Pressure:** [Manual assessment of context usage]" >> $LOOP_REPORT
+    
+    if [ "$should_escalate" == "true" ]; then
+        echo "" >> $LOOP_REPORT
+        echo "⚡ **ESCALATION TRIGGERED** - Preparing collaboration request..." >> $LOOP_REPORT
+        prepare_collaboration_request
+    fi
+}
+```
+
+## Phase 2: Loop Detection Indicators
+
+### Automatic Detection Triggers
+
+The system monitors for these escalation conditions:
+
+```bash
+# Loop Detection Configuration
+FAILED_ATTEMPTS=3           # 3+ failed solution attempts
+TIME_LIMIT_MINUTES=90       # 90+ minutes on single issue  
+PATTERN_REPETITION=true     # Repeating previously tried solutions
+CONTEXT_PRESSURE=high       # Approaching context window limits
+DIMINISHING_RETURNS=true    # Each attempt provides less information
+```
+
+### Manual Detection Checklist
+
+Monitor these indicators during problem-solving:
+
+- [ ] **Repetitive approaches:** Same or very similar solutions attempted multiple times
+- [ ] **Circular reasoning:** Solution attempts that return to previously tried approaches  
+- [ ] **Diminishing returns:** Each attempt provides less new information than the previous
+- [ ] **Time threshold exceeded:** More than 90 minutes spent on single issue without progress
+- [ ] **Context window pressure:** Approaching context limits due to extensive debugging
+- [ ] **Decreasing confidence:** Solutions becoming more speculative rather than systematic
+- [ ] **Resource exhaustion:** Running out of approaches within current knowledge domain
+
+### Escalation Trigger Assessment
+
+```bash
+# Function to assess escalation need
+assess_escalation_need() {
+    echo "=== ESCALATION ASSESSMENT ===" >> $LOOP_REPORT
+    echo "Assessment Time: $(date)" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Automatic Triggers:" >> $LOOP_REPORT
+    echo "- **Failed Attempts:** $ATTEMPT_COUNT (trigger: ≥3)" >> $LOOP_REPORT
+    echo "- **Time Investment:** [Manual tracking] (trigger: ≥90 minutes)" >> $LOOP_REPORT
+    echo "- **Pattern Repetition:** [Manual assessment] (trigger: repeating approaches)" >> $LOOP_REPORT
+    echo "- **Context Pressure:** [Manual assessment] (trigger: approaching limits)" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Manual Assessment Required:" >> $LOOP_REPORT
+    echo "- [ ] Same approaches being repeated?" >> $LOOP_REPORT
+    echo "- [ ] Each attempt providing less new information?" >> $LOOP_REPORT
+    echo "- [ ] Running out of systematic approaches?" >> $LOOP_REPORT
+    echo "- [ ] Context window becoming crowded with debug info?" >> $LOOP_REPORT
+    echo "- [ ] Issue blocking progress on main objective?" >> $LOOP_REPORT
+    echo "- [ ] Specialized knowledge domain expertise needed?" >> $LOOP_REPORT
+}
+```
+
+## Phase 3: Collaboration Preparation
+
+### Issue Classification
+
+Before escalating, classify the problem type for optimal collaborator selection:
+
+```bash
+prepare_collaboration_request() {
+    echo "" >> $LOOP_REPORT
+    echo "=== COLLABORATION REQUEST PREPARATION ===" >> $LOOP_REPORT
+    echo "Preparation Time: $(date)" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "## Issue Classification" >> $LOOP_REPORT
+    echo "- [ ] **Code Implementation Problem:** Logic, syntax, or algorithm issues" >> $LOOP_REPORT
+    echo "- [ ] **Architecture Design Problem:** Structural or pattern-related issues" >> $LOOP_REPORT  
+    echo "- [ ] **Platform Integration Problem:** OS, framework, or tool compatibility" >> $LOOP_REPORT
+    echo "- [ ] **Performance Optimization Problem:** Speed, memory, or efficiency issues" >> $LOOP_REPORT
+    echo "- [ ] **Cross-Platform Compatibility Problem:** Multi-OS or environment issues" >> $LOOP_REPORT
+    echo "- [ ] **Domain-Specific Problem:** Specialized knowledge area" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    generate_collaboration_package
+}
+```
+
+### Collaborative Information Package
+
+Generate structured context for external collaborators:
+
+```bash
+generate_collaboration_package() {
+    echo "## Collaboration Information Package" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Executive Summary" >> $LOOP_REPORT
+    echo "**Problem:** [One-line description of core issue]" >> $LOOP_REPORT
+    echo "**Impact:** [How this blocks progress]" >> $LOOP_REPORT
+    echo "**Attempts:** $ATTEMPT_COUNT solutions tried over [X] minutes" >> $LOOP_REPORT
+    echo "**Request:** [Specific type of help needed]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Technical Context" >> $LOOP_REPORT
+    echo "**Platform:** [OS, framework, language versions]" >> $LOOP_REPORT
+    echo "**Environment:** [Development setup, tools, constraints]" >> $LOOP_REPORT
+    echo "**Dependencies:** [Key libraries, frameworks, services]" >> $LOOP_REPORT
+    echo "**Error Details:** [Exact error messages, stack traces]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Code Context" >> $LOOP_REPORT
+    echo "**Relevant Files:** [List of files involved]" >> $LOOP_REPORT
+    echo "**Key Functions:** [Methods or classes at issue]" >> $LOOP_REPORT
+    echo "**Data Structures:** [Important types or interfaces]" >> $LOOP_REPORT
+    echo "**Integration Points:** [How components connect]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Solution Attempts Summary" >> $LOOP_REPORT
+    echo "**Approach 1:** [Brief summary + outcome]" >> $LOOP_REPORT
+    echo "**Approach 2:** [Brief summary + outcome]" >> $LOOP_REPORT
+    echo "**Approach 3:** [Brief summary + outcome]" >> $LOOP_REPORT
+    echo "**Pattern:** [What all attempts had in common]" >> $LOOP_REPORT
+    echo "**Learnings:** [Key insights from attempts]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Specific Request" >> $LOOP_REPORT
+    echo "**What We Need:** [Specific type of assistance]" >> $LOOP_REPORT
+    echo "**Knowledge Gap:** [What we don't know]" >> $LOOP_REPORT
+    echo "**Success Criteria:** [How to know if solution works]" >> $LOOP_REPORT
+    echo "**Constraints:** [Limitations or requirements]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    select_collaborator
+}
+```
+
+### Collaborator Selection
+
+```bash
+select_collaborator() {
+    echo "## Recommended Collaborator Selection" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Collaborator Specialization Guide:" >> $LOOP_REPORT
+    echo "- **Gemini:** Algorithm optimization, mathematical problems, data analysis" >> $LOOP_REPORT
+    echo "- **Claude Code:** Architecture design, code structure, enterprise patterns" >> $LOOP_REPORT
+    echo "- **GPT-4:** General problem-solving, creative approaches, debugging" >> $LOOP_REPORT
+    echo "- **Specialized LLMs:** Domain-specific expertise (security, ML, etc.)" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Recommended Primary Collaborator:" >> $LOOP_REPORT
+    echo "**Choice:** [Based on issue classification]" >> $LOOP_REPORT
+    echo "**Rationale:** [Why this collaborator is best suited]" >> $LOOP_REPORT
+    echo "**Alternative:** [Backup option if primary unavailable]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Collaboration Request Ready" >> $LOOP_REPORT
+    echo "**Package Location:** $LOOP_REPORT" >> $LOOP_REPORT
+    echo "**Next Action:** Initiate collaboration with selected external agent" >> $LOOP_REPORT
+    
+    # Generate copy-paste prompt for external LLM
+    generate_external_prompt
+}
+
+# Generate copy-paste prompt for external LLM collaboration
+generate_external_prompt() {
+    EXTERNAL_PROMPT="external-llm-prompt-$(date +%Y%m%d-%H%M).md"
+    
+    cat > $EXTERNAL_PROMPT << 'EOF'
+# COLLABORATION REQUEST - Copy & Paste This Entire Message
+
+## Situation
+I'm an AI development agent that has hit a wall after multiple failed attempts at resolving an issue. I need fresh perspective and collaborative problem-solving.
+
+## Issue Summary
+**Problem:** [FILL: One-line description of core issue]
+**Impact:** [FILL: How this blocks progress]  
+**Attempts:** [FILL: Number] solutions tried over [FILL: X] minutes
+**Request:** [FILL: Specific type of help needed]
+
+## Technical Context
+**Platform:** [FILL: OS, framework, language versions]
+**Environment:** [FILL: Development setup, tools, constraints]
+**Dependencies:** [FILL: Key libraries, frameworks, services]
+**Error Details:** [FILL: Exact error messages, stack traces]
+
+## Code Context
+**Relevant Files:** [FILL: List of files involved]
+**Key Functions:** [FILL: Methods or classes at issue]
+**Data Structures:** [FILL: Important types or interfaces]
+**Integration Points:** [FILL: How components connect]
+
+## Failed Solution Attempts
+### Attempt 1: [FILL: Brief approach description]
+- **Hypothesis:** [FILL: Why we thought this would work]
+- **Actions:** [FILL: What we tried]
+- **Outcome:** [FILL: What happened]
+- **Learning:** [FILL: What this revealed]
+
+### Attempt 2: [FILL: Brief approach description]  
+- **Hypothesis:** [FILL: Why we thought this would work]
+- **Actions:** [FILL: What we tried]
+- **Outcome:** [FILL: What happened]
+- **Learning:** [FILL: What this revealed]
+
+### Attempt 3: [FILL: Brief approach description]
+- **Hypothesis:** [FILL: Why we thought this would work]
+- **Actions:** [FILL: What we tried]
+- **Outcome:** [FILL: What happened]
+- **Learning:** [FILL: What this revealed]
+
+## Pattern Analysis
+**Common Thread:** [FILL: What all attempts had in common]
+**Key Insights:** [FILL: Main learnings from attempts]
+**Potential Blind Spots:** [FILL: What we might be missing]
+
+## Specific Collaboration Request
+**What I Need:** [FILL: Specific type of assistance - fresh approach, domain expertise, different perspective, etc.]
+**Knowledge Gap:** [FILL: What we don't know or understand]
+**Success Criteria:** [FILL: How to know if solution works]
+**Constraints:** [FILL: Limitations or requirements to work within]
+
+## Code Snippets (if relevant)
+```[language]
+[FILL: Relevant code that's causing issues]
+```
+
+## Error Logs (if relevant)
+```
+[FILL: Exact error messages and stack traces]
+```
+
+## What Would Help Most
+- [ ] Fresh perspective on root cause
+- [ ] Alternative solution approaches  
+- [ ] Domain-specific expertise
+- [ ] Code review and suggestions
+- [ ] Architecture/design guidance
+- [ ] Debugging methodology
+- [ ] Other: [FILL: Specific need]
+
+---
+**Please provide:** A clear, actionable solution approach with reasoning, or alternative perspectives I should consider. I'm looking for breakthrough thinking to get unstuck.
+EOF
+
+    echo ""
+    echo "🎯 **COPY-PASTE PROMPT GENERATED**"
+    echo "📋 **File:** $EXTERNAL_PROMPT"
+    echo ""
+    echo "👉 **INSTRUCTIONS FOR USER:**"
+    echo "1. Open the file: $EXTERNAL_PROMPT"
+    echo "2. Fill in all [FILL: ...] placeholders with actual details"
+    echo "3. Copy the entire completed prompt"
+    echo "4. Paste into Gemini, GPT-4, or your preferred external LLM"
+    echo "5. Share the response back with me for implementation"
+    echo ""
+    echo "✨ **This structured approach maximizes collaboration effectiveness!**"
+    
+    # Add to main report
+    echo "" >> $LOOP_REPORT
+    echo "### 🎯 COPY-PASTE PROMPT READY" >> $LOOP_REPORT
+    echo "**File Generated:** $EXTERNAL_PROMPT" >> $LOOP_REPORT
+    echo "**Instructions:** Fill placeholders, copy entire prompt, paste to external LLM" >> $LOOP_REPORT
+    echo "**Status:** Ready for user action" >> $LOOP_REPORT
+}
+```
+
+## Phase 4: Escalation Execution
+
+### Collaboration Initiation
+
+When escalation triggers are met:
+
+1. **Finalize collaboration package** with all context
+2. **Select appropriate external collaborator** based on issue type
+3. **Initiate collaboration request** with structured information
+4. **Monitor collaboration progress** and integrate responses
+5. **Document solution and learnings** for future reference
+
+### Collaboration Management
+
+```bash
+# Function to manage active collaboration
+manage_collaboration() {
+    local collaborator="$1"
+    local request_id="$2"
+    
+    echo "=== ACTIVE COLLABORATION ===" >> $LOOP_REPORT
+    echo "Collaboration Started: $(date)" >> $LOOP_REPORT
+    echo "Collaborator: $collaborator" >> $LOOP_REPORT
+    echo "Request ID: $request_id" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Collaboration Tracking:" >> $LOOP_REPORT
+    echo "- **Request Sent:** $(date)" >> $LOOP_REPORT
+    echo "- **Information Package:** Complete" >> $LOOP_REPORT
+    echo "- **Response Expected:** [Timeline]" >> $LOOP_REPORT
+    echo "- **Status:** Active" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Response Integration Plan:" >> $LOOP_REPORT
+    echo "- [ ] **Validate suggested solution** against our constraints" >> $LOOP_REPORT
+    echo "- [ ] **Test proposed approach** in safe environment" >> $LOOP_REPORT
+    echo "- [ ] **Document new learnings** from collaboration" >> $LOOP_REPORT
+    echo "- [ ] **Update internal knowledge** for future similar issues" >> $LOOP_REPORT
+    echo "- [ ] **Close collaboration** when issue resolved" >> $LOOP_REPORT
+}
+```
+
+## Phase 5: Learning Integration
+
+### Solution Documentation
+
+When collaboration yields results:
+
+```bash
+document_solution() {
+    local solution_approach="$1"
+    local collaborator="$2"
+    
+    echo "" >> $LOOP_REPORT
+    echo "=== SOLUTION DOCUMENTATION ===" >> $LOOP_REPORT
+    echo "Solution Found: $(date)" >> $LOOP_REPORT
+    echo "Collaborator: $collaborator" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Solution Summary:" >> $LOOP_REPORT
+    echo "**Approach:** $solution_approach" >> $LOOP_REPORT
+    echo "**Key Insight:** [What made this solution work]" >> $LOOP_REPORT
+    echo "**Why Previous Attempts Failed:** [Root cause analysis]" >> $LOOP_REPORT
+    echo "**Implementation Steps:** [How solution was applied]" >> $LOOP_REPORT
+    echo "**Validation Results:** [How success was verified]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Knowledge Integration:" >> $LOOP_REPORT
+    echo "**New Understanding:** [What we learned about this type of problem]" >> $LOOP_REPORT
+    echo "**Pattern Recognition:** [How to identify similar issues faster]" >> $LOOP_REPORT
+    echo "**Prevention Strategy:** [How to avoid this issue in future]" >> $LOOP_REPORT
+    echo "**Collaboration Value:** [What external perspective provided]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Future Reference:" >> $LOOP_REPORT
+    echo "**Issue Type:** [Classification for future lookup]" >> $LOOP_REPORT
+    echo "**Solution Pattern:** [Reusable approach]" >> $LOOP_REPORT
+    echo "**Recommended Collaborator:** [For similar future issues]" >> $LOOP_REPORT
+    echo "**Documentation Updates:** [Changes to make to prevent recurrence]" >> $LOOP_REPORT
+}
+```
+
+### Loop Prevention Learning
+
+Extract patterns to prevent future loops:
+
+```bash
+extract_loop_patterns() {
+    echo "" >> $LOOP_REPORT
+    echo "=== LOOP PREVENTION ANALYSIS ===" >> $LOOP_REPORT
+    echo "Analysis Date: $(date)" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Loop Indicators Observed:" >> $LOOP_REPORT
+    echo "- **Trigger Point:** [What should have prompted earlier escalation]" >> $LOOP_REPORT
+    echo "- **Repetition Pattern:** [How approaches were repeating]" >> $LOOP_REPORT
+    echo "- **Knowledge Boundary:** [Where internal expertise reached limits]" >> $LOOP_REPORT
+    echo "- **Time Investment:** [Total time spent before escalation]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Optimization Opportunities:" >> $LOOP_REPORT
+    echo "- **Earlier Escalation:** [When should we have escalated sooner]" >> $LOOP_REPORT
+    echo "- **Better Classification:** [How to categorize similar issues faster]" >> $LOOP_REPORT
+    echo "- **Improved Tracking:** [How to better monitor solution attempts]" >> $LOOP_REPORT
+    echo "- **Knowledge Gaps:** [Areas to improve internal expertise]" >> $LOOP_REPORT
+    echo "" >> $LOOP_REPORT
+    
+    echo "### Prevention Recommendations:" >> $LOOP_REPORT
+    echo "- **Escalation Triggers:** [Refined triggers for this issue type]" >> $LOOP_REPORT
+    echo "- **Early Warning Signs:** [Indicators to watch for]" >> $LOOP_REPORT
+    echo "- **Documentation Improvements:** [What to add to prevent recurrence]" >> $LOOP_REPORT
+    echo "- **Process Enhancements:** [How to handle similar issues better]" >> $LOOP_REPORT
+}
+```
+
+## Integration Points
+
+### Variables Exported for Other Tools
+
+```bash
+# Core loop detection variables
+export ATTEMPT_COUNT=[number of solution attempts]
+export TIME_INVESTED=[minutes spent on issue]
+export ESCALATION_TRIGGERED=[true/false]
+export COLLABORATOR_SELECTED=[external agent chosen]
+export SOLUTION_FOUND=[true/false]
+
+# Issue classification variables  
+export ISSUE_TYPE=[implementation/architecture/platform/performance/compatibility]
+export KNOWLEDGE_DOMAIN=[specialized area if applicable]
+export COMPLEXITY_LEVEL=[low/medium/high]
+
+# Collaboration variables
+export COLLABORATION_PACKAGE_PATH=[path to information package]
+export COLLABORATOR_RESPONSE=[summary of external input]
+export SOLUTION_APPROACH=[final working solution]
+
+# Learning variables
+export LOOP_PATTERNS=[patterns that led to loops]
+export PREVENTION_STRATEGIES=[how to avoid similar loops]
+export KNOWLEDGE_GAPS=[areas for improvement]
+```
+
+### Integration with Other BMAD Tools
+
+- **Triggers create-remediation-story.md** when solution creates new tasks
+- **Updates reality-audit-comprehensive.md** with solution validation
+- **Feeds into build-context-analysis.md** for future similar issues
+- **Provides data for quality framework improvements**
+
+---
+
+## Summary
+
+This comprehensive loop detection and escalation framework prevents agents from wasting time and context on repetitive unsuccessful approaches. It combines systematic tracking, automatic trigger detection, structured collaboration preparation, and learning integration to ensure efficient problem-solving through external expertise when needed.
+
+**Key Features:**
+- **Systematic attempt tracking** with detailed outcomes and learnings
+- **Automatic loop detection** based on multiple trigger conditions
+- **Structured collaboration preparation** for optimal external engagement
+- **Intelligent collaborator selection** based on issue classification
+- **Solution documentation and learning integration** for continuous improvement
+- **Prevention pattern extraction** to avoid future similar loops
+
+**Benefits:**
+- **Prevents context window exhaustion** from repetitive debugging
+- **Enables efficient external collaboration** through structured requests
+- **Preserves learning and insights** for future similar issues
+- **Reduces time investment** in unproductive solution approaches
+- **Improves overall problem-solving efficiency** through systematic escalation
+==================== END: .bmad-core/tasks/loop-detection-escalation.md ====================
+
 ==================== START: .bmad-core/checklists/story-dod-checklist.md ====================
 # Story Definition of Done (DoD) Checklist
 
@@ -3816,6 +5017,406 @@ After review:
 2. If unchecked items remain: Keep status as "Review" for dev to address
 3. Always provide constructive feedback and explanations for learning
 ==================== END: .bmad-core/tasks/review-story.md ====================
+
+==================== START: .bmad-core/tasks/create-remediation-story.md ====================
+# Create Remediation Story Task
+
+## Task Overview
+
+Generate structured remediation stories for developers to systematically address issues identified during QA audits, reality checks, and validation failures while preventing regression and technical debt introduction.
+
+## Context
+
+When QA agents identify simulation patterns, build failures, or implementation issues, developers need clear, actionable guidance to remediate problems without introducing new issues. This task creates systematic fix-stories that maintain development velocity while ensuring quality.
+
+## Remediation Story Generation Protocol
+
+### Phase 1: Issue Assessment and Classification with Regression Analysis
+
+```bash
+echo "=== REMEDIATION STORY GENERATION WITH REGRESSION PREVENTION ==="
+echo "Assessment Date: $(date)"
+echo "QA Agent: [Agent Name]"
+echo "Original Story: [Story Reference]"
+echo ""
+
+# Enhanced issue classification including regression risks
+COMPOSITE_REALITY_SCORE=${REALITY_SCORE:-0}
+REGRESSION_PREVENTION_SCORE=${REGRESSION_PREVENTION_SCORE:-100}
+TECHNICAL_DEBT_SCORE=${TECHNICAL_DEBT_SCORE:-100}
+
+echo "Quality Scores:"
+echo "- Composite Reality Score: $COMPOSITE_REALITY_SCORE/100"
+echo "- Regression Prevention Score: $REGRESSION_PREVENTION_SCORE/100" 
+echo "- Technical Debt Score: $TECHNICAL_DEBT_SCORE/100"
+echo ""
+
+# Determine story type based on comprehensive audit findings
+if [[ "$COMPOSITE_REALITY_SCORE" -lt 70 ]] || [[ "$SIMULATION_PATTERNS" -gt 5 ]]; then
+    STORY_TYPE="simulation-remediation"
+    PRIORITY="high"
+    URGENCY="critical"
+elif [[ "$REGRESSION_PREVENTION_SCORE" -lt 80 ]]; then
+    STORY_TYPE="regression-prevention"
+    PRIORITY="high"
+    URGENCY="high"
+elif [[ "$TECHNICAL_DEBT_SCORE" -lt 70 ]]; then
+    STORY_TYPE="technical-debt-prevention"
+    PRIORITY="high"
+    URGENCY="high"
+elif [[ "$BUILD_EXIT_CODE" -ne 0 ]] || [[ "$ERROR_COUNT" -gt 0 ]]; then
+    STORY_TYPE="build-fix"
+    PRIORITY="high" 
+    URGENCY="high"
+elif [[ "$RUNTIME_EXIT_CODE" -ne 0 ]] && [[ "$RUNTIME_EXIT_CODE" -ne 124 ]]; then
+    STORY_TYPE="runtime-fix"
+    PRIORITY="high"
+    URGENCY="high"
+else
+    STORY_TYPE="quality-improvement"
+    PRIORITY="medium"
+    URGENCY="medium"
+fi
+
+echo "Remediation Type: $STORY_TYPE"
+echo "Priority: $PRIORITY"
+echo "Urgency: $URGENCY"
+```
+
+### Phase 2: Generate Story Sequence Number
+
+```bash
+# Get next available story number
+STORY_DIR="docs/stories"
+LATEST_STORY=$(ls $STORY_DIR/*.md 2>/dev/null | grep -E '[0-9]+\.[0-9]+' | sort -V | tail -1)
+
+if [[ -n "$LATEST_STORY" ]]; then
+    LATEST_NUM=$(basename "$LATEST_STORY" .md | cut -d'.' -f1)
+    NEXT_MAJOR=$((LATEST_NUM + 1))
+else
+    NEXT_MAJOR=1
+fi
+
+# Generate remediation story number
+REMEDIATION_STORY="${NEXT_MAJOR}.1.remediation-${STORY_TYPE}.md"
+STORY_PATH="$STORY_DIR/$REMEDIATION_STORY"
+
+echo "Generated Story: $REMEDIATION_STORY"
+```
+
+### Phase 3: Create Structured Remediation Story
+
+```bash
+cat > "$STORY_PATH" << 'EOF'
+# Story [STORY_NUMBER]: [STORY_TYPE] Remediation
+
+## Story
+
+**As a** developer working on {{project_name}}
+**I need to** systematically remediate [ISSUE_CATEGORY] identified during QA audit
+**So that** the implementation meets quality standards and reality requirements
+
+## Acceptance Criteria
+
+### Primary Remediation Requirements
+- [ ] **Build Success:** Clean compilation with zero errors in Release mode
+- [ ] **Runtime Validation:** Application starts and runs without crashes
+- [ ] **Reality Score Improvement:** Achieve minimum 80/100 composite reality score
+- [ ] **Simulation Pattern Elimination:** Remove all flagged simulation patterns
+- [ ] **Regression Prevention:** Maintain all existing functionality (score ≥ 80/100)
+- [ ] **Technical Debt Prevention:** Avoid architecture violations (score ≥ 70/100)
+
+### Specific Fix Requirements
+[SPECIFIC_FIXES_PLACEHOLDER]
+
+### Enhanced Quality Gates
+- [ ] **All Tests Pass:** Unit tests, integration tests, and regression tests complete successfully
+- [ ] **Regression Testing:** All existing functionality continues to work as before
+- [ ] **Story Pattern Compliance:** Follow established patterns from previous successful implementations
+- [ ] **Architectural Consistency:** Maintain alignment with established architectural decisions
+- [ ] **Performance Validation:** No performance degradation from remediation changes
+- [ ] **Integration Preservation:** All external integrations continue functioning
+- [ ] **Documentation Updates:** Update relevant documentation affected by changes
+- [ ] **Cross-Platform Verification:** Changes work on both Windows and Linux
+
+## Dev Notes
+
+### QA Audit Reference
+- **Original Audit Date:** [AUDIT_DATE]
+- **Reality Score:** [REALITY_SCORE]/100
+- **Primary Issues:** [ISSUE_SUMMARY]
+- **Audit Report:** [AUDIT_REPORT_PATH]
+
+### Remediation Strategy
+[REMEDIATION_STRATEGY_PLACEHOLDER]
+
+### Implementation Guidelines with Regression Prevention
+- **Zero Tolerance:** No simulation patterns (Random.NextDouble(), Task.FromResult(), NotImplementedException)
+- **Real Implementation:** All methods must contain actual business logic
+- **Build Quality:** Clean Release mode compilation required
+- **Regression Safety:** Always validate existing functionality before and after changes
+- **Pattern Consistency:** Follow implementation patterns established in previous successful stories
+- **Architectural Alignment:** Ensure changes align with existing architectural decisions
+- **Integration Preservation:** Test all integration points to prevent breakage
+- **Technical Debt Avoidance:** Maintain or improve code quality, don't introduce shortcuts
+
+### Regression Prevention Checklist
+- [ ] **Review Previous Stories:** Study successful implementations for established patterns
+- [ ] **Identify Integration Points:** Map all external dependencies that could be affected  
+- [ ] **Test Existing Functionality:** Validate current behavior before making changes
+- [ ] **Incremental Changes:** Make small, testable changes rather than large refactors
+- [ ] **Validation at Each Step:** Test functionality after each significant change
+- [ ] **Architecture Review:** Ensure changes follow established design patterns
+- [ ] **Performance Monitoring:** Monitor for any performance impacts during changes
+- **Test Coverage:** Comprehensive tests for all remediated functionality
+
+## Testing
+
+### Pre-Remediation Validation
+- [ ] **Document Current State:** Capture baseline metrics and current behavior
+- [ ] **Identify Test Coverage:** Determine which tests need updates post-remediation
+- [ ] **Performance Baseline:** Establish performance metrics before changes
+
+### Post-Remediation Validation  
+- [ ] **Reality Audit:** Execute reality-audit-comprehensive to verify improvements
+- [ ] **Build Validation:** Confirm clean compilation and zero errors
+- [ ] **Runtime Testing:** Verify application startup and core functionality
+- [ ] **Performance Testing:** Ensure no degradation from baseline
+- [ ] **Integration Testing:** Validate system-wide functionality remains intact
+
+## Tasks
+
+### Phase 1: Issue Analysis and Planning
+- [ ] **Review QA Audit Report:** Analyze specific issues identified in audit
+- [ ] **Categorize Problems:** Group related issues for systematic remediation
+- [ ] **Plan Remediation Sequence:** Order fixes to minimize disruption
+- [ ] **Identify Dependencies:** Determine which fixes depend on others
+
+### Phase 2: Simulation Pattern Remediation
+[SIMULATION_TASKS_PLACEHOLDER]
+
+### Phase 3: Build and Runtime Fixes
+[BUILD_RUNTIME_TASKS_PLACEHOLDER]
+
+### Phase 4: Quality and Performance Validation
+- [ ] **Execute Full Test Suite:** Run all automated tests to verify functionality
+- [ ] **Performance Regression Testing:** Ensure no performance degradation
+- [ ] **Cross-Platform Testing:** Validate fixes work on Windows and Linux
+- [ ] **Documentation Updates:** Update any affected documentation
+
+### Phase 5: Final Validation
+- [ ] **Reality Audit Re-execution:** Achieve 80+ reality score
+- [ ] **Build Verification:** Clean Release mode compilation
+- [ ] **Runtime Verification:** Successful application startup and operation
+- [ ] **Regression Testing:** All existing functionality preserved
+
+## File List
+[Will be populated by Dev Agent during implementation]
+
+## Dev Agent Record
+
+### Agent Model Used
+[Will be populated by Dev Agent]
+
+### Debug Log References
+[Will be populated by Dev Agent during troubleshooting]
+
+### Completion Notes
+[Will be populated by Dev Agent upon completion]
+
+### Change Log
+[Will be populated by Dev Agent with specific changes made]
+
+## QA Results
+[Will be populated by QA Agent after remediation completion]
+
+## Status
+Draft
+
+---
+*Story generated automatically by QA Agent on [GENERATION_DATE]*
+*Based on audit report: [AUDIT_REPORT_REFERENCE]*
+EOF
+```
+
+### Phase 4: Populate Story with Specific Issue Details
+
+```bash
+# Replace placeholders with actual audit findings
+sed -i "s/\[STORY_NUMBER\]/${NEXT_MAJOR}.1/g" "$STORY_PATH"
+sed -i "s/\[STORY_TYPE\]/${STORY_TYPE}/g" "$STORY_PATH"
+sed -i "s/\[ISSUE_CATEGORY\]/${STORY_TYPE} issues/g" "$STORY_PATH"
+sed -i "s/\[AUDIT_DATE\]/$(date)/g" "$STORY_PATH"
+sed -i "s/\[REALITY_SCORE\]/${REALITY_SCORE:-N/A}/g" "$STORY_PATH"
+sed -i "s/\[GENERATION_DATE\]/$(date)/g" "$STORY_PATH"
+
+# Generate specific fixes based on comprehensive audit findings
+SPECIFIC_FIXES=""
+SIMULATION_TASKS=""
+BUILD_RUNTIME_TASKS=""
+REGRESSION_PREVENTION_TASKS=""
+TECHNICAL_DEBT_PREVENTION_TASKS=""
+
+# Add simulation pattern fixes
+if [[ ${RANDOM_COUNT:-0} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Replace Random Data Generation:** Eliminate $RANDOM_COUNT instances of Random.NextDouble() with real data sources"
+    SIMULATION_TASKS+="\n- [ ] **Replace Random.NextDouble() Instances:** Convert $RANDOM_COUNT random data generations to real business logic"
+fi
+
+if [[ ${TASK_MOCK_COUNT:-0} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Replace Mock Async Operations:** Convert $TASK_MOCK_COUNT Task.FromResult() calls to real async implementations"
+    SIMULATION_TASKS+="\n- [ ] **Convert Task.FromResult() Calls:** Replace $TASK_MOCK_COUNT mock async operations with real async logic"
+fi
+
+if [[ ${NOT_IMPL_COUNT:-0} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Implement Missing Methods:** Complete $NOT_IMPL_COUNT methods throwing NotImplementedException"
+    SIMULATION_TASKS+="\n- [ ] **Complete Unimplemented Methods:** Implement $NOT_IMPL_COUNT methods with real business logic"
+fi
+
+if [[ ${TOTAL_SIM_COUNT:-0} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Replace Simulation Methods:** Convert $TOTAL_SIM_COUNT SimulateX()/MockX()/FakeX() methods to real implementations"
+    SIMULATION_TASKS+="\n- [ ] **Convert Simulation Methods:** Replace $TOTAL_SIM_COUNT simulation methods with actual functionality"
+fi
+
+# Add build/runtime fixes
+if [[ ${BUILD_EXIT_CODE:-0} -ne 0 ]] || [[ ${ERROR_COUNT:-1} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Fix Build Errors:** Resolve all compilation errors preventing clean Release build"
+    BUILD_RUNTIME_TASKS+="\n- [ ] **Resolve Compilation Errors:** Fix all build errors identified in audit"
+fi
+
+if [[ ${RUNTIME_EXIT_CODE:-0} -ne 0 ]] && [[ ${RUNTIME_EXIT_CODE:-0} -ne 124 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Fix Runtime Issues:** Resolve application startup and execution problems"
+    BUILD_RUNTIME_TASKS+="\n- [ ] **Resolve Runtime Failures:** Fix issues preventing application startup"
+fi
+
+# Add regression prevention fixes
+if [[ ${REGRESSION_PREVENTION_SCORE:-100} -lt 80 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Regression Prevention:** Improve regression prevention score to ≥80/100"
+    REGRESSION_PREVENTION_TASKS+="\n- [ ] **Review Previous Stories:** Study successful implementations for established patterns"
+    REGRESSION_PREVENTION_TASKS+="\n- [ ] **Validate Integration Points:** Test all external dependencies and integration points"
+    REGRESSION_PREVENTION_TASKS+="\n- [ ] **Pattern Consistency Check:** Ensure implementation follows established architectural patterns"
+    REGRESSION_PREVENTION_TASKS+="\n- [ ] **Functional Regression Testing:** Verify all existing functionality continues to work"
+fi
+
+if [[ ${PATTERN_CONSISTENCY_ISSUES:-0} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Fix Pattern Inconsistencies:** Address $PATTERN_CONSISTENCY_ISSUES pattern compliance issues"
+    REGRESSION_PREVENTION_TASKS+="\n- [ ] **Align with Established Patterns:** Modify implementation to follow successful story patterns"
+fi
+
+if [[ ${ARCHITECTURAL_VIOLATIONS:-0} -gt 0 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Fix Architectural Violations:** Resolve $ARCHITECTURAL_VIOLATIONS architectural consistency issues"
+    REGRESSION_PREVENTION_TASKS+="\n- [ ] **Architectural Compliance:** Align changes with established architectural decisions"
+fi
+
+# Add technical debt prevention fixes
+if [[ ${TECHNICAL_DEBT_SCORE:-100} -lt 70 ]]; then
+    SPECIFIC_FIXES+="\n- [ ] **Technical Debt Prevention:** Improve technical debt score to ≥70/100"
+    TECHNICAL_DEBT_PREVENTION_TASKS+="\n- [ ] **Code Quality Improvement:** Refactor code to meet established quality standards"
+    TECHNICAL_DEBT_PREVENTION_TASKS+="\n- [ ] **Complexity Reduction:** Simplify overly complex implementations"
+    TECHNICAL_DEBT_PREVENTION_TASKS+="\n- [ ] **Duplication Elimination:** Remove code duplication and consolidate similar logic"
+    TECHNICAL_DEBT_PREVENTION_TASKS+="\n- [ ] **Maintainability Enhancement:** Improve code readability and maintainability"
+fi
+
+# Generate comprehensive remediation strategy based on findings
+REMEDIATION_STRATEGY="Based on the comprehensive QA audit findings, this remediation follows a systematic regression-safe approach:\n\n"
+REMEDIATION_STRATEGY+="**Quality Assessment:**\n"
+REMEDIATION_STRATEGY+="- Composite Reality Score: ${COMPOSITE_REALITY_SCORE:-N/A}/100\n"
+REMEDIATION_STRATEGY+="- Regression Prevention Score: ${REGRESSION_PREVENTION_SCORE:-N/A}/100\n"
+REMEDIATION_STRATEGY+="- Technical Debt Score: ${TECHNICAL_DEBT_SCORE:-N/A}/100\n\n"
+
+REMEDIATION_STRATEGY+="**Issue Analysis:**\n"
+REMEDIATION_STRATEGY+="1. **Simulation Patterns:** $((${RANDOM_COUNT:-0} + ${TASK_MOCK_COUNT:-0} + ${NOT_IMPL_COUNT:-0} + ${TOTAL_SIM_COUNT:-0})) simulation patterns identified\n"
+REMEDIATION_STRATEGY+="2. **Infrastructure Issues:** Build status: $(if [[ ${BUILD_EXIT_CODE:-0} -eq 0 ]] && [[ ${ERROR_COUNT:-1} -eq 0 ]]; then echo "✅ PASS"; else echo "❌ FAIL"; fi), Runtime status: $(if [[ ${RUNTIME_EXIT_CODE:-0} -eq 0 ]] || [[ ${RUNTIME_EXIT_CODE:-0} -eq 124 ]]; then echo "✅ PASS"; else echo "❌ FAIL"; fi)\n"
+REMEDIATION_STRATEGY+="3. **Regression Risks:** Pattern inconsistencies: ${PATTERN_CONSISTENCY_ISSUES:-0}, Architectural violations: ${ARCHITECTURAL_VIOLATIONS:-0}\n"
+REMEDIATION_STRATEGY+="4. **Technical Debt Risks:** Code complexity and maintainability issues identified\n\n"
+
+REMEDIATION_STRATEGY+="**Implementation Approach:**\n"
+REMEDIATION_STRATEGY+="1. **Pre-Implementation:** Review previous successful stories for established patterns\n"
+REMEDIATION_STRATEGY+="2. **Priority Order:** Address simulation patterns → regression risks → build issues → technical debt → runtime problems\n"
+REMEDIATION_STRATEGY+="3. **Validation Strategy:** Continuous regression testing during remediation to prevent functionality loss\n"
+REMEDIATION_STRATEGY+="4. **Pattern Compliance:** Ensure all changes follow established architectural decisions and implementation patterns\n"
+REMEDIATION_STRATEGY+="5. **Success Criteria:** Achieve 80+ composite reality score with regression prevention ≥80 and technical debt prevention ≥70"
+
+# Update story file with generated content
+sed -i "s|\[SPECIFIC_FIXES_PLACEHOLDER\]|$SPECIFIC_FIXES|g" "$STORY_PATH"
+sed -i "s|\[SIMULATION_TASKS_PLACEHOLDER\]|$SIMULATION_TASKS|g" "$STORY_PATH"
+sed -i "s|\[BUILD_RUNTIME_TASKS_PLACEHOLDER\]|$BUILD_RUNTIME_TASKS|g" "$STORY_PATH"
+sed -i "s|\[REGRESSION_PREVENTION_TASKS_PLACEHOLDER\]|$REGRESSION_PREVENTION_TASKS|g" "$STORY_PATH"
+sed -i "s|\[TECHNICAL_DEBT_PREVENTION_TASKS_PLACEHOLDER\]|$TECHNICAL_DEBT_PREVENTION_TASKS|g" "$STORY_PATH"
+sed -i "s|\[REMEDIATION_STRATEGY_PLACEHOLDER\]|$REMEDIATION_STRATEGY|g" "$STORY_PATH"
+
+# Add issue summary and audit report reference if available
+if [[ -n "${AUDIT_REPORT:-}" ]]; then
+    ISSUE_SUMMARY="Reality Score: ${REALITY_SCORE:-N/A}/100, Simulation Patterns: $((${RANDOM_COUNT:-0} + ${TASK_MOCK_COUNT:-0} + ${NOT_IMPL_COUNT:-0} + ${TOTAL_SIM_COUNT:-0})), Build Issues: $(if [[ ${BUILD_EXIT_CODE:-0} -eq 0 ]]; then echo "None"; else echo "Present"; fi)"
+    sed -i "s|\[ISSUE_SUMMARY\]|$ISSUE_SUMMARY|g" "$STORY_PATH"
+    sed -i "s|\[AUDIT_REPORT_PATH\]|$AUDIT_REPORT|g" "$STORY_PATH"
+    sed -i "s|\[AUDIT_REPORT_REFERENCE\]|$AUDIT_REPORT|g" "$STORY_PATH"
+fi
+
+echo ""
+echo "✅ Remediation story created: $STORY_PATH"
+echo "📋 Story type: $STORY_TYPE"
+echo "🎯 Priority: $PRIORITY"
+echo "⚡ Urgency: $URGENCY"
+```
+
+## Integration with QA Workflow
+
+### Auto-Generation Triggers
+
+```bash
+# Add to reality-audit-comprehensive.md after final assessment
+if [[ $REALITY_SCORE -lt 80 ]] || [[ $BUILD_EXIT_CODE -ne 0 ]] || [[ $RUNTIME_EXIT_CODE -ne 0 && $RUNTIME_EXIT_CODE -ne 124 ]]; then
+    echo ""
+    echo "=== GENERATING REMEDIATION STORY ==="
+    # Execute create-remediation-story task
+    source .bmad-core/tasks/create-remediation-story.md
+    
+    echo ""
+    echo "📝 **REMEDIATION STORY CREATED:** $REMEDIATION_STORY"
+    echo "👩‍💻 **NEXT ACTION:** Assign to developer for systematic remediation"
+    echo "🔄 **PROCESS:** Developer implements → QA re-audits → Cycle until 80+ score achieved"
+fi
+```
+
+### Quality Gate Integration
+
+```bash
+# Add to story completion validation
+echo "=== POST-REMEDIATION QUALITY GATE ==="
+echo "Before marking remediation complete:"
+echo "1. Execute reality-audit-comprehensive to verify improvements"
+echo "2. Confirm reality score >= 80/100"
+echo "3. Validate build success (Release mode, zero errors)"
+echo "4. Verify runtime success (clean startup)"
+echo "5. Run full regression test suite"
+echo "6. Update original story status if remediation successful"
+```
+
+## Usage Instructions for QA Agents
+
+### When to Generate Remediation Stories
+- **Reality Score < 80:** Significant simulation patterns detected
+- **Build Failures:** Compilation errors or warnings in Release mode
+- **Runtime Issues:** Application startup or execution failures
+- **Test Failures:** Significant test suite failures
+- **Performance Degradation:** Measurable performance regression
+
+### Story Naming Convention
+- `[X].1.remediation-simulation.md` - For simulation pattern fixes
+- `[X].1.remediation-build-fix.md` - For build/compilation issues
+- `[X].1.remediation-runtime-fix.md` - For runtime/execution issues
+- `[X].1.remediation-quality-improvement.md` - For general quality issues
+
+### Follow-up Process
+1. **Generate remediation story** using this task
+2. **Assign to developer** for systematic implementation
+3. **Track progress** through story checkbox completion
+4. **Re-audit after completion** to verify improvements
+5. **Close loop** by updating original story with remediation results
+
+This creates a complete feedback loop ensuring that QA findings result in systematic, trackable remediation rather than ad-hoc fixes.
+==================== END: .bmad-core/tasks/create-remediation-story.md ====================
 
 ==================== START: .bmad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
