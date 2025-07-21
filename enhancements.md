@@ -6,7 +6,7 @@
 
 ## 🎯 What's New
 
-### ✨ Six Game-Changing Features
+### ✨ Seven Game-Changing Features
 
 | Feature | Purpose | Key Innovation |
 |---------|---------|----------------|
@@ -16,6 +16,7 @@
 | **🔄 Auto-Remediation Workflow** | Eliminate manual QA handoffs | Automatic fix story generation with regression safety |
 | **🔗 Loop Detection & Escalation** | Break debugging cycles automatically | Copy-paste prompts for external LLM collaboration |
 | **📤 Auto Git Push** | Streamline perfect completions | Intelligent push with comprehensive criteria validation |
+| **📋 Dual-Track Progress** | Ensure story file updates during development | Automatic story checkbox and file list updates with validation gates |
 
 ---
 
@@ -23,7 +24,7 @@
 
 ### 💻 Developer Agent (James)
 ```bash
-*develop-story        # Systematic story implementation with auto-progress tracking
+*develop-story        # Systematic story implementation with dual-track progress updates
 *reality-audit        # Comprehensive quality validation with regression analysis  
 *build-context        # Pre-fix investigation with git history and risk assessment
 *escalate            # External AI collaboration when stuck in loops
@@ -58,6 +59,11 @@
 - Intelligent commit messages with quality metrics
 - `*Push2Git` available for manual override when needed
 
+**📋 Dual-Track Progress (During Development)**
+- Automatic story file checkbox updates `[x]` after each task completion
+- Incremental File List updates with new/modified/deleted files
+- Validation gates prevent proceeding without story file updates
+
 ---
 
 ## 🎯 Quality Scoring System
@@ -84,7 +90,7 @@
 ```bash
 *develop-story
 ```
-*Systematic implementation with automatic task completion tracking*
+*Systematic implementation with dual-track progress updates (story file + TodoWrite)*
 
 ### 2. **Validate Quality** 
 ```bash
@@ -126,7 +132,7 @@
 ## 📁 Implementation Details
 
 ### Core Framework Files
-- `bmad-core/agents/dev.md` - Enhanced developer agent with reality enforcement
+- `bmad-core/agents/dev.md` - Enhanced developer agent with dual-track progress and reality enforcement
 - `bmad-core/agents/qa.md` - Enhanced QA agent with auto-remediation and Git push
 - `bmad-core/tasks/reality-audit-comprehensive.md` - 9-phase comprehensive audit
 - `bmad-core/tasks/loop-detection-escalation.md` - External collaboration framework
