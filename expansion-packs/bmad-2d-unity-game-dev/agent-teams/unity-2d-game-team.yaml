@@ -6,6 +6,7 @@ agents:
   - analyst
   - bmad-orchestrator
   - game-designer
+  - game-architect
   - game-developer
   - game-sm
 workflows:
