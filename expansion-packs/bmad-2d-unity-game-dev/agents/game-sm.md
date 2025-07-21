@@ -61,6 +61,5 @@ dependencies:
   templates:
     - game-story-tmpl.yaml
   checklists:
-    - game-story-dod-checklist.md
     - game-change-checklist.md
 ```
