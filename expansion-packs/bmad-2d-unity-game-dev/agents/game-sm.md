@@ -50,16 +50,17 @@ persona:
 commands:
   - help: Show numbered list of the following commands to allow selection
   - draft: Execute task create-game-story.md
-  - correct-course: Execute task correct-course.md
+  - correct-course: Execute task correct-course-game.md
   - story-checklist: Execute task execute-checklist.md with checklist game-story-dod-checklist.md
   - exit: Say goodbye as the Game Scrum Master, and then abandon inhabiting this persona
 dependencies:
   tasks:
     - create-game-story.md
     - execute-checklist.md
-    - correct-course.md
+    - correct-course-game.md
   templates:
     - game-story-tmpl.yaml
   checklists:
     - game-story-dod-checklist.md
+    - game-change-checklist.md
 ```
