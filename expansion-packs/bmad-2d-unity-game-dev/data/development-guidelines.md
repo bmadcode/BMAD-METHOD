@@ -9,15 +9,18 @@ This document establishes coding standards, architectural patterns, and developm
 ### Naming Conventions
 
 **Classes, Structs, Enums, and Interfaces:**
+
 - PascalCase for types: `PlayerController`, `GameData`, `IInteractable`
 - Prefix interfaces with 'I': `IDamageable`, `IControllable`
 - Descriptive names that indicate purpose: `GameStateManager` not `GSM`
 
 **Methods and Properties:**
+
 - PascalCase for methods and properties: `CalculateScore()`, `CurrentHealth`
 - Descriptive verb phrases for methods: `ActivateShield()` not `shield()`
 
 **Fields and Variables:**
+
 - `private` or `protected` fields: camelCase with an underscore prefix: `_playerHealth`, `_movementSpeed`
 - `public` fields (use sparingly, prefer properties): PascalCase: `PlayerName`
 - `static` fields: PascalCase: `Instance`, `GameVersion`
@@ -26,6 +29,7 @@ This document establishes coding standards, architectural patterns, and developm
 - Boolean variables with is/has/can prefix: `_isAlive`, `_hasKey`, `_canJump`
 
 **Files and Directories:**
+
 - PascalCase for C# script files, matching the primary class name: `PlayerController.cs`
 - PascalCase for Scene files: `MainMenu.unity`, `Level01.unity`
 
@@ -39,7 +43,9 @@ This document establishes coding standards, architectural patterns, and developm
 ## Unity Architecture Patterns
 
 ### Scene Lifecycle Management
+
 **Loading and Transitioning Between Scenes:**
+
 ```csharp
 // SceneLoader.cs - A singleton for managing scene transitions.
 using UnityEngine;
@@ -97,7 +103,9 @@ public class SceneLoader : MonoBehaviour
 ```
 
 ### MonoBehaviour Lifecycle
+
 **Understanding Core MonoBehaviour Events:**
+
 ```csharp
 // Example of a standard MonoBehaviour lifecycle
 using UnityEngine;
@@ -138,7 +146,7 @@ public class PlayerController : MonoBehaviour
     {
         // Handle input and non-physics movement here.
     }
-    
+
     // LATEUPDATE: Called every frame, after all Update functions have been called.
     // Good for camera logic that needs to track a target that moves in Update.
     private void LateUpdate()
@@ -165,6 +173,7 @@ public class PlayerController : MonoBehaviour
 ### Game Object Patterns
 
 **Component-Based Architecture:**
+
 ```csharp
 // Player.cs - The main GameObject class, acts as a container for components.
 using UnityEngine;
@@ -214,6 +223,7 @@ public class PlayerHealth : MonoBehaviour
 ### Data-Driven Design with ScriptableObjects
 
 **Define Data Containers:**
+
 ```csharp
 // EnemyData.cs - A ScriptableObject to hold data for an enemy type.
 using UnityEngine;
@@ -239,7 +249,7 @@ public class Enemy : MonoBehaviour
         _currentHealth = _enemyData.maxHealth;
         GetComponent<SpriteRenderer>().sprite = _enemyData.sprite;
     }
-    
+
     // ... other enemy logic
 }
 ```
@@ -247,6 +257,7 @@ public class Enemy : MonoBehaviour
 ### System Management
 
 **Singleton Managers:**
+
 ```csharp
 // GameManager.cs - A singleton to manage the overall game state.
 using UnityEngine;
@@ -280,6 +291,7 @@ public class GameManager : MonoBehaviour
 ### Object Pooling
 
 **Required for High-Frequency Objects (e.g., bullets, effects):**
+
 ```csharp
 // ObjectPool.cs - A generic object pooling system.
 using UnityEngine;
@@ -325,10 +337,12 @@ public class ObjectPool : MonoBehaviour
 ### Frame Rate Optimization
 
 **Update Loop Optimization:**
+
 - Avoid expensive calls like `GetComponent`, `FindObjectOfType`, or `Instantiate` inside `Update()` or `FixedUpdate()`. Cache references in `Awake()` or `Start()`.
 - Use Coroutines or simple timers for logic that doesn't need to run every single frame.
 
 **Physics Optimization:**
+
 - Adjust the "Physics 2D Settings" in Project Settings, especially the "Layer Collision Matrix", to prevent unnecessary collision checks.
 - Use `Rigidbody2D.Sleep()` for objects that are not moving to save CPU cycles.
 
@@ -339,6 +353,7 @@ public class ObjectPool : MonoBehaviour
 **Input Action Asset:** Create an Input Action Asset (`.inputactions`) to define controls.
 
 **PlayerInput Component:**
+
 - Add the `PlayerInput` component to the player GameObject.
 - Set its "Actions" to the created Input Action Asset.
 - Set "Behavior" to "Invoke Unity Events" to easily hook up methods in the Inspector, or "Send Messages" to use methods like `OnMove`, `OnFire`.
@@ -372,7 +387,9 @@ public class PlayerInputHandler : MonoBehaviour
 ### Graceful Degradation
 
 **Asset Loading Error Handling:**
+
 - When using Addressables or `Resources.Load`, always check if the loaded asset is null before using it.
+
 ```csharp
 // Load a sprite and use a fallback if it fails
 Sprite playerSprite = Resources.Load<Sprite>("Sprites/Player");
@@ -386,8 +403,10 @@ if (playerSprite == null)
 ### Runtime Error Recovery
 
 **Assertions and Logging:**
+
 - Use `Debug.Assert(condition, "Message")` to check for critical conditions that must be true.
 - Use `Debug.LogError("Message")` for fatal errors and `Debug.LogWarning("Message")` for non-critical issues.
+
 ```csharp
 // Example of using an assertion to ensure a component exists.
 private Rigidbody2D _rb;
@@ -404,6 +423,7 @@ void Awake()
 ### Unit Testing (Edit Mode)
 
 **Game Logic Testing:**
+
 ```csharp
 // HealthSystemTests.cs - Example test for a simple health system.
 using NUnit.Framework;
@@ -418,7 +438,7 @@ public class HealthSystemTests
         var gameObject = new GameObject();
         var healthSystem = gameObject.AddComponent<PlayerHealth>();
         // Note: This is a simplified example. You might need to mock dependencies.
-        
+
         // Act
         healthSystem.TakeDamage(20);
 
@@ -432,8 +452,10 @@ public class HealthSystemTests
 ### Integration Testing (Play Mode)
 
 **Scene Testing:**
+
 - Play Mode tests run in a live scene, allowing you to test interactions between multiple components and systems.
 - Use `yield return null;` to wait for the next frame.
+
 ```csharp
 // PlayerJumpTest.cs
 using System.Collections;
@@ -453,7 +475,7 @@ public class PlayerJumpTest
         // Act
         // Simulate pressing the jump button (requires setting up the input system for tests)
         // For simplicity, we'll call a public method here.
-        // player.Jump(); 
+        // player.Jump();
 
         // Wait for a few physics frames
         yield return new WaitForSeconds(0.5f);

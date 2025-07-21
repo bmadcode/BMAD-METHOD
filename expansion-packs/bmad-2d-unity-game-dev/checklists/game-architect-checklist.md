@@ -120,6 +120,23 @@ Ask the user if they want to work through the checklist:
 - [ ] Input system using Unity's new Input System is outlined
 - [ ] UI system using Unity's UI Toolkit or UGUI is determined
 - [ ] Scene management and loading architecture is clear
+- [ ] Gameplay systems architecture covers core game mechanics and player interactions
+- [ ] Component architecture details define MonoBehaviour and ScriptableObject patterns
+- [ ] Physics configuration for Unity 2D is comprehensively defined
+- [ ] State machine architecture covers game states, player states, and entity behaviors
+- [ ] UI component system and data binding patterns are established
+- [ ] UI state management across screens and game states is defined
+- [ ] Data persistence and save system architecture is fully specified
+- [ ] Analytics integration approach is defined (if applicable)
+- [ ] Multiplayer architecture is detailed (if applicable)
+- [ ] Rendering pipeline configuration and optimization strategies are clear
+- [ ] Shader guidelines and performance considerations are documented
+- [ ] Sprite management and optimization strategies are defined
+- [ ] Particle system architecture and performance budgets are established
+- [ ] Audio architecture includes system design and category management
+- [ ] Audio mixing configuration with Unity AudioMixer is detailed
+- [ ] Sound bank management and asset organization is specified
+- [ ] Unity development conventions and best practices are documented
 
 ### 3.3 Data Architecture & Game Balance
 
