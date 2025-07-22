@@ -47,55 +47,35 @@ The goal is informed fixes, not blind error resolution.
 - [ ] **Business Logic Preserved**: Identified functionality that must be maintained
 - [ ] **Change Justification**: Understand why the interface was modified
 
-### Historical Analysis Commands
+### Historical Analysis Process
 
-```bash
-echo "=== BUILD CONTEXT HISTORICAL ANALYSIS ==="
-echo "Analysis Date: $(date)"
-echo "Analyst: [Developer Agent Name]"
-echo ""
+**Execute git history analysis using the following approach:**
 
-# Create tmp directory if it doesn't exist
-mkdir -p tmp
+1. **Create Analysis Report Directory:**
+   - Use Bash tool to create tmp directory: `mkdir -p tmp`
+   - Create report file: `tmp/build-context-$(date).md`
 
-# Create analysis report in tmp folder
-CONTEXT_REPORT="tmp/build-context-$(date +%Y%m%d-%H%M).md"
-echo "# Build Context Analysis Report" > $CONTEXT_REPORT
-echo "Date: $(date)" >> $CONTEXT_REPORT
-echo "" >> $CONTEXT_REPORT
+2. **Recent Commits Analysis:**
+   - Use Bash tool for: `git log --oneline -10`
+   - Document recent commits that might have introduced build issues
 
-echo "=== GIT HISTORY INVESTIGATION ===" | tee -a $CONTEXT_REPORT
+3. **Interface Changes Detection:**
+   - Use Bash tool for: `git log --oneline -20 --grep="interface|API|contract|signature"`
+   - Identify commits that modified interfaces or contracts
 
-# Find recent commits that might have caused build errors
-echo "## Recent Commits Analysis" >> $CONTEXT_REPORT
-echo "Recent commits (last 10):" | tee -a $CONTEXT_REPORT
-git log --oneline -10 | tee -a $CONTEXT_REPORT
+4. **File Change Frequency Analysis:**
+   - Use Bash tool for: `git log --since="30 days ago" --name-only --pretty=format:`
+   - Find files with frequent recent modifications
 
-echo "" >> $CONTEXT_REPORT
-echo "## Interface Changes Detection" >> $CONTEXT_REPORT
+5. **Build Error Source Analysis:**
+   - Examine source files for recent changes
+   - Focus on files most likely causing build errors
 
-# Look for interface/API changes in recent commits
-echo "Interface changes in recent commits:" | tee -a $CONTEXT_REPORT
-git log --oneline -20 --grep="interface\|API\|contract\|signature" | tee -a $CONTEXT_REPORT
-
-# Find files with frequent recent changes
-echo "" >> $CONTEXT_REPORT
-echo "## Frequently Modified Files" >> $CONTEXT_REPORT
-echo "Files with most changes in last 30 days:" | tee -a $CONTEXT_REPORT
-git log --since="30 days ago" --name-only --pretty=format: | sort | uniq -c | sort -rn | head -20 | tee -a $CONTEXT_REPORT
-
-# Analyze specific error-causing files
-echo "" >> $CONTEXT_REPORT
-echo "## Build Error File Analysis" >> $CONTEXT_REPORT
-for file in $(find . -name "*.cs" -o -name "*.java" -o -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.rs" -o -name "*.go" | head -10); do
-    if [ -f "$file" ]; then
-        echo "### File: $file" >> $CONTEXT_REPORT
-        echo "Last 5 commits affecting this file:" >> $CONTEXT_REPORT
-        git log --oneline -5 -- "$file" >> $CONTEXT_REPORT
-        echo "" >> $CONTEXT_REPORT
-    fi
-done
-```
+**Key Git Investigation Commands to Execute:**
+- Recent commit analysis
+- Interface change detection  
+- Frequently modified file identification
+- Build error source file examination
 
 ### Documentation Required
 
@@ -139,66 +119,34 @@ Document findings in the following format:
 - [ ] **Behavior Patterns Identified**: Understand consistent usage patterns
 - [ ] **Identify Usage Patterns**: Find how components are actually used
 
-### Test Analysis Commands
+### Test Analysis Process
 
-```bash
-echo "=== TEST CONTRACT ANALYSIS ===" | tee -a $CONTEXT_REPORT
+**Execute test contract analysis using the following approach:**
 
-# Find all test files
-echo "## Test File Discovery" >> $CONTEXT_REPORT
-echo "Locating test files..." | tee -a $CONTEXT_REPORT
+1. **Test File Discovery:**
+   - **For .NET projects**: Use Glob tool with pattern `**/*Test*.cs` or `**/*Tests.cs`
+   - **For JavaScript/TypeScript**: Use Glob tool with pattern `**/*.test.js` or `**/*.spec.ts`  
+   - **For Python**: Use Glob tool with pattern `**/*_test.py` or `**/test_*.py`
+   - **For Go**: Use Glob tool with pattern `**/*_test.go`
+   - **For Rust**: Use Glob tool with pattern `**/*_test.rs` or `**/tests/*.rs`
+   - **For Java**: Use Glob tool with pattern `**/*Test.java`
 
-# Different project types have different test patterns
-if find . -name "*.Test.cs" -o -name "*Tests.cs" | head -1 | grep -q .; then
-    # .NET tests
-    TEST_FILES=$(find . -name "*.Test.cs" -o -name "*Tests.cs" -o -name "*Test*.cs")
-    echo "Found .NET test files:" | tee -a $CONTEXT_REPORT
-elif find . -name "*.test.js" -o -name "*.spec.js" | head -1 | grep -q .; then
-    # JavaScript tests
-    TEST_FILES=$(find . -name "*.test.js" -o -name "*.spec.js" -o -name "*.test.ts" -o -name "*.spec.ts")
-    echo "Found JavaScript/TypeScript test files:" | tee -a $CONTEXT_REPORT
-elif find . -name "*_test.py" -o -name "test_*.py" | head -1 | grep -q .; then
-    # Python tests
-    TEST_FILES=$(find . -name "*_test.py" -o -name "test_*.py")
-    echo "Found Python test files:" | tee -a $CONTEXT_REPORT
-elif find . -name "*_test.go" | head -1 | grep -q .; then
-    # Go tests
-    TEST_FILES=$(find . -name "*_test.go")
-    echo "Found Go test files:" | tee -a $CONTEXT_REPORT
-elif find . -name "*_test.rs" | head -1 | grep -q .; then
-    # Rust tests
-    TEST_FILES=$(find . -name "*_test.rs" -o -name "lib.rs" -path "*/tests/*")
-    echo "Found Rust test files:" | tee -a $CONTEXT_REPORT
-else
-    # Generic search
-    TEST_FILES=$(find . -name "*test*" -name "*.java" -o -name "*Test*")
-    echo "Found test files (generic):" | tee -a $CONTEXT_REPORT
-fi
+2. **Test Contract Analysis:**
+   - **Constructor Patterns**: Use Grep tool with pattern `new.*\(` to find constructor usage
+   - **Method Call Patterns**: Use Grep tool with pattern `\\..*\(` to find method invocations
+   - **Assertion Patterns**: Use Grep tool with pattern `Assert|expect|should|assert` to find test assertions
+   - **Interface Expectations**: Use Grep tool to find interface contracts and expected behaviors
 
-echo "$TEST_FILES" | tee -a $CONTEXT_REPORT
+3. **API Contract Mapping:**
+   - Analyze test files to understand expected interfaces
+   - Document consistent usage patterns across test files
+   - Identify critical behaviors that must be preserved
 
-# Analyze test expectations for key components
-echo "" >> $CONTEXT_REPORT
-echo "## Test Expectations Analysis" >> $CONTEXT_REPORT
-
-for test_file in $TEST_FILES; do
-    if [ -f "$test_file" ] && [ $(wc -l < "$test_file") -gt 0 ]; then
-        echo "### Test File: $test_file" >> $CONTEXT_REPORT
-        
-        # Look for constructor calls, method calls, and assertions
-        echo "Constructor usage patterns:" >> $CONTEXT_REPORT
-        grep -n "new.*(" "$test_file" | head -5 >> $CONTEXT_REPORT 2>/dev/null || echo "No constructor patterns found" >> $CONTEXT_REPORT
-        
-        echo "Method call patterns:" >> $CONTEXT_REPORT  
-        grep -n "\\..*(" "$test_file" | head -5 >> $CONTEXT_REPORT 2>/dev/null || echo "No method call patterns found" >> $CONTEXT_REPORT
-        
-        echo "Assertion patterns:" >> $CONTEXT_REPORT
-        grep -n "Assert\|expect\|should\|assert" "$test_file" | head -5 >> $CONTEXT_REPORT 2>/dev/null || echo "No assertion patterns found" >> $CONTEXT_REPORT
-        
-        echo "" >> $CONTEXT_REPORT
-    fi
-done
-```
+**Test Analysis Execution Steps:**
+- Use appropriate Glob patterns for test file discovery based on project type
+- Use Grep tool for pattern analysis instead of bash loops
+- Focus on understanding what APIs and behaviors tests expect
+- Document findings for implementation planning
 
 ### Test Contract Documentation
 
@@ -236,60 +184,41 @@ Document test findings:
 - [ ] **Call Chain Analysis**: Understand sequence of operations
 - [ ] **Impact Assessment Completed**: Know scope of potential regression
 
-### Dependency Analysis Commands
+### Dependency Analysis Process
 
-```bash
-echo "=== DEPENDENCY INTEGRATION ANALYSIS ===" | tee -a $CONTEXT_REPORT
+**Execute dependency integration analysis using the following approach:**
 
-# Find dependencies and usage patterns
-echo "## Dependency Mapping" >> $CONTEXT_REPORT
+1. **Project Type Detection:**
+   - Use Glob tool to detect project type by finding characteristic files
+   - Look for `.csproj`, `package.json`, `pom.xml`, `Cargo.toml`, etc.
 
-# Search for class/interface usage across the codebase
-if find . -name "*.cs" | head -1 | grep -q .; then
-    # .NET analysis
-    echo "Analyzing .NET dependencies..." | tee -a $CONTEXT_REPORT
-    
-    # Find interface implementations
-    echo "### Interface Implementations:" >> $CONTEXT_REPORT
-    grep -r "class.*:.*I[A-Z]" . --include="*.cs" | head -10 >> $CONTEXT_REPORT
-    
-    # Find constructor usage
-    echo "### Constructor Usage Patterns:" >> $CONTEXT_REPORT
-    grep -r "new [A-Z][a-zA-Z]*(" . --include="*.cs" | head -15 >> $CONTEXT_REPORT
-    
-elif find . -name "*.ts" -o -name "*.js" | head -1 | grep -q .; then
-    # TypeScript/JavaScript analysis
-    echo "Analyzing TypeScript/JavaScript dependencies..." | tee -a $CONTEXT_REPORT
-    
-    # Find imports
-    echo "### Import Dependencies:" >> $CONTEXT_REPORT
-    grep -r "import.*from\|require(" . --include="*.ts" --include="*.js" | head -15 >> $CONTEXT_REPORT
-    
-    # Find class usage
-    echo "### Class Usage Patterns:" >> $CONTEXT_REPORT
-    grep -r "new [A-Z]" . --include="*.ts" --include="*.js" | head -15 >> $CONTEXT_REPORT
-    
-elif find . -name "*.java" | head -1 | grep -q .; then
-    # Java analysis
-    echo "Analyzing Java dependencies..." | tee -a $CONTEXT_REPORT
-    
-    # Find imports
-    echo "### Import Dependencies:" >> $CONTEXT_REPORT
-    grep -r "import.*;" . --include="*.java" | head -15 >> $CONTEXT_REPORT
-    
-    # Find constructor usage
-    echo "### Constructor Usage:" >> $CONTEXT_REPORT
-    grep -r "new [A-Z][a-zA-Z]*(" . --include="*.java" | head -15 >> $CONTEXT_REPORT
-fi
+2. **Dependency Pattern Analysis by Language:**
 
-# Analyze call chains and data flow
-echo "" >> $CONTEXT_REPORT
-echo "## Call Chain Analysis" >> $CONTEXT_REPORT
-echo "Method call patterns in source files:" >> $CONTEXT_REPORT
+   **For .NET Projects:**
+   - **Interface Implementations**: Use Grep tool with pattern `class.*:.*I[A-Z]` and type `cs`
+   - **Constructor Usage**: Use Grep tool with pattern `new [A-Z][a-zA-Z]*\(` and type `cs`
+   - **Namespace Dependencies**: Use Grep tool with pattern `using.*\;` and type `cs`
 
-# Find method chaining and call patterns
-grep -r "\\..*\\." . --include="*.cs" --include="*.java" --include="*.ts" --include="*.js" | head -20 >> $CONTEXT_REPORT 2>/dev/null || echo "No method chains found" >> $CONTEXT_REPORT
-```
+   **For JavaScript/TypeScript Projects:**
+   - **Import Dependencies**: Use Grep tool with pattern `import.*from|require\(` and type `js`
+   - **Class Usage**: Use Grep tool with pattern `new [A-Z]` and type `js`
+   - **Module Exports**: Use Grep tool with pattern `export|module\.exports` and type `js`
+
+   **For Java Projects:**
+   - **Import Dependencies**: Use Grep tool with pattern `import.*\;` and type `java`
+   - **Constructor Usage**: Use Grep tool with pattern `new [A-Z][a-zA-Z]*\(` and type `java`
+   - **Interface Implementations**: Use Grep tool with pattern `implements|extends` and type `java`
+
+3. **Integration Point Analysis:**
+   - **Method Chaining**: Use Grep tool with pattern `\\..*\\.` to find method chains
+   - **Data Flow Patterns**: Identify how data moves between components
+   - **Call Chain Analysis**: Map component interaction patterns
+
+**Dependency Analysis Steps:**
+- Use Glob and Grep tools instead of bash scripting
+- Focus on understanding component relationships and dependencies
+- Map integration points that could be affected by build errors
+- Document critical dependencies that must be preserved
 
 ### Integration Documentation
 
@@ -327,37 +256,39 @@ grep -r "\\..*\\." . --include="*.cs" --include="*.java" --include="*.ts" --incl
 - [ ] **Rollback Plan Prepared**: Have strategy if fixes introduce new problems
 - [ ] **Impact Scope Bounded**: Understand maximum possible scope of changes
 
-### Risk Assessment Framework
+### Risk Assessment Process
 
-```bash
-echo "=== RISK ASSESSMENT ===" | tee -a $CONTEXT_REPORT
+**Execute comprehensive risk analysis using the following approach:**
 
-echo "## Fix Strategy Risk Analysis" >> $CONTEXT_REPORT
+1. **Fix Strategy Evaluation:**
+   - **Interface Restoration**: Analyze feasibility of restoring previous interface signatures
+     - Risk: May conflict with new functionality requirements
+     - Impact: Low regression risk, high business requirement risk
+   
+   - **Implementation Adaptation**: Evaluate updating implementations to match new interfaces  
+     - Risk: May break existing functionality if not careful
+     - Impact: Medium regression risk, low requirement risk
+     
+   - **Hybrid Approach**: Consider combining interface restoration with selective implementation updates
+     - Risk: Complex changes with multiple failure points  
+     - Impact: Variable risk depending on execution
 
-# Analyze different fix approaches
-echo "### Possible Fix Approaches:" >> $CONTEXT_REPORT
-echo "1. **Interface Restoration**: Restore previous interface signatures" >> $CONTEXT_REPORT
-echo "   - Risk: May conflict with new functionality requirements" >> $CONTEXT_REPORT
-echo "   - Impact: Low regression risk, high business requirement risk" >> $CONTEXT_REPORT
-echo "" >> $CONTEXT_REPORT
+2. **Critical Risk Factor Assessment:**
+   - **Test Coverage Analysis**: Use Glob tool to count test files with pattern `**/*test*` or `**/*Test*`
+   - **Integration Complexity**: Document component interactions through changed interfaces
+   - **Business Logic Preservation**: Identify core functionality that must remain intact  
+   - **Timeline vs Quality Balance**: Assess pressure to deliver vs. quality requirements
 
-echo "2. **Implementation Adaptation**: Update implementations to match new interfaces" >> $CONTEXT_REPORT
-echo "   - Risk: May break existing functionality if not careful" >> $CONTEXT_REPORT
-echo "   - Impact: Medium regression risk, low requirement risk" >> $CONTEXT_REPORT
-echo "" >> $CONTEXT_REPORT
+3. **Risk Documentation Requirements:**
+   - Document recommended fix strategy with detailed justification
+   - List alternative approaches considered and reasons for rejection
+   - Define risk mitigation strategies and validation checkpoints
+   - Plan rollback procedures if fixes introduce new problems
 
-echo "3. **Hybrid Approach**: Combine interface restoration with selective implementation updates" >> $CONTEXT_REPORT
-echo "   - Risk: Complex changes with multiple failure points" >> $CONTEXT_REPORT
-echo "   - Impact: Variable risk depending on execution" >> $CONTEXT_REPORT
-echo "" >> $CONTEXT_REPORT
-
-# Document critical risk factors
-echo "### Critical Risk Factors:" >> $CONTEXT_REPORT
-echo "- **Test Coverage**: $(find . -name "*test*" -o -name "*Test*" | wc -l) test files found" >> $CONTEXT_REPORT
-echo "- **Integration Complexity**: Multiple components interact through changed interfaces" >> $CONTEXT_REPORT
-echo "- **Business Logic Preservation**: Core functionality must remain intact" >> $CONTEXT_REPORT
-echo "- **Timeline Pressure**: Need to balance speed with quality" >> $CONTEXT_REPORT
-```
+**Risk Assessment Execution:**
+- Use systematic analysis rather than bash scripting
+- Focus on understanding implications of different fix approaches
+- Document findings for implementation planning and stakeholder communication
 
 ### Risk Documentation
 
@@ -397,34 +328,53 @@ echo "- **Timeline Pressure**: Need to balance speed with quality" >> $CONTEXT_R
 
 Generate comprehensive context report:
 
-```bash
-echo "=== CONTEXT ANALYSIS SUMMARY ===" | tee -a $CONTEXT_REPORT
+**Execute final context report generation using the following approach:**
 
-echo "## Executive Summary" >> $CONTEXT_REPORT
-echo "**Analysis Completion Date**: $(date)" >> $CONTEXT_REPORT
-echo "**Build Errors Analyzed**: [Number and categories]" >> $CONTEXT_REPORT
-echo "**Components Affected**: [List of impacted components]" >> $CONTEXT_REPORT
-echo "**Risk Level**: [High/Medium/Low with justification]" >> $CONTEXT_REPORT
-echo "**Recommended Approach**: [Chosen fix strategy]" >> $CONTEXT_REPORT
-echo "" >> $CONTEXT_REPORT
+1. **Report File Creation:**
+   - Create analysis report file in tmp directory
+   - Use current date for report filename: `tmp/build-context-analysis-[date].md`
 
-echo "## Key Findings:" >> $CONTEXT_REPORT
-echo "- **Root Cause**: [Why build errors occurred]" >> $CONTEXT_REPORT
-echo "- **Business Impact**: [Functionality at risk]" >> $CONTEXT_REPORT
-echo "- **Technical Debt**: [Issues to address]" >> $CONTEXT_REPORT
-echo "- **Integration Risks**: [Components that could break]" >> $CONTEXT_REPORT
-echo "" >> $CONTEXT_REPORT
+2. **Context Report Content Structure:**
+   - **Executive Summary Section** with completion date, error categories, affected components
+   - **Risk Level Assessment** with detailed justification for risk rating
+   - **Recommended Approach** with chosen fix strategy and rationale
+   - **Key Findings Section** documenting root causes, business impact, technical debt
+   - **Integration Risk Analysis** identifying components that could break
+   - **Next Steps Section** with implementation plan and validation checkpoints
 
-echo "## Next Steps:" >> $CONTEXT_REPORT
-echo "1. **Implement fixes** following recommended approach" >> $CONTEXT_REPORT
-echo "2. **Execute validation checkpoints** at each stage" >> $CONTEXT_REPORT
-echo "3. **Run comprehensive test suite** before completion" >> $CONTEXT_REPORT
-echo "4. **Update documentation** to reflect changes" >> $CONTEXT_REPORT
-echo "5. **Communicate changes** to relevant stakeholders" >> $CONTEXT_REPORT
+3. **Report Generation Process:**
+   - Document all analysis phases completed in this investigation
+   - Summarize critical findings from git history, test analysis, and dependency mapping
+   - Present risk assessment conclusions and recommended fix strategies
+   - Include validation checkpoints and rollback procedures
+   - List all stakeholders that need to be informed of changes
 
-echo "" >> $CONTEXT_REPORT
-echo "**Context Analysis Complete**" >> $CONTEXT_REPORT
-echo "Report saved to: $CONTEXT_REPORT" | tee -a $CONTEXT_REPORT
+**Final Report Documentation Template:**
+```markdown
+# Build Context Analysis Summary
+
+## Executive Summary
+- **Analysis Completion Date**: [Current date]
+- **Build Errors Analyzed**: [Number and categories found]
+- **Components Affected**: [List of impacted components from analysis]
+- **Risk Level**: [High/Medium/Low with detailed justification]
+- **Recommended Approach**: [Chosen fix strategy with rationale]
+
+## Key Findings
+- **Root Cause**: [Why build errors occurred - from git history analysis]
+- **Business Impact**: [Functionality at risk - from test contract analysis]
+- **Technical Debt**: [Issues to address - from dependency analysis]
+- **Integration Risks**: [Components that could break - from dependency mapping]
+
+## Next Steps
+1. **Implement fixes** following recommended approach with validation gates
+2. **Execute validation checkpoints** at each implementation stage
+3. **Run comprehensive test suite** before marking changes complete
+4. **Update documentation** to reflect interface and implementation changes
+5. **Communicate changes** to relevant stakeholders and team members
+
+## Context Analysis Complete
+[Summary of all investigation phases and their outcomes]
 ```
 
 ## Completion Criteria
