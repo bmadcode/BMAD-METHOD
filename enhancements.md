@@ -6,7 +6,7 @@
 
 ## 🎯 What's New
 
-### ✨ Nine Game-Changing Features
+### ✨ Ten Game-Changing Features
 
 | Feature | Purpose | Key Innovation |
 |---------|---------|----------------|
@@ -19,6 +19,7 @@
 | **📋 Dual-Track Progress** | Ensure story file updates during development | Automatic story checkbox and file list updates with validation gates |
 | **🔧 Task Execution Enforcement** | Prevent automation workflow failures | Mandatory task file execution with Read tool validation |
 | **📊 Automatic Options Presentation** | Eliminate "what's next" confusion | Grade-based options with effort estimates presented automatically |
+| **🎛️ Role-Optimized LLM Settings** | Maximize agent performance for specific tasks | Custom temperature, top-P, and penalty settings per agent role |
 
 ---
 
@@ -76,6 +77,12 @@
 - Grade A-F options automatically presented based on audit results
 - Effort estimates and specific actions included for each option
 - Clear next steps eliminate "what should I do?" moments
+
+**🎛️ Role-Optimized LLM Settings (Maximum Agent Performance)**
+- Development agents: Low temperature (0.3-0.4) for precise code generation
+- Creative agents: Higher temperature (0.75-0.8) for innovative ideation
+- Technical agents: Balanced settings (0.5-0.6) for structured creativity
+- Each agent fine-tuned for their specific responsibilities and output quality
 
 ---
 
@@ -137,19 +144,21 @@
 - **Zero user confusion** - automatic options with effort estimates
 - **Pattern-based development** reuses successful approaches  
 - **Complete workflow automation** from detection to solution delivery
+- **Optimized agent performance** - role-specific LLM settings for maximum effectiveness
 
 ---
 
 ## 📁 Implementation Details
 
 ### Core Framework Files
-- `bmad-core/agents/dev.md` - Enhanced developer agent with dual-track progress and task execution enforcement
-- `bmad-core/agents/qa.md` - Enhanced QA agent with auto-remediation, Git push, and mandatory task file execution
+- `bmad-core/agents/dev.md` - Enhanced developer agent with role-optimized LLM settings (temp=0.4) for precise code
+- `bmad-core/agents/qa.md` - Enhanced QA agent with systematic analysis settings (temp=0.3) and auto-remediation
+- `bmad-core/agents/analyst.md` - Business analyst with creative ideation settings (temp=0.8) for innovative thinking
+- `bmad-core/agents/architect.md` - Technical architect with balanced creativity settings (temp=0.6) for design solutions
+- `bmad-core/agents/ux-expert.md` - UX designer with high creativity settings (temp=0.75) for innovative interfaces
 - `bmad-core/tasks/reality-audit-comprehensive.md` - 10-phase comprehensive audit with automatic remediation execution
 - `bmad-core/tasks/loop-detection-escalation.md` - External collaboration framework with copy-paste prompts
 - `bmad-core/tasks/create-remediation-story.md` - Automated fix story generation with regression prevention
-- `bmad-core/checklists/static-analysis-checklist.md` - Code quality validation standards
-- `bmad-core/checklists/task-execution-validation.md` - Task file execution compliance verification
 
 ### Enterprise Features
 - **Multi-language project detection** (Node.js, .NET, Java, Rust, Python, Go, Ruby, PHP)
@@ -160,6 +169,7 @@
 - **File organization** with `/tmp` folder for temporary reports and analysis  
 - **Zero-touch remediation** automatically executes fixes without manual intervention
 - **Smart story splitting** detects and resolves oversized story scope issues
+- **Performance-optimized agents** with custom LLM settings tailored to each role's requirements
 
 ---
 
