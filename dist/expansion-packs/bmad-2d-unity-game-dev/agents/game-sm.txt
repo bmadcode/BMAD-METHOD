@@ -72,18 +72,18 @@ persona:
 commands:
   - help: Show numbered list of the following commands to allow selection
   - draft: Execute task create-game-story.md
-  - correct-course: Execute task correct-course.md
+  - correct-course: Execute task correct-course-game.md
   - story-checklist: Execute task execute-checklist.md with checklist game-story-dod-checklist.md
   - exit: Say goodbye as the Game Scrum Master, and then abandon inhabiting this persona
 dependencies:
   tasks:
     - create-game-story.md
     - execute-checklist.md
-    - correct-course.md
+    - correct-course-game.md
   templates:
     - game-story-tmpl.yaml
   checklists:
-    - game-story-dod-checklist.md
+    - game-change-checklist.md
 ```
 ==================== END: .bmad-2d-unity-game-dev/agents/game-sm.md ====================
 
@@ -371,84 +371,165 @@ The LLM will:
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
 ==================== END: .bmad-2d-unity-game-dev/tasks/execute-checklist.md ====================
 
-==================== START: .bmad-2d-unity-game-dev/tasks/correct-course.md ====================
-# Correct Course Task
+==================== START: .bmad-2d-unity-game-dev/tasks/correct-course-game.md ====================
+# Correct Course Task - Game Development
 
 ## Purpose
 
-- Guide a structured response to a change trigger using the `.bmad-2d-unity-game-dev/checklists/change-checklist`.
-- Analyze the impacts of the change on epics, project artifacts, and the MVP, guided by the checklist's structure.
-- Explore potential solutions (e.g., adjust scope, rollback elements, re-scope features) as prompted by the checklist.
-- Draft specific, actionable proposed updates to any affected project artifacts (e.g., epics, user stories, PRD sections, architecture document sections) based on the analysis.
-- Produce a consolidated "Sprint Change Proposal" document that contains the impact analysis and the clearly drafted proposed edits for user review and approval.
-- Ensure a clear handoff path if the nature of the changes necessitates fundamental replanning by other core agents (like PM or Architect).
+- Guide a structured response to game development change triggers using the `.bmad-2d-unity-game-dev/checklists/game-change-checklist`.
+- Analyze the impacts of changes on game features, technical systems, and milestone deliverables.
+- Explore game-specific solutions (e.g., performance optimizations, feature scaling, platform adjustments).
+- Draft specific, actionable proposed updates to affected game artifacts (e.g., GDD sections, technical specs, Unity configurations).
+- Produce a consolidated "Game Development Change Proposal" document for review and approval.
+- Ensure clear handoff path for changes requiring fundamental redesign or technical architecture updates.
 
 ## Instructions
 
 ### 1. Initial Setup & Mode Selection
 
 - **Acknowledge Task & Inputs:**
-  - Confirm with the user that the "Correct Course Task" (Change Navigation & Integration) is being initiated.
-  - Verify the change trigger and ensure you have the user's initial explanation of the issue and its perceived impact.
-  - Confirm access to all relevant project artifacts (e.g., PRD, Epics/Stories, Architecture Documents, UI/UX Specifications) and, critically, the `.bmad-2d-unity-game-dev/checklists/change-checklist`.
+
+  - Confirm with the user that the "Game Development Correct Course Task" is being initiated.
+  - Verify the change trigger (e.g., performance issue, platform constraint, gameplay feedback, technical blocker).
+  - Confirm access to relevant game artifacts:
+    - Game Design Document (GDD)
+    - Technical Design Documents
+    - Unity Architecture specifications
+    - Performance budgets and platform requirements
+    - Current sprint's game stories and epics
+    - Asset specifications and pipelines
+  - Confirm access to `.bmad-2d-unity-game-dev/checklists/game-change-checklist`.
+
 - **Establish Interaction Mode:**
-  - Ask the user their preferred interaction mode for this task:
-    - **"Incrementally (Default & Recommended):** Shall we work through the change-checklist section by section, discussing findings and collaboratively drafting proposed changes for each relevant part before moving to the next? This allows for detailed, step-by-step refinement."
-    - **"YOLO Mode (Batch Processing):** Or, would you prefer I conduct a more batched analysis based on the checklist and then present a consolidated set of findings and proposed changes for a broader review? This can be quicker for initial assessment but might require more extensive review of the combined proposals."
-  - Once the user chooses, confirm the selected mode and then inform the user: "We will now use the change-checklist to analyze the change and draft proposed updates. I will guide you through the checklist items based on our chosen interaction mode."
+  - Ask the user their preferred interaction mode:
+    - **"Incrementally (Default & Recommended):** Work through the game-change-checklist section by section, discussing findings and drafting changes collaboratively. Best for complex technical or gameplay changes."
+    - **"YOLO Mode (Batch Processing):** Conduct batched analysis and present consolidated findings. Suitable for straightforward performance optimizations or minor adjustments."
+  - Confirm the selected mode and inform: "We will now use the game-change-checklist to analyze the change and draft proposed updates specific to our Unity game development context."
 
-### 2. Execute Checklist Analysis (Iteratively or Batched, per Interaction Mode)
+### 2. Execute Game Development Checklist Analysis
 
-- Systematically work through Sections 1-4 of the change-checklist (typically covering Change Context, Epic/Story Impact Analysis, Artifact Conflict Resolution, and Path Evaluation/Recommendation).
-- For each checklist item or logical group of items (depending on interaction mode):
-  - Present the relevant prompt(s) or considerations from the checklist to the user.
-  - Request necessary information and actively analyze the relevant project artifacts (PRD, epics, architecture documents, story history, etc.) to assess the impact.
-  - Discuss your findings for each item with the user.
-  - Record the status of each checklist item (e.g., `[x] Addressed`, `[N/A]`, `[!] Further Action Needed`) and any pertinent notes or decisions.
-  - Collaboratively agree on the "Recommended Path Forward" as prompted by Section 4 of the checklist.
+- Systematically work through the game-change-checklist sections:
 
-### 3. Draft Proposed Changes (Iteratively or Batched)
+  1. **Change Context & Game Impact**
+  2. **Feature/System Impact Analysis**
+  3. **Technical Artifact Conflict Resolution**
+  4. **Performance & Platform Evaluation**
+  5. **Path Forward Recommendation**
 
-- Based on the completed checklist analysis (Sections 1-4) and the agreed "Recommended Path Forward" (excluding scenarios requiring fundamental replans that would necessitate immediate handoff to PM/Architect):
-  - Identify the specific project artifacts that require updates (e.g., specific epics, user stories, PRD sections, architecture document components, diagrams).
-  - **Draft the proposed changes directly and explicitly for each identified artifact.** Examples include:
-    - Revising user story text, acceptance criteria, or priority.
-    - Adding, removing, reordering, or splitting user stories within epics.
-    - Proposing modified architecture diagram snippets (e.g., providing an updated Mermaid diagram block or a clear textual description of the change to an existing diagram).
-    - Updating technology lists, configuration details, or specific sections within the PRD or architecture documents.
-    - Drafting new, small supporting artifacts if necessary (e.g., a brief addendum for a specific decision).
-  - If in "Incremental Mode," discuss and refine these proposed edits for each artifact or small group of related artifacts with the user as they are drafted.
-  - If in "YOLO Mode," compile all drafted edits for presentation in the next step.
+- For each checklist section:
+  - Present game-specific prompts and considerations
+  - Analyze impacts on:
+    - Unity scenes and prefabs
+    - Component dependencies
+    - Performance metrics (FPS, memory, build size)
+    - Platform-specific code paths
+    - Asset loading and management
+    - Third-party plugins/SDKs
+  - Discuss findings with clear technical context
+  - Record status: `[x] Addressed`, `[N/A]`, `[!] Further Action Needed`
+  - Document Unity-specific decisions and constraints
 
-### 4. Generate "Sprint Change Proposal" with Edits
+### 3. Draft Game-Specific Proposed Changes
 
-- Synthesize the complete change-checklist analysis (covering findings from Sections 1-4) and all the agreed-upon proposed edits (from Instruction 3) into a single document titled "Sprint Change Proposal." This proposal should align with the structure suggested by Section 5 of the change-checklist.
-- The proposal must clearly present:
-  - **Analysis Summary:** A concise overview of the original issue, its analyzed impact (on epics, artifacts, MVP scope), and the rationale for the chosen path forward.
-  - **Specific Proposed Edits:** For each affected artifact, clearly show or describe the exact changes (e.g., "Change Story X.Y from: [old text] To: [new text]", "Add new Acceptance Criterion to Story A.B: [new AC]", "Update Section 3.2 of Architecture Document as follows: [new/modified text or diagram description]").
-- Present the complete draft of the "Sprint Change Proposal" to the user for final review and feedback. Incorporate any final adjustments requested by the user.
+Based on the analysis and agreed path forward:
+
+- **Identify affected game artifacts requiring updates:**
+
+  - GDD sections (mechanics, systems, progression)
+  - Technical specifications (architecture, performance targets)
+  - Unity-specific configurations (build settings, quality settings)
+  - Game story modifications (scope, acceptance criteria)
+  - Asset pipeline adjustments
+  - Platform-specific adaptations
+
+- **Draft explicit changes for each artifact:**
+
+  - **Game Stories:** Revise story text, Unity-specific acceptance criteria, technical constraints
+  - **Technical Specs:** Update architecture diagrams, component hierarchies, performance budgets
+  - **Unity Configurations:** Propose settings changes, optimization strategies, platform variants
+  - **GDD Updates:** Modify feature descriptions, balance parameters, progression systems
+  - **Asset Specifications:** Adjust texture sizes, model complexity, audio compression
+  - **Performance Targets:** Update FPS goals, memory limits, load time requirements
+
+- **Include Unity-specific details:**
+  - Prefab structure changes
+  - Scene organization updates
+  - Component refactoring needs
+  - Shader/material optimizations
+  - Build pipeline modifications
+
+### 4. Generate "Game Development Change Proposal"
+
+- Create a comprehensive proposal document containing:
+
+  **A. Change Summary:**
+
+  - Original issue (performance, gameplay, technical constraint)
+  - Game systems affected
+  - Platform/performance implications
+  - Chosen solution approach
+
+  **B. Technical Impact Analysis:**
+
+  - Unity architecture changes needed
+  - Performance implications (with metrics)
+  - Platform compatibility effects
+  - Asset pipeline modifications
+  - Third-party dependency impacts
+
+  **C. Specific Proposed Edits:**
+
+  - For each game story: "Change Story GS-X.Y from: [old] To: [new]"
+  - For technical specs: "Update Unity Architecture Section X: [changes]"
+  - For GDD: "Modify [Feature] in Section Y: [updates]"
+  - For configurations: "Change [Setting] from [old_value] to [new_value]"
+
+  **D. Implementation Considerations:**
+
+  - Required Unity version updates
+  - Asset reimport needs
+  - Shader recompilation requirements
+  - Platform-specific testing needs
 
 ### 5. Finalize & Determine Next Steps
 
-- Obtain explicit user approval for the "Sprint Change Proposal," including all the specific edits documented within it.
-- Provide the finalized "Sprint Change Proposal" document to the user.
-- **Based on the nature of the approved changes:**
-  - **If the approved edits sufficiently address the change and can be implemented directly or organized by a PO/SM:** State that the "Correct Course Task" is complete regarding analysis and change proposal, and the user can now proceed with implementing or logging these changes (e.g., updating actual project documents, backlog items). Suggest handoff to a PO/SM agent for backlog organization if appropriate.
-  - **If the analysis and proposed path (as per checklist Section 4 and potentially Section 6) indicate that the change requires a more fundamental replan (e.g., significant scope change, major architectural rework):** Clearly state this conclusion. Advise the user that the next step involves engaging the primary PM or Architect agents, using the "Sprint Change Proposal" as critical input and context for that deeper replanning effort.
+- Obtain explicit approval for the "Game Development Change Proposal"
+- Provide the finalized document to the user
+
+- **Based on change scope:**
+
+  - **Minor adjustments (can be handled in current sprint):**
+    - Confirm task completion
+    - Suggest handoff to game-dev agent for implementation
+    - Note any required playtesting validation
+  - **Major changes (require replanning):**
+    - Clearly state need for deeper technical review
+    - Recommend engaging Game Architect or Technical Lead
+    - Provide proposal as input for architecture revision
+    - Flag any milestone/deadline impacts
 
 ## Output Deliverables
 
-- **Primary:** A "Sprint Change Proposal" document (in markdown format). This document will contain:
-  - A summary of the change-checklist analysis (issue, impact, rationale for the chosen path).
-  - Specific, clearly drafted proposed edits for all affected project artifacts.
-- **Implicit:** An annotated change-checklist (or the record of its completion) reflecting the discussions, findings, and decisions made during the process.
-==================== END: .bmad-2d-unity-game-dev/tasks/correct-course.md ====================
+- **Primary:** "Game Development Change Proposal" document containing:
+
+  - Game-specific change analysis
+  - Technical impact assessment with Unity context
+  - Platform and performance considerations
+  - Clearly drafted updates for all affected game artifacts
+  - Implementation guidance and constraints
+
+- **Secondary:** Annotated game-change-checklist showing:
+  - Technical decisions made
+  - Performance trade-offs considered
+  - Platform-specific accommodations
+  - Unity-specific implementation notes
+==================== END: .bmad-2d-unity-game-dev/tasks/correct-course-game.md ====================
 
 ==================== START: .bmad-2d-unity-game-dev/templates/game-story-tmpl.yaml ====================
 template:
-  id: game-story-template-v2
+  id: game-story-template-v3
   name: Game Development Story
-  version: 2.0
+  version: 3.0
   output:
     format: markdown
     filename: "stories/{{epic_name}}/{{story_id}}-{{story_name}}.md"
@@ -496,9 +577,9 @@ sections:
         title: Technical Requirements
         type: checklist
         items:
-          - "Code follows C# best practices"
-          - "Maintains stable frame rate on target devices"
-          - "No memory leaks or performance degradation"
+          - Code follows C# best practices
+          - Maintains stable frame rate on target devices
+          - No memory leaks or performance degradation
           - "{{specific_technical_requirement}}"
       - id: game-design-requirements
         title: Game Design Requirements
@@ -674,13 +755,13 @@ sections:
     instruction: Checklist that must be completed before the story is considered finished
     type: checklist
     items:
-      - "All acceptance criteria met"
-      - "Code reviewed and approved"
-      - "Unit tests written and passing"
-      - "Integration tests passing"
-      - "Performance targets met"
-      - "No C# compiler errors or warnings"
-      - "Documentation updated"
+      - All acceptance criteria met
+      - Code reviewed and approved
+      - Unit tests written and passing
+      - Integration tests passing
+      - Performance targets met
+      - No C# compiler errors or warnings
+      - Documentation updated
       - "{{game_specific_dod_item}}"
 
   - id: notes
@@ -703,165 +784,208 @@ sections:
       - {{future_optimization_1}}
 ==================== END: .bmad-2d-unity-game-dev/templates/game-story-tmpl.yaml ====================
 
-==================== START: .bmad-2d-unity-game-dev/checklists/game-story-dod-checklist.md ====================
-# Game Development Story Definition of Done Checklist
+==================== START: .bmad-2d-unity-game-dev/checklists/game-change-checklist.md ====================
+# Game Development Change Navigation Checklist
 
-## Story Completeness
+**Purpose:** To systematically guide the Game SM agent and user through analysis and planning when a significant change (performance issue, platform constraint, technical blocker, gameplay feedback) is identified during Unity game development.
 
-### Basic Story Elements
+**Instructions:** Review each item with the user. Mark `[x]` for completed/confirmed, `[N/A]` if not applicable, or add notes for discussion points.
 
-- [ ] **Story Title** - Clear, descriptive title that identifies the feature
-- [ ] **Epic Assignment** - Story is properly assigned to relevant epic
-- [ ] **Priority Level** - Appropriate priority assigned (High/Medium/Low)
-- [ ] **Story Points** - Realistic estimation for implementation complexity
-- [ ] **Description** - Clear, concise description of what needs to be implemented
+[[LLM: INITIALIZATION INSTRUCTIONS - GAME CHANGE NAVIGATION
 
-### Game Design Alignment
+Changes during game development are common - performance issues, platform constraints, gameplay feedback, and technical limitations are part of the process.
 
-- [ ] **GDD Reference** - Specific Game Design Document section referenced
-- [ ] **Game Mechanic Context** - Clear connection to game mechanics defined in GDD
-- [ ] **Player Experience Goal** - Describes the intended player experience
-- [ ] **Balance Parameters** - Includes any relevant game balance values
-- [ ] **Design Intent** - Purpose and rationale for the feature is clear
+Before proceeding, understand:
 
-## Technical Specifications
+1. This checklist is for SIGNIFICANT changes affecting game architecture or features
+2. Minor tweaks (shader adjustments, UI positioning) don't require this process
+3. The goal is to maintain playability while adapting to technical realities
+4. Performance and player experience are paramount
 
-### Architecture Compliance
+Required context:
 
-- [ ] **File Organization** - Follows game architecture document structure (e.g., scripts, prefabs, scenes)
-- [ ] **Class Definitions** - C# classes and interfaces are properly defined
-- [ ] **Integration Points** - Clear specification of how feature integrates with existing systems
-- [ ] **Event Communication** - UnityEvents or C# events usage specified
-- [ ] **Dependencies** - All system dependencies clearly identified
+- The triggering issue (performance metrics, crash logs, feedback)
+- Current development state (implemented features, current sprint)
+- Access to GDD, technical specs, and performance budgets
+- Understanding of remaining features and milestones
 
-### Unity Requirements
+APPROACH:
+This is an interactive process. Discuss performance implications, platform constraints, and player impact. The user makes final decisions, but provide expert Unity/game dev guidance.
 
-- [ ] **Scene Integration** - Specifies which scenes are affected and how
-- [ ] **Prefab Usage** - Proper use of prefabs for reusable GameObjects
-- [ ] **Component Design** - Logic is encapsulated in well-defined MonoBehaviour components
-- [ ] **Asset Requirements** - All needed assets (sprites, audio, materials) identified
-- [ ] **Performance Considerations** - Stable frame rate target and optimization requirements
+REMEMBER: Game development is iterative. Changes often lead to better gameplay and performance.]]
 
-### Code Quality Standards
+---
 
-- [ ] **C# Best Practices** - All code must comply with modern C# standards
-- [ ] **Error Handling** - Error scenarios and handling requirements specified
-- [ ] **Memory Management** - Coroutine and object lifecycle management requirements where needed
-- [ ] **Cross-Platform Support** - Desktop and mobile considerations addressed
-- [ ] **Code Organization** - Follows established Unity project structure
+## 1. Understand the Trigger & Context
 
-## Implementation Readiness
+[[LLM: Start by understanding the game-specific issue. Ask technical questions:
 
-### Acceptance Criteria
+- What performance metrics triggered this? (FPS, memory, load times)
+- Is this platform-specific or universal?
+- Can we reproduce it consistently?
+- What Unity profiler data do we have?
+- Is this a gameplay issue or technical constraint?
 
-- [ ] **Functional Requirements** - All functional acceptance criteria are specific and testable
-- [ ] **Technical Requirements** - Technical acceptance criteria are complete and verifiable
-- [ ] **Game Design Requirements** - Game-specific requirements match GDD specifications
-- [ ] **Performance Requirements** - Frame rate and memory usage criteria specified
-- [ ] **Completeness** - No acceptance criteria are vague or unmeasurable
+Focus on measurable impacts and technical specifics.]]
 
-### Implementation Tasks
+- [ ] **Identify Triggering Element:** Clearly identify the game feature/system revealing the issue.
+- [ ] **Define the Issue:** Articulate the core problem precisely.
+  - [ ] Performance bottleneck (CPU/GPU/Memory)?
+  - [ ] Platform-specific limitation?
+  - [ ] Unity engine constraint?
+  - [ ] Gameplay/balance issue from playtesting?
+  - [ ] Asset pipeline or build size problem?
+  - [ ] Third-party SDK/plugin conflict?
+- [ ] **Assess Performance Impact:** Document specific metrics (current FPS, target FPS, memory usage, build size).
+- [ ] **Gather Technical Evidence:** Note profiler data, crash logs, platform test results, player feedback.
 
-- [ ] **Task Breakdown** - Story broken into specific, ordered implementation tasks
-- [ ] **Task Scope** - Each task is completable in 1-4 hours
-- [ ] **Task Clarity** - Each task has clear, actionable instructions
-- [ ] **File Specifications** - Exact file paths and purposes specified (e.g., `Scripts/Player/PlayerMovement.cs`)
-- [ ] **Development Flow** - Tasks follow logical implementation order
+## 2. Game Feature Impact Assessment
 
-### Dependencies
+[[LLM: Game features are interconnected. Evaluate systematically:
 
-- [ ] **Story Dependencies** - All prerequisite stories identified with IDs
-- [ ] **Technical Dependencies** - Required systems and files identified
-- [ ] **Asset Dependencies** - All needed assets specified with locations
-- [ ] **External Dependencies** - Any third-party or external requirements noted (e.g., Asset Store packages)
-- [ ] **Dependency Validation** - All dependencies are actually available
+1. Can we optimize the current feature without changing gameplay?
+2. Do dependent features need adjustment?
+3. Are there platform-specific workarounds?
+4. Does this affect our performance budget allocation?
 
-## Testing Requirements
+Consider both technical and gameplay impacts.]]
 
-### Test Coverage
+- [ ] **Analyze Current Sprint Features:**
+  - [ ] Can the current feature be optimized (LOD, pooling, batching)?
+  - [ ] Does it need gameplay simplification?
+  - [ ] Should it be platform-specific (high-end only)?
+- [ ] **Analyze Dependent Systems:**
+  - [ ] Review all game systems interacting with the affected feature.
+  - [ ] Do physics systems need adjustment?
+  - [ ] Are UI/HUD systems impacted?
+  - [ ] Do save/load systems require changes?
+  - [ ] Are multiplayer systems affected?
+- [ ] **Summarize Feature Impact:** Document effects on gameplay systems and technical architecture.
 
-- [ ] **Unit Test Requirements** - Specific unit test files and scenarios defined for NUnit
-- [ ] **Integration Test Cases** - Integration testing with other game systems specified
-- [ ] **Manual Test Cases** - Game-specific manual testing procedures defined in the Unity Editor
-- [ ] **Performance Tests** - Frame rate and memory testing requirements specified
-- [ ] **Edge Case Testing** - Edge cases and error conditions covered
+## 3. Game Artifact Conflict & Impact Analysis
 
-### Test Implementation
+[[LLM: Game documentation drives development. Check each artifact:
 
-- [ ] **Test File Paths** - Exact test file locations specified (e.g., `Assets/Tests/EditMode`)
-- [ ] **Test Scenarios** - All test scenarios are complete and executable
-- [ ] **Expected Behaviors** - Clear expected outcomes for all tests defined
-- [ ] **Performance Metrics** - Specific performance targets for testing
-- [ ] **Test Data** - Any required test data or mock objects specified
+1. Does this invalidate GDD mechanics?
+2. Are technical architecture assumptions still valid?
+3. Do performance budgets need reallocation?
+4. Are platform requirements still achievable?
 
-## Game-Specific Quality
+Missing conflicts cause performance issues later.]]
 
-### Gameplay Implementation
+- [ ] **Review GDD:**
+  - [ ] Does the issue conflict with core gameplay mechanics?
+  - [ ] Do game features need scaling for performance?
+  - [ ] Are progression systems affected?
+  - [ ] Do balance parameters need adjustment?
+- [ ] **Review Technical Architecture:**
+  - [ ] Does the issue conflict with Unity architecture (scene structure, prefab hierarchy)?
+  - [ ] Are component systems impacted?
+  - [ ] Do shader/rendering approaches need revision?
+  - [ ] Are data structures optimal for the scale?
+- [ ] **Review Performance Specifications:**
+  - [ ] Are target framerates still achievable?
+  - [ ] Do memory budgets need reallocation?
+  - [ ] Are load time targets realistic?
+  - [ ] Do we need platform-specific targets?
+- [ ] **Review Asset Specifications:**
+  - [ ] Do texture resolutions need adjustment?
+  - [ ] Are model poly counts appropriate?
+  - [ ] Do audio compression settings need changes?
+  - [ ] Is the animation budget sustainable?
+- [ ] **Summarize Artifact Impact:** List all game documents requiring updates.
 
-- [ ] **Mechanic Accuracy** - Implementation matches GDD mechanic specifications
-- [ ] **Player Controls** - Input handling requirements are complete (e.g., Input System package)
-- [ ] **Game Feel** - Requirements for juice, feedback, and responsiveness specified
-- [ ] **Balance Implementation** - Numeric values and parameters from GDD included
-- [ ] **State Management** - Game state changes and persistence requirements defined
+## 4. Path Forward Evaluation
 
-### User Experience
+[[LLM: Present game-specific solutions with technical trade-offs:
 
-- [ ] **UI Requirements** - User interface elements and behaviors specified (e.g., UI Toolkit or UGUI)
-- [ ] **Audio Integration** - Sound effect and music requirements defined
-- [ ] **Visual Feedback** - Animation and visual effect requirements specified (e.g., Animator, Particle System)
-- [ ] **Accessibility** - Mobile touch and responsive design considerations
-- [ ] **Error Recovery** - User-facing error handling and recovery specified
+1. What's the performance gain?
+2. How much rework is required?
+3. What's the player experience impact?
+4. Are there platform-specific solutions?
+5. Is this maintainable across updates?
 
-### Performance Optimization
+Be specific about Unity implementation details.]]
 
-- [ ] **Frame Rate Targets** - Specific FPS requirements for different platforms
-- [ ] **Memory Usage** - Memory consumption limits and monitoring requirements (e.g., Profiler)
-- [ ] **Asset Optimization** - Texture, audio, and data optimization requirements
-- [ ] **Mobile Considerations** - Touch controls and mobile performance requirements
-- [ ] **Loading Performance** - Asset loading and scene transition requirements
+- [ ] **Option 1: Optimization Within Current Design:**
+  - [ ] Can performance be improved through Unity optimizations?
+    - [ ] Object pooling implementation?
+    - [ ] LOD system addition?
+    - [ ] Texture atlasing?
+    - [ ] Draw call batching?
+    - [ ] Shader optimization?
+  - [ ] Define specific optimization techniques.
+  - [ ] Estimate performance improvement potential.
+- [ ] **Option 2: Feature Scaling/Simplification:**
+  - [ ] Can the feature be simplified while maintaining fun?
+  - [ ] Identify specific elements to scale down.
+  - [ ] Define platform-specific variations.
+  - [ ] Assess player experience impact.
+- [ ] **Option 3: Architecture Refactor:**
+  - [ ] Would restructuring improve performance significantly?
+  - [ ] Identify Unity-specific refactoring needs:
+    - [ ] Scene organization changes?
+    - [ ] Prefab structure optimization?
+    - [ ] Component system redesign?
+    - [ ] State machine optimization?
+  - [ ] Estimate development effort.
+- [ ] **Option 4: Scope Adjustment:**
+  - [ ] Can we defer features to post-launch?
+  - [ ] Should certain features be platform-exclusive?
+  - [ ] Do we need to adjust milestone deliverables?
+- [ ] **Select Recommended Path:** Choose based on performance gain vs. effort.
 
-## Documentation and Communication
+## 5. Game Development Change Proposal Components
 
-### Story Documentation
+[[LLM: The proposal must include technical specifics:
 
-- [ ] **Implementation Notes** - Additional context and implementation guidance provided
-- [ ] **Design Decisions** - Key design choices documented with rationale
-- [ ] **Future Considerations** - Potential future enhancements or modifications noted
-- [ ] **Change Tracking** - Process for tracking any requirement changes during development
-- [ ] **Reference Materials** - Links to relevant GDD sections and architecture docs
+1. Performance metrics (before/after projections)
+2. Unity implementation details
+3. Platform-specific considerations
+4. Testing requirements
+5. Risk mitigation strategies
 
-### Developer Handoff
+Make it actionable for game developers.]]
 
-- [ ] **Immediate Actionability** - Developer can start implementation without additional questions
-- [ ] **Complete Context** - All necessary context provided within the story
-- [ ] **Clear Boundaries** - What is and isn't included in the story scope is clear
-- [ ] **Success Criteria** - Objective measures for story completion defined
-- [ ] **Communication Plan** - Process for developer questions and updates established
+(Ensure all points from previous sections are captured)
 
-## Final Validation
+- [ ] **Technical Issue Summary:** Performance/technical problem with metrics.
+- [ ] **Feature Impact Summary:** Affected game systems and dependencies.
+- [ ] **Performance Projections:** Expected improvements from chosen solution.
+- [ ] **Implementation Plan:** Unity-specific technical approach.
+- [ ] **Platform Considerations:** Any platform-specific implementations.
+- [ ] **Testing Strategy:** Performance benchmarks and validation approach.
+- [ ] **Risk Assessment:** Technical risks and mitigation plans.
+- [ ] **Updated Game Stories:** Revised stories with technical constraints.
 
-### Story Readiness
+## 6. Final Review & Handoff
 
-- [ ] **No Ambiguity** - No sections require interpretation or additional design decisions
-- [ ] **Technical Completeness** - All technical requirements are specified and actionable
-- [ ] **Scope Appropriateness** - Story scope matches assigned story points
-- [ ] **Quality Standards** - Story meets all game development quality standards
-- [ ] **Review Completion** - Story has been reviewed for completeness and accuracy
+[[LLM: Game changes require technical validation. Before concluding:
 
-### Implementation Preparedness
+1. Are performance targets clearly defined?
+2. Is the Unity implementation approach clear?
+3. Do we have rollback strategies?
+4. Are test scenarios defined?
+5. Is platform testing covered?
 
-- [ ] **Environment Ready** - Development environment requirements specified (e.g., Unity version)
-- [ ] **Resources Available** - All required resources (assets, docs, dependencies) accessible
-- [ ] **Testing Prepared** - Testing environment and data requirements specified
-- [ ] **Definition of Done** - Clear, objective completion criteria established
-- [ ] **Handoff Complete** - Story is ready for developer assignment and implementation
+Get explicit approval on technical approach.
 
-## Checklist Completion
+FINAL REPORT:
+Provide a technical summary:
 
-**Overall Story Quality:** ⭐⭐⭐⭐⭐
+- Performance issue and root cause
+- Chosen solution with expected gains
+- Implementation approach in Unity
+- Testing and validation plan
+- Timeline and milestone impacts
 
-**Ready for Development:** [ ] Yes [ ] No
+Keep it technically precise and actionable.]]
 
-**Additional Notes:**
-_Any specific concerns, recommendations, or clarifications needed before development begins._
-==================== END: .bmad-2d-unity-game-dev/checklists/game-story-dod-checklist.md ====================
+- [ ] **Review Checklist:** Confirm all technical aspects discussed.
+- [ ] **Review Change Proposal:** Ensure Unity implementation details are clear.
+- [ ] **Performance Validation:** Define how we'll measure success.
+- [ ] **User Approval:** Obtain approval for technical approach.
+- [ ] **Developer Handoff:** Ensure game-dev agent has all technical details needed.
+
+---
+==================== END: .bmad-2d-unity-game-dev/checklists/game-change-checklist.md ====================
