@@ -1,10 +1,10 @@
 template:
   id: level-design-doc-template-v2
   name: Level Design Document
-  version: 2.0
+  version: 2.1
   output:
     format: markdown
-    filename: "docs/{{game_name}}-level-design-document.md"
+    filename: docs/level-design-document.md
     title: "{{game_title}} Level Design Document"
 
 workflow:
@@ -371,19 +371,19 @@ sections:
             title: Playtesting Checklist
             type: checklist
             items:
-              - "Level completes within target time range"
-              - "All mechanics function correctly"
-              - "Difficulty feels appropriate for level category"
-              - "Player guidance is clear and effective"
-              - "No exploits or sequence breaks (unless intended)"
+              - Level completes within target time range
+              - All mechanics function correctly
+              - Difficulty feels appropriate for level category
+              - Player guidance is clear and effective
+              - No exploits or sequence breaks (unless intended)
           - id: player-experience-testing
             title: Player Experience Testing
             type: checklist
             items:
-              - "Tutorial levels teach effectively"
-              - "Challenge feels fair and rewarding"
-              - "Flow and pacing maintain engagement"
-              - "Audio and visual feedback support gameplay"
+              - Tutorial levels teach effectively
+              - Challenge feels fair and rewarding
+              - Flow and pacing maintain engagement
+              - Audio and visual feedback support gameplay
       - id: balance-validation
         title: Balance Validation
         template: |
