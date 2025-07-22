@@ -66,6 +66,7 @@ dependencies:
   tasks:
     - create-doc.md
     - create-deep-research-prompt.md
+    - shard-doc.md
     - document-project.md
     - execute-checklist.md
     - advanced-elicitation.md
