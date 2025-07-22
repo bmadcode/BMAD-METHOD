@@ -4,7 +4,7 @@ template:
   version: 3.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-brief.md"
+    filename: docs/game-brief.md
     title: "{{game_title}} Game Brief"
 
 workflow:
