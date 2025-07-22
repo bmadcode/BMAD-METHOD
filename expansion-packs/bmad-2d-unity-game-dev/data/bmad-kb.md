@@ -196,14 +196,18 @@ architectureSharded: true
 # Game-specific document locations
 gameDesignDocLocation: docs/game-design-doc.md
 gameBriefDocLocation: docs/game-brief.md
+gameBriefSharded: true
+gameBriefShardedLocation: docs/game-design
 gameArchitectureLocation: docs/game-architecture.md
+gameArchitectureSharded: true
+gameArchitectureShardedLocation: docs/game-architecture
 leveLDesignLocation: docs/level-design.md
 
 # Unity-specific files to load
 devLoadAlwaysFiles:
-  - Assets/Scripts/GameManager.cs
-  - Assets/Scripts/Player/PlayerController.cs
-  - ProjectSettings/ProjectSettings.asset
+  - docs/game-architecture/9-coding-standards.md
+  - docs/game-architecture/3-tech-stack.md
+  - docs/game-architecture/8-unity-project-structure.md
 ```
 
 ## Complete Game Development Workflow
