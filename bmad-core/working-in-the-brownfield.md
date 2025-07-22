@@ -210,10 +210,12 @@ The PO ensures:
    docs/brownfield-architecture.md
 2. Shard your docs:
    In your IDE
+
    ```bash
    @po
    shard docs/brownfield-prd.md
    ```
+
    ```bash
    @po
    shard docs/brownfield-architecture.md
