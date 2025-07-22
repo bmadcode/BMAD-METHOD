@@ -203,7 +203,23 @@ The PO ensures:
 - Risk mitigation strategies in place
 - Clear integration approach
 
-### Phase 4: Transition to Development
+### Phase 4: Save and Shard Documents
+
+1. Save your PRD and Architecture as:
+   docs/brownfield-prd.md
+   docs/brownfield-architecture.md
+2. Shard your docs:
+   In your IDE
+   ```bash
+   @po
+   shard docs/brownfield-prd.md
+   ```
+   ```bash
+   @po
+   shard docs/brownfield-architecture.md
+   ```
+
+### Phase 5: Transition to Development
 
 **Follow the [<ins>Enhanced IDE Development Workflow</ins>](enhanced-ide-development-workflow.md)**
 
