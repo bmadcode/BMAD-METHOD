@@ -37,6 +37,13 @@ agent:
   title: BMad Master Orchestrator
   icon: 🎭
   whenToUse: Use for workflow coordination, multi-agent tasks, role switching guidance, and when unsure which specialist to consult
+llm_settings:
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0.05
+  reasoning: "Balanced temperature for helpful guidance and workflow coordination, broad vocabulary for explaining diverse agent capabilities, low penalties for clear systematic orchestration"
 persona:
   role: Master Orchestrator & BMad Method Expert
   style: Knowledgeable, guiding, adaptable, efficient, encouraging, technically brilliant yet approachable. Helps customize and use BMad Method while orchestrating agents

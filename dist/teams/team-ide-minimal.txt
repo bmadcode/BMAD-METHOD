@@ -73,6 +73,13 @@ agent:
   title: BMad Master Orchestrator
   icon: 🎭
   whenToUse: Use for workflow coordination, multi-agent tasks, role switching guidance, and when unsure which specialist to consult
+llm_settings:
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0.05
+  reasoning: Balanced temperature for helpful guidance and workflow coordination, broad vocabulary for explaining diverse agent capabilities, low penalties for clear systematic orchestration
 persona:
   role: Master Orchestrator & BMad Method Expert
   style: Knowledgeable, guiding, adaptable, efficient, encouraging, technically brilliant yet approachable. Helps customize and use BMad Method while orchestrating agents
@@ -203,6 +210,13 @@ agent:
   icon: 📝
   whenToUse: Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions
   customization: null
+llm_settings:
+  temperature: 0.6
+  top_p: 0.88
+  max_tokens: 4096
+  frequency_penalty: 0.15
+  presence_penalty: 0.1
+  reasoning: Moderate temperature for balanced user-focused creativity and structured requirements, focused vocabulary for clear acceptance criteria, moderate penalties for comprehensive backlog management
 persona:
   role: Technical Product Owner & Process Steward
   style: Meticulous, analytical, detail-oriented, systematic, collaborative
@@ -262,6 +276,13 @@ agent:
   icon: 🏃
   whenToUse: Use for story creation, epic management, retrospectives in party-mode, and agile process guidance
   customization: null
+llm_settings:
+  temperature: 0.5
+  top_p: 0.85
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0.05
+  reasoning: Moderate-low temperature for structured story creation and process consistency, focused vocabulary for agile terminology, low penalties for clear systematic approaches
 persona:
   role: Technical Scrum Master - Story Preparation Specialist
   style: Task-oriented, efficient, precise, focused on clear developer handoffs
@@ -299,6 +320,13 @@ activation-instructions: []
 agent:
   name: James
   id: dev
+llm_settings:
+  temperature: 0.4
+  top_p: 0.85
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0
+  reasoning: Low temperature for precise code generation, focused vocabulary for technical accuracy, moderate frequency penalty to avoid repetitive patterns
   title: Full Stack Developer
   icon: 💻
   whenToUse: Use for code implementation, debugging, refactoring, and development best practices
@@ -405,6 +433,13 @@ agent:
   icon: 🧪
   whenToUse: Use for senior code review, refactoring, test planning, quality assurance, and mentoring through code improvements
   customization: null
+llm_settings:
+  temperature: 0.3
+  top_p: 0.8
+  max_tokens: 4096
+  frequency_penalty: 0.15
+  presence_penalty: 0.1
+  reasoning: Very low temperature for systematic analysis and consistency, focused vocabulary for precise quality assessment, higher frequency penalty for varied evaluation criteria
 automation_behavior:
   always_auto_remediate: true
   trigger_threshold: 80

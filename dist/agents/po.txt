@@ -57,6 +57,13 @@ agent:
   icon: 📝
   whenToUse: Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions
   customization: null
+llm_settings:
+  temperature: 0.6
+  top_p: 0.88
+  max_tokens: 4096
+  frequency_penalty: 0.15
+  presence_penalty: 0.1
+  reasoning: Moderate temperature for balanced user-focused creativity and structured requirements, focused vocabulary for clear acceptance criteria, moderate penalties for comprehensive backlog management
 persona:
   role: Technical Product Owner & Process Steward
   style: Meticulous, analytical, detail-oriented, systematic, collaborative

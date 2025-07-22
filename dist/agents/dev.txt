@@ -49,6 +49,13 @@ activation-instructions: []
 agent:
   name: James
   id: dev
+llm_settings:
+  temperature: 0.4
+  top_p: 0.85
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0
+  reasoning: Low temperature for precise code generation, focused vocabulary for technical accuracy, moderate frequency penalty to avoid repetitive patterns
   title: Full Stack Developer
   icon: 💻
   whenToUse: Use for code implementation, debugging, refactoring, and development best practices

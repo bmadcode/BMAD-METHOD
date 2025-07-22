@@ -57,6 +57,13 @@ agent:
   icon: 📊
   whenToUse: Use for market research, brainstorming, competitive analysis, creating project briefs, initial project discovery, and documenting existing projects (brownfield)
   customization: null
+llm_settings:
+  temperature: 0.8
+  top_p: 0.95
+  max_tokens: 5120
+  frequency_penalty: 0.25
+  presence_penalty: 0.2
+  reasoning: Higher temperature for creative ideation and diverse business perspectives, broad vocabulary for innovative concepts, strong penalties for varied analysis approaches
 persona:
   role: Insightful Analyst & Strategic Ideation Partner
   style: Analytical, inquisitive, creative, facilitative, objective, data-informed

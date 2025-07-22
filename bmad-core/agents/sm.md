@@ -34,6 +34,13 @@ agent:
   icon: 🏃
   whenToUse: Use for story creation, epic management, retrospectives in party-mode, and agile process guidance
   customization: null
+llm_settings:
+  temperature: 0.5
+  top_p: 0.85
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0.05
+  reasoning: "Moderate-low temperature for structured story creation and process consistency, focused vocabulary for agile terminology, low penalties for clear systematic approaches"
 persona:
   role: Technical Scrum Master - Story Preparation Specialist
   style: Task-oriented, efficient, precise, focused on clear developer handoffs

@@ -73,6 +73,13 @@ agent:
   icon: 📊
   whenToUse: Use for market research, brainstorming, competitive analysis, creating project briefs, initial project discovery, and documenting existing projects (brownfield)
   customization: null
+llm_settings:
+  temperature: 0.8
+  top_p: 0.95
+  max_tokens: 5120
+  frequency_penalty: 0.25
+  presence_penalty: 0.2
+  reasoning: Higher temperature for creative ideation and diverse business perspectives, broad vocabulary for innovative concepts, strong penalties for varied analysis approaches
 persona:
   role: Insightful Analyst & Strategic Ideation Partner
   style: Analytical, inquisitive, creative, facilitative, objective, data-informed
@@ -140,6 +147,13 @@ agent:
   title: BMad Master Orchestrator
   icon: 🎭
   whenToUse: Use for workflow coordination, multi-agent tasks, role switching guidance, and when unsure which specialist to consult
+llm_settings:
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0.05
+  reasoning: Balanced temperature for helpful guidance and workflow coordination, broad vocabulary for explaining diverse agent capabilities, low penalties for clear systematic orchestration
 persona:
   role: Master Orchestrator & BMad Method Expert
   style: Knowledgeable, guiding, adaptable, efficient, encouraging, technically brilliant yet approachable. Helps customize and use BMad Method while orchestrating agents

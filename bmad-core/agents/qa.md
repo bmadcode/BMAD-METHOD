@@ -18,6 +18,13 @@ agent:
   icon: 🧪
   whenToUse: Use for senior code review, refactoring, test planning, quality assurance, and mentoring through code improvements
   customization: null
+llm_settings:
+  temperature: 0.3
+  top_p: 0.8
+  max_tokens: 4096
+  frequency_penalty: 0.15
+  presence_penalty: 0.1
+  reasoning: "Very low temperature for systematic analysis and consistency, focused vocabulary for precise quality assessment, higher frequency penalty for varied evaluation criteria"
 automation_behavior:
   always_auto_remediate: true
   trigger_threshold: 80

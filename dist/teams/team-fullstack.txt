@@ -81,6 +81,13 @@ agent:
   title: BMad Master Orchestrator
   icon: 🎭
   whenToUse: Use for workflow coordination, multi-agent tasks, role switching guidance, and when unsure which specialist to consult
+llm_settings:
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 4096
+  frequency_penalty: 0.1
+  presence_penalty: 0.05
+  reasoning: Balanced temperature for helpful guidance and workflow coordination, broad vocabulary for explaining diverse agent capabilities, low penalties for clear systematic orchestration
 persona:
   role: Master Orchestrator & BMad Method Expert
   style: Knowledgeable, guiding, adaptable, efficient, encouraging, technically brilliant yet approachable. Helps customize and use BMad Method while orchestrating agents
@@ -211,6 +218,13 @@ agent:
   icon: 📊
   whenToUse: Use for market research, brainstorming, competitive analysis, creating project briefs, initial project discovery, and documenting existing projects (brownfield)
   customization: null
+llm_settings:
+  temperature: 0.8
+  top_p: 0.95
+  max_tokens: 5120
+  frequency_penalty: 0.25
+  presence_penalty: 0.2
+  reasoning: Higher temperature for creative ideation and diverse business perspectives, broad vocabulary for innovative concepts, strong penalties for varied analysis approaches
 persona:
   role: Insightful Analyst & Strategic Ideation Partner
   style: Analytical, inquisitive, creative, facilitative, objective, data-informed
@@ -274,6 +288,13 @@ agent:
   title: Product Manager
   icon: 📋
   whenToUse: Use for creating PRDs, product strategy, feature prioritization, roadmap planning, and stakeholder communication
+llm_settings:
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 5120
+  frequency_penalty: 0.2
+  presence_penalty: 0.15
+  reasoning: Balanced temperature for strategic creativity with structured output, broad vocabulary for product concepts, moderate penalties for comprehensive product thinking
 persona:
   role: Investigative Product Strategist & Market-Savvy PM
   style: Analytical, inquisitive, data-driven, user-focused, pragmatic
@@ -337,6 +358,13 @@ agent:
   icon: 🎨
   whenToUse: Use for UI/UX design, wireframes, prototypes, front-end specifications, and user experience optimization
   customization: null
+llm_settings:
+  temperature: 0.75
+  top_p: 0.92
+  max_tokens: 5120
+  frequency_penalty: 0.3
+  presence_penalty: 0.25
+  reasoning: Higher temperature for creative design thinking and innovative UX solutions, broad vocabulary for design concepts, strong penalties for diverse design approaches and alternatives
 persona:
   role: User Experience Designer & UI Specialist
   style: Empathetic, creative, detail-oriented, user-obsessed, data-informed
@@ -387,6 +415,13 @@ agent:
   icon: 🏗️
   whenToUse: Use for system design, architecture documents, technology selection, API design, and infrastructure planning
   customization: null
+llm_settings:
+  temperature: 0.6
+  top_p: 0.9
+  max_tokens: 6144
+  frequency_penalty: 0.2
+  presence_penalty: 0.15
+  reasoning: Moderate temperature for balanced technical creativity and precision, broader vocabulary for architectural concepts, higher penalties for diverse technical solutions
 persona:
   role: Holistic System Architect & Full-Stack Technical Leader
   style: Comprehensive, pragmatic, user-centric, technically deep yet accessible
@@ -452,6 +487,13 @@ agent:
   icon: 📝
   whenToUse: Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions
   customization: null
+llm_settings:
+  temperature: 0.6
+  top_p: 0.88
+  max_tokens: 4096
+  frequency_penalty: 0.15
+  presence_penalty: 0.1
+  reasoning: Moderate temperature for balanced user-focused creativity and structured requirements, focused vocabulary for clear acceptance criteria, moderate penalties for comprehensive backlog management
 persona:
   role: Technical Product Owner & Process Steward
   style: Meticulous, analytical, detail-oriented, systematic, collaborative

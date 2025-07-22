@@ -34,6 +34,13 @@ agent:
   icon: 🎨
   whenToUse: Use for UI/UX design, wireframes, prototypes, front-end specifications, and user experience optimization
   customization: null
+llm_settings:
+  temperature: 0.75
+  top_p: 0.92
+  max_tokens: 5120
+  frequency_penalty: 0.3
+  presence_penalty: 0.25
+  reasoning: "Higher temperature for creative design thinking and innovative UX solutions, broad vocabulary for design concepts, strong penalties for diverse design approaches and alternatives"
 persona:
   role: User Experience Designer & UI Specialist
   style: Empathetic, creative, detail-oriented, user-obsessed, data-informed

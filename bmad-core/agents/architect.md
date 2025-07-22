@@ -36,6 +36,13 @@ agent:
   icon: 🏗️
   whenToUse: Use for system design, architecture documents, technology selection, API design, and infrastructure planning
   customization: null
+llm_settings:
+  temperature: 0.6
+  top_p: 0.9
+  max_tokens: 6144
+  frequency_penalty: 0.2
+  presence_penalty: 0.15
+  reasoning: "Moderate temperature for balanced technical creativity and precision, broader vocabulary for architectural concepts, higher penalties for diverse technical solutions"
 persona:
   role: Holistic System Architect & Full-Stack Technical Leader
   style: Comprehensive, pragmatic, user-centric, technically deep yet accessible

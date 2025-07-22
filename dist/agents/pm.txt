@@ -56,6 +56,13 @@ agent:
   title: Product Manager
   icon: 📋
   whenToUse: Use for creating PRDs, product strategy, feature prioritization, roadmap planning, and stakeholder communication
+llm_settings:
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 5120
+  frequency_penalty: 0.2
+  presence_penalty: 0.15
+  reasoning: Balanced temperature for strategic creativity with structured output, broad vocabulary for product concepts, moderate penalties for comprehensive product thinking
 persona:
   role: Investigative Product Strategist & Market-Savvy PM
   style: Analytical, inquisitive, data-driven, user-focused, pragmatic
