@@ -4098,7 +4098,7 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 template:
   id: game-design-doc-template-v3
   name: Game Design Document (GDD)
-  version: 3.0
+  version: 4.0
   output:
     format: markdown
     filename: docs/game-design-document.md
@@ -4560,20 +4560,20 @@ sections:
     instruction: Break down the Unity development into phases that can be converted to agile epics. Each phase should deliver deployable functionality following Unity best practices.
     elicit: true
     sections:
-      - id: epic-overview
-        title: Epic Overview
-        instruction: Present a high-level list of all epics for user approval. Each epic should deliver significant Unity functionality.
+      - id: phases-overview
+        title: Phases Overview
+        instruction: Present a high-level list of all phases for user approval. Each phase's design should deliver significant Unity functionality.
         type: numbered-list
         examples:
-          - "Epic 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
-          - "Epic 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
-          - "Epic 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
-          - "Epic 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
+          - "Phase 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
+          - "Phase 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
+          - "Phase 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
+          - "Phase 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
       - id: phase-1-foundation
         title: "Phase 1: Unity Foundation & Core Systems ({{duration}})"
         sections:
-          - id: foundation-epic
-            title: "Epic: Unity Project Foundation"
+          - id: foundation-design
+            title: "Design: Unity Project Foundation"
             type: bullet-list
             template: |
               - Unity project setup with proper folder structure and naming conventions
@@ -4584,8 +4584,8 @@ sections:
               - Initial build pipeline and platform configuration
             examples:
               - "Input System: Configure PlayerInput component with Action Maps for movement and UI"
-          - id: core-systems-epic
-            title: "Epic: Essential Game Systems"
+          - id: core-systems-design
+            title: "Design: Essential Game Systems"
             type: bullet-list
             template: |
               - Save/Load system implementation with {{save_format}} format
@@ -4597,8 +4597,8 @@ sections:
       - id: phase-2-gameplay
         title: "Phase 2: Core Gameplay Implementation ({{duration}})"
         sections:
-          - id: gameplay-mechanics-epic
-            title: "Epic: Primary Game Mechanics"
+          - id: gameplay-mechanics-design
+            title: "Design: Primary Game Mechanics"
             type: bullet-list
             template: |
               - Player controller with {{movement_type}} movement system
@@ -4607,8 +4607,8 @@ sections:
               - Game state management (playing, paused, game over)
               - Basic collision detection and response systems
               - Animation system integration with Animator controllers
-          - id: level-systems-epic
-            title: "Epic: Level & Content Systems"
+          - id: level-systems-design
+            title: "Design: Level & Content Systems"
             type: bullet-list
             template: |
               - Scene loading and transition system
@@ -4620,8 +4620,8 @@ sections:
       - id: phase-3-polish
         title: "Phase 3: Polish & Optimization ({{duration}})"
         sections:
-          - id: performance-epic
-            title: "Epic: Performance & Platform Optimization"
+          - id: performance-design
+            title: "Design: Performance & Platform Optimization"
             type: bullet-list
             template: |
               - Unity Profiler analysis and optimization passes
@@ -4630,8 +4630,8 @@ sections:
               - Platform-specific performance tuning
               - Build size optimization and asset bundling
               - Quality settings configuration for different device tiers
-          - id: user-experience-epic
-            title: "Epic: User Experience & Polish"
+          - id: user-experience-design
+            title: "Design: User Experience & Polish"
             type: bullet-list
             template: |
               - Complete UI/UX implementation with responsive design
@@ -4640,6 +4640,79 @@ sections:
               - Accessibility features implementation
               - Tutorial and onboarding flow
               - Final testing and bug fixing across all platforms
+
+  - id: epic-list
+    title: Epic List
+    instruction: |
+      Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+
+      CRITICAL: Epics MUST be logically sequential following agile best practices:
+
+      - Each epic should be focused on a single phase and it's design from the development-phases section and deliver a significant, end-to-end, fully deployable increment of testable functionality
+      - Epic 1 must establish Phase 1: Unity Foundation & Core Systems (Project setup, input handling, basic scene management) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, remember this when we produce the stories for the first epic!
+      - Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
+      - Not every project needs multiple epics, an epic needs to deliver value. For example, an API, component, or scriptableobject completed can deliver value even if a scene, or gameobject is not complete and planned for a separate epic.
+      - Err on the side of less epics, but let the user know your rationale and offer options for splitting them if it seems some are too large or focused on disparate things.
+      - Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.
+    elicit: true
+    examples:
+      - "Epic 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
+      - "Epic 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
+      - "Epic 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
+      - "Epic 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
+
+  - id: epic-details
+    title: Epic {{epic_number}} {{epic_title}}
+    repeatable: true
+    instruction: |
+      After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
+
+      For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
+
+      CRITICAL STORY SEQUENCING REQUIREMENTS:
+
+      - Stories within each epic MUST be logically sequential
+      - Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
+      - No story should depend on work from a later story or epic
+      - Identify and note any direct prerequisite stories
+      - Focus on "what" and "why" not "how" (leave technical implementation to Architect) yet be precise enough to support a logical sequential order of operations from story to story.
+      - Ensure each story delivers clear user or business value, try to avoid enablers and build them into stories that deliver value.
+      - Size stories for AI agent execution: Each story must be completable by a single AI agent in one focused session without context overflow
+      - Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
+      - If a story seems complex, break it down further as long as it can deliver a vertical slice
+    elicit: true
+    template: "{{epic_goal}}"
+    sections:
+      - id: story
+        title: Story {{epic_number}}.{{story_number}} {{story_title}}
+        repeatable: true
+        instruction: Provide a clear, concise description of what this story implements. Focus on the specific game feature or system being built. Reference the GDD section that defines this feature and reference the gamearchitecture section for additional implementation and integration specifics.
+        template: "{{clear_description_of_what_needs_to_be_implemented}}"
+        sections:
+          - id: acceptance-criteria
+            title: Acceptance Criteria
+            instruction: Define specific, testable conditions that must be met for the story to be considered complete. Each criterion should be verifiable and directly related to gameplay functionality.
+            sections:
+              - id: functional-requirements
+                title: Functional Requirements
+                type: checklist
+                items:
+                  - "{{specific_functional_requirement}}"
+              - id: technical-requirements
+                title: Technical Requirements
+                type: checklist
+                items:
+                  - Code follows C# best practices
+                  - Maintains stable frame rate on target devices
+                  - No memory leaks or performance degradation
+                  - "{{specific_technical_requirement}}"
+              - id: game-design-requirements
+                title: Game Design Requirements
+                type: checklist
+                items:
+                  - "{{gameplay_requirement_from_gdd}}"
+                  - "{{balance_requirement_if_applicable}}"
+                  - "{{player_experience_requirement}}"
 
   - id: success-metrics
     title: Success Metrics & Quality Assurance
@@ -8090,7 +8163,7 @@ To identify the next logical game story based on project progress and epic defin
 - Load `.bmad-2d-unity-game-dev/game-core-config.yaml` from the project root
 - If the file does not exist, check for `.bmad-2d-unity-game-dev/core-config.yaml` as fallback
 - If neither exists, HALT and inform the user: "game-core-config.yaml (or core-config.yaml) not found. This file is required for story creation. You can either: 1) Copy core-config.yaml from GITHUB bmad-core/ and configure it for your game project OR 2) Run the BMad installer against your project to upgrade and add the file automatically. Please add and configure before proceeding."
-- Extract key configurations: `devStoryLocation`, `gdd.*`, `architecture.*`, `workflow.*`
+- Extract key configurations: `devStoryLocation`, `gdd.*`, `gamearchitecture.*`, `workflow.*`
 
 ### 1. Identify Next Story for Preparation
 
@@ -8120,12 +8193,12 @@ To identify the next logical game story based on project progress and epic defin
 
 #### 3.1 Determine Architecture Reading Strategy
 
-- **If `architectureVersion: >= v4` and `architectureSharded: true`**: Read `{architectureShardedLocation}/index.md` then follow structured reading order below
-- **Else**: Use monolithic `architectureFile` for similar sections
+- **If `gamearchitectureVersion: >= v3` and `gamearchitectureSharded: true`**: Read `{gamearchitectureShardedLocation}/index.md` then follow structured reading order below
+- **Else**: Use monolithic `gamearchitectureFile` for similar sections
 
 #### 3.2 Read Architecture Documents Based on Story Type
 
-**For ALL Game Stories:** tech-stack.md, unified-project-structure.md, coding-standards.md, testing-strategy.md, unity-conventions.md
+**For ALL Game Stories:** tech-stack.md, unity-project-structure.md, coding-standards.md, unity-conventions.md,testing-resilience-architecture.md
 
 **For Gameplay/Mechanics Stories, additionally:** gameplay-systems.md, component-architecture.md, physics-config.md, input-system.md, state-machines.md
 
@@ -8155,7 +8228,7 @@ Extract:
 - Platform-specific considerations (mobile vs desktop)
 - Testing requirements specific to Unity features
 
-ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
+ALWAYS cite source documents: `[Source: gamearchitecture/{filename}.md#{section}]`
 
 ### 4. Unity-Specific Technical Analysis
 
@@ -8195,7 +8268,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
 - Create new story file: `{devStoryLocation}/{epicNum}.{storyNum}.story.md` using Game Story Template
 - Fill in basic story information: Title, Status (Draft), Story statement, Acceptance Criteria from Epic/GDD
 - **`Dev Notes` section (CRITICAL):**
-  - CRITICAL: This section MUST contain ONLY information extracted from architecture documents and GDD. NEVER invent or assume technical details.
+  - CRITICAL: This section MUST contain ONLY information extracted from gamearchitecture documents and GDD. NEVER invent or assume technical details.
   - Include ALL relevant technical details from Steps 2-4, organized by category:
     - **Previous Story Insights**: Key learnings from previous story implementation
     - **Package Dependencies**: Unity packages required, versions, configurations [with source references]
@@ -8207,10 +8280,10 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
     - **Performance Targets**: FPS targets, memory budgets, profiler metrics
     - **Platform Considerations**: Mobile vs desktop differences, input variations
     - **Testing Requirements**: PlayMode tests, Unity Test Framework specifics
-  - Every technical detail MUST include its source reference: `[Source: architecture/{filename}.md#{section}]`
-  - If information for a category is not found in the architecture docs, explicitly state: "No specific guidance found in architecture docs"
+  - Every technical detail MUST include its source reference: `[Source: gamearchitecture/{filename}.md#{section}]`
+  - If information for a category is not found in the gamearchitecture docs, explicitly state: "No specific guidance found in gamearchitecture docs"
 - **`Tasks / Subtasks` section:**
-  - Generate detailed, sequential list of technical tasks based ONLY on: Epic/GDD Requirements, Story AC, Reviewed Architecture Information
+  - Generate detailed, sequential list of technical tasks based ONLY on: Epic/GDD Requirements, Story AC, Reviewed GameArchitecture Information
   - Include Unity-specific tasks:
     - Scene setup and configuration
     - Prefab creation and testing
@@ -8219,7 +8292,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
     - Physics configuration
     - UI implementation with proper anchoring
     - Performance profiling checkpoints
-  - Each task must reference relevant architecture documentation
+  - Each task must reference relevant gamearchitecture documentation
   - Include PlayMode testing as explicit subtasks
   - Link tasks to ACs where applicable (e.g., `Task 1 (AC: 1, 3)`)
 - Add notes on Unity project structure alignment or discrepancies found in Step 4
@@ -8241,7 +8314,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
   - Key Unity components and systems included
   - Scene/prefab modifications required
   - Asset requirements identified
-  - Any deviations or conflicts noted between GDD and architecture
+  - Any deviations or conflicts noted between GDD and gamearchitecture
   - Checklist Results
   - Next steps: For complex Unity features, suggest the user review the story draft and optionally test critical assumptions in Unity Editor
 
@@ -10279,7 +10352,7 @@ sections:
 template:
   id: game-design-doc-template-v3
   name: Game Design Document (GDD)
-  version: 3.0
+  version: 4.0
   output:
     format: markdown
     filename: docs/game-design-document.md
@@ -10741,20 +10814,20 @@ sections:
     instruction: Break down the Unity development into phases that can be converted to agile epics. Each phase should deliver deployable functionality following Unity best practices.
     elicit: true
     sections:
-      - id: epic-overview
-        title: Epic Overview
-        instruction: Present a high-level list of all epics for user approval. Each epic should deliver significant Unity functionality.
+      - id: phases-overview
+        title: Phases Overview
+        instruction: Present a high-level list of all phases for user approval. Each phase's design should deliver significant Unity functionality.
         type: numbered-list
         examples:
-          - "Epic 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
-          - "Epic 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
-          - "Epic 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
-          - "Epic 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
+          - "Phase 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
+          - "Phase 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
+          - "Phase 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
+          - "Phase 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
       - id: phase-1-foundation
         title: "Phase 1: Unity Foundation & Core Systems ({{duration}})"
         sections:
-          - id: foundation-epic
-            title: "Epic: Unity Project Foundation"
+          - id: foundation-design
+            title: "Design: Unity Project Foundation"
             type: bullet-list
             template: |
               - Unity project setup with proper folder structure and naming conventions
@@ -10765,8 +10838,8 @@ sections:
               - Initial build pipeline and platform configuration
             examples:
               - "Input System: Configure PlayerInput component with Action Maps for movement and UI"
-          - id: core-systems-epic
-            title: "Epic: Essential Game Systems"
+          - id: core-systems-design
+            title: "Design: Essential Game Systems"
             type: bullet-list
             template: |
               - Save/Load system implementation with {{save_format}} format
@@ -10778,8 +10851,8 @@ sections:
       - id: phase-2-gameplay
         title: "Phase 2: Core Gameplay Implementation ({{duration}})"
         sections:
-          - id: gameplay-mechanics-epic
-            title: "Epic: Primary Game Mechanics"
+          - id: gameplay-mechanics-design
+            title: "Design: Primary Game Mechanics"
             type: bullet-list
             template: |
               - Player controller with {{movement_type}} movement system
@@ -10788,8 +10861,8 @@ sections:
               - Game state management (playing, paused, game over)
               - Basic collision detection and response systems
               - Animation system integration with Animator controllers
-          - id: level-systems-epic
-            title: "Epic: Level & Content Systems"
+          - id: level-systems-design
+            title: "Design: Level & Content Systems"
             type: bullet-list
             template: |
               - Scene loading and transition system
@@ -10801,8 +10874,8 @@ sections:
       - id: phase-3-polish
         title: "Phase 3: Polish & Optimization ({{duration}})"
         sections:
-          - id: performance-epic
-            title: "Epic: Performance & Platform Optimization"
+          - id: performance-design
+            title: "Design: Performance & Platform Optimization"
             type: bullet-list
             template: |
               - Unity Profiler analysis and optimization passes
@@ -10811,8 +10884,8 @@ sections:
               - Platform-specific performance tuning
               - Build size optimization and asset bundling
               - Quality settings configuration for different device tiers
-          - id: user-experience-epic
-            title: "Epic: User Experience & Polish"
+          - id: user-experience-design
+            title: "Design: User Experience & Polish"
             type: bullet-list
             template: |
               - Complete UI/UX implementation with responsive design
@@ -10821,6 +10894,79 @@ sections:
               - Accessibility features implementation
               - Tutorial and onboarding flow
               - Final testing and bug fixing across all platforms
+
+  - id: epic-list
+    title: Epic List
+    instruction: |
+      Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+
+      CRITICAL: Epics MUST be logically sequential following agile best practices:
+
+      - Each epic should be focused on a single phase and it's design from the development-phases section and deliver a significant, end-to-end, fully deployable increment of testable functionality
+      - Epic 1 must establish Phase 1: Unity Foundation & Core Systems (Project setup, input handling, basic scene management) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, remember this when we produce the stories for the first epic!
+      - Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
+      - Not every project needs multiple epics, an epic needs to deliver value. For example, an API, component, or scriptableobject completed can deliver value even if a scene, or gameobject is not complete and planned for a separate epic.
+      - Err on the side of less epics, but let the user know your rationale and offer options for splitting them if it seems some are too large or focused on disparate things.
+      - Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.
+    elicit: true
+    examples:
+      - "Epic 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
+      - "Epic 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
+      - "Epic 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
+      - "Epic 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
+
+  - id: epic-details
+    title: Epic {{epic_number}} {{epic_title}}
+    repeatable: true
+    instruction: |
+      After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
+
+      For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
+
+      CRITICAL STORY SEQUENCING REQUIREMENTS:
+
+      - Stories within each epic MUST be logically sequential
+      - Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
+      - No story should depend on work from a later story or epic
+      - Identify and note any direct prerequisite stories
+      - Focus on "what" and "why" not "how" (leave technical implementation to Architect) yet be precise enough to support a logical sequential order of operations from story to story.
+      - Ensure each story delivers clear user or business value, try to avoid enablers and build them into stories that deliver value.
+      - Size stories for AI agent execution: Each story must be completable by a single AI agent in one focused session without context overflow
+      - Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
+      - If a story seems complex, break it down further as long as it can deliver a vertical slice
+    elicit: true
+    template: "{{epic_goal}}"
+    sections:
+      - id: story
+        title: Story {{epic_number}}.{{story_number}} {{story_title}}
+        repeatable: true
+        instruction: Provide a clear, concise description of what this story implements. Focus on the specific game feature or system being built. Reference the GDD section that defines this feature and reference the gamearchitecture section for additional implementation and integration specifics.
+        template: "{{clear_description_of_what_needs_to_be_implemented}}"
+        sections:
+          - id: acceptance-criteria
+            title: Acceptance Criteria
+            instruction: Define specific, testable conditions that must be met for the story to be considered complete. Each criterion should be verifiable and directly related to gameplay functionality.
+            sections:
+              - id: functional-requirements
+                title: Functional Requirements
+                type: checklist
+                items:
+                  - "{{specific_functional_requirement}}"
+              - id: technical-requirements
+                title: Technical Requirements
+                type: checklist
+                items:
+                  - Code follows C# best practices
+                  - Maintains stable frame rate on target devices
+                  - No memory leaks or performance degradation
+                  - "{{specific_technical_requirement}}"
+              - id: game-design-requirements
+                title: Game Design Requirements
+                type: checklist
+                items:
+                  - "{{gameplay_requirement_from_gdd}}"
+                  - "{{balance_requirement_if_applicable}}"
+                  - "{{player_experience_requirement}}"
 
   - id: success-metrics
     title: Success Metrics & Quality Assurance
@@ -11938,7 +12084,7 @@ To identify the next logical game story based on project progress and epic defin
 - Load `.bmad-2d-unity-game-dev/game-core-config.yaml` from the project root
 - If the file does not exist, check for `.bmad-2d-unity-game-dev/core-config.yaml` as fallback
 - If neither exists, HALT and inform the user: "game-core-config.yaml (or core-config.yaml) not found. This file is required for story creation. You can either: 1) Copy core-config.yaml from GITHUB bmad-core/ and configure it for your game project OR 2) Run the BMad installer against your project to upgrade and add the file automatically. Please add and configure before proceeding."
-- Extract key configurations: `devStoryLocation`, `gdd.*`, `architecture.*`, `workflow.*`
+- Extract key configurations: `devStoryLocation`, `gdd.*`, `gamearchitecture.*`, `workflow.*`
 
 ### 1. Identify Next Story for Preparation
 
@@ -11968,12 +12114,12 @@ To identify the next logical game story based on project progress and epic defin
 
 #### 3.1 Determine Architecture Reading Strategy
 
-- **If `architectureVersion: >= v4` and `architectureSharded: true`**: Read `{architectureShardedLocation}/index.md` then follow structured reading order below
-- **Else**: Use monolithic `architectureFile` for similar sections
+- **If `gamearchitectureVersion: >= v3` and `gamearchitectureSharded: true`**: Read `{gamearchitectureShardedLocation}/index.md` then follow structured reading order below
+- **Else**: Use monolithic `gamearchitectureFile` for similar sections
 
 #### 3.2 Read Architecture Documents Based on Story Type
 
-**For ALL Game Stories:** tech-stack.md, unified-project-structure.md, coding-standards.md, testing-strategy.md, unity-conventions.md
+**For ALL Game Stories:** tech-stack.md, unity-project-structure.md, coding-standards.md, unity-conventions.md,testing-resilience-architecture.md
 
 **For Gameplay/Mechanics Stories, additionally:** gameplay-systems.md, component-architecture.md, physics-config.md, input-system.md, state-machines.md
 
@@ -12003,7 +12149,7 @@ Extract:
 - Platform-specific considerations (mobile vs desktop)
 - Testing requirements specific to Unity features
 
-ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
+ALWAYS cite source documents: `[Source: gamearchitecture/{filename}.md#{section}]`
 
 ### 4. Unity-Specific Technical Analysis
 
@@ -12043,7 +12189,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
 - Create new story file: `{devStoryLocation}/{epicNum}.{storyNum}.story.md` using Game Story Template
 - Fill in basic story information: Title, Status (Draft), Story statement, Acceptance Criteria from Epic/GDD
 - **`Dev Notes` section (CRITICAL):**
-  - CRITICAL: This section MUST contain ONLY information extracted from architecture documents and GDD. NEVER invent or assume technical details.
+  - CRITICAL: This section MUST contain ONLY information extracted from gamearchitecture documents and GDD. NEVER invent or assume technical details.
   - Include ALL relevant technical details from Steps 2-4, organized by category:
     - **Previous Story Insights**: Key learnings from previous story implementation
     - **Package Dependencies**: Unity packages required, versions, configurations [with source references]
@@ -12055,10 +12201,10 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
     - **Performance Targets**: FPS targets, memory budgets, profiler metrics
     - **Platform Considerations**: Mobile vs desktop differences, input variations
     - **Testing Requirements**: PlayMode tests, Unity Test Framework specifics
-  - Every technical detail MUST include its source reference: `[Source: architecture/{filename}.md#{section}]`
-  - If information for a category is not found in the architecture docs, explicitly state: "No specific guidance found in architecture docs"
+  - Every technical detail MUST include its source reference: `[Source: gamearchitecture/{filename}.md#{section}]`
+  - If information for a category is not found in the gamearchitecture docs, explicitly state: "No specific guidance found in gamearchitecture docs"
 - **`Tasks / Subtasks` section:**
-  - Generate detailed, sequential list of technical tasks based ONLY on: Epic/GDD Requirements, Story AC, Reviewed Architecture Information
+  - Generate detailed, sequential list of technical tasks based ONLY on: Epic/GDD Requirements, Story AC, Reviewed GameArchitecture Information
   - Include Unity-specific tasks:
     - Scene setup and configuration
     - Prefab creation and testing
@@ -12067,7 +12213,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
     - Physics configuration
     - UI implementation with proper anchoring
     - Performance profiling checkpoints
-  - Each task must reference relevant architecture documentation
+  - Each task must reference relevant gamearchitecture documentation
   - Include PlayMode testing as explicit subtasks
   - Link tasks to ACs where applicable (e.g., `Task 1 (AC: 1, 3)`)
 - Add notes on Unity project structure alignment or discrepancies found in Step 4
@@ -12089,7 +12235,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
   - Key Unity components and systems included
   - Scene/prefab modifications required
   - Asset requirements identified
-  - Any deviations or conflicts noted between GDD and architecture
+  - Any deviations or conflicts noted between GDD and gamearchitecture
   - Checklist Results
   - Next steps: For complex Unity features, suggest the user review the story draft and optionally test critical assumptions in Unity Editor
 

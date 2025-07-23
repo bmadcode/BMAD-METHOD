@@ -11,7 +11,7 @@ To identify the next logical game story based on project progress and epic defin
 - Load `{root}/game-core-config.yaml` from the project root
 - If the file does not exist, check for `{root}/core-config.yaml` as fallback
 - If neither exists, HALT and inform the user: "game-core-config.yaml (or core-config.yaml) not found. This file is required for story creation. You can either: 1) Copy core-config.yaml from GITHUB bmad-core/ and configure it for your game project OR 2) Run the BMad installer against your project to upgrade and add the file automatically. Please add and configure before proceeding."
-- Extract key configurations: `devStoryLocation`, `gdd.*`, `architecture.*`, `workflow.*`
+- Extract key configurations: `devStoryLocation`, `gdd.*`, `gamearchitecture.*`, `workflow.*`
 
 ### 1. Identify Next Story for Preparation
 
@@ -41,12 +41,12 @@ To identify the next logical game story based on project progress and epic defin
 
 #### 3.1 Determine Architecture Reading Strategy
 
-- **If `architectureVersion: >= v4` and `architectureSharded: true`**: Read `{architectureShardedLocation}/index.md` then follow structured reading order below
-- **Else**: Use monolithic `architectureFile` for similar sections
+- **If `gamearchitectureVersion: >= v3` and `gamearchitectureSharded: true`**: Read `{gamearchitectureShardedLocation}/index.md` then follow structured reading order below
+- **Else**: Use monolithic `gamearchitectureFile` for similar sections
 
 #### 3.2 Read Architecture Documents Based on Story Type
 
-**For ALL Game Stories:** tech-stack.md, unified-project-structure.md, coding-standards.md, testing-strategy.md, unity-conventions.md
+**For ALL Game Stories:** tech-stack.md, unity-project-structure.md, coding-standards.md, unity-conventions.md,testing-resilience-architecture.md
 
 **For Gameplay/Mechanics Stories, additionally:** gameplay-systems.md, component-architecture.md, physics-config.md, input-system.md, state-machines.md
 
@@ -76,7 +76,7 @@ Extract:
 - Platform-specific considerations (mobile vs desktop)
 - Testing requirements specific to Unity features
 
-ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
+ALWAYS cite source documents: `[Source: gamearchitecture/{filename}.md#{section}]`
 
 ### 4. Unity-Specific Technical Analysis
 
@@ -116,7 +116,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
 - Create new story file: `{devStoryLocation}/{epicNum}.{storyNum}.story.md` using Game Story Template
 - Fill in basic story information: Title, Status (Draft), Story statement, Acceptance Criteria from Epic/GDD
 - **`Dev Notes` section (CRITICAL):**
-  - CRITICAL: This section MUST contain ONLY information extracted from architecture documents and GDD. NEVER invent or assume technical details.
+  - CRITICAL: This section MUST contain ONLY information extracted from gamearchitecture documents and GDD. NEVER invent or assume technical details.
   - Include ALL relevant technical details from Steps 2-4, organized by category:
     - **Previous Story Insights**: Key learnings from previous story implementation
     - **Package Dependencies**: Unity packages required, versions, configurations [with source references]
@@ -128,10 +128,10 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
     - **Performance Targets**: FPS targets, memory budgets, profiler metrics
     - **Platform Considerations**: Mobile vs desktop differences, input variations
     - **Testing Requirements**: PlayMode tests, Unity Test Framework specifics
-  - Every technical detail MUST include its source reference: `[Source: architecture/{filename}.md#{section}]`
-  - If information for a category is not found in the architecture docs, explicitly state: "No specific guidance found in architecture docs"
+  - Every technical detail MUST include its source reference: `[Source: gamearchitecture/{filename}.md#{section}]`
+  - If information for a category is not found in the gamearchitecture docs, explicitly state: "No specific guidance found in gamearchitecture docs"
 - **`Tasks / Subtasks` section:**
-  - Generate detailed, sequential list of technical tasks based ONLY on: Epic/GDD Requirements, Story AC, Reviewed Architecture Information
+  - Generate detailed, sequential list of technical tasks based ONLY on: Epic/GDD Requirements, Story AC, Reviewed GameArchitecture Information
   - Include Unity-specific tasks:
     - Scene setup and configuration
     - Prefab creation and testing
@@ -140,7 +140,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
     - Physics configuration
     - UI implementation with proper anchoring
     - Performance profiling checkpoints
-  - Each task must reference relevant architecture documentation
+  - Each task must reference relevant gamearchitecture documentation
   - Include PlayMode testing as explicit subtasks
   - Link tasks to ACs where applicable (e.g., `Task 1 (AC: 1, 3)`)
 - Add notes on Unity project structure alignment or discrepancies found in Step 4
@@ -162,7 +162,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
   - Key Unity components and systems included
   - Scene/prefab modifications required
   - Asset requirements identified
-  - Any deviations or conflicts noted between GDD and architecture
+  - Any deviations or conflicts noted between GDD and gamearchitecture
   - Checklist Results
   - Next steps: For complex Unity features, suggest the user review the story draft and optionally test critical assumptions in Unity Editor
 

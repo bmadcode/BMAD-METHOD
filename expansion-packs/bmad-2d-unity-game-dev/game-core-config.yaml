@@ -1,0 +1,29 @@
+name: bmad-2d-unity-game-dev
+version: 1.4.0
+short-title: Unity C# 2D Game Dev Pack
+description: 2D Game Development expansion pack for BMad Method - Unity & C# focused
+author: pbean (PinkyD)
+slashPrefix: bmad2du
+markdownExploder: true
+# Game-specific document locations
+gdd:
+  gddVersion: v4
+  gddSharded: true
+  gddLocation: docs/game-design-doc.md
+  gddShardedLocation: docs/game-design-document
+  epicFilePattern: epic-{n}*.md
+gamearchitecture:
+  gamearchitectureFile: docs/architecture.md
+  gamearchitectureVersion: v3
+  gamearchitectureLocation: docs/game-architecture.md
+  gamearchitectureSharded: true
+  gamearchitectureShardedLocation: docs/game-architecture
+gamebriefdocLocation: docs/game-brief.md
+levelDesignLocation: docs/level-design.md
+devDebugLog: .ai/debug-log.md
+devStoryLocation: docs/stories
+# Unity-specific files to load -- assuming per sharding
+devLoadAlwaysFiles:
+  - docs/game-architecture/9-coding-standards.md
+  - docs/game-architecture/3-tech-stack.md
+  - docs/game-architecture/8-unity-project-structure.md
