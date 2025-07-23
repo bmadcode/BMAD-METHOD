@@ -8,10 +8,9 @@ To comprehensively validate a Unity 2D game development story draft before imple
 
 ### 0. Load Core Configuration and Inputs
 
-- Load `{root}/config.yaml` from the project root
-- If the file does not exist, check for `{root}/core-config.yaml` as fallback
-- If neither exists, HALT and inform the user: "config.yaml (or core-config.yaml) not found. This file is required for story validation."
-- Extract key configurations: `devStoryLocation`, `gdd.*`, `architecture.*`, `workflow.*`
+- Load `{root}/core-config.yaml` from the project root
+- If the file does not exist, HALT and inform the user: "core-config.yaml not found. This file is required for story validation."
+- Extract key configurations: `devStoryLocation`, `gdd.*`, `gamearchitecture.*`, `workflow.*`
 - Identify and load the following inputs:
   - **Story file**: The drafted game story to validate (provided by user or discovered in `devStoryLocation`)
   - **Parent epic**: The epic containing this story's requirements from GDD
