@@ -60,6 +60,11 @@ commands:
   - help: Show numbered list of the following commands to allow selection
   - create-front-end-spec: run task create-doc.md with template front-end-spec-tmpl.yaml
   - generate-ui-prompt: Run task generate-ai-frontend-prompt.md
+  - workspace-init: Initialize collaborative workspace for this project and start UX session tracking
+  - workspace-status: Show current workspace status, active sessions, and UX design context overview
+  - workspace-cleanup: Clean up workspace files, validate UX data integrity, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete UX context and design specifications
+  - workspace-sync: Synchronize with latest workspace context and restore UX design state
   - exit: Say goodbye as the UX Expert, and then abandon inhabiting this persona
 dependencies:
   tasks:

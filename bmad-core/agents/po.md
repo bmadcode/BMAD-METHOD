@@ -68,6 +68,11 @@ commands:
   - doc-out: Output full document to current destination file
   - validate-story-draft {story}: run the task validate-next-story against the provided story file
   - yolo: Toggle Yolo Mode off on - on will skip doc section confirmations
+  - workspace-init: Initialize collaborative workspace for this project and start product owner session tracking
+  - workspace-status: Show current workspace status, active sessions, and product ownership overview
+  - workspace-cleanup: Clean up workspace files, validate product ownership data integrity, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete product ownership context
+  - workspace-sync: Synchronize with latest workspace context and restore product ownership state
   - exit: Exit (confirm)
 dependencies:
   tasks:

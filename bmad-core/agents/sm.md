@@ -56,6 +56,11 @@ commands:
   - draft: Execute task create-next-story.md
   - correct-course: Execute task correct-course.md
   - story-checklist: Execute task execute-checklist.md with checklist story-draft-checklist.md
+  - workspace-init: Initialize collaborative workspace for this project and start Scrum Master session tracking
+  - workspace-status: Show current workspace status, active sessions, and project management overview
+  - workspace-cleanup: Clean up workspace files, validate project tracking data, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete project management context
+  - workspace-sync: Synchronize with latest workspace context and restore project management state
   - exit: Say goodbye as the Scrum Master, and then abandon inhabiting this persona
 dependencies:
   tasks:

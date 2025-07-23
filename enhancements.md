@@ -22,6 +22,7 @@
 | **🎛️ Role-Optimized LLM Settings** | Maximize agent performance for specific tasks | Custom temperature, top-P, and penalty settings per agent role |
 | **📋 Story-to-Code Audit** | Ensure completed stories match actual implementation | Auto-cross-reference with gap detection and remediation story generation |
 | **🔧 IDE Environment Detection** | Optimize tool usage based on detected IDE | Auto-adapt to Cursor, Claude Code, Windsurf, Trae, Roo, Cline, Gemini, Copilot |
+| **🚀 Claude Code CLI Optimization** | Premium workspace experience for Claude Code users | Native commands, auto-session management, context-aware handoffs, built-in maintenance |
 
 ---
 
@@ -33,6 +34,9 @@
 *reality-audit        # Comprehensive quality validation with regression analysis  
 *build-context        # Pre-fix investigation with git history and risk assessment
 *escalate            # External AI collaboration when stuck in loops
+*workspace-init       # Initialize collaborative workspace session (Claude Code CLI)
+*workspace-status     # Show workspace status and collaboration context
+*workspace-handoff    # Context-aware agent transitions with intelligent suggestions
 ```
 
 ### 🧪 QA Agent (Quinn)
@@ -42,6 +46,8 @@
 *create-remediation   # Generate regression-safe fix stories with pattern compliance
 *story-code-audit     # Cross-reference completed stories vs actual codebase implementation
 *Push2Git            # Override safety gates to push despite quality issues
+*workspace-cleanup    # Automated workspace maintenance and optimization (Claude Code CLI)
+*workspace-sync       # Synchronize with latest workspace context and quality metrics
 ```
 
 ---
@@ -93,6 +99,13 @@
 - Eliminates approval prompts by leveraging integrated IDE capabilities
 - Batches CLI commands when running in standalone mode
 
+**🚀 Claude Code CLI Premium Experience (Enterprise-Grade Workspace)**
+- Native workspace commands integrated into all 8 BMAD agents (dev, qa, sm, analyst, architect, ux-expert, pm, po)
+- Automatic session management with heartbeat monitoring and cleanup
+- Context-aware agent handoffs with intelligent opportunity detection and enhanced context transfer
+- Built-in workspace maintenance with automatic integrity checking and repair
+- Enhanced UX with intelligent suggestions, productivity analytics, and seamless workflow integration
+
 ---
 
 ## 🎯 Quality Scoring System
@@ -115,6 +128,10 @@
 
 ## 🚀 Getting Started
 
+> **📖 [Complete Getting Started Guide](getting-started-guide.md)** - Master all enhanced features with step-by-step workflows, agent selection guide, and advanced techniques.
+
+### Quick Start (Core Workflow)
+
 ### 1. **Develop Your Story**
 ```bash
 *develop-story
@@ -134,6 +151,9 @@
 
 ### 4. **Collaborate When Stuck** (automatic)
 *After 3 failed attempts, get copy-paste prompts for external AI collaboration*
+
+**Need help with Claude Code CLI workspace commands, agent selection, or advanced features?**  
+👉 **[See the Complete Getting Started Guide](getting-started-guide.md)**
 
 ---
 
@@ -180,14 +200,22 @@ The structured framework **keeps AI agents more focused and productive** than ad
 ## 📁 Implementation Details
 
 ### Core Framework Files
-- `bmad-core/agents/dev.md` - Enhanced developer agent with role-optimized LLM settings (temp=0.4) for precise code
-- `bmad-core/agents/qa.md` - Enhanced QA agent with systematic analysis settings (temp=0.3) and auto-remediation
-- `bmad-core/agents/analyst.md` - Business analyst with creative ideation settings (temp=0.8) for innovative thinking
-- `bmad-core/agents/architect.md` - Technical architect with balanced creativity settings (temp=0.6) for design solutions
-- `bmad-core/agents/ux-expert.md` - UX designer with high creativity settings (temp=0.75) for innovative interfaces
+- `bmad-core/agents/dev.md` - Enhanced developer agent with role-optimized LLM settings (temp=0.4) for precise code + workspace commands
+- `bmad-core/agents/qa.md` - Enhanced QA agent with systematic analysis settings (temp=0.3) and auto-remediation + workspace commands
+- `bmad-core/agents/analyst.md` - Business analyst with creative ideation settings (temp=0.8) for innovative thinking + workspace commands
+- `bmad-core/agents/architect.md` - Technical architect with balanced creativity settings (temp=0.6) for design solutions + workspace commands
+- `bmad-core/agents/ux-expert.md` - UX designer with high creativity settings (temp=0.75) for innovative interfaces + workspace commands
+- `bmad-core/agents/sm.md`, `pm.md`, `po.md` - Enhanced project management agents with native workspace integration
 - `bmad-core/tasks/reality-audit-comprehensive.md` - 10-phase comprehensive audit with automatic remediation execution
 - `bmad-core/tasks/loop-detection-escalation.md` - External collaboration framework with copy-paste prompts
 - `bmad-core/tasks/create-remediation-story.md` - Automated fix story generation with regression prevention
+
+### Claude Code CLI Optimization Files
+- `tools/installer/lib/claude-code-session-manager.js` - Automatic session lifecycle management (400+ lines)
+- `tools/installer/lib/claude-code-workspace-commands.js` - Native workspace command implementations (500+ lines)
+- `tools/installer/lib/claude-code-context-integration.js` - Context-aware integration system (400+ lines)
+- `tools/installer/lib/claude-code-maintenance-system.js` - Built-in maintenance and repair (600+ lines)
+- `tools/installer/lib/claude-code-ux-enhancements.js` - Enhanced UX with analytics (500+ lines)
 
 ### Enterprise Features
 - **Multi-language project detection** (Node.js, .NET, Java, Rust, Python, Go, Ruby, PHP)

@@ -105,6 +105,42 @@ class IdeSetup extends BaseIdeSetup {
       }
     }
 
+    // Create settings.local.json for Claude Code permissions
+    const claudeDir = path.join(installDir, ".claude");
+    const settingsLocalPath = path.join(claudeDir, "settings.local.json");
+    
+    // Define necessary permissions for BMAD operations
+    const settingsConfig = {
+      permissions: {
+        allow: [
+          "Bash(npm run validate:*)",
+          "Bash(rm:*)",
+          "Bash(git add:*)",
+          "Bash(mv:*)",
+          "Bash(node:*)",
+          "Bash(npm run install:bmad:*)",
+          "Bash(npm run build:*)",
+          "Bash(npm run format:*)",
+          "Bash(npm run version:*)",
+          "Bash(npm run release:*)",
+          "Bash(npm test:*)",
+          "Bash(npm start:*)",
+          "Bash(grep:*)",
+          "Bash(find:*)",
+          "Bash(workspace-*:*)"
+        ],
+        deny: []
+      }
+    };
+    
+    try {
+      await fileManager.ensureDirectory(claudeDir);
+      await fileManager.writeFile(settingsLocalPath, JSON.stringify(settingsConfig, null, 2));
+      console.log(chalk.green("✓ Created Claude Code settings.local.json with BMAD permissions"));
+    } catch (error) {
+      console.warn(chalk.yellow("⚠️  Could not create settings.local.json:"), error.message);
+    }
+
     return true;
   }
 

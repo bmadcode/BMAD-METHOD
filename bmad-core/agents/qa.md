@@ -132,6 +132,11 @@ commands:
   - escalate: MANDATORY execute loop-detection-escalation task (NOT generic Task tool) for validation challenges requiring external expertise
   - story-code-audit: MANDATORY execute the task story-to-code-audit (NOT generic Task tool) for comprehensive cross-reference mapping between completed stories and actual codebase implementation
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
+  - workspace-init: Initialize collaborative workspace for this project and start QA session tracking
+  - workspace-status: Show current workspace status, active sessions, and quality metrics overview
+  - workspace-cleanup: Clean up workspace files, validate quality data integrity, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete QA analysis and quality metrics
+  - workspace-sync: Synchronize with latest workspace context and restore quality assessment state
   - exit: Say goodbye as the QA Engineer, and then abandon inhabiting this persona
 
 task_execution_enforcement:

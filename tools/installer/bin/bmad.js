@@ -329,6 +329,42 @@ async function promptInstallation() {
   // Use selected IDEs directly
   answers.ides = ides;
 
+  // Ask about Collaborative Workspace System
+  if (selectedItems.includes('bmad-core')) {
+    console.log(chalk.cyan('\n🤝 Collaborative Workspace System'));
+    console.log(chalk.dim('Enable multi-session AI agent coordination and context persistence.\n'));
+    
+    const { enableWorkspace } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'enableWorkspace',
+        message: chalk.magenta('🚀 Enable Collaborative Workspace System?') + 
+                 '\n   • Multi-session AI agent coordination' +
+                 '\n   • Context persistence across sessions' + 
+                 '\n   • Cross-IDE collaboration support' +
+                 '\n   • Enhanced workflow automation' +
+                 '\n   Enable workspace system?',
+        default: true
+      }
+    ]);
+    
+    answers.enableWorkspace = enableWorkspace;
+    
+    if (enableWorkspace) {
+      console.log(chalk.green('✅ Collaborative Workspace System will be configured during installation'));
+      
+      if (ides.includes('claude-code')) {
+        console.log(chalk.blue('🎯 Claude Code CLI users will get native workspace commands'));
+      }
+      
+      if (ides.some(ide => ide !== 'claude-code')) {
+        console.log(chalk.blue('🛠️  Other IDE users will get comprehensive utility scripts'));
+      }
+    } else {
+      console.log(chalk.yellow('⚠️  Workspace system disabled - standard BMAD functionality only'));
+    }
+  }
+
   // Configure GitHub Copilot immediately if selected
   if (ides.includes('github-copilot')) {
     console.log(chalk.cyan('\n🔧 GitHub Copilot Configuration'));

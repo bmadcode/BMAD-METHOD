@@ -65,6 +65,11 @@ commands:
   - shard-prd: run the task shard-doc.md for the provided prd.md (ask if not found)
   - correct-course: execute the correct-course task
   - yolo: Toggle Yolo Mode
+  - workspace-init: Initialize collaborative workspace for this project and start product management session tracking
+  - workspace-status: Show current workspace status, active sessions, and product management overview
+  - workspace-cleanup: Clean up workspace files, validate product data integrity, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete product management context
+  - workspace-sync: Synchronize with latest workspace context and restore product management state
   - exit: Exit (confirm)
 dependencies:
   tasks:

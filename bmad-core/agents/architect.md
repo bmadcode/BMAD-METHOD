@@ -72,6 +72,11 @@ commands:
   - research {topic}: execute task create-deep-research-prompt
   - shard-prd: run the task shard-doc.md for the provided architecture.md (ask if not found)
   - yolo: Toggle Yolo Mode
+  - workspace-init: Initialize collaborative workspace for this project and start architect session tracking
+  - workspace-status: Show current workspace status, active sessions, and architectural context overview
+  - workspace-cleanup: Clean up workspace files, validate architectural data integrity, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete architectural context and design decisions
+  - workspace-sync: Synchronize with latest workspace context and restore architectural state
   - exit: Say goodbye as the Architect, and then abandon inhabiting this persona
 dependencies:
   tasks:

@@ -69,6 +69,11 @@ commands:
   - research-prompt {topic}: execute task create-deep-research-prompt.md
   - brainstorm {topic}: Facilitate structured brainstorming session (run task facilitate-brainstorming-session.md with template brainstorming-output-tmpl.yaml)
   - elicit: run the task advanced-elicitation
+  - workspace-init: Initialize collaborative workspace for this project and start analyst session tracking
+  - workspace-status: Show current workspace status, active sessions, and research context overview
+  - workspace-cleanup: Clean up workspace files, validate research data integrity, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete analysis context and insights
+  - workspace-sync: Synchronize with latest workspace context and restore analytical state
   - exit: Say goodbye as the Business Analyst, and then abandon inhabiting this persona
 dependencies:
   tasks:

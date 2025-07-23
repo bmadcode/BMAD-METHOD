@@ -8,6 +8,7 @@ const configLoader = require("./config-loader");
 const ideSetup = require("./ide-setup");
 const { extractYamlFromAgent } = require("../../lib/yaml-utils");
 const resourceLocator = require("./resource-locator");
+const WorkspaceSetup = require("./workspace-setup");
 
 class Installer {
   async getCoreVersion() {
@@ -382,6 +383,35 @@ class Installer {
         const preConfiguredSettings = ide === 'github-copilot' ? config.githubCopilotConfig : null;
         await ideSetup.setup(ide, installDir, config.agent, spinner, preConfiguredSettings);
       }
+    }
+
+    // Set up Collaborative Workspace System if requested
+    if (config.enableWorkspace) {
+      const workspaceSetup = new WorkspaceSetup();
+      
+      spinner.text = 'Setting up Collaborative Workspace System...';
+      
+      // Create workspace directory structure
+      const workspaceCreated = await workspaceSetup.createWorkspaceDirectory(installDir, spinner);
+      if (!workspaceCreated) {
+        throw new Error('Failed to create workspace directory structure');
+      }
+      
+      // Create workspace utilities
+      const utilitiesCreated = await workspaceSetup.createWorkspaceUtilities(installDir, ides, spinner);
+      if (!utilitiesCreated) {
+        throw new Error('Failed to create workspace utilities');
+      }
+      
+      // Set up Claude Code specific commands if Claude Code is selected
+      if (ides.includes('claude-code')) {
+        const claudeCodeSetup = await workspaceSetup.setupClaudeCodeWorkspaceCommands(installDir, spinner);
+        if (!claudeCodeSetup) {
+          console.warn(chalk.yellow('⚠️  Warning: Failed to integrate workspace commands with Claude Code CLI'));
+        }
+      }
+      
+      spinner.text = 'Collaborative Workspace System configured successfully';
     }
 
     // Modify core-config.yaml if sharding preferences were provided
@@ -841,6 +871,20 @@ class Installer {
       console.log(chalk.green("✓ .bmad-core framework installed with all agents and workflows"));
     }
     
+    if (config.enableWorkspace) {
+      console.log(chalk.green("✓ 🤝 Collaborative Workspace System configured"));
+      console.log(chalk.green("  • .workspace/ directory structure created"));
+      console.log(chalk.green("  • workspace-utils/ scripts installed"));
+      
+      if (ides.includes('claude-code')) {
+        console.log(chalk.green("  • Native Claude Code CLI commands integrated"));
+      }
+      
+      if (ides.some(ide => ide !== 'claude-code')) {
+        console.log(chalk.green("  • Cross-IDE utility scripts configured"));
+      }
+    }
+    
     if (config.expansionPacks && config.expansionPacks.length > 0) {
       console.log(chalk.green(`✓ Expansion packs installed:`));
       for (const packId of config.expansionPacks) {
@@ -890,6 +934,29 @@ class Installer {
     if (options.isUpdate && ides.includes('cursor')) {
       console.log(chalk.yellow.bold("\n⚠️  IMPORTANT: Cursor Custom Modes Update Required"));
       console.log(chalk.yellow("Since agents have been updated, you need to update any custom agent modes configured in the Cursor custom agent GUI per the Cursor docs."));
+    }
+
+    // Workspace usage guidance
+    if (config.enableWorkspace) {
+      console.log(chalk.bold.cyan("\n🚀 Getting Started with Collaborative Workspace:"));
+      
+      if (ides.includes('claude-code')) {
+        console.log(chalk.cyan("  Claude Code CLI Users:"));
+        console.log(chalk.cyan("    • Use *workspace-init to start collaborating"));
+        console.log(chalk.cyan("    • Try *workspace-status to see active sessions"));
+        console.log(chalk.cyan("    • Workspace features work automatically!"));
+      }
+      
+      if (ides.some(ide => ide !== 'claude-code')) {
+        console.log(chalk.cyan("  Other IDE Users:"));
+        console.log(chalk.cyan("    • Run: npm run workspace-init"));
+        console.log(chalk.cyan("    • Check: npm run workspace-status"));
+        console.log(chalk.cyan("    • See: workspace-utils/docs/ for IDE-specific guides"));
+      }
+      
+      console.log(chalk.cyan("\n  📁 Workspace Files:"));
+      console.log(chalk.cyan("    • .workspace/ - Shared context and collaboration data"));
+      console.log(chalk.cyan("    • workspace-utils/ - Cross-IDE utility scripts"));
     }
 
     // Important notice to read the user guide

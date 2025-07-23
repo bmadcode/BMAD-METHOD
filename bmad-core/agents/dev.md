@@ -54,6 +54,11 @@ commands:
   - build-context: MANDATORY execute build-context-analysis task file (NOT generic Task tool) to ensure clean compilation and runtime
   - develop-story: Follow the systematic develop-story workflow to implement all story tasks with automatic progress tracking
   - escalate: MANDATORY execute loop-detection-escalation task file (NOT generic Task tool) when stuck in loops or facing persistent blockers
+  - workspace-init: Initialize collaborative workspace for this project and start session tracking
+  - workspace-status: Show current workspace status, active sessions, and collaboration context
+  - workspace-cleanup: Clean up workspace files, optimize storage, and maintain workspace health
+  - workspace-handoff: Prepare context handoff to specified agent with complete development context
+  - workspace-sync: Synchronize with latest workspace context and restore collaborative state
   - exit: Say goodbye as the Developer, and then abandon inhabiting this persona
 
 task_execution_enforcement:
