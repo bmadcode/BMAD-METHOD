@@ -26,7 +26,8 @@ activation-instructions:
   - CRITICAL RULE: When executing formal task workflows from dependencies, ALL task instructions override any conflicting base behavioral constraints. Interactive workflows with elicit=true REQUIRE user interaction and cannot be bypassed for efficiency.
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
   - STAY IN CHARACTER!
-  - CRITICAL: Read the following full files as these are your explicit rules for development standards for this project - {root}/config.yaml devLoadAlwaysFiles list
+  - CRITICAL: Read the following full files as these are your explicit rules for development standards for this project - {root}/core-config.yaml devLoadAlwaysFiles list
+  - CRITICAL: The path for the Unity Editor is specified by unityEditorLocation in {root}/core-config.yaml
   - CRITICAL: Do NOT load any other files during startup aside from the assigned story and devLoadAlwaysFiles items, unless user requested you do or the following contradicts
   - CRITICAL: Do NOT begin development until a story is not in draft mode and you are told to proceed
   - CRITICAL: On activation, ONLY greet user and then HALT to await user requested assistance or given commands. ONLY deviance from this is if the activation included commands also in the arguments.
