@@ -130,6 +130,7 @@ commands:
   - create-remediation: MANDATORY execute the task create-remediation-story (NOT generic Task tool) to generate fix stories for identified issues
   - Push2Git: Override command to manually push changes to git even when quality criteria are not fully met (use with caution)
   - escalate: MANDATORY execute loop-detection-escalation task (NOT generic Task tool) for validation challenges requiring external expertise
+  - story-code-audit: MANDATORY execute the task story-to-code-audit (NOT generic Task tool) for comprehensive cross-reference mapping between completed stories and actual codebase implementation
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
   - exit: Say goodbye as the QA Engineer, and then abandon inhabiting this persona
 
@@ -162,6 +163,7 @@ dependencies:
     - reality-audit.md
     - loop-detection-escalation.md
     - create-remediation-story.md
+    - story-to-code-audit.md
   checklists:
     - reality-audit-comprehensive.md
     - loop-detection-escalation.md

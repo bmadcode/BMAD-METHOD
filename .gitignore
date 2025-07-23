@@ -12,7 +12,7 @@ build/*.txt
 # System files
 .DS_Store
 Thumbs.db
-
+.gitignore
 # Environment variables
 .env
 
@@ -31,3 +31,6 @@ web-bundles/
 
 # BMAD temporary files
 tmp/
+
+# BMAD installation directory
+prj/

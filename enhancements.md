@@ -20,6 +20,7 @@
 | **🔧 Task Execution Enforcement** | Prevent automation workflow failures | Mandatory task file execution with Read tool validation |
 | **📊 Automatic Options Presentation** | Eliminate "what's next" confusion | Grade-based options with effort estimates presented automatically |
 | **🎛️ Role-Optimized LLM Settings** | Maximize agent performance for specific tasks | Custom temperature, top-P, and penalty settings per agent role |
+| **📋 Story-to-Code Audit** | Ensure completed stories match actual implementation | Auto-cross-reference with gap detection and remediation story generation |
 
 ---
 
@@ -38,6 +39,7 @@
 *reality-audit        # Manual quality audit with regression prevention analysis
 *audit-validation     # Auto-remediation audit with guaranteed fix story generation
 *create-remediation   # Generate regression-safe fix stories with pattern compliance
+*story-code-audit     # Cross-reference completed stories vs actual codebase implementation
 *Push2Git            # Override safety gates to push despite quality issues
 ```
 
