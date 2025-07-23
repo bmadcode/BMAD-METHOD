@@ -3159,18 +3159,22 @@ prdVersion: v4
 prdSharded: true
 architectureVersion: v4
 architectureSharded: true
+gdd:
+  gddVersion: v4
+  gddSharded: true
+  gddLocation: docs/game-design-doc.md
+  gddShardedLocation: docs/gdd
+  epicFilePattern: epic-{n}*.md
+gamearchitecture:
+  gamearchitectureFile: docs/architecture.md
+  gamearchitectureVersion: v3
+  gamearchitectureLocation: docs/game-architecture.md
+  gamearchitectureSharded: true
+  gamearchitectureShardedLocation: docs/game-architecture
+gamebriefdocLocation: docs/game-brief.md
+levelDesignLocation: docs/level-design.md
 
-# Game-specific document locations
-gameDesignDocLocation: docs/game-design-doc.md
-gameBriefDocLocation: docs/game-brief.md
-gameBriefSharded: true
-gameBriefShardedLocation: docs/game-design
-gameArchitectureLocation: docs/game-architecture.md
-gameArchitectureSharded: true
-gameArchitectureShardedLocation: docs/game-architecture
-leveLDesignLocation: docs/level-design.md
-
-# Unity-specific files to load
+#replace old devLoadAlwaysFiles with this once you have sharded your gamearchitecture document
 devLoadAlwaysFiles:
   - docs/game-architecture/9-coding-standards.md
   - docs/game-architecture/3-tech-stack.md
