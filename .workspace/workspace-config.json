@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "created": "2025-07-23T21:21:29.430Z",
+  "lastUpdated": "2025-07-23T21:21:29.431Z",
+  "features": {
+    "crossIDESupport": true,
+    "sessionManagement": true,
+    "contextPersistence": true,
+    "agentHandoffs": true,
+    "qualityTracking": true
+  },
+  "settings": {
+    "maxSessions": 10,
+    "sessionTimeout": 3600000,
+    "autoCleanup": true,
+    "logLevel": "info"
+  }
+}

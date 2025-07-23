@@ -1,0 +1,9 @@
+name: bmad-infrastructure-devops
+version: 1.10.0
+short-title: Infrastructure DevOps Pack
+description: >-
+  This expansion pack extends BMad Method with comprehensive infrastructure and
+  DevOps capabilities. It's designed for teams that need to define, implement,
+  and manage cloud infrastructure alongside their application development.
+author: Brian (BMad)
+slashPrefix: bmadInfraDevOps

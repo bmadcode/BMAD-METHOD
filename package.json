@@ -1,0 +1,84 @@
+{
+  "name": "bmad-method",
+  "version": "4.31.0",
+  "description": "Breakthrough Method of Agile AI-driven Development",
+  "main": "tools/cli.js",
+  "bin": {
+    "bmad": "tools/bmad-npx-wrapper.js",
+    "bmad-method": "tools/bmad-npx-wrapper.js"
+  },
+  "scripts": {
+    "build": "node tools/cli.js build",
+    "build:agents": "node tools/cli.js build --agents-only",
+    "build:teams": "node tools/cli.js build --teams-only",
+    "list:agents": "node tools/cli.js list:agents",
+    "validate": "node tools/cli.js validate",
+    "install:bmad": "node tools/installer/bin/bmad.js install",
+    "format": "prettier --write \"**/*.md\"",
+    "workspace-init": "node workspace-utils/init.js",
+    "workspace-status": "node workspace-utils/status.js",
+    "workspace-cleanup": "node workspace-utils/cleanup.js",
+    "workspace-handoff": "node workspace-utils/handoff.js",
+    "workspace-sync": "node workspace-utils/sync.js",
+    "workspace-health": "node workspace-utils/health.js",
+    "version:patch": "node tools/version-bump.js patch",
+    "version:minor": "node tools/version-bump.js minor",
+    "version:major": "node tools/version-bump.js major",
+    "version:expansion": "node tools/bump-expansion-version.js",
+    "version:expansion:set": "node tools/update-expansion-version.js",
+    "version:all": "node tools/bump-all-versions.js",
+    "version:all:minor": "node tools/bump-all-versions.js minor",
+    "version:all:major": "node tools/bump-all-versions.js major",
+    "version:all:patch": "node tools/bump-all-versions.js patch",
+    "version:expansion:all": "node tools/bump-all-versions.js",
+    "version:expansion:all:minor": "node tools/bump-all-versions.js minor",
+    "version:expansion:all:major": "node tools/bump-all-versions.js major",
+    "version:expansion:all:patch": "node tools/bump-all-versions.js patch",
+    "release": "semantic-release",
+    "release:test": "semantic-release --dry-run --no-ci || echo 'Config test complete - authentication errors are expected locally'",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@kayvan/markdown-tree-parser": "^1.5.0",
+    "bmad-method": "^4.30.3",
+    "chalk": "^4.1.2",
+    "commander": "^14.0.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.3",
+    "inquirer": "^8.2.6",
+    "js-yaml": "^4.1.0",
+    "ora": "^5.4.1"
+  },
+  "keywords": [
+    "agile",
+    "ai",
+    "orchestrator",
+    "development",
+    "methodology",
+    "agents",
+    "bmad"
+  ],
+  "author": "Brian (BMad) Madison",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmadcode/BMAD-METHOD.git"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.1",
+    "prettier": "^3.5.3",
+    "semantic-release": "^22.0.0",
+    "yaml-lint": "^1.7.0"
+  },
+  "lint-staged": {
+    "**/*.md": [
+      "prettier --write"
+    ]
+  }
+}

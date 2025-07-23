@@ -1,0 +1,170 @@
+{
+  "timestamp": "2025-07-23T21:21:35.971Z",
+  "overallScore": 93,
+  "status": "excellent",
+  "checks": {
+    "directoryStructure": {
+      "score": 100,
+      "issues": [],
+      "missing": [],
+      "present": [
+        {
+          "name": "sessions",
+          "critical": true,
+          "description": "Session management"
+        },
+        {
+          "name": "context",
+          "critical": true,
+          "description": "Shared context storage"
+        },
+        {
+          "name": "handoffs",
+          "critical": true,
+          "description": "Agent handoff coordination"
+        },
+        {
+          "name": "decisions",
+          "critical": false,
+          "description": "Decision tracking"
+        },
+        {
+          "name": "progress",
+          "critical": false,
+          "description": "Progress monitoring"
+        },
+        {
+          "name": "quality",
+          "critical": false,
+          "description": "Quality reports"
+        },
+        {
+          "name": "archive",
+          "critical": false,
+          "description": "Archived data"
+        },
+        {
+          "name": "hooks",
+          "critical": false,
+          "description": "Integration hooks"
+        },
+        {
+          "name": "templates",
+          "critical": false,
+          "description": "Workspace templates"
+        },
+        {
+          "name": "logs",
+          "critical": true,
+          "description": "Activity logging"
+        }
+      ]
+    },
+    "workspaceConfig": {
+      "score": 100,
+      "issues": [],
+      "valid": true,
+      "config": {
+        "version": "1.0.0",
+        "created": "2025-07-23T21:21:29.430Z",
+        "lastUpdated": "2025-07-23T21:21:29.431Z",
+        "features": {
+          "crossIDESupport": true,
+          "sessionManagement": true,
+          "contextPersistence": true,
+          "agentHandoffs": true,
+          "qualityTracking": true
+        },
+        "settings": {
+          "maxSessions": 10,
+          "sessionTimeout": 3600000,
+          "autoCleanup": true,
+          "logLevel": "info"
+        }
+      }
+    },
+    "sessionHealth": {
+      "score": 100,
+      "issues": [],
+      "totalSessions": 1,
+      "activeSessions": 1,
+      "staleSessions": 0,
+      "corruptedSessions": 0,
+      "sessions": [
+        {
+          "id": "85db2f3a0f721c3c",
+          "ide": "vscode",
+          "created": "2025-07-23T21:21:29.435Z",
+          "lastHeartbeat": "2025-07-23T21:21:29.435Z",
+          "pid": 97230,
+          "user": "bryan",
+          "cwd": "/mnt/c/Projects/BMAD-Method",
+          "nodeVersion": "v20.19.2",
+          "platform": "linux",
+          "arch": "x64",
+          "metadata": {
+            "ideSpecific": {
+              "supportsTerminalCommands": true,
+              "hasIntegratedGit": true,
+              "supportsPanels": true,
+              "hasExtensionSystem": true,
+              "features": [
+                "extensions",
+                "integrated-terminal",
+                "git-integration"
+              ]
+            },
+            "features": [
+              "context-sharing",
+              "agent-handoffs",
+              "quality-tracking"
+            ]
+          },
+          "status": "active",
+          "timeSinceLastHeartbeat": 6550
+        }
+      ]
+    },
+    "fileSystemPermissions": {
+      "score": 100,
+      "issues": [],
+      "canRead": true,
+      "canWrite": true,
+      "canExecute": true
+    },
+    "logHealth": {
+      "score": 100,
+      "issues": [],
+      "exists": true,
+      "size": 128,
+      "recentEntries": 1,
+      "corruptedEntries": 0
+    },
+    "crossIDECompatibility": {
+      "score": 55,
+      "issues": [
+        "Limited IDE template support: 1 templates found",
+        "No integration hooks configured"
+      ],
+      "ideSupport": {
+        "cursor": false,
+        "windsurf": false,
+        "vscode": true,
+        "trae": false,
+        "roo": false,
+        "cline": false,
+        "gemini": false,
+        "github-copilot": false
+      },
+      "templateCount": 1,
+      "hookCount": 0
+    }
+  },
+  "summary": {
+    "totalIssues": 2,
+    "criticalIssues": 0,
+    "recommendations": [
+      "Generate additional IDE-specific templates for better compatibility"
+    ]
+  }
+}
