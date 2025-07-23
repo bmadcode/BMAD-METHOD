@@ -16,6 +16,11 @@ build/
 # Environment variables
 .env
 
+# Workspace and IDE-specific files
+.workspace/
+.claude/
+prj/
+
 CLAUDE.md
 Clean-EscapedBackticks.ps1
 Clean-MarkdownFiles.ps1
