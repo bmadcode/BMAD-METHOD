@@ -23,6 +23,14 @@ The BMad Method is a natural language framework for AI-assisted software develop
 - **Tasks are procedures**: Step-by-step instructions an agent follows to complete work
 - **Templates are outputs**: Structured documents with embedded instructions for generation
 - **Dependencies matter**: Explicitly declare only what's needed
+- **Collaborative by design**: Agents support workspace coordination, cross-agent handoffs, and automatic escalation
+
+### 4. Quality and Collaboration First
+
+- **Zero tolerance for simulation**: Automatic detection and prevention of placeholder implementations
+- **Collaborative problem-solving**: Auto-escalation to external LLMs and cross-agent coordination when stuck
+- **Universal IDE support**: Workspace functionality works across all major IDEs and development environments
+- **Intelligent automation**: Automatic loop detection, quality validation, and remediation generation
 
 ## Practical Guidelines
 
@@ -45,8 +53,10 @@ See [Expansion Packs Guide](../docs/expansion-packs.md) for detailed examples an
 ### Agent Design Rules
 
 1. **Web/Planning Agents**: Can have richer context, multiple tasks, extensive templates
-2. **Dev Agents**: Minimal dependencies, focused on code generation, lean task sets
+2. **Dev Agents**: Minimal dependencies, focused on code generation, lean task sets  
 3. **All Agents**: Clear persona, specific expertise, well-defined capabilities
+4. **Workspace Integration**: All agents include collaborative workspace commands for cross-agent coordination
+5. **Auto-Escalation**: Built-in loop detection and external LLM collaboration for complex problems
 
 ### Task Writing Rules
 

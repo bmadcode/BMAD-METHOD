@@ -23,6 +23,8 @@
 | **📋 Story-to-Code Audit** | Ensure completed stories match actual implementation | Auto-cross-reference with gap detection and remediation story generation |
 | **🔧 IDE Environment Detection** | Optimize tool usage based on detected IDE | Auto-adapt to Cursor, Claude Code, Windsurf, Trae, Roo, Cline, Gemini, Copilot |
 | **🚀 Claude Code CLI Optimization** | Premium workspace experience for Claude Code users | Native commands, auto-session management, context-aware handoffs, built-in maintenance |
+| **🤝 Collaborative Workspace System** | Multi-session AI coordination with auto-escalation | Cross-IDE collaboration, automatic external LLM integration, ambiguity resolution |
+| **📦 Universal Installer Integration** | Automated workspace deployment across IDEs | Auto-configures collaborative features based on IDE selection during installation |
 
 ---
 
@@ -33,9 +35,9 @@
 *develop-story        # Systematic story implementation with dual-track progress updates
 *reality-audit        # Comprehensive quality validation with regression analysis  
 *build-context        # Pre-fix investigation with git history and risk assessment
-*escalate            # External AI collaboration when stuck in loops
+*escalate            # Auto-escalation to external LLMs when stuck (3 failed attempts triggers)
 *workspace-init       # Initialize collaborative workspace session (Claude Code CLI)
-*workspace-status     # Show workspace status and collaboration context
+*workspace-status     # Show workspace status and collaboration context  
 *workspace-handoff    # Context-aware agent transitions with intelligent suggestions
 ```
 

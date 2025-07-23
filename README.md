@@ -25,6 +25,8 @@ This branch is testing **twelve transformative quality framework enhancements** 
 - **📋 Story-to-Code Audit** - Automatic cross-reference between completed stories and actual implementation
 - **🔧 IDE Environment Detection** - Auto-adapt to 8+ IDEs including Cursor, Claude Code, Windsurf, and more
 - **🎛️ Role-Optimized LLM Settings** - Custom temperature and parameters per agent for maximum performance
+- **🤝 Collaborative Workspace System** - Multi-session AI coordination with auto-escalation to external LLMs
+- **📦 Universal Installer Integration** - Automated workspace deployment with IDE-specific configuration
 
 **📄 [View Complete Enhancement Details](enhancements.md)**
 
@@ -36,13 +38,15 @@ This branch is testing **twelve transformative quality framework enhancements** 
 
 ## Overview
 
-**BMad Method's Two Key Innovations:**
+**BMad Method's Three Key Innovations:**
 
 **1. Agentic Planning:** Dedicated agents (Analyst, PM, Architect) collaborate with you to create detailed, consistent PRDs and Architecture documents. Through advanced prompt engineering and human-in-the-loop refinement, these planning agents produce comprehensive specifications that go far beyond generic AI task generation.
 
 **2. Context-Engineered Development:** The Scrum Master agent then transforms these detailed plans into hyper-detailed development stories that contain everything the Dev agent needs - full context, implementation details, and architectural guidance embedded directly in story files.
 
-This two-phase approach eliminates both **planning inconsistency** and **context loss** - the biggest problems in AI-assisted development. Your Dev agent opens a story file with complete understanding of what to build, how to build it, and why.
+**3. Collaborative Quality Assurance:** Built-in workspace system enables cross-agent coordination, automatic escalation to external LLMs when stuck, and comprehensive quality validation to prevent technical debt from ambiguous requirements.
+
+This three-phase approach eliminates **planning inconsistency**, **context loss**, and **implementation ambiguity** - the biggest problems in AI-assisted development. Your Dev agent opens a story file with complete understanding of what to build, how to build it, and why, plus automatic collaboration when requirements need clarification.
 
 **📖 [See the complete workflow in the User Guide](bmad-core/user-guide.md)** - Planning phase, development cycle, and all agent roles
 
