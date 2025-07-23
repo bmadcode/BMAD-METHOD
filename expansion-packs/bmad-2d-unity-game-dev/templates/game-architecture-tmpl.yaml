@@ -1,545 +1,1030 @@
 template:
-  id: game-architecture-template-v2
+  id: game-architecture-template-v3
   name: Game Architecture Document
-  version: 2.0
+  version: 3.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-architecture.md"
-    title: "{{game_title}} Game Architecture Document"
+    filename: docs/game-architecture.md
+    title: "{{project_name}} Game Architecture Document"
 
 workflow:
   mode: interactive
+  elicitation: advanced-elicitation
 
 sections:
-  - id: initial-setup
-    instruction: |
-    This template creates a comprehensive game architecture document specifically for Unity + C# projects. This should provide the technical foundation for all game development stories and epics.
-
-    If available, review any provided documents: Game Design Document (GDD), Technical Preferences. This architecture should support all game mechanics defined in the GDD.
-
   - id: introduction
     title: Introduction
-    instruction: Establish the document's purpose and scope for game development
-    content: |
-      This document outlines the complete technical architecture for {{Game Title}}, a 2D game built with Unity and C#. It serves as the technical foundation for AI-driven game development, ensuring consistency and scalability across all game systems.
-
-      This architecture is designed to support the gameplay mechanics defined in the Game Design Document while maintaining stable performance and cross-platform compatibility.
+    instruction: |
+      If available, review any provided relevant documents to gather all relevant context before beginning. At a minimum you should locate and review: Game Design Document (GDD), Technical Preferences. If these are not available, ask the user what docs will provide the basis for the game architecture.
     sections:
-      - id: change-log
-        title: Change Log
-        instruction: Track document versions and changes
-        type: table
-        template: |
-          | Date | Version | Description | Author |
-          | :--- | :------ | :---------- | :----- |
+      - id: intro-content
+        content: |
+          This document outlines the complete technical architecture for {{project_name}}, a 2D game built with Unity and C#. It serves as the technical foundation for AI-driven game development, ensuring consistency and scalability across all game systems.
 
-  - id: technical-overview
-    title: Technical Overview
-    instruction: Present all subsections together, then apply `tasks#advanced-elicitation` protocol to the complete section.
-    sections:
-      - id: architecture-summary
-        title: Architecture Summary
+          This architecture is designed to support the gameplay mechanics defined in the Game Design Document while maintaining stable performance and cross-platform compatibility.
+      - id: starter-template
+        title: Starter Template or Existing Project
         instruction: |
-          Provide a comprehensive overview covering:
+          Before proceeding further with game architecture design, check if the project is based on a Unity template or existing codebase:
 
-          - Game engine choice and configuration
-          - Project structure and organization
-          - Key systems and their interactions
-          - Performance and optimization strategy
-          - How this architecture achieves GDD requirements
-      - id: platform-targets
-        title: Platform Targets
-        instruction: Based on GDD requirements, confirm platform support
-        template: |
-          **Primary Platform:** {{primary_platform}}
-          **Secondary Platforms:** {{secondary_platforms}}
-          **Minimum Requirements:** {{min_specs}}
-          **Target Performance:** Stable frame rate on {{target_device}}
-      - id: technology-stack
-        title: Technology Stack
-        template: |
-          **Core Engine:** Unity 2022 LTS or newer
-          **Language:** C# 10+
-          **Build Tool:** Unity Build Pipeline
-          **Package Manager:** Unity Package Manager
-          **Testing:** Unity Test Framework (NUnit)
-          **Deployment:** {{deployment_platform}}
+          1. Review the GDD and brainstorming brief for any mentions of:
+          - Unity templates (2D Core, 2D Mobile, 2D URP, etc.)
+          - Existing Unity projects being used as a foundation
+          - Asset Store packages or game development frameworks
+          - Previous game projects to be cloned or adapted
 
-  - id: project-structure
-    title: Project Structure
-    instruction: Define the complete project organization that developers will follow
+          2. If a starter template or existing project is mentioned:
+          - Ask the user to provide access via one of these methods:
+            - Link to the Unity template documentation
+            - Upload/attach the project files (for small projects)
+            - Share a link to the project repository (GitHub, GitLab, etc.)
+          - Analyze the starter/existing project to understand:
+            - Pre-configured Unity version and render pipeline
+            - Project structure and organization patterns
+            - Built-in packages and dependencies
+            - Existing architectural patterns and conventions
+            - Any limitations or constraints imposed by the starter
+          - Use this analysis to inform and align your architecture decisions
+
+          3. If no starter template is mentioned but this is a greenfield project:
+          - Suggest appropriate Unity templates based on the target platform
+          - Explain the benefits (faster setup, best practices, package integration)
+          - Let the user decide whether to use one
+
+          4. If the user confirms no starter template will be used:
+          - Proceed with architecture design from scratch
+          - Note that manual setup will be required for all Unity configuration
+
+          Document the decision here before proceeding with the architecture design. If none, just say N/A
+        elicit: true
+      - id: changelog
+        title: Change Log
+        type: table
+        columns: [Date, Version, Description, Author]
+        instruction: Track document versions and changes
+
+  - id: high-level-architecture
+    title: High Level Architecture
+    instruction: |
+      This section contains multiple subsections that establish the foundation of the game architecture. Present all subsections together at once.
+    elicit: true
     sections:
-      - id: repository-organization
-        title: Repository Organization
-        instruction: Design a clear folder structure for game development
-        type: code
-        language: text
-        template: |
-          {{game_name}}/
-          ├── Assets/
-          │   ├── Scenes/          # Game scenes
-          │   ├── Scripts/         # C# scripts
-          │   ├── Prefabs/         # Reusable game objects
-          │   ├── Art/             # Art assets
-          │   ├── Audio/           # Audio assets
-          │   ├── Data/            # ScriptableObjects and other data
-          │   └── Tests/           # Unity Test Framework tests
-          ├── Packages/            # Package Manager manifest
-          └── ProjectSettings/     # Unity project settings
-      - id: module-organization
-        title: Module Organization
-        instruction: Define how TypeScript modules should be organized
-        sections:
-          - id: scene-structure
-            title: Scene Structure
-            type: bullet-list
-            template: |
-              - Each scene in separate file
-              - Scene-specific logic contained in scripts within the scene
-              - Use a loading scene for asynchronous loading
-          - id: game-object-pattern
-            title: Game Object Pattern
-            type: bullet-list
-            template: |
-              - Component-based architecture using MonoBehaviours
-              - Reusable game objects as prefabs
-              - Data-driven design with ScriptableObjects
-          - id: system-architecture
-            title: System Architecture
-            type: bullet-list
-            template: |
-              - Singleton managers for global systems (e.g., GameManager, AudioManager)
-              - Event-driven communication using UnityEvents or C# events
-              - Clear separation of concerns between components
+      - id: technical-summary
+        title: Technical Summary
+        instruction: |
+          Provide a brief paragraph (3-5 sentences) overview of:
+          - The game's overall architecture style (component-based Unity architecture)
+          - Key game systems and their relationships
+          - Primary technology choices (Unity, C#, target platforms)
+          - Core architectural patterns being used (MonoBehaviour components, ScriptableObjects, Unity Events)
+          - Reference back to the GDD goals and how this architecture supports them
+      - id: high-level-overview
+        title: High Level Overview
+        instruction: |
+          Based on the GDD's Technical Assumptions section, describe:
 
-  - id: core-game-systems
-    title: Core Game Systems
-    instruction: Detail each major system that needs to be implemented. Each system should be specific enough for developers to create implementation stories.
+          1. The main architectural style (component-based Unity architecture with MonoBehaviours)
+          2. Repository structure decision from GDD (single Unity project vs multiple projects)
+          3. Game system architecture (modular systems, manager singletons, data-driven design)
+          4. Primary player interaction flow and core game loop
+          5. Key architectural decisions and their rationale (render pipeline, input system, physics)
+      - id: project-diagram
+        title: High Level Project Diagram
+        type: mermaid
+        mermaid_type: graph
+        instruction: |
+          Create a Mermaid diagram that visualizes the high-level game architecture. Consider:
+          - Core game systems (Input, Physics, Rendering, Audio, UI)
+          - Game managers and their responsibilities
+          - Data flow between systems
+          - External integrations (platform services, analytics)
+          - Player interaction points
+
+      - id: architectural-patterns
+        title: Architectural and Design Patterns
+        instruction: |
+          List the key high-level patterns that will guide the game architecture. For each pattern:
+
+          1. Present 2-3 viable options if multiple exist
+          2. Provide your recommendation with clear rationale
+          3. Get user confirmation before finalizing
+          4. These patterns should align with the GDD's technical assumptions and project goals
+
+          Common Unity patterns to consider:
+          - Component patterns (MonoBehaviour composition, ScriptableObject data)
+          - Game management patterns (Singleton managers, Event systems, State machines)
+          - Data patterns (ScriptableObject configuration, Save/Load systems)
+          - Unity-specific patterns (Object pooling, Coroutines, Unity Events)
+        template: "- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}"
+        examples:
+          - "**Component-Based Architecture:** Using MonoBehaviour components for game logic - _Rationale:_ Aligns with Unity's design philosophy and enables reusable, testable game systems"
+          - "**ScriptableObject Data:** Using ScriptableObjects for game configuration - _Rationale:_ Enables data-driven design and easy balancing without code changes"
+          - "**Event-Driven Communication:** Using Unity Events and C# events for system decoupling - _Rationale:_ Supports modular architecture and easier testing"
+
+  - id: tech-stack
+    title: Tech Stack
+    instruction: |
+      This is the DEFINITIVE technology selection section for the Unity game. Work with the user to make specific choices:
+
+      1. Review GDD technical assumptions and any preferences from {root}/data/technical-preferences.yaml or an attached technical-preferences
+      2. For each category, present 2-3 viable options with pros/cons
+      3. Make a clear recommendation based on project needs
+      4. Get explicit user approval for each selection
+      5. Document exact versions (avoid "latest" - pin specific versions)
+      6. This table is the single source of truth - all other docs must reference these choices
+
+      Key decisions to finalize - before displaying the table, ensure you are aware of or ask the user about:
+
+      - Unity version and render pipeline
+      - Target platforms and their specific requirements
+      - Unity Package Manager packages and versions
+      - Third-party assets or frameworks
+      - Platform SDKs and services
+      - Build and deployment tools
+
+      Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away elicit feedback.
+    elicit: true
     sections:
-      - id: scene-management
-        title: Scene Management System
+      - id: platform-infrastructure
+        title: Platform Infrastructure
         template: |
-          **Purpose:** Handle game flow and scene transitions
+          - **Target Platforms:** {{target_platforms}}
+          - **Primary Platform:** {{primary_platform}}
+          - **Platform Services:** {{platform_services_list}}
+          - **Distribution:** {{distribution_channels}}
+      - id: technology-stack-table
+        title: Technology Stack Table
+        type: table
+        columns: [Category, Technology, Version, Purpose, Rationale]
+        instruction: Populate the technology stack table with all relevant Unity technologies
+        examples:
+          - "| **Game Engine** | Unity | 2022.3.21f1 | Core game development platform | Latest LTS version, stable 2D tooling, comprehensive package ecosystem |"
+          - "| **Language** | C# | 10.0 | Primary scripting language | Unity's native language, strong typing, excellent tooling |"
+          - "| **Render Pipeline** | Universal Render Pipeline (URP) | 14.0.10 | 2D/3D rendering | Optimized for mobile, excellent 2D features, future-proof |"
+          - "| **Input System** | Unity Input System | 1.7.0 | Cross-platform input handling | Modern input system, supports multiple devices, rebindable controls |"
+          - "| **Physics** | Unity 2D Physics | Built-in | 2D collision and physics | Integrated Box2D, optimized for 2D games |"
+          - "| **Audio** | Unity Audio | Built-in | Audio playback and mixing | Built-in audio system with mixer support |"
+          - "| **Testing** | Unity Test Framework | 1.1.33 | Unit and integration testing | Built-in testing framework based on NUnit |"
+
+  - id: data-models
+    title: Game Data Models
+    instruction: |
+      Define the core game data models/entities using Unity's ScriptableObject system:
+
+      1. Review GDD requirements and identify key game entities
+      2. For each model, explain its purpose and relationships
+      3. Include key attributes and data types appropriate for Unity/C#
+      4. Show relationships between models using ScriptableObject references
+      5. Discuss design decisions with user
+
+      Create a clear conceptual model before moving to specific implementations.
+    elicit: true
+    repeatable: true
+    sections:
+      - id: model
+        title: "{{model_name}}"
+        template: |
+          **Purpose:** {{model_purpose}}
+
+          **Key Attributes:**
+          - {{attribute_1}}: {{type_1}} - {{description_1}}
+          - {{attribute_2}}: {{type_2}} - {{description_2}}
+
+          **Relationships:**
+          - {{relationship_1}}
+          - {{relationship_2}}
+
+          **ScriptableObject Implementation:**
+          - Create as `[CreateAssetMenu]` ScriptableObject
+          - Store in `Assets/_Project/Data/{{ModelName}}/`
+
+  - id: components
+    title: Game Systems & Components
+    instruction: |
+      Based on the architectural patterns, tech stack, and data models from above:
+
+      1. Identify major game systems and their responsibilities
+      2. Consider Unity's component-based architecture with MonoBehaviours
+      3. Define clear interfaces between systems using Unity Events or C# events
+      4. For each system, specify:
+      - Primary responsibility and core functionality
+      - Key MonoBehaviour components and ScriptableObjects
+      - Dependencies on other systems
+      - Unity-specific implementation details (lifecycle methods, coroutines, etc.)
+
+      5. Create system diagrams where helpful using Unity terminology
+    elicit: true
+    sections:
+      - id: system-list
+        repeatable: true
+        title: "{{system_name}} System"
+        template: |
+          **Responsibility:** {{system_description}}
 
           **Key Components:**
+          - {{component_1}} (MonoBehaviour)
+          - {{component_2}} (ScriptableObject)
+          - {{component_3}} (Manager/Controller)
 
-          - Asynchronous scene loading and unloading
-          - Data passing between scenes using a persistent manager or ScriptableObject
-          - Loading screens with progress bars
-
-          **Implementation Requirements:**
-
-          - A `SceneLoader` class to manage all scene transitions
-          - A loading scene to handle asynchronous loading
-          - A `GameManager` to persist between scenes and hold necessary data
+          **Unity Implementation Details:**
+          - Lifecycle: {{lifecycle_methods}}
+          - Events: {{unity_events_used}}
+          - Dependencies: {{system_dependencies}}
 
           **Files to Create:**
+          - `Assets/_Project/Scripts/{{SystemName}}/{{MainScript}}.cs`
+          - `Assets/_Project/Prefabs/{{SystemName}}/{{MainPrefab}}.prefab`
+      - id: component-diagrams
+        title: System Interaction Diagrams
+        type: mermaid
+        instruction: |
+          Create Mermaid diagrams to visualize game system relationships. Options:
+          - System architecture diagram for high-level view
+          - Component interaction diagram for detailed relationships
+          - Sequence diagrams for complex game loops (Update, FixedUpdate flows)
+          Choose the most appropriate for clarity and Unity-specific understanding
 
-          - `Assets/Scripts/Core/SceneLoader.cs`
-          - `Assets/Scenes/Loading.unity`
-      - id: game-state-management
-        title: Game State Management
-        template: |
-          **Purpose:** Track player progress and game status
-
-          **State Categories:**
-
-          - Player progress (levels, unlocks)
-          - Game settings (audio, controls)
-          - Session data (current level, score)
-          - Persistent data (achievements, statistics)
-
-          **Implementation Requirements:**
-
-          - A `SaveManager` class to handle saving and loading data to a file
-          - Use of `ScriptableObject`s to hold game state data
-          - State validation and error recovery
-
-          **Files to Create:**
-
-          - `Assets/Scripts/Core/SaveManager.cs`
-          - `Assets/Data/ScriptableObjects/GameState.cs`
-      - id: asset-management
-        title: Asset Management System
-        template: |
-          **Purpose:** Efficient loading and management of game assets
-
-          **Asset Categories:**
-
-          - Sprites and textures
-          - Audio clips and music
-          - Prefabs and scene files
-          - ScriptableObjects
-
-          **Implementation Requirements:**
-
-          - Use of Addressables for dynamic asset loading
-          - Asset bundles for platform-specific assets
-          - Memory management for large assets
-
-          **Files to Create:**
-
-          - `Assets/Scripts/Core/AssetManager.cs` (if needed for complex scenarios)
-      - id: input-management
-        title: Input Management System
-        template: |
-          **Purpose:** Handle all player input across platforms
-
-          **Input Types:**
-
-          - Keyboard controls
-          - Mouse/pointer interaction
-          - Touch gestures (mobile)
-          - Gamepad support
-
-          **Implementation Requirements:**
-
-          - Use the new Unity Input System
-          - Create Action Maps for different input contexts
-          - Use the `PlayerInput` component for easy player input handling
-
-          **Files to Create:**
-
-          - `Assets/Settings/InputActions.inputactions`
-      - id: game-mechanics-systems
-        title: Game Mechanics Systems
-        instruction: For each major mechanic defined in the GDD, create a system specification
-        repeatable: true
-        sections:
-          - id: mechanic-system
-            title: "{{mechanic_name}} System"
-            template: |
-              **Purpose:** {{system_purpose}}
-
-              **Core Functionality:**
-
-              - {{feature_1}}
-              - {{feature_2}}
-              - {{feature_3}}
-
-              **Dependencies:** {{required_systems}}
-
-              **Performance Considerations:** {{optimization_notes}}
-
-              **Files to Create:**
-
-              - `Assets/Scripts/Mechanics/{{SystemName}}.cs`
-              - `Assets/Prefabs/{{RelatedObject}}.prefab`
-      - id: physics-collision
-        title: Physics & Collision System
-        template: |
-          **Physics Engine:** Unity 2D Physics
-
-          **Collision Categories:**
-
-          - Player collision
-          - Enemy interactions
-          - Environmental objects
-          - Collectibles and items
-
-          **Implementation Requirements:**
-
-          - Use the Layer Collision Matrix to optimize collision detection
-          - Use `Rigidbody2D` for physics-based movement
-          - Use `Collider2D` components for collision shapes
-
-          **Files to Create:**
-
-          - (No new files, but configure `ProjectSettings/DynamicsManager.asset`)
-      - id: audio-system
-        title: Audio System
-        template: |
-          **Audio Requirements:**
-
-          - Background music with looping
-          - Sound effects for actions
-          - Audio settings and volume control
-          - Mobile audio optimization
-
-          **Implementation Features:**
-
-          - An `AudioManager` singleton to play sounds and music
-          - Use of `AudioMixer` to control volume levels
-          - Object pooling for frequently played sound effects
-
-          **Files to Create:**
-
-          - `Assets/Scripts/Core/AudioManager.cs`
-      - id: ui-system
-        title: UI System
-        template: |
-          **UI Components:**
-
-          - HUD elements (score, health, etc.)
-          - Menu navigation
-          - Modal dialogs
-          - Settings screens
-
-          **Implementation Requirements:**
-
-          - Use UI Toolkit or UGUI for building user interfaces
-          - Create a `UIManager` to manage UI elements
-          - Use events to update UI from game logic
-
-          **Files to Create:**
-
-          - `Assets/Scripts/UI/UIManager.cs`
-          - `Assets/UI/` (folder for UI assets and prefabs)
-
-  - id: performance-architecture
-    title: Performance Architecture
-    instruction: Define performance requirements and optimization strategies
+  - id: gameplay-systems
+    title: Gameplay Systems Architecture
+    instruction: |
+      Define the core gameplay systems that drive the player experience. Focus on game-specific logic and mechanics.
+    elicit: true
     sections:
-      - id: performance-targets
-        title: Performance Targets
+      - id: gameplay-overview
+        title: Gameplay Systems Overview
         template: |
-          **Frame Rate:** Stable frame rate, 60+ FPS on target platforms
-          **Memory Usage:** <{{memory_limit}}MB total
-          **Load Times:** <{{initial_load}}s initial, <{{level_load}}s per level
-          **Battery Optimization:** Reduced updates when not visible
-      - id: optimization-strategies
-        title: Optimization Strategies
-        sections:
-          - id: object-pooling
-            title: Object Pooling
-            type: bullet-list
-            template: |
-              - Bullets and projectiles
-              - Particle effects
-              - Enemy objects
-              - UI elements
-          - id: asset-optimization
-            title: Asset Optimization
-            type: bullet-list
-            template: |
-              - Sprite atlases
-              - Audio compression
-              - Mipmaps for textures
-          - id: rendering-optimization
-            title: Rendering Optimization
-            type: bullet-list
-            template: |
-              - Use the 2D Renderer
-              - Batching for sprites
-              - Culling off-screen objects
-          - id: optimization-files
-            title: Files to Create
-            type: bullet-list
-            template: |
-              - `Assets/Scripts/Core/ObjectPool.cs`
+          **Core Game Loop:** {{core_game_loop_description}}
 
-  - id: game-configuration
-    title: Game Configuration
-    instruction: Define all configurable aspects of the game
-    sections:
-      - id: game-balance-configuration
-        title: Game Balance Configuration
-        instruction: Based on GDD, define configurable game parameters using ScriptableObjects
-        type: code
-        language: c#
+          **Player Actions:** {{primary_player_actions}}
+
+          **Game State Flow:** {{game_state_transitions}}
+      - id: gameplay-components
+        title: Gameplay Component Architecture
         template: |
-          // Assets/Scripts/Data/GameBalance.cs
-          using UnityEngine;
+          **Player Controller Components:**
+          - {{player_controller_components}}
 
-          [CreateAssetMenu(fileName = "GameBalance", menuName = "Game/Game Balance")]
-          public class GameBalance : ScriptableObject
-          {
-              public PlayerStats playerStats;
-              public EnemyStats enemyStats;
-          }
+          **Game Logic Components:**
+          - {{game_logic_components}}
 
-          [System.Serializable]
-          public class PlayerStats
-          {
-              public float speed;
-              public int maxHealth;
-          }
+          **Interaction Systems:**
+          - {{interaction_system_components}}
 
-          [System.Serializable]
-          public class EnemyStats
-          {
-              public float speed;
-              public int maxHealth;
-              public int damage;
-          }
-
-  - id: development-guidelines
-    title: Development Guidelines
-    instruction: Provide coding standards specific to game development
+  - id: component-architecture
+    title: Component Architecture Details
+    instruction: |
+      Define detailed Unity component architecture patterns and conventions for the game.
+    elicit: true
     sections:
-      - id: c#-standards
-        title: C# Standards
-        sections:
-          - id: code-style
-            title: Code Style
-            type: bullet-list
-            template: |
-              - Follow .NET coding conventions
-              - Use namespaces to organize code
-              - Write clean, readable, and maintainable code
+      - id: monobehaviour-patterns
+        title: MonoBehaviour Patterns
+        template: |
+          **Component Composition:** {{component_composition_approach}}
+
+          **Lifecycle Management:** {{lifecycle_management_patterns}}
+
+          **Component Communication:** {{component_communication_methods}}
+      - id: scriptableobject-usage
+        title: ScriptableObject Architecture
+        template: |
+          **Data Architecture:** {{scriptableobject_data_patterns}}
+
+          **Configuration Management:** {{config_scriptableobject_usage}}
+
+          **Runtime Data:** {{runtime_scriptableobject_patterns}}
+
+  - id: physics-config
+    title: Physics Configuration
+    instruction: |
+      Define Unity 2D physics setup and configuration for the game.
+    elicit: true
+    sections:
+      - id: physics-settings
+        title: Physics Settings
+        template: |
+          **Physics 2D Settings:** {{physics_2d_configuration}}
+
+          **Collision Layers:** {{collision_layer_matrix}}
+
+          **Physics Materials:** {{physics_materials_setup}}
+      - id: rigidbody-patterns
+        title: Rigidbody Patterns
+        template: |
+          **Player Physics:** {{player_rigidbody_setup}}
+
+          **Object Physics:** {{object_physics_patterns}}
+
+          **Performance Optimization:** {{physics_optimization_strategies}}
+
+  - id: input-system
+    title: Input System Architecture
+    instruction: |
+      Define input handling using Unity's Input System package.
+    elicit: true
+    sections:
+      - id: input-actions
+        title: Input Actions Configuration
+        template: |
+          **Input Action Assets:** {{input_action_asset_structure}}
+
+          **Action Maps:** {{input_action_maps}}
+
+          **Control Schemes:** {{control_schemes_definition}}
+      - id: input-handling
+        title: Input Handling Patterns
+        template: |
+          **Player Input:** {{player_input_component_usage}}
+
+          **UI Input:** {{ui_input_handling_patterns}}
+
+          **Input Validation:** {{input_validation_strategies}}
+
+  - id: state-machines
+    title: State Machine Architecture
+    instruction: |
+      Define state machine patterns for game states, player states, and AI behavior.
+    elicit: true
+    sections:
+      - id: game-state-machine
+        title: Game State Machine
+        template: |
+          **Game States:** {{game_state_definitions}}
+
+          **State Transitions:** {{game_state_transition_rules}}
+
+          **State Management:** {{game_state_manager_implementation}}
+      - id: entity-state-machines
+        title: Entity State Machines
+        template: |
+          **Player States:** {{player_state_machine_design}}
+
+          **AI Behavior States:** {{ai_state_machine_patterns}}
+
+          **Object States:** {{object_state_management}}
+
+  - id: ui-architecture
+    title: UI Architecture
+    instruction: |
+      Define Unity UI system architecture using UGUI or UI Toolkit.
+    elicit: true
+    sections:
+      - id: ui-system-choice
+        title: UI System Selection
+        template: |
+          **UI Framework:** {{ui_framework_choice}} (UGUI/UI Toolkit)
+
+          **UI Scaling:** {{ui_scaling_strategy}}
+
+          **Canvas Setup:** {{canvas_configuration}}
+      - id: ui-navigation
+        title: UI Navigation System
+        template: |
+          **Screen Management:** {{screen_management_system}}
+
+          **Navigation Flow:** {{ui_navigation_patterns}}
+
+          **Back Button Handling:** {{back_button_implementation}}
+
+  - id: ui-components
+    title: UI Component System
+    instruction: |
+      Define reusable UI components and their implementation patterns.
+    elicit: true
+    sections:
+      - id: ui-component-library
+        title: UI Component Library
+        template: |
+          **Base Components:** {{base_ui_components}}
+
+          **Custom Components:** {{custom_ui_components}}
+
+          **Component Prefabs:** {{ui_prefab_organization}}
+      - id: ui-data-binding
+        title: UI Data Binding
+        template: |
+          **Data Binding Patterns:** {{ui_data_binding_approach}}
+
+          **UI Events:** {{ui_event_system}}
+
+          **View Model Patterns:** {{ui_viewmodel_implementation}}
+
+  - id: ui-state-management
+    title: UI State Management
+    instruction: |
+      Define how UI state is managed across the game.
+    elicit: true
+    sections:
+      - id: ui-state-patterns
+        title: UI State Patterns
+        template: |
+          **State Persistence:** {{ui_state_persistence}}
+
+          **Screen State:** {{screen_state_management}}
+
+          **UI Configuration:** {{ui_configuration_management}}
+
+  - id: scene-management
+    title: Scene Management Architecture
+    instruction: |
+      Define scene loading, unloading, and transition strategies.
+    elicit: true
+    sections:
+      - id: scene-structure
+        title: Scene Structure
+        template: |
+          **Scene Organization:** {{scene_organization_strategy}}
+
+          **Scene Hierarchy:** {{scene_hierarchy_patterns}}
+
+          **Persistent Scenes:** {{persistent_scene_usage}}
+      - id: scene-loading
+        title: Scene Loading System
+        template: |
+          **Loading Strategies:** {{scene_loading_patterns}}
+
+          **Async Loading:** {{async_scene_loading_implementation}}
+
+          **Loading Screens:** {{loading_screen_management}}
+
+  - id: data-persistence
+    title: Data Persistence Architecture
+    instruction: |
+      Define save system and data persistence strategies.
+    elicit: true
+    sections:
+      - id: save-data-structure
+        title: Save Data Structure
+        template: |
+          **Save Data Models:** {{save_data_model_design}}
+
+          **Serialization Format:** {{serialization_format_choice}}
+
+          **Data Validation:** {{save_data_validation}}
+      - id: persistence-strategy
+        title: Persistence Strategy
+        template: |
+          **Save Triggers:** {{save_trigger_events}}
+
+          **Auto-Save:** {{auto_save_implementation}}
+
+          **Cloud Save:** {{cloud_save_integration}}
+
+  - id: save-system
+    title: Save System Implementation
+    instruction: |
+      Define detailed save system implementation patterns.
+    elicit: true
+    sections:
+      - id: save-load-api
+        title: Save/Load API
+        template: |
+          **Save Interface:** {{save_interface_design}}
+
+          **Load Interface:** {{load_interface_design}}
+
+          **Error Handling:** {{save_load_error_handling}}
+      - id: save-file-management
+        title: Save File Management
+        template: |
+          **File Structure:** {{save_file_structure}}
+
+          **Backup Strategy:** {{save_backup_strategy}}
+
+          **Migration:** {{save_data_migration_strategy}}
+
+  - id: analytics-integration
+    title: Analytics Integration
+    instruction: |
+      Define analytics tracking and integration patterns.
+    condition: Game requires analytics tracking
+    elicit: true
+    sections:
+      - id: analytics-events
+        title: Analytics Event Design
+        template: |
+          **Event Categories:** {{analytics_event_categories}}
+
+          **Custom Events:** {{custom_analytics_events}}
+
+          **Player Progression:** {{progression_analytics}}
+      - id: analytics-implementation
+        title: Analytics Implementation
+        template: |
+          **Analytics SDK:** {{analytics_sdk_choice}}
+
+          **Event Tracking:** {{event_tracking_patterns}}
+
+          **Privacy Compliance:** {{analytics_privacy_considerations}}
+
+  - id: multiplayer-architecture
+    title: Multiplayer Architecture
+    instruction: |
+      Define multiplayer system architecture if applicable.
+    condition: Game includes multiplayer features
+    elicit: true
+    sections:
+      - id: networking-approach
+        title: Networking Approach
+        template: |
+          **Networking Solution:** {{networking_solution_choice}}
+
+          **Architecture Pattern:** {{multiplayer_architecture_pattern}}
+
+          **Synchronization:** {{state_synchronization_strategy}}
+      - id: multiplayer-systems
+        title: Multiplayer System Components
+        template: |
+          **Client Components:** {{multiplayer_client_components}}
+
+          **Server Components:** {{multiplayer_server_components}}
+
+          **Network Messages:** {{network_message_design}}
+
+  - id: rendering-pipeline
+    title: Rendering Pipeline Configuration
+    instruction: |
+      Define Unity rendering pipeline setup and optimization.
+    elicit: true
+    sections:
+      - id: render-pipeline-setup
+        title: Render Pipeline Setup
+        template: |
+          **Pipeline Choice:** {{render_pipeline_choice}} (URP/Built-in)
+
+          **Pipeline Asset:** {{render_pipeline_asset_config}}
+
+          **Quality Settings:** {{quality_settings_configuration}}
+      - id: rendering-optimization
+        title: Rendering Optimization
+        template: |
+          **Batching Strategies:** {{sprite_batching_optimization}}
+
+          **Draw Call Optimization:** {{draw_call_reduction_strategies}}
+
+          **Texture Optimization:** {{texture_optimization_settings}}
+
+  - id: shader-guidelines
+    title: Shader Guidelines
+    instruction: |
+      Define shader usage and custom shader guidelines.
+    elicit: true
+    sections:
+      - id: shader-usage
+        title: Shader Usage Patterns
+        template: |
+          **Built-in Shaders:** {{builtin_shader_usage}}
+
+          **Custom Shaders:** {{custom_shader_requirements}}
+
+          **Shader Variants:** {{shader_variant_management}}
+      - id: shader-performance
+        title: Shader Performance Guidelines
+        template: |
+          **Mobile Optimization:** {{mobile_shader_optimization}}
+
+          **Performance Budgets:** {{shader_performance_budgets}}
+
+          **Profiling Guidelines:** {{shader_profiling_approach}}
+
+  - id: sprite-management
+    title: Sprite Management
+    instruction: |
+      Define sprite asset management and optimization strategies.
+    elicit: true
+    sections:
+      - id: sprite-organization
+        title: Sprite Organization
+        template: |
+          **Atlas Strategy:** {{sprite_atlas_organization}}
+
+          **Sprite Naming:** {{sprite_naming_conventions}}
+
+          **Import Settings:** {{sprite_import_settings}}
+      - id: sprite-optimization
+        title: Sprite Optimization
+        template: |
+          **Compression Settings:** {{sprite_compression_settings}}
+
+          **Resolution Strategy:** {{sprite_resolution_strategy}}
+
+          **Memory Optimization:** {{sprite_memory_optimization}}
+
+  - id: particle-systems
+    title: Particle System Architecture
+    instruction: |
+      Define particle system usage and optimization.
+    elicit: true
+    sections:
+      - id: particle-design
+        title: Particle System Design
+        template: |
+          **Effect Categories:** {{particle_effect_categories}}
+
+          **Prefab Organization:** {{particle_prefab_organization}}
+
+          **Pooling Strategy:** {{particle_pooling_implementation}}
+      - id: particle-performance
+        title: Particle Performance
+        template: |
+          **Performance Budgets:** {{particle_performance_budgets}}
+
+          **Mobile Optimization:** {{particle_mobile_optimization}}
+
+          **LOD Strategy:** {{particle_lod_implementation}}
+
+  - id: audio-architecture
+    title: Audio Architecture
+    instruction: |
+      Define audio system architecture and implementation.
+    elicit: true
+    sections:
+      - id: audio-system-design
+        title: Audio System Design
+        template: |
+          **Audio Manager:** {{audio_manager_implementation}}
+
+          **Audio Sources:** {{audio_source_management}}
+
+          **3D Audio:** {{spatial_audio_implementation}}
+      - id: audio-categories
+        title: Audio Categories
+        template: |
+          **Music System:** {{music_system_architecture}}
+
+          **Sound Effects:** {{sfx_system_design}}
+
+          **Voice/Dialog:** {{dialog_system_implementation}}
+
+  - id: audio-mixing
+    title: Audio Mixing Configuration
+    instruction: |
+      Define Unity Audio Mixer setup and configuration.
+    elicit: true
+    sections:
+      - id: mixer-setup
+        title: Audio Mixer Setup
+        template: |
+          **Mixer Groups:** {{audio_mixer_group_structure}}
+
+          **Effects Chain:** {{audio_effects_configuration}}
+
+          **Snapshot System:** {{audio_snapshot_usage}}
+      - id: dynamic-mixing
+        title: Dynamic Audio Mixing
+        template: |
+          **Volume Control:** {{volume_control_implementation}}
+
+          **Dynamic Range:** {{dynamic_range_management}}
+
+          **Platform Optimization:** {{platform_audio_optimization}}
+
+  - id: sound-banks
+    title: Sound Bank Management
+    instruction: |
+      Define sound asset organization and loading strategies.
+    elicit: true
+    sections:
+      - id: sound-organization
+        title: Sound Asset Organization
+        template: |
+          **Bank Structure:** {{sound_bank_organization}}
+
+          **Loading Strategy:** {{audio_loading_patterns}}
+
+          **Memory Management:** {{audio_memory_management}}
+      - id: sound-streaming
+        title: Audio Streaming
+        template: |
+          **Streaming Strategy:** {{audio_streaming_implementation}}
+
+          **Compression Settings:** {{audio_compression_settings}}
+
+          **Platform Considerations:** {{platform_audio_considerations}}
+
+  - id: unity-conventions
+    title: Unity Development Conventions
+    instruction: |
+      Define Unity-specific development conventions and best practices.
+    elicit: true
+    sections:
       - id: unity-best-practices
         title: Unity Best Practices
-        sections:
-          - id: general-best-practices
-            title: General Best Practices
-            type: bullet-list
-            template: |
-              - Use the `[SerializeField]` attribute to expose private fields in the Inspector
-              - Avoid using `GameObject.Find()` in `Update()`
-              - Cache component references in `Awake()` or `Start()`
-          - id: component-design
-            title: Component Design
-            type: bullet-list
-            template: |
-              - Follow the Single Responsibility Principle
-              - Use events for communication between components
-              - Use ScriptableObjects for data
-          - id: scene-management-practices
-            title: Scene Management
-            type: bullet-list
-            template: |
-              - Use a loading scene for asynchronous loading
-              - Keep scenes small and focused
-      - id: testing-strategy
-        title: Testing Strategy
-        sections:
-          - id: unit-testing
-            title: Unit Testing
-            type: bullet-list
-            template: |
-              - Use the Unity Test Framework (Edit Mode tests)
-              - Test C# logic in isolation
-          - id: integration-testing
-            title: Integration Testing
-            type: bullet-list
-            template: |
-              - Use the Unity Test Framework (Play Mode tests)
-              - Test the interaction between components and systems
-          - id: test-files
-            title: Files to Create
-            type: bullet-list
-            template: |
-              - `Assets/Tests/EditMode/`
-              - `Assets/Tests/PlayMode/`
+        template: |
+          **Component Design:** {{unity_component_best_practices}}
 
-  - id: deployment-architecture
-    title: Deployment Architecture
-    instruction: Define how the game will be built and deployed
+          **Performance Guidelines:** {{unity_performance_guidelines}}
+
+          **Memory Management:** {{unity_memory_best_practices}}
+      - id: unity-workflow
+        title: Unity Workflow Conventions
+        template: |
+          **Scene Workflow:** {{scene_workflow_conventions}}
+
+          **Prefab Workflow:** {{prefab_workflow_conventions}}
+
+          **Asset Workflow:** {{asset_workflow_conventions}}
+
+  - id: external-integrations
+    title: External Integrations
+    condition: Game requires external service integrations
+    instruction: |
+      For each external service integration required by the game:
+
+      1. Identify services needed based on GDD requirements and platform needs
+      2. If documentation URLs are unknown, ask user for specifics
+      3. Document authentication methods and Unity-specific integration approaches
+      4. List specific APIs that will be used
+      5. Note any platform-specific SDKs or Unity packages required
+
+      If no external integrations are needed, state this explicitly and skip to next section.
+    elicit: true
+    repeatable: true
     sections:
-      - id: build-process
-        title: Build Process
-        sections:
-          - id: development-build
-            title: Development Build
-            type: bullet-list
-            template: |
-              - Enable "Development Build" in Build Settings
-              - Use the Profiler to analyze performance
-          - id: production-build
-            title: Production Build
-            type: bullet-list
-            template: |
-              - Disable "Development Build"
-              - Use IL2CPP for better performance
-              - Configure platform-specific settings
+      - id: integration
+        title: "{{service_name}} Integration"
+        template: |
+          - **Purpose:** {{service_purpose}}
+          - **Documentation:** {{service_docs_url}}
+          - **Unity Package:** {{unity_package_name}} {{version}}
+          - **Platform SDK:** {{platform_sdk_requirements}}
+          - **Authentication:** {{auth_method}}
+
+          **Key Features Used:**
+          - {{feature_1}} - {{feature_purpose}}
+          - {{feature_2}} - {{feature_purpose}}
+
+          **Unity Implementation Notes:** {{unity_integration_details}}
+
+  - id: core-workflows
+    title: Core Game Workflows
+    type: mermaid
+    mermaid_type: sequence
+    instruction: |
+      Illustrate key game workflows using sequence diagrams:
+
+      1. Identify critical player journeys from GDD (game loop, level progression, etc.)
+      2. Show system interactions including Unity lifecycle methods
+      3. Include error handling paths and state transitions
+      4. Document async operations (scene loading, asset loading)
+      5. Create both high-level game flow and detailed system interaction diagrams
+
+      Focus on workflows that clarify Unity-specific architecture decisions or complex system interactions.
+    elicit: true
+
+  - id: unity-project-structure
+    title: Unity Project Structure
+    type: code
+    language: plaintext
+    instruction: |
+      Create a Unity project folder structure that reflects:
+
+      1. Unity best practices for 2D game organization
+      2. The selected render pipeline and packages
+      3. Component organization from above systems
+      4. Clear separation of concerns for game assets
+      5. Testing structure for Unity Test Framework
+      6. Platform-specific asset organization
+
+      Follow Unity naming conventions and folder organization standards.
+    elicit: true
+    examples:
+      - |
+        ProjectName/
+        ├── Assets/
+        │   └── _Project/                   # Main project folder
+        │       ├── Scenes/                 # Game scenes
+        │       │   ├── Gameplay/           # Level scenes
+        │       │   ├── UI/                 # UI-only scenes
+        │       │   └── Loading/            # Loading scenes
+        │       ├── Scripts/                # C# scripts
+        │       │   ├── Core/               # Core systems
+        │       │   ├── Gameplay/           # Gameplay mechanics
+        │       │   ├── UI/                 # UI controllers
+        │       │   └── Data/               # ScriptableObjects
+        │       ├── Prefabs/                # Reusable game objects
+        │       │   ├── Characters/         # Player, enemies
+        │       │   ├── Environment/        # Level elements
+        │       │   └── UI/                 # UI prefabs
+        │       ├── Art/                    # Visual assets
+        │       │   ├── Sprites/            # 2D sprites
+        │       │   ├── Materials/          # Unity materials
+        │       │   └── Shaders/            # Custom shaders
+        │       ├── Audio/                  # Audio assets
+        │       │   ├── Music/              # Background music
+        │       │   ├── SFX/                # Sound effects
+        │       │   └── Mixers/             # Audio mixers
+        │       ├── Data/                   # Game data
+        │       │   ├── Settings/           # Game settings
+        │       │   └── Balance/            # Balance data
+        │       └── Tests/                  # Unity tests
+        │           ├── EditMode/           # Edit mode tests
+        │           └── PlayMode/           # Play mode tests
+        ├── Packages/                       # Package Manager
+        │   └── manifest.json               # Package dependencies
+        └── ProjectSettings/                # Unity project settings
+
+  - id: infrastructure-deployment
+    title: Infrastructure and Deployment
+    instruction: |
+      Define the Unity build and deployment architecture:
+
+      1. Use Unity's build system and any additional tools
+      2. Choose deployment strategy appropriate for target platforms
+      3. Define environments (development, staging, production builds)
+      4. Establish version control and build pipeline practices
+      5. Consider platform-specific requirements and store submissions
+
+      Get user input on build preferences and CI/CD tool choices for Unity projects.
+    elicit: true
+    sections:
+      - id: unity-build-configuration
+        title: Unity Build Configuration
+        template: |
+          - **Unity Version:** {{unity_version}} LTS
+          - **Build Pipeline:** {{build_pipeline_type}}
+          - **Addressables:** {{addressables_usage}}
+          - **Asset Bundles:** {{asset_bundle_strategy}}
       - id: deployment-strategy
         title: Deployment Strategy
-        sections:
-          - id: platform-deployment
-            title: Platform Deployment
-            type: bullet-list
-            template: |
-              - Configure player settings for each target platform
-              - Use Unity Cloud Build for automated builds
-              - Follow platform-specific guidelines for submission
-
-  - id: implementation-roadmap
-    title: Implementation Roadmap
-    instruction: Break down the architecture implementation into phases that align with the GDD development phases
-    sections:
-      - id: phase-1-foundation
-        title: "Phase 1: Foundation ({{duration}})"
-        sections:
-          - id: phase-1-core
-            title: Core Systems
-            type: bullet-list
-            template: |
-              - Project setup and configuration
-              - Basic scene management
-              - Asset loading pipeline
-              - Input handling framework
-          - id: phase-1-epics
-            title: Story Epics
-            type: bullet-list
-            template: |
-              - "Engine Setup and Configuration"
-              - "Basic Scene Management System"
-              - "Asset Loading Foundation"
-      - id: phase-2-game-systems
-        title: "Phase 2: Game Systems ({{duration}})"
-        sections:
-          - id: phase-2-gameplay
-            title: Gameplay Systems
-            type: bullet-list
-            template: |
-              - {{primary_mechanic}} implementation
-              - Physics and collision system
-              - Game state management
-              - UI framework
-          - id: phase-2-epics
-            title: Story Epics
-            type: bullet-list
-            template: |
-              - "{{primary_mechanic}} System Implementation"
-              - "Physics and Collision Framework"
-              - "Game State Management System"
-      - id: phase-3-content-polish
-        title: "Phase 3: Content & Polish ({{duration}})"
-        sections:
-          - id: phase-3-content
-            title: Content Systems
-            type: bullet-list
-            template: |
-              - Level loading and management
-              - Audio system integration
-              - Performance optimization
-              - Final polish and testing
-          - id: phase-3-epics
-            title: Story Epics
-            type: bullet-list
-            template: |
-              - "Level Management System"
-              - "Audio Integration and Optimization"
-              - "Performance Optimization and Testing"
-
-  - id: risk-assessment
-    title: Risk Assessment
-    instruction: Identify potential technical risks and mitigation strategies
-    type: table
-    template: |
-      | Risk                         | Probability | Impact     | Mitigation Strategy |
-      | ---------------------------- | ----------- | ---------- | ------------------- |
-      | Performance issues on mobile | {{prob}}    | {{impact}} | {{mitigation}}      |
-      | Asset loading bottlenecks    | {{prob}}    | {{impact}} | {{mitigation}}      |
-      | Cross-platform compatibility | {{prob}}    | {{impact}} | {{mitigation}}      |
-
-  - id: success-criteria
-    title: Success Criteria
-    instruction: Define measurable technical success criteria
-    sections:
-      - id: technical-metrics
-        title: Technical Metrics
-        type: bullet-list
         template: |
-          - All systems implemented per specification
-          - Performance targets met consistently
-          - Zero critical bugs in core systems
-          - Successful deployment across target platforms
-      - id: code-quality
-        title: Code Quality
-        type: bullet-list
+          - **Build Automation:** {{build_automation_tool}}
+          - **Version Control:** {{version_control_integration}}
+          - **Distribution:** {{distribution_platforms}}
+      - id: environments
+        title: Build Environments
+        repeatable: true
+        template: "- **{{env_name}}:** {{env_purpose}} - {{platform_settings}}"
+      - id: platform-specific-builds
+        title: Platform-Specific Build Settings
+        type: code
+        language: text
+        template: "{{platform_build_configurations}}"
+
+  - id: coding-standards
+    title: Coding Standards
+    instruction: |
+      These standards are MANDATORY for AI agents working on Unity game development. Work with user to define ONLY the critical rules needed to prevent bad Unity code. Explain that:
+
+      1. This section directly controls AI developer behavior
+      2. Keep it minimal - assume AI knows general C# and Unity best practices
+      3. Focus on project-specific Unity conventions and gotchas
+      4. Overly detailed standards bloat context and slow development
+      5. Standards will be extracted to separate file for dev agent use
+
+      For each standard, get explicit user confirmation it's necessary.
+    elicit: true
+    sections:
+      - id: core-standards
+        title: Core Standards
         template: |
-          - 90%+ test coverage on game logic
-          - Zero C# compiler errors or warnings
-          - Consistent adherence to coding standards
-          - Comprehensive documentation coverage
+          - **Unity Version:** {{unity_version}} LTS
+          - **C# Language Version:** {{csharp_version}}
+          - **Code Style:** Microsoft C# conventions + Unity naming
+          - **Testing Framework:** Unity Test Framework (NUnit-based)
+      - id: unity-naming-conventions
+        title: Unity Naming Conventions
+        type: table
+        columns: [Element, Convention, Example]
+        instruction: Only include if deviating from Unity defaults
+        examples:
+          - "| MonoBehaviour | PascalCase + Component suffix | PlayerController, HealthSystem |"
+          - "| ScriptableObject | PascalCase + Data/Config suffix | PlayerData, GameConfig |"
+          - "| Prefab | PascalCase descriptive | PlayerCharacter, EnvironmentTile |"
+      - id: critical-rules
+        title: Critical Unity Rules
+        instruction: |
+          List ONLY rules that AI might violate or Unity-specific requirements. Examples:
+          - "Always cache GetComponent calls in Awake() or Start()"
+          - "Use [SerializeField] for private fields that need Inspector access"
+          - "Prefer UnityEvents over C# events for Inspector-assignable callbacks"
+          - "Never call GameObject.Find() in Update, FixedUpdate, or LateUpdate"
+
+          Avoid obvious rules like "follow SOLID principles" or "optimize performance"
+        repeatable: true
+        template: "- **{{rule_name}}:** {{rule_description}}"
+      - id: unity-specifics
+        title: Unity-Specific Guidelines
+        condition: Critical Unity-specific rules needed
+        instruction: Add ONLY if critical for preventing AI mistakes with Unity APIs
+        sections:
+          - id: unity-lifecycle
+            title: Unity Lifecycle Rules
+            repeatable: true
+            template: "- **{{lifecycle_method}}:** {{usage_rule}}"
+
+  - id: test-strategy
+    title: Test Strategy and Standards
+    instruction: |
+      Work with user to define comprehensive Unity test strategy:
+
+      1. Use Unity Test Framework for both Edit Mode and Play Mode tests
+      2. Decide on test-driven development vs test-after approach
+      3. Define test organization and naming for Unity projects
+      4. Establish coverage goals for game logic
+      5. Determine integration test infrastructure (scene-based testing)
+      6. Plan for test data and mock external dependencies
+
+      Note: Basic info goes in Coding Standards for dev agent. This detailed section is for comprehensive testing strategy.
+    elicit: true
+    sections:
+      - id: testing-philosophy
+        title: Testing Philosophy
+        template: |
+          - **Approach:** {{test_approach}}
+          - **Coverage Goals:** {{coverage_targets}}
+          - **Test Distribution:** {{edit_mode_vs_play_mode_split}}
+      - id: unity-test-types
+        title: Unity Test Types and Organization
+        sections:
+          - id: edit-mode-tests
+            title: Edit Mode Tests
+            template: |
+              - **Framework:** Unity Test Framework (Edit Mode)
+              - **File Convention:** {{edit_mode_test_naming}}
+              - **Location:** `Assets/_Project/Tests/EditMode/`
+              - **Purpose:** C# logic testing without Unity runtime
+              - **Coverage Requirement:** {{edit_mode_coverage}}
+
+              **AI Agent Requirements:**
+              - Test ScriptableObject data validation
+              - Test utility classes and static methods
+              - Test serialization/deserialization logic
+              - Mock Unity APIs where necessary
+          - id: play-mode-tests
+            title: Play Mode Tests
+            template: |
+              - **Framework:** Unity Test Framework (Play Mode)
+              - **Location:** `Assets/_Project/Tests/PlayMode/`
+              - **Purpose:** Integration testing with Unity runtime
+              - **Test Scenes:** {{test_scene_requirements}}
+              - **Coverage Requirement:** {{play_mode_coverage}}
+
+              **AI Agent Requirements:**
+              - Test MonoBehaviour component interactions
+              - Test scene loading and GameObject lifecycle
+              - Test physics interactions and collision systems
+              - Test UI interactions and event systems
+      - id: test-data-management
+        title: Test Data Management
+        template: |
+          - **Strategy:** {{test_data_approach}}
+          - **ScriptableObject Fixtures:** {{test_scriptableobject_location}}
+          - **Test Scene Templates:** {{test_scene_templates}}
+          - **Cleanup Strategy:** {{cleanup_approach}}
+
+  - id: security
+    title: Security Considerations
+    instruction: |
+      Define security requirements specific to Unity game development:
+
+      1. Focus on Unity-specific security concerns
+      2. Consider platform store requirements
+      3. Address save data protection and anti-cheat measures
+      4. Define secure communication patterns for multiplayer
+      5. These rules directly impact Unity code generation
+    elicit: true
+    sections:
+      - id: save-data-security
+        title: Save Data Security
+        template: |
+          - **Encryption:** {{save_data_encryption_method}}
+          - **Validation:** {{save_data_validation_approach}}
+          - **Anti-Tampering:** {{anti_tampering_measures}}
+      - id: platform-security
+        title: Platform Security Requirements
+        template: |
+          - **Mobile Permissions:** {{mobile_permission_requirements}}
+          - **Store Compliance:** {{platform_store_requirements}}
+          - **Privacy Policy:** {{privacy_policy_requirements}}
+      - id: multiplayer-security
+        title: Multiplayer Security (if applicable)
+        condition: Game includes multiplayer features
+        template: |
+          - **Client Validation:** {{client_validation_rules}}
+          - **Server Authority:** {{server_authority_approach}}
+          - **Anti-Cheat:** {{anti_cheat_measures}}
+
+  - id: checklist-results
+    title: Checklist Results Report
+    instruction: Before running the checklist, offer to output the full game architecture document. Once user confirms, execute the architect-checklist and populate results here.
+
+  - id: next-steps
+    title: Next Steps
+    instruction: |
+      After completing the game architecture:
+
+      1. Review with Game Designer and technical stakeholders
+      2. Begin story implementation with Game Developer agent
+      3. Set up Unity project structure and initial configuration
+      4. Configure version control and build pipeline
+
+      Include specific prompts for next agents if needed.
+    sections:
+      - id: developer-prompt
+        title: Game Developer Prompt
+        instruction: |
+          Create a brief prompt to hand off to Game Developer for story implementation. Include:
+          - Reference to this game architecture document
+          - Key Unity-specific requirements from this architecture
+          - Any Unity package or configuration decisions made here
+          - Request for adherence to established coding standards and patterns

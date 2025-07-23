@@ -1,160 +1,132 @@
-# Game Development Story Definition of Done Checklist
+# Game Development Story Definition of Done (DoD) Checklist
 
-## Story Completeness
+## Instructions for Developer Agent
 
-### Basic Story Elements
+Before marking a story as 'Review', please go through each item in this checklist. Report the status of each item (e.g., [x] Done, [ ] Not Done, [N/A] Not Applicable) and provide brief comments if necessary.
 
-- [ ] **Story Title** - Clear, descriptive title that identifies the feature
-- [ ] **Epic Assignment** - Story is properly assigned to relevant epic
-- [ ] **Priority Level** - Appropriate priority assigned (High/Medium/Low)
-- [ ] **Story Points** - Realistic estimation for implementation complexity
-- [ ] **Description** - Clear, concise description of what needs to be implemented
+[[LLM: INITIALIZATION INSTRUCTIONS - GAME STORY DOD VALIDATION
 
-### Game Design Alignment
+This checklist is for GAME DEVELOPER AGENTS to self-validate their work before marking a story complete.
 
-- [ ] **GDD Reference** - Specific Game Design Document section referenced
-- [ ] **Game Mechanic Context** - Clear connection to game mechanics defined in GDD
-- [ ] **Player Experience Goal** - Describes the intended player experience
-- [ ] **Balance Parameters** - Includes any relevant game balance values
-- [ ] **Design Intent** - Purpose and rationale for the feature is clear
+IMPORTANT: This is a self-assessment. Be honest about what's actually done vs what should be done. It's better to identify issues now than have them found in review.
 
-## Technical Specifications
+EXECUTION APPROACH:
 
-### Architecture Compliance
+1. Go through each section systematically
+2. Mark items as [x] Done, [ ] Not Done, or [N/A] Not Applicable
+3. Add brief comments explaining any [ ] or [N/A] items
+4. Be specific about what was actually implemented
+5. Flag any concerns or technical debt created
 
-- [ ] **File Organization** - Follows game architecture document structure (e.g., scripts, prefabs, scenes)
-- [ ] **Class Definitions** - C# classes and interfaces are properly defined
-- [ ] **Integration Points** - Clear specification of how feature integrates with existing systems
-- [ ] **Event Communication** - UnityEvents or C# events usage specified
-- [ ] **Dependencies** - All system dependencies clearly identified
+The goal is quality delivery, not just checking boxes.]]
 
-### Unity Requirements
+## Checklist Items
 
-- [ ] **Scene Integration** - Specifies which scenes are affected and how
-- [ ] **Prefab Usage** - Proper use of prefabs for reusable GameObjects
-- [ ] **Component Design** - Logic is encapsulated in well-defined MonoBehaviour components
-- [ ] **Asset Requirements** - All needed assets (sprites, audio, materials) identified
-- [ ] **Performance Considerations** - Stable frame rate target and optimization requirements
+1. **Requirements Met:**
 
-### Code Quality Standards
+   [[LLM: Be specific - list each requirement and whether it's complete. Include game-specific requirements from GDD]]
 
-- [ ] **C# Best Practices** - All code must comply with modern C# standards
-- [ ] **Error Handling** - Error scenarios and handling requirements specified
-- [ ] **Memory Management** - Coroutine and object lifecycle management requirements where needed
-- [ ] **Cross-Platform Support** - Desktop and mobile considerations addressed
-- [ ] **Code Organization** - Follows established Unity project structure
+   - [ ] All functional requirements specified in the story are implemented.
+   - [ ] All acceptance criteria defined in the story are met.
+   - [ ] Game Design Document (GDD) requirements referenced in the story are implemented.
+   - [ ] Player experience goals specified in the story are achieved.
 
-## Implementation Readiness
+2. **Coding Standards & Project Structure:**
 
-### Acceptance Criteria
+   [[LLM: Code quality matters for maintainability. Check Unity-specific patterns and C# standards]]
 
-- [ ] **Functional Requirements** - All functional acceptance criteria are specific and testable
-- [ ] **Technical Requirements** - Technical acceptance criteria are complete and verifiable
-- [ ] **Game Design Requirements** - Game-specific requirements match GDD specifications
-- [ ] **Performance Requirements** - Frame rate and memory usage criteria specified
-- [ ] **Completeness** - No acceptance criteria are vague or unmeasurable
+   - [ ] All new/modified code strictly adheres to `Operational Guidelines`.
+   - [ ] All new/modified code aligns with `Project Structure` (Scripts/, Prefabs/, Scenes/, etc.).
+   - [ ] Adherence to `Tech Stack` for Unity version and packages used.
+   - [ ] Adherence to `Api Reference` and `Data Models` (if story involves API or data model changes).
+   - [ ] Unity best practices followed (prefab usage, component design, event handling).
+   - [ ] C# coding standards followed (naming conventions, error handling, memory management).
+   - [ ] Basic security best practices applied for new/modified code.
+   - [ ] No new linter errors or warnings introduced.
+   - [ ] Code is well-commented where necessary (clarifying complex logic, not obvious statements).
 
-### Implementation Tasks
+3. **Testing:**
 
-- [ ] **Task Breakdown** - Story broken into specific, ordered implementation tasks
-- [ ] **Task Scope** - Each task is completable in 1-4 hours
-- [ ] **Task Clarity** - Each task has clear, actionable instructions
-- [ ] **File Specifications** - Exact file paths and purposes specified (e.g., `Scripts/Player/PlayerMovement.cs`)
-- [ ] **Development Flow** - Tasks follow logical implementation order
+   [[LLM: Testing proves your code works. Include Unity-specific testing with NUnit and manual testing]]
 
-### Dependencies
+   - [ ] All required unit tests (NUnit) as per the story and testing strategy are implemented.
+   - [ ] All required integration tests (if applicable) are implemented.
+   - [ ] Manual testing performed in Unity Editor for all game functionality.
+   - [ ] All tests (unit, integration, manual) pass successfully.
+   - [ ] Test coverage meets project standards (if defined).
+   - [ ] Performance tests conducted (frame rate, memory usage).
+   - [ ] Edge cases and error conditions tested.
 
-- [ ] **Story Dependencies** - All prerequisite stories identified with IDs
-- [ ] **Technical Dependencies** - Required systems and files identified
-- [ ] **Asset Dependencies** - All needed assets specified with locations
-- [ ] **External Dependencies** - Any third-party or external requirements noted (e.g., Asset Store packages)
-- [ ] **Dependency Validation** - All dependencies are actually available
+4. **Functionality & Verification:**
 
-## Testing Requirements
+   [[LLM: Did you actually run and test your code in Unity? Be specific about game mechanics tested]]
 
-### Test Coverage
+   - [ ] Functionality has been manually verified in Unity Editor and play mode.
+   - [ ] Game mechanics work as specified in the GDD.
+   - [ ] Player controls and input handling work correctly.
+   - [ ] UI elements function properly (if applicable).
+   - [ ] Audio integration works correctly (if applicable).
+   - [ ] Visual feedback and animations work as intended.
+   - [ ] Edge cases and potential error conditions handled gracefully.
+   - [ ] Cross-platform functionality verified (desktop/mobile as applicable).
 
-- [ ] **Unit Test Requirements** - Specific unit test files and scenarios defined for NUnit
-- [ ] **Integration Test Cases** - Integration testing with other game systems specified
-- [ ] **Manual Test Cases** - Game-specific manual testing procedures defined in the Unity Editor
-- [ ] **Performance Tests** - Frame rate and memory testing requirements specified
-- [ ] **Edge Case Testing** - Edge cases and error conditions covered
+5. **Story Administration:**
 
-### Test Implementation
+   [[LLM: Documentation helps the next developer. Include Unity-specific implementation notes]]
 
-- [ ] **Test File Paths** - Exact test file locations specified (e.g., `Assets/Tests/EditMode`)
-- [ ] **Test Scenarios** - All test scenarios are complete and executable
-- [ ] **Expected Behaviors** - Clear expected outcomes for all tests defined
-- [ ] **Performance Metrics** - Specific performance targets for testing
-- [ ] **Test Data** - Any required test data or mock objects specified
+   - [ ] All tasks within the story file are marked as complete.
+   - [ ] Any clarifications or decisions made during development are documented.
+   - [ ] Unity-specific implementation details documented (scene changes, prefab modifications).
+   - [ ] The story wrap up section has been completed with notes of changes.
+   - [ ] Changelog properly updated with Unity version and package changes.
 
-## Game-Specific Quality
+6. **Dependencies, Build & Configuration:**
 
-### Gameplay Implementation
+   [[LLM: Build issues block everyone. Ensure Unity project builds for all target platforms]]
 
-- [ ] **Mechanic Accuracy** - Implementation matches GDD mechanic specifications
-- [ ] **Player Controls** - Input handling requirements are complete (e.g., Input System package)
-- [ ] **Game Feel** - Requirements for juice, feedback, and responsiveness specified
-- [ ] **Balance Implementation** - Numeric values and parameters from GDD included
-- [ ] **State Management** - Game state changes and persistence requirements defined
+   - [ ] Unity project builds successfully without errors.
+   - [ ] Project builds for all target platforms (desktop/mobile as specified).
+   - [ ] Any new Unity packages or Asset Store items were pre-approved OR approved by user.
+   - [ ] If new dependencies were added, they are recorded with justification.
+   - [ ] No known security vulnerabilities in newly added dependencies.
+   - [ ] Project settings and configurations properly updated.
+   - [ ] Asset import settings optimized for target platforms.
 
-### User Experience
+7. **Game-Specific Quality:**
 
-- [ ] **UI Requirements** - User interface elements and behaviors specified (e.g., UI Toolkit or UGUI)
-- [ ] **Audio Integration** - Sound effect and music requirements defined
-- [ ] **Visual Feedback** - Animation and visual effect requirements specified (e.g., Animator, Particle System)
-- [ ] **Accessibility** - Mobile touch and responsive design considerations
-- [ ] **Error Recovery** - User-facing error handling and recovery specified
+   [[LLM: Game quality matters. Check performance, game feel, and player experience]]
 
-### Performance Optimization
+   - [ ] Frame rate meets target (30/60 FPS) on all platforms.
+   - [ ] Memory usage within acceptable limits.
+   - [ ] Game feel and responsiveness meet design requirements.
+   - [ ] Balance parameters from GDD correctly implemented.
+   - [ ] State management and persistence work correctly.
+   - [ ] Loading times and scene transitions acceptable.
+   - [ ] Mobile-specific requirements met (touch controls, aspect ratios).
 
-- [ ] **Frame Rate Targets** - Specific FPS requirements for different platforms
-- [ ] **Memory Usage** - Memory consumption limits and monitoring requirements (e.g., Profiler)
-- [ ] **Asset Optimization** - Texture, audio, and data optimization requirements
-- [ ] **Mobile Considerations** - Touch controls and mobile performance requirements
-- [ ] **Loading Performance** - Asset loading and scene transition requirements
+8. **Documentation (If Applicable):**
 
-## Documentation and Communication
+   [[LLM: Good documentation prevents future confusion. Include Unity-specific docs]]
 
-### Story Documentation
+   - [ ] Code documentation (XML comments) for public APIs complete.
+   - [ ] Unity component documentation in Inspector updated.
+   - [ ] User-facing documentation updated, if changes impact players.
+   - [ ] Technical documentation (architecture, system diagrams) updated.
+   - [ ] Asset documentation (prefab usage, scene setup) complete.
 
-- [ ] **Implementation Notes** - Additional context and implementation guidance provided
-- [ ] **Design Decisions** - Key design choices documented with rationale
-- [ ] **Future Considerations** - Potential future enhancements or modifications noted
-- [ ] **Change Tracking** - Process for tracking any requirement changes during development
-- [ ] **Reference Materials** - Links to relevant GDD sections and architecture docs
+## Final Confirmation
 
-### Developer Handoff
+[[LLM: FINAL GAME DOD SUMMARY
 
-- [ ] **Immediate Actionability** - Developer can start implementation without additional questions
-- [ ] **Complete Context** - All necessary context provided within the story
-- [ ] **Clear Boundaries** - What is and isn't included in the story scope is clear
-- [ ] **Success Criteria** - Objective measures for story completion defined
-- [ ] **Communication Plan** - Process for developer questions and updates established
+After completing the checklist:
 
-## Final Validation
+1. Summarize what game features/mechanics were implemented
+2. List any items marked as [ ] Not Done with explanations
+3. Identify any technical debt or performance concerns
+4. Note any challenges with Unity implementation or game design
+5. Confirm whether the story is truly ready for review
+6. Report final performance metrics (FPS, memory usage)
 
-### Story Readiness
+Be honest - it's better to flag issues now than have them discovered during playtesting.]]
 
-- [ ] **No Ambiguity** - No sections require interpretation or additional design decisions
-- [ ] **Technical Completeness** - All technical requirements are specified and actionable
-- [ ] **Scope Appropriateness** - Story scope matches assigned story points
-- [ ] **Quality Standards** - Story meets all game development quality standards
-- [ ] **Review Completion** - Story has been reviewed for completeness and accuracy
-
-### Implementation Preparedness
-
-- [ ] **Environment Ready** - Development environment requirements specified (e.g., Unity version)
-- [ ] **Resources Available** - All required resources (assets, docs, dependencies) accessible
-- [ ] **Testing Prepared** - Testing environment and data requirements specified
-- [ ] **Definition of Done** - Clear, objective completion criteria established
-- [ ] **Handoff Complete** - Story is ready for developer assignment and implementation
-
-## Checklist Completion
-
-**Overall Story Quality:** ⭐⭐⭐⭐⭐
-
-**Ready for Development:** [ ] Yes [ ] No
-
-**Additional Notes:**
-_Any specific concerns, recommendations, or clarifications needed before development begins._
+- [ ] I, the Game Developer Agent, confirm that all applicable items above have been addressed.

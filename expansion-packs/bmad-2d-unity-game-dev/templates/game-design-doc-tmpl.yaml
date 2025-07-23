@@ -1,86 +1,128 @@
 template:
-  id: game-design-doc-template-v2
+  id: game-design-doc-template-v3
   name: Game Design Document (GDD)
-  version: 2.0
+  version: 4.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-design-document.md"
+    filename: docs/game-design-document.md
     title: "{{game_title}} Game Design Document (GDD)"
 
 workflow:
   mode: interactive
+  elicitation: advanced-elicitation
 
 sections:
-  - id: initial-setup
+  - id: goals-context
+    title: Goals and Background Context
     instruction: |
-      This template creates a comprehensive Game Design Document that will serve as the foundation for all game development work. The GDD should be detailed enough that developers can create user stories and epics from it. Focus on gameplay systems, mechanics, and technical requirements that can be broken down into implementable features.
-      
-      If available, review any provided documents or ask if any are optionally available: Project Brief, Market Research, Competitive Analysis
+      Ask if Project Brief document is available. If NO Project Brief exists, STRONGLY recommend creating one first using project-brief-tmpl (it provides essential foundation: problem statement, target users, success metrics, MVP scope, constraints). If user insists on GDD without brief, gather this information during Goals section. If Project Brief exists, review and use it to populate Goals (bullet list of desired game development outcomes) and Background Context (1-2 paragraphs on what game concept this will deliver and why) so we can determine what is and is not in scope for the GDD. Include Change Log table for version tracking.
+    sections:
+      - id: goals
+        title: Goals
+        type: bullet-list
+        instruction: Bullet list of 1 line desired outcomes the GDD will deliver if successful - game development and player experience goals
+        examples:
+          - Create an engaging 2D platformer that teaches players basic programming concepts
+          - Deliver a polished mobile game that runs smoothly on low-end Android devices
+          - Build a foundation for future expansion packs and content updates
+      - id: background
+        title: Background Context
+        type: paragraphs
+        instruction: 1-2 short paragraphs summarizing the game concept background, target audience needs, market opportunity, and what problem this game solves
+      - id: changelog
+        title: Change Log
+        type: table
+        columns: [Date, Version, Description, Author]
+        instruction: Track document versions and changes
 
   - id: executive-summary
     title: Executive Summary
     instruction: Create a compelling overview that captures the essence of the game. Present this section first and get user feedback before proceeding.
+    elicit: true
     sections:
       - id: core-concept
         title: Core Concept
         instruction: 2-3 sentences that clearly describe what the game is and why players will love it
+        examples:
+          - A fast-paced 2D platformer where players manipulate gravity to solve puzzles and defeat enemies in a hand-drawn world.
+          - An educational puzzle game that teaches coding concepts through visual programming blocks in a fantasy adventure setting.
       - id: target-audience
         title: Target Audience
         instruction: Define the primary and secondary audience with demographics and gaming preferences
         template: |
           **Primary:** {{age_range}}, {{player_type}}, {{platform_preference}}
           **Secondary:** {{secondary_audience}}
+        examples:
+          - "Primary: Ages 8-16, casual mobile gamers, prefer short play sessions"
+          - "Secondary: Adult puzzle enthusiasts, educators looking for teaching tools"
       - id: platform-technical
         title: Platform & Technical Requirements
-        instruction: Based on the technical preferences or user input, define the target platforms
+        instruction: Based on the technical preferences or user input, define the target platforms and Unity-specific requirements
         template: |
           **Primary Platform:** {{platform}}
-          **Engine:** Unity & C#
-          **Performance Target:** Stable FPS on {{minimum_device}}
+          **Engine:** Unity {{unity_version}} & C#
+          **Performance Target:** Stable {{fps_target}} FPS on {{minimum_device}}
           **Screen Support:** {{resolution_range}}
+          **Build Targets:** {{build_targets}}
+        examples:
+          - "Primary Platform: Mobile (iOS/Android), Engine: Unity 2022.3 LTS & C#, Performance: 60 FPS on iPhone 8/Galaxy S8"
       - id: unique-selling-points
         title: Unique Selling Points
         instruction: List 3-5 key features that differentiate this game from competitors
         type: numbered-list
-        template: "{{usp}}"
+        examples:
+          - Innovative gravity manipulation mechanic that affects both player and environment
+          - Seamless integration of educational content without compromising fun gameplay
+          - Adaptive difficulty system that learns from player behavior
 
   - id: core-gameplay
     title: Core Gameplay
-    instruction: This section defines the fundamental game mechanics. After presenting each subsection, apply `tasks#advanced-elicitation` protocol to ensure completeness.
+    instruction: This section defines the fundamental game mechanics. After presenting each subsection, apply advanced elicitation to ensure completeness and gather additional details.
+    elicit: true
     sections:
       - id: game-pillars
         title: Game Pillars
-        instruction: Define 3-5 core pillars that guide all design decisions. These should be specific and actionable.
+        instruction: Define 3-5 core pillars that guide all design decisions. These should be specific and actionable for Unity development.
         type: numbered-list
         template: |
           **{{pillar_name}}** - {{description}}
+        examples:
+          - Intuitive Controls - All interactions must be learnable within 30 seconds using touch or keyboard
+          - Immediate Feedback - Every player action provides visual and audio response within 0.1 seconds
+          - Progressive Challenge - Difficulty increases through mechanic complexity, not unfair timing
       - id: core-gameplay-loop
         title: Core Gameplay Loop
-        instruction: Define the 30-60 second loop that players will repeat. Be specific about timing and player actions.
+        instruction: Define the 30-60 second loop that players will repeat. Be specific about timing and player actions for Unity implementation.
         template: |
           **Primary Loop ({{duration}} seconds):**
           
-          1. {{action_1}} ({{time_1}}s)
-          2. {{action_2}} ({{time_2}}s)
-          3. {{action_3}} ({{time_3}}s)
-          4. {{reward_feedback}} ({{time_4}}s)
+          1. {{action_1}} ({{time_1}}s) - {{unity_component}}
+          2. {{action_2}} ({{time_2}}s) - {{unity_component}}
+          3. {{action_3}} ({{time_3}}s) - {{unity_component}}
+          4. {{reward_feedback}} ({{time_4}}s) - {{unity_component}}
+        examples:
+          - Observe environment (2s) - Camera Controller, Identify puzzle elements (3s) - Highlight System
       - id: win-loss-conditions
         title: Win/Loss Conditions
-        instruction: Clearly define success and failure states
+        instruction: Clearly define success and failure states with Unity-specific implementation notes
         template: |
           **Victory Conditions:**
           
-          - {{win_condition_1}}
-          - {{win_condition_2}}
+          - {{win_condition_1}} - Unity Event: {{unity_event}}
+          - {{win_condition_2}} - Unity Event: {{unity_event}}
           
           **Failure States:**
           
-          - {{loss_condition_1}}
-          - {{loss_condition_2}}
+          - {{loss_condition_1}} - Trigger: {{unity_trigger}}
+          - {{loss_condition_2}} - Trigger: {{unity_trigger}}
+        examples:
+          - "Victory: Player reaches exit portal - Unity Event: OnTriggerEnter2D with Portal tag"
+          - "Failure: Health reaches zero - Trigger: Health component value <= 0"
 
   - id: game-mechanics
     title: Game Mechanics
-    instruction: Detail each major mechanic that will need to be implemented. Each mechanic should be specific enough for developers to create implementation stories.
+    instruction: Detail each major mechanic that will need Unity implementation. Each mechanic should be specific enough for developers to create C# scripts and prefabs.
+    elicit: true
     sections:
       - id: primary-mechanics
         title: Primary Mechanics
@@ -91,29 +133,41 @@ sections:
             template: |
               **Description:** {{detailed_description}}
               
-              **Player Input:** {{input_method}}
+              **Player Input:** {{input_method}} - Unity Input System: {{input_action}}
               
               **System Response:** {{game_response}}
               
-              **Implementation Notes:**
+              **Unity Implementation Notes:**
               
-              - {{tech_requirement_1}}
-              - {{tech_requirement_2}}
-              - {{performance_consideration}}
+              - **Components Needed:** {{component_list}}
+              - **Physics Requirements:** {{physics_2d_setup}}
+              - **Animation States:** {{animator_states}}
+              - **Performance Considerations:** {{optimization_notes}}
               
               **Dependencies:** {{other_mechanics_needed}}
+              
+              **Script Architecture:**
+              
+              - {{script_name}}.cs - {{responsibility}}
+              - {{manager_script}}.cs - {{management_role}}
+            examples:
+              - "Components Needed: Rigidbody2D, BoxCollider2D, PlayerMovement script"
+              - "Physics Requirements: 2D Physics material for ground friction, Gravity scale 3"
       - id: controls
         title: Controls
-        instruction: Define all input methods for different platforms
+        instruction: Define all input methods for different platforms using Unity's Input System
         type: table
         template: |
-          | Action | Desktop | Mobile | Gamepad |
-          | ------ | ------- | ------ | ------- |
-          | {{action}} | {{key}} | {{gesture}} | {{button}} |
+          | Action | Desktop | Mobile | Gamepad | Unity Input Action |
+          | ------ | ------- | ------ | ------- | ------------------ |
+          | {{action}} | {{key}} | {{gesture}} | {{button}} | {{input_action}} |
+        examples:
+          - Move Left, A/Left Arrow, Swipe Left, Left Stick, <Move>/x
 
   - id: progression-balance
     title: Progression & Balance
-    instruction: Define how players advance and how difficulty scales. This section should provide clear parameters for implementation.
+    instruction: Define how players advance and how difficulty scales. This section should provide clear parameters for Unity implementation and scriptable objects.
+    elicit: true
     sections:
       - id: player-progression
         title: Player Progression
@@ -122,30 +176,54 @@ sections:
           
           **Key Milestones:**
           
-          1. **{{milestone_1}}** - {{unlock_description}}
-          2. **{{milestone_2}}** - {{unlock_description}}
-          3. **{{milestone_3}}** - {{unlock_description}}
+          1. **{{milestone_1}}** - {{unlock_description}} - Unity: {{scriptable_object_update}}
+          2. **{{milestone_2}}** - {{unlock_description}} - Unity: {{scriptable_object_update}}
+          3. **{{milestone_3}}** - {{unlock_description}} - Unity: {{scriptable_object_update}}
+          
+          **Save Data Structure:**
+          
+          ```csharp
+          [System.Serializable]
+          public class PlayerProgress
+          {
+              {{progress_fields}}
+          }
+          ```
+        examples:
+          - public int currentLevel, public bool[] unlockedAbilities, public float totalPlayTime
       - id: difficulty-curve
         title: Difficulty Curve
-        instruction: Provide specific parameters for balancing
+        instruction: Provide specific parameters for balancing that can be implemented as Unity ScriptableObjects
         template: |
           **Tutorial Phase:** {{duration}} - {{difficulty_description}}
+          - Unity Config: {{scriptable_object_values}}
+          
           **Early Game:** {{duration}} - {{difficulty_description}}
+          - Unity Config: {{scriptable_object_values}}
+          
           **Mid Game:** {{duration}} - {{difficulty_description}}
+          - Unity Config: {{scriptable_object_values}}
+          
           **Late Game:** {{duration}} - {{difficulty_description}}
+          - Unity Config: {{scriptable_object_values}}
+        examples:
+          - "enemy speed: 2.0f, jump height: 4.5f, obstacle density: 0.3f"
       - id: economy-resources
         title: Economy & Resources
         condition: has_economy
-        instruction: Define any in-game currencies, resources, or collectibles
+        instruction: Define any in-game currencies, resources, or collectibles with Unity implementation details
         type: table
         template: |
-          | Resource | Earn Rate | Spend Rate | Purpose | Cap |
-          | -------- | --------- | ---------- | ------- | --- |
-          | {{resource}} | {{rate}} | {{rate}} | {{use}} | {{max}} |
+          | Resource | Earn Rate | Spend Rate | Purpose | Cap | Unity ScriptableObject |
+          | -------- | --------- | ---------- | ------- | --- | --------------------- |
+          | {{resource}} | {{rate}} | {{rate}} | {{use}} | {{max}} | {{so_name}} |
+        examples:
+          - Coins, 1-3 per enemy, 10-50 per upgrade, Buy abilities, 9999, CurrencyData
 
   - id: level-design-framework
     title: Level Design Framework
-    instruction: Provide guidelines for level creation that developers can use to create level implementation stories
+    instruction: Provide guidelines for level creation that developers can use to create Unity scenes and prefabs. Focus on modular design and reusable components.
+    elicit: true
     sections:
       - id: level-types
         title: Level Types
@@ -155,189 +233,473 @@ sections:
             title: "{{level_type_name}}"
             template: |
               **Purpose:** {{gameplay_purpose}}
-              **Duration:** {{target_time}}
+              **Target Duration:** {{target_time}}
               **Key Elements:** {{required_mechanics}}
-              **Difficulty:** {{relative_difficulty}}
+              **Difficulty Rating:** {{relative_difficulty}}
               
-              **Structure Template:**
+              **Unity Scene Structure:**
               
-              - Introduction: {{intro_description}}
-              - Challenge: {{main_challenge}}
-              - Resolution: {{completion_requirement}}
+              - **Environment:** {{tilemap_setup}}
+              - **Gameplay Objects:** {{prefab_list}}
+              - **Lighting:** {{lighting_setup}}
+              - **Audio:** {{audio_sources}}
+              
+              **Level Flow Template:**
+              
+              - **Introduction:** {{intro_description}} - Area: {{unity_area_bounds}}
+              - **Challenge:** {{main_challenge}} - Mechanics: {{active_components}}
+              - **Resolution:** {{completion_requirement}} - Trigger: {{completion_trigger}}
+              
+              **Reusable Prefabs:**
+              
+              - {{prefab_name}} - {{prefab_purpose}}
+            examples:
+              - "Environment: TilemapRenderer with Platform tileset, Lighting: 2D Global Light + Point Lights"
       - id: level-progression
         title: Level Progression
         template: |
           **World Structure:** {{linear|hub|open}}
           **Total Levels:** {{number}}
           **Unlock Pattern:** {{progression_method}}
+          **Scene Management:** {{unity_scene_loading}}
+          
+          **Unity Scene Organization:**
+          
+          - Scene Naming: {{naming_convention}}
+          - Addressable Assets: {{addressable_groups}}
+          - Loading Screens: {{loading_implementation}}
+        examples:
+          - "Scene Naming: World{X}_Level{Y}_Name, Addressable Groups: Levels_World1, World_Environments"
 
   - id: technical-specifications
     title: Technical Specifications
-    instruction: Define technical requirements that will guide architecture and implementation decisions. Review any existing technical preferences.
+    instruction: Define Unity-specific technical requirements that will guide architecture and implementation decisions. Reference Unity documentation and best practices.
+    elicit: true
+    choices:
+      render_pipeline: [Built-in, URP, HDRP]
+      input_system: [Legacy, New Input System, Both]
+      physics: [2D Only, 3D Only, Hybrid]
     sections:
+      - id: unity-configuration
+        title: Unity Project Configuration
+        template: |
+          **Unity Version:** {{unity_version}} (LTS recommended)
+          **Render Pipeline:** {{Built-in|URP|HDRP}}
+          **Input System:** {{Legacy|New Input System|Both}}
+          **Physics:** {{2D Only|3D Only|Hybrid}}
+          **Scripting Backend:** {{Mono|IL2CPP}}
+          **API Compatibility:** {{.NET Standard 2.1|.NET Framework}}
+          
+          **Required Packages:**
+          
+          - {{package_name}} {{version}} - {{purpose}}
+          
+          **Project Settings:**
+          
+          - Color Space: {{Linear|Gamma}}
+          - Quality Settings: {{quality_levels}}
+          - Physics Settings: {{physics_config}}
+        examples:
+          - com.unity.addressables 1.20.5 - Asset loading and memory management
+          - "Color Space: Linear, Quality: Mobile/Desktop presets, Gravity: -20"
       - id: performance-requirements
         title: Performance Requirements
         template: |
-          **Frame Rate:** Stable FPS (minimum 30 FPS on low-end devices)
-          **Memory Usage:** <{{memory_limit}}MB
+          **Frame Rate:** {{fps_target}} FPS (minimum {{min_fps}} on low-end devices)
+          **Memory Usage:** <{{memory_limit}}MB heap, <{{texture_memory}}MB textures
           **Load Times:** <{{load_time}}s initial, <{{level_load}}s between levels
-          **Battery Usage:** Optimized for mobile devices
+          **Battery Usage:** Optimized for mobile devices - {{battery_target}} hours gameplay
+          
+          **Unity Profiler Targets:**
+          
+          - CPU Frame Time: <{{cpu_time}}ms
+          - GPU Frame Time: <{{gpu_time}}ms
+          - GC Allocs: <{{gc_limit}}KB per frame
+          - Draw Calls: <{{draw_calls}} per frame
+        examples:
+          - "60 FPS (minimum 30), CPU: <16.67ms, GPU: <16.67ms, GC: <4KB, Draws: <50"
       - id: platform-specific
-        title: Platform Specific
+        title: Platform Specific Requirements
         template: |
           **Desktop:**
           
           - Resolution: {{min_resolution}} - {{max_resolution}}
-          - Input: Keyboard, Mouse, Gamepad
-          - Browser: Chrome 80+, Firefox 75+, Safari 13+
+          - Input: Keyboard, Mouse, Gamepad ({{gamepad_support}})
+          - Build Target: {{desktop_targets}}
           
           **Mobile:**
           
           - Resolution: {{mobile_min}} - {{mobile_max}}
-          - Input: Touch, Tilt (optional)
-          - OS: iOS 13+, Android 8+
+          - Input: Touch, Accelerometer ({{sensor_support}})
+          - OS: iOS {{ios_min}}+, Android {{android_min}}+ (API {{api_level}})
+          - Device Requirements: {{device_specs}}
+          
+          **Web (if applicable):**
+          
+          - WebGL Version: {{webgl_version}}
+          - Browser Support: {{browser_list}}
+          - Compression: {{compression_format}}
+        examples:
+          - "Resolution: 1280x720 - 4K, Gamepad: Xbox/PlayStation controllers via Input System"
       - id: asset-requirements
         title: Asset Requirements
-        instruction: Define asset specifications for the art and audio teams
+        instruction: Define asset specifications for Unity pipeline optimization
         template: |
-          **Visual Assets:**
+          **2D Art Assets:**
           
-          - Art Style: {{style_description}}
-          - Color Palette: {{color_specification}}
-          - Animation: {{animation_requirements}}
-          - UI Resolution: {{ui_specs}}
+          - Sprites: {{sprite_resolution}} at {{ppu}} PPU
+          - Texture Format: {{texture_compression}}
+          - Atlas Strategy: {{sprite_atlas_setup}}
+          - Animation: {{animation_type}} at {{framerate}} FPS
           
           **Audio Assets:**
           
-          - Music Style: {{music_genre}}
-          - Sound Effects: {{sfx_requirements}}
-          - Voice Acting: {{voice_needs}}
+          - Music: {{audio_format}} at {{sample_rate}} Hz
+          - SFX: {{sfx_format}} at {{sfx_sample_rate}} Hz
+          - Compression: {{audio_compression}}
+          - 3D Audio: {{spatial_audio}}
+          
+          **UI Assets:**
+          
+          - Canvas Resolution: {{ui_resolution}}
+          - UI Scale Mode: {{scale_mode}}
+          - Font: {{font_requirements}}
+          - Icon Sizes: {{icon_specifications}}
+        examples:
+          - "Sprites: 32x32 to 256x256 at 16 PPU, Format: RGBA32 for quality/RGBA16 for performance"
 
   - id: technical-architecture-requirements
     title: Technical Architecture Requirements
-    instruction: Define high-level technical requirements that the game architecture must support
+    instruction: Define high-level Unity architecture patterns and systems that the game must support. Focus on scalability and maintainability.
+    elicit: true
+    choices:
+      architecture_pattern: [MVC, MVVM, ECS, Component-Based]
+      save_system: [PlayerPrefs, JSON, Binary, Cloud]
+      audio_system: [Unity Audio, FMOD, Wwise]
     sections:
-      - id: engine-configuration
-        title: Engine Configuration
-        template: |
-          **Unity Setup:**
-
-          - C#: Latest stable version
-          - Physics: 2D Physics
-          - Renderer: 2D Renderer (URP)
-          - Input System: New Input System
       - id: code-architecture
-        title: Code Architecture
+        title: Code Architecture Pattern
         template: |
-          **Required Systems:**
+          **Architecture Pattern:** {{MVC|MVVM|ECS|Component-Based|Custom}}
           
-          - Scene Management
-          - State Management
-          - Asset Loading
-          - Save/Load System
-          - Input Management
-          - Audio System
-          - Performance Monitoring
+          **Core Systems Required:**
+          
+          - **Scene Management:** {{scene_manager_approach}}
+          - **State Management:** {{state_pattern_implementation}}
+          - **Event System:** {{event_system_choice}}
+          - **Object Pooling:** {{pooling_strategy}}
+          - **Save/Load System:** {{save_system_approach}}
+          
+          **Folder Structure:**
+          
+          ```
+          Assets/
+          ├── _Project/
+          │   ├── Scripts/
+          │   │   ├── {{folder_structure}}
+          │   ├── Prefabs/
+          │   ├── Scenes/
+          │   └── {{additional_folders}}
+          ```
+          
+          **Naming Conventions:**
+          
+          - Scripts: {{script_naming}}
+          - Prefabs: {{prefab_naming}}
+          - Scenes: {{scene_naming}}
+        examples:
+          - "Architecture: Component-Based with ScriptableObject data containers"
+          - "Scripts: PascalCase (PlayerController), Prefabs: Player_Prefab, Scenes: Level_01_Forest"
+      - id: unity-systems-integration
+        title: Unity Systems Integration
+        template: |
+          **Required Unity Systems:**
+          
+          - **Input System:** {{input_implementation}}
+          - **Animation System:** {{animation_approach}}
+          - **Physics Integration:** {{physics_usage}}
+          - **Rendering Features:** {{rendering_requirements}}
+          - **Asset Streaming:** {{asset_loading_strategy}}
+          
+          **Third-Party Integrations:**
+          
+          - {{integration_name}}: {{integration_purpose}}
+          
+          **Performance Systems:**
+          
+          - **Profiling Integration:** {{profiling_setup}}
+          - **Memory Management:** {{memory_strategy}}
+          - **Build Pipeline:** {{build_automation}}
+        examples:
+          - "Input System: Action Maps for Menu/Gameplay contexts with device switching"
+          - "DOTween: Smooth UI transitions and gameplay animations"
       - id: data-management
         title: Data Management
         template: |
-          **Save Data:**
+          **Save Data Architecture:**
           
-          - Progress tracking
-          - Settings persistence
-          - Statistics collection
-          - {{additional_data}}
+          - **Format:** {{PlayerPrefs|JSON|Binary|Cloud}}
+          - **Structure:** {{save_data_organization}}
+          - **Encryption:** {{security_approach}}
+          - **Cloud Sync:** {{cloud_integration}}
+          
+          **Configuration Data:**
+          
+          - **ScriptableObjects:** {{scriptable_object_usage}}
+          - **Settings Management:** {{settings_system}}
+          - **Localization:** {{localization_approach}}
+          
+          **Runtime Data:**
+          
+          - **Caching Strategy:** {{cache_implementation}}
+          - **Memory Pools:** {{pooling_objects}}
+          - **Asset References:** {{asset_reference_system}}
+        examples:
+          - "Save Data: JSON format with AES encryption, stored in persistent data path"
+          - "ScriptableObjects: Game settings, level configurations, character data"
 
   - id: development-phases
-    title: Development Phases
-    instruction: Break down the development into phases that can be converted to epics
+    title: Development Phases & Epic Planning
+    instruction: Break down the Unity development into phases that can be converted to agile epics. Each phase should deliver deployable functionality following Unity best practices.
+    elicit: true
     sections:
-      - id: phase-1-core-systems
-        title: "Phase 1: Core Systems ({{duration}})"
+      - id: phases-overview
+        title: Phases Overview
+        instruction: Present a high-level list of all phases for user approval. Each phase's design should deliver significant Unity functionality.
+        type: numbered-list
+        examples:
+          - "Phase 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
+          - "Phase 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
+          - "Phase 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
+          - "Phase 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
+      - id: phase-1-foundation
+        title: "Phase 1: Unity Foundation & Core Systems ({{duration}})"
         sections:
-          - id: foundation-epic
-            title: "Epic: Foundation"
+          - id: foundation-design
+            title: "Design: Unity Project Foundation"
             type: bullet-list
             template: |
-              - Engine setup and configuration
-              - Basic scene management
-              - Core input handling
-              - Asset loading pipeline
-          - id: core-mechanics-epic
-            title: "Epic: Core Mechanics"
+              - Unity project setup with proper folder structure and naming conventions
+              - Core architecture implementation ({{architecture_pattern}})
+              - Input System configuration with action maps for all platforms
+              - Basic scene management and state handling
+              - Development tools setup (debugging, profiling integration)
+              - Initial build pipeline and platform configuration
+            examples:
+              - "Input System: Configure PlayerInput component with Action Maps for movement and UI"
+          - id: core-systems-design
+            title: "Design: Essential Game Systems"
             type: bullet-list
             template: |
-              - {{primary_mechanic}} implementation
-              - Basic physics and collision
-              - Player controller
-      - id: phase-2-gameplay-features
-        title: "Phase 2: Gameplay Features ({{duration}})"
+              - Save/Load system implementation with {{save_format}} format
+              - Audio system setup with {{audio_system}} integration
+              - Event system for decoupled component communication
+              - Object pooling system for performance optimization
+              - Basic UI framework and canvas configuration
+              - Settings and configuration management with ScriptableObjects
+      - id: phase-2-gameplay
+        title: "Phase 2: Core Gameplay Implementation ({{duration}})"
         sections:
-          - id: game-systems-epic
-            title: "Epic: Game Systems"
+          - id: gameplay-mechanics-design
+            title: "Design: Primary Game Mechanics"
             type: bullet-list
             template: |
-              - {{mechanic_2}} implementation
-              - {{mechanic_3}} implementation
-              - Game state management
-          - id: content-creation-epic
-            title: "Epic: Content Creation"
+              - Player controller with {{movement_type}} movement system
+              - {{primary_mechanic}} implementation with Unity physics
+              - {{secondary_mechanic}} system with visual feedback
+              - Game state management (playing, paused, game over)
+              - Basic collision detection and response systems
+              - Animation system integration with Animator controllers
+          - id: level-systems-design
+            title: "Design: Level & Content Systems"
             type: bullet-list
             template: |
-              - Level loading system
-              - First playable levels
-              - Basic UI implementation
-      - id: phase-3-polish-optimization
+              - Scene loading and transition system
+              - Level progression and unlock system
+              - Prefab-based level construction tools
+              - {{level_generation}} level creation workflow
+              - Collectibles and pickup systems
+              - Victory/defeat condition implementation
+      - id: phase-3-polish
         title: "Phase 3: Polish & Optimization ({{duration}})"
         sections:
-          - id: performance-epic
-            title: "Epic: Performance"
+          - id: performance-design
+            title: "Design: Performance & Platform Optimization"
             type: bullet-list
             template: |
-              - Optimization and profiling
-              - Mobile platform testing
-              - Memory management
-          - id: user-experience-epic
-            title: "Epic: User Experience"
+              - Unity Profiler analysis and optimization passes
+              - Memory management and garbage collection optimization
+              - Asset optimization (texture compression, audio compression)
+              - Platform-specific performance tuning
+              - Build size optimization and asset bundling
+              - Quality settings configuration for different device tiers
+          - id: user-experience-design
+            title: "Design: User Experience & Polish"
             type: bullet-list
             template: |
-              - Audio implementation
-              - Visual effects and polish
-              - Final UI/UX refinement
+              - Complete UI/UX implementation with responsive design
+              - Audio implementation with dynamic mixing
+              - Visual effects and particle systems
+              - Accessibility features implementation
+              - Tutorial and onboarding flow
+              - Final testing and bug fixing across all platforms
+
+  - id: epic-list
+    title: Epic List
+    instruction: |
+      Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+
+      CRITICAL: Epics MUST be logically sequential following agile best practices:
+
+      - Each epic should be focused on a single phase and it's design from the development-phases section and deliver a significant, end-to-end, fully deployable increment of testable functionality
+      - Epic 1 must establish Phase 1: Unity Foundation & Core Systems (Project setup, input handling, basic scene management) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, remember this when we produce the stories for the first epic!
+      - Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
+      - Not every project needs multiple epics, an epic needs to deliver value. For example, an API, component, or scriptableobject completed can deliver value even if a scene, or gameobject is not complete and planned for a separate epic.
+      - Err on the side of less epics, but let the user know your rationale and offer options for splitting them if it seems some are too large or focused on disparate things.
+      - Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.
+    elicit: true
+    examples:
+      - "Epic 1: Unity Foundation & Core Systems: Project setup, input handling, basic scene management"
+      - "Epic 2: Core Game Mechanics: Player controller, physics systems, basic gameplay loop"
+      - "Epic 3: Level Systems & Content Pipeline: Scene loading, prefab systems, level progression"
+      - "Epic 4: Polish & Platform Optimization: Performance tuning, platform-specific features, deployment"
+
+  - id: epic-details
+    title: Epic {{epic_number}} {{epic_title}}
+    repeatable: true
+    instruction: |
+      After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
+
+      For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
+
+      CRITICAL STORY SEQUENCING REQUIREMENTS:
+
+      - Stories within each epic MUST be logically sequential
+      - Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
+      - No story should depend on work from a later story or epic
+      - Identify and note any direct prerequisite stories
+      - Focus on "what" and "why" not "how" (leave technical implementation to Architect) yet be precise enough to support a logical sequential order of operations from story to story.
+      - Ensure each story delivers clear user or business value, try to avoid enablers and build them into stories that deliver value.
+      - Size stories for AI agent execution: Each story must be completable by a single AI agent in one focused session without context overflow
+      - Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
+      - If a story seems complex, break it down further as long as it can deliver a vertical slice
+    elicit: true
+    template: "{{epic_goal}}"
+    sections:
+      - id: story
+        title: Story {{epic_number}}.{{story_number}} {{story_title}}
+        repeatable: true
+        instruction: Provide a clear, concise description of what this story implements. Focus on the specific game feature or system being built. Reference the GDD section that defines this feature and reference the gamearchitecture section for additional implementation and integration specifics.
+        template: "{{clear_description_of_what_needs_to_be_implemented}}"
+        sections:
+          - id: acceptance-criteria
+            title: Acceptance Criteria
+            instruction: Define specific, testable conditions that must be met for the story to be considered complete. Each criterion should be verifiable and directly related to gameplay functionality.
+            sections:
+              - id: functional-requirements
+                title: Functional Requirements
+                type: checklist
+                items:
+                  - "{{specific_functional_requirement}}"
+              - id: technical-requirements
+                title: Technical Requirements
+                type: checklist
+                items:
+                  - Code follows C# best practices
+                  - Maintains stable frame rate on target devices
+                  - No memory leaks or performance degradation
+                  - "{{specific_technical_requirement}}"
+              - id: game-design-requirements
+                title: Game Design Requirements
+                type: checklist
+                items:
+                  - "{{gameplay_requirement_from_gdd}}"
+                  - "{{balance_requirement_if_applicable}}"
+                  - "{{player_experience_requirement}}"
 
   - id: success-metrics
-    title: Success Metrics
-    instruction: Define measurable goals for the game
+    title: Success Metrics & Quality Assurance
+    instruction: Define measurable goals for the Unity game development project with specific targets that can be validated through Unity Analytics and profiling tools.
+    elicit: true
     sections:
       - id: technical-metrics
-        title: Technical Metrics
+        title: Technical Performance Metrics
         type: bullet-list
         template: |
-          - Frame rate: {{fps_target}}
-          - Load time: {{load_target}}
-          - Crash rate: <{{crash_threshold}}%
-          - Memory usage: <{{memory_target}}MB
+          - **Frame Rate:** Consistent {{fps_target}} FPS with <5% drops below {{min_fps}}
+          - **Load Times:** Initial load <{{initial_load}}s, level transitions <{{level_load}}s
+          - **Memory Usage:** Heap memory <{{heap_limit}}MB, texture memory <{{texture_limit}}MB
+          - **Crash Rate:** <{{crash_threshold}}% across all supported platforms
+          - **Build Size:** Final build <{{size_limit}}MB for mobile, <{{desktop_limit}}MB for desktop
+          - **Battery Life:** Mobile gameplay sessions >{{battery_target}} hours on average device
+        examples:
+          - "Frame Rate: Consistent 60 FPS with <5% drops below 45 FPS on target hardware"
+          - "Crash Rate: <0.5% across iOS/Android, <0.1% on desktop platforms"
       - id: gameplay-metrics
-        title: Gameplay Metrics
+        title: Gameplay & User Engagement Metrics
         type: bullet-list
         template: |
-          - Tutorial completion: {{completion_rate}}%
-          - Average session: {{session_length}} minutes
-          - Level completion: {{level_completion}}%
-          - Player retention: D1 {{d1}}%, D7 {{d7}}%
-
-  - id: appendices
-    title: Appendices
-    sections:
-      - id: change-log
-        title: Change Log
-        instruction: Track document versions and changes
+          - **Tutorial Completion:** {{tutorial_rate}}% of players complete basic tutorial
+          - **Level Progression:** {{progression_rate}}% reach level {{target_level}} within first session
+          - **Session Duration:** Average session length {{session_target}} minutes
+          - **Player Retention:** Day 1: {{d1_retention}}%, Day 7: {{d7_retention}}%, Day 30: {{d30_retention}}%
+          - **Gameplay Completion:** {{completion_rate}}% complete main game content
+          - **Control Responsiveness:** Input lag <{{input_lag}}ms on all platforms
+        examples:
+          - "Tutorial Completion: 85% of players complete movement and basic mechanics tutorial"
+          - "Session Duration: Average 15-20 minutes per session for mobile, 30-45 minutes for desktop"
+      - id: platform-specific-metrics
+        title: Platform-Specific Quality Metrics
         type: table
         template: |
-          | Date | Version | Description | Author |
-          | :--- | :------ | :---------- | :----- |
-      - id: references
-        title: References
-        instruction: List any competitive analysis, inspiration, or research sources
+          | Platform | Frame Rate | Load Time | Memory | Build Size | Battery |
+          | -------- | ---------- | --------- | ------ | ---------- | ------- |
+          | {{platform}} | {{fps}} | {{load}} | {{memory}} | {{size}} | {{battery}} |
+        examples:
+          - iOS, 60 FPS, <3s, <150MB, <80MB, 3+ hours
+          - Android, 60 FPS, <5s, <200MB, <100MB, 2.5+ hours
+
+  - id: next-steps-integration
+    title: Next Steps & BMad Integration
+    instruction: Define how this GDD integrates with BMad's agent workflow and what follow-up documents or processes are needed.
+    sections:
+      - id: architecture-handoff
+        title: Unity Architecture Requirements
+        instruction: Summary of key architectural decisions that need to be implemented in Unity project setup
         type: bullet-list
-        template: "{{reference}}"
+        template: |
+          - Unity {{unity_version}} project with {{render_pipeline}} pipeline
+          - {{architecture_pattern}} code architecture with {{folder_structure}}
+          - Required packages: {{essential_packages}}
+          - Performance targets: {{key_performance_metrics}}
+          - Platform builds: {{deployment_targets}}
+      - id: story-creation-guidance
+        title: Story Creation Guidance for SM Agent
+        instruction: Provide guidance for the Story Manager (SM) agent on how to break down this GDD into implementable user stories
+        template: |
+          **Epic Prioritization:** {{epic_order_rationale}}
+          
+          **Story Sizing Guidelines:**
+          
+          - Foundation stories: {{foundation_story_scope}}
+          - Feature stories: {{feature_story_scope}}
+          - Polish stories: {{polish_story_scope}}
+          
+          **Unity-Specific Story Considerations:**
+          
+          - Each story should result in testable Unity scenes or prefabs
+          - Include specific Unity components and systems in acceptance criteria
+          - Consider cross-platform testing requirements
+          - Account for Unity build and deployment steps
+        examples:
+          - "Foundation stories: Individual Unity systems (Input, Audio, Scene Management) - 1-2 days each"
+          - "Feature stories: Complete gameplay mechanics with UI and feedback - 2-4 days each"
+      - id: recommended-agents
+        title: Recommended BMad Agent Sequence
+        type: numbered-list
+        template: |
+          1. **{{agent_name}}**: {{agent_responsibility}}
+        examples:
+          - "Unity Architect: Create detailed technical architecture document with specific Unity implementation patterns"
+          - "Unity Developer: Implement core systems and gameplay mechanics according to architecture"
+          - "QA Tester: Validate performance metrics and cross-platform functionality"
