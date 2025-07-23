@@ -100,10 +100,17 @@ develop-story:
       - "Same validation error persists after 3 different solutions tried"
       - "Reality audit fails 3 times on same simulation pattern despite fixes"
   ready-for-review: "Code matches requirements + All validations pass + Follows standards + File List complete"
-  completion: "VERIFY: All Tasks and Subtasks marked [x] in story file (not just TodoWrite)→All tasks have tests→Validations and full regression passes (DON'T BE LAZY, EXECUTE ALL TESTS and CONFIRM)→VERIFY: File List is Complete with all created/modified files→run the task execute-checklist for the checklist story-dod-checklist→MANDATORY: run the task reality-audit-comprehensive to validate no simulation patterns→FINAL CHECK: Story file shows all tasks as [x] before setting status→set story status: 'Ready for Review'→HALT"
+  completion: "VERIFY: All Tasks and Subtasks marked [x] in story file (not just TodoWrite)→All tasks have tests→Validations and full regression passes (DON'T BE LAZY, EXECUTE ALL TESTS and CONFIRM)→VERIFY: File List is Complete with all created/modified files→run the task execute-checklist for the checklist story-dod-checklist→MANDATORY: run the task reality-audit-comprehensive to validate no simulation patterns→After successful build: run the task incremental-story-mapping to cache story-to-code mapping→FINAL CHECK: Story file shows all tasks as [x] before setting status→set story status: 'Ready for Review'→HALT"
 
 dependencies:
   tasks:
+    - lightweight-ide-detection.md
+    - auto-language-init.md
+    - incremental-story-mapping.md
+    - lightweight-reality-audit.md
+    - smart-build-context.md
+    - tiered-remediation.md
+    - context-aware-execution.md
     - execute-checklist.md
     - validate-next-story.md
     - reality-audit-comprehensive.md

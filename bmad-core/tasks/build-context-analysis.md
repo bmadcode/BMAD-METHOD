@@ -28,6 +28,7 @@ The goal is informed fixes, not blind error resolution.
 - Story requirements understood
 - Access to git history and previous implementations
 - Development environment configured for analysis
+- **Execute lightweight-ide-detection.md first** to optimize tool usage
 
 ## Phase 1: Historical Context Investigation
 
@@ -49,23 +50,25 @@ The goal is informed fixes, not blind error resolution.
 
 ### Historical Analysis Process
 
-**Execute git history analysis using the following approach:**
+**Execute git history analysis using environment-optimized approach:**
 
-1. **Create Analysis Report Directory:**
-   - Use Bash tool to create tmp directory: `mkdir -p tmp`
-   - Create report file: `tmp/build-context-$(date).md`
+**Environment-Adaptive Git Analysis:**
+- **If Cursor/Trae/Windsurf**: Use AI-powered git analysis with natural language queries
+- **If Claude Code**: Use built-in git integration and diff visualization  
+- **If Roo Code**: Use cloud git integration with collaborative history
+- **If Cline/GitHub Copilot**: Use VS Code git panel with AI enhancement
+- **If Gemini CLI**: Use CLI git with AI analysis
+- **If Standalone**: Use bash commands with approval prompts
 
-2. **Recent Commits Analysis:**
-   - Use Bash tool for: `git log --oneline -10`
-   - Document recent commits that might have introduced build issues
-
-3. **Interface Changes Detection:**
-   - Use Bash tool for: `git log --oneline -20 --grep="interface|API|contract|signature"`
-   - Identify commits that modified interfaces or contracts
-
-4. **File Change Frequency Analysis:**
-   - Use Bash tool for: `git log --since="30 days ago" --name-only --pretty=format:`
-   - Find files with frequent recent modifications
+**Optimized Git Commands (Environment-Specific):**
+```bash
+# Single combined command to minimize approvals in CLI mode
+echo "=== BMAD Build Context Analysis ===" && \
+mkdir -p tmp && \
+echo "=== Recent Commits ===" && git log --oneline -10 && \
+echo "=== Interface Changes ===" && git log --oneline -20 --grep="interface|API|contract|signature" && \
+echo "=== Frequently Modified Files ===" && git log --since="30 days ago" --name-only --pretty=format: | sort | uniq -c | sort -nr | head -20
+```
 
 5. **Build Error Source Analysis:**
    - Examine source files for recent changes

@@ -158,6 +158,13 @@ auto_escalation:
 
 dependencies:
   tasks:
+    - lightweight-ide-detection.md
+    - auto-language-init.md
+    - incremental-story-mapping.md
+    - lightweight-reality-audit.md
+    - smart-build-context.md
+    - tiered-remediation.md
+    - context-aware-execution.md
     - review-story.md
     - reality-audit-comprehensive.md
     - reality-audit.md
