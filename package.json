@@ -41,13 +41,13 @@
   "dependencies": {
     "@kayvan/markdown-tree-parser": "^1.5.0",
     "bmad-method": "^4.30.3",
-    "chalk": "^4.1.2",
+    "chalk": "^5.4.1",
     "commander": "^14.0.0",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.3",
-    "inquirer": "^8.2.6",
+    "inquirer": "^12.6.3",
     "js-yaml": "^4.1.0",
-    "ora": "^5.4.1"
+    "ora": "^8.2.0"
   },
   "keywords": [
     "agile",
