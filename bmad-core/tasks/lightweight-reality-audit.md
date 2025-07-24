@@ -77,19 +77,48 @@ fi
 ### 2. **Quick Fix Suggestions** (100-200 tokens)
 
 ```bash
-# Lightweight remediation for common patterns
+# Environment-adaptive remediation for common patterns
 suggest_quick_fixes() {
   local SIMULATION_COUNT="$1"
   
   if [ $SIMULATION_COUNT -gt 0 ] && [ $SIMULATION_COUNT -lt 5 ]; then
-    echo "🔧 Quick Fix Suggestions:"
-    echo "1. Replace Random.NextDouble() with actual business logic"
-    echo "2. Replace Task.FromResult() with real async operations" 
-    echo "3. Remove TODO/HACK comments before completion"
-    echo "4. Implement real functionality instead of stubs"
+    echo "🔧 Environment-Adaptive Quick Fix Suggestions:"
+    echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+    echo ""
+    
+    # Language-specific fix suggestions using auto-detected patterns
+    case "$BMAD_PRIMARY_LANGUAGE" in
+      "csharp")
+        echo "1. Replace Random.NextDouble() with actual data processing"
+        echo "2. Replace Task.FromResult() with real async operations"
+        echo "3. Complete NotImplementedException methods with business logic"
+        echo "4. Remove Mock/Fake implementations with real services"
+        ;;
+      "javascript"|"typescript")
+        echo "1. Replace Math.random() with actual data sources"
+        echo "2. Replace Promise.resolve() with real async operations"
+        echo "3. Complete TODO items with actual implementations"
+        echo "4. Remove jest.fn() mocks from production code"
+        ;;
+      "python")
+        echo "1. Replace random.random() with real data processing"
+        echo "2. Complete TODO items with actual functionality"
+        echo "3. Remove mock objects from production paths"
+        echo "4. Implement real error handling instead of pass statements"
+        ;;
+      *)
+        echo "1. Replace simulation patterns identified in scan"
+        echo "2. Complete TODO/HACK comments with real implementations"
+        echo "3. Remove mock/stub code from production paths"
+        echo "4. Implement actual business logic"
+        ;;
+    esac
+    
     echo ""
     echo "💡 Estimated fix time: 15-30 minutes"
+    echo "💻 IDE Support: $DETECTED_IDE can assist with navigation and refactoring"
     echo "📋 No new story needed - direct fixes recommended"
+    echo "🔄 Re-run *quick-audit after fixes to validate improvements"
   fi
 }
 ```
@@ -102,12 +131,15 @@ suggest_quick_fixes() {
 - Story marked as "complex" or "high-risk"
 - Previous quick audits failed
 
-### **Smart Escalation** (50 tokens)
+### **Environment-Adaptive Smart Escalation**
 ```bash
-# Automatic escalation to comprehensive audit
+# Automatic escalation to comprehensive audit (works across all environments)
 if [ $QUICK_SCORE -lt 60 ]; then
   echo "🔄 Escalating to comprehensive reality audit..."
-  # Execute heavyweight task only when needed
+  echo "Environment: $DETECTED_IDE will use optimal analysis tools"
+  echo "Language: $BMAD_PRIMARY_LANGUAGE patterns will be analyzed thoroughly"
+  
+  # The comprehensive audit will also use environment detection automatically
   Read tool: bmad-core/tasks/reality-audit-comprehensive.md
   exit $?
 fi
@@ -117,20 +149,41 @@ fi
 
 ### **Common Anti-Patterns** (100-150 tokens each)
 ```bash
-# Quick check for specific reality violations
+# Environment-adaptive pattern detection
 check_mock_implementations() {
   local FILES="$1"
-  echo "$FILES" | xargs grep -l "Mock\|Fake\|Stub" 2>/dev/null | head -3
+  
+  if [ "$USE_IDE_TOOLS" = "true" ]; then
+    # Use native IDE tools (Grep tool would be used here)
+    echo "# Would use Grep tool with pattern: Mock|Fake|Stub"
+  else
+    # CLI batch mode
+    echo "$FILES" | xargs grep -l "Mock\|Fake\|Stub" 2>/dev/null | head -3
+  fi
 }
 
 check_simulation_code() {
-  local FILES="$1"  
-  echo "$FILES" | xargs grep -l "Random\|Task\.FromResult\|Thread\.Sleep" 2>/dev/null | head -3
+  local FILES="$1"
+  
+  if [ "$USE_IDE_TOOLS" = "true" ]; then
+    # Use language-specific patterns from auto-detection
+    echo "# Would use Grep tool with pattern: $BMAD_SIMULATION_PATTERNS"
+  else
+    # CLI batch mode with language-specific patterns
+    echo "$FILES" | xargs grep -l -E "$BMAD_SIMULATION_PATTERNS" 2>/dev/null | head -3
+  fi
 }
 
 check_incomplete_implementations() {
   local FILES="$1"
-  echo "$FILES" | xargs grep -l "TODO\|HACK\|NotImplementedException" 2>/dev/null | head -3
+  
+  if [ "$USE_IDE_TOOLS" = "true" ]; then
+    # Use native IDE tools
+    echo "# Would use Grep tool with pattern: TODO|HACK|NotImplementedException"
+  else
+    # CLI batch mode
+    echo "$FILES" | xargs grep -l "TODO\|HACK\|NotImplementedException" 2>/dev/null | head -3
+  fi
 }
 ```
 

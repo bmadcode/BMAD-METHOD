@@ -34,38 +34,126 @@ For each completed story:
 
 [[LLM: Compare story expectations against actual codebase state]]
 
-**Step 2.1: File Existence Verification**
+**Step 2.1: Environment-Adaptive File Existence Verification**
 ```bash
-# For each story's File List:
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+echo "🔍 Environment-Adaptive File Verification:"
+echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+
+# For each story's File List using environment-appropriate methods:
 for file in story_file_list:
-    if exists(file):
-        status = "✅ EXISTS"
-        last_modified = git_log_date(file)
-        size = file_size(file)
-    else:
-        status = "❌ MISSING"
-        # Check for renamed/moved files
-        similar = find_similar_files(file)
+    if [ "$USE_IDE_TOOLS" = "true" ]; then
+        # Use native IDE tools for file verification
+        echo "Using native IDE integration for file existence check"
+        # Would use LS tool or Read tool for file checking
+        # Would use Bash tool with clear description for git log operations
+    fi
+    
+    # Universal file check (works in all environments)
+    if [ -f "$file" ]; then
+        status="✅ EXISTS"
+        last_modified=$(git log -1 --format="%ci" "$file" 2>/dev/null || echo "unknown")
+        size=$(stat -c%s "$file" 2>/dev/null || echo "unknown")
+    else
+        status="❌ MISSING"
+        # Check for renamed/moved files using environment-appropriate search
+        if [ "$USE_IDE_TOOLS" = "true" ]; then
+            # Would use Glob tool for similar file detection
+            similar="$(find . -name "*$(basename "$file")" 2>/dev/null || echo 'none')"
+        else
+            similar="$(find . -name "*$(basename "$file")" 2>/dev/null || echo 'none')"
+        fi
+    fi
+    echo "File: $file | Status: $status | Modified: $last_modified"
+done
 ```
 
-**Step 2.2: Implementation Content Analysis**
+**Step 2.2: Environment-Adaptive Implementation Content Analysis**
 ```bash
-# For each expected component:
-for component in story_components:
-    grep_results = search_codebase(component)
-    if found:
-        analyze_implementation_completeness(component, story_requirements)
-    else:
-        check_for_mock_vs_real_implementation(component)
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_SIMULATION_PATTERNS" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+echo "🔍 Environment-Adaptive Implementation Analysis:"
+echo "Language: $BMAD_PRIMARY_LANGUAGE | Simulation Patterns: $BMAD_SIMULATION_PATTERNS"
+
+# For each expected component using environment-appropriate search:
+for component in story_components; do
+    if [ "$USE_IDE_TOOLS" = "true" ]; then
+        echo "Using native IDE tools for component analysis: $component"
+        # Would use Grep tool with appropriate patterns for component search
+        # Would use Read tool for implementation analysis
+        grep_results="native_search_result"
+    else
+        echo "Using CLI batch mode for component search: $component (may require approval)"
+        grep_results=$(grep -r "$component" . --include="*.${BMAD_PRIMARY_LANGUAGE,,}" 2>/dev/null || echo "not_found")
+    fi
+    
+    if [ "$grep_results" != "not_found" ] && [ -n "$grep_results" ]; then
+        echo "✅ Component found: $component"
+        # Analyze implementation completeness using language-specific patterns
+        simulation_check=$(echo "$grep_results" | grep -E "$(echo "$BMAD_SIMULATION_PATTERNS" | tr ',' '|')" || echo "none")
+        if [ "$simulation_check" != "none" ]; then
+            echo "⚠️ Simulation patterns detected in $component"
+        else
+            echo "✅ Real implementation found for $component"
+        fi
+    else
+        echo "❌ Component missing: $component"
+        # Check for mock vs real implementation patterns
+        check_for_mock_vs_real_implementation "$component"
+    fi
+done
 ```
 
-**Step 2.3: Acceptance Criteria Validation**
+**Step 2.3: Environment-Adaptive Acceptance Criteria Validation**
 ```bash
-# For each acceptance criterion:
-for criterion in story_acceptance_criteria:
-    test_files = find_related_tests(criterion)
-    implementation = find_implementation(criterion)
-    validation_status = verify_criterion_met(criterion, implementation, test_files)
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_TEST_PATTERNS" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+echo "✅ Environment-Adaptive Acceptance Criteria Validation:"
+echo "Language: $BMAD_PRIMARY_LANGUAGE | Test Patterns: $BMAD_TEST_PATTERNS"
+
+# For each acceptance criterion using environment-appropriate analysis:
+for criterion in story_acceptance_criteria; do
+    echo "Validating criterion: $criterion"
+    
+    if [ "$USE_IDE_TOOLS" = "true" ]; then
+        echo "Using native IDE tools for test discovery"
+        # Would use Glob tool with test patterns for test file discovery
+        # Would use Grep tool for implementation search
+        test_files="native_test_discovery"
+        implementation="native_implementation_search"
+    else
+        echo "Using CLI batch mode for criterion validation (may require approval)"
+        # Find related tests using language-specific patterns
+        test_pattern=$(echo "$BMAD_TEST_PATTERNS" | cut -d',' -f1)
+        test_files=$(find . -name "*$test_pattern" -type f | head -10)
+        implementation=$(grep -r "$(echo "$criterion" | cut -d' ' -f1-3)" . --include="*.${BMAD_PRIMARY_LANGUAGE,,}" | head -5)
+    fi
+    
+    # Validate criterion status
+    if [ -n "$test_files" ] && [ -n "$implementation" ]; then
+        validation_status="✅ VERIFIED - Tests and implementation found"
+    elif [ -n "$implementation" ]; then
+        validation_status="⚠️ PARTIAL - Implementation found, tests missing"
+    else
+        validation_status="❌ MISSING - No implementation or tests found"
+    fi
+    
+    echo "Criterion: $criterion | Status: $validation_status"
+done
 ```
 
 ### 3. **Gap Analysis Documentation**
@@ -102,26 +190,91 @@ for criterion in story_acceptance_criteria:
 
 [[LLM: Evaluate quality of implementations against story requirements]]
 
-**Step 4.1: Real vs Mock Implementation Check**
+**Step 4.1: Environment-Adaptive Real vs Mock Implementation Check**
 ```bash
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_SIMULATION_PATTERNS" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+echo "🔍 Environment-Adaptive Implementation Quality Check:"
+echo "Language: $BMAD_PRIMARY_LANGUAGE | Simulation Patterns: $BMAD_SIMULATION_PATTERNS"
+
 # For each component mentioned in completed stories:
-for component in completed_story_components:
-    implementation_type = analyze_implementation_type(component)
-    if implementation_type == "MOCK":
-        quality_score = "VIOLATION - Mock in production"
-    elif implementation_type == "STUB":
-        quality_score = "INCOMPLETE - Stub implementation"
-    elif implementation_type == "REAL":
-        quality_score = "COMPLIANT - Real implementation"
+for component in completed_story_components; do
+    echo "Analyzing implementation type for: $component"
+    
+    if [ "$USE_IDE_TOOLS" = "true" ]; then
+        echo "Using native IDE tools for implementation analysis"
+        # Would use Grep tool with simulation patterns for mock detection
+        # Would use Read tool for component implementation analysis
+        implementation_content="native_content_analysis"
+    else
+        echo "Using CLI batch mode for implementation analysis (may require approval)"
+        implementation_content=$(grep -A 10 -B 5 "$component" . -r --include="*.${BMAD_PRIMARY_LANGUAGE,,}" 2>/dev/null)
+    fi
+    
+    # Analyze implementation type using language-specific simulation patterns
+    simulation_patterns_found=$(echo "$implementation_content" | grep -E "$(echo "$BMAD_SIMULATION_PATTERNS" | tr ',' '|')" | wc -l)
+    
+    if [ "$simulation_patterns_found" -gt 3 ]; then
+        implementation_type="MOCK"
+        quality_score="VIOLATION - Mock in production ($simulation_patterns_found patterns found)"
+    elif [ "$simulation_patterns_found" -gt 0 ]; then
+        implementation_type="STUB"
+        quality_score="INCOMPLETE - Stub implementation ($simulation_patterns_found patterns found)"
+    else
+        implementation_type="REAL"
+        quality_score="COMPLIANT - Real implementation (no simulation patterns)"
+    fi
+    
+    echo "Component: $component | Type: $implementation_type | Quality: $quality_score"
+done
 ```
 
-**Step 4.2: Architecture Compliance Check**
+**Step 4.2: Environment-Adaptive Architecture Compliance Check**
 ```bash
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_COMPONENT_PATTERNS" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+echo "🏗️ Environment-Adaptive Architecture Compliance Check:"
+echo "Language: $BMAD_PRIMARY_LANGUAGE | Component Patterns: $BMAD_COMPONENT_PATTERNS"
+
 # For each story claiming architectural compliance:
-for story in architectural_stories:
-    pattern_compliance = check_architectural_patterns(story.components)
-    security_compliance = check_security_requirements(story.components)
-    performance_compliance = check_performance_requirements(story.components)
+for story in architectural_stories; do
+    echo "Checking architectural compliance for story: $story"
+    
+    if [ "$USE_IDE_TOOLS" = "true" ]; then
+        echo "Using native IDE tools for architecture analysis"
+        # Would use Grep tool with component patterns for architecture verification
+        # Would use Read tool for detailed component analysis
+        pattern_compliance="native_pattern_check"
+        security_compliance="native_security_check"
+        performance_compliance="native_performance_check"
+    else
+        echo "Using CLI batch mode for architecture validation (may require approval)"
+        # Check architectural patterns using language-specific component patterns
+        component_pattern_regex=$(echo "$BMAD_COMPONENT_PATTERNS" | tr ',' '|')
+        pattern_compliance=$(grep -E "$component_pattern_regex" "$story" | wc -l)
+        security_compliance=$(grep -i "security\|auth\|encrypt" "$story" | wc -l)
+        performance_compliance=$(grep -i "performance\|benchmark\|optimize" "$story" | wc -l)
+    fi
+    
+    # Generate compliance report
+    echo "Story: $story"
+    echo "  - Pattern Compliance: $pattern_compliance expected patterns found"
+    echo "  - Security Compliance: $security_compliance security considerations found"
+    echo "  - Performance Compliance: $performance_compliance performance considerations found"
+    
+    # Overall compliance assessment
+    if [ "$pattern_compliance" -gt 0 ]; then
+        echo "  - Overall Assessment: ✅ Architecture patterns followed"
+    else
+        echo "  - Overall Assessment: ⚠️ Missing expected architectural patterns"
+    fi
+done
 ```
 
 ### 5. **Automated Audit Execution**

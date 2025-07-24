@@ -6,15 +6,25 @@ Intelligent remediation that provides lightweight quick fixes for simple issues 
 
 ## Remediation Tiers
 
-### **Tier 1: Quick Fixes** (300-500 tokens)
+### **Tier 1: Environment-Adaptive Quick Fixes** (300-500 tokens)
 
 ```bash
-# Immediate fixes for common, simple issues
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Immediate fixes for common, simple issues using environment-appropriate tools
 provide_quick_fixes() {
   local ISSUE_TYPE="$1"
   local ISSUE_DESCRIPTION="$2"
   
-  echo "🚀 Tier 1: Quick Fix Available"
+  echo "🚀 Tier 1: Quick Fix Available ($DETECTED_IDE environment)"
+  echo "Language: $BMAD_PRIMARY_LANGUAGE | Tools: $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native" || echo "CLI Batched")"
   
   case "$ISSUE_TYPE" in
     "simulation_patterns")
@@ -51,15 +61,25 @@ provide_quick_fixes() {
 }
 ```
 
-### **Tier 2: Guided Fixes** (500-800 tokens)
+### **Tier 2: Environment-Adaptive Guided Fixes** (500-800 tokens)
 
 ```bash
-# Structured guidance for moderate complexity issues
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Structured guidance for moderate complexity issues using environment-appropriate methods
 provide_guided_fixes() {
   local ISSUE_TYPE="$1"
   local COMPLEXITY_SCORE="$2"
   
-  echo "⚖️ Tier 2: Guided Fix Approach"
+  echo "⚖️ Tier 2: Guided Fix Approach ($DETECTED_IDE environment)"
+  echo "Language: $BMAD_PRIMARY_LANGUAGE | Complexity: $COMPLEXITY_SCORE"
   
   case "$ISSUE_TYPE" in
     "interface_mismatches")
@@ -108,17 +128,27 @@ provide_guided_fixes() {
 }
 ```
 
-### **Tier 3: Full Remediation Stories** (1500-2000+ tokens)
+### **Tier 3: Environment-Adaptive Full Remediation Stories** (1500-2000+ tokens)
 
 ```bash
-# Complex issues requiring dedicated remediation stories
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Complex issues requiring dedicated remediation stories with environment context
 create_remediation_story() {
   local ISSUE_TYPE="$1"
   local ORIGINAL_STORY="$2"
   local COMPLEXITY_SCORE="$3"
   
-  echo "🚨 Tier 3: Full Remediation Story Required"
-  echo "Complexity Score: $COMPLEXITY_SCORE (>70 threshold met)"
+  echo "🚨 Tier 3: Full Remediation Story Required ($DETECTED_IDE environment)"
+  echo "Language: $BMAD_PRIMARY_LANGUAGE | Complexity Score: $COMPLEXITY_SCORE (>70 threshold met)"
+  echo "Environment Tools: $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native IDE integration" || echo "CLI batch mode")"
   echo ""
   
   # Execute comprehensive remediation story creation
@@ -136,14 +166,34 @@ create_remediation_story() {
 
 ## Smart Triage Logic
 
-### **Issue Classification** (100-200 tokens)
+### **Environment-Adaptive Issue Classification** (100-200 tokens)
 
 ```bash
-# Intelligent issue assessment and tier assignment
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Intelligent issue assessment and tier assignment using environment-appropriate analysis
 classify_remediation_need() {
   local AUDIT_RESULTS="$1"
   
-  # Extract key metrics
+  echo "📊 Environment-Adaptive Issue Classification:"
+  echo "Analysis Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+  
+  # Extract key metrics using environment-appropriate methods
+  if [ "$USE_IDE_TOOLS" = "true" ]; then
+    # Use native IDE tools for pattern analysis
+    echo "Using native IDE tools for issue pattern detection"
+    # Would use Grep tool with appropriate patterns for simulation detection
+    # Would use Read tool for audit results analysis
+  fi
+  
+  # Universal metric extraction (works in all environments)
   SIMULATION_COUNT=$(echo "$AUDIT_RESULTS" | grep -c "simulation pattern" || echo 0)
   MISSING_TESTS=$(echo "$AUDIT_RESULTS" | grep -c "missing test" || echo 0)
   INTERFACE_ERRORS=$(echo "$AUDIT_RESULTS" | grep -c "interface mismatch" || echo 0)
@@ -182,15 +232,27 @@ classify_remediation_need() {
 
 ## Integration with Quality Framework
 
-### **Auto-Triage After Reality Audit**
+### **Environment-Adaptive Auto-Triage After Reality Audit**
 
 ```bash
-# Automatic remediation routing based on audit results
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Automatic remediation routing based on audit results with environment optimization
 auto_remediation_triage() {
   local STORY_FILE="$1"
   local AUDIT_RESULTS="$2"
   
-  # Classify remediation needs
+  echo "🔄 Environment-Adaptive Auto-Triage:"
+  echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+  
+  # Classify remediation needs using environment-aware analysis
   classify_remediation_need "$AUDIT_RESULTS"
   TIER_LEVEL=$?
   
@@ -214,13 +276,19 @@ auto_remediation_triage() {
 }
 ```
 
-### **QA Agent Commands**
+### **Environment-Adaptive QA Agent Commands**
 
 ```bash
-*quick-fix              # Tier 1 only - immediate fixes (300-500 tokens)
-*guided-fix             # Tier 2 guided approach (500-800 tokens)  
-*create-remediation     # Tier 3 full story (1500-2000+ tokens)
-*auto-triage           # Smart triage based on complexity (100-2000 tokens)
+*quick-fix              # Tier 1 - immediate fixes (300-500 tokens) - Auto-adapts to current IDE
+*guided-fix             # Tier 2 - guided approach (500-800 tokens) - Uses environment-appropriate tools  
+*create-remediation     # Tier 3 - full story (1500-2000+ tokens) - Environment context included
+*auto-triage           # Smart triage based on complexity (100-2000 tokens) - Universal IDE compatibility
+
+# Environment context automatically included in all commands:
+# - Uses Grep/Read/Glob tools in Claude Code CLI for pattern detection
+# - Falls back to batched commands in traditional CLI environments
+# - Preserves language-specific remediation patterns from auto-detection
+# - Optimizes token usage based on IDE capabilities
 ```
 
 ## Token Usage Optimization

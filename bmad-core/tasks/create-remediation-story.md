@@ -10,11 +10,22 @@ When QA agents identify simulation patterns, build failures, or implementation i
 
 ## Remediation Story Generation Protocol
 
-### Phase 1: Issue Assessment and Classification with Regression Analysis
+### Phase 1: Environment-Adaptive Issue Assessment and Classification with Regression Analysis
 
 ```bash
-echo "=== REMEDIATION STORY GENERATION WITH REGRESSION PREVENTION ==="
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+echo "=== ENVIRONMENT-ADAPTIVE REMEDIATION STORY GENERATION ==="
 echo "Assessment Date: $(date)"
+echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+echo "Tools: $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native IDE integration" || echo "CLI batch mode")"
 echo "QA Agent: [Agent Name]"
 echo "Original Story: [Story Reference]"
 echo ""
@@ -62,12 +73,30 @@ echo "Priority: $PRIORITY"
 echo "Urgency: $URGENCY"
 ```
 
-### Phase 2: Generate Story Sequence Number
+### Phase 2: Environment-Adaptive Story Sequence Number Generation
 
 ```bash
-# Get next available story number
+# Auto-initialize environment detection if needed
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Get next available story number using environment-appropriate methods
 STORY_DIR="docs/stories"
-LATEST_STORY=$(ls $STORY_DIR/*.md 2>/dev/null | grep -E '[0-9]+\.[0-9]+' | sort -V | tail -1)
+
+if [ "$USE_IDE_TOOLS" = "true" ]; then
+  # IDE environments: Use native tools for file discovery
+  echo "Using native IDE tools for story number generation"
+  # Would use Glob tool to find story files
+  # Would use LS tool for directory listing
+  LATEST_STORY=$(ls $STORY_DIR/*.md 2>/dev/null | grep -E '[0-9]+\.[0-9]+' | sort -V | tail -1)
+else
+  # CLI environments: Use traditional approach (may require approval)
+  echo "Using CLI batch mode for story discovery (may require approval)"
+  LATEST_STORY=$(ls $STORY_DIR/*.md 2>/dev/null | grep -E '[0-9]+\.[0-9]+' | sort -V | tail -1)
+fi
+
+echo "Environment-adaptive story discovery completed ($DETECTED_IDE)"
 
 if [[ -n "$LATEST_STORY" ]]; then
     LATEST_NUM=$(basename "$LATEST_STORY" .md | cut -d'.' -f1)
@@ -83,9 +112,18 @@ STORY_PATH="$STORY_DIR/$REMEDIATION_STORY"
 echo "Generated Story: $REMEDIATION_STORY"
 ```
 
-### Phase 3: Create Structured Remediation Story
+### Phase 3: Environment-Adaptive Structured Remediation Story Creation
 
 ```bash
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+echo "Creating remediation story using $DETECTED_IDE environment context"
+echo "Language-specific patterns: $BMAD_PRIMARY_LANGUAGE | Build Command: $BMAD_BUILD_COMMAND"
+
+# Create story with environment context embedded
 cat > "$STORY_PATH" << 'EOF'
 # Story [STORY_NUMBER]: [STORY_TYPE] Remediation
 
@@ -218,16 +256,26 @@ Draft
 EOF
 ```
 
-### Phase 4: Populate Story with Specific Issue Details
+### Phase 4: Environment-Adaptive Story Population with Specific Issue Details
 
 ```bash
-# Replace placeholders with actual audit findings
+# Auto-initialize environment detection if needed
+if [ -z "$DETECTED_IDE" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+echo "Populating story with environment-specific context ($DETECTED_IDE)"
+
+# Replace placeholders with actual audit findings and environment context
 sed -i "s/\[STORY_NUMBER\]/${NEXT_MAJOR}.1/g" "$STORY_PATH"
 sed -i "s/\[STORY_TYPE\]/${STORY_TYPE}/g" "$STORY_PATH"
 sed -i "s/\[ISSUE_CATEGORY\]/${STORY_TYPE} issues/g" "$STORY_PATH"
 sed -i "s/\[AUDIT_DATE\]/$(date)/g" "$STORY_PATH"
 sed -i "s/\[REALITY_SCORE\]/${REALITY_SCORE:-N/A}/g" "$STORY_PATH"
 sed -i "s/\[GENERATION_DATE\]/$(date)/g" "$STORY_PATH"
+
+# Add environment-specific context to story
+echo "\n### Environment Context\n- **Analysis Environment:** $DETECTED_IDE\n- **Primary Language:** $BMAD_PRIMARY_LANGUAGE\n- **Build System:** $BMAD_BUILD_COMMAND\n- **Tool Integration:** $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native IDE tools" || echo "CLI batch mode")" >> "$STORY_PATH"
 
 # Generate specific fixes based on comprehensive audit findings
 SPECIFIC_FIXES=""
@@ -341,14 +389,24 @@ echo "⚡ Urgency: $URGENCY"
 
 ## Integration with QA Workflow
 
-### Auto-Generation Triggers
+### Environment-Adaptive Auto-Generation Triggers
 
 ```bash
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
 # Add to reality-audit-comprehensive.md after final assessment
 if [[ $REALITY_SCORE -lt 80 ]] || [[ $BUILD_EXIT_CODE -ne 0 ]] || [[ $RUNTIME_EXIT_CODE -ne 0 && $RUNTIME_EXIT_CODE -ne 124 ]]; then
     echo ""
-    echo "=== GENERATING REMEDIATION STORY ==="
-    # Execute create-remediation-story task
+    echo "=== GENERATING ENVIRONMENT-ADAPTIVE REMEDIATION STORY ==="
+    echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+    # Execute create-remediation-story task with environment context
     source .bmad-core/tasks/create-remediation-story.md
     
     echo ""
@@ -358,18 +416,26 @@ if [[ $REALITY_SCORE -lt 80 ]] || [[ $BUILD_EXIT_CODE -ne 0 ]] || [[ $RUNTIME_EX
 fi
 ```
 
-### Quality Gate Integration
+### Environment-Adaptive Quality Gate Integration
 
 ```bash
-# Add to story completion validation
-echo "=== POST-REMEDIATION QUALITY GATE ==="
+# Auto-initialize environment detection if needed
+if [ -z "$DETECTED_IDE" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Add to story completion validation with environment awareness
+echo "=== ENVIRONMENT-ADAPTIVE POST-REMEDIATION QUALITY GATE ==="
+echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+echo "Build System: $BMAD_BUILD_COMMAND | Tools: $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native" || echo "CLI Batched")"
 echo "Before marking remediation complete:"
-echo "1. Execute reality-audit-comprehensive to verify improvements"
+echo "1. Execute reality-audit-comprehensive to verify improvements (using environment-appropriate tools)"
 echo "2. Confirm reality score >= 80/100"
-echo "3. Validate build success (Release mode, zero errors)"
-echo "4. Verify runtime success (clean startup)"
-echo "5. Run full regression test suite"
+echo "3. Validate build success ($BMAD_BUILD_COMMAND in Release mode, zero errors)"
+echo "4. Verify runtime success (clean startup using $DETECTED_IDE integration)"
+echo "5. Run full regression test suite (environment-optimized execution)"
 echo "6. Update original story status if remediation successful"
+echo "7. Document environment-specific validation results"
 ```
 
 ## Usage Instructions for QA Agents

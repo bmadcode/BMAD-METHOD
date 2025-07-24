@@ -30,15 +30,44 @@ Then proceed with the manual method below ONLY if markdownExploder is false.]]
 
 ### Installation and Usage
 
-1. **Install globally**:
+1. **Environment-Adaptive Installation**:
 
    ```bash
-   npm install -g @kayvan/markdown-tree-parser
+   # Auto-initialize environment detection if needed
+   if [ -z "$DETECTED_IDE" ]; then
+     Read tool: bmad-core/tasks/lightweight-ide-detection.md
+   fi
+   
+   echo "Installing markdown-tree-parser in $DETECTED_IDE environment"
+   
+   if [ "$USE_IDE_TOOLS" = "true" ]; then
+     echo "Using native IDE integration for package installation"
+     # Use Bash tool with clear description for npm install
+     npm install -g @kayvan/markdown-tree-parser
+   else
+     echo "Using CLI batch mode for installation (may require approval)"
+     npm install -g @kayvan/markdown-tree-parser
+   fi
+   
+   echo "Installation completed for $DETECTED_IDE environment"
    ```
 
-2. **Use the explode command**:
+2. **Environment-Adaptive Document Explosion**:
 
    ```bash
+   # Auto-initialize environment detection if needed
+   if [ -z "$DETECTED_IDE" ]; then
+     Read tool: bmad-core/tasks/lightweight-ide-detection.md
+   fi
+   
+   echo "Using md-tree explode in $DETECTED_IDE environment"
+   echo "Tools: $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native IDE integration" || echo "CLI batch mode")"
+   
+   if [ "$USE_IDE_TOOLS" = "true" ]; then
+     echo "Executing document sharding using native IDE tools"
+     # Use Bash tool with clear description for md-tree commands
+   fi
+   
    # For PRD
    md-tree explode docs/prd.md docs/prd
 
@@ -47,6 +76,8 @@ Then proceed with the manual method below ONLY if markdownExploder is false.]]
 
    # For any document
    md-tree explode [source-document] [destination-folder]
+   
+   echo "Document explosion completed in $DETECTED_IDE environment"
    ```
 
 3. **What it does**:

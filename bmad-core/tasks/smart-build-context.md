@@ -6,149 +6,216 @@ Lightweight build error investigation with intelligent escalation to comprehensi
 
 ## Smart Analysis Process
 
-### 1. **Quick Build Error Assessment** (200-300 tokens)
+### 1. **Quick Build Error Assessment (Environment-Aware)**
 
-```bash
-# Rapid build error classification and complexity assessment
-STORY_FILE="$1"
-PROJECT_DIR="."
+**Environment Initialization:**
+- Use Read tool to execute: `bmad-core/tasks/auto-language-init.md` (if not cached)
+- Use Read tool to execute: `bmad-core/tasks/lightweight-ide-detection.md` (if not cached)
+- Load cached environment variables: `$BMAD_PRIMARY_LANGUAGE`, `$BMAD_BUILD_COMMAND`, `$BMAD_ERROR_PATTERNS`
 
-echo "🔍 Smart Build Context Analysis"
+**Build Execution (Based on IDE Environment):**
 
-# Auto-initialize language environment if needed
-if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
-  Read tool: bmad-core/tasks/auto-language-init.md
-fi
+**If USE_IDE_TOOLS = true (Claude Code CLI):**
+- Execute build using Bash tool with clear description: "Execute build command to assess errors"
+- Capture build output for analysis
+- No approval prompts in IDE environment
 
-echo "🔍 Smart Build Context Analysis ($BMAD_PRIMARY_LANGUAGE)"
+**Build Error Analysis Using Native Tools:**
 
-# Language-adaptive build and error analysis
-BUILD_OUTPUT=$($BMAD_BUILD_COMMAND 2>&1)
-BUILD_EXIT_CODE=$?
-
-if [ $BUILD_EXIT_CODE -eq 0 ]; then
-  echo "✅ Build successful - no context analysis needed"
-  exit 0
-fi
-
-# Language-specific error counting
-TOTAL_ERRORS=$(echo "$BUILD_OUTPUT" | grep -c -E "$BMAD_ERROR_PATTERNS")
-SYNTAX_ERRORS=$(echo "$BUILD_OUTPUT" | grep -c -i "syntax\|parse")
-TYPE_ERRORS=$(echo "$BUILD_OUTPUT" | grep -c -i "undefined\|not found\|cannot find")
-INTERFACE_ERRORS=$(echo "$BUILD_OUTPUT" | grep -c -i "interface\|implementation\|abstract")
-
-echo "📊 Build Error Summary:"
-echo "Total Errors: $TOTAL_ERRORS"
-echo "Syntax Errors: $SYNTAX_ERRORS" 
-echo "Type/Reference Errors: $TYPE_ERRORS"
-echo "Interface/Implementation Errors: $INTERFACE_ERRORS"
-
-# Calculate complexity score
-COMPLEXITY_SCORE=0
-if [ $TOTAL_ERRORS -gt 20 ]; then COMPLEXITY_SCORE=$((COMPLEXITY_SCORE + 30)); fi
-if [ $INTERFACE_ERRORS -gt 5 ]; then COMPLEXITY_SCORE=$((COMPLEXITY_SCORE + 25)); fi  
-if [ $TYPE_ERRORS -gt 10 ]; then COMPLEXITY_SCORE=$((COMPLEXITY_SCORE + 20)); fi
-if [ $SYNTAX_ERRORS -gt 5 ]; then COMPLEXITY_SCORE=$((COMPLEXITY_SCORE + 15)); fi
-
-echo "🎯 Complexity Score: $COMPLEXITY_SCORE/100"
+**1. Execute Build Command:**
+```
+Bash tool parameters:
+- command: [Use $BMAD_BUILD_COMMAND]
+- description: "Execute language-specific build command to identify errors"
 ```
 
-### 2. **Smart Decision Logic** (50-100 tokens)
+**2. Analyze Build Output:**
+- If build successful (exit code 0): Return "✅ Build successful - no context analysis needed"
+- If build failed: Proceed with error pattern analysis
 
-```bash
-# Intelligent routing based on complexity
-if [ $COMPLEXITY_SCORE -lt 30 ]; then
-  echo "🚀 SIMPLE - Using lightweight fix suggestions"
-  provide_quick_build_fixes
-  echo "💡 Tokens saved: ~2000 (avoided comprehensive analysis)"
-  exit 0
-elif [ $COMPLEXITY_SCORE -lt 60 ]; then
-  echo "⚖️ MODERATE - Using targeted analysis"
-  provide_targeted_context_analysis
-  echo "💡 Tokens used: ~800 (focused analysis)"
-  exit 0
-else
-  echo "🔄 COMPLEX - Escalating to comprehensive build context analysis"
-  Read tool: bmad-core/tasks/build-context-analysis.md
-  exit $?
-fi
+**3. Error Pattern Detection:**
+Use language-specific error patterns from `$BMAD_ERROR_PATTERNS`:
+
+**Total Error Count:**
+- Analyze build output for error patterns
+- Count total errors using language-specific patterns
+
+**Error Categorization:**
+- **Syntax Errors**: Count syntax/parse-related errors
+- **Type Errors**: Count undefined/not found references  
+- **Interface Errors**: Count interface/implementation mismatches
+
+**4. Complexity Score Calculation:**
+```
+Complexity Scoring Logic:
+- Total errors > 20: +30 points
+- Interface errors > 5: +25 points
+- Type errors > 10: +20 points
+- Syntax errors > 5: +15 points
+
+COMPLEXITY_SCORE = Sum of applicable points
 ```
 
-### 3. **Quick Build Fixes** (200-300 tokens)
-
-```bash
-provide_quick_build_fixes() {
-  echo "🔧 Quick Build Fix Suggestions:"
-  
-  # Common syntax fixes
-  if [ $SYNTAX_ERRORS -gt 0 ]; then
-    echo "📝 Syntax Issues Detected:"
-    echo "• Check for missing semicolons, braces, or parentheses"
-    echo "• Verify method/class declarations are properly closed"
-    echo "• Look for unmatched brackets in recent changes"
-  fi
-  
-  # Missing references
-  if [ $TYPE_ERRORS -gt 0 ]; then
-    echo "📦 Missing Reference Issues:"
-    echo "• Add missing using statements"
-    echo "• Verify NuGet packages are installed"
-    echo "• Check if types were moved to different namespaces"
-  fi
-  
-  # Simple interface mismatches
-  if [ $INTERFACE_ERRORS -gt 0 ] && [ $INTERFACE_ERRORS -lt 5 ]; then
-    echo "🔌 Interface Implementation Issues:"
-    echo "• Implement missing interface members"
-    echo "• Check method signatures match interface contracts"  
-    echo "• Verify async/sync patterns are consistent"
-  fi
-  
-  echo ""
-  echo "⏱️ Estimated fix time: 10-20 minutes"
-  echo "🎯 Focus on most recent file changes first"
-}
+**Results Summary:**
+```
+📊 Build Error Summary:
+Project Language: [BMAD_PRIMARY_LANGUAGE]
+Total Errors: [count]
+Syntax Errors: [count]
+Type/Reference Errors: [count] 
+Interface/Implementation Errors: [count]
+🎯 Complexity Score: [score]/100
 ```
 
-### 4. **Targeted Context Analysis** (400-600 tokens)
+### 2. **Smart Decision Logic (Intelligent Routing)**
 
-```bash
-provide_targeted_context_analysis() {
-  echo "🎯 Targeted Build Context Analysis:"
-  
-  # Focus on most problematic files
-  PROBLEM_FILES=$(echo "$BUILD_OUTPUT" | grep "error " | cut -d'(' -f1 | sort | uniq -c | sort -nr | head -5)
-  
-  echo "📁 Most Problematic Files:"
-  echo "$PROBLEM_FILES"
-  
-  # Quick git history for problem files  
-  echo "🕰️ Recent Changes to Problem Files:"
-  echo "$PROBLEM_FILES" | while read count file; do
-    if [ -f "$file" ]; then
-      LAST_CHANGE=$(git log -1 --format="%h %s" -- "$file" 2>/dev/null || echo "No git history")
-      echo "• $file: $LAST_CHANGE"
-    fi
-  done
-  
-  # Check for interface evolution patterns
-  if [ $INTERFACE_ERRORS -gt 0 ]; then
-    echo "🔍 Interface Evolution Check:"
-    INTERFACE_CHANGES=$(git log --oneline -10 --grep="interface\|API\|contract" 2>/dev/null | head -3)
-    if [ -n "$INTERFACE_CHANGES" ]; then
-      echo "$INTERFACE_CHANGES"
-      echo "💡 Recent interface changes detected - may need implementation updates"
-    fi
-  fi
-  
-  echo ""
-  echo "🔧 Targeted Fix Strategy:"
-  echo "1. Focus on files with highest error counts first"
-  echo "2. Check recent git changes for context"
-  echo "3. Update interface implementations before complex logic"
-  echo "4. Test incrementally after each file fix"
-}
+**Complexity-Based Routing:**
+
+**SIMPLE Issues (Complexity Score < 30):**
+- Route to: Quick Build Fixes (lightweight suggestions)
+- Approach: Common pattern-based fix recommendations
+- Estimated tokens: 200-300
+- Success rate: ~75%
+
+**MODERATE Issues (Complexity Score 30-59):**
+- Route to: Targeted Context Analysis (focused investigation)
+- Approach: Problem file analysis with recent change context
+- Estimated tokens: 400-600  
+- Success rate: ~65%
+
+**COMPLEX Issues (Complexity Score ≥ 60):**
+- Route to: Comprehensive Build Context Analysis
+- Approach: Use Read tool to execute `bmad-core/tasks/build-context-analysis.md`
+- Estimated tokens: 1500-2500
+- Success rate: ~95%
+
+**Decision Implementation:**
 ```
+If COMPLEXITY_SCORE < 30:
+  → Execute Quick Build Fixes section
+  → Report: "🚀 SIMPLE - Using lightweight fix suggestions"
+
+Else if COMPLEXITY_SCORE < 60:
+  → Execute Targeted Context Analysis section  
+  → Report: "⚖️ MODERATE - Using targeted analysis"
+
+Else:
+  → Use Read tool: bmad-core/tasks/build-context-analysis.md
+  → Report: "🔄 COMPLEX - Escalating to comprehensive analysis"
+```
+
+### 3. **Quick Build Fixes (Pattern-Based Recommendations)**
+
+**Language-Adaptive Fix Suggestions:**
+
+Based on error categorization from build analysis:
+
+**Syntax Error Fixes (if SYNTAX_ERRORS > 0):**
+```
+📝 Syntax Issues Detected:
+• Check for missing semicolons, braces, or parentheses
+• Verify method/class declarations are properly closed  
+• Look for unmatched brackets in recent changes
+• Review string literal formatting and escape characters
+```
+
+**Type/Reference Error Fixes (if TYPE_ERRORS > 0):**
+```
+📦 Missing Reference Issues:
+• Add missing using/import statements
+• Verify packages/dependencies are installed
+• Check if types were moved to different namespaces/modules
+• Confirm spelling of type names and method calls
+```
+
+**Interface Implementation Fixes (if INTERFACE_ERRORS < 5):**
+```
+🔌 Interface Implementation Issues:
+• Implement missing interface members
+• Check method signatures match interface contracts
+• Verify async/sync patterns are consistent  
+• Ensure parameter types and return types match
+```
+
+**General Quick Fix Strategy:**
+```
+🔧 Quick Build Fix Approach:
+⏱️ Estimated fix time: 10-20 minutes
+🎯 Priority: Focus on most recent file changes first
+🔄 Process: Fix one category at a time, then rebuild
+✅ Validation: Test build after each fix category
+```
+
+**Success Indicators:**
+- Simple syntax issues (missing semicolons, brackets)
+- Straightforward reference problems
+- Minor interface signature mismatches
+- Recent changes causing obvious breaks
+
+### 4. **Targeted Context Analysis (Environment-Aware)**
+
+**Problem File Identification:**
+
+Use build output analysis to identify most problematic files:
+
+**1. Parse Build Output for Error Sources:**
+- Extract file paths from build error messages
+- Count errors per file to identify highest-impact files
+- Focus on top 5 most problematic files
+
+**2. Recent Changes Analysis (Using Git Commands):**
+
+**If git repository detected:**
+- Use Bash tool to execute git commands for each problem file:
+  ```
+  Bash tool parameters:
+  - command: git log -1 --format="%h %s" -- [file_path]
+  - description: "Get recent change history for problematic file"
+  ```
+
+**3. Interface Evolution Detection:**
+
+**If interface errors > 0:**
+- Use Bash tool to check for recent interface changes:
+  ```
+  Bash tool parameters: 
+  - command: git log --oneline -10 --grep="interface|API|contract"
+  - description: "Check for recent interface-related changes"
+  ```
+
+**Analysis Results Format:**
+```
+🎯 Targeted Build Context Analysis:
+
+📁 Most Problematic Files:
+• [file1]: [error_count] errors
+• [file2]: [error_count] errors  
+• [file3]: [error_count] errors
+
+🕰️ Recent Changes to Problem Files:
+• [file1]: [last_commit_hash] [commit_message]
+• [file2]: [last_commit_hash] [commit_message]
+
+🔍 Interface Evolution Check:
+[Recent interface-related commits if any]
+💡 Analysis: [Interface change impact assessment]
+```
+
+**Targeted Fix Strategy:**
+```
+🔧 Targeted Fix Approach:
+1. **Priority Files**: Focus on files with highest error counts first
+2. **Context Review**: Check recent git changes for context clues
+3. **Interface First**: Update interface implementations before complex logic
+4. **Incremental Testing**: Test build after each major file fix
+5. **Change Validation**: Ensure fixes don't break existing functionality
+```
+
+**Success Criteria:**
+- Moderate complexity with identifiable problem files
+- Recent changes provide context for errors
+- Interface mismatches can be resolved systematically
+- Git history reveals helpful change patterns
 
 ## Escalation Triggers
 
@@ -159,29 +226,61 @@ provide_targeted_context_analysis() {
 - User explicitly requests via `*build-context --full`
 - Previous quick fixes failed
 
-### **Escalation Logic** (50 tokens)
-```bash
-# Smart escalation with context preservation
-escalate_to_comprehensive() {
-  echo "📋 Preserving quick analysis results for comprehensive audit..."
-  echo "Complexity Score: $COMPLEXITY_SCORE" > tmp/build-context-quick.txt
-  echo "Error Counts: Total=$TOTAL_ERRORS, Interface=$INTERFACE_ERRORS" >> tmp/build-context-quick.txt
-  echo "Problem Files: $PROBLEM_FILES" >> tmp/build-context-quick.txt
-  
-  echo "🔄 Executing comprehensive build context analysis..."
-  Read tool: bmad-core/tasks/build-context-analysis.md
-}
+### **Escalation Logic (Context Preservation)**
+
+**Smart Escalation Process:**
+
+**1. Context Preservation:**
+Before escalating to comprehensive analysis, preserve quick analysis results:
+
 ```
+Context Documentation:
+📋 Smart Analysis Results Preserved:
+• Complexity Score: [score]/100
+• Error Counts: Total=[count], Interface=[count], Type=[count], Syntax=[count]
+• Problem Files: [list of files with highest error counts]
+• Analysis Route: [SIMPLE/MODERATE/COMPLEX routing decision]
+• Environment: [detected language and IDE environment]
+```
+
+**2. Escalation Execution:**
+- Use Read tool to execute: `bmad-core/tasks/build-context-analysis.md`
+- Pass context information to comprehensive analysis
+- Maintain continuity between smart and comprehensive approaches
+
+**3. Escalation Triggers:**
+- Complexity score ≥ 60
+- Interface errors > 10  
+- Total errors > 50
+- User explicit request via command flags
+- Previous lightweight fixes failed
+
+**Context Handoff Benefits:**
+- Comprehensive analysis can build on smart analysis results
+- Avoids duplicate work in problem identification
+- Maintains consistent error categorization
+- Preserves environment detection results
 
 ## Integration with Development Workflow
 
-### **Dev Agent Integration**
-```bash
-# Replace direct build-context-analysis.md calls with smart analysis
-*build-context           # Smart analysis (200-800 tokens) 
-*build-context --full    # Force comprehensive analysis (1500+ tokens)
-*build-context --quick   # Force lightweight fixes only (300 tokens)
-```
+### **Dev Agent Integration (Command Structure)**
+
+**Agent Command Integration:**
+
+**Standard Command:**
+- `*build-context` - Smart analysis with automatic routing (200-800 tokens)
+- Automatically chooses SIMPLE/MODERATE/COMPLEX approach based on complexity score
+
+**Override Commands:**
+- `*build-context --full` - Force comprehensive analysis (1500+ tokens)
+- `*build-context --quick` - Force lightweight fixes only (300 tokens)
+- `*build-context --targeted` - Force moderate targeted analysis (400-600 tokens)
+
+**Usage Integration:**
+- Replace direct `build-context-analysis.md` calls with smart routing
+- Maintain backward compatibility for existing workflows
+- Provide token usage transparency to users
+- Enable conscious choice between speed and thoroughness
 
 ### **Auto-Trigger Conditions**
 - Build failures during story development

@@ -60,7 +60,14 @@ The goal is informed fixes, not blind error resolution.
 - **If Gemini CLI**: Use CLI git with AI analysis
 - **If Standalone**: Use bash commands with approval prompts
 
-**Optimized Git Commands (Environment-Specific):**
+**Environment-Adaptive Git Analysis:**
+
+**If USE_IDE_TOOLS = true (Claude Code, Cursor, Windsurf, etc.):**
+- Use individual Bash tool calls with clear descriptions
+- No approval prompts in IDE environments
+- Better error handling and context per command
+
+**If BATCH_COMMANDS = true (CLI mode):**
 ```bash
 # Single combined command to minimize approvals in CLI mode
 echo "=== BMAD Build Context Analysis ===" && \
@@ -69,6 +76,11 @@ echo "=== Recent Commits ===" && git log --oneline -10 && \
 echo "=== Interface Changes ===" && git log --oneline -20 --grep="interface|API|contract|signature" && \
 echo "=== Frequently Modified Files ===" && git log --since="30 days ago" --name-only --pretty=format: | sort | uniq -c | sort -nr | head -20
 ```
+
+**Environment Detection:**
+- Auto-initialize using: `lightweight-ide-detection.md`
+- Adapt command execution based on `$USE_IDE_TOOLS` flag
+- Use optimal approach for detected environment
 
 5. **Build Error Source Analysis:**
    - Examine source files for recent changes

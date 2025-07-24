@@ -6,18 +6,41 @@ Intelligent task selection that chooses lightweight vs comprehensive approaches 
 
 ## Context Assessment Framework
 
-### 1. **Story Complexity Analysis** (50-100 tokens)
+### 1. **Environment-Adaptive Story Complexity Analysis** (50-100 tokens)
 
 ```bash
-# Rapid story complexity assessment for task routing
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_PRIMARY_LANGUAGE" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Rapid story complexity assessment for task routing using environment-appropriate tools
 assess_story_complexity() {
   local STORY_FILE="$1"
   
-  # Count complexity indicators
+  echo "📊 Environment-Adaptive Complexity Analysis:"
+  echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+  
+  # Count complexity indicators using environment-appropriate methods
+  if [ "$USE_IDE_TOOLS" = "true" ]; then
+    # Use native IDE tools for pattern analysis
+    echo "Using native IDE tools for complexity assessment"
+    # Would use Grep tool with appropriate patterns for task detection
+    # Would use Read tool for story content analysis
+  fi
+  
+  # Universal complexity analysis (works in all environments)
   TASK_COUNT=$(grep -c "^\s*- \[ \]" "$STORY_FILE" || echo 0)
   SUBTASK_COUNT=$(grep -c "^\s*- \[ \]" "$STORY_FILE" | xargs -I {} expr {} - $TASK_COUNT || echo 0)
   FILE_COUNT=$(grep -A 20 "## File List" "$STORY_FILE" | grep -c "^\s*[-*]" || echo 0)
-  COMPONENT_COUNT=$(grep -A 10 "## Story" "$STORY_FILE" | grep -c -E "[A-Z][a-zA-Z]*Service|Controller|Repository" || echo 0)
+  
+  # Language-specific component patterns from auto-detection
+  COMPONENT_PATTERNS=$(echo "$BMAD_COMPONENT_PATTERNS" | tr ',' '|')
+  COMPONENT_COUNT=$(grep -A 10 "## Story" "$STORY_FILE" | grep -c -E "$COMPONENT_PATTERNS" || echo 0)
   
   # Look for complexity keywords  
   COMPLEXITY_KEYWORDS=$(grep -c -i "refactor\|migrate\|restructure\|architectural\|integration\|complex" "$STORY_FILE" || echo 0)
@@ -46,17 +69,25 @@ assess_story_complexity() {
 }
 ```
 
-### 2. **Issue Severity Detection** (50-100 tokens)
+### 2. **Environment-Adaptive Issue Severity Detection** (50-100 tokens)
 
 ```bash
-# Quick severity assessment for appropriate response
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_SIMULATION_PATTERNS" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+# Quick severity assessment for appropriate response using language-specific patterns
 assess_issue_severity() {
   local ISSUE_DESCRIPTION="$1"
   
-  # Check for severity indicators
+  echo "🔍 Environment-Adaptive Severity Assessment:"
+  echo "Language: $BMAD_PRIMARY_LANGUAGE | Environment: $DETECTED_IDE"
+  
+  # Use language-specific severity patterns from auto-detection
   CRITICAL_PATTERNS="build.*fail|crash|exception|error.*count.*[1-9][0-9]|security|production"
   HIGH_PATTERNS="interface.*mismatch|architecture.*violation|regression|performance"
-  MEDIUM_PATTERNS="simulation.*pattern|missing.*test|code.*quality"
+  MEDIUM_PATTERNS="$(echo "$BMAD_SIMULATION_PATTERNS" | tr ',' '|')|missing.*test|code.*quality"
   LOW_PATTERNS="formatting|documentation|naming|style"
   
   if echo "$ISSUE_DESCRIPTION" | grep -qi "$CRITICAL_PATTERNS"; then
@@ -77,16 +108,24 @@ assess_issue_severity() {
 
 ## Smart Task Routing
 
-### 3. **Intelligent Task Selection** (100-150 tokens)
+### 3. **Environment-Adaptive Intelligent Task Selection** (100-150 tokens)
 
 ```bash
-# Route to optimal task variant based on context
+# Auto-initialize environment detection if needed
+if [ -z "$DETECTED_IDE" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Route to optimal task variant based on context using environment-appropriate methods
 route_to_optimal_task() {
   local TASK_TYPE="$1"
   local STORY_FILE="$2"
   local CONTEXT_INFO="$3"
   
-  # Assess context
+  echo "🎯 Environment-Adaptive Task Routing:"
+  echo "Environment: $DETECTED_IDE | Target Task: $TASK_TYPE"
+  
+  # Assess context using environment-aware analysis
   assess_story_complexity "$STORY_FILE"
   STORY_COMPLEXITY=$?
   
@@ -141,14 +180,22 @@ route_to_optimal_task() {
 
 ## Context Caching System
 
-### 4. **Context Cache Management** (50-100 tokens)
+### 4. **Environment-Adaptive Context Cache Management** (50-100 tokens)
 
 ```bash
-# Cache context assessments to avoid re-analysis
+# Auto-initialize environment detection if needed
+if [ -z "$DETECTED_IDE" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Cache context assessments to avoid re-analysis with environment context
 manage_context_cache() {
   local STORY_FILE="$1"
   local STORY_ID=$(basename "$STORY_FILE" .story.md)
   local CACHE_FILE="tmp/context-cache.json"
+  
+  echo "💾 Environment-Adaptive Cache Management:"
+  echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
   
   # Check for existing assessment
   if [ -f "$CACHE_FILE" ]; then
@@ -167,16 +214,27 @@ manage_context_cache() {
   assess_story_complexity "$STORY_FILE"
   COMPLEXITY_RESULT=$?
   
-  # Update cache
+  # Update cache with environment context
   mkdir -p tmp
   if [ ! -f "$CACHE_FILE" ]; then
-    echo '{"stories": {}}' > "$CACHE_FILE"
+    echo '{"stories": {}, "environment_info": {}}' > "$CACHE_FILE"
   fi
   
   jq --arg id "$STORY_ID" \
      --arg complexity "$COMPLEXITY_RESULT" \
      --arg updated "$(date -Iseconds)" \
-     '.stories[$id] = {"complexity": $complexity, "last_updated": $updated}' \
+     --arg env "$DETECTED_IDE" \
+     --arg lang "$BMAD_PRIMARY_LANGUAGE" \
+     '.stories[$id] = {
+       "complexity": $complexity, 
+       "last_updated": $updated,
+       "environment": $env,
+       "language": $lang
+     } | .environment_info = {
+       "last_detected_ide": $env,
+       "last_detected_language": $lang,
+       "cache_updated": $updated
+     }' \
      "$CACHE_FILE" > tmp/context-temp.json && mv tmp/context-temp.json "$CACHE_FILE"
   
   return $COMPLEXITY_RESULT
@@ -209,33 +267,58 @@ manage_context_cache() {
 }
 ```
 
-### 6. **Automatic Context Detection**
+### 6. **Environment-Adaptive Automatic Context Detection**
 
 ```bash
-# Auto-detect context from current development state
+# Auto-initialize environment detection if needed
+if [ -z "$BMAD_BUILD_COMMAND" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
+
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+
+# Auto-detect context from current development state using environment-appropriate methods
 auto_detect_context() {
   local STORY_FILE="$1"
   
-  # Recent build status
+  echo "🔍 Environment-Adaptive Context Detection:"
+  echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+  
+  # Recent build status using detected build command
   BUILD_STATUS="unknown"
-  if command -v dotnet >/dev/null 2>&1; then
-    if dotnet build --verbosity quiet >/dev/null 2>&1; then
-      BUILD_STATUS="passing"
-    else
-      BUILD_STATUS="failing"
+  if [ -n "$BMAD_BUILD_COMMAND" ]; then
+    if [ "$USE_IDE_TOOLS" = "true" ]; then
+      echo "Using native IDE integration for build status"
+      # Would use Bash tool with clear description for build command
+    fi
+    
+    # Universal build check (works in all environments)
+    if $BMAD_BUILD_COMMAND --help >/dev/null 2>&1; then
+      if $BMAD_BUILD_COMMAND >/dev/null 2>&1; then
+        BUILD_STATUS="passing"
+      else
+        BUILD_STATUS="failing"
+      fi
     fi
   fi
   
-  # Git status for change complexity
-  GIT_CHANGES=$(git status --porcelain 2>/dev/null | wc -l || echo 0)
+  # Git status for change complexity using environment-appropriate methods
+  if [ "$USE_IDE_TOOLS" = "true" ]; then
+    echo "Using native IDE integration for git analysis"
+    # Would use appropriate IDE-specific git tools
+  fi
   
-  # Recent commit activity
+  # Universal git analysis (works in all environments)
+  GIT_CHANGES=$(git status --porcelain 2>/dev/null | wc -l || echo 0)
   RECENT_COMMITS=$(git log --oneline --since="1 day ago" 2>/dev/null | wc -l || echo 0)
   
-  # Generate context summary
-  CONTEXT_SUMMARY="build:$BUILD_STATUS,changes:$GIT_CHANGES,commits:$RECENT_COMMITS"
+  # Generate context summary with environment information
+  CONTEXT_SUMMARY="env:$DETECTED_IDE,lang:$BMAD_PRIMARY_LANGUAGE,build:$BUILD_STATUS,changes:$GIT_CHANGES,commits:$RECENT_COMMITS"
   
   echo "🔍 Auto-detected context: $CONTEXT_SUMMARY"
+  echo "Environment-adaptive context detection completed"
   echo "$CONTEXT_SUMMARY"
 }
 ```
