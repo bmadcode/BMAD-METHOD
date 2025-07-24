@@ -177,8 +177,7 @@ dependencies:
     - create-remediation-story.md
     - story-to-code-audit.md
   checklists:
-    - reality-audit-comprehensive.md
-    - loop-detection-escalation.md
+    - story-dod-checklist.md
   data:
     - technical-preferences.md
   templates:
