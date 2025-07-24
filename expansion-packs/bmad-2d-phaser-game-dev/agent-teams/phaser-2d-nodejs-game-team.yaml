@@ -1,0 +1,13 @@
+bundle:
+  name: Phaser 2D NodeJS Game Team
+  icon: 🎮
+  description: Game Development team specialized in 2D games using Phaser 3 and TypeScript.
+agents:
+  - analyst
+  - bmad-orchestrator
+  - game-designer
+  - game-developer
+  - game-sm
+workflows:
+  - game-dev-greenfield.md
+  - game-prototype.md

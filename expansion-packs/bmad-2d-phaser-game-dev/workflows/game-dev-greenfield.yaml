@@ -1,0 +1,183 @@
+workflow:
+  id: game-dev-greenfield
+  name: Game Development - Greenfield Project
+  description: Specialized workflow for creating 2D games from concept to implementation using Phaser 3 and TypeScript. Guides teams through game concept development, design documentation, technical architecture, and story-driven development for professional game development.
+  type: greenfield
+  project_types:
+    - indie-game
+    - mobile-game
+    - web-game
+    - educational-game
+    - prototype-game
+    - game-jam
+  full_game_sequence:
+    - agent: game-designer
+      creates: game-brief.md
+      optional_steps:
+        - brainstorming_session
+        - game_research_prompt
+        - player_research
+      notes: 'Start with brainstorming game concepts, then create comprehensive game brief. SAVE OUTPUT: Copy final game-brief.md to your project''s docs/design/ folder.'
+    - agent: game-designer
+      creates: game-design-doc.md
+      requires: game-brief.md
+      optional_steps:
+        - competitive_analysis
+        - technical_research
+      notes: 'Create detailed Game Design Document using game-design-doc-tmpl. Defines all gameplay mechanics, progression, and technical requirements. SAVE OUTPUT: Copy final game-design-doc.md to your project''s docs/design/ folder.'
+    - agent: game-designer
+      creates: level-design-doc.md
+      requires: game-design-doc.md
+      optional_steps:
+        - level_prototyping
+        - difficulty_analysis
+      notes: 'Create level design framework using level-design-doc-tmpl. Establishes content creation guidelines and performance requirements. SAVE OUTPUT: Copy final level-design-doc.md to your project''s docs/design/ folder.'
+    - agent: solution-architect
+      creates: game-architecture.md
+      requires:
+        - game-design-doc.md
+        - level-design-doc.md
+      optional_steps:
+        - technical_research_prompt
+        - performance_analysis
+        - platform_research
+      notes: 'Create comprehensive technical architecture using game-architecture-tmpl. Defines Phaser 3 systems, performance optimization, and code structure. SAVE OUTPUT: Copy final game-architecture.md to your project''s docs/architecture/ folder.'
+    - agent: game-designer
+      validates: design_consistency
+      requires: all_design_documents
+      uses: game-design-checklist
+      notes: Validate all design documents for consistency, completeness, and implementability. May require updates to any design document.
+    - agent: various
+      updates: flagged_design_documents
+      condition: design_validation_issues
+      notes: If design validation finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder.
+  project_setup_guidance:
+    action: guide_game_project_structure
+    notes: Set up game project structure following game architecture document. Create src/, assets/, docs/, and tests/ directories. Initialize TypeScript and Phaser 3 configuration.
+  workflow_end:
+    action: move_to_story_development
+    notes: All design artifacts complete. Begin story-driven development phase. Use Game Scrum Master to create implementation stories from design documents.
+  prototype_sequence:
+    - step: prototype_scope
+      action: assess_prototype_complexity
+      notes: First, assess if this needs full game design (use full_game_sequence) or can be a rapid prototype.
+    - agent: game-designer
+      creates: game-brief.md
+      optional_steps:
+        - quick_brainstorming
+        - concept_validation
+      notes: 'Create focused game brief for prototype. Emphasize core mechanics and immediate playability. SAVE OUTPUT: Copy final game-brief.md to your project''s docs/ folder.'
+    - agent: game-designer
+      creates: prototype-design.md
+      uses: create-doc prototype-design OR create-game-story
+      requires: game-brief.md
+      notes: Create minimal design document or jump directly to implementation stories for rapid prototyping. Choose based on prototype complexity.
+  prototype_workflow_end:
+    action: move_to_rapid_implementation
+    notes: Prototype defined. Begin immediate implementation with Game Developer. Focus on core mechanics first, then iterate based on playtesting.
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: Game Development Project] --> B{Project Scope?}
+        B -->|Full Game/Production| C[game-designer: game-brief.md]
+        B -->|Prototype/Game Jam| D[game-designer: focused game-brief.md]
+
+        C --> E[game-designer: game-design-doc.md]
+        E --> F[game-designer: level-design-doc.md]
+        F --> G[solution-architect: game-architecture.md]
+        G --> H[game-designer: validate design consistency]
+        H --> I{Design validation issues?}
+        I -->|Yes| J[Return to relevant agent for fixes]
+        I -->|No| K[Set up game project structure]
+        J --> H
+        K --> L[Move to Story Development Phase]
+
+        D --> M[game-designer: prototype-design.md]
+        M --> N[Move to Rapid Implementation]
+
+        C -.-> C1[Optional: brainstorming]
+        C -.-> C2[Optional: game research]
+        E -.-> E1[Optional: competitive analysis]
+        F -.-> F1[Optional: level prototyping]
+        G -.-> G1[Optional: technical research]
+        D -.-> D1[Optional: quick brainstorming]
+
+        style L fill:#90EE90
+        style N fill:#90EE90
+        style C fill:#FFE4B5
+        style E fill:#FFE4B5
+        style F fill:#FFE4B5
+        style G fill:#FFE4B5
+        style D fill:#FFB6C1
+        style M fill:#FFB6C1
+    ```
+  decision_guidance:
+    use_full_sequence_when:
+      - Building commercial or production games
+      - Multiple team members involved
+      - Complex gameplay systems (3+ core mechanics)
+      - Long-term development timeline (2+ months)
+      - Need comprehensive documentation for team coordination
+      - Targeting multiple platforms
+      - Educational or enterprise game projects
+    use_prototype_sequence_when:
+      - Game jams or time-constrained development
+      - Solo developer or very small team
+      - Experimental or proof-of-concept games
+      - Simple mechanics (1-2 core systems)
+      - Quick validation of game concepts
+      - Learning projects or technical demos
+  handoff_prompts:
+    designer_to_gdd: Game brief is complete. Save it as docs/design/game-brief.md in your project, then create the comprehensive Game Design Document.
+    gdd_to_level: Game Design Document ready. Save it as docs/design/game-design-doc.md, then create the level design framework.
+    level_to_architect: Level design complete. Save it as docs/design/level-design-doc.md, then create the technical architecture.
+    architect_review: Architecture complete. Save it as docs/architecture/game-architecture.md. Please validate all design documents for consistency.
+    validation_issues: Design validation found issues with [document]. Please return to [agent] to fix and re-save the updated document.
+    full_complete: All design artifacts validated and saved. Set up game project structure and move to story development phase.
+    prototype_designer_to_dev: Prototype brief complete. Save it as docs/game-brief.md, then create minimal design or jump directly to implementation stories.
+    prototype_complete: Prototype defined. Begin rapid implementation focusing on core mechanics and immediate playability.
+  story_development_guidance:
+    epic_breakdown:
+      - Core Game Systems" - Fundamental gameplay mechanics and player controls
+      - Level Content" - Individual levels, progression, and content implementation
+      - User Interface" - Menus, HUD, settings, and player feedback systems
+      - Audio Integration" - Music, sound effects, and audio systems
+      - Performance Optimization" - Platform optimization and technical polish
+      - Game Polish" - Visual effects, animations, and final user experience
+    story_creation_process:
+      - Use Game Scrum Master to create detailed implementation stories
+      - Each story should reference specific GDD sections
+      - Include performance requirements (60 FPS target)
+      - Specify Phaser 3 implementation details
+      - Apply game-story-dod-checklist for quality validation
+      - Ensure stories are immediately actionable by Game Developer
+  game_development_best_practices:
+    performance_targets:
+      - Maintain 60 FPS on target devices throughout development
+      - Memory usage under specified limits per game system
+      - Loading times under 3 seconds for levels
+      - Smooth animation and responsive player controls
+    technical_standards:
+      - TypeScript strict mode compliance
+      - Component-based game architecture
+      - Object pooling for performance-critical objects
+      - Cross-platform input handling
+      - Comprehensive error handling and graceful degradation
+    playtesting_integration:
+      - Test core mechanics early and frequently
+      - Validate game balance through metrics and player feedback
+      - Iterate on design based on implementation discoveries
+      - Document design changes and rationale
+  success_criteria:
+    design_phase_complete:
+      - All design documents created and validated
+      - Technical architecture aligns with game design requirements
+      - Performance targets defined and achievable
+      - Story breakdown ready for implementation
+      - Project structure established
+    implementation_readiness:
+      - Development environment configured for Phaser 3 + TypeScript
+      - Asset pipeline and build system established
+      - Testing framework in place
+      - Team roles and responsibilities defined
+      - First implementation stories created and ready

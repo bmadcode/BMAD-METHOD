@@ -1,0 +1,9 @@
+name: bmad-creator-tools
+version: 1.5.0
+short-title: Creator Tools Pack
+description: >-
+  Tools for creating and extending BMAD framework components. This expansion pack
+  provides agents and tasks for building new agents, expansion packs, and extending
+  the BMAD Method framework with custom capabilities.
+author: Brian (BMad)
+slashPrefix: bmadCreator

@@ -1,0 +1,12 @@
+name: bmad-creator-tools
+version: 1.0.0
+description: Tools for creating and extending BMAD framework components
+type: creator-tools
+compatibility:
+  bmad-version: '>=4.0.0'
+components:
+  agents:
+    - bmad-the-creator
+  tasks:
+    - create-agent
+    - generate-expansion-pack

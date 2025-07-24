@@ -1,0 +1,13 @@
+bundle:
+  name: Unity 2D Game Team
+  icon: 🎮
+  description: Game Development team specialized in 2D games using Unity and C#.
+agents:
+  - analyst
+  - bmad-orchestrator
+  - game-designer
+  - game-developer
+  - game-sm
+workflows:
+  - unity-game-dev-greenfield.md
+  - unity-game-prototype.md

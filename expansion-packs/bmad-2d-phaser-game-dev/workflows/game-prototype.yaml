@@ -1,0 +1,175 @@
+workflow:
+  id: game-prototype
+  name: Game Prototype Development
+  description: Fast-track workflow for rapid game prototyping and concept validation. Optimized for game jams, proof-of-concept development, and quick iteration on game mechanics using Phaser 3 and TypeScript.
+  type: prototype
+  project_types:
+    - game-jam
+    - proof-of-concept
+    - mechanic-test
+    - technical-demo
+    - learning-project
+    - rapid-iteration
+  prototype_sequence:
+    - step: concept_definition
+      agent: game-designer
+      duration: 15-30 minutes
+      creates: concept-summary.md
+      notes: Quickly define core game concept, primary mechanic, and target experience. Focus on what makes this game unique and fun.
+    - step: rapid_design
+      agent: game-designer
+      duration: 30-60 minutes
+      creates: prototype-spec.md
+      requires: concept-summary.md
+      optional_steps:
+        - quick_brainstorming
+        - reference_research
+      notes: Create minimal but complete design specification. Focus on core mechanics, basic controls, and success/failure conditions.
+    - step: technical_planning
+      agent: game-developer
+      duration: 15-30 minutes
+      creates: prototype-architecture.md
+      requires: prototype-spec.md
+      notes: Define minimal technical implementation plan. Identify core Phaser 3 systems needed and performance constraints.
+    - step: implementation_stories
+      agent: game-sm
+      duration: 30-45 minutes
+      creates: prototype-stories/
+      requires: prototype-spec.md, prototype-architecture.md
+      notes: Create 3-5 focused implementation stories for core prototype features. Each story should be completable in 2-4 hours.
+    - step: iterative_development
+      agent: game-developer
+      duration: varies
+      implements: prototype-stories/
+      notes: Implement stories in priority order. Test frequently and adjust design based on what feels fun. Document discoveries.
+  workflow_end:
+    action: prototype_evaluation
+    notes: 'Prototype complete. Evaluate core mechanics, gather feedback, and decide next steps: iterate, expand, or archive.'
+  game_jam_sequence:
+    - step: jam_concept
+      agent: game-designer
+      duration: 10-15 minutes
+      creates: jam-concept.md
+      notes: Define game concept based on jam theme. One sentence core mechanic, basic controls, win condition.
+    - step: jam_implementation
+      agent: game-developer
+      duration: varies (jam timeline)
+      creates: working-prototype
+      requires: jam-concept.md
+      notes: Directly implement core mechanic. No formal stories - iterate rapidly on what's fun. Document major decisions.
+  jam_workflow_end:
+    action: jam_submission
+    notes: Submit to game jam. Capture lessons learned and consider post-jam development if concept shows promise.
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: Prototype Project] --> B{Development Context?}
+        B -->|Standard Prototype| C[game-designer: concept-summary.md]
+        B -->|Game Jam| D[game-designer: jam-concept.md]
+
+        C --> E[game-designer: prototype-spec.md]
+        E --> F[game-developer: prototype-architecture.md]
+        F --> G[game-sm: create prototype stories]
+        G --> H[game-developer: iterative implementation]
+        H --> I[Prototype Evaluation]
+
+        D --> J[game-developer: direct implementation]
+        J --> K[Game Jam Submission]
+
+        E -.-> E1[Optional: quick brainstorming]
+        E -.-> E2[Optional: reference research]
+
+        style I fill:#90EE90
+        style K fill:#90EE90
+        style C fill:#FFE4B5
+        style E fill:#FFE4B5
+        style F fill:#FFE4B5
+        style G fill:#FFE4B5
+        style H fill:#FFE4B5
+        style D fill:#FFB6C1
+        style J fill:#FFB6C1
+    ```
+  decision_guidance:
+    use_prototype_sequence_when:
+      - Learning new game development concepts
+      - Testing specific game mechanics
+      - Building portfolio pieces
+      - Have 1-7 days for development
+      - Need structured but fast development
+      - Want to validate game concepts before full development
+    use_game_jam_sequence_when:
+      - Participating in time-constrained game jams
+      - Have 24-72 hours total development time
+      - Want to experiment with wild or unusual concepts
+      - Learning through rapid iteration
+      - Building networking/portfolio presence
+  prototype_best_practices:
+    scope_management:
+      - Start with absolute minimum viable gameplay
+      - One core mechanic implemented well beats many mechanics poorly
+      - Focus on "game feel" over features
+      - Cut features ruthlessly to meet timeline
+    rapid_iteration:
+      - Test the game every 1-2 hours of development
+      - Ask "Is this fun?" frequently during development
+      - Be willing to pivot mechanics if they don't feel good
+      - Document what works and what doesn't
+    technical_efficiency:
+      - Use simple graphics (geometric shapes, basic sprites)
+      - Leverage Phaser 3's built-in systems heavily
+      - Avoid complex custom systems in prototypes
+      - Prioritize functional over polished
+  prototype_evaluation_criteria:
+    core_mechanic_validation:
+      - Is the primary mechanic engaging for 30+ seconds?
+      - Do players understand the mechanic without explanation?
+      - Does the mechanic have depth for extended play?
+      - Are there natural difficulty progression opportunities?
+    technical_feasibility:
+      - Does the prototype run at acceptable frame rates?
+      - Are there obvious technical blockers for expansion?
+      - Is the codebase clean enough for further development?
+      - Are performance targets realistic for full game?
+    player_experience:
+      - Do testers engage with the game voluntarily?
+      - What emotions does the game create in players?
+      - Are players asking for "just one more try"?
+      - What do players want to see added or changed?
+  post_prototype_options:
+    iterate_and_improve:
+      action: continue_prototyping
+      when: Core mechanic shows promise but needs refinement
+      next_steps: Create new prototype iteration focusing on identified improvements
+    expand_to_full_game:
+      action: transition_to_full_development
+      when: Prototype validates strong game concept
+      next_steps: Use game-dev-greenfield workflow to create full game design and architecture
+    pivot_concept:
+      action: new_prototype_direction
+      when: Current mechanic doesn't work but insights suggest new direction
+      next_steps: Apply learnings to new prototype concept
+    archive_and_learn:
+      action: document_learnings
+      when: Prototype doesn't work but provides valuable insights
+      next_steps: Document lessons learned and move to next prototype concept
+  time_boxing_guidance:
+    concept_phase: Maximum 30 minutes - if you can't explain the game simply, simplify it
+    design_phase: Maximum 1 hour - focus on core mechanics only
+    planning_phase: Maximum 30 minutes - identify critical path to playable prototype
+    implementation_phase: Time-boxed iterations - test every 2-4 hours of work
+  success_metrics:
+    development_velocity:
+      - Playable prototype in first day of development
+      - Core mechanic demonstrable within 4-6 hours of coding
+      - Major iteration cycles completed in 2-4 hour blocks
+    learning_objectives:
+      - Clear understanding of what makes the mechanic fun (or not)
+      - Technical feasibility assessment for full development
+      - Player reaction and engagement validation
+      - Design insights for future development
+  handoff_prompts:
+    concept_to_design: Game concept defined. Create minimal design specification focusing on core mechanics and player experience.
+    design_to_technical: Design specification ready. Create technical implementation plan for rapid prototyping.
+    technical_to_stories: Technical plan complete. Create focused implementation stories for prototype development.
+    stories_to_implementation: Stories ready. Begin iterative implementation with frequent playtesting and design validation.
+    prototype_to_evaluation: Prototype playable. Evaluate core mechanics, gather feedback, and determine next development steps.
