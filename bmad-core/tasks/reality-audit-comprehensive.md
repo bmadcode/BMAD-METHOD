@@ -103,27 +103,60 @@ Use the language-specific simulation patterns from `$BMAD_SIMULATION_PATTERNS` a
 - TODO_COMMENT_COUNT (TODO, FIXME, etc.)
 - Calculate TOTAL_SIMULATION_SCORE based on weighted counts
 
-## Phase 2: Build and Runtime Validation (Environment-Aware)
+## Phase 2: Environment-Adaptive Build and Runtime Validation
 
-**Build Validation Using Auto-Detected Commands:**
+**Auto-Initialize Environment Detection (if not already done):**
+```
+# Ensure environment detection is loaded
+if [ -z "$BMAD_BUILD_COMMAND" ]; then
+  Read tool: bmad-core/tasks/auto-language-init.md
+fi
 
-Use `$BMAD_BUILD_COMMAND` from auto-detection system and execute based on IDE environment:
+if [ -z "$USE_IDE_TOOLS" ]; then
+  Read tool: bmad-core/tasks/lightweight-ide-detection.md
+fi
+```
 
-**If USE_IDE_TOOLS = true (Claude Code CLI):**
-- Execute build command using Bash tool with clear description
-- Capture build output for analysis
-- No approval prompts required in IDE environment
+**Environment-Adaptive Build Validation:**
 
-**If BATCH_COMMANDS = true (CLI mode):**
-- Batch build validation with error analysis in single command
-- Use command chaining with `&&` for efficiency
+**Step 1: Display Environment Context**
+```
+echo "🔧 Environment-Adaptive Build Validation:"
+echo "Environment: $DETECTED_IDE | Language: $BMAD_PRIMARY_LANGUAGE"
+echo "Build Command: $BMAD_BUILD_COMMAND"
+echo "Tools Mode: $([ "$USE_IDE_TOOLS" = "true" ] && echo "Native IDE integration" || echo "CLI batch mode")"
+```
 
-**Build Analysis Process:**
-1. Execute: `$BMAD_BUILD_COMMAND` 
-2. Capture exit code and output
-3. Use Grep tool to scan build output for error patterns from `$BMAD_ERROR_PATTERNS`
-4. Count warnings using language-specific warning patterns
-5. Document results in audit report
+**Step 2: Execute Build Using Environment-Appropriate Method**
+```
+if [ "$USE_IDE_TOOLS" = "true" ]; then
+  echo "Using native IDE integration for build validation"
+  # Use Bash tool with clear description for build command
+  BUILD_OUTPUT=$($BMAD_BUILD_COMMAND 2>&1)
+  BUILD_EXIT_CODE=$?
+else
+  echo "Using CLI batch mode for build validation (may require approval)"
+  # Traditional CLI approach
+  BUILD_OUTPUT=$($BMAD_BUILD_COMMAND 2>&1)
+  BUILD_EXIT_CODE=$?
+fi
+
+echo "Build Exit Code: $BUILD_EXIT_CODE"
+```
+
+**Step 3: Analyze Build Results Using Native Tools**
+```
+# Use Grep tool to analyze build output for errors
+if [ "$USE_IDE_TOOLS" = "true" ]; then
+  echo "Analyzing build results using native IDE tools"
+  # Would use Grep tool with error patterns from $BMAD_ERROR_PATTERNS
+  # Would use Read tool for detailed error analysis
+else
+  # Traditional CLI analysis
+  ERROR_COUNT=$(echo "$BUILD_OUTPUT" | grep -c "error" || echo 0)
+  WARNING_COUNT=$(echo "$BUILD_OUTPUT" | grep -c "warning" || echo 0)
+fi
+```
 
 **Runtime Validation (Simplified):**
 - Use `$BMAD_TEST_COMMAND` if available for runtime testing
