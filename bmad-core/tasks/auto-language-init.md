@@ -208,7 +208,17 @@ EOF
   export BMAD_COMPONENT_PATTERNS="$COMPONENT_PATTERNS"
   export BMAD_FILE_EXTENSIONS="$FILE_EXTENSIONS"
   
+  # Append language environment variables to .bmad_env file for persistent state
+  echo "export BMAD_PRIMARY_LANGUAGE=\"$PRIMARY_LANGUAGE\"" >> .bmad_env
+  echo "export BMAD_BUILD_COMMAND=\"$BUILD_COMMAND\"" >> .bmad_env
+  echo "export BMAD_TEST_COMMAND=\"$TEST_COMMAND\"" >> .bmad_env
+  echo "export BMAD_SIMULATION_PATTERNS=\"$SIMULATION_PATTERNS\"" >> .bmad_env
+  echo "export BMAD_ERROR_PATTERNS=\"$ERROR_PATTERNS\"" >> .bmad_env
+  echo "export BMAD_COMPONENT_PATTERNS=\"$COMPONENT_PATTERNS\"" >> .bmad_env
+  echo "export BMAD_FILE_EXTENSIONS=\"$FILE_EXTENSIONS\"" >> .bmad_env
+  
   echo "✅ Language environment initialized: $PRIMARY_LANGUAGE"
+  echo "Language configuration appended to .bmad_env for persistent state across tool calls"
 }
 
 # Call auto-initialization (runs automatically when this task is loaded)

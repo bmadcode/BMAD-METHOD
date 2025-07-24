@@ -9,7 +9,7 @@ Minimal-token environment detection to optimize BMAD task execution without cons
 ### Single Command Detection (50-100 tokens)
 
 ```bash
-# Lightweight IDE detection with caching
+# Lightweight IDE detection with environment file persistence
 if [ -f "tmp/ide-detected.txt" ]; then
   DETECTED_IDE=$(cat tmp/ide-detected.txt)
 else
@@ -50,7 +50,15 @@ case $DETECTED_IDE in
     ;;
 esac
 
+# Create/update .bmad_env file with IDE environment variables for persistent state
+> .bmad_env
+echo "export DETECTED_IDE=\"$DETECTED_IDE\"" >> .bmad_env
+echo "export USE_IDE_TOOLS=\"$USE_IDE_TOOLS\"" >> .bmad_env
+echo "export BATCH_COMMANDS=\"$BATCH_COMMANDS\"" >> .bmad_env
+echo "export APPROVAL_REQUIRED=\"$APPROVAL_REQUIRED\"" >> .bmad_env
+
 echo "IDE: $DETECTED_IDE | Use IDE Tools: $USE_IDE_TOOLS | Batch: $BATCH_COMMANDS"
+echo "Environment configuration saved to .bmad_env for persistent state across tool calls"
 ```
 
 ## Tool Adaptation Logic
