@@ -19,6 +19,7 @@ build/
 # Workspace and IDE-specific files
 .workspace/
 .claude/
+tmp/
 prj/
 
 CLAUDE.md
