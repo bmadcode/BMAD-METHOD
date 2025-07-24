@@ -1,0 +1,92 @@
+installation-options:
+  full:
+    name: Complete BMad Core
+    description: Copy the entire .bmad-core folder with all agents, templates, and tools
+    action: copy-folder
+    source: bmad-core
+  single-agent:
+    name: Single Agent
+    description: Select and install a single agent with its dependencies
+    action: copy-agent
+ide-configurations:
+  cursor:
+    name: Cursor
+    rule-dir: .cursor/rules/
+    format: multi-file
+    command-suffix: .mdc
+    instructions: |
+      # To use BMad agents in Cursor:
+      # 1. Press Ctrl+L (Cmd+L on Mac) to open the chat
+      # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
+      # 3. The agent will adopt that persona for the conversation
+  claude-code:
+    name: Claude Code
+    rule-dir: .claude/commands/BMad/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Claude Code:
+      # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
+      # 2. Claude will switch to that agent's persona
+  windsurf:
+    name: Windsurf
+    rule-dir: .windsurf/rules/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Windsurf:
+      # 1. Type @agent-name (e.g., "@dev", "@pm")
+      # 2. Windsurf will adopt that agent's persona
+  trae:
+    name: Trae
+    rule-dir: .trae/rules/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Trae:
+      # 1. Type @agent-name (e.g., "@dev", "@pm", "@architect")
+      # 2. Trae will adopt that agent's persona
+  roo:
+    name: Roo Code
+    format: custom-modes
+    file: .roomodes
+    instructions: |
+      # To use BMad agents in Roo Code:
+      # 1. Open the mode selector (usually in the status bar)
+      # 2. Select any bmad-{agent} mode (e.g., "bmad-dev", "bmad-pm")
+      # 3. The AI will adopt that agent's full personality and capabilities
+  cline:
+    name: Cline
+    rule-dir: .clinerules/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Cline:
+      # 1. Open the Cline chat panel in VS Code
+      # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
+      # 3. The agent will adopt that persona for the conversation
+      # 4. Rules are stored in .clinerules/ directory in your project
+  gemini:
+    name: Gemini CLI
+    rule-dir: .gemini/bmad-method/
+    format: single-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents with the Gemini CLI:
+      # 1. The installer creates a .gemini/bmad-method/ directory in your project.
+      # 2. It concatenates all agent files into a single GEMINI.md file.
+      # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
+      # 4. The Gemini CLI will automatically have the context for that agent.
+  github-copilot:
+    name: Github Copilot
+    rule-dir: .github/chatmodes/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents with Github Copilot:
+      # 1. The installer creates a .github/chatmodes/ directory in your project
+      # 2. Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
+      # 3. The agent will adopt that persona for the conversation
+      # 4. Requires VS Code 1.101+ with `chat.agent.enabled: true` in settings
+      # 5. Agent files are stored in .github/chatmodes/
+      # 6. Use `*help` to see available commands and agents

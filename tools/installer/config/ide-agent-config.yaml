@@ -1,0 +1,58 @@
+# IDE-specific agent configurations
+# This file defines agent-specific settings for different IDEs
+
+# Roo Code file permissions
+# Each agent can have restricted file access based on regex patterns
+# If an agent is not listed here, it gets full edit access
+roo-permissions:
+  # Core agents
+  analyst:
+    fileRegex: "\\.(md|txt)$"
+    description: "Documentation and text files"
+  pm:
+    fileRegex: "\\.(md|txt)$"
+    description: "Product documentation"
+  architect:
+    fileRegex: "\\.(md|txt|yml|yaml|json)$"
+    description: "Architecture docs and configs"
+  qa:
+    fileRegex: "\\.(test|spec)\\.(js|ts|jsx|tsx)$|\\.md$"
+    description: "Test files and documentation"
+  ux-expert:
+    fileRegex: "\\.(md|css|scss|html|jsx|tsx)$"
+    description: "Design-related files"
+  po:
+    fileRegex: "\\.(md|txt)$"
+    description: "Story and requirement docs"
+  sm:
+    fileRegex: "\\.(md|txt)$"
+    description: "Process and planning docs"
+  # Expansion pack agents
+  game-designer:
+    fileRegex: "\\.(md|txt|json|yaml|yml)$"
+    description: "Game design documents and configs"
+  game-sm:
+    fileRegex: "\\.(md|txt)$"
+    description: "Game project management docs"
+
+# Cline agent ordering
+# Lower numbers appear first in the list
+# Agents not listed get order 99
+cline-order:
+  # Core agents
+  bmad-master: 1
+  bmad-orchestrator: 2
+  pm: 3
+  analyst: 4
+  architect: 5
+  po: 6
+  sm: 7
+  dev: 8
+  qa: 9
+  ux-expert: 10
+  # Expansion pack agents
+  bmad-the-creator: 11
+  game-designer: 12
+  game-developer: 13
+  game-sm: 14
+  infra-devops-platform: 15
