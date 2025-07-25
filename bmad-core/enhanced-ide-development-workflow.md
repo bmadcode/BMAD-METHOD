@@ -10,7 +10,7 @@ This is a simple step-by-step guide to help you efficiently manage your developm
 
 1. **Start new chat/conversation**
 2. **Load SM agent**
-3. **Execute**: `*create` (runs create-next-story task)
+3. **Execute**: `*draft` (runs create-next-story task)
 4. **Review generated story** in `docs/stories/`
 5. **Update status**: Change from "Draft" to "Approved"
 

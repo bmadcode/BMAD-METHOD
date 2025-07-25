@@ -55,7 +55,7 @@ If you have just completed an MVP with BMad, and you want to continue with post-
 
 ```bash
 @pm
-*create-doc brownfield-prd
+*create-brownfield-prd
 ```
 
 The PM will:
@@ -72,7 +72,7 @@ The PM will:
 **Still in Gemini Web, now with PRD context:**
 
 ```bash
-@analyst
+@architect
 *document-project
 ```
 
@@ -108,7 +108,7 @@ For example, if you say "Add payment processing to user service":
 2. **Upload your project**:
    - **Option A**: Paste your GitHub repository URL directly
    - **Option B**: Upload your flattened-codebase.xml file
-3. **Load the analyst agent**: Upload `dist/agents/analyst.txt`
+3. **Load the analyst agent**: Upload `dist/agents/architect.txt`
 4. **Run documentation**: Type `*document-project`
 
 The analyst will generate comprehensive documentation of everything.
@@ -121,7 +121,7 @@ The analyst will generate comprehensive documentation of everything.
 
 ```bash
 @pm
-*create-doc brownfield-prd
+*create-brownfield-prd
 ```
 
 The PM agent will:
@@ -148,7 +148,7 @@ The PM agent will:
 
 ```bash
 @architect
-*create-doc brownfield-architecture
+*create-brownfield-architecture
 ```
 
 The architect will:
@@ -165,7 +165,7 @@ The architect will:
 
 ```bash
 @pm
-*brownfield-create-epic
+*create-brownfield-epic
 ```
 
 Use when:
@@ -179,7 +179,7 @@ Use when:
 
 ```bash
 @pm
-*brownfield-create-story
+*create-brownfield-story
 ```
 
 Use when:
@@ -193,7 +193,7 @@ Use when:
 
 ```bash
 @po
-*execute-checklist po-master-checklist
+*execute-checklist-po
 ```
 
 The PO ensures:
@@ -290,7 +290,7 @@ Document:
 ### Scenario 3: Bug Fix in Complex System
 
 1. Document relevant subsystems
-2. Use `brownfield-create-story` for focused fix
+2. Use `create-brownfield-story` for focused fix
 3. Include regression test requirements
 4. QA validates no side effects
 
@@ -313,7 +313,7 @@ Document:
 
 ### "Too much boilerplate for small changes"
 
-**Solution**: Use `brownfield-create-story` instead of full workflow
+**Solution**: Use `create-brownfield-story` instead of full workflow
 
 ### "Integration points unclear"
 
@@ -325,19 +325,19 @@ Document:
 
 ```bash
 # Document existing project
-@analyst → *document-project
+@architect → *document-project
 
 # Create enhancement PRD
-@pm → *create-doc brownfield-prd
+@pm → *create-brownfield-prd
 
 # Create architecture with integration focus
-@architect → *create-doc brownfield-architecture
+@architect → *create-brownfield-architecture
 
 # Quick epic creation
-@pm → *brownfield-create-epic
+@pm → *create-brownfield-epic
 
 # Single story creation
-@pm → *brownfield-create-story
+@pm → *create-brownfield-story
 ```
 
 ### Decision Tree

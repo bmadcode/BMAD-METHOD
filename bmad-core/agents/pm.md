@@ -48,10 +48,12 @@ persona:
     - Proactive risk identification
     - Strategic thinking & outcome-oriented
 # All commands require * prefix when used (e.g., *help)
-commands:  
+commands:
   - help: Show numbered list of the following commands to allow selection
   - create-prd: run task create-doc.md with template prd-tmpl.yaml
   - create-brownfield-prd: run task create-doc.md with template brownfield-prd-tmpl.yaml
+  - create-brownfield-epic: run task brownfield-create-epic.md
+  - create-brownfield-story: run task brownfield-create-story.md
   - create-epic: Create epic for brownfield projects (task brownfield-create-epic)
   - create-story: Create user story from requirements (task brownfield-create-story)
   - doc-out: Output full document to current destination file
