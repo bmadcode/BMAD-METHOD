@@ -1,0 +1,76 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "name": "BMAD Context Loader",
+        "description": "Automatically loads active story context and quality reminders",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${BMAD_HOME}/tools/claude-code-hooks/context-loader.js"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "name": "BMAD Write Validator",
+        "matcher": "Write|Edit|MultiEdit",
+        "description": "Validates story requirements before code modifications",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${BMAD_HOME}/tools/claude-code-hooks/pre-write-validator.js"
+          }
+        ]
+      },
+      {
+        "name": "BMAD Reality Guard",
+        "matcher": "Write",
+        "description": "Prevents creation of mock/stub implementations",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${BMAD_HOME}/tools/claude-code-hooks/reality-guard.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "name": "BMAD Progress Tracker",
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "description": "Updates story progress automatically",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${BMAD_HOME}/tools/claude-code-hooks/progress-tracker.js"
+          }
+        ]
+      },
+      {
+        "name": "BMAD Quality Monitor",
+        "matcher": "Write|Edit|MultiEdit",
+        "description": "Runs mini reality audit after code changes",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${BMAD_HOME}/tools/claude-code-hooks/quality-monitor.js"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "name": "BMAD Session Summary",
+        "description": "Generates quality summary and next steps",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${BMAD_HOME}/tools/claude-code-hooks/session-summary.js"
+          }
+        ]
+      }
+    ]
+  }
+}

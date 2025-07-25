@@ -14,6 +14,7 @@
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
     "install:bmad": "node tools/installer/bin/bmad.js install",
+    "install:claude-hooks": "node tools/claude-code-hooks/install.js",
     "format": "prettier --write \"**/*.md\"",
     "version:patch": "node tools/version-bump.js patch",
     "version:minor": "node tools/version-bump.js minor",
