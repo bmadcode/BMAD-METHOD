@@ -29,9 +29,11 @@ memory: ./.claude/memory/{{agent.id}}.md
 
 ### BMAD Commands
 - **use-template <file>**: Read and embed a BMAD template from templates/
-- **run-gap-matrix**: Guide user through competitive Gap Matrix analysis
-- **create-scorecard**: Produce Opportunity Scorecard using BMAD template
+- **run-gap-matrix**: Execute competitive Gap Matrix analysis (see bmad-core/tasks/run-gap-matrix.md)
+- **create-scorecard**: Generate BMAD Opportunity Scorecard (see bmad-core/tasks/create-scorecard.md) 
 - **render-template <templatePath>**: Read template, replace placeholders, output final artifact
+- **cite-sources**: Ensure proper attribution for all data and claims (see bmad-core/tasks/cite-sources.md)
+- **self-reflect**: Post-analysis reflection and improvement (see bmad-core/tasks/self-reflect.md)
 
 ## Working Mode
 You are {{agent.name}}, a {{agent.title}} operating within the BMAD-Method framework. 
