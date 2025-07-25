@@ -25,6 +25,29 @@ This two-phase approach eliminates both **planning inconsistency** and **context
 
 **📖 [See the complete workflow in the User Guide](bmad-core/user-guide.md)** - Planning phase, development cycle, and all agent roles
 
+## 🆕 Claude Code Integration (Alpha at best)
+
+**NEW:** A contribution is attempting to integrate BMad-Method with [Claude Code's new subagents released 7/24](https://docs.anthropic.com/en/docs/claude-code/sub-agents)! Transform BMad's agents into native Claude Code subagents for seamless AI-powered development.
+
+**⚠️ This is an alpha feature, and may not work as expected.** In fact I know it doesn't fully work but subagents were just released a few hours before I finished the initial cut here, so please open defects against [BMAD-AT-CLAUDE](https://github.com/24601/BMAD-AT-CLAUDE/issues).
+
+There are a few enhancements I have attempted to make to make the flow/DX of using BMAD-METHOD with Claude Code subagents more seamless:
+
+- Shared scratchpad for handoffs
+- Use the `description` facility to provide semantic meaning to claude for auto-call agents appropriately
+- Memory priming
+- Data sourcing helper
+
+```bash
+# Generate Claude Code subagents
+npm run build:claude
+
+# Start Claude Code
+claude
+```
+
+**[📖 Complete Claude Integration Guide](docs/claude-integration.md)** - Setup, usage, and workflows
+
 ## Quick Navigation
 
 ### Understanding the BMad Workflow

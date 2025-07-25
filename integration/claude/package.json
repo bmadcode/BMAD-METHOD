@@ -1,0 +1,38 @@
+{
+  "name": "@bmad/claude-integration",
+  "version": "1.0.0",
+  "description": "Claude Code subagents integration for BMAD-Method",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build-claude.js",
+    "build:agents": "node src/build-claude.js",
+    "clean": "rm -rf ../../.claude",
+    "validate": "node src/validate.js"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "yaml": "^2.3.4",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "bmad-method": "*"
+  },
+  "keywords": [
+    "bmad",
+    "claude",
+    "ai-agents",
+    "subagents",
+    "anthropic"
+  ],
+  "author": "BMAD Community",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/24601/BMAD-AT-CLAUDE.git",
+    "directory": "integration/claude"
+  }
+}

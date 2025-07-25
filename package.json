@@ -11,6 +11,8 @@
     "build": "node tools/cli.js build",
     "build:agents": "node tools/cli.js build --agents-only",
     "build:teams": "node tools/cli.js build --teams-only",
+    "build:claude": "cd integration/claude && npm install && npm run build",
+    "test:claude": "./integration/claude/quick-start-test.sh",
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
     "install:bmad": "node tools/installer/bin/bmad.js install",
