@@ -1,0 +1,30 @@
+{
+  "name": "bmad-claude-integration",
+  "version": "1.0.0",
+  "description": "BMAD-METHOD integration for Claude Code using subagents",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:ai": "jest --testPathPattern=ai-judge",
+    "install:local": "node installer/install.js",
+    "generate:routers": "node lib/router-generator.js",
+    "queue:init": "node core/message-queue.js init",
+    "queue:metrics": "node core/message-queue.js metrics"
+  },
+  "keywords": [
+    "bmad",
+    "claude",
+    "subagents",
+    "ai",
+    "development"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "@anthropic-ai/sdk": "^0.20.0"
+  }
+}

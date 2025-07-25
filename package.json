@@ -10,6 +10,8 @@
   "scripts": {
     "build": "node tools/cli.js build",
     "build:agents": "node tools/cli.js build --agents-only",
+    "build:claude-agents": "node .claude/utils/generate-cc-agents.js generate",
+    "clean:claude-agents": "node .claude/utils/generate-cc-agents.js clean",
     "build:teams": "node tools/cli.js build --teams-only",
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
