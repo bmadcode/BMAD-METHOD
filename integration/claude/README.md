@@ -1,6 +1,4 @@
-# BMAD-Method Claude Code Integration - ALPHA AT BEST! 
-
-PLEASE OPEN ISSUES AGAINST THE [BMAD-AT-CODE](https://github.com/24601/BMAD-AT-CLAUDE/issues) REPO!
+# BMAD-Method Claude Code Integration
 
 This directory contains the integration layer that ports BMAD-Method agents to Claude Code's subagent system.
 
