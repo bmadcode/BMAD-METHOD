@@ -38,6 +38,8 @@ There are a few enhancements I have attempted to make to make the flow/DX of usi
 - Memory priming
 - Data sourcing helper
 
+See [Claude Code Subagents Integration](docs/claude-integration.md) for more details.
+
 ```bash
 # Generate Claude Code subagents
 npm run build:claude
