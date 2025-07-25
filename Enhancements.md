@@ -234,6 +234,36 @@ With PR0+PR4:
 **Benefit:** Enterprise-grade Claude Code workspace experience  
 **Builds on PR0:** Provides CLI commands to manage PR0-7's features
 
+### PR9: Sub-Agent Integration (Claude Code Exclusive)
+**What:** Parallel task execution using Claude Code's sub-agent capabilities  
+**Benefit:** 40-60% performance improvement through concurrent task processing  
+**Builds on PR0 & PR7:** Uses PR0's hooks for orchestration and PR7's workspace for efficient context sharing between sub-agents
+
+**PR9 Example:**
+```
+Without PR9 (Sequential):
+- Reality audit Phase 1: Scan JavaScript files (15s)
+- Reality audit Phase 2: Scan Python files (12s)
+- Reality audit Phase 3: Check build systems (8s)
+- Reality audit Phase 4: Validate tests (10s)
+Total time: 45 seconds
+
+With PR9 (Parallel Sub-Agents):
+- Main agent coordinates 4 sub-agents simultaneously
+- Sub-agent 1: JavaScript scan ──┐
+- Sub-agent 2: Python scan ─────├─ All run in parallel (15s max)
+- Sub-agent 3: Build check ─────┤
+- Sub-agent 4: Test validation ─┘
+- Results aggregated and merged
+Total time: 15 seconds (3x faster!)
+```
+
+**Use Cases:**
+- **Multi-file search**: Each sub-agent searches different directories
+- **Polyglot projects**: Language-specific agents work simultaneously
+- **Story development**: Frontend, backend, database, and test agents in parallel
+- **Large refactoring**: Distributed changes across codebase
+
 ---
 
 ## 📈 Expected Impact (As per Claude's guestimation)
