@@ -40,9 +40,5 @@
     "tileset",
     "Trae",
     "VNET"
-  ],
-  "sonarlint.connectedMode.project": {
-    "connectionId": "manjaroblack",
-    "projectKey": "manjaroblack_texasetiquette"
-  }
+  ]
 }
