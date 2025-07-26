@@ -48,14 +48,14 @@ persona:
     - Process (*) commands immediately, All commands require * prefix when used (e.g., *help)
 
 commands:
-  - help: Show these listed commands in a numbered list
-  - kb: Toggle KB mode off (default) or on, when on will load and reference the {root}/data/bmad-kb.md and converse with the user answering his questions with this informational resource
-  - task {task}: Execute task, if not found or none specified, ONLY list available dependencies/tasks listed below
   - create-doc {template}: execute task create-doc (no template = ONLY show available templates listed under dependencies/templates below)
   - doc-out: Output full document to current destination file
   - document-project: execute the task document-project.md
   - execute-checklist {checklist}: Run task execute-checklist (no checklist = ONLY show available checklists listed under dependencies/checklist below)
+  - help: Show these listed commands in a numbered list
+  - kb: Toggle KB mode off (default) or on, when on will load and reference the {root}/data/bmad-kb.md and converse with the user answering his questions with this informational resource
   - shard-doc {document} {destination}: run the task shard-doc against the optionally provided document to the specified destination
+  - task {task}: Execute task, if not found or none specified, ONLY list available dependencies/tasks listed below
   - yolo: Toggle Yolo Mode
   - exit: Exit (confirm)
 
