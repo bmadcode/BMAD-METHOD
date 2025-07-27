@@ -1,0 +1,19 @@
+# Company Information
+COMPANY_NAME: "Your Company Name"
+COMPANY_PREFIX: "yourcompany"  # lowercase, no spaces
+INDUSTRY: "Your Industry"
+BUSINESS_TYPE: "Your Business Type"
+PRIMARY_PRODUCT_TYPE: "Your Primary Product"
+CORE_BUSINESS_PROCESS: "Your Core Process"
+
+# Google Cloud Configuration
+PROJECT_ID: "your-project-id"
+LOCATION: "us-central1"  # or your preferred region
+BUCKET_NAME: "your-company-ai-agents-storage"
+DATABASE_NAME: "your-company-ai-agents-db"
+
+# Domain-Specific Configuration
+PRIMARY_DOMAIN: "Your Primary Domain"
+SECONDARY_DOMAIN: "Your Secondary Domain"
+SPECIALTY_AREA: "Your Specialization"
+TARGET_MARKET: "Your Target Market"

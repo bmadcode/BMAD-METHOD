@@ -1,0 +1,16 @@
+# Software-Specific Configuration
+INDUSTRY: "Technology"
+BUSINESS_TYPE: "Software Development"
+PRIMARY_PRODUCT_TYPE: "Software Products"
+CORE_BUSINESS_PROCESS: "Software Development Lifecycle"
+
+# Software Development Agents
+ORCHESTRATOR_TITLE: "Technical Lead"
+SPECIALIST_1_TITLE: "Software Architect"
+SPECIALIST_2_TITLE: "Senior Developer"
+SPECIALIST_3_TITLE: "QA Engineer"
+
+# Software Workflows
+PRIMARY_WORKFLOW: "requirements-to-deployment"
+QUALITY_VALIDATION: "code-quality-assurance"
+PROCESS_OPTIMIZATION: "development-efficiency"

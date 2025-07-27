@@ -1,0 +1,16 @@
+# Manufacturing-Specific Configuration
+INDUSTRY: "Manufacturing"
+BUSINESS_TYPE: "Product Manufacturing"
+PRIMARY_PRODUCT_TYPE: "Physical Products"
+CORE_BUSINESS_PROCESS: "Production Planning"
+
+# Manufacturing Agents
+ORCHESTRATOR_TITLE: "Production Manager"
+SPECIALIST_1_TITLE: "Quality Engineer"
+SPECIALIST_2_TITLE: "Process Engineer"
+SPECIALIST_3_TITLE: "Supply Chain Coordinator"
+
+# Manufacturing Workflows
+PRIMARY_WORKFLOW: "product-development-to-production"
+QUALITY_VALIDATION: "manufacturing-quality-control"
+PROCESS_OPTIMIZATION: "production-efficiency"

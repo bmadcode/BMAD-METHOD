@@ -1,0 +1,14 @@
+# Agent Character Information
+AGENT_CHARACTER_NAME: "Character Full Name"
+AGENT_PROFESSIONAL_TITLE: "Professional Title"
+YEARS_EXPERIENCE: "10"  # number as string
+DOMAIN_EXPERTISE: "Your Domain"
+PRIMARY_SPECIALIZATION: "Primary Specialty"
+COMMUNICATION_STYLE: "Communication Approach"
+
+# Agent Capabilities
+PRIMARY_TASK: "main-task-name"
+SECONDARY_TASK: "supporting-task-name"
+ANALYSIS_TASK: "analysis-task-name"
+PRIMARY_TEMPLATE: "main-template-name"
+DOMAIN_SPECIFIC_UTILS: "domain-utils"
