@@ -1,0 +1,15 @@
+bundle:
+  name: {{TEAM_DISPLAY_NAME}}
+  icon: {{TEAM_EMOJI}}
+  description: {{TEAM_DESCRIPTION}}
+
+agents:
+  - {{ORCHESTRATOR_AGENT_ID}}
+  - {{SPECIALIST_AGENT_1_ID}}
+  - {{SPECIALIST_AGENT_2_ID}}
+  - {{SPECIALIST_AGENT_N_ID}}
+
+workflows:
+  - {{PRIMARY_WORKFLOW_NAME}}
+  - {{SECONDARY_WORKFLOW_NAME}}
+  - {{SPECIALIZED_WORKFLOW_NAME}}

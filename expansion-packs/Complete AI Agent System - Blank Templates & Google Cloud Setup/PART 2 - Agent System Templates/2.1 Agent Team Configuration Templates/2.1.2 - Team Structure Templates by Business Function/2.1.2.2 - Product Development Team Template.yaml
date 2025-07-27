@@ -1,0 +1,15 @@
+bundle:
+  name: {{PRODUCT_TYPE}} Development Team
+  icon: 🔬
+  description: Product development team specializing in {{PRODUCT_TYPE}} innovation from concept through technical specification.
+
+agents:
+  - {{PRODUCT_PREFIX}}-development-orchestrator
+  - product-designer
+  - technical-specialist
+  - quality-engineer
+
+workflows:
+  - product-development-workflow
+  - innovation-process
+  - quality-validation-workflow
