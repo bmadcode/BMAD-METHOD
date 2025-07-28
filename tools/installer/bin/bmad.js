@@ -110,6 +110,20 @@ program
     }
   });
 
+program
+  .command('flatten')
+  .description('Flatten codebase to XML format')
+  .option('-i, --input <path>', 'Input directory to flatten', process.cwd())
+  .option('-o, --output <path>', 'Output file path', 'flattened-codebase.xml')
+  .action(async (options) => {
+    try {
+      await installer.flatten(options);
+    } catch (error) {
+      console.error(chalk.red('Flatten failed:'), error.message);
+      process.exit(1);
+    }
+  });
+
 async function promptInstallation() {
   
   // Display ASCII logo

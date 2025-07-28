@@ -2591,18 +2591,25 @@ npx bmad-method install
 
 ## Core Configuration for Game Development (core-config.yaml)
 
-**New in V4**: The `bmad-core/core-config.yaml` file enables BMad to work seamlessly with any Unity project structure, providing maximum flexibility for game development.
+**New in V4**: The `expansion-packs/bmad-2d-unity-game-dev/core-config.yaml` file enables BMad to work seamlessly with any Unity project structure, providing maximum flexibility for game development.
 
 ### Game Development Configuration
 
-The expansion pack follows the standard BMad configuration patterns. Game-specific configurations would be added to your project's `core-config.yaml`:
+The expansion pack follows the standard BMad configuration patterns. Copy your core-config.yaml file to expansion-packs/bmad-2d-unity-game-dev/ and add Game-specific configurations to your project's `core-config.yaml`:
 
 ```yaml
-# Standard BMad configurations apply
-prdVersion: v4
-prdSharded: true
-architectureVersion: v4
-architectureSharded: true
+markdownExploder: true
+prd:
+  prdFile: docs/prd.md
+  prdVersion: v4
+  prdSharded: true
+  prdShardedLocation: docs/prd
+  epicFilePattern: epic-{n}*.md
+architecture:
+  architectureFile: docs/architecture.md
+  architectureVersion: v4
+  architectureSharded: true
+  architectureShardedLocation: docs/architecture
 gdd:
   gddVersion: v4
   gddSharded: true
@@ -2617,7 +2624,12 @@ gamearchitecture:
   gamearchitectureShardedLocation: docs/game-architecture
 gamebriefdocLocation: docs/game-brief.md
 levelDesignLocation: docs/level-design.md
-
+#Specify the location for your unity editor
+unityEditorLocation: /home/USER/Unity/Hub/Editor/VERSION/Editor/Unity
+customTechnicalDocuments: null
+devDebugLog: .ai/debug-log.md
+devStoryLocation: docs/stories
+slashPrefix: bmad2du
 #replace old devLoadAlwaysFiles with this once you have sharded your gamearchitecture document
 devLoadAlwaysFiles:
   - docs/game-architecture/9-coding-standards.md
@@ -14265,18 +14277,25 @@ npx bmad-method install
 
 ## Core Configuration for Game Development (core-config.yaml)
 
-**New in V4**: The `bmad-core/core-config.yaml` file enables BMad to work seamlessly with any Unity project structure, providing maximum flexibility for game development.
+**New in V4**: The `expansion-packs/bmad-2d-unity-game-dev/core-config.yaml` file enables BMad to work seamlessly with any Unity project structure, providing maximum flexibility for game development.
 
 ### Game Development Configuration
 
-The expansion pack follows the standard BMad configuration patterns. Game-specific configurations would be added to your project's `core-config.yaml`:
+The expansion pack follows the standard BMad configuration patterns. Copy your core-config.yaml file to expansion-packs/bmad-2d-unity-game-dev/ and add Game-specific configurations to your project's `core-config.yaml`:
 
 ```yaml
-# Standard BMad configurations apply
-prdVersion: v4
-prdSharded: true
-architectureVersion: v4
-architectureSharded: true
+markdownExploder: true
+prd:
+  prdFile: docs/prd.md
+  prdVersion: v4
+  prdSharded: true
+  prdShardedLocation: docs/prd
+  epicFilePattern: epic-{n}*.md
+architecture:
+  architectureFile: docs/architecture.md
+  architectureVersion: v4
+  architectureSharded: true
+  architectureShardedLocation: docs/architecture
 gdd:
   gddVersion: v4
   gddSharded: true
@@ -14291,7 +14310,12 @@ gamearchitecture:
   gamearchitectureShardedLocation: docs/game-architecture
 gamebriefdocLocation: docs/game-brief.md
 levelDesignLocation: docs/level-design.md
-
+#Specify the location for your unity editor
+unityEditorLocation: /home/USER/Unity/Hub/Editor/VERSION/Editor/Unity
+customTechnicalDocuments: null
+devDebugLog: .ai/debug-log.md
+devStoryLocation: docs/stories
+slashPrefix: bmad2du
 #replace old devLoadAlwaysFiles with this once you have sharded your gamearchitecture document
 devLoadAlwaysFiles:
   - docs/game-architecture/9-coding-standards.md
