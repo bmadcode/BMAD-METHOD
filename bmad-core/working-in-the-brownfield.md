@@ -2,10 +2,10 @@
 
 > **HIGHLY RECOMMENDED: Use Gemini Web or Gemini CLI for Brownfield Documentation Generation!**
 >
-> Gemini Web's 1M+ token context window or Gemini CLI (when its working) can analyze your ENTIRE codebase or critical sections of it all at once (obviously within reason):
+> Gemini Web's 1M+ token context window or Gemini CLI (when it's working) can analyze your ENTIRE codebase, or critical sections of it, all at once (obviously within reason):
 >
 > - Upload via GitHub URL or use gemini cli in the project folder
-> - If in the web: Upload up to 1000 files or the zipped project or just give it the github url
+> - If working in the web: use `npx bmad-method flatten` to flatten your project into a single file, then upload that file to your web agent.
 
 ## What is Brownfield Development?
 
@@ -22,9 +22,12 @@ Brownfield development refers to adding features, fixing bugs, or modernizing ex
 
 ## When NOT to use a Brownfield Flow
 
-If you have just completed an MVP with BMad, and you want to continue with post-MVP, its easier to just talk to the PM and ask him to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
+If you have just completed an MVP with BMad, and you want to continue with post-MVP, its easier to just talk to the PM and ask it to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
 
 ## The Complete Brownfield Workflow
+
+1. **Follow the [<ins>User Guide - Installation</ins>](user-guide.md#installation) steps to setup your agent in the web.**
+2. **Generate a 'flattened' single file of your entire codebase** run: ```npx bmad-method flatten```
 
 ### Choose Your Approach
 
@@ -48,11 +51,11 @@ If you have just completed an MVP with BMad, and you want to continue with post-
 
 #### Phase 1: Define Requirements First
 
-**In Gemini Web (with your codebase uploaded):**
+**In Gemini Web (with your flattened-codebase.xml uploaded):**
 
 ```bash
 @pm
-*create-doc brownfield-prd
+*create-brownfield-prd
 ```
 
 The PM will:
@@ -69,7 +72,7 @@ The PM will:
 **Still in Gemini Web, now with PRD context:**
 
 ```bash
-@analyst
+@architect
 *document-project
 ```
 
@@ -104,22 +107,21 @@ For example, if you say "Add payment processing to user service":
 1. **Go to Gemini Web** (gemini.google.com)
 2. **Upload your project**:
    - **Option A**: Paste your GitHub repository URL directly
-   - **Option B**: Upload up to 1000 files from your src/project folder
-   - **Option C**: Zip your project and upload the archive
-3. **Load the analyst agent**: Upload `dist/agents/analyst.txt`
+   - **Option B**: Upload your flattened-codebase.xml file
+3. **Load the analyst agent**: Upload `dist/agents/architect.txt`
 4. **Run documentation**: Type `*document-project`
 
 The analyst will generate comprehensive documentation of everything.
 
 #### Phase 2: Plan Your Enhancement
 
-#### Option A: Full Brownfield Workflow (Recommended for Major Changes)
+##### Option A: Full Brownfield Workflow (Recommended for Major Changes)
 
 **1. Create Brownfield PRD**:
 
 ```bash
 @pm
-*create-doc brownfield-prd
+*create-brownfield-prd
 ```
 
 The PM agent will:
@@ -146,7 +148,7 @@ The PM agent will:
 
 ```bash
 @architect
-*create-doc brownfield-architecture
+*create-brownfield-architecture
 ```
 
 The architect will:
@@ -157,13 +159,13 @@ The architect will:
 - **Identify technical risks**
 - **Define compatibility requirements**
 
-#### Option B: Quick Enhancement (For Focused Changes)
+##### Option B: Quick Enhancement (For Focused Changes)
 
 **For Single Epic Without Full PRD**:
 
 ```bash
 @pm
-*brownfield-create-epic
+*create-brownfield-epic
 ```
 
 Use when:
@@ -177,7 +179,7 @@ Use when:
 
 ```bash
 @pm
-*brownfield-create-story
+*create-brownfield-story
 ```
 
 Use when:
@@ -191,7 +193,7 @@ Use when:
 
 ```bash
 @po
-*execute-checklist po-master-checklist
+*execute-checklist-po
 ```
 
 The PO ensures:
@@ -201,26 +203,27 @@ The PO ensures:
 - Risk mitigation strategies in place
 - Clear integration approach
 
-### Phase 4: Transition to Development
+### Phase 4: Save and Shard Documents
 
-Follow the enhanced IDE Development Workflow:
-
-1. **Ensure documents are in project**:
-
-   - Copy `docs/prd.md` (or brownfield-prd.md)
-   - Copy `docs/architecture.md` (or brownfield-architecture.md)
-
-2. **Shard documents**:
+1. Save your PRD and Architecture as:
+   docs/brownfield-prd.md
+   docs/brownfield-architecture.md
+2. Shard your docs:
+   In your IDE
 
    ```bash
    @po
-   # Ask to shard docs/prd.md
+   shard docs/brownfield-prd.md
    ```
 
-3. **Development cycle**:
-   - **SM** creates stories with integration awareness
-   - **Dev** implements with existing code respect
-   - **QA** reviews for compatibility and improvements
+   ```bash
+   @po
+   shard docs/brownfield-architecture.md
+   ```
+
+### Phase 5: Transition to Development
+
+**Follow the [<ins>Enhanced IDE Development Workflow</ins>](enhanced-ide-development-workflow.md)**
 
 ## Brownfield Best Practices
 
@@ -287,7 +290,7 @@ Document:
 ### Scenario 3: Bug Fix in Complex System
 
 1. Document relevant subsystems
-2. Use `brownfield-create-story` for focused fix
+2. Use `create-brownfield-story` for focused fix
 3. Include regression test requirements
 4. QA validates no side effects
 
@@ -310,7 +313,7 @@ Document:
 
 ### "Too much boilerplate for small changes"
 
-**Solution**: Use `brownfield-create-story` instead of full workflow
+**Solution**: Use `create-brownfield-story` instead of full workflow
 
 ### "Integration points unclear"
 
@@ -322,19 +325,19 @@ Document:
 
 ```bash
 # Document existing project
-@analyst → *document-project
+@architect → *document-project
 
 # Create enhancement PRD
-@pm → *create-doc brownfield-prd
+@pm → *create-brownfield-prd
 
 # Create architecture with integration focus
-@architect → *create-doc brownfield-architecture
+@architect → *create-brownfield-architecture
 
 # Quick epic creation
-@pm → *brownfield-create-epic
+@pm → *create-brownfield-epic
 
 # Single story creation
-@pm → *brownfield-create-story
+@pm → *create-brownfield-story
 ```
 
 ### Decision Tree

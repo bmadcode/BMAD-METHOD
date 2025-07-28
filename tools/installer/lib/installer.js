@@ -497,7 +497,7 @@ class Installer {
       case "reinstall":
         // For reinstall, don't check for modifications - just overwrite
         return await this.performReinstall(config, installDir, spinner);
-      case "expansions":
+      case "expansions": {
         // Ask which expansion packs to install
         const availableExpansionPacks = await resourceLocator.getExpansionPacks();
         
@@ -534,6 +534,7 @@ class Installer {
           console.log(chalk.green(`  - ${packId} → .${packId}/`));
         }
         return;
+      }
       case "cancel":
         console.log("Installation cancelled.");
         return;
@@ -865,6 +866,8 @@ class Installer {
       }).join(", ");
       console.log(chalk.green(`✓ IDE rules and configurations set up for: ${ideNames}`));
     }
+    
+
 
     // Information about web bundles
     if (!config.includeWebBundles) {
@@ -1428,7 +1431,7 @@ class Installer {
         return config.selectedWebBundleTeams ? 
           `teams: ${config.selectedWebBundleTeams.join(', ')}` : 
           'selected teams';
-      case 'custom':
+      case 'custom': {
         const parts = [];
         if (config.selectedWebBundleTeams && config.selectedWebBundleTeams.length > 0) {
           parts.push(`teams: ${config.selectedWebBundleTeams.join(', ')}`);
@@ -1437,6 +1440,7 @@ class Installer {
           parts.push('individual agents');
         }
         return parts.length > 0 ? parts.join(' + ') : 'custom selection';
+      }
       default:
         return 'selected bundles';
     }
@@ -1740,6 +1744,28 @@ class Installer {
     }
 
     return null;
+  }
+
+  async flatten(options) {
+    const { spawn } = require('child_process');
+    const flattenerPath = path.join(__dirname, '..', '..', 'flattener', 'main.js');
+    
+    const args = [];
+    if (options.input) {
+      args.push('--input', options.input);
+    }
+    if (options.output) {
+      args.push('--output', options.output);
+    }
+    
+    const child = spawn('node', [flattenerPath, ...args], {
+      stdio: 'inherit',
+      cwd: process.cwd()
+    });
+    
+    child.on('exit', (code) => {
+      process.exit(code);
+    });
   }
 }
 
