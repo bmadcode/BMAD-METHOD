@@ -137,18 +137,35 @@ describe('ElicitationBroker', () => {
     test('should format elicitation prompt correctly', async () => {
       const session = await broker.createSession('ux-expert', {});
       
+      // Test with no history first
+      const emptyPrompt = await broker.formatElicitationPrompt(session, 'First question?');
+      expect(emptyPrompt).toContain('BMAD ux-expert - Elicitation');
+      expect(emptyPrompt).toContain('Current Question:');
+      expect(emptyPrompt).toContain('First question?');
+      expect(emptyPrompt).not.toContain('Previous Context:');
+      
+      // Now add history and test again
       await broker.addQuestion(session.id, 'What is the target demographic?');
       await broker.addResponse(session.id, 'Young professionals 25-35');
       await broker.addQuestion(session.id, 'What design style preference?');
 
       const prompt = await broker.formatElicitationPrompt(session, 'Modern or classic design?');
 
-      expect(prompt).toContain('BMAD ux-expert - Elicitation');
-      expect(prompt).toContain('Previous Context:');
-      expect(prompt).toContain('What is the target demographic?');
-      expect(prompt).toContain('Young professionals 25-35');
-      expect(prompt).toContain('Current Question:');
-      expect(prompt).toContain('Modern or classic design?');
+      // Debug: log the prompt to see what's happening
+      // console.log('Generated prompt:', prompt);
+      
+      // Reload session to ensure we have latest data
+      const reloadedSession = await broker.loadSession(session.id);
+      expect(reloadedSession.context.elicitationHistory.length).toBeGreaterThan(0);
+      
+      const promptWithHistory = await broker.formatElicitationPrompt(reloadedSession, 'Modern or classic design?');
+
+      expect(promptWithHistory).toContain('BMAD ux-expert - Elicitation');
+      expect(promptWithHistory).toContain('Previous Context:');
+      expect(promptWithHistory).toContain('What is the target demographic?');
+      expect(promptWithHistory).toContain('Young professionals 25-35');
+      expect(promptWithHistory).toContain('Current Question:');
+      expect(promptWithHistory).toContain('Modern or classic design?');
     });
   });
 

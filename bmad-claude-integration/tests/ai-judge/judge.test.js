@@ -1,23 +1,27 @@
 const { describe, test, expect, beforeAll, afterAll } = require('@jest/globals');
-const Anthropic = require('@anthropic-ai/sdk');
+const OpenAI = require('openai');
 const BMADMessageQueue = require('../../core/message-queue');
 const ElicitationBroker = require('../../core/elicitation-broker');
 const SessionManager = require('../../core/session-manager');
 const BMADLoader = require('../../core/bmad-loader');
 
-// AI Judge class for evaluating test results
+// AI Judge class for evaluating test results using o3
 class AIJudge {
   constructor() {
-    this.anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new Error('OPENAI_API_KEY environment variable is required for AI Judge tests');
+    }
+    
+    this.openai = new OpenAI({
+      apiKey: apiKey
     });
   }
 
-  async evaluate(prompt, criteria, model = 'claude-3-5-haiku-20241022') {
+  async evaluate(prompt, criteria, model = 'o3-2025-01-17') {
     try {
-      const response = await this.anthropic.messages.create({
+      const response = await this.openai.chat.completions.create({
         model,
-        max_tokens: 1000,
         messages: [{
           role: 'user',
           content: `You are an expert AI judge evaluating a BMAD-METHOD Claude Code integration test.
@@ -40,10 +44,13 @@ Format your response as JSON:
   "pass": boolean,
   "feedback": "..."
 }`
-        }]
+        }],
+        temperature: 0.3,
+        max_tokens: 1000,
+        response_format: { type: "json_object" }
       });
 
-      return JSON.parse(response.content[0].text);
+      return JSON.parse(response.choices[0].message.content);
     } catch (error) {
       console.error('AI Judge error:', error);
       throw error;
@@ -54,12 +61,23 @@ Format your response as JSON:
 describe('BMAD Claude Integration - AI Judge Tests', () => {
   let queue, broker, sessionManager, loader, judge;
 
+  const skipIfNoApiKey = () => {
+    if (!process.env.OPENAI_API_KEY) {
+      return describe.skip;
+    }
+    return describe;
+  };
+
   beforeAll(async () => {
     queue = new BMADMessageQueue({ basePath: './test-bmad' });
     broker = new ElicitationBroker(queue);
     sessionManager = new SessionManager(queue, broker);
     loader = new BMADLoader();
-    judge = new AIJudge();
+    
+    // Only create judge if we have API key
+    if (process.env.OPENAI_API_KEY) {
+      judge = new AIJudge();
+    }
     
     await queue.initialize();
     await sessionManager.initialize();

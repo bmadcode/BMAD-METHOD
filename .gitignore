@@ -42,3 +42,7 @@ CLAUDE.md
 .bmad-creator-tools
 test-project-install/*
 sample-project/*
+
+.temp-comparison
+bmad-claude-integration/benchmark*
+bmad-claude-integration/test-workspace

@@ -1,0 +1,26 @@
+{
+  "generated": "2025-07-26T14:24:25.847Z",
+  "totalTests": 3,
+  "agents": [
+    "pm",
+    "architect",
+    "qa"
+  ],
+  "scenarios": [
+    {
+      "id": "pm-user-story-oauth",
+      "name": "PM Agent - OAuth Login Story",
+      "patternsValidated": 4
+    },
+    {
+      "id": "architect-microservices",
+      "name": "Architect Agent - Microservices Design",
+      "patternsValidated": 2
+    },
+    {
+      "id": "qa-test-strategy",
+      "name": "QA Agent - Test Strategy",
+      "patternsValidated": 3
+    }
+  ]
+}

@@ -5,11 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
     "test:ai": "jest --testPathPattern=ai-judge",
+    "test:interactive": "node tests/harness/claude-interactive-test.js run",
+    "test:scenario": "node tests/harness/claude-interactive-test.js scenario",
+    "benchmark": "node tests/performance/benchmark.js",
     "install:local": "node installer/install.js",
+    "uninstall": "node installer/uninstall.js",
     "generate:routers": "node lib/router-generator.js",
     "queue:init": "node core/message-queue.js init",
-    "queue:metrics": "node core/message-queue.js metrics"
+    "queue:metrics": "node core/message-queue.js metrics",
+    "queue:list": "node core/message-queue.js list",
+    "session:list": "node core/session-manager.js list",
+    "clean": "rm -rf ./test-bmad ./benchmark-temp ./.bmad"
   },
   "keywords": [
     "bmad",
@@ -21,10 +29,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "openai": "^5.10.2"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "@anthropic-ai/sdk": "^0.20.0"
+    "@anthropic-ai/sdk": "^0.20.0",
+    "jest": "^29.7.0"
   }
 }

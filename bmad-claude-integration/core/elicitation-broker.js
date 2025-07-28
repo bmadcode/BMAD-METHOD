@@ -206,6 +206,9 @@ class ElicitationBroker {
           prompt += `**A**: ${entry.text}\n\n`;
         }
       }
+    } else {
+      // No previous context, go straight to current question
+      prompt += ``;
     }
     
     prompt += `### Current Question:\n${question}\n\n`;

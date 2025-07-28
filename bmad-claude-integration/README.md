@@ -72,6 +72,23 @@ npm run install:local
    node installer/install.js
    ```
 
+## Uninstallation
+
+To completely remove the BMAD integration:
+
+```bash
+cd /path/to/BMAD-METHOD/bmad-claude-integration
+npm run uninstall
+```
+
+This will:
+- Remove the `~/.bmad` directory (with optional backup)
+- Remove BMAD routers from `~/.claude/routers/`
+- Clean up hooks from `~/.claude/config/settings.json`
+- Remove BMAD scripts from `package.json`
+
+The uninstaller will prompt for confirmation and offer to backup session data if found.
+
 ## Usage
 
 ### Natural Language Invocation
@@ -158,6 +175,13 @@ Run the test suite:
 npm test              # Run all tests
 npm run test:ai      # Run AI judge tests
 ```
+
+## Known Issues
+
+Please review [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for important information about:
+- Claude Code's agent name inference issue
+- Workarounds and mitigations
+- Other known limitations
 
 ## Troubleshooting
 
