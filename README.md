@@ -1,6 +1,6 @@
 # BMad-Method: Universal AI Agent Framework
 
-**Come to discord (see below) [https://discord.com/channels/1377115244018532404/1398087195272806581](specifically this channel) to chat about this port of BMAD-METHOD**
+**Come to discord (see below) [specifically this channel](https://discord.com/channels/1377115244018532404/1398087195272806581) to chat about this port of BMAD-METHOD**
 
 
 [![Version](https://img.shields.io/npm/v/bmad-method?color=blue&label=version)](https://www.npmjs.com/package/bmad-method)
