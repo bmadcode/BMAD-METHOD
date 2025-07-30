@@ -85,9 +85,9 @@ Once planning is complete and documents are sharded, BMad follows a structured d
 graph TD
     A["Development Phase Start"] --> B["SM: Reviews Previous Story Dev/QA Notes"]
     B --> B2["SM: Drafts Next Story from Sharded Epic + Architecture"]
-    B2 --> B3{"QA: Review Story Draft (Optional)"}
-    B3 -->|Review Requested| B4["QA: Review Story Against Artifacts"]
-    B3 -->|Skip Review| C{"User Approval"}
+    B2 --> B3{"PO: Validate Story Draft (Optional)"}
+    B3 -->|Validation Requested| B4["PO: Validate Story Against Artifacts"]
+    B3 -->|Skip Validation| C{"User Approval"}
     B4 --> C
     C -->|Approved| D["Dev: Sequential Task Execution"]
     C -->|Needs Changes| B2
