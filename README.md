@@ -42,7 +42,7 @@ This two-phase approach eliminates both **planning inconsistency** and **context
 - **[Learn how to use BMad](bmad-core/user-guide.md)** → Complete user guide and walkthrough
 - **[See available AI agents](/bmad-core/agents))** → Specialized roles for your team
 - **[Explore non-technical uses](#-beyond-software-development---expansion-packs)** → Creative writing, business, wellness, education
-- **[Create my own AI agents](#creating-your-own-expansion-pack)** → Build agents for your domain
+- **[Create my own AI agents](docs/expansion-packs.md)** → Build agents for your domain
 - **[Browse ready-made expansion packs](expansion-packs/)** → Game dev, DevOps, infrastructure and get inspired with ideas and examples
 - **[Understand the architecture](docs/core-architecture.md)** → Technical deep dive
 - **[Join the community](https://discord.gg/gk8jAdXWmj)** → Get help and share ideas
