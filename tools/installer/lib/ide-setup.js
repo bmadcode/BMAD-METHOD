@@ -53,6 +53,8 @@ class IdeSetup extends BaseIdeSetup {
         return this.setupRoo(installDir, selectedAgent);
       case "cline":
         return this.setupCline(installDir, selectedAgent);
+      case "kilo":
+        return this.setupKilocode(installDir, selectedAgent);
       case "gemini":
         return this.setupGeminiCli(installDir, selectedAgent);
       case "github-copilot":
@@ -675,11 +677,17 @@ class IdeSetup extends BaseIdeSetup {
             ? roleDefinitionMatch[1].trim()
             : `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
 
+
+          // Add permissions based on agent type
+          const permissions = agentPermissions[agentId];
           // Build mode entry with proper formatting (matching exact indentation)
           // Avoid double "bmad-" prefix for agents that already have it
           const slug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
           newModesContent += ` - slug: ${slug}\n`;
           newModesContent += `   name: '${icon} ${title}'\n`;
+          if (permissions) {
+          newModesContent += `   description: '${permissions.description}'\n`; 
+          }
           newModesContent += `   roleDefinition: ${roleDefinition}\n`;
           newModesContent += `   whenToUse: ${whenToUse}\n`;
           // Get relative path from installDir to agent file
@@ -688,8 +696,6 @@ class IdeSetup extends BaseIdeSetup {
           newModesContent += `   groups:\n`;
           newModesContent += `    - read\n`;
 
-          // Add permissions based on agent type
-          const permissions = agentPermissions[agentId];
           if (permissions) {
             newModesContent += `    - - edit\n`;
             newModesContent += `      - fileRegex: ${permissions.fileRegex}\n`;
@@ -722,7 +728,98 @@ class IdeSetup extends BaseIdeSetup {
 
     return true;
   }
+  
+  async setupKilocode(installDir, selectedAgent) {
+    const filePath = path.join(installDir, ".kilocodemodes");
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
+    let existingModes = [], existingContent = "";
+    if (await fileManager.pathExists(filePath)) {
+      existingContent = await fileManager.readFile(filePath);
+      for (const match of existingContent.matchAll(/- slug: ([\w-]+)/g)) {
+        existingModes.push(match[1]);
+      }
+      console.log(chalk.yellow(`Found existing .kilocodemodes file with ${existingModes.length} modes`));
+    }
+
+    const config = await this.loadIdeAgentConfig();
+    const permissions = config['roo-permissions'] || {}; // reuse same roo permissions block (Kilo Code understands same mode schema)
+
+    let newContent = "";
+
+    for (const agentId of agents) {
+      const slug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
+      if (existingModes.includes(slug)) {
+        console.log(chalk.dim(`Skipping ${agentId} - already exists in .kilocodemodes`));
+        continue;
+      }
+
+      const agentPath = await this.findAgentPath(agentId, installDir);
+      if (!agentPath) {
+        console.log(chalk.red(`✗ Could not find agent file for ${agentId}`));
+        continue;
+      }
+
+      const agentContent = await fileManager.readFile(agentPath);
+      const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
+      if (!yamlMatch) {
+        console.log(chalk.red(`✗ Could not extract YAML block for ${agentId}`));
+        continue;
+      }
+
+      const yaml = yamlMatch[1];
+
+      // Robust fallback for title and icon
+      const title = (yaml.match(/title:\s*(.+)/)?.[1]?.trim()) || await this.getAgentTitle(agentId, installDir);
+      const icon = (yaml.match(/icon:\s*(.+)/)?.[1]?.trim()) || '🤖';
+      const whenToUse = (yaml.match(/whenToUse:\s*"(.+)"/)?.[1]?.trim()) || `Use for ${title} tasks`;
+      const roleDefinition = (yaml.match(/roleDefinition:\s*"(.+)"/)?.[1]?.trim()) ||
+        `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
+
+      const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+      const customInstructions = `CRITICAL Read the full YAML from ${relativePath} start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode`;
+
+      // Add permissions from config if they exist
+      const agentPermission = permissions[agentId];
+
+      // Begin .kilocodemodes block
+      newContent += ` - slug: ${slug}\n`;
+      newContent += `   name: '${icon} ${title}'\n`;
+      if (agentPermission) {
+      newContent += `   description: '${agentPermission.description}'\n`; 
+      }
+
+      newContent += `   roleDefinition: ${roleDefinition}\n`;
+      newContent += `   whenToUse: ${whenToUse}\n`;
+      newContent += `   customInstructions: ${customInstructions}\n`;
+      newContent += `   groups:\n`;
+      newContent += `    - read\n`;
+
+
+      if (agentPermission) {
+        newContent += `    - - edit\n`;
+        newContent += `      - fileRegex: ${agentPermission.fileRegex}\n`;
+        newContent += `        description: ${agentPermission.description}\n`;
+      } else {
+        // Fallback to generic edit
+        newContent += `    - edit\n`;
+      }
+
+      console.log(chalk.green(`✓ Added Kilo mode: ${slug} (${icon} ${title})`));
+    }
+
+    const finalContent = existingContent
+      ? existingContent.trim() + "\n" + newContent
+      : "customModes:\n" + newContent;
+
+    await fileManager.writeFile(filePath, finalContent);
+    console.log(chalk.green("✓ Created .kilocodemodes file in project root"));
+    console.log(chalk.green(`✓ KiloCode setup complete!`));
+    console.log(chalk.dim("Custom modes will be available when you open this project in KiloCode"));
+
+    return true;
+  }
+  
   async setupCline(installDir, selectedAgent) {
     const clineRulesDir = path.join(installDir, ".clinerules");
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
