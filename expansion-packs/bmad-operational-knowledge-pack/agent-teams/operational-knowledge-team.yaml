@@ -1,0 +1,7 @@
+bundle:
+  name: Operational Knowledge Team
+  icon: 🧠
+  description: A team of agents focused on building and managing operational knowledge networks.
+agents:
+  - bmad-orchestrator
+  - memory-network-builder
