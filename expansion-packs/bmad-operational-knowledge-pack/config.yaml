@@ -1,0 +1,8 @@
+# Configuration for the BMad Operational Knowledge Pack
+
+pack:
+  id: bmad-operational-knowledge-pack
+  name: BMad Operational Knowledge Pack
+  version: 0.1.0
+  description: "Agents and tools for managing operational knowledge."
+  author: "Your Name"
