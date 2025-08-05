@@ -1,2 +1,0 @@
-# Run lint-staged to format and lint YAML files
-npx lint-staged

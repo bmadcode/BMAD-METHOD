@@ -1,6 +1,6 @@
 {
   "name": "bmad-method",
-  "version": "4.31.0",
+  "version": "4.35.0",
   "description": "Breakthrough Method of Agile AI-driven Development",
   "main": "tools/cli.js",
   "bin": {
@@ -13,6 +13,7 @@
     "build:teams": "node tools/cli.js build --teams-only",
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
+    "flatten": "node tools/flattener/main.js",
     "install:bmad": "node tools/installer/bin/bmad.js install",
     "format": "prettier --write \"**/*.md\"",
     "version:patch": "node tools/version-bump.js patch",
@@ -41,6 +42,7 @@
     "glob": "^11.0.3",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
+    "minimatch": "^10.0.3",
     "ora": "^5.4.1"
   },
   "keywords": [
@@ -65,6 +67,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "husky": "^9.1.7",
+    "jest": "^30.0.4",
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "semantic-release": "^22.0.0",

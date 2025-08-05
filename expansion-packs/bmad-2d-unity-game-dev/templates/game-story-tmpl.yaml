@@ -1,7 +1,7 @@
 template:
-  id: game-story-template-v2
+  id: game-story-template-v3
   name: Game Development Story
-  version: 2.0
+  version: 3.0
   output:
     format: markdown
     filename: "stories/{{epic_name}}/{{story_id}}-{{story_name}}.md"
@@ -49,9 +49,9 @@ sections:
         title: Technical Requirements
         type: checklist
         items:
-          - "Code follows C# best practices"
-          - "Maintains stable frame rate on target devices"
-          - "No memory leaks or performance degradation"
+          - Code follows C# best practices
+          - Maintains stable frame rate on target devices
+          - No memory leaks or performance degradation
           - "{{specific_technical_requirement}}"
       - id: game-design-requirements
         title: Game Design Requirements
@@ -227,13 +227,13 @@ sections:
     instruction: Checklist that must be completed before the story is considered finished
     type: checklist
     items:
-      - "All acceptance criteria met"
-      - "Code reviewed and approved"
-      - "Unit tests written and passing"
-      - "Integration tests passing"
-      - "Performance targets met"
-      - "No C# compiler errors or warnings"
-      - "Documentation updated"
+      - All acceptance criteria met
+      - Code reviewed and approved
+      - Unit tests written and passing
+      - Integration tests passing
+      - Performance targets met
+      - No C# compiler errors or warnings
+      - Documentation updated
       - "{{game_specific_dod_item}}"
 
   - id: notes

@@ -53,10 +53,14 @@ class IdeSetup extends BaseIdeSetup {
         return this.setupRoo(installDir, selectedAgent);
       case "cline":
         return this.setupCline(installDir, selectedAgent);
+      case "kilo":
+        return this.setupKilocode(installDir, selectedAgent);
       case "gemini":
         return this.setupGeminiCli(installDir, selectedAgent);
       case "github-copilot":
         return this.setupGitHubCopilot(installDir, selectedAgent, spinner, preConfiguredSettings);
+      case "qwen-code":
+        return this.setupQwenCode(installDir, selectedAgent);
       default:
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -675,11 +679,17 @@ class IdeSetup extends BaseIdeSetup {
             ? roleDefinitionMatch[1].trim()
             : `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
 
+
+          // Add permissions based on agent type
+          const permissions = agentPermissions[agentId];
           // Build mode entry with proper formatting (matching exact indentation)
           // Avoid double "bmad-" prefix for agents that already have it
           const slug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
           newModesContent += ` - slug: ${slug}\n`;
           newModesContent += `   name: '${icon} ${title}'\n`;
+          if (permissions) {
+          newModesContent += `   description: '${permissions.description}'\n`; 
+          }
           newModesContent += `   roleDefinition: ${roleDefinition}\n`;
           newModesContent += `   whenToUse: ${whenToUse}\n`;
           // Get relative path from installDir to agent file
@@ -688,8 +698,6 @@ class IdeSetup extends BaseIdeSetup {
           newModesContent += `   groups:\n`;
           newModesContent += `    - read\n`;
 
-          // Add permissions based on agent type
-          const permissions = agentPermissions[agentId];
           if (permissions) {
             newModesContent += `    - - edit\n`;
             newModesContent += `      - fileRegex: ${permissions.fileRegex}\n`;
@@ -722,7 +730,98 @@ class IdeSetup extends BaseIdeSetup {
 
     return true;
   }
+  
+  async setupKilocode(installDir, selectedAgent) {
+    const filePath = path.join(installDir, ".kilocodemodes");
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
+    let existingModes = [], existingContent = "";
+    if (await fileManager.pathExists(filePath)) {
+      existingContent = await fileManager.readFile(filePath);
+      for (const match of existingContent.matchAll(/- slug: ([\w-]+)/g)) {
+        existingModes.push(match[1]);
+      }
+      console.log(chalk.yellow(`Found existing .kilocodemodes file with ${existingModes.length} modes`));
+    }
+
+    const config = await this.loadIdeAgentConfig();
+    const permissions = config['roo-permissions'] || {}; // reuse same roo permissions block (Kilo Code understands same mode schema)
+
+    let newContent = "";
+
+    for (const agentId of agents) {
+      const slug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
+      if (existingModes.includes(slug)) {
+        console.log(chalk.dim(`Skipping ${agentId} - already exists in .kilocodemodes`));
+        continue;
+      }
+
+      const agentPath = await this.findAgentPath(agentId, installDir);
+      if (!agentPath) {
+        console.log(chalk.red(`✗ Could not find agent file for ${agentId}`));
+        continue;
+      }
+
+      const agentContent = await fileManager.readFile(agentPath);
+      const yamlMatch = agentContent.match(/```ya?ml\r?\n([\s\S]*?)```/);
+      if (!yamlMatch) {
+        console.log(chalk.red(`✗ Could not extract YAML block for ${agentId}`));
+        continue;
+      }
+
+      const yaml = yamlMatch[1];
+
+      // Robust fallback for title and icon
+      const title = (yaml.match(/title:\s*(.+)/)?.[1]?.trim()) || await this.getAgentTitle(agentId, installDir);
+      const icon = (yaml.match(/icon:\s*(.+)/)?.[1]?.trim()) || '🤖';
+      const whenToUse = (yaml.match(/whenToUse:\s*"(.+)"/)?.[1]?.trim()) || `Use for ${title} tasks`;
+      const roleDefinition = (yaml.match(/roleDefinition:\s*"(.+)"/)?.[1]?.trim()) ||
+        `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
+
+      const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+      const customInstructions = `CRITICAL Read the full YAML from ${relativePath} start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode`;
+
+      // Add permissions from config if they exist
+      const agentPermission = permissions[agentId];
+
+      // Begin .kilocodemodes block
+      newContent += ` - slug: ${slug}\n`;
+      newContent += `   name: '${icon} ${title}'\n`;
+      if (agentPermission) {
+      newContent += `   description: '${agentPermission.description}'\n`; 
+      }
+
+      newContent += `   roleDefinition: ${roleDefinition}\n`;
+      newContent += `   whenToUse: ${whenToUse}\n`;
+      newContent += `   customInstructions: ${customInstructions}\n`;
+      newContent += `   groups:\n`;
+      newContent += `    - read\n`;
+
+
+      if (agentPermission) {
+        newContent += `    - - edit\n`;
+        newContent += `      - fileRegex: ${agentPermission.fileRegex}\n`;
+        newContent += `        description: ${agentPermission.description}\n`;
+      } else {
+        // Fallback to generic edit
+        newContent += `    - edit\n`;
+      }
+
+      console.log(chalk.green(`✓ Added Kilo mode: ${slug} (${icon} ${title})`));
+    }
+
+    const finalContent = existingContent
+      ? existingContent.trim() + "\n" + newContent
+      : "customModes:\n" + newContent;
+
+    await fileManager.writeFile(filePath, finalContent);
+    console.log(chalk.green("✓ Created .kilocodemodes file in project root"));
+    console.log(chalk.green(`✓ KiloCode setup complete!`));
+    console.log(chalk.dim("Custom modes will be available when you open this project in KiloCode"));
+
+    return true;
+  }
+  
   async setupCline(installDir, selectedAgent) {
     const clineRulesDir = path.join(installDir, ".clinerules");
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
@@ -876,6 +975,106 @@ class IdeSetup extends BaseIdeSetup {
     const geminiMdPath = path.join(bmadMethodDir, "GEMINI.md");
     await fileManager.writeFile(geminiMdPath, concatenatedContent);
     console.log(chalk.green(`\n✓ Created GEMINI.md in ${bmadMethodDir}`));
+
+    return true;
+  }
+
+  async setupQwenCode(installDir, selectedAgent) {
+    const qwenDir = path.join(installDir, ".qwen");
+    const bmadMethodDir = path.join(qwenDir, "bmad-method");
+    await fileManager.ensureDirectory(bmadMethodDir);
+
+    // Update logic for existing settings.json
+    const settingsPath = path.join(qwenDir, "settings.json");
+    if (await fileManager.pathExists(settingsPath)) {
+      try {
+        const settingsContent = await fileManager.readFile(settingsPath);
+        const settings = JSON.parse(settingsContent);
+        let updated = false;
+        
+        // Handle contextFileName property
+        if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
+          const originalLength = settings.contextFileName.length;
+          settings.contextFileName = settings.contextFileName.filter(
+            (fileName) => !fileName.startsWith("agents/")
+          );
+          if (settings.contextFileName.length !== originalLength) {
+            updated = true;
+          }
+        }
+        
+        if (updated) {
+          await fileManager.writeFile(
+            settingsPath,
+            JSON.stringify(settings, null, 2)
+          );
+          console.log(chalk.green("✓ Updated .qwen/settings.json - removed agent file references"));
+        }
+      } catch (error) {
+        console.warn(
+          chalk.yellow("Could not update .qwen/settings.json"),
+          error
+        );
+      }
+    }
+
+    // Remove old agents directory
+    const agentsDir = path.join(qwenDir, "agents");
+    if (await fileManager.pathExists(agentsDir)) {
+      await fileManager.removeDirectory(agentsDir);
+      console.log(chalk.green("✓ Removed old .qwen/agents directory"));
+    }
+
+    // Get all available agents
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
+    let concatenatedContent = "";
+
+    for (const agentId of agents) {
+      // Find the source agent file
+      const agentPath = await this.findAgentPath(agentId, installDir);
+
+      if (agentPath) {
+        const agentContent = await fileManager.readFile(agentPath);
+        
+        // Create properly formatted agent rule content (similar to gemini)
+        let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
+        agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
+          agentId,
+          installDir
+        )} agent persona.\n\n`;
+        agentRuleContent += "## Agent Activation\n\n";
+        agentRuleContent +=
+          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
+        agentRuleContent += "```yaml\n";
+        // Extract just the YAML content from the agent file
+        const yamlContent = extractYamlFromAgent(agentContent);
+        if (yamlContent) {
+          agentRuleContent += yamlContent;
+        }
+        else {
+          // If no YAML found, include the whole content minus the header
+          agentRuleContent += agentContent.replace(/^#.*$/m, "").trim();
+        }
+        agentRuleContent += "\n```\n\n";
+        agentRuleContent += "## File Reference\n\n";
+        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
+        agentRuleContent += "## Usage\n\n";
+        agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
+          agentId,
+          installDir
+        )} persona and follow all instructions defined in the YAML configuration above.\n`;
+        
+        // Add to concatenated content with separator
+        concatenatedContent += agentRuleContent + "\n\n---\n\n";
+        console.log(chalk.green(`✓ Added context for *${agentId}`));
+      }
+    }
+
+    // Write the concatenated content to QWEN.md
+    const qwenMdPath = path.join(bmadMethodDir, "QWEN.md");
+    await fileManager.writeFile(qwenMdPath, concatenatedContent);
+    console.log(chalk.green(`\n✓ Created QWEN.md in ${bmadMethodDir}`));
 
     return true;
   }
