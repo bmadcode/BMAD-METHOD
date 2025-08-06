@@ -255,7 +255,7 @@ When invoked after outputting a section:
 
 ```text
 **Advanced Elicitation Options**
-Choose a number (0-8) or 9 to proceed:
+Choose a number (0-9) or 10 to proceed:
 
 0. [Method Name]
 1. [Method Name]
