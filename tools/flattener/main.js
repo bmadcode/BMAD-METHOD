@@ -45,7 +45,20 @@ async function discoverFiles(rootDir) {
       '.env.*',
       '*.env',
       '.config',
+      '.venv/**',
+      '*/.venv/**',
+      '**/.venv/**',
       '.venv',
+      'venv/**',
+      '*/venv/**',
+      '**/venv/**',
+      'venv',
+      'env/**',
+      '*/env/**',
+      '**/env/**',
+      'virtualenv/**',
+      '*/virtualenv/**',
+      '**/virtualenv/**',
 
       // Logs
       'logs/**',
@@ -114,7 +127,10 @@ async function discoverFiles(rootDir) {
       '*.so',
       '*.dll',
       '*.exe',
-
+      'lib64/**',
+      '**/.venv/lib64/**',
+      '**/venv/lib64/**',
+      
       // Documentation build
       '_site/**',
       '.jekyll-cache/**',
@@ -130,13 +146,30 @@ async function discoverFiles(rootDir) {
       ...commonIgnorePatterns
     ];
 
+    // Add specific patterns for commonly ignored directories and files
+    const additionalGlobIgnores = [
+      // Virtual environments
+      '**/.venv/**', '**/venv/**', '**/.virtualenv/**', '**/virtualenv/**',
+      // Node modules
+      '**/node_modules/**',
+      // Python cache
+      '**/__pycache__/**', '**/*.pyc', '**/*.pyo', '**/*.pyd',
+      // Binary and media files
+      '**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.bmp', '**/*.ico', '**/*.svg',
+      '**/*.pdf', '**/*.doc', '**/*.docx', '**/*.xls', '**/*.xlsx', '**/*.ppt', '**/*.pptx',
+      '**/*.zip', '**/*.tar', '**/*.gz', '**/*.rar', '**/*.7z',
+      '**/*.exe', '**/*.dll', '**/*.so', '**/*.dylib',
+      '**/*.mp3', '**/*.mp4', '**/*.avi', '**/*.mov', '**/*.wav',
+      '**/*.ttf', '**/*.otf', '**/*.woff', '**/*.woff2'
+    ];
+    
     // Use glob to recursively find all files, excluding common ignore patterns
     const files = await glob('**/*', {
       cwd: rootDir,
       nodir: true, // Only files, not directories
       dot: true,   // Include hidden files
       follow: false, // Don't follow symbolic links
-      ignore: combinedIgnores
+      ignore: [...combinedIgnores, ...additionalGlobIgnores]
     });
 
     return files.map(file => path.resolve(rootDir, file));
@@ -182,7 +215,13 @@ async function parseGitignore(gitignorePath) {
  */
 async function isBinaryFile(filePath) {
   try {
-    // First check by file extension
+    // First check if the path is a directory
+    const stats = await fs.stat(filePath);
+    if (stats.isDirectory()) {
+      throw new Error(`EISDIR: illegal operation on a directory`);
+    }
+
+    // Check by file extension
     const binaryExtensions = [
       '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.ico', '.svg',
       '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx',
@@ -199,7 +238,6 @@ async function isBinaryFile(filePath) {
     }
 
     // For files without clear extensions, try to read a small sample
-    const stats = await fs.stat(filePath);
     if (stats.size === 0) {
       return false; // Empty files are considered text
     }
@@ -447,16 +485,46 @@ async function filterFiles(files, rootDir) {
   const gitignorePath = path.join(rootDir, '.gitignore');
   const ignorePatterns = await parseGitignore(gitignorePath);
 
-  if (ignorePatterns.length === 0) {
-    return files;
-  }
+  // Add explicit patterns for common directories and files to ignore
+  const additionalPatterns = [
+    // Virtual environments
+    '**/.venv/**', '**/venv/**', '**/env/**', '**/virtualenv/**',
+    '.venv/**', 'venv/**', 'env/**', 'virtualenv/**',
+    '.venv', 'venv', 'env', 'virtualenv',
+    
+    // Node modules
+    '**/node_modules/**',
+    'node_modules/**',
+    'node_modules',
+    
+    // Python cache
+    '**/__pycache__/**',
+    '__pycache__/**',
+    '__pycache__',
+    '**/*.pyc',
+    '**/*.pyo',
+    '**/*.pyd',
+    
+    // Binary and media files
+    '**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.bmp', '**/*.ico', '**/*.svg',
+    '**/*.pdf', '**/*.doc', '**/*.docx', '**/*.xls', '**/*.xlsx', '**/*.ppt', '**/*.pptx',
+    '**/*.zip', '**/*.tar', '**/*.gz', '**/*.rar', '**/*.7z',
+    '**/*.exe', '**/*.dll', '**/*.so', '**/*.dylib',
+    '**/*.mp3', '**/*.mp4', '**/*.avi', '**/*.mov', '**/*.wav',
+    '**/*.ttf', '**/*.otf', '**/*.woff', '**/*.woff2'
+  ];
+  
+  const allIgnorePatterns = [
+    ...ignorePatterns,
+    ...additionalPatterns
+  ];
 
   // Convert absolute paths to relative for pattern matching
   const relativeFiles = files.map(file => path.relative(rootDir, file));
 
   // Separate positive and negative patterns
-  const positivePatterns = ignorePatterns.filter(p => !p.startsWith('!'));
-  const negativePatterns = ignorePatterns.filter(p => p.startsWith('!')).map(p => p.slice(1));
+  const positivePatterns = allIgnorePatterns.filter(p => !p.startsWith('!'));
+  const negativePatterns = allIgnorePatterns.filter(p => p.startsWith('!')).map(p => p.slice(1));
 
   // Filter out files that match ignore patterns
   const filteredRelative = [];
@@ -464,20 +532,36 @@ async function filterFiles(files, rootDir) {
   for (const file of relativeFiles) {
     let shouldIgnore = false;
 
-    // First check positive patterns (ignore these files)
-    for (const pattern of positivePatterns) {
-      if (minimatch(file, pattern)) {
-        shouldIgnore = true;
-        break;
-      }
-    }
-
-    // Then check negative patterns (don't ignore these files even if they match positive patterns)
-    if (shouldIgnore) {
-      for (const pattern of negativePatterns) {
-        if (minimatch(file, pattern)) {
-          shouldIgnore = false;
+    // First, explicit check for commonly ignored directories and file types
+    if (
+      // Check for virtual environments
+      file.includes('/.venv/') || file.includes('/venv/') || 
+      file.startsWith('.venv/') || file.startsWith('venv/') ||
+      // Check for node_modules
+      file.includes('/node_modules/') || file.startsWith('node_modules/') ||
+      // Check for Python cache
+      file.includes('/__pycache__/') || file.startsWith('__pycache__/') ||
+      file.endsWith('.pyc') || file.endsWith('.pyo') || file.endsWith('.pyd') ||
+      // Check for common binary file extensions
+      /\.(jpg|jpeg|png|gif|bmp|ico|svg|pdf|doc|docx|xls|xlsx|ppt|pptx|zip|tar|gz|rar|7z|exe|dll|so|dylib|mp3|mp4|avi|mov|wav|ttf|otf|woff|woff2)$/i.test(file)
+    ) {
+      shouldIgnore = true;
+    } else {
+      // Check against other patterns
+      for (const pattern of positivePatterns) {
+        if (minimatch(file, pattern, { dot: true })) {
+          shouldIgnore = true;
           break;
+        }
+      }
+
+      // Then check negative patterns (don't ignore these files even if they match positive patterns)
+      if (shouldIgnore) {
+        for (const pattern of negativePatterns) {
+          if (minimatch(file, pattern, { dot: true })) {
+            shouldIgnore = false;
+            break;
+          }
         }
       }
     }
@@ -521,6 +605,14 @@ program
       const files = await discoverFiles(inputDir);
       const filteredFiles = await filterFiles(files, inputDir);
       discoverySpinner.succeed(`📁 Found ${filteredFiles.length} files to include`);
+
+      // Write filteredFiles to temp.txt for debugging XML including unneeded files
+      // const tempFilePath = path.join(process.cwd(), 'temp-filtered-files.txt');
+      // await fs.writeFile(
+      //   tempFilePath, 
+      //   filteredFiles.map(file => `${file}\n${path.relative(inputDir, file)}\n---\n`).join('\n')
+      // );
+      // console.log(`📄 Filtered files written to: ${tempFilePath}`);
 
       // Process files with progress tracking
       console.log('Reading file contents');
