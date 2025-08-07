@@ -45,6 +45,7 @@ async function discoverFiles(rootDir) {
       '.env.*',
       '*.env',
       '.config',
+      '.venv',
 
       // Logs
       'logs/**',
