@@ -27,6 +27,9 @@ roo-permissions:
   sm:
     fileRegex: "\\.(md|txt)$"
     description: "Process and planning docs"
+  seo-expert:
+    fileRegex: "\\.(md|txt|json|xml|html)$"
+    description: "SEO docs, sitemaps, and meta content"
   # Expansion pack agents
   game-designer:
     fileRegex: "\\.(md|txt|json|yaml|yml)$"
@@ -50,9 +53,10 @@ cline-order:
   dev: 8
   qa: 9
   ux-expert: 10
+  seo-expert: 11
   # Expansion pack agents
-  bmad-the-creator: 11
-  game-designer: 12
-  game-developer: 13
-  game-sm: 14
-  infra-devops-platform: 15
+  bmad-the-creator: 12
+  game-designer: 13
+  game-developer: 14
+  game-sm: 15
+  infra-devops-platform: 16

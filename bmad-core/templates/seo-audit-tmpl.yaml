@@ -1,0 +1,127 @@
+template:
+  name: SEO Audit Report
+  version: 1.0
+  description: Comprehensive SEO audit documentation template
+  sections:
+    - name: Executive Summary
+      required: true
+      prompts:
+        - Current SEO performance overview
+        - Critical issues impacting visibility
+        - Top 3-5 priority recommendations
+        - Expected impact of improvements
+    
+    - name: Technical SEO Analysis
+      required: true
+      subsections:
+        - name: Site Architecture
+          prompts:
+            - Crawlability assessment
+            - Indexation status
+            - XML sitemap analysis
+            - Robots.txt review
+        - name: Performance Metrics
+          prompts:
+            - Page speed scores (Mobile/Desktop)
+            - Core Web Vitals (LCP, FID, CLS)
+            - Server response times
+            - Resource optimization needs
+        - name: Mobile Optimization
+          prompts:
+            - Mobile responsiveness issues
+            - Mobile-specific user experience
+            - AMP implementation (if applicable)
+    
+    - name: On-Page SEO Assessment
+      required: true
+      subsections:
+        - name: Content Optimization
+          prompts:
+            - Title tag analysis
+            - Meta description review
+            - Header structure (H1-H6)
+            - Keyword density and placement
+        - name: Internal Linking
+          prompts:
+            - Link structure analysis
+            - Anchor text distribution
+            - Orphan pages identification
+            - Link depth assessment
+    
+    - name: Off-Page SEO Factors
+      required: true
+      subsections:
+        - name: Backlink Profile
+          prompts:
+            - Total backlinks and referring domains
+            - Link quality assessment
+            - Toxic link identification
+            - Competitor backlink gap
+        - name: Brand Authority
+          prompts:
+            - Domain authority metrics
+            - Brand mention tracking
+            - Local citations (if applicable)
+    
+    - name: Content Analysis
+      required: true
+      subsections:
+        - name: Content Quality
+          prompts:
+            - Thin content identification
+            - Duplicate content issues
+            - Content freshness assessment
+            - E-E-A-T factors
+        - name: Keyword Opportunities
+          prompts:
+            - Current keyword rankings
+            - Keyword gap analysis
+            - Search intent alignment
+            - Featured snippet opportunities
+    
+    - name: Competitive Analysis
+      required: false
+      prompts:
+        - Top 3-5 competitors identified
+        - Competitive advantages/disadvantages
+        - Content gap opportunities
+        - Technical differentiators
+    
+    - name: Priority Action Matrix
+      required: true
+      subsections:
+        - name: Critical Issues
+          prompts:
+            - Issues blocking crawling/indexing
+            - Major technical problems
+            - Immediate fixes needed
+        - name: High Priority
+          prompts:
+            - Quick wins with high impact
+            - Important optimizations
+            - 30-day action items
+        - name: Medium Priority
+          prompts:
+            - Ongoing improvements
+            - 60-90 day initiatives
+            - Content enhancements
+        - name: Low Priority
+          prompts:
+            - Nice-to-have improvements
+            - Long-term initiatives
+    
+    - name: Implementation Roadmap
+      required: true
+      prompts:
+        - Week 1-2 tasks
+        - Month 1 deliverables
+        - Quarter 1 goals
+        - Success metrics and KPIs
+    
+    - name: Monitoring Plan
+      required: true
+      prompts:
+        - Key metrics to track
+        - Reporting frequency
+        - Tools and dashboards
+        - Success benchmarks
