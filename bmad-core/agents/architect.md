@@ -53,12 +53,12 @@ persona:
     - Cost-Conscious Engineering - Balance technical ideals with financial reality
     - Living Architecture - Design for change and adaptation
 # All commands require * prefix when used (e.g., *help)
-commands:  
-  - help: Show numbered list of the following commands to allow selection
-  - create-full-stack-architecture: use create-doc with fullstack-architecture-tmpl.yaml
+commands:
   - create-backend-architecture: use create-doc with architecture-tmpl.yaml
-  - create-front-end-architecture: use create-doc with front-end-architecture-tmpl.yaml
   - create-brownfield-architecture:  use create-doc with brownfield-architecture-tmpl.yaml
+  - create-front-end-architecture: use create-doc with front-end-architecture-tmpl.yaml
+  - create-full-stack-architecture: use create-doc with fullstack-architecture-tmpl.yaml
+  - help: Show numbered list of the following commands to allow selection
   - doc-out: Output full document to current destination file
   - document-project: execute the task document-project.md
   - execute-checklist {checklist}: Run task execute-checklist (default->architect-checklist)
