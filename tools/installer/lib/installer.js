@@ -8,6 +8,7 @@ const configLoader = require("./config-loader");
 const ideSetup = require("./ide-setup");
 const { extractYamlFromAgent } = require("../../lib/yaml-utils");
 const resourceLocator = require("./resource-locator");
+const yaml = require('js-yaml');
 
 class Installer {
   async getCoreVersion() {
@@ -19,6 +20,57 @@ class Installer {
     } catch (error) {
       console.warn("Could not read version from package.json, using 'unknown'");
       return "unknown";
+    }
+  }
+
+  
+  async getAgentDefaults(agentId) {
+      try {
+          const agentPath = configLoader.getAgentPath(agentId);
+          const content = await fs.readFile(agentPath, 'utf8');
+          const yamlContent = extractYamlFromAgent(content);
+          if (!yamlContent) return { name: 'Unknown', title: 'Unknown Agent' };
+          const config = yaml.load(yamlContent);
+          return {
+              name: config.agent.name || 'Unknown',
+              title: config.agent.title || 'Unknown Agent'
+          };
+      } catch (error) {
+          console.warn(chalk.yellow(`Could not load defaults for agent ${agentId}: ${error.message}`));
+          return { name: 'Unknown', title: 'Unknown Agent' };
+      }
+  }
+
+  async applyAgentCustomizations(installDir, customizations, spinner) {
+    if (!customizations || customizations.length === 0) {
+        return;
+    }
+    spinner.text = "Applying agent customizations...";
+    for (const custom of customizations) {
+        spinner.text = `Customizing agent: ${custom.agentId}...`;
+        const agentPath = path.join(installDir, '.bmad-core', 'agents', `${custom.agentId}.md`);
+        try {
+            const content = await fs.readFile(agentPath, 'utf8');
+            const yamlRegex = /(```yaml\n)([\s\S]*?)(\n```)/;
+            const match = content.match(yamlRegex);
+            if (!match || !match[2]) {
+                console.warn(chalk.yellow(`\nCould not find YAML block in ${custom.agentId}.md. Skipping.`));
+                continue;
+            }
+            const config = yaml.load(match[2]);
+            if (config.agent) {
+                config.agent.name = custom.newName;
+                config.agent.customization = custom.personality;
+            } else {
+                 console.warn(chalk.yellow(`\n'agent' key not found in ${custom.agentId}.md YAML. Skipping.`));
+                continue;
+            }
+            const newYamlString = yaml.dump(config, { noRefs: true, lineWidth: -1 }).trim();
+            const newContent = content.replace(yamlRegex, `$1${newYamlString}$3`);
+            await fs.writeFile(agentPath, newContent, 'utf8');
+        } catch (error) {
+            console.error(chalk.red(`\nFailed to customize agent ${custom.agentId}: ${error.message}`));
+        }
     }
   }
 
@@ -371,6 +423,11 @@ class Installer {
       // Expansion-only installation - DO NOT create .bmad-core
       // Only install expansion packs
       spinner.text = "Installing expansion packs only...";
+    }
+
+    // Apply customizations if provided
+    if (config.installType === "full" && config.agentCustomizations) {
+      await this.applyAgentCustomizations(installDir, config.agentCustomizations, spinner);
     }
 
     // Install expansion packs if requested

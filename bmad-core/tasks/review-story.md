@@ -81,7 +81,7 @@ After review and any refactoring, append your results to the story file in the Q
 ## QA Results
 
 ### Review Date: [Date]
-### Reviewed By: Quinn (Senior Developer QA)
+### Reviewed By: [Your agent name] ([Your agent title])
 
 ### Code Quality Assessment
 [Overall assessment of implementation quality]
