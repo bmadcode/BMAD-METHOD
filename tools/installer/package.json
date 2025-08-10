@@ -22,12 +22,12 @@
   "author": "BMad Team",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^5.4.1",
+    "chalk": "^4.1.2",
     "commander": "^14.0.0",
     "fs-extra": "^11.3.0",
-    "inquirer": "^12.6.3",
+    "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
-    "ora": "^8.2.0"
+    "ora": "^5.4.1"
   },
   "engines": {
     "node": ">=20.0.0"
