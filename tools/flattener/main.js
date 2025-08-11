@@ -127,11 +127,6 @@ program
           path.join(inputDir, "flattened-codebase.xml"),
         );
       }
-    } else {
-      console.error(
-        "Could not auto-detect a project root and no arguments were provided. Please specify -i/--input and -o/--output.",
-      );
-      process.exit(1);
     }
 
     // Ensure output directory exists
