@@ -117,9 +117,13 @@ program
           
           // Compare versions using semver
           if (semver.gt(latest, version)) {
-            console.log(`${packageName} update available: ${version} → ${latest}`);
+            console.log(chalk.bold.blue(`⚠️  ${packageName} update available: ${version} → ${latest}`));
+            console.log(chalk.bold.blue('\nInstall latest by running:'));
+            console.log(chalk.bold.magenta(`  npm install -g ${packageName}@latest`));
+            console.log(chalk.dim('  or'));
+            console.log(chalk.bold.magenta(`  npx ${packageName}@latest`));
           } else {
-            console.log(`${packageName} is up to date.`);
+            console.log(chalk.bold.blue(`✨ ${packageName} is up to date`));
           }
         } catch (error) {
           // Handle JSON parsing errors
