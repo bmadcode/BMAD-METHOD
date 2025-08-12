@@ -45,7 +45,7 @@ program
   .option('-f, --full', 'Install complete BMad Method')
   .option('-x, --expansion-only', 'Install only expansion packs (no bmad-core)')
   .option('-d, --directory <path>', 'Installation directory')
-  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, trae, roo, kilo, cline, gemini, qwen-code, github-copilot, other)')
+  .option('-i, --ide <ide...>', 'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, trae, roo, kilo, cline, gemini, qwen-code, github-copilot, crush, other)')
   .option('-e, --expansion-packs <packs...>', 'Install specific expansion packs (can specify multiple)')
   .action(async (options) => {
     try {
@@ -183,17 +183,17 @@ program
   });
 
 async function promptInstallation() {
-  
+
   // Display ASCII logo
   console.log(chalk.bold.cyan(`
-██████╗ ███╗   ███╗ █████╗ ██████╗       ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ 
+██████╗ ███╗   ███╗ █████╗ ██████╗       ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗
 ██╔══██╗████╗ ████║██╔══██╗██╔══██╗      ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗
 ██████╔╝██╔████╔██║███████║██║  ██║█████╗██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║
 ██╔══██╗██║╚██╔╝██║██╔══██║██║  ██║╚════╝██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║
 ██████╔╝██║ ╚═╝ ██║██║  ██║██████╔╝      ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝
-╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝       ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
+╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝       ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝
   `));
-  
+
   console.log(chalk.bold.magenta('🚀 Universal AI Agent Framework for Any Domain'));
   console.log(chalk.bold.blue(`✨ Installer v${version}\n`));
 
@@ -218,63 +218,63 @@ async function promptInstallation() {
   // Detect existing installations
   const installDir = path.resolve(directory);
   const state = await installer.detectInstallationState(installDir);
-  
+
   // Check for existing expansion packs
   const existingExpansionPacks = state.expansionPacks || {};
-  
+
   // Get available expansion packs
   const availableExpansionPacks = await installer.getAvailableExpansionPacks();
-  
+
   // Build choices list
   const choices = [];
-  
+
   // Load core config to get short-title
   const coreConfigPath = path.join(__dirname, '..', '..', '..', 'bmad-core', 'core-config.yaml');
   const coreConfig = yaml.load(await fs.readFile(coreConfigPath, 'utf8'));
   const coreShortTitle = coreConfig['short-title'] || 'BMad Agile Core System';
-  
+
   // Add BMad core option
   let bmadOptionText;
   if (state.type === 'v4_existing') {
     const currentVersion = state.manifest?.version || 'unknown';
     const newVersion = version; // Always use package.json version
-    const versionInfo = currentVersion === newVersion 
+    const versionInfo = currentVersion === newVersion
       ? `(v${currentVersion} - reinstall)`
       : `(v${currentVersion} → v${newVersion})`;
     bmadOptionText = `Update ${coreShortTitle} ${versionInfo} .bmad-core`;
   } else {
     bmadOptionText = `${coreShortTitle} (v${version}) .bmad-core`;
   }
-  
+
   choices.push({
     name: bmadOptionText,
     value: 'bmad-core',
     checked: true
   });
-  
+
   // Add expansion pack options
   for (const pack of availableExpansionPacks) {
     const existing = existingExpansionPacks[pack.id];
     let packOptionText;
-    
+
     if (existing) {
       const currentVersion = existing.manifest?.version || 'unknown';
       const newVersion = pack.version;
-      const versionInfo = currentVersion === newVersion 
+      const versionInfo = currentVersion === newVersion
         ? `(v${currentVersion} - reinstall)`
         : `(v${currentVersion} → v${newVersion})`;
       packOptionText = `Update ${pack.shortTitle} ${versionInfo} .${pack.id}`;
     } else {
       packOptionText = `${pack.shortTitle} (v${pack.version}) .${pack.id}`;
     }
-    
+
     choices.push({
       name: packOptionText,
       value: pack.id,
       checked: false
     });
   }
-  
+
   // Ask what to install
   const { selectedItems } = await inquirer.prompt([
     {
@@ -290,7 +290,7 @@ async function promptInstallation() {
       }
     }
   ]);
-  
+
   // Process selections
   answers.installType = selectedItems.includes('bmad-core') ? 'full' : 'expansion-only';
   answers.expansionPacks = selectedItems.filter(item => item !== 'bmad-core');
@@ -299,7 +299,7 @@ async function promptInstallation() {
   if (selectedItems.includes('bmad-core')) {
     console.log(chalk.cyan('\n📋 Document Organization Settings'));
     console.log(chalk.dim('Configure how your project documentation should be organized.\n'));
-    
+
     // Ask about PRD sharding
     const { prdSharded } = await inquirer.prompt([
       {
@@ -310,7 +310,7 @@ async function promptInstallation() {
       }
     ]);
     answers.prdSharded = prdSharded;
-    
+
     // Ask about architecture sharding
     const { architectureSharded } = await inquirer.prompt([
       {
@@ -321,7 +321,7 @@ async function promptInstallation() {
       }
     ]);
     answers.architectureSharded = architectureSharded;
-    
+
     // Show warning if architecture sharding is disabled
     if (!architectureSharded) {
       console.log(chalk.yellow.bold('\n⚠️  IMPORTANT: Architecture Sharding Disabled'));
@@ -330,7 +330,7 @@ async function promptInstallation() {
       console.log(chalk.yellow('as these are used by the dev agent at runtime.'));
       console.log(chalk.yellow('\nAlternatively, you can remove these files from the devLoadAlwaysFiles list'));
       console.log(chalk.yellow('in your core-config.yaml after installation.'));
-      
+
       const { acknowledge } = await inquirer.prompt([
         {
           type: 'confirm',
@@ -339,7 +339,7 @@ async function promptInstallation() {
           default: false
         }
       ]);
-      
+
       if (!acknowledge) {
         console.log(chalk.red('Installation cancelled.'));
         process.exit(0);
@@ -350,14 +350,14 @@ async function promptInstallation() {
   // Ask for IDE configuration
   let ides = [];
   let ideSelectionComplete = false;
-  
+
   while (!ideSelectionComplete) {
     console.log(chalk.cyan('\n🛠️  IDE Configuration'));
     console.log(chalk.bold.yellow.bgRed(' ⚠️  IMPORTANT: This is a MULTISELECT! Use SPACEBAR to toggle each IDE! '));
     console.log(chalk.bold.magenta('🔸 Use arrow keys to navigate'));
     console.log(chalk.bold.magenta('🔸 Use SPACEBAR to select/deselect IDEs'));
     console.log(chalk.bold.magenta('🔸 Press ENTER when finished selecting\n'));
-    
+
     const ideResponse = await inquirer.prompt([
       {
         type: 'checkbox',
@@ -373,11 +373,12 @@ async function promptInstallation() {
           { name: 'Cline', value: 'cline' },
           { name: 'Gemini CLI', value: 'gemini' },
           { name: 'Qwen Code', value: 'qwen-code' },
+          { name: 'Crush', value: 'crush' },
           { name: 'Github Copilot', value: 'github-copilot' }
         ]
       }
     ]);
-    
+
     ides = ideResponse.ides;
 
     // Confirm no IDE selection if none selected
@@ -390,13 +391,13 @@ async function promptInstallation() {
           default: false
         }
       ]);
-      
+
       if (!confirmNoIde) {
         console.log(chalk.bold.red('\n🔄 Returning to IDE selection. Remember to use SPACEBAR to select IDEs!\n'));
         continue; // Go back to IDE selection only
       }
     }
-    
+
     ideSelectionComplete = true;
   }
 
@@ -407,7 +408,7 @@ async function promptInstallation() {
   if (ides.includes('github-copilot')) {
     console.log(chalk.cyan('\n🔧 GitHub Copilot Configuration'));
     console.log(chalk.dim('BMad works best with specific VS Code settings for optimal agent experience.\n'));
-    
+
     const { configChoice } = await inquirer.prompt([
       {
         type: 'list',
@@ -430,7 +431,7 @@ async function promptInstallation() {
         default: 'defaults'
       }
     ]);
-    
+
     answers.githubCopilotConfig = { configChoice };
   }
 
