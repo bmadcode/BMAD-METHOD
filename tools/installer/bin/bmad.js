@@ -119,7 +119,7 @@ program
           if (semver.gt(latest, version)) {
             console.log(chalk.bold.blue(`⚠️  ${packageName} update available: ${version} → ${latest}`));
             console.log(chalk.bold.blue('\nInstall latest by running:'));
-            console.log(chalk.bold.magenta(`  npm install -g ${packageName}@latest`));
+            console.log(chalk.bold.magenta(`  npm install ${packageName}@latest`));
             console.log(chalk.dim('  or'));
             console.log(chalk.bold.magenta(`  npx ${packageName}@latest`));
           } else {
