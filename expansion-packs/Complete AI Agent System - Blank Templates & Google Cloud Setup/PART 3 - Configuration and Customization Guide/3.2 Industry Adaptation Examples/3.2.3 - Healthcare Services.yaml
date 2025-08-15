@@ -1,0 +1,16 @@
+# Healthcare-Specific Configuration
+INDUSTRY: "Healthcare"
+BUSINESS_TYPE: "Healthcare Services"
+PRIMARY_PRODUCT_TYPE: "Patient Care Services"
+CORE_BUSINESS_PROCESS: "Patient Care Delivery"
+
+# Healthcare Agents
+ORCHESTRATOR_TITLE: "Clinical Director"
+SPECIALIST_1_TITLE: "Clinical Specialist"
+SPECIALIST_2_TITLE: "Quality Assurance Coordinator"
+SPECIALIST_3_TITLE: "Compliance Officer"
+
+# Healthcare Workflows
+PRIMARY_WORKFLOW: "patient-care-optimization"
+QUALITY_VALIDATION: "clinical-quality-assurance"
+PROCESS_OPTIMIZATION: "care-delivery-efficiency"
