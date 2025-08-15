@@ -11,7 +11,7 @@ installation-options:
 ide-configurations:
   cursor:
     name: Cursor
-    rule-dir: .cursor/rules/
+    rule-dir: .cursor/rules/bmad/
     format: multi-file
     command-suffix: .mdc
     instructions: |
