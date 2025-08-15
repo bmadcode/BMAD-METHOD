@@ -25,7 +25,6 @@ Thumbs.db
 # Development tools and configs
 .prettierignore
 .prettierrc
-.husky/
 
 # IDE and editor configs
 .windsurf/
