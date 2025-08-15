@@ -68,7 +68,7 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async setupCursor(installDir, selectedAgent) {
-    const cursorRulesDir = path.join(installDir, ".cursor", "rules");
+    const cursorRulesDir = path.join(installDir, ".cursor", "rules", "bmad");
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(cursorRulesDir);
