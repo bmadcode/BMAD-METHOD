@@ -127,12 +127,9 @@ program
           path.join(inputDir, "flattened-codebase.xml"),
         );
       }
-    } else {
-      console.error(
-        "Could not auto-detect a project root and no arguments were provided. Please specify -i/--input and -o/--output.",
-      );
-      process.exit(1);
     }
+    // If user provided arguments, use the resolved inputDir and outputPath from the options
+    // which are already set at the beginning of the function
 
     // Ensure output directory exists
     await fs.ensureDir(path.dirname(outputPath));
