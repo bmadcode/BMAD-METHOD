@@ -8,21 +8,21 @@ This expansion pack provides a complete, deployable starter kit for building and
 
 ## Features
 
-  * **Automated GCP Setup**: `gcloud` scripts to configure your project, service accounts, and required APIs in minutes.
-  * **Production-Ready Deployment**: Includes a `Dockerfile` and `cloudbuild.yaml` for easy, repeatable deployments to Google Cloud Run.
-  * **Rich Template Library**: A comprehensive set of BMad-compatible templates for Teams, Agents, Tasks, Workflows, Documents, and Checklists.
-  * **Pre-configured Agent Roles**: Includes powerful master templates for key agent archetypes like Orchestrators and Specialists.
-  * **Highly Customizable**: Easily adapt the entire system with company-specific variables and industry-specific configurations.
-  * **Powered by Google ADK**: Built on the official Google Agent Development Kit for robust and native integration with Vertex AI services.
+- **Automated GCP Setup**: `gcloud` scripts to configure your project, service accounts, and required APIs in minutes.
+- **Production-Ready Deployment**: Includes a `Dockerfile` and `cloudbuild.yaml` for easy, repeatable deployments to Google Cloud Run.
+- **Rich Template Library**: A comprehensive set of BMad-compatible templates for Teams, Agents, Tasks, Workflows, Documents, and Checklists.
+- **Pre-configured Agent Roles**: Includes powerful master templates for key agent archetypes like Orchestrators and Specialists.
+- **Highly Customizable**: Easily adapt the entire system with company-specific variables and industry-specific configurations.
+- **Powered by Google ADK**: Built on the official Google Agent Development Kit for robust and native integration with Vertex AI services.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed and configured:
 
-  * A Google Cloud Platform (GCP) Account with an active billing account.
-  * The [Google Cloud SDK (`gcloud` CLI)](https://www.google.com/search?q=%5Bhttps://cloud.google.com/sdk/docs/install%5D\(https://cloud.google.com/sdk/docs/install\)) installed and authenticated.
-  * [Docker](https://www.docker.com/products/docker-desktop/) installed on your local machine.
-  * Python 3.11+
+- A Google Cloud Platform (GCP) Account with an active billing account.
+- The [Google Cloud SDK (`gcloud` CLI)](<https://www.google.com/search?q=%5Bhttps://cloud.google.com/sdk/docs/install%5D(https://cloud.google.com/sdk/docs/install)>) installed and authenticated.
+- [Docker](https://www.docker.com/products/docker-desktop/) installed on your local machine.
+- Python 3.11+
 
 ## Quick Start Guide
 
@@ -32,9 +32,9 @@ Follow these steps to get your own AI agent system running on Google Cloud.
 
 The setup scripts use placeholder variables. Before running them, open the files in the `/scripts` directory and replace the following placeholders with your own values:
 
-  * `{{PROJECT_ID}}`: Your unique Google Cloud project ID.
-  * `{{COMPANY_NAME}}`: Your company or project name (used for naming resources).
-  * `{{LOCATION}}`: The GCP region you want to deploy to (e.g., `us-central1`).
+- `{{PROJECT_ID}}`: Your unique Google Cloud project ID.
+- `{{COMPANY_NAME}}`: Your company or project name (used for naming resources).
+- `{{LOCATION}}`: The GCP region you want to deploy to (e.g., `us-central1`).
 
 ### 2\. Run the GCP Setup Scripts
 

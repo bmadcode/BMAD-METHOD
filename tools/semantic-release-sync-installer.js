@@ -2,8 +2,8 @@
  * Semantic-release plugin to sync installer package.json version
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // This function runs during the "prepare" step of semantic-release
 function prepare(_, { nextRelease, logger }) {
@@ -14,13 +14,13 @@ function prepare(_, { nextRelease, logger }) {
   if (!fs.existsSync(file)) return logger.log('Installer package.json not found, skipping');
 
   // Read and parse the package.json file
-  const pkg = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const package_ = JSON.parse(fs.readFileSync(file, 'utf8'));
 
   // Update the version field with the next release version
-  pkg.version = nextRelease.version;
+  package_.version = nextRelease.version;
 
   // Write the updated JSON back to the file
-  fs.writeFileSync(file, JSON.stringify(pkg, null, 2) + '\n');
+  fs.writeFileSync(file, JSON.stringify(package_, null, 2) + '\n');
 
   // Log success message
   logger.log(`Synced installer package.json to version ${nextRelease.version}`);

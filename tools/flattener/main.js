@@ -1,20 +1,14 @@
-#!/usr/bin/env node
-
-const { Command } = require("commander");
-const fs = require("fs-extra");
-const path = require("node:path");
-const process = require("node:process");
+const { Command } = require('commander');
+const fs = require('fs-extra');
+const path = require('node:path');
+const process = require('node:process');
 
 // Modularized components
-const { findProjectRoot } = require("./projectRoot.js");
-const { promptYesNo, promptPath } = require("./prompts.js");
-const {
-  discoverFiles,
-  filterFiles,
-  aggregateFileContents,
-} = require("./files.js");
-const { generateXMLOutput } = require("./xml.js");
-const { calculateStatistics } = require("./stats.js");
+const { findProjectRoot } = require('./projectRoot.js');
+const { promptYesNo, promptPath } = require('./prompts.js');
+const { discoverFiles, filterFiles, aggregateFileContents } = require('./files.js');
+const { generateXMLOutput } = require('./xml.js');
+const { calculateStatistics } = require('./stats.js');
 
 /**
  * Recursively discover all files in a directory
@@ -73,30 +67,30 @@ const { calculateStatistics } = require("./stats.js");
 const program = new Command();
 
 program
-  .name("bmad-flatten")
-  .description("BMad-Method codebase flattener tool")
-  .version("1.0.0")
-  .option("-i, --input <path>", "Input directory to flatten", process.cwd())
-  .option("-o, --output <path>", "Output file path", "flattened-codebase.xml")
+  .name('bmad-flatten')
+  .description('BMad-Method codebase flattener tool')
+  .version('1.0.0')
+  .option('-i, --input <path>', 'Input directory to flatten', process.cwd())
+  .option('-o, --output <path>', 'Output file path', 'flattened-codebase.xml')
   .action(async (options) => {
     let inputDir = path.resolve(options.input);
     let outputPath = path.resolve(options.output);
 
     // Detect if user explicitly provided -i/--input or -o/--output
     const argv = process.argv.slice(2);
-    const userSpecifiedInput = argv.some((a) =>
-      a === "-i" || a === "--input" || a.startsWith("--input=")
+    const userSpecifiedInput = argv.some(
+      (a) => a === '-i' || a === '--input' || a.startsWith('--input='),
     );
-    const userSpecifiedOutput = argv.some((a) =>
-      a === "-o" || a === "--output" || a.startsWith("--output=")
+    const userSpecifiedOutput = argv.some(
+      (a) => a === '-o' || a === '--output' || a.startsWith('--output='),
     );
-    const noPathArgs = !userSpecifiedInput && !userSpecifiedOutput;
+    const noPathArguments = !userSpecifiedInput && !userSpecifiedOutput;
 
-    if (noPathArgs) {
+    if (noPathArguments) {
       const detectedRoot = await findProjectRoot(process.cwd());
       const suggestedOutput = detectedRoot
-        ? path.join(detectedRoot, "flattened-codebase.xml")
-        : path.resolve("flattened-codebase.xml");
+        ? path.join(detectedRoot, 'flattened-codebase.xml')
+        : path.resolve('flattened-codebase.xml');
 
       if (detectedRoot) {
         const useDefaults = await promptYesNo(
@@ -107,29 +101,23 @@ program
           inputDir = detectedRoot;
           outputPath = suggestedOutput;
         } else {
-          inputDir = await promptPath(
-            "Enter input directory path",
-            process.cwd(),
-          );
+          inputDir = await promptPath('Enter input directory path', process.cwd());
           outputPath = await promptPath(
-            "Enter output file path",
-            path.join(inputDir, "flattened-codebase.xml"),
+            'Enter output file path',
+            path.join(inputDir, 'flattened-codebase.xml'),
           );
         }
       } else {
-        console.log("Could not auto-detect a project root.");
-        inputDir = await promptPath(
-          "Enter input directory path",
-          process.cwd(),
-        );
+        console.log('Could not auto-detect a project root.');
+        inputDir = await promptPath('Enter input directory path', process.cwd());
         outputPath = await promptPath(
-          "Enter output file path",
-          path.join(inputDir, "flattened-codebase.xml"),
+          'Enter output file path',
+          path.join(inputDir, 'flattened-codebase.xml'),
         );
       }
     } else {
       console.error(
-        "Could not auto-detect a project root and no arguments were provided. Please specify -i/--input and -o/--output.",
+        'Could not auto-detect a project root and no arguments were provided. Please specify -i/--input and -o/--output.',
       );
       process.exit(1);
     }
@@ -142,25 +130,23 @@ program
 
     try {
       // Verify input directory exists
-      if (!await fs.pathExists(inputDir)) {
+      if (!(await fs.pathExists(inputDir))) {
         console.error(`❌ Error: Input directory does not exist: ${inputDir}`);
         process.exit(1);
       }
 
       // Import ora dynamically
-      const { default: ora } = await import("ora");
+      const { default: ora } = await import('ora');
 
       // Start file discovery with spinner
-      const discoverySpinner = ora("🔍 Discovering files...").start();
+      const discoverySpinner = ora('🔍 Discovering files...').start();
       const files = await discoverFiles(inputDir);
       const filteredFiles = await filterFiles(files, inputDir);
-      discoverySpinner.succeed(
-        `📁 Found ${filteredFiles.length} files to include`,
-      );
+      discoverySpinner.succeed(`📁 Found ${filteredFiles.length} files to include`);
 
       // Process files with progress tracking
-      console.log("Reading file contents");
-      const processingSpinner = ora("📄 Processing files...").start();
+      console.log('Reading file contents');
+      const processingSpinner = ora('📄 Processing files...').start();
       const aggregatedContent = await aggregateFileContents(
         filteredFiles,
         inputDir,
@@ -178,34 +164,30 @@ program
       }
 
       // Generate XML output using streaming
-      const xmlSpinner = ora("🔧 Generating XML output...").start();
+      const xmlSpinner = ora('🔧 Generating XML output...').start();
       await generateXMLOutput(aggregatedContent, outputPath);
-      xmlSpinner.succeed("📝 XML generation completed");
+      xmlSpinner.succeed('📝 XML generation completed');
 
       // Calculate and display statistics
       const outputStats = await fs.stat(outputPath);
       const stats = calculateStatistics(aggregatedContent, outputStats.size);
 
       // Display completion summary
-      console.log("\n📊 Completion Summary:");
+      console.log('\n📊 Completion Summary:');
       console.log(
-        `✅ Successfully processed ${filteredFiles.length} files into ${
-          path.basename(outputPath)
-        }`,
+        `✅ Successfully processed ${filteredFiles.length} files into ${path.basename(outputPath)}`,
       );
       console.log(`📁 Output file: ${outputPath}`);
       console.log(`📏 Total source size: ${stats.totalSize}`);
       console.log(`📄 Generated XML size: ${stats.xmlSize}`);
-      console.log(
-        `📝 Total lines of code: ${stats.totalLines.toLocaleString()}`,
-      );
+      console.log(`📝 Total lines of code: ${stats.totalLines.toLocaleString()}`);
       console.log(`🔢 Estimated tokens: ${stats.estimatedTokens}`);
       console.log(
         `📊 File breakdown: ${stats.textFiles} text, ${stats.binaryFiles} binary, ${stats.errorFiles} errors`,
       );
     } catch (error) {
-      console.error("❌ Critical error:", error.message);
-      console.error("An unexpected error occurred.");
+      console.error('❌ Critical error:', error.message);
+      console.error('An unexpected error occurred.');
       process.exit(1);
     }
   });

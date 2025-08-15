@@ -1,5 +1,5 @@
 name: Release
-'on':
+"on":
   push:
     branches:
       - main
@@ -22,7 +22,7 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: '!contains(github.event.head_commit.message, ''[skip ci]'')'
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
           cache: npm
           registry-url: https://registry.npmjs.org
       - name: Install dependencies
