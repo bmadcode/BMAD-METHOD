@@ -1,10 +1,10 @@
 const fs = require('fs-extra');
-const path = require('path');
-const crypto = require('crypto');
+const path = require('node:path');
+const crypto = require('node:crypto');
 const yaml = require('js-yaml');
-const chalk = require('chalk').default || require('chalk');
-const { createReadStream, createWriteStream, promises: fsPromises } = require('fs');
-const { pipeline } = require('stream/promises');
+const chalk = require('chalk');
+const { createReadStream, createWriteStream, promises: fsPromises } = require('node:fs');
+const { pipeline } = require('node:stream/promises');
 const resourceLocator = require('./resource-locator');
 
 class FileManager {

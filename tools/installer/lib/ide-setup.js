@@ -1,8 +1,8 @@
-const path = require('path');
+const path = require('node:path');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
-const chalk = require('chalk').default || require('chalk');
-const inquirer = require('inquirer').default || require('inquirer');
+const chalk = require('chalk');
+const inquirer = require('inquirer');
 const fileManager = require('./file-manager');
 const configLoader = require('./config-loader');
 const { extractYamlFromAgent } = require('../../lib/yaml-utils');
