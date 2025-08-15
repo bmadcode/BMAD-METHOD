@@ -15,7 +15,6 @@ const DEFAULT_PATTERNS = [
   "**/node_modules/**",
   "**/bower_components/**",
   "**/vendor/**",
-  "**/packages/**",
   "**/build/**",
   "**/dist/**",
   "**/out/**",
