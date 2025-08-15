@@ -492,7 +492,7 @@ class V3ToV4Upgrader {
       const ideMessages = {
         cursor: 'Rules created in .cursor/rules/',
         'claude-code': 'Commands created in .claude/commands/BMad/',
-        windsurf: 'Rules created in .windsurf/rules/',
+        windsurf: 'Rules created in .windsurf/workflows/',
         trae: 'Rules created in.trae/rules/',
         roo: 'Custom modes created in .roomodes',
         cline: 'Rules created in .clinerules/',
