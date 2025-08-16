@@ -380,7 +380,9 @@ class InputManager {
   }
 
   private setupKeyboard(): void {
-    this.keys = this.scene.input.keyboard.addKeys("W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT");
+    this.keys = this.scene.input.keyboard.addKeys(
+      "W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT",
+    );
   }
 
   private setupTouch(): void {
@@ -585,25 +587,21 @@ src/
 ### Story Implementation Process
 
 1. **Read Story Requirements:**
-
    - Understand acceptance criteria
    - Identify technical requirements
    - Review performance constraints
 
 2. **Plan Implementation:**
-
    - Identify files to create/modify
    - Consider component architecture
    - Plan testing approach
 
 3. **Implement Feature:**
-
    - Follow TypeScript strict mode
    - Use established patterns
    - Maintain 60 FPS performance
 
 4. **Test Implementation:**
-
    - Write unit tests for game logic
    - Test cross-platform functionality
    - Validate performance targets

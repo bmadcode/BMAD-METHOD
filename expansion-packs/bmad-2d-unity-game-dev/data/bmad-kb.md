@@ -270,7 +270,6 @@ that can handle [specific game requirements] with stable performance."
 **Prerequisites**: Game planning documents must exist in `docs/` folder of Unity project
 
 1. **Document Sharding** (CRITICAL STEP for Game Development):
-
    - Documents created by Game Designer/Architect (in Web or IDE) MUST be sharded for development
    - Use core BMad agents or tools to shard:
      a) **Manual**: Use core BMad `shard-doc` task if available
@@ -293,20 +292,17 @@ Resulting Unity Project Folder Structure:
 3. **Game Development Cycle** (Sequential, one game story at a time):
 
    **CRITICAL CONTEXT MANAGEMENT for Unity Development**:
-
    - **Context windows matter!** Always use fresh, clean context windows
    - **Model selection matters!** Use most powerful thinking model for Game SM story creation
    - **ALWAYS start new chat between Game SM, Game Dev, and QA work**
 
    **Step 1 - Game Story Creation**:
-
    - **NEW CLEAN CHAT** → Select powerful model → `/bmad2du/game-sm` → `*draft`
    - Game SM executes create-game-story task using `game-story-tmpl`
    - Review generated story in `docs/game-stories/`
    - Update status from "Draft" to "Approved"
 
    **Step 2 - Unity Game Story Implementation**:
-
    - **NEW CLEAN CHAT** → `/bmad2du/game-developer`
    - Agent asks which game story to implement
    - Include story file content to save game dev agent lookup time
@@ -315,7 +311,6 @@ Resulting Unity Project Folder Structure:
    - Game Dev marks story as "Review" when complete with all Unity tests passing
 
    **Step 3 - Game QA Review**:
-
    - **NEW CLEAN CHAT** → Use core `@qa` agent → execute review-story task
    - QA performs senior Unity developer code review
    - QA can refactor and improve Unity code directly
@@ -355,14 +350,12 @@ Since this expansion pack doesn't include specific brownfield templates, you'll 
 
 1. **Upload Unity project to Web UI** (GitHub URL, files, or zip)
 2. **Create adapted Game Design Document**: `/bmad2du/game-designer` - Modify `game-design-doc-tmpl` to include:
-
    - Analysis of existing game systems
    - Integration points for new features
    - Compatibility requirements
    - Risk assessment for changes
 
 3. **Game Architecture Planning**:
-
    - Use `/bmad2du/game-architect` with `game-architecture-tmpl`
    - Focus on how new features integrate with existing Unity systems
    - Plan for gradual rollout and testing

@@ -4,8 +4,8 @@ const { program } = require('commander');
 const path = require('path');
 const fs = require('fs').promises;
 const yaml = require('js-yaml');
-const chalk = require('chalk');
-const inquirer = require('inquirer');
+const chalk = require('chalk').default || require('chalk');
+const inquirer = require('inquirer').default || require('inquirer');
 const semver = require('semver');
 const https = require('https');
 

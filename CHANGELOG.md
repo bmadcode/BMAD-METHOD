@@ -1,9 +1,8 @@
 ## [4.36.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.36.1...v4.36.2) (2025-08-10)
 
-
 ### Bug Fixes
 
-* align installer dependencies with root package versions for ESM compatibility ([#420](https://github.com/bmadcode/BMAD-METHOD/issues/420)) ([3f6b674](https://github.com/bmadcode/BMAD-METHOD/commit/3f6b67443d61ae6add98656374bed27da4704644))
+- align installer dependencies with root package versions for ESM compatibility ([#420](https://github.com/bmadcode/BMAD-METHOD/issues/420)) ([3f6b674](https://github.com/bmadcode/BMAD-METHOD/commit/3f6b67443d61ae6add98656374bed27da4704644))
 
 ## [4.36.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.36.0...v4.36.1) (2025-08-09)
 
