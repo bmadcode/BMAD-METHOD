@@ -16,6 +16,9 @@ on:
 jobs:
   promote:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     
     steps:
       - name: Checkout repository
@@ -34,6 +37,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
       - name: Switch to stable branch
         run: |
@@ -103,7 +107,9 @@ jobs:
           - Automated promotion via GitHub Actions"
 
       - name: Push stable release
-        run: git push origin stable
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push origin stable
 
       - name: Switch back to main
         run: git checkout main
