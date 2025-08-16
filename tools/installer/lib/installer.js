@@ -1,8 +1,8 @@
 const path = require("node:path");
 const fs = require("fs-extra");
-const chalk = require("chalk");
-const ora = require("ora");
-const inquirer = require("inquirer");
+const chalk = require("chalk").default || require("chalk");
+const ora = require("ora").default || require("ora");
+const inquirer = require("inquirer").default || require("inquirer");
 const fileManager = require("./file-manager");
 const configLoader = require("./config-loader");
 const ideSetup = require("./ide-setup");

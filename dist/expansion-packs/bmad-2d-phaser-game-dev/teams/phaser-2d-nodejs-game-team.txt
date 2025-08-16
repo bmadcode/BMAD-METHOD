@@ -463,7 +463,7 @@ If user selects Option 1, present numbered list of techniques from the brainstor
 1. Apply selected technique according to data file description
 2. Keep engaging with technique until user indicates they want to:
    - Choose a different technique
-   - Apply current ideas to a new technique  
+   - Apply current ideas to a new technique
    - Move to convergent phase
    - End session
 
@@ -580,63 +580,54 @@ CRITICAL: First, help the user select the most appropriate research focus based 
 Present these numbered options to the user:
 
 1. **Product Validation Research**
-
    - Validate product hypotheses and market fit
    - Test assumptions about user needs and solutions
    - Assess technical and business feasibility
    - Identify risks and mitigation strategies
 
 2. **Market Opportunity Research**
-
    - Analyze market size and growth potential
    - Identify market segments and dynamics
    - Assess market entry strategies
    - Evaluate timing and market readiness
 
 3. **User & Customer Research**
-
    - Deep dive into user personas and behaviors
    - Understand jobs-to-be-done and pain points
    - Map customer journeys and touchpoints
    - Analyze willingness to pay and value perception
 
 4. **Competitive Intelligence Research**
-
    - Detailed competitor analysis and positioning
    - Feature and capability comparisons
    - Business model and strategy analysis
    - Identify competitive advantages and gaps
 
 5. **Technology & Innovation Research**
-
    - Assess technology trends and possibilities
    - Evaluate technical approaches and architectures
    - Identify emerging technologies and disruptions
    - Analyze build vs. buy vs. partner options
 
 6. **Industry & Ecosystem Research**
-
    - Map industry value chains and dynamics
    - Identify key players and relationships
    - Analyze regulatory and compliance factors
    - Understand partnership opportunities
 
 7. **Strategic Options Research**
-
    - Evaluate different strategic directions
    - Assess business model alternatives
    - Analyze go-to-market strategies
    - Consider expansion and scaling paths
 
 8. **Risk & Feasibility Research**
-
    - Identify and assess various risk factors
    - Evaluate implementation challenges
    - Analyze resource requirements
    - Consider regulatory and legal implications
 
 9. **Custom Research Focus**
-
    - User-defined research objectives
    - Specialized domain investigation
    - Cross-functional research needs
@@ -805,13 +796,11 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 ### 5. Review and Refinement
 
 1. **Present Complete Prompt**
-
    - Show the full research prompt
    - Explain key elements and rationale
    - Highlight any assumptions made
 
 2. **Gather Feedback**
-
    - Are the objectives clear and correct?
    - Do the questions address all concerns?
    - Is the scope appropriate?
@@ -973,7 +962,6 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 2. If the section contains game flow diagrams, level layouts, or system diagrams, explain each diagram briefly with game development context before offering elicitation options (e.g., "The gameplay loop diagram shows how player actions lead to rewards and progression. Notice how each step maintains player engagement and creates opportunities for skill development.")
 
 3. If the section contains multiple game elements (like multiple mechanics, multiple levels, multiple systems, etc.), inform the user they can apply elicitation actions to:
-
    - The entire section as a whole
    - Individual game elements within the section (specify which element when selecting an action)
 
@@ -1180,9 +1168,9 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 
 ### Change Log
 
-| Date | Version | Description | Author |
-|------|---------|-------------|--------|
-| [Date] | 1.0 | Initial brownfield analysis | [Analyst] |
+| Date   | Version | Description                 | Author    |
+| ------ | ------- | --------------------------- | --------- |
+| [Date] | 1.0     | Initial brownfield analysis | [Analyst] |
 
 ## Quick Reference - Key Files and Entry Points
 
@@ -1205,11 +1193,11 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 
 ### Actual Tech Stack (from package.json/requirements.txt)
 
-| Category | Technology | Version | Notes |
-|----------|------------|---------|--------|
-| Runtime | Node.js | 16.x | [Any constraints] |
-| Framework | Express | 4.18.2 | [Custom middleware?] |
-| Database | PostgreSQL | 13 | [Connection pooling setup] |
+| Category  | Technology | Version | Notes                      |
+| --------- | ---------- | ------- | -------------------------- |
+| Runtime   | Node.js    | 16.x    | [Any constraints]          |
+| Framework | Express    | 4.18.2  | [Custom middleware?]       |
+| Database  | PostgreSQL | 13      | [Connection pooling setup] |
 
 etc...
 
@@ -1248,6 +1236,7 @@ project-root/
 ### Data Models
 
 Instead of duplicating, reference actual model files:
+
 - **User Model**: See `src/models/User.js`
 - **Order Model**: See `src/models/Order.js`
 - **Related Types**: TypeScript definitions in `src/types/`
@@ -1277,10 +1266,10 @@ Instead of duplicating, reference actual model files:
 
 ### External Services
 
-| Service | Purpose | Integration Type | Key Files |
-|---------|---------|------------------|-----------|
-| Stripe | Payments | REST API | `src/integrations/stripe/` |
-| SendGrid | Emails | SDK | `src/services/emailService.js` |
+| Service  | Purpose  | Integration Type | Key Files                      |
+| -------- | -------- | ---------------- | ------------------------------ |
+| Stripe   | Payments | REST API         | `src/integrations/stripe/`     |
+| SendGrid | Emails   | SDK              | `src/services/emailService.js` |
 
 etc...
 
@@ -1325,6 +1314,7 @@ npm run test:integration  # Runs integration tests (requires local DB)
 ### Files That Will Need Modification
 
 Based on the enhancement requirements, these files will be affected:
+
 - `src/services/userService.js` - Add new user fields
 - `src/models/User.js` - Update schema
 - `src/routes/userRoutes.js` - New endpoints
@@ -2386,13 +2376,11 @@ You are developing games as a "Player Experience CEO" - thinking like a game dir
 ### Phase 1: Game Concept and Design
 
 1. **Game Designer**: Start with brainstorming and concept development
-
    - Use \*brainstorm to explore game concepts and mechanics
    - Create Game Brief using game-brief-tmpl
    - Develop core game pillars and player experience goals
 
 2. **Game Designer**: Create comprehensive Game Design Document
-
    - Use game-design-doc-tmpl to create detailed GDD
    - Define all game mechanics, progression, and balance
    - Specify technical requirements and platform targets
@@ -2412,13 +2400,11 @@ You are developing games as a "Player Experience CEO" - thinking like a game dir
 ### Phase 3: Story-Driven Development
 
 5. **Game Scrum Master**: Break down design into development stories
-
    - Use create-game-story task to create detailed implementation stories
    - Each story should be immediately actionable by game developers
    - Apply game-story-dod-checklist to ensure story quality
 
 6. **Game Developer**: Implement game features story by story
-
    - Follow TypeScript strict mode and Phaser 3 best practices
    - Maintain 60 FPS performance target throughout development
    - Use test-driven development for game logic components
@@ -2649,7 +2635,7 @@ Provide a user-friendly interface to the BMad knowledge base without overwhelmin
 
 ## Instructions
 
-When entering KB mode (*kb-mode), follow these steps:
+When entering KB mode (\*kb-mode), follow these steps:
 
 ### 1. Welcome and Guide
 
@@ -2691,12 +2677,12 @@ Or ask me about anything else related to BMad-Method!
 When user is done or wants to exit KB mode:
 
 - Summarize key points discussed if helpful
-- Remind them they can return to KB mode anytime with *kb-mode
+- Remind them they can return to KB mode anytime with \*kb-mode
 - Suggest next steps based on what was discussed
 
 ## Example Interaction
 
-**User**: *kb-mode
+**User**: \*kb-mode
 
 **Assistant**: I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method.
 
@@ -2724,16 +2710,19 @@ Or ask me about anything else related to BMad-Method!
 ## Core Reflective Methods
 
 **Expand or Contract for Audience**
+
 - Ask whether to 'expand' (add detail, elaborate) or 'contract' (simplify, clarify)
 - Identify specific target audience if relevant
 - Tailor content complexity and depth accordingly
 
 **Explain Reasoning (CoT Step-by-Step)**
+
 - Walk through the step-by-step thinking process
 - Reveal underlying assumptions and decision points
 - Show how conclusions were reached from current role's perspective
 
 **Critique and Refine**
+
 - Review output for flaws, inconsistencies, or improvement areas
 - Identify specific weaknesses from role's expertise
 - Suggest refined version reflecting domain knowledge
@@ -2741,12 +2730,14 @@ Or ask me about anything else related to BMad-Method!
 ## Structural Analysis Methods
 
 **Analyze Logical Flow and Dependencies**
+
 - Examine content structure for logical progression
 - Check internal consistency and coherence
 - Identify and validate dependencies between elements
 - Confirm effective ordering and sequencing
 
 **Assess Alignment with Overall Goals**
+
 - Evaluate content contribution to stated objectives
 - Identify any misalignments or gaps
 - Interpret alignment from specific role's perspective
@@ -2755,12 +2746,14 @@ Or ask me about anything else related to BMad-Method!
 ## Risk and Challenge Methods
 
 **Identify Potential Risks and Unforeseen Issues**
+
 - Brainstorm potential risks from role's expertise
 - Identify overlooked edge cases or scenarios
 - Anticipate unintended consequences
 - Highlight implementation challenges
 
 **Challenge from Critical Perspective**
+
 - Adopt critical stance on current content
 - Play devil's advocate from specified viewpoint
 - Argue against proposal highlighting weaknesses
@@ -2769,12 +2762,14 @@ Or ask me about anything else related to BMad-Method!
 ## Creative Exploration Methods
 
 **Tree of Thoughts Deep Dive**
+
 - Break problem into discrete "thoughts" or intermediate steps
 - Explore multiple reasoning paths simultaneously
 - Use self-evaluation to classify each path as "sure", "likely", or "impossible"
 - Apply search algorithms (BFS/DFS) to find optimal solution paths
 
 **Hindsight is 20/20: The 'If Only...' Reflection**
+
 - Imagine retrospective scenario based on current content
 - Identify the one "if only we had known/done X..." insight
 - Describe imagined consequences humorously or dramatically
@@ -2783,6 +2778,7 @@ Or ask me about anything else related to BMad-Method!
 ## Multi-Persona Collaboration Methods
 
 **Agile Team Perspective Shift**
+
 - Rotate through different Scrum team member viewpoints
 - Product Owner: Focus on user value and business impact
 - Scrum Master: Examine process flow and team dynamics
@@ -2790,12 +2786,14 @@ Or ask me about anything else related to BMad-Method!
 - QA: Identify testing scenarios and quality concerns
 
 **Stakeholder Round Table**
+
 - Convene virtual meeting with multiple personas
 - Each persona contributes unique perspective on content
 - Identify conflicts and synergies between viewpoints
 - Synthesize insights into actionable recommendations
 
 **Meta-Prompting Analysis**
+
 - Step back to analyze the structure and logic of current approach
 - Question the format and methodology being used
 - Suggest alternative frameworks or mental models
@@ -2804,24 +2802,28 @@ Or ask me about anything else related to BMad-Method!
 ## Advanced 2025 Techniques
 
 **Self-Consistency Validation**
+
 - Generate multiple reasoning paths for same problem
 - Compare consistency across different approaches
 - Identify most reliable and robust solution
 - Highlight areas where approaches diverge and why
 
 **ReWOO (Reasoning Without Observation)**
+
 - Separate parametric reasoning from tool-based actions
 - Create reasoning plan without external dependencies
 - Identify what can be solved through pure reasoning
 - Optimize for efficiency and reduced token usage
 
 **Persona-Pattern Hybrid**
+
 - Combine specific role expertise with elicitation pattern
 - Architect + Risk Analysis: Deep technical risk assessment
 - UX Expert + User Journey: End-to-end experience critique
 - PM + Stakeholder Analysis: Multi-perspective impact review
 
 **Emergent Collaboration Discovery**
+
 - Allow multiple perspectives to naturally emerge
 - Identify unexpected insights from persona interactions
 - Explore novel combinations of viewpoints
@@ -2830,18 +2832,21 @@ Or ask me about anything else related to BMad-Method!
 ## Game-Based Elicitation Methods
 
 **Red Team vs Blue Team**
+
 - Red Team: Attack the proposal, find vulnerabilities
 - Blue Team: Defend and strengthen the approach
 - Competitive analysis reveals blind spots
 - Results in more robust, battle-tested solutions
 
 **Innovation Tournament**
+
 - Pit multiple alternative approaches against each other
 - Score each approach across different criteria
 - Crowd-source evaluation from different personas
 - Identify winning combination of features
 
 **Escape Room Challenge**
+
 - Present content as constraints to work within
 - Find creative solutions within tight limitations
 - Identify minimum viable approach
@@ -2850,6 +2855,7 @@ Or ask me about anything else related to BMad-Method!
 ## Process Control
 
 **Proceed / No Further Actions**
+
 - Acknowledge choice to finalize current work
 - Accept output as-is or move to next step
 - Prepare to continue without additional elicitation
@@ -2939,7 +2945,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
@@ -2952,14 +2957,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -2968,7 +2971,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -2976,7 +2978,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -2990,7 +2991,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -3000,7 +3000,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -3035,7 +3034,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 [[LLM: Begin by understanding the game design context and goals. Ask clarifying questions if needed to determine the best approach for game-specific ideation.]]
 
 1. **Establish Game Context**
-
    - Understand the game genre or opportunity area
    - Identify target audience and platform constraints
    - Determine session goals (concept exploration vs. mechanic refinement)
@@ -3053,7 +3051,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **"What If" Game Scenarios**
    [[LLM: Generate provocative what-if questions that challenge game design assumptions and expand thinking beyond current genre limitations.]]
-
    - What if players could rewind time in any genre?
    - What if the game world reacted to the player's real-world location?
    - What if failure was more rewarding than success?
@@ -3062,7 +3059,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Cross-Genre Fusion**
    [[LLM: Help user combine unexpected game genres and mechanics to create unique experiences.]]
-
    - "How might [genre A] mechanics work in [genre B]?"
    - Puzzle mechanics in action games
    - Dating sim elements in strategy games
@@ -3071,7 +3067,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Player Motivation Reversal**
    [[LLM: Flip traditional player motivations to reveal new gameplay possibilities.]]
-
    - What if losing was the goal?
    - What if cooperation was forced in competitive games?
    - What if players had to help their enemies?
@@ -3088,7 +3083,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **SCAMPER for Game Mechanics**
    [[LLM: Guide through each SCAMPER prompt specifically for game design.]]
-
    - **S** = Substitute: What mechanics can be substituted? (walking → flying → swimming)
    - **C** = Combine: What systems can be merged? (inventory + character growth)
    - **A** = Adapt: What mechanics from other media? (books, movies, sports)
@@ -3099,7 +3093,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player Agency Spectrum**
    [[LLM: Explore different levels of player control and agency across game systems.]]
-
    - Full Control: Direct character movement, combat, building
    - Indirect Control: Setting rules, giving commands, environmental changes
    - Influence Only: Suggestions, preferences, emotional reactions
@@ -3107,7 +3100,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Temporal Game Design**
    [[LLM: Explore how time affects gameplay and player experience.]]
-
    - Real-time vs. turn-based mechanics
    - Time travel and manipulation
    - Persistent vs. session-based progress
@@ -3118,7 +3110,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Emotion-First Design**
    [[LLM: Start with target emotions and work backward to mechanics that create them.]]
-
    - Target Emotion: Wonder → Mechanics: Discovery, mystery, scale
    - Target Emotion: Triumph → Mechanics: Challenge, skill growth, recognition
    - Target Emotion: Connection → Mechanics: Cooperation, shared goals, communication
@@ -3126,7 +3117,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player Archetype Brainstorming**
    [[LLM: Design for different player types and motivations.]]
-
    - Achievers: Progression, completion, mastery
    - Explorers: Discovery, secrets, world-building
    - Socializers: Interaction, cooperation, community
@@ -3135,7 +3125,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Accessibility-First Innovation**
    [[LLM: Generate ideas that make games more accessible while creating new gameplay.]]
-
    - Visual impairment considerations leading to audio-focused mechanics
    - Motor accessibility inspiring one-handed or simplified controls
    - Cognitive accessibility driving clear feedback and pacing
@@ -3145,7 +3134,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Environmental Storytelling**
    [[LLM: Brainstorm ways the game world itself tells stories without explicit narrative.]]
-
    - How does the environment show history?
    - What do interactive objects reveal about characters?
    - How can level design communicate mood?
@@ -3153,7 +3141,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player-Generated Narrative**
    [[LLM: Explore ways players create their own stories through gameplay.]]
-
    - Emergent storytelling through player choices
    - Procedural narrative generation
    - Player-to-player story sharing
@@ -3161,7 +3148,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Genre Expectation Subversion**
    [[LLM: Identify and deliberately subvert player expectations within genres.]]
-
    - Fantasy RPG where magic is mundane
    - Horror game where monsters are friendly
    - Racing game where going slow is optimal
@@ -3171,7 +3157,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Platform-Specific Design**
    [[LLM: Generate ideas that leverage unique platform capabilities.]]
-
    - Mobile: GPS, accelerometer, camera, always-connected
    - Web: URLs, tabs, social sharing, real-time collaboration
    - Console: Controllers, TV viewing, couch co-op
@@ -3179,7 +3164,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Constraint-Based Creativity**
    [[LLM: Use technical or design constraints as creative catalysts.]]
-
    - One-button games
    - Games without graphics
    - Games that play in notification bars
@@ -3225,19 +3209,16 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 [[LLM: Guide the brainstorming session with appropriate pacing for game design exploration.]]
 
 1. **Inspiration Phase** (10-15 min)
-
    - Reference existing games and mechanics
    - Explore player experiences and emotions
    - Gather visual and thematic inspiration
 
 2. **Divergent Exploration** (25-35 min)
-
    - Generate many game concepts or mechanics
    - Use expansion and fusion techniques
    - Encourage wild and impossible ideas
 
 3. **Player-Centered Filtering** (15-20 min)
-
    - Consider target audience reactions
    - Evaluate emotional impact and engagement
    - Group ideas by player experience goals
@@ -5892,7 +5873,9 @@ class InputManager {
   }
 
   private setupKeyboard(): void {
-    this.keys = this.scene.input.keyboard.addKeys("W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT");
+    this.keys = this.scene.input.keyboard.addKeys(
+      "W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT",
+    );
   }
 
   private setupTouch(): void {
@@ -6097,25 +6080,21 @@ src/
 ### Story Implementation Process
 
 1. **Read Story Requirements:**
-
    - Understand acceptance criteria
    - Identify technical requirements
    - Review performance constraints
 
 2. **Plan Implementation:**
-
    - Identify files to create/modify
    - Consider component architecture
    - Plan testing approach
 
 3. **Implement Feature:**
-
    - Follow TypeScript strict mode
    - Use established patterns
    - Maintain 60 FPS performance
 
 4. **Test Implementation:**
-
    - Write unit tests for game logic
    - Test cross-platform functionality
    - Validate performance targets
@@ -8723,7 +8702,6 @@ sections:
 2. If the section contains game flow diagrams, level layouts, or system diagrams, explain each diagram briefly with game development context before offering elicitation options (e.g., "The gameplay loop diagram shows how player actions lead to rewards and progression. Notice how each step maintains player engagement and creates opportunities for skill development.")
 
 3. If the section contains multiple game elements (like multiple mechanics, multiple levels, multiple systems, etc.), inform the user they can apply elicitation actions to:
-
    - The entire section as a whole
    - Individual game elements within the section (specify which element when selecting an action)
 
@@ -9047,7 +9025,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 [[LLM: Begin by understanding the game design context and goals. Ask clarifying questions if needed to determine the best approach for game-specific ideation.]]
 
 1. **Establish Game Context**
-
    - Understand the game genre or opportunity area
    - Identify target audience and platform constraints
    - Determine session goals (concept exploration vs. mechanic refinement)
@@ -9065,7 +9042,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **"What If" Game Scenarios**
    [[LLM: Generate provocative what-if questions that challenge game design assumptions and expand thinking beyond current genre limitations.]]
-
    - What if players could rewind time in any genre?
    - What if the game world reacted to the player's real-world location?
    - What if failure was more rewarding than success?
@@ -9074,7 +9050,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Cross-Genre Fusion**
    [[LLM: Help user combine unexpected game genres and mechanics to create unique experiences.]]
-
    - "How might [genre A] mechanics work in [genre B]?"
    - Puzzle mechanics in action games
    - Dating sim elements in strategy games
@@ -9083,7 +9058,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Player Motivation Reversal**
    [[LLM: Flip traditional player motivations to reveal new gameplay possibilities.]]
-
    - What if losing was the goal?
    - What if cooperation was forced in competitive games?
    - What if players had to help their enemies?
@@ -9100,7 +9074,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **SCAMPER for Game Mechanics**
    [[LLM: Guide through each SCAMPER prompt specifically for game design.]]
-
    - **S** = Substitute: What mechanics can be substituted? (walking → flying → swimming)
    - **C** = Combine: What systems can be merged? (inventory + character growth)
    - **A** = Adapt: What mechanics from other media? (books, movies, sports)
@@ -9111,7 +9084,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player Agency Spectrum**
    [[LLM: Explore different levels of player control and agency across game systems.]]
-
    - Full Control: Direct character movement, combat, building
    - Indirect Control: Setting rules, giving commands, environmental changes
    - Influence Only: Suggestions, preferences, emotional reactions
@@ -9119,7 +9091,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Temporal Game Design**
    [[LLM: Explore how time affects gameplay and player experience.]]
-
    - Real-time vs. turn-based mechanics
    - Time travel and manipulation
    - Persistent vs. session-based progress
@@ -9130,7 +9101,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Emotion-First Design**
    [[LLM: Start with target emotions and work backward to mechanics that create them.]]
-
    - Target Emotion: Wonder → Mechanics: Discovery, mystery, scale
    - Target Emotion: Triumph → Mechanics: Challenge, skill growth, recognition
    - Target Emotion: Connection → Mechanics: Cooperation, shared goals, communication
@@ -9138,7 +9108,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player Archetype Brainstorming**
    [[LLM: Design for different player types and motivations.]]
-
    - Achievers: Progression, completion, mastery
    - Explorers: Discovery, secrets, world-building
    - Socializers: Interaction, cooperation, community
@@ -9147,7 +9116,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Accessibility-First Innovation**
    [[LLM: Generate ideas that make games more accessible while creating new gameplay.]]
-
    - Visual impairment considerations leading to audio-focused mechanics
    - Motor accessibility inspiring one-handed or simplified controls
    - Cognitive accessibility driving clear feedback and pacing
@@ -9157,7 +9125,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Environmental Storytelling**
    [[LLM: Brainstorm ways the game world itself tells stories without explicit narrative.]]
-
    - How does the environment show history?
    - What do interactive objects reveal about characters?
    - How can level design communicate mood?
@@ -9165,7 +9132,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player-Generated Narrative**
    [[LLM: Explore ways players create their own stories through gameplay.]]
-
    - Emergent storytelling through player choices
    - Procedural narrative generation
    - Player-to-player story sharing
@@ -9173,7 +9139,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Genre Expectation Subversion**
    [[LLM: Identify and deliberately subvert player expectations within genres.]]
-
    - Fantasy RPG where magic is mundane
    - Horror game where monsters are friendly
    - Racing game where going slow is optimal
@@ -9183,7 +9148,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Platform-Specific Design**
    [[LLM: Generate ideas that leverage unique platform capabilities.]]
-
    - Mobile: GPS, accelerometer, camera, always-connected
    - Web: URLs, tabs, social sharing, real-time collaboration
    - Console: Controllers, TV viewing, couch co-op
@@ -9191,7 +9155,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Constraint-Based Creativity**
    [[LLM: Use technical or design constraints as creative catalysts.]]
-
    - One-button games
    - Games without graphics
    - Games that play in notification bars
@@ -9237,19 +9200,16 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 [[LLM: Guide the brainstorming session with appropriate pacing for game design exploration.]]
 
 1. **Inspiration Phase** (10-15 min)
-
    - Reference existing games and mechanics
    - Explore player experiences and emotions
    - Gather visual and thematic inspiration
 
 2. **Divergent Exploration** (25-35 min)
-
    - Generate many game concepts or mechanics
    - Use expansion and fusion techniques
    - Encourage wild and impossible ideas
 
 3. **Player-Centered Filtering** (15-20 min)
-
    - Consider target audience reactions
    - Evaluate emotional impact and engagement
    - Group ideas by player experience goals
@@ -10119,13 +10079,11 @@ You are developing games as a "Player Experience CEO" - thinking like a game dir
 ### Phase 1: Game Concept and Design
 
 1. **Game Designer**: Start with brainstorming and concept development
-
    - Use \*brainstorm to explore game concepts and mechanics
    - Create Game Brief using game-brief-tmpl
    - Develop core game pillars and player experience goals
 
 2. **Game Designer**: Create comprehensive Game Design Document
-
    - Use game-design-doc-tmpl to create detailed GDD
    - Define all game mechanics, progression, and balance
    - Specify technical requirements and platform targets
@@ -10145,13 +10103,11 @@ You are developing games as a "Player Experience CEO" - thinking like a game dir
 ### Phase 3: Story-Driven Development
 
 5. **Game Scrum Master**: Break down design into development stories
-
    - Use create-game-story task to create detailed implementation stories
    - Each story should be immediately actionable by game developers
    - Apply game-story-dod-checklist to ensure story quality
 
 6. **Game Developer**: Implement game features story by story
-
    - Follow TypeScript strict mode and Phaser 3 best practices
    - Maintain 60 FPS performance target throughout development
    - Use test-driven development for game logic components
@@ -10717,7 +10673,9 @@ class InputManager {
   }
 
   private setupKeyboard(): void {
-    this.keys = this.scene.input.keyboard.addKeys("W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT");
+    this.keys = this.scene.input.keyboard.addKeys(
+      "W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT",
+    );
   }
 
   private setupTouch(): void {
@@ -10922,25 +10880,21 @@ src/
 ### Story Implementation Process
 
 1. **Read Story Requirements:**
-
    - Understand acceptance criteria
    - Identify technical requirements
    - Review performance constraints
 
 2. **Plan Implementation:**
-
    - Identify files to create/modify
    - Consider component architecture
    - Plan testing approach
 
 3. **Implement Feature:**
-
    - Follow TypeScript strict mode
    - Use established patterns
    - Maintain 60 FPS performance
 
 4. **Test Implementation:**
-
    - Write unit tests for game logic
    - Test cross-platform functionality
    - Validate performance targets

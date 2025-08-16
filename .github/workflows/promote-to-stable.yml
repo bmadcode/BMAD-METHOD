@@ -1,0 +1,144 @@
+name: Promote to Stable
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type'
+        required: true
+        default: 'minor'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+      - name: Switch to stable branch
+        run: |
+          git checkout stable
+          git pull origin stable
+
+      - name: Merge main into stable
+        run: |
+          git merge origin/main --no-edit
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get current version and calculate new version
+        id: version
+        run: |
+          # Get current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          # Remove beta suffix if present
+          BASE_VERSION=$(echo $CURRENT_VERSION | sed 's/-beta\.[0-9]\+//')
+          echo "base_version=$BASE_VERSION" >> $GITHUB_OUTPUT
+          
+          # Calculate new version based on bump type
+          IFS='.' read -ra VERSION_PARTS <<< "$BASE_VERSION"
+          MAJOR=${VERSION_PARTS[0]}
+          MINOR=${VERSION_PARTS[1]}
+          PATCH=${VERSION_PARTS[2]}
+          
+          case "${{ github.event.inputs.version_bump }}" in
+            "major")
+              NEW_VERSION="$((MAJOR + 1)).0.0"
+              ;;
+            "minor")
+              NEW_VERSION="$MAJOR.$((MINOR + 1)).0"
+              ;;
+            "patch")
+              NEW_VERSION="$MAJOR.$MINOR.$((PATCH + 1))"
+              ;;
+            *)
+              NEW_VERSION="$BASE_VERSION"
+              ;;
+          esac
+          
+          # Check if calculated version already exists on NPM and increment if necessary
+          while npm view bmad-method@$NEW_VERSION version >/dev/null 2>&1; do
+            echo "Version $NEW_VERSION already exists, incrementing..."
+            IFS='.' read -ra NEW_VERSION_PARTS <<< "$NEW_VERSION"
+            NEW_MAJOR=${NEW_VERSION_PARTS[0]}
+            NEW_MINOR=${NEW_VERSION_PARTS[1]}
+            NEW_PATCH=${NEW_VERSION_PARTS[2]}
+            
+            case "${{ github.event.inputs.version_bump }}" in
+              "major")
+                NEW_VERSION="$((NEW_MAJOR + 1)).0.0"
+                ;;
+              "minor")
+                NEW_VERSION="$NEW_MAJOR.$((NEW_MINOR + 1)).0"
+                ;;
+              "patch")
+                NEW_VERSION="$NEW_MAJOR.$NEW_MINOR.$((NEW_PATCH + 1))"
+                ;;
+            esac
+          done
+          
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "Promoting from $CURRENT_VERSION to $NEW_VERSION"
+
+      - name: Update package.json versions
+        run: |
+          # Update main package.json
+          npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          
+          # Update installer package.json
+          sed -i 's/"version": ".*"/"version": "${{ steps.version.outputs.new_version }}"/' tools/installer/package.json
+
+      - name: Update package-lock.json
+        run: npm install --package-lock-only
+
+      - name: Commit stable release
+        run: |
+          git add .
+          git commit -m "feat: promote to stable ${{ steps.version.outputs.new_version }}
+
+          BREAKING CHANGE: Promote beta features to stable release
+
+          - Update version from ${{ steps.version.outputs.current_version }} to ${{ steps.version.outputs.new_version }}
+          - Automated promotion via GitHub Actions"
+
+      - name: Push stable release
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push origin stable
+
+      - name: Switch back to main
+        run: git checkout main
+
+      - name: Summary
+        run: |
+          echo "🎉 Successfully promoted to stable!"
+          echo "📦 Version: ${{ steps.version.outputs.new_version }}"
+          echo "🚀 The stable release will be automatically published to NPM via semantic-release"
+          echo "✅ Users running 'npx bmad-method install' will now get version ${{ steps.version.outputs.new_version }}"

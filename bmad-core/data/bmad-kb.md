@@ -542,7 +542,7 @@ Each status change requires user verification and approval before proceeding.
 #### Greenfield Development
 
 - Business analysis and market research
-- Product requirements and feature definition  
+- Product requirements and feature definition
 - System architecture and design
 - Development execution
 - Testing and deployment
@@ -651,8 +651,11 @@ Templates with Level 2 headings (`##`) can be automatically sharded:
 
 ```markdown
 ## Goals and Background Context
-## Requirements  
+
+## Requirements
+
 ## User Interface Design Goals
+
 ## Success Metrics
 ```
 

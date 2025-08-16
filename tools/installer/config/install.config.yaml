@@ -28,6 +28,16 @@ ide-configurations:
       # To use BMad agents in Claude Code:
       # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
       # 2. Claude will switch to that agent's persona
+  crush:
+    name: Crush
+    rule-dir: .crush/commands/BMad/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Crush:
+      # 1. Press CTRL + P and press TAB
+      # 2. Select agent or task
+      # 3. Crush will switch to that agent's persona / task
   windsurf:
     name: Windsurf
     rule-dir: .windsurf/rules/

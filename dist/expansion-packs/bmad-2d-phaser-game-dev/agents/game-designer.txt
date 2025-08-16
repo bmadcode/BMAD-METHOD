@@ -210,7 +210,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
@@ -223,14 +222,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -239,7 +236,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -247,7 +243,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -261,7 +256,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -271,7 +265,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -306,7 +299,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 [[LLM: Begin by understanding the game design context and goals. Ask clarifying questions if needed to determine the best approach for game-specific ideation.]]
 
 1. **Establish Game Context**
-
    - Understand the game genre or opportunity area
    - Identify target audience and platform constraints
    - Determine session goals (concept exploration vs. mechanic refinement)
@@ -324,7 +316,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **"What If" Game Scenarios**
    [[LLM: Generate provocative what-if questions that challenge game design assumptions and expand thinking beyond current genre limitations.]]
-
    - What if players could rewind time in any genre?
    - What if the game world reacted to the player's real-world location?
    - What if failure was more rewarding than success?
@@ -333,7 +324,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Cross-Genre Fusion**
    [[LLM: Help user combine unexpected game genres and mechanics to create unique experiences.]]
-
    - "How might [genre A] mechanics work in [genre B]?"
    - Puzzle mechanics in action games
    - Dating sim elements in strategy games
@@ -342,7 +332,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Player Motivation Reversal**
    [[LLM: Flip traditional player motivations to reveal new gameplay possibilities.]]
-
    - What if losing was the goal?
    - What if cooperation was forced in competitive games?
    - What if players had to help their enemies?
@@ -359,7 +348,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **SCAMPER for Game Mechanics**
    [[LLM: Guide through each SCAMPER prompt specifically for game design.]]
-
    - **S** = Substitute: What mechanics can be substituted? (walking → flying → swimming)
    - **C** = Combine: What systems can be merged? (inventory + character growth)
    - **A** = Adapt: What mechanics from other media? (books, movies, sports)
@@ -370,7 +358,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player Agency Spectrum**
    [[LLM: Explore different levels of player control and agency across game systems.]]
-
    - Full Control: Direct character movement, combat, building
    - Indirect Control: Setting rules, giving commands, environmental changes
    - Influence Only: Suggestions, preferences, emotional reactions
@@ -378,7 +365,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Temporal Game Design**
    [[LLM: Explore how time affects gameplay and player experience.]]
-
    - Real-time vs. turn-based mechanics
    - Time travel and manipulation
    - Persistent vs. session-based progress
@@ -389,7 +375,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Emotion-First Design**
    [[LLM: Start with target emotions and work backward to mechanics that create them.]]
-
    - Target Emotion: Wonder → Mechanics: Discovery, mystery, scale
    - Target Emotion: Triumph → Mechanics: Challenge, skill growth, recognition
    - Target Emotion: Connection → Mechanics: Cooperation, shared goals, communication
@@ -397,7 +382,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player Archetype Brainstorming**
    [[LLM: Design for different player types and motivations.]]
-
    - Achievers: Progression, completion, mastery
    - Explorers: Discovery, secrets, world-building
    - Socializers: Interaction, cooperation, community
@@ -406,7 +390,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Accessibility-First Innovation**
    [[LLM: Generate ideas that make games more accessible while creating new gameplay.]]
-
    - Visual impairment considerations leading to audio-focused mechanics
    - Motor accessibility inspiring one-handed or simplified controls
    - Cognitive accessibility driving clear feedback and pacing
@@ -416,7 +399,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Environmental Storytelling**
    [[LLM: Brainstorm ways the game world itself tells stories without explicit narrative.]]
-
    - How does the environment show history?
    - What do interactive objects reveal about characters?
    - How can level design communicate mood?
@@ -424,7 +406,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Player-Generated Narrative**
    [[LLM: Explore ways players create their own stories through gameplay.]]
-
    - Emergent storytelling through player choices
    - Procedural narrative generation
    - Player-to-player story sharing
@@ -432,7 +413,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 3. **Genre Expectation Subversion**
    [[LLM: Identify and deliberately subvert player expectations within genres.]]
-
    - Fantasy RPG where magic is mundane
    - Horror game where monsters are friendly
    - Racing game where going slow is optimal
@@ -442,7 +422,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 1. **Platform-Specific Design**
    [[LLM: Generate ideas that leverage unique platform capabilities.]]
-
    - Mobile: GPS, accelerometer, camera, always-connected
    - Web: URLs, tabs, social sharing, real-time collaboration
    - Console: Controllers, TV viewing, couch co-op
@@ -450,7 +429,6 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 
 2. **Constraint-Based Creativity**
    [[LLM: Use technical or design constraints as creative catalysts.]]
-
    - One-button games
    - Games without graphics
    - Games that play in notification bars
@@ -496,19 +474,16 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 [[LLM: Guide the brainstorming session with appropriate pacing for game design exploration.]]
 
 1. **Inspiration Phase** (10-15 min)
-
    - Reference existing games and mechanics
    - Explore player experiences and emotions
    - Gather visual and thematic inspiration
 
 2. **Divergent Exploration** (25-35 min)
-
    - Generate many game concepts or mechanics
    - Use expansion and fusion techniques
    - Encourage wild and impossible ideas
 
 3. **Player-Centered Filtering** (15-20 min)
-
    - Consider target audience reactions
    - Evaluate emotional impact and engagement
    - Group ideas by player experience goals
@@ -629,63 +604,54 @@ CRITICAL: First, help the user select the most appropriate research focus based 
 Present these numbered options to the user:
 
 1. **Product Validation Research**
-
    - Validate product hypotheses and market fit
    - Test assumptions about user needs and solutions
    - Assess technical and business feasibility
    - Identify risks and mitigation strategies
 
 2. **Market Opportunity Research**
-
    - Analyze market size and growth potential
    - Identify market segments and dynamics
    - Assess market entry strategies
    - Evaluate timing and market readiness
 
 3. **User & Customer Research**
-
    - Deep dive into user personas and behaviors
    - Understand jobs-to-be-done and pain points
    - Map customer journeys and touchpoints
    - Analyze willingness to pay and value perception
 
 4. **Competitive Intelligence Research**
-
    - Detailed competitor analysis and positioning
    - Feature and capability comparisons
    - Business model and strategy analysis
    - Identify competitive advantages and gaps
 
 5. **Technology & Innovation Research**
-
    - Assess technology trends and possibilities
    - Evaluate technical approaches and architectures
    - Identify emerging technologies and disruptions
    - Analyze build vs. buy vs. partner options
 
 6. **Industry & Ecosystem Research**
-
    - Map industry value chains and dynamics
    - Identify key players and relationships
    - Analyze regulatory and compliance factors
    - Understand partnership opportunities
 
 7. **Strategic Options Research**
-
    - Evaluate different strategic directions
    - Assess business model alternatives
    - Analyze go-to-market strategies
    - Consider expansion and scaling paths
 
 8. **Risk & Feasibility Research**
-
    - Identify and assess various risk factors
    - Evaluate implementation challenges
    - Analyze resource requirements
    - Consider regulatory and legal implications
 
 9. **Custom Research Focus**
-
    - User-defined research objectives
    - Specialized domain investigation
    - Cross-functional research needs
@@ -854,13 +820,11 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 ### 5. Review and Refinement
 
 1. **Present Complete Prompt**
-
    - Show the full research prompt
    - Explain key elements and rationale
    - Highlight any assumptions made
 
 2. **Gather Feedback**
-
    - Are the objectives clear and correct?
    - Do the questions address all concerns?
    - Is the scope appropriate?
@@ -918,7 +882,6 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 2. If the section contains game flow diagrams, level layouts, or system diagrams, explain each diagram briefly with game development context before offering elicitation options (e.g., "The gameplay loop diagram shows how player actions lead to rewards and progression. Notice how each step maintains player engagement and creates opportunities for skill development.")
 
 3. If the section contains multiple game elements (like multiple mechanics, multiple levels, multiple systems, etc.), inform the user they can apply elicitation actions to:
-
    - The entire section as a whole
    - Individual game elements within the section (specify which element when selecting an action)
 

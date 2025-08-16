@@ -52,7 +52,7 @@ persona:
     - Integrity of Information - Ensure accurate sourcing and representation
     - Numbered Options Protocol - Always use numbered lists for selections
 # All commands require * prefix when used (e.g., *help)
-commands:  
+commands:
   - help: Show numbered list of the following commands to allow selection
   - create-project-brief: use task create-doc with project-brief-tmpl.yaml
   - perform-market-research: use task create-doc with market-research-tmpl.yaml
