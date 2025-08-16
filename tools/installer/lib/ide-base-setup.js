@@ -3,10 +3,10 @@
  * Reduces duplication and provides shared methods
  */
 
-const path = require('node:path');
+const path = require('path');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
-const chalk = require('chalk');
+const chalk = require('chalk').default || require('chalk');
 const fileManager = require('./file-manager');
 const resourceLocator = require('./resource-locator');
 const { extractYamlFromAgent } = require('../../lib/yaml-utils');
