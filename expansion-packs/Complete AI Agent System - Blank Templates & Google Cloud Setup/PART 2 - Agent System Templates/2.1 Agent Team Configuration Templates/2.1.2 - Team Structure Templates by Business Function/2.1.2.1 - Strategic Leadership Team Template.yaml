@@ -1,0 +1,14 @@
+bundle:
+  name: {{COMPANY_NAME}} Strategic Leadership Team
+  icon: 🎯
+  description: Executive leadership team providing strategic direction, operational oversight, and business planning for {{INDUSTRY}} {{BUSINESS_TYPE}}.
+
+agents:
+  - {{COMPANY_PREFIX}}-ceo-orchestrator
+  - operations-manager
+  - business-development-manager
+
+workflows:
+  - strategic-planning
+  - business-development
+  - operational-optimization
