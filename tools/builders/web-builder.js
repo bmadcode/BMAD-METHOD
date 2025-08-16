@@ -292,7 +292,7 @@ These references map directly to bundle sections:
 
     for (const packName of expansionPacks) {
       console.log(`  Building expansion pack: ${packName}`);
-      await this.buildExpansionPack(packName, options);
+      await this.buildExpansionPack(packName, { ...options, clean: false });
     }
 
     console.log(`Built ${expansionPacks.length} expansion pack bundles`);
@@ -327,7 +327,7 @@ These references map directly to bundle sections:
           console.log(`      - ${agentName}`);
 
           // Build individual agent bundle
-          const bundle = await this.buildExpansionAgentBundle(packName, packDir, agentName);
+          const bundle = await this.buildExpansionAgentBundle(packName, packDir, agentName, options.language);
 
           // Write to all output directories
           for (const outputDir of outputDirs) {
@@ -353,7 +353,7 @@ These references map directly to bundle sections:
         const teamConfigPath = path.join(agentTeamsDir, teamFile);
 
         // Build expansion pack as a team bundle
-        const bundle = await this.buildExpansionTeamBundle(packName, packDir, teamConfigPath);
+        const bundle = await this.buildExpansionTeamBundle(packName, packDir, teamConfigPath, options.language);
 
         // Write to all output directories
         for (const outputDir of outputDirs) {
@@ -371,13 +371,28 @@ These references map directly to bundle sections:
     }
   }
 
-  async buildExpansionAgentBundle(packName, packDir, agentName) {
+  async buildExpansionAgentBundle(packName, packDir, agentName, language = null) {
     const template = this.generateWebInstructions('expansion-agent', packName);
     const sections = [template];
 
     // Add agent configuration
+    let agentContent = await fs.readFile(path.join(packDir, "agents", `${agentName}.md`), "utf8");
+
+    if (language) {
+      const yaml = require("js-yaml");
+      const yamlContent = yamlUtils.extractYamlFromAgent(agentContent);
+      if (yamlContent) {
+        const agentConfig = yaml.load(yamlContent);
+        if (!agentConfig["activation-instructions"]) {
+          agentConfig["activation-instructions"] = [];
+        }
+        agentConfig["activation-instructions"].push(`You must reply in ${language}.`);
+        const newYamlContent = yaml.dump(agentConfig);
+        agentContent = agentContent.replace(yamlContent, newYamlContent);
+      }
+    }
+
     const agentPath = path.join(packDir, "agents", `${agentName}.md`);
-    const agentContent = await fs.readFile(agentPath, "utf8");
     const agentWebPath = this.convertToWebPath(agentPath, packName);
     sections.push(this.formatSection(agentWebPath, agentContent, packName));
 
@@ -465,7 +480,7 @@ These references map directly to bundle sections:
     return sections.join("\n");
   }
 
-  async buildExpansionTeamBundle(packName, packDir, teamConfigPath) {
+  async buildExpansionTeamBundle(packName, packDir, teamConfigPath, language = null) {
     const template = this.generateWebInstructions('expansion-team', packName);
 
     const sections = [template];
@@ -498,7 +513,7 @@ These references map directly to bundle sections:
       try {
         const resourceFiles = await fs.readdir(resourcePath);
         for (const resourceFile of resourceFiles.filter(
-          (f) => f.endsWith(".md") || f.endsWith(".yaml")
+          (f) => f.endsWith(".md") || f.endsWith(".yaml") || f.endsWith(".csv")
         )) {
           expansionResources.set(`${resourceDir}#${resourceFile}`, true);
         }
@@ -520,65 +535,60 @@ These references map directly to bundle sections:
     const allDependencies = new Map();
 
     for (const agentId of agentsToProcess) {
+      let agentContent;
+      let agentPath;
+
       if (expansionAgents.has(agentId)) {
         // Use expansion pack version (override)
-        const agentPath = path.join(agentsDir, `${agentId}.md`);
-        const agentContent = await fs.readFile(agentPath, "utf8");
-        const expansionAgentWebPath = this.convertToWebPath(agentPath, packName);
-        sections.push(this.formatSection(expansionAgentWebPath, agentContent, packName));
-
-        // Parse and collect dependencies from expansion agent
-        const agentYaml = agentContent.match(/```yaml\n([\s\S]*?)\n```/);
-        if (agentYaml) {
-          try {
-            const agentConfig = this.parseYaml(agentYaml[1]);
-            if (agentConfig.dependencies) {
-              for (const [resourceType, resources] of Object.entries(agentConfig.dependencies)) {
-                if (Array.isArray(resources)) {
-                  for (const resourceName of resources) {
-                    const key = `${resourceType}#${resourceName}`;
-                    if (!allDependencies.has(key)) {
-                      allDependencies.set(key, { type: resourceType, name: resourceName });
-                    }
-                  }
-                }
-              }
-            }
-          } catch (error) {
-            console.debug(`Failed to parse agent YAML for ${agentId}:`, error.message);
-          }
-        }
+        agentPath = path.join(agentsDir, `${agentId}.md`);
+        agentContent = await fs.readFile(agentPath, "utf8");
       } else {
         // Use core BMad version
         try {
-          const coreAgentPath = path.join(this.rootDir, "bmad-core", "agents", `${agentId}.md`);
-          const coreAgentContent = await fs.readFile(coreAgentPath, "utf8");
-          const coreAgentWebPath = this.convertToWebPath(coreAgentPath, packName);
-          sections.push(this.formatSection(coreAgentWebPath, coreAgentContent, packName));
+          agentPath = path.join(this.rootDir, "bmad-core", "agents", `${agentId}.md`);
+          agentContent = await fs.readFile(agentPath, "utf8");
+        } catch (error) {
+          console.warn(`    ⚠ Agent ${agentId} not found in core or expansion pack`);
+          continue;
+        }
+      }
 
-          // Parse and collect dependencies from core agent
-          const yamlContent = yamlUtils.extractYamlFromAgent(coreAgentContent, true);
-          if (yamlContent) {
-            try {
-              const agentConfig = this.parseYaml(yamlContent);
-              if (agentConfig.dependencies) {
-                for (const [resourceType, resources] of Object.entries(agentConfig.dependencies)) {
-                  if (Array.isArray(resources)) {
-                    for (const resourceName of resources) {
-                      const key = `${resourceType}#${resourceName}`;
-                      if (!allDependencies.has(key)) {
-                        allDependencies.set(key, { type: resourceType, name: resourceName });
-                      }
-                    }
+      if (language) {
+        const yaml = require("js-yaml");
+        const yamlContent = yamlUtils.extractYamlFromAgent(agentContent);
+        if (yamlContent) {
+          const agentConfig = yaml.load(yamlContent);
+          if (!agentConfig["activation-instructions"]) {
+            agentConfig["activation-instructions"] = [];
+          }
+          agentConfig["activation-instructions"].push(`You must reply in ${language}.`);
+          const newYamlContent = yaml.dump(agentConfig);
+          agentContent = agentContent.replace(yamlContent, newYamlContent);
+        }
+      }
+
+      const agentWebPath = this.convertToWebPath(agentPath, packName);
+      sections.push(this.formatSection(agentWebPath, agentContent, packName));
+
+      // Parse and collect dependencies from agent
+      const agentYaml = agentContent.match(/```yaml\n([\s\S]*?)\n```/);
+      if (agentYaml) {
+        try {
+          const agentConfig = this.parseYaml(agentYaml[1]);
+          if (agentConfig.dependencies) {
+            for (const [resourceType, resources] of Object.entries(agentConfig.dependencies)) {
+              if (Array.isArray(resources)) {
+                for (const resourceName of resources) {
+                  const key = `${resourceType}#${resourceName}`;
+                  if (!allDependencies.has(key)) {
+                    allDependencies.set(key, { type: resourceType, name: resourceName });
                   }
                 }
               }
-            } catch (error) {
-              console.debug(`Failed to parse agent YAML for ${agentId}:`, error.message);
             }
           }
         } catch (error) {
-          console.warn(`    ⚠ Agent ${agentId} not found in core or expansion pack`);
+          console.debug(`Failed to parse agent YAML for ${agentId}:`, error.message);
         }
       }
     }

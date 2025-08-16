@@ -1,0 +1,13 @@
+bundle:
+  name: Film Pre-Production Team
+  icon: 🎬
+  description: A team of AI agents specialized in the creative and logistical tasks of film pre-production.
+agents:
+  - bmad-orchestrator
+  - screenwriter
+  - director
+  - producer
+  - cinematographer
+  - production-designer
+workflows:
+  - film-pre-production-workflow.yaml

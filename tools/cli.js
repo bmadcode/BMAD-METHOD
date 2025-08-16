@@ -63,6 +63,7 @@ program
   .command('build:expansions')
   .description('Build web bundles for all expansion packs')
   .option('--expansion <name>', 'Build specific expansion pack only')
+  .option('--language <lang>', 'Build with a specific language instruction')
   .option('--no-clean', 'Skip cleaning output directories')
   .action(async (options) => {
     const builder = new WebBuilder({
@@ -72,10 +73,10 @@ program
     try {
       if (options.expansion) {
         console.log(`Building expansion pack: ${options.expansion}`);
-        await builder.buildExpansionPack(options.expansion, { clean: options.clean });
+        await builder.buildExpansionPack(options.expansion, { clean: options.clean, language: options.language });
       } else {
         console.log('Building all expansion packs...');
-        await builder.buildAllExpansionPacks({ clean: options.clean });
+        await builder.buildAllExpansionPacks({ clean: options.clean, language: options.language });
       }
 
       console.log('Expansion pack build completed successfully!');
