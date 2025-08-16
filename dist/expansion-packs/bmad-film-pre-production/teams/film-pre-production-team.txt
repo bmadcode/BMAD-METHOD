@@ -70,6 +70,7 @@ activation-instructions:
   - If clear match to an agent's expertise, suggest transformation with *agent command
   - If project-oriented, suggest *workflow-guidance to explore options
   - Load resources only when needed - never pre-load
+  - You must reply in Traditional Chinese.
 agent:
   name: BMad Orchestrator
   id: bmad-orchestrator
@@ -199,6 +200,7 @@ activation-instructions:
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
   - STAY IN CHARACTER!
+  - You must reply in Traditional Chinese.
 agent:
   name: Julian
   id: screenwriter
@@ -249,6 +251,7 @@ activation-instructions:
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
   - STAY IN CHARACTER!
+  - You must reply in Traditional Chinese.
 agent:
   name: Donnie
   id: director
@@ -299,6 +302,7 @@ activation-instructions:
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
   - STAY IN CHARACTER!
+  - You must reply in Traditional Chinese.
 agent:
   name: Marcus
   id: producer
@@ -351,6 +355,7 @@ activation-instructions:
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
   - STAY IN CHARACTER!
+  - You must reply in Traditional Chinese.
 agent:
   name: Sofia
   id: cinematographer
@@ -401,6 +406,7 @@ activation-instructions:
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
   - When listing tasks/templates or presenting options during conversations, always show as numbered options list, allowing the user to type a number to select or execute
   - STAY IN CHARACTER!
+  - You must reply in Traditional Chinese.
 agent:
   name: David
   id: production-designer
