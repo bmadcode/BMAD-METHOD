@@ -728,7 +728,7 @@ Provide a user-friendly interface to the BMad knowledge base without overwhelmin
 
 ## Instructions
 
-When entering KB mode (*kb-mode), follow these steps:
+When entering KB mode (\*kb-mode), follow these steps:
 
 ### 1. Welcome and Guide
 
@@ -770,12 +770,12 @@ Or ask me about anything else related to BMad-Method!
 When user is done or wants to exit KB mode:
 
 - Summarize key points discussed if helpful
-- Remind them they can return to KB mode anytime with *kb-mode
+- Remind them they can return to KB mode anytime with \*kb-mode
 - Suggest next steps based on what was discussed
 
 ## Example Interaction
 
-**User**: *kb-mode
+**User**: \*kb-mode
 
 **Assistant**: I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method.
 
@@ -1342,7 +1342,7 @@ Each status change requires user verification and approval before proceeding.
 #### Greenfield Development
 
 - Business analysis and market research
-- Product requirements and feature definition  
+- Product requirements and feature definition
 - System architecture and design
 - Development execution
 - Testing and deployment
@@ -1451,8 +1451,11 @@ Templates with Level 2 headings (`##`) can be automatically sharded:
 
 ```markdown
 ## Goals and Background Context
-## Requirements  
+
+## Requirements
+
 ## User Interface Design Goals
+
 ## Success Metrics
 ```
 
@@ -1609,16 +1612,19 @@ Use the **expansion-creator** pack to build your own:
 ## Core Reflective Methods
 
 **Expand or Contract for Audience**
+
 - Ask whether to 'expand' (add detail, elaborate) or 'contract' (simplify, clarify)
 - Identify specific target audience if relevant
 - Tailor content complexity and depth accordingly
 
 **Explain Reasoning (CoT Step-by-Step)**
+
 - Walk through the step-by-step thinking process
 - Reveal underlying assumptions and decision points
 - Show how conclusions were reached from current role's perspective
 
 **Critique and Refine**
+
 - Review output for flaws, inconsistencies, or improvement areas
 - Identify specific weaknesses from role's expertise
 - Suggest refined version reflecting domain knowledge
@@ -1626,12 +1632,14 @@ Use the **expansion-creator** pack to build your own:
 ## Structural Analysis Methods
 
 **Analyze Logical Flow and Dependencies**
+
 - Examine content structure for logical progression
 - Check internal consistency and coherence
 - Identify and validate dependencies between elements
 - Confirm effective ordering and sequencing
 
 **Assess Alignment with Overall Goals**
+
 - Evaluate content contribution to stated objectives
 - Identify any misalignments or gaps
 - Interpret alignment from specific role's perspective
@@ -1640,12 +1648,14 @@ Use the **expansion-creator** pack to build your own:
 ## Risk and Challenge Methods
 
 **Identify Potential Risks and Unforeseen Issues**
+
 - Brainstorm potential risks from role's expertise
 - Identify overlooked edge cases or scenarios
 - Anticipate unintended consequences
 - Highlight implementation challenges
 
 **Challenge from Critical Perspective**
+
 - Adopt critical stance on current content
 - Play devil's advocate from specified viewpoint
 - Argue against proposal highlighting weaknesses
@@ -1654,12 +1664,14 @@ Use the **expansion-creator** pack to build your own:
 ## Creative Exploration Methods
 
 **Tree of Thoughts Deep Dive**
+
 - Break problem into discrete "thoughts" or intermediate steps
 - Explore multiple reasoning paths simultaneously
 - Use self-evaluation to classify each path as "sure", "likely", or "impossible"
 - Apply search algorithms (BFS/DFS) to find optimal solution paths
 
 **Hindsight is 20/20: The 'If Only...' Reflection**
+
 - Imagine retrospective scenario based on current content
 - Identify the one "if only we had known/done X..." insight
 - Describe imagined consequences humorously or dramatically
@@ -1668,6 +1680,7 @@ Use the **expansion-creator** pack to build your own:
 ## Multi-Persona Collaboration Methods
 
 **Agile Team Perspective Shift**
+
 - Rotate through different Scrum team member viewpoints
 - Product Owner: Focus on user value and business impact
 - Scrum Master: Examine process flow and team dynamics
@@ -1675,12 +1688,14 @@ Use the **expansion-creator** pack to build your own:
 - QA: Identify testing scenarios and quality concerns
 
 **Stakeholder Round Table**
+
 - Convene virtual meeting with multiple personas
 - Each persona contributes unique perspective on content
 - Identify conflicts and synergies between viewpoints
 - Synthesize insights into actionable recommendations
 
 **Meta-Prompting Analysis**
+
 - Step back to analyze the structure and logic of current approach
 - Question the format and methodology being used
 - Suggest alternative frameworks or mental models
@@ -1689,24 +1704,28 @@ Use the **expansion-creator** pack to build your own:
 ## Advanced 2025 Techniques
 
 **Self-Consistency Validation**
+
 - Generate multiple reasoning paths for same problem
 - Compare consistency across different approaches
 - Identify most reliable and robust solution
 - Highlight areas where approaches diverge and why
 
 **ReWOO (Reasoning Without Observation)**
+
 - Separate parametric reasoning from tool-based actions
 - Create reasoning plan without external dependencies
 - Identify what can be solved through pure reasoning
 - Optimize for efficiency and reduced token usage
 
 **Persona-Pattern Hybrid**
+
 - Combine specific role expertise with elicitation pattern
 - Architect + Risk Analysis: Deep technical risk assessment
 - UX Expert + User Journey: End-to-end experience critique
 - PM + Stakeholder Analysis: Multi-perspective impact review
 
 **Emergent Collaboration Discovery**
+
 - Allow multiple perspectives to naturally emerge
 - Identify unexpected insights from persona interactions
 - Explore novel combinations of viewpoints
@@ -1715,18 +1734,21 @@ Use the **expansion-creator** pack to build your own:
 ## Game-Based Elicitation Methods
 
 **Red Team vs Blue Team**
+
 - Red Team: Attack the proposal, find vulnerabilities
 - Blue Team: Defend and strengthen the approach
 - Competitive analysis reveals blind spots
 - Results in more robust, battle-tested solutions
 
 **Innovation Tournament**
+
 - Pit multiple alternative approaches against each other
 - Score each approach across different criteria
 - Crowd-source evaluation from different personas
 - Identify winning combination of features
 
 **Escape Room Challenge**
+
 - Present content as constraints to work within
 - Find creative solutions within tight limitations
 - Identify minimum viable approach
@@ -1735,6 +1757,7 @@ Use the **expansion-creator** pack to build your own:
 ## Process Control
 
 **Proceed / No Further Actions**
+
 - Acknowledge choice to finalize current work
 - Accept output as-is or move to next step
 - Prepare to continue without additional elicitation
@@ -1858,7 +1881,7 @@ If user selects Option 1, present numbered list of techniques from the brainstor
 1. Apply selected technique according to data file description
 2. Keep engaging with technique until user indicates they want to:
    - Choose a different technique
-   - Apply current ideas to a new technique  
+   - Apply current ideas to a new technique
    - Move to convergent phase
    - End session
 
@@ -1975,63 +1998,54 @@ CRITICAL: First, help the user select the most appropriate research focus based 
 Present these numbered options to the user:
 
 1. **Product Validation Research**
-
    - Validate product hypotheses and market fit
    - Test assumptions about user needs and solutions
    - Assess technical and business feasibility
    - Identify risks and mitigation strategies
 
 2. **Market Opportunity Research**
-
    - Analyze market size and growth potential
    - Identify market segments and dynamics
    - Assess market entry strategies
    - Evaluate timing and market readiness
 
 3. **User & Customer Research**
-
    - Deep dive into user personas and behaviors
    - Understand jobs-to-be-done and pain points
    - Map customer journeys and touchpoints
    - Analyze willingness to pay and value perception
 
 4. **Competitive Intelligence Research**
-
    - Detailed competitor analysis and positioning
    - Feature and capability comparisons
    - Business model and strategy analysis
    - Identify competitive advantages and gaps
 
 5. **Technology & Innovation Research**
-
    - Assess technology trends and possibilities
    - Evaluate technical approaches and architectures
    - Identify emerging technologies and disruptions
    - Analyze build vs. buy vs. partner options
 
 6. **Industry & Ecosystem Research**
-
    - Map industry value chains and dynamics
    - Identify key players and relationships
    - Analyze regulatory and compliance factors
    - Understand partnership opportunities
 
 7. **Strategic Options Research**
-
    - Evaluate different strategic directions
    - Assess business model alternatives
    - Analyze go-to-market strategies
    - Consider expansion and scaling paths
 
 8. **Risk & Feasibility Research**
-
    - Identify and assess various risk factors
    - Evaluate implementation challenges
    - Analyze resource requirements
    - Consider regulatory and legal implications
 
 9. **Custom Research Focus**
-
    - User-defined research objectives
    - Specialized domain investigation
    - Cross-functional research needs
@@ -2200,13 +2214,11 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 ### 5. Review and Refinement
 
 1. **Present Complete Prompt**
-
    - Show the full research prompt
    - Explain key elements and rationale
    - Highlight any assumptions made
 
 2. **Gather Feedback**
-
    - Are the objectives clear and correct?
    - Do the questions address all concerns?
    - Is the scope appropriate?
@@ -2357,9 +2369,9 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 
 ### Change Log
 
-| Date | Version | Description | Author |
-|------|---------|-------------|--------|
-| [Date] | 1.0 | Initial brownfield analysis | [Analyst] |
+| Date   | Version | Description                 | Author    |
+| ------ | ------- | --------------------------- | --------- |
+| [Date] | 1.0     | Initial brownfield analysis | [Analyst] |
 
 ## Quick Reference - Key Files and Entry Points
 
@@ -2382,11 +2394,11 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 
 ### Actual Tech Stack (from package.json/requirements.txt)
 
-| Category | Technology | Version | Notes |
-|----------|------------|---------|--------|
-| Runtime | Node.js | 16.x | [Any constraints] |
-| Framework | Express | 4.18.2 | [Custom middleware?] |
-| Database | PostgreSQL | 13 | [Connection pooling setup] |
+| Category  | Technology | Version | Notes                      |
+| --------- | ---------- | ------- | -------------------------- |
+| Runtime   | Node.js    | 16.x    | [Any constraints]          |
+| Framework | Express    | 4.18.2  | [Custom middleware?]       |
+| Database  | PostgreSQL | 13      | [Connection pooling setup] |
 
 etc...
 
@@ -2425,6 +2437,7 @@ project-root/
 ### Data Models
 
 Instead of duplicating, reference actual model files:
+
 - **User Model**: See `src/models/User.js`
 - **Order Model**: See `src/models/Order.js`
 - **Related Types**: TypeScript definitions in `src/types/`
@@ -2454,10 +2467,10 @@ Instead of duplicating, reference actual model files:
 
 ### External Services
 
-| Service | Purpose | Integration Type | Key Files |
-|---------|---------|------------------|-----------|
-| Stripe | Payments | REST API | `src/integrations/stripe/` |
-| SendGrid | Emails | SDK | `src/services/emailService.js` |
+| Service  | Purpose  | Integration Type | Key Files                      |
+| -------- | -------- | ---------------- | ------------------------------ |
+| Stripe   | Payments | REST API         | `src/integrations/stripe/`     |
+| SendGrid | Emails   | SDK              | `src/services/emailService.js` |
 
 etc...
 
@@ -2502,6 +2515,7 @@ npm run test:integration  # Runs integration tests (requires local DB)
 ### Files That Will Need Modification
 
 Based on the enhancement requirements, these files will be affected:
+
 - `src/services/userService.js` - Add new user fields
 - `src/models/User.js` - Update schema
 - `src/routes/userRoutes.js` - New endpoints
@@ -3958,7 +3972,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
@@ -3971,14 +3984,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -3987,7 +3998,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -3995,7 +4005,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -4009,7 +4018,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -4019,7 +4027,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -4136,13 +4143,11 @@ CRITICAL: Use proper parsing that understands markdown context. A ## inside a co
 For each extracted section:
 
 1. **Generate filename**: Convert the section heading to lowercase-dash-case
-
    - Remove special characters
    - Replace spaces with dashes
    - Example: "## Tech Stack" → `tech-stack.md`
 
 2. **Adjust heading levels**:
-
    - The level 2 heading becomes level 1 (# instead of ##) in the sharded new document
    - All subsection levels decrease by 1:
 
@@ -5027,7 +5032,6 @@ Ask the user if they want to work through the checklist:
 Create a comprehensive validation report that includes:
 
 1. Executive Summary
-
    - Overall PRD completeness (percentage)
    - MVP scope appropriateness (Too Large/Just Right/Too Small)
    - Readiness for architecture phase (Ready/Nearly Ready/Not Ready)
@@ -5035,26 +5039,22 @@ Create a comprehensive validation report that includes:
 
 2. Category Analysis Table
    Fill in the actual table with:
-
    - Status: PASS (90%+ complete), PARTIAL (60-89%), FAIL (<60%)
    - Critical Issues: Specific problems that block progress
 
 3. Top Issues by Priority
-
    - BLOCKERS: Must fix before architect can proceed
    - HIGH: Should fix for quality
    - MEDIUM: Would improve clarity
    - LOW: Nice to have
 
 4. MVP Scope Assessment
-
    - Features that might be cut for true MVP
    - Missing features that are essential
    - Complexity concerns
    - Timeline realism
 
 5. Technical Readiness
-
    - Clarity of technical constraints
    - Identified technical risks
    - Areas needing architect investigation
@@ -8250,33 +8250,28 @@ Ask the user if they want to work through the checklist:
 Now that you've completed the checklist, generate a comprehensive validation report that includes:
 
 1. Executive Summary
-
    - Overall architecture readiness (High/Medium/Low)
    - Critical risks identified
    - Key strengths of the architecture
    - Project type (Full-stack/Frontend/Backend) and sections evaluated
 
 2. Section Analysis
-
    - Pass rate for each major section (percentage of items passed)
    - Most concerning failures or gaps
    - Sections requiring immediate attention
    - Note any sections skipped due to project type
 
 3. Risk Assessment
-
    - Top 5 risks by severity
    - Mitigation recommendations for each
    - Timeline impact of addressing issues
 
 4. Recommendations
-
    - Must-fix items before development
    - Should-fix items for better quality
    - Nice-to-have improvements
 
 5. AI Implementation Readiness
-
    - Specific concerns for AI agent implementation
    - Areas needing additional clarification
    - Complexity hotspots to address
@@ -8578,12 +8573,10 @@ PROJECT TYPE DETECTION:
 First, determine the project type by checking:
 
 1. Is this a GREENFIELD project (new from scratch)?
-
    - Look for: New project initialization, no existing codebase references
    - Check for: prd.md, architecture.md, new project setup stories
 
 2. Is this a BROWNFIELD project (enhancing existing system)?
-
    - Look for: References to existing codebase, enhancement/modification language
    - Check for: brownfield-prd.md, brownfield-architecture.md, existing system analysis
 
@@ -8917,7 +8910,6 @@ Ask the user if they want to work through the checklist:
 Generate a comprehensive validation report that adapts to project type:
 
 1. Executive Summary
-
    - Project type: [Greenfield/Brownfield] with [UI/No UI]
    - Overall readiness (percentage)
    - Go/No-Go recommendation
@@ -8927,42 +8919,36 @@ Generate a comprehensive validation report that adapts to project type:
 2. Project-Specific Analysis
 
    FOR GREENFIELD:
-
    - Setup completeness
    - Dependency sequencing
    - MVP scope appropriateness
    - Development timeline feasibility
 
    FOR BROWNFIELD:
-
    - Integration risk level (High/Medium/Low)
    - Existing system impact assessment
    - Rollback readiness
    - User disruption potential
 
 3. Risk Assessment
-
    - Top 5 risks by severity
    - Mitigation recommendations
    - Timeline impact of addressing issues
    - [BROWNFIELD] Specific integration risks
 
 4. MVP Completeness
-
    - Core features coverage
    - Missing essential functionality
    - Scope creep identified
    - True MVP vs over-engineering
 
 5. Implementation Readiness
-
    - Developer clarity score (1-10)
    - Ambiguous requirements count
    - Missing technical details
    - [BROWNFIELD] Integration point clarity
 
 6. Recommendations
-
    - Must-fix before development
    - Should-fix for quality
    - Consider for improvement
