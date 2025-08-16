@@ -1,0 +1,60 @@
+workflow:
+  id: film-pre-production-workflow
+  name: Film Pre-Production Workflow
+  description: A specialized workflow for guiding a team of AI agents through the creative and logistical tasks of film pre-production.
+  type: creative
+  project_types:
+    - short-film
+    - feature-film
+    - web-series
+    - documentary
+  pre_production_sequence:
+    - agent: screenwriter
+      creates: screenplay.md
+      using_task: develop-screenplay
+      notes: 'Start with a logline or synopsis and develop a full screenplay. SAVE OUTPUT: Copy final screenplay.md to your project''s docs/script/ folder.'
+    - agent: director
+      creates: storyboard.md
+      using_task: create-storyboard
+      requires: screenplay.md
+      notes: 'Visualize the screenplay by creating a detailed storyboard. SAVE OUTPUT: Copy final storyboard.md to your project''s docs/visuals/ folder.'
+    - agent: production-designer
+      creates: location-scouting-report.md
+      using_task: scout-locations
+      requires: screenplay.md
+      notes: 'Scout and document potential locations for the film. SAVE OUTPUT: Copy final location-scouting-report.md to your project''s docs/locations/ folder.'
+    - agent: producer
+      creates: casting-report.md
+      using_task: casting-call
+      requires: screenplay.md
+      notes: 'Manage the casting process and select actors for all roles. SAVE OUTPUT: Copy final casting-report.md to your project''s docs/casting/ folder.'
+    - agent: producer
+      creates: production-schedule.md
+      using_task: create-production-schedule
+      requires:
+        - screenplay.md
+        - location-scouting-report.md
+        - casting-report.md
+      notes: 'Create a comprehensive production schedule for the film. SAVE OUTPUT: Copy final production-schedule.md to your project''s docs/ folder.'
+  workflow_end:
+    action: move_to_production
+    notes: All pre-production tasks are complete. The project is now ready to move into the production phase.
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: Film Pre-Production] --> B[screenwriter: screenplay.md]
+        B --> C[director: storyboard.md]
+        B --> D[production-designer: location-scouting-report.md]
+        B --> E[producer: casting-report.md]
+        C --> F
+        D --> F
+        E --> F
+        F[producer: production-schedule.md] --> G[Move to Production]
+
+        style G fill:#90EE90
+        style B fill:#FFE4B5
+        style C fill:#FFE4B5
+        style D fill:#FFE4B5
+        style E fill:#FFE4B5
+        style F fill:#FFE4B5
+    ```

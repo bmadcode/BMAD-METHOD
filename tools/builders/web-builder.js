@@ -492,7 +492,7 @@ These references map directly to bundle sections:
       try {
         const resourceFiles = await fs.readdir(resourcePath);
         for (const resourceFile of resourceFiles.filter(
-          (f) => f.endsWith('.md') || f.endsWith('.yaml'),
+          (f) => f.endsWith('.md') || f.endsWith('.yaml') || f.endsWith('.csv')
         )) {
           expansionResources.set(`${resourceDir}#${resourceFile}`, true);
         }
