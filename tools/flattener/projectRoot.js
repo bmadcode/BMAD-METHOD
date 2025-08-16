@@ -1,5 +1,5 @@
-const fs = require("fs-extra");
-const path = require("node:path");
+const fs = require('fs-extra');
+const path = require('node:path');
 
 /**
  * Attempt to find the project root by walking up from startDir
@@ -12,24 +12,22 @@ async function findProjectRoot(startDir) {
     let dir = path.resolve(startDir);
     const root = path.parse(dir).root;
     const markers = [
-      ".git",
-      "package.json",
-      "pnpm-workspace.yaml",
-      "yarn.lock",
-      "pnpm-lock.yaml",
-      "pyproject.toml",
-      "requirements.txt",
-      "go.mod",
-      "Cargo.toml",
-      "composer.json",
-      ".hg",
-      ".svn",
+      '.git',
+      'package.json',
+      'pnpm-workspace.yaml',
+      'yarn.lock',
+      'pnpm-lock.yaml',
+      'pyproject.toml',
+      'requirements.txt',
+      'go.mod',
+      'Cargo.toml',
+      'composer.json',
+      '.hg',
+      '.svn',
     ];
 
     while (true) {
-      const exists = await Promise.all(
-        markers.map((m) => fs.pathExists(path.join(dir, m))),
-      );
+      const exists = await Promise.all(markers.map((m) => fs.pathExists(path.join(dir, m))));
       if (exists.some(Boolean)) {
         return dir;
       }

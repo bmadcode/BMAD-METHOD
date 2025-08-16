@@ -11,8 +11,8 @@ template:
 schema: 1
 story: "{{epic_num}}.{{story_num}}"
 story_title: "{{story_title}}"
-gate: "{{gate_status}}"  # PASS|CONCERNS|FAIL|WAIVED
-status_reason: "{{status_reason}}"  # 1-2 sentence summary of why this gate decision
+gate: "{{gate_status}}" # PASS|CONCERNS|FAIL|WAIVED
+status_reason: "{{status_reason}}" # 1-2 sentence summary of why this gate decision
 reviewer: "Quinn (Test Architect)"
 updated: "{{iso_timestamp}}"
 
@@ -41,7 +41,7 @@ examples:
         severity: medium
         finding: "Missing integration tests for auth flow"
         suggested_action: "Add test coverage for critical paths"
-  
+
   when_waived: |
     waiver:
       active: true
@@ -55,7 +55,7 @@ optional_fields_examples:
   quality_and_expiry: |
     quality_score: 75  # 0-100 (optional scoring)
     expires: "2025-01-26T00:00:00Z"  # Optional gate freshness window
-  
+
   evidence: |
     evidence:
       tests_reviewed: 15
@@ -63,14 +63,14 @@ optional_fields_examples:
       trace:
         ac_covered: [1, 2, 3]  # AC numbers with test coverage
         ac_gaps: [4]  # AC numbers lacking coverage
-  
+
   nfr_validation: |
     nfr_validation:
       security: { status: CONCERNS, notes: "Rate limiting missing" }
       performance: { status: PASS, notes: "" }
       reliability: { status: PASS, notes: "" }
       maintainability: { status: PASS, notes: "" }
-  
+
   history: |
     history:  # Append-only audit trail
       - at: "2025-01-12T10:00:00Z"
@@ -79,7 +79,7 @@ optional_fields_examples:
       - at: "2025-01-12T15:00:00Z"  
         gate: CONCERNS
         note: "Tests added but rate limiting still missing"
-  
+
   risk_summary: |
     risk_summary:  # From risk-profile task
       totals:
@@ -91,7 +91,7 @@ optional_fields_examples:
       recommendations:
         must_fix: []
         monitor: []
-  
+
   recommendations: |
     recommendations:
       immediate:  # Must fix before production

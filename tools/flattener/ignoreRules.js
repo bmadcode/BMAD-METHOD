@@ -1,147 +1,147 @@
-const fs = require("fs-extra");
-const path = require("node:path");
-const ignore = require("ignore");
+const fs = require('fs-extra');
+const path = require('node:path');
+const ignore = require('ignore');
 
 // Central default ignore patterns for discovery and filtering.
 // These complement .gitignore and are applied regardless of VCS presence.
 const DEFAULT_PATTERNS = [
   // Project/VCS
-  "**/.bmad-core/**",
-  "**/.git/**",
-  "**/.svn/**",
-  "**/.hg/**",
-  "**/.bzr/**",
+  '**/.bmad-core/**',
+  '**/.git/**',
+  '**/.svn/**',
+  '**/.hg/**',
+  '**/.bzr/**',
   // Package/build outputs
-  "**/node_modules/**",
-  "**/bower_components/**",
-  "**/vendor/**",
-  "**/packages/**",
-  "**/build/**",
-  "**/dist/**",
-  "**/out/**",
-  "**/target/**",
-  "**/bin/**",
-  "**/obj/**",
-  "**/release/**",
-  "**/debug/**",
+  '**/node_modules/**',
+  '**/bower_components/**',
+  '**/vendor/**',
+  '**/packages/**',
+  '**/build/**',
+  '**/dist/**',
+  '**/out/**',
+  '**/target/**',
+  '**/bin/**',
+  '**/obj/**',
+  '**/release/**',
+  '**/debug/**',
   // Environments
-  "**/.venv/**",
-  "**/venv/**",
-  "**/.virtualenv/**",
-  "**/virtualenv/**",
-  "**/env/**",
+  '**/.venv/**',
+  '**/venv/**',
+  '**/.virtualenv/**',
+  '**/virtualenv/**',
+  '**/env/**',
   // Logs & coverage
-  "**/*.log",
-  "**/npm-debug.log*",
-  "**/yarn-debug.log*",
-  "**/yarn-error.log*",
-  "**/lerna-debug.log*",
-  "**/coverage/**",
-  "**/.nyc_output/**",
-  "**/.coverage/**",
-  "**/test-results/**",
+  '**/*.log',
+  '**/npm-debug.log*',
+  '**/yarn-debug.log*',
+  '**/yarn-error.log*',
+  '**/lerna-debug.log*',
+  '**/coverage/**',
+  '**/.nyc_output/**',
+  '**/.coverage/**',
+  '**/test-results/**',
   // Caches & temp
-  "**/.cache/**",
-  "**/.tmp/**",
-  "**/.temp/**",
-  "**/tmp/**",
-  "**/temp/**",
-  "**/.sass-cache/**",
+  '**/.cache/**',
+  '**/.tmp/**',
+  '**/.temp/**',
+  '**/tmp/**',
+  '**/temp/**',
+  '**/.sass-cache/**',
   // IDE/editor
-  "**/.vscode/**",
-  "**/.idea/**",
-  "**/*.swp",
-  "**/*.swo",
-  "**/*~",
-  "**/.project",
-  "**/.classpath",
-  "**/.settings/**",
-  "**/*.sublime-project",
-  "**/*.sublime-workspace",
+  '**/.vscode/**',
+  '**/.idea/**',
+  '**/*.swp',
+  '**/*.swo',
+  '**/*~',
+  '**/.project',
+  '**/.classpath',
+  '**/.settings/**',
+  '**/*.sublime-project',
+  '**/*.sublime-workspace',
   // Lockfiles
-  "**/package-lock.json",
-  "**/yarn.lock",
-  "**/pnpm-lock.yaml",
-  "**/composer.lock",
-  "**/Pipfile.lock",
+  '**/package-lock.json',
+  '**/yarn.lock',
+  '**/pnpm-lock.yaml',
+  '**/composer.lock',
+  '**/Pipfile.lock',
   // Python/Java/compiled artifacts
-  "**/*.pyc",
-  "**/*.pyo",
-  "**/*.pyd",
-  "**/__pycache__/**",
-  "**/*.class",
-  "**/*.jar",
-  "**/*.war",
-  "**/*.ear",
-  "**/*.o",
-  "**/*.so",
-  "**/*.dll",
-  "**/*.exe",
+  '**/*.pyc',
+  '**/*.pyo',
+  '**/*.pyd',
+  '**/__pycache__/**',
+  '**/*.class',
+  '**/*.jar',
+  '**/*.war',
+  '**/*.ear',
+  '**/*.o',
+  '**/*.so',
+  '**/*.dll',
+  '**/*.exe',
   // System junk
-  "**/lib64/**",
-  "**/.venv/lib64/**",
-  "**/venv/lib64/**",
-  "**/_site/**",
-  "**/.jekyll-cache/**",
-  "**/.jekyll-metadata",
-  "**/.DS_Store",
-  "**/.DS_Store?",
-  "**/._*",
-  "**/.Spotlight-V100/**",
-  "**/.Trashes/**",
-  "**/ehthumbs.db",
-  "**/Thumbs.db",
-  "**/desktop.ini",
+  '**/lib64/**',
+  '**/.venv/lib64/**',
+  '**/venv/lib64/**',
+  '**/_site/**',
+  '**/.jekyll-cache/**',
+  '**/.jekyll-metadata',
+  '**/.DS_Store',
+  '**/.DS_Store?',
+  '**/._*',
+  '**/.Spotlight-V100/**',
+  '**/.Trashes/**',
+  '**/ehthumbs.db',
+  '**/Thumbs.db',
+  '**/desktop.ini',
   // XML outputs
-  "**/flattened-codebase.xml",
-  "**/repomix-output.xml",
+  '**/flattened-codebase.xml',
+  '**/repomix-output.xml',
   // Images, media, fonts, archives, docs, dylibs
-  "**/*.jpg",
-  "**/*.jpeg",
-  "**/*.png",
-  "**/*.gif",
-  "**/*.bmp",
-  "**/*.ico",
-  "**/*.svg",
-  "**/*.pdf",
-  "**/*.doc",
-  "**/*.docx",
-  "**/*.xls",
-  "**/*.xlsx",
-  "**/*.ppt",
-  "**/*.pptx",
-  "**/*.zip",
-  "**/*.tar",
-  "**/*.gz",
-  "**/*.rar",
-  "**/*.7z",
-  "**/*.dylib",
-  "**/*.mp3",
-  "**/*.mp4",
-  "**/*.avi",
-  "**/*.mov",
-  "**/*.wav",
-  "**/*.ttf",
-  "**/*.otf",
-  "**/*.woff",
-  "**/*.woff2",
+  '**/*.jpg',
+  '**/*.jpeg',
+  '**/*.png',
+  '**/*.gif',
+  '**/*.bmp',
+  '**/*.ico',
+  '**/*.svg',
+  '**/*.pdf',
+  '**/*.doc',
+  '**/*.docx',
+  '**/*.xls',
+  '**/*.xlsx',
+  '**/*.ppt',
+  '**/*.pptx',
+  '**/*.zip',
+  '**/*.tar',
+  '**/*.gz',
+  '**/*.rar',
+  '**/*.7z',
+  '**/*.dylib',
+  '**/*.mp3',
+  '**/*.mp4',
+  '**/*.avi',
+  '**/*.mov',
+  '**/*.wav',
+  '**/*.ttf',
+  '**/*.otf',
+  '**/*.woff',
+  '**/*.woff2',
   // Env files
-  "**/.env",
-  "**/.env.*",
-  "**/*.env",
+  '**/.env',
+  '**/.env.*',
+  '**/*.env',
   // Misc
-  "**/junit.xml",
+  '**/junit.xml',
 ];
 
 async function readIgnoreFile(filePath) {
   try {
-    if (!await fs.pathExists(filePath)) return [];
-    const content = await fs.readFile(filePath, "utf8");
+    if (!(await fs.pathExists(filePath))) return [];
+    const content = await fs.readFile(filePath, 'utf8');
     return content
-      .split("\n")
+      .split('\n')
       .map((l) => l.trim())
-      .filter((l) => l && !l.startsWith("#"));
-  } catch (err) {
+      .filter((l) => l && !l.startsWith('#'));
+  } catch {
     return [];
   }
 }
@@ -153,18 +153,18 @@ async function parseGitignore(gitignorePath) {
 
 async function loadIgnore(rootDir, extraPatterns = []) {
   const ig = ignore();
-  const gitignorePath = path.join(rootDir, ".gitignore");
+  const gitignorePath = path.join(rootDir, '.gitignore');
   const patterns = [
-    ...await readIgnoreFile(gitignorePath),
+    ...(await readIgnoreFile(gitignorePath)),
     ...DEFAULT_PATTERNS,
     ...extraPatterns,
   ];
   // De-duplicate
-  const unique = Array.from(new Set(patterns.map((p) => String(p))));
+  const unique = [...new Set(patterns.map(String))];
   ig.add(unique);
 
   // Include-only filter: return true if path should be included
-  const filter = (relativePath) => !ig.ignores(relativePath.replace(/\\/g, "/"));
+  const filter = (relativePath) => !ig.ignores(relativePath.replaceAll('\\', '/'));
 
   return { ig, filter, patterns: unique };
 }

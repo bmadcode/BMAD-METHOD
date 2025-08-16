@@ -1,7 +1,23 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "bmad-method",
   "version": "5.0.0",
   "description": "Breakthrough Method of Agile AI-driven Development",
+  "keywords": [
+    "agile",
+    "ai",
+    "orchestrator",
+    "development",
+    "methodology",
+    "agents",
+    "bmad"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmadcode/BMAD-METHOD.git"
+  },
+  "license": "MIT",
+  "author": "Brian (BMad) Madison",
   "main": "tools/cli.js",
   "bin": {
     "bmad": "tools/bmad-npx-wrapper.js",
@@ -11,27 +27,43 @@
     "build": "node tools/cli.js build",
     "build:agents": "node tools/cli.js build --agents-only",
     "build:teams": "node tools/cli.js build --teams-only",
-    "list:agents": "node tools/cli.js list:agents",
-    "validate": "node tools/cli.js validate",
     "flatten": "node tools/flattener/main.js",
+    "format": "prettier --write \"**/*.{js,cjs,mjs,json,md,yaml}\"",
+    "format:check": "prettier --check \"**/*.{js,cjs,mjs,json,md,yaml}\"",
     "install:bmad": "node tools/installer/bin/bmad.js install",
-    "format": "prettier --write \"**/*.md\"",
-    "version:patch": "node tools/version-bump.js patch",
-    "version:minor": "node tools/version-bump.js minor",
-    "version:major": "node tools/version-bump.js major",
-    "version:expansion": "node tools/bump-expansion-version.js",
-    "version:expansion:set": "node tools/update-expansion-version.js",
-    "version:all": "node tools/bump-all-versions.js",
-    "version:all:minor": "node tools/bump-all-versions.js minor",
-    "version:all:major": "node tools/bump-all-versions.js major",
-    "version:all:patch": "node tools/bump-all-versions.js patch",
-    "version:expansion:all": "node tools/bump-all-versions.js",
-    "version:expansion:all:minor": "node tools/bump-all-versions.js minor",
-    "version:expansion:all:major": "node tools/bump-all-versions.js major",
-    "version:expansion:all:patch": "node tools/bump-all-versions.js patch",
+    "lint": "eslint . --ext .js,.cjs,.mjs,.yaml --max-warnings=0",
+    "lint:fix": "eslint . --ext .js,.cjs,.mjs,.yaml --fix",
+    "list:agents": "node tools/cli.js list:agents",
+    "prepare": "husky",
     "release": "semantic-release",
     "release:test": "semantic-release --dry-run --no-ci || echo 'Config test complete - authentication errors are expected locally'",
-    "prepare": "husky"
+    "validate": "node tools/cli.js validate",
+    "version:all": "node tools/bump-all-versions.js",
+    "version:all:major": "node tools/bump-all-versions.js major",
+    "version:all:minor": "node tools/bump-all-versions.js minor",
+    "version:all:patch": "node tools/bump-all-versions.js patch",
+    "version:expansion": "node tools/bump-expansion-version.js",
+    "version:expansion:all": "node tools/bump-all-versions.js",
+    "version:expansion:all:major": "node tools/bump-all-versions.js major",
+    "version:expansion:all:minor": "node tools/bump-all-versions.js minor",
+    "version:expansion:all:patch": "node tools/bump-all-versions.js patch",
+    "version:expansion:set": "node tools/update-expansion-version.js",
+    "version:major": "node tools/version-bump.js major",
+    "version:minor": "node tools/version-bump.js minor",
+    "version:patch": "node tools/version-bump.js patch"
+  },
+  "lint-staged": {
+    "**/*.{js,cjs,mjs}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "**/*.yaml": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@kayvan/markdown-tree-parser": "^1.5.0",
@@ -46,37 +78,25 @@
     "ora": "^5.4.1",
     "semver": "^7.6.3"
   },
-  "keywords": [
-    "agile",
-    "ai",
-    "orchestrator",
-    "development",
-    "methodology",
-    "agents",
-    "bmad"
-  ],
-  "author": "Brian (BMad) Madison",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bmadcode/BMAD-METHOD.git"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
   "devDependencies": {
+    "@eslint/js": "^9.33.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^17.21.3",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "eslint-plugin-yml": "^1.18.0",
     "husky": "^9.1.7",
     "jest": "^30.0.4",
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
+    "prettier-plugin-packagejson": "^2.5.19",
     "semantic-release": "^22.0.0",
+    "yaml-eslint-parser": "^1.2.3",
     "yaml-lint": "^1.7.0"
   },
-  "lint-staged": {
-    "**/*.md": [
-      "prettier --write"
-    ]
+  "engines": {
+    "node": ">=20.10.0"
   }
 }

@@ -298,7 +298,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
-- **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
+- **Windsurf**: `/agent-name` (e.g., `/bmad-master`)
 - **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-master`)
 - **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.

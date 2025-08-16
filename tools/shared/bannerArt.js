@@ -1,8 +1,8 @@
 // ASCII banner art definitions extracted from banners.js to separate art from logic
 
-const BMAD_TITLE = "BMAD-METHOD";
-const FLATTENER_TITLE = "FLATTENER";
-const INSTALLER_TITLE = "INSTALLER";
+const BMAD_TITLE = 'BMAD-METHOD';
+const FLATTENER_TITLE = 'FLATTENER';
+const INSTALLER_TITLE = 'INSTALLER';
 
 // Large ASCII blocks (block-style fonts)
 const BMAD_LARGE = `

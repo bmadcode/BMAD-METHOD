@@ -29,14 +29,14 @@ The Test Architect (Quinn) provides comprehensive quality assurance throughout t
 
 ### Quick Command Reference
 
-| **Stage** | **Command** | **Purpose** | **Output** | **Priority** |
-|-----------|------------|-------------|------------|--------------|
-| **After Story Approval** | `*risk` | Identify integration & regression risks | `docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md` | High for complex/brownfield |
-| | `*design` | Create test strategy for dev | `docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md` | High for new features |
-| **During Development** | `*trace` | Verify test coverage | `docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md` | Medium |
-| | `*nfr` | Validate quality attributes | `docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md` | High for critical features |
-| **After Development** | `*review` | Comprehensive assessment | QA Results in story + `docs/qa/gates/{epic}.{story}-{slug}.yml` | **Required** |
-| **Post-Review** | `*gate` | Update quality decision | Updated `docs/qa/gates/{epic}.{story}-{slug}.yml` | As needed |
+| **Stage**                | **Command** | **Purpose**                             | **Output**                                                      | **Priority**                |
+| ------------------------ | ----------- | --------------------------------------- | --------------------------------------------------------------- | --------------------------- |
+| **After Story Approval** | `*risk`     | Identify integration & regression risks | `docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md`         | High for complex/brownfield |
+|                          | `*design`   | Create test strategy for dev            | `docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md`  | High for new features       |
+| **During Development**   | `*trace`    | Verify test coverage                    | `docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md`        | Medium                      |
+|                          | `*nfr`      | Validate quality attributes             | `docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md`          | High for critical features  |
+| **After Development**    | `*review`   | Comprehensive assessment                | QA Results in story + `docs/qa/gates/{epic}.{story}-{slug}.yml` | **Required**                |
+| **Post-Review**          | `*gate`     | Update quality decision                 | Updated `docs/qa/gates/{epic}.{story}-{slug}.yml`               | As needed                   |
 
 ### Stage 1: After Story Creation (Before Dev Starts)
 
@@ -134,24 +134,24 @@ The Test Architect (Quinn) provides comprehensive quality assurance throughout t
 
 ### Understanding Gate Decisions
 
-| **Status** | **Meaning** | **Action Required** | **Can Proceed?** |
-|------------|-------------|-------------------|------------------|
-| **PASS** | All critical requirements met | None | ✅ Yes |
-| **CONCERNS** | Non-critical issues found | Team review recommended | ⚠️ With caution |
-| **FAIL** | Critical issues (security, missing P0 tests) | Must fix | ❌ No |
-| **WAIVED** | Issues acknowledged and accepted | Document reasoning | ✅ With approval |
+| **Status**   | **Meaning**                                  | **Action Required**     | **Can Proceed?** |
+| ------------ | -------------------------------------------- | ----------------------- | ---------------- |
+| **PASS**     | All critical requirements met                | None                    | ✅ Yes           |
+| **CONCERNS** | Non-critical issues found                    | Team review recommended | ⚠️ With caution  |
+| **FAIL**     | Critical issues (security, missing P0 tests) | Must fix                | ❌ No            |
+| **WAIVED**   | Issues acknowledged and accepted             | Document reasoning      | ✅ With approval |
 
 ### Risk-Based Testing Strategy
 
 The Test Architect uses risk scoring to prioritize testing:
 
-| **Risk Score** | **Calculation** | **Testing Priority** | **Gate Impact** |
-|---------------|----------------|-------------------|----------------|
-| **9** | High probability × High impact | P0 - Must test thoroughly | FAIL if untested |
-| **6** | Medium-high combinations | P1 - Should test well | CONCERNS if gaps |
-| **4** | Medium combinations | P1 - Should test | CONCERNS if notable gaps |
-| **2-3** | Low-medium combinations | P2 - Nice to have | Note in review |
-| **1** | Minimal risk | P2 - Minimal | Note in review |
+| **Risk Score** | **Calculation**                | **Testing Priority**      | **Gate Impact**          |
+| -------------- | ------------------------------ | ------------------------- | ------------------------ |
+| **9**          | High probability × High impact | P0 - Must test thoroughly | FAIL if untested         |
+| **6**          | Medium-high combinations       | P1 - Should test well     | CONCERNS if gaps         |
+| **4**          | Medium combinations            | P1 - Should test          | CONCERNS if notable gaps |
+| **2-3**        | Low-medium combinations        | P2 - Nice to have         | Note in review           |
+| **1**          | Minimal risk                   | P2 - Minimal              | Note in review           |
 
 ### Special Situations & Best Practices
 
@@ -227,14 +227,14 @@ All Test Architect activities create permanent records:
 
 **Should I run Test Architect commands?**
 
-| **Scenario** | **Before Dev** | **During Dev** | **After Dev** |
-|-------------|---------------|----------------|---------------|
-| **Simple bug fix** | Optional | Optional | Required `*review` |
-| **New feature** | Recommended `*risk`, `*design` | Optional `*trace` | Required `*review` |
-| **Brownfield change** | **Required** `*risk`, `*design` | Recommended `*trace`, `*nfr` | Required `*review` |
-| **API modification** | **Required** `*risk`, `*design` | **Required** `*trace` | Required `*review` |
-| **Performance-critical** | Recommended `*design` | **Required** `*nfr` | Required `*review` |
-| **Data migration** | **Required** `*risk`, `*design` | **Required** `*trace` | Required `*review` + `*gate` |
+| **Scenario**             | **Before Dev**                  | **During Dev**               | **After Dev**                |
+| ------------------------ | ------------------------------- | ---------------------------- | ---------------------------- |
+| **Simple bug fix**       | Optional                        | Optional                     | Required `*review`           |
+| **New feature**          | Recommended `*risk`, `*design`  | Optional `*trace`            | Required `*review`           |
+| **Brownfield change**    | **Required** `*risk`, `*design` | Recommended `*trace`, `*nfr` | Required `*review`           |
+| **API modification**     | **Required** `*risk`, `*design` | **Required** `*trace`        | Required `*review`           |
+| **Performance-critical** | Recommended `*design`           | **Required** `*nfr`          | Required `*review`           |
+| **Data migration**       | **Required** `*risk`, `*design` | **Required** `*trace`        | Required `*review` + `*gate` |
 
 ### Success Metrics
 

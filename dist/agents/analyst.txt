@@ -106,7 +106,7 @@ dependencies:
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
 ---
 docOutputLocation: docs/brainstorming-session-results.md
-template: ".bmad-core/templates/brainstorming-output-tmpl.yaml"
+template: '.bmad-core/templates/brainstorming-output-tmpl.yaml'
 ---
 
 # Facilitate Brainstorming Session Task
@@ -1101,35 +1101,35 @@ template:
   output:
     format: markdown
     filename: docs/brief.md
-    title: "Project Brief: {{project_name}}"
+    title: 'Project Brief: {{project_name}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Project Brief Elicitation Actions"
+    title: 'Project Brief Elicitation Actions'
     options:
-      - "Expand section with more specific details"
-      - "Validate against similar successful products"
-      - "Stress test assumptions with edge cases"
-      - "Explore alternative solution approaches"
-      - "Analyze resource/constraint trade-offs"
-      - "Generate risk mitigation strategies"
-      - "Challenge scope from MVP minimalist view"
-      - "Brainstorm creative feature possibilities"
-      - "If only we had [resource/capability/time]..."
-      - "Proceed to next section"
+      - 'Expand section with more specific details'
+      - 'Validate against similar successful products'
+      - 'Stress test assumptions with edge cases'
+      - 'Explore alternative solution approaches'
+      - 'Analyze resource/constraint trade-offs'
+      - 'Generate risk mitigation strategies'
+      - 'Challenge scope from MVP minimalist view'
+      - 'Brainstorm creative feature possibilities'
+      - 'If only we had [resource/capability/time]...'
+      - 'Proceed to next section'
 
 sections:
   - id: introduction
     instruction: |
       This template guides creation of a comprehensive Project Brief that serves as the foundational input for product development.
-      
+
       Start by asking the user which mode they prefer:
-      
+
       1. **Interactive Mode** - Work through each section collaboratively
       2. **YOLO Mode** - Generate complete draft for review and refinement
-      
+
       Before beginning, understand what inputs are available (brainstorming results, market research, competitive analysis, initial ideas) and gather project context.
 
   - id: executive-summary
@@ -1140,7 +1140,7 @@ sections:
       - Primary problem being solved
       - Target market identification
       - Key value proposition
-    template: "{{executive_summary_content}}"
+    template: '{{executive_summary_content}}'
 
   - id: problem-statement
     title: Problem Statement
@@ -1150,7 +1150,7 @@ sections:
       - Impact of the problem (quantify if possible)
       - Why existing solutions fall short
       - Urgency and importance of solving this now
-    template: "{{detailed_problem_description}}"
+    template: '{{detailed_problem_description}}'
 
   - id: proposed-solution
     title: Proposed Solution
@@ -1160,7 +1160,7 @@ sections:
       - Key differentiators from existing solutions
       - Why this solution will succeed where others haven't
       - High-level vision for the product
-    template: "{{solution_description}}"
+    template: '{{solution_description}}'
 
   - id: target-users
     title: Target Users
@@ -1172,12 +1172,12 @@ sections:
       - Goals they're trying to achieve
     sections:
       - id: primary-segment
-        title: "Primary User Segment: {{segment_name}}"
-        template: "{{primary_user_description}}"
+        title: 'Primary User Segment: {{segment_name}}'
+        template: '{{primary_user_description}}'
       - id: secondary-segment
-        title: "Secondary User Segment: {{segment_name}}"
+        title: 'Secondary User Segment: {{segment_name}}'
         condition: Has secondary user segment
-        template: "{{secondary_user_description}}"
+        template: '{{secondary_user_description}}'
 
   - id: goals-metrics
     title: Goals & Success Metrics
@@ -1186,15 +1186,15 @@ sections:
       - id: business-objectives
         title: Business Objectives
         type: bullet-list
-        template: "- {{objective_with_metric}}"
+        template: '- {{objective_with_metric}}'
       - id: user-success-metrics
         title: User Success Metrics
         type: bullet-list
-        template: "- {{user_metric}}"
+        template: '- {{user_metric}}'
       - id: kpis
         title: Key Performance Indicators (KPIs)
         type: bullet-list
-        template: "- {{kpi}}: {{definition_and_target}}"
+        template: '- {{kpi}}: {{definition_and_target}}'
 
   - id: mvp-scope
     title: MVP Scope
@@ -1203,14 +1203,14 @@ sections:
       - id: core-features
         title: Core Features (Must Have)
         type: bullet-list
-        template: "- **{{feature}}:** {{description_and_rationale}}"
+        template: '- **{{feature}}:** {{description_and_rationale}}'
       - id: out-of-scope
         title: Out of Scope for MVP
         type: bullet-list
-        template: "- {{feature_or_capability}}"
+        template: '- {{feature_or_capability}}'
       - id: mvp-success-criteria
         title: MVP Success Criteria
-        template: "{{mvp_success_definition}}"
+        template: '{{mvp_success_definition}}'
 
   - id: post-mvp-vision
     title: Post-MVP Vision
@@ -1218,13 +1218,13 @@ sections:
     sections:
       - id: phase-2-features
         title: Phase 2 Features
-        template: "{{next_priority_features}}"
+        template: '{{next_priority_features}}'
       - id: long-term-vision
         title: Long-term Vision
-        template: "{{one_two_year_vision}}"
+        template: '{{one_two_year_vision}}'
       - id: expansion-opportunities
         title: Expansion Opportunities
-        template: "{{potential_expansions}}"
+        template: '{{potential_expansions}}'
 
   - id: technical-considerations
     title: Technical Considerations
@@ -1265,7 +1265,7 @@ sections:
       - id: key-assumptions
         title: Key Assumptions
         type: bullet-list
-        template: "- {{assumption}}"
+        template: '- {{assumption}}'
 
   - id: risks-questions
     title: Risks & Open Questions
@@ -1274,15 +1274,15 @@ sections:
       - id: key-risks
         title: Key Risks
         type: bullet-list
-        template: "- **{{risk}}:** {{description_and_impact}}"
+        template: '- **{{risk}}:** {{description_and_impact}}'
       - id: open-questions
         title: Open Questions
         type: bullet-list
-        template: "- {{question}}"
+        template: '- {{question}}'
       - id: research-areas
         title: Areas Needing Further Research
         type: bullet-list
-        template: "- {{research_topic}}"
+        template: '- {{research_topic}}'
 
   - id: appendices
     title: Appendices
@@ -1299,10 +1299,10 @@ sections:
       - id: stakeholder-input
         title: B. Stakeholder Input
         condition: Has stakeholder feedback
-        template: "{{stakeholder_feedback}}"
+        template: '{{stakeholder_feedback}}'
       - id: references
         title: C. References
-        template: "{{relevant_links_and_docs}}"
+        template: '{{relevant_links_and_docs}}'
 
   - id: next-steps
     title: Next Steps
@@ -1310,7 +1310,7 @@ sections:
       - id: immediate-actions
         title: Immediate Actions
         type: numbered-list
-        template: "{{action_item}}"
+        template: '{{action_item}}'
       - id: pm-handoff
         title: PM Handoff
         content: |
@@ -1325,24 +1325,24 @@ template:
   output:
     format: markdown
     filename: docs/market-research.md
-    title: "Market Research Report: {{project_product_name}}"
+    title: 'Market Research Report: {{project_product_name}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Market Research Elicitation Actions"
+    title: 'Market Research Elicitation Actions'
     options:
-      - "Expand market sizing calculations with sensitivity analysis"
-      - "Deep dive into a specific customer segment"
-      - "Analyze an emerging market trend in detail"
-      - "Compare this market to an analogous market"
-      - "Stress test market assumptions"
-      - "Explore adjacent market opportunities"
-      - "Challenge market definition and boundaries"
-      - "Generate strategic scenarios (best/base/worst case)"
-      - "If only we had considered [X market factor]..."
-      - "Proceed to next section"
+      - 'Expand market sizing calculations with sensitivity analysis'
+      - 'Deep dive into a specific customer segment'
+      - 'Analyze an emerging market trend in detail'
+      - 'Compare this market to an analogous market'
+      - 'Stress test market assumptions'
+      - 'Explore adjacent market opportunities'
+      - 'Challenge market definition and boundaries'
+      - 'Generate strategic scenarios (best/base/worst case)'
+      - 'If only we had considered [X market factor]...'
+      - 'Proceed to next section'
 
 sections:
   - id: executive-summary
@@ -1424,7 +1424,7 @@ sections:
         repeatable: true
         sections:
           - id: segment
-            title: "Segment {{segment_number}}: {{segment_name}}"
+            title: 'Segment {{segment_number}}: {{segment_name}}'
             template: |
               - **Description:** {{brief_overview}}
               - **Size:** {{number_of_customers_market_value}}
@@ -1450,7 +1450,7 @@ sections:
         instruction: Map the end-to-end customer experience for primary segments
         template: |
           For primary customer segment:
-          
+
           1. **Awareness:** {{discovery_process}}
           2. **Consideration:** {{evaluation_criteria}}
           3. **Purchase:** {{decision_triggers}}
@@ -1493,20 +1493,20 @@ sections:
         instruction: Analyze each force with specific evidence and implications
         sections:
           - id: supplier-power
-            title: "Supplier Power: {{power_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Supplier Power: {{power_level}}'
+            template: '{{analysis_and_implications}}'
           - id: buyer-power
-            title: "Buyer Power: {{power_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Buyer Power: {{power_level}}'
+            template: '{{analysis_and_implications}}'
           - id: competitive-rivalry
-            title: "Competitive Rivalry: {{intensity_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Competitive Rivalry: {{intensity_level}}'
+            template: '{{analysis_and_implications}}'
           - id: threat-new-entry
-            title: "Threat of New Entry: {{threat_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Threat of New Entry: {{threat_level}}'
+            template: '{{analysis_and_implications}}'
           - id: threat-substitutes
-            title: "Threat of Substitutes: {{threat_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Threat of Substitutes: {{threat_level}}'
+            template: '{{analysis_and_implications}}'
       - id: adoption-lifecycle
         title: Technology Adoption Lifecycle Stage
         instruction: |
@@ -1524,7 +1524,7 @@ sections:
         repeatable: true
         sections:
           - id: opportunity
-            title: "Opportunity {{opportunity_number}}: {{name}}"
+            title: 'Opportunity {{opportunity_number}}: {{name}}'
             template: |
               - **Description:** {{what_is_the_opportunity}}
               - **Size/Potential:** {{quantified_potential}}
@@ -1580,24 +1580,24 @@ template:
   output:
     format: markdown
     filename: docs/competitor-analysis.md
-    title: "Competitive Analysis Report: {{project_product_name}}"
+    title: 'Competitive Analysis Report: {{project_product_name}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Competitive Analysis Elicitation Actions"
+    title: 'Competitive Analysis Elicitation Actions'
     options:
       - "Deep dive on a specific competitor's strategy"
-      - "Analyze competitive dynamics in a specific segment"
-      - "War game competitive responses to your moves"
-      - "Explore partnership vs. competition scenarios"
-      - "Stress test differentiation claims"
-      - "Analyze disruption potential (yours or theirs)"
-      - "Compare to competition in adjacent markets"
-      - "Generate win/loss analysis insights"
+      - 'Analyze competitive dynamics in a specific segment'
+      - 'War game competitive responses to your moves'
+      - 'Explore partnership vs. competition scenarios'
+      - 'Stress test differentiation claims'
+      - 'Analyze disruption potential (yours or theirs)'
+      - 'Compare to competition in adjacent markets'
+      - 'Generate win/loss analysis insights'
       - "If only we had known about [competitor X's plan]..."
-      - "Proceed to next section"
+      - 'Proceed to next section'
 
 sections:
   - id: executive-summary
@@ -1651,7 +1651,7 @@ sections:
         title: Competitor Prioritization Matrix
         instruction: |
           Help categorize competitors by market share and strategic threat level
-          
+
           Create a 2x2 matrix:
           - Priority 1 (Core Competitors): High Market Share + High Threat
           - Priority 2 (Emerging Threats): Low Market Share + High Threat
@@ -1664,7 +1664,7 @@ sections:
     repeatable: true
     sections:
       - id: competitor
-        title: "{{competitor_name}} - Priority {{priority_level}}"
+        title: '{{competitor_name}} - Priority {{priority_level}}'
         sections:
           - id: company-overview
             title: Company Overview
@@ -1696,11 +1696,11 @@ sections:
               - id: strengths
                 title: Strengths
                 type: bullet-list
-                template: "- {{strength}}"
+                template: '- {{strength}}'
               - id: weaknesses
                 title: Weaknesses
                 type: bullet-list
-                template: "- {{weakness}}"
+                template: '- {{weakness}}'
           - id: market-position
             title: Market Position & Performance
             template: |
@@ -1716,24 +1716,37 @@ sections:
         title: Feature Comparison Matrix
         instruction: Create a detailed comparison table of key features across competitors
         type: table
-        columns: ["Feature Category", "{{your_company}}", "{{competitor_1}}", "{{competitor_2}}", "{{competitor_3}}"]
+        columns:
+          [
+            'Feature Category',
+            '{{your_company}}',
+            '{{competitor_1}}',
+            '{{competitor_2}}',
+            '{{competitor_3}}',
+          ]
         rows:
-          - category: "Core Functionality"
+          - category: 'Core Functionality'
             items:
-              - ["Feature A", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
-              - ["Feature B", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
-          - category: "User Experience"
+              - ['Feature A', '{{status}}', '{{status}}', '{{status}}', '{{status}}']
+              - ['Feature B', '{{status}}', '{{status}}', '{{status}}', '{{status}}']
+          - category: 'User Experience'
             items:
-              - ["Mobile App", "{{rating}}", "{{rating}}", "{{rating}}", "{{rating}}"]
-              - ["Onboarding Time", "{{time}}", "{{time}}", "{{time}}", "{{time}}"]
-          - category: "Integration & Ecosystem"
+              - ['Mobile App', '{{rating}}', '{{rating}}', '{{rating}}', '{{rating}}']
+              - ['Onboarding Time', '{{time}}', '{{time}}', '{{time}}', '{{time}}']
+          - category: 'Integration & Ecosystem'
             items:
-              - ["API Availability", "{{availability}}", "{{availability}}", "{{availability}}", "{{availability}}"]
-              - ["Third-party Integrations", "{{number}}", "{{number}}", "{{number}}", "{{number}}"]
-          - category: "Pricing & Plans"
+              - [
+                  'API Availability',
+                  '{{availability}}',
+                  '{{availability}}',
+                  '{{availability}}',
+                  '{{availability}}',
+                ]
+              - ['Third-party Integrations', '{{number}}', '{{number}}', '{{number}}', '{{number}}']
+          - category: 'Pricing & Plans'
             items:
-              - ["Starting Price", "{{price}}", "{{price}}", "{{price}}", "{{price}}"]
-              - ["Free Tier", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}"]
+              - ['Starting Price', '{{price}}', '{{price}}', '{{price}}', '{{price}}']
+              - ['Free Tier', '{{yes_no}}', '{{yes_no}}', '{{yes_no}}', '{{yes_no}}']
       - id: swot-comparison
         title: SWOT Comparison
         instruction: Create SWOT analysis for your solution vs. top competitors
@@ -1746,7 +1759,7 @@ sections:
               - **Opportunities:** {{opportunities}}
               - **Threats:** {{threats}}
           - id: vs-competitor
-            title: "vs. {{main_competitor}}"
+            title: 'vs. {{main_competitor}}'
             template: |
               - **Competitive Advantages:** {{your_advantages}}
               - **Competitive Disadvantages:** {{their_advantages}}
@@ -1755,7 +1768,7 @@ sections:
         title: Positioning Map
         instruction: |
           Describe competitor positions on key dimensions
-          
+
           Create a positioning description using 2 key dimensions relevant to the market, such as:
           - Price vs. Features
           - Ease of Use vs. Power
@@ -1790,7 +1803,7 @@ sections:
         title: Blue Ocean Opportunities
         instruction: |
           Identify uncontested market spaces
-          
+
           List opportunities to create new market space:
           - Underserved segments
           - Unaddressed use cases
@@ -1876,7 +1889,7 @@ template:
   output:
     format: markdown
     filename: docs/brainstorming-session-results.md
-    title: "Brainstorming Session Results"
+    title: 'Brainstorming Session Results'
 
 workflow:
   mode: non-interactive
@@ -1894,45 +1907,45 @@ sections:
       - id: summary-details
         template: |
           **Topic:** {{session_topic}}
-          
+
           **Session Goals:** {{stated_goals}}
-          
+
           **Techniques Used:** {{techniques_list}}
-          
+
           **Total Ideas Generated:** {{total_ideas}}
       - id: key-themes
-        title: "Key Themes Identified:"
+        title: 'Key Themes Identified:'
         type: bullet-list
-        template: "- {{theme}}"
+        template: '- {{theme}}'
 
   - id: technique-sessions
     title: Technique Sessions
     repeatable: true
     sections:
       - id: technique
-        title: "{{technique_name}} - {{duration}}"
+        title: '{{technique_name}} - {{duration}}'
         sections:
           - id: description
-            template: "**Description:** {{technique_description}}"
+            template: '**Description:** {{technique_description}}'
           - id: ideas-generated
-            title: "Ideas Generated:"
+            title: 'Ideas Generated:'
             type: numbered-list
-            template: "{{idea}}"
+            template: '{{idea}}'
           - id: insights
-            title: "Insights Discovered:"
+            title: 'Insights Discovered:'
             type: bullet-list
-            template: "- {{insight}}"
+            template: '- {{insight}}'
           - id: connections
-            title: "Notable Connections:"
+            title: 'Notable Connections:'
             type: bullet-list
-            template: "- {{connection}}"
+            template: '- {{connection}}'
 
   - id: idea-categorization
     title: Idea Categorization
     sections:
       - id: immediate-opportunities
         title: Immediate Opportunities
-        content: "*Ideas ready to implement now*"
+        content: '*Ideas ready to implement now*'
         repeatable: true
         type: numbered-list
         template: |
@@ -1942,7 +1955,7 @@ sections:
           - Resources needed: {{requirements}}
       - id: future-innovations
         title: Future Innovations
-        content: "*Ideas requiring development/research*"
+        content: '*Ideas requiring development/research*'
         repeatable: true
         type: numbered-list
         template: |
@@ -1952,7 +1965,7 @@ sections:
           - Timeline estimate: {{timeline}}
       - id: moonshots
         title: Moonshots
-        content: "*Ambitious, transformative concepts*"
+        content: '*Ambitious, transformative concepts*'
         repeatable: true
         type: numbered-list
         template: |
@@ -1962,9 +1975,9 @@ sections:
           - Challenges to overcome: {{challenges}}
       - id: insights-learnings
         title: Insights & Learnings
-        content: "*Key realizations from the session*"
+        content: '*Key realizations from the session*'
         type: bullet-list
-        template: "- {{insight}}: {{description_and_implications}}"
+        template: '- {{insight}}: {{description_and_implications}}'
 
   - id: action-planning
     title: Action Planning
@@ -1973,21 +1986,21 @@ sections:
         title: Top 3 Priority Ideas
         sections:
           - id: priority-1
-            title: "#1 Priority: {{idea_name}}"
+            title: '#1 Priority: {{idea_name}}'
             template: |
               - Rationale: {{rationale}}
               - Next steps: {{next_steps}}
               - Resources needed: {{resources}}
               - Timeline: {{timeline}}
           - id: priority-2
-            title: "#2 Priority: {{idea_name}}"
+            title: '#2 Priority: {{idea_name}}'
             template: |
               - Rationale: {{rationale}}
               - Next steps: {{next_steps}}
               - Resources needed: {{resources}}
               - Timeline: {{timeline}}
           - id: priority-3
-            title: "#3 Priority: {{idea_name}}"
+            title: '#3 Priority: {{idea_name}}'
             template: |
               - Rationale: {{rationale}}
               - Next steps: {{next_steps}}
@@ -2000,19 +2013,19 @@ sections:
       - id: what-worked
         title: What Worked Well
         type: bullet-list
-        template: "- {{aspect}}"
+        template: '- {{aspect}}'
       - id: areas-exploration
         title: Areas for Further Exploration
         type: bullet-list
-        template: "- {{area}}: {{reason}}"
+        template: '- {{area}}: {{reason}}'
       - id: recommended-techniques
         title: Recommended Follow-up Techniques
         type: bullet-list
-        template: "- {{technique}}: {{reason}}"
+        template: '- {{technique}}: {{reason}}'
       - id: questions-emerged
         title: Questions That Emerged
         type: bullet-list
-        template: "- {{question}}"
+        template: '- {{question}}'
       - id: next-session
         title: Next Session Planning
         template: |
@@ -2023,7 +2036,7 @@ sections:
   - id: footer
     content: |
       ---
-      
+
       *Session facilitated using the BMAD-METHOD brainstorming framework*
 ==================== END: .bmad-core/templates/brainstorming-output-tmpl.yaml ====================
 
@@ -2328,7 +2341,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
-- **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
+- **Windsurf**: `/agent-name` (e.g., `/bmad-master`)
 - **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-master`)
 - **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.

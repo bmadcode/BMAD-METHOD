@@ -1014,7 +1014,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
-- **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
+- **Windsurf**: `/agent-name` (e.g., `/bmad-master`)
 - **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-master`)
 - **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
@@ -2246,14 +2246,14 @@ template:
   output:
     format: markdown
     filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
-    title: "Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
+    title: 'Story {{epic_num}}.{{story_num}}: {{story_title_short}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
 
 agent_config:
-  editable_sections: 
+  editable_sections:
     - Status
     - Story
     - Acceptance Criteria
@@ -2270,7 +2270,7 @@ sections:
     instruction: Select the current status of the story
     owner: scrum-master
     editors: [scrum-master, dev-agent]
-    
+
   - id: story
     title: Story
     type: template-text
@@ -2282,7 +2282,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
-    
+
   - id: acceptance-criteria
     title: Acceptance Criteria
     type: numbered-list
@@ -2290,7 +2290,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
-    
+
   - id: tasks-subtasks
     title: Tasks / Subtasks
     type: bullet-list
@@ -2307,7 +2307,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master, dev-agent]
-    
+
   - id: dev-notes
     title: Dev Notes
     instruction: |
@@ -2331,7 +2331,7 @@ sections:
         elicit: true
         owner: scrum-master
         editors: [scrum-master]
-        
+
   - id: change-log
     title: Change Log
     type: table
@@ -2339,7 +2339,7 @@ sections:
     instruction: Track changes made to this story document
     owner: scrum-master
     editors: [scrum-master, dev-agent, qa-agent]
-    
+
   - id: dev-agent-record
     title: Dev Agent Record
     instruction: This section is populated by the development agent during implementation
@@ -2348,29 +2348,29 @@ sections:
     sections:
       - id: agent-model
         title: Agent Model Used
-        template: "{{agent_model_name_version}}"
+        template: '{{agent_model_name_version}}'
         instruction: Record the specific AI agent model and version used for development
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: debug-log-references
         title: Debug Log References
         instruction: Reference any debug logs or traces generated during development
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: completion-notes
         title: Completion Notes List
         instruction: Notes about the completion of tasks and any issues encountered
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: file-list
         title: File List
         instruction: List all files created, modified, or affected during story implementation
         owner: dev-agent
         editors: [dev-agent]
-        
+
   - id: qa-results
     title: QA Results
     instruction: Results from QA Agent QA review of the completed story implementation
@@ -3375,10 +3375,10 @@ Perform a comprehensive test architecture review with quality gate decision. Thi
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "docs/stories/{epic}.{story}.*.md"
-  - story_title: "{title}" # If missing, derive from story file H1
-  - story_slug: "{slug}" # If missing, derive from title (lowercase, hyphenated)
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from core-config.yaml
+  - story_title: '{title}' # If missing, derive from story file H1
+  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
 
 ## Prerequisites
@@ -3540,6 +3540,8 @@ Gate: {STATUS} → docs/qa/gates/{epic}.{story}-{slug}.yml
 Risk profile: docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
 NFR assessment: docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
 
+# Note: Paths should reference core-config.yaml for custom configurations
+
 ### Recommended Status
 
 [✓ Ready for Done] / [✗ Changes Required - See unchecked items above]
@@ -3551,26 +3553,26 @@ NFR assessment: docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
 **Template and Directory:**
 
 - Render from `templates/qa-gate-tmpl.yaml`
-- Create `docs/qa/gates/` directory if missing
+- Create `docs/qa/gates/` directory if missing (or configure in core-config.yaml)
 - Save to: `docs/qa/gates/{epic}.{story}-{slug}.yml`
 
 Gate file structure:
 
 ```yaml
 schema: 1
-story: "{epic}.{story}"
-story_title: "{story title}"
+story: '{epic}.{story}'
+story_title: '{story title}'
 gate: PASS|CONCERNS|FAIL|WAIVED
-status_reason: "1-2 sentence explanation of gate decision"
-reviewer: "Quinn (Test Architect)"
-updated: "{ISO-8601 timestamp}"
+status_reason: '1-2 sentence explanation of gate decision'
+reviewer: 'Quinn (Test Architect)'
+updated: '{ISO-8601 timestamp}'
 
 top_issues: [] # Empty if no issues
 waiver: { active: false } # Set active: true only if WAIVED
 
 # Extended fields (optional but recommended):
 quality_score: 0-100 # 100 - (20*FAILs) - (10*CONCERNS) or use technical-preferences.md weights
-expires: "{ISO-8601 timestamp}" # Typically 2 weeks from review
+expires: '{ISO-8601 timestamp}' # Typically 2 weeks from review
 
 evidence:
   tests_reviewed: { count }
@@ -3582,24 +3584,24 @@ evidence:
 nfr_validation:
   security:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
   performance:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
   reliability:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
   maintainability:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
 
 recommendations:
   immediate: # Must fix before production
-    - action: "Add rate limiting"
-      refs: ["api/auth/login.ts"]
+    - action: 'Add rate limiting'
+      refs: ['api/auth/login.ts']
   future: # Can be addressed later
-    - action: "Consider caching"
-      refs: ["services/data.ts"]
+    - action: 'Consider caching'
+      refs: ['services/data.ts']
 ```
 
 ### Gate Decision Criteria
@@ -3711,11 +3713,11 @@ Slug rules:
 
 ```yaml
 schema: 1
-story: "{epic}.{story}"
+story: '{epic}.{story}'
 gate: PASS|CONCERNS|FAIL|WAIVED
-status_reason: "1-2 sentence explanation of gate decision"
-reviewer: "Quinn"
-updated: "{ISO-8601 timestamp}"
+status_reason: '1-2 sentence explanation of gate decision'
+reviewer: 'Quinn'
+updated: '{ISO-8601 timestamp}'
 top_issues: [] # Empty array if no issues
 waiver: { active: false } # Only set active: true if WAIVED
 ```
@@ -3724,20 +3726,20 @@ waiver: { active: false } # Only set active: true if WAIVED
 
 ```yaml
 schema: 1
-story: "1.3"
+story: '1.3'
 gate: CONCERNS
-status_reason: "Missing rate limiting on auth endpoints poses security risk."
-reviewer: "Quinn"
-updated: "2025-01-12T10:15:00Z"
+status_reason: 'Missing rate limiting on auth endpoints poses security risk.'
+reviewer: 'Quinn'
+updated: '2025-01-12T10:15:00Z'
 top_issues:
-  - id: "SEC-001"
+  - id: 'SEC-001'
     severity: high # ONLY: low|medium|high
-    finding: "No rate limiting on login endpoint"
-    suggested_action: "Add rate limiting middleware before production"
-  - id: "TEST-001"
+    finding: 'No rate limiting on login endpoint'
+    suggested_action: 'Add rate limiting middleware before production'
+  - id: 'TEST-001'
     severity: medium
-    finding: "No integration tests for auth flow"
-    suggested_action: "Add integration test coverage"
+    finding: 'No integration tests for auth flow'
+    suggested_action: 'Add integration test coverage'
 waiver: { active: false }
 ```
 
@@ -3745,20 +3747,20 @@ waiver: { active: false }
 
 ```yaml
 schema: 1
-story: "1.3"
+story: '1.3'
 gate: WAIVED
-status_reason: "Known issues accepted for MVP release."
-reviewer: "Quinn"
-updated: "2025-01-12T10:15:00Z"
+status_reason: 'Known issues accepted for MVP release.'
+reviewer: 'Quinn'
+updated: '2025-01-12T10:15:00Z'
 top_issues:
-  - id: "PERF-001"
+  - id: 'PERF-001'
     severity: low
-    finding: "Dashboard loads slowly with 1000+ items"
-    suggested_action: "Implement pagination in next sprint"
+    finding: 'Dashboard loads slowly with 1000+ items'
+    suggested_action: 'Implement pagination in next sprint'
 waiver:
   active: true
-  reason: "MVP release - performance optimization deferred"
-  approved_by: "Product Owner"
+  reason: 'MVP release - performance optimization deferred'
+  approved_by: 'Product Owner'
 ```
 
 ## Gate Decision Criteria
@@ -3877,21 +3879,21 @@ Identify all testable requirements from:
 For each requirement, document which tests validate it. Use Given-When-Then to describe what the test validates (not how it's written):
 
 ```yaml
-requirement: "AC1: User can login with valid credentials"
+requirement: 'AC1: User can login with valid credentials'
 test_mappings:
-  - test_file: "auth/login.test.ts"
-    test_case: "should successfully login with valid email and password"
+  - test_file: 'auth/login.test.ts'
+    test_case: 'should successfully login with valid email and password'
     # Given-When-Then describes WHAT the test validates, not HOW it's coded
-    given: "A registered user with valid credentials"
-    when: "They submit the login form"
-    then: "They are redirected to dashboard and session is created"
+    given: 'A registered user with valid credentials'
+    when: 'They submit the login form'
+    then: 'They are redirected to dashboard and session is created'
     coverage: full
 
-  - test_file: "e2e/auth-flow.test.ts"
-    test_case: "complete login flow"
-    given: "User on login page"
-    when: "Entering valid credentials and submitting"
-    then: "Dashboard loads with user data"
+  - test_file: 'e2e/auth-flow.test.ts'
+    test_case: 'complete login flow'
+    given: 'User on login page'
+    when: 'Entering valid credentials and submitting'
+    then: 'Dashboard loads with user data'
     coverage: integration
 ```
 
@@ -3913,19 +3915,19 @@ Document any gaps found:
 
 ```yaml
 coverage_gaps:
-  - requirement: "AC3: Password reset email sent within 60 seconds"
-    gap: "No test for email delivery timing"
+  - requirement: 'AC3: Password reset email sent within 60 seconds'
+    gap: 'No test for email delivery timing'
     severity: medium
     suggested_test:
       type: integration
-      description: "Test email service SLA compliance"
+      description: 'Test email service SLA compliance'
 
-  - requirement: "AC5: Support 1000 concurrent users"
-    gap: "No load testing implemented"
+  - requirement: 'AC5: Support 1000 concurrent users'
+    gap: 'No load testing implemented'
     severity: high
     suggested_test:
       type: performance
-      description: "Load test with 1000 concurrent connections"
+      description: 'Load test with 1000 concurrent connections'
 ```
 
 ## Outputs
@@ -3941,11 +3943,11 @@ trace:
     full: Y
     partial: Z
     none: W
-  planning_ref: "docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md"
+  planning_ref: 'docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md'
   uncovered:
-    - ac: "AC3"
-      reason: "No test found for password reset timing"
-  notes: "See docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md"
+    - ac: 'AC3'
+      reason: 'No test found for password reset timing'
+  notes: 'See docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md'
 ```
 
 ### Output 2: Traceability Report
@@ -4119,10 +4121,10 @@ Generate a comprehensive risk assessment matrix for a story implementation using
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "docs/stories/{epic}.{story}.*.md"
-  - story_title: "{title}" # If missing, derive from story file H1
-  - story_slug: "{slug}" # If missing, derive from title (lowercase, hyphenated)
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: 'docs/stories/{epic}.{story}.*.md'
+  - story_title: '{title}' # If missing, derive from story file H1
+  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
 
 ## Purpose
@@ -4192,14 +4194,14 @@ For each category, identify specific risks:
 
 ```yaml
 risk:
-  id: "SEC-001" # Use prefixes: SEC, PERF, DATA, BUS, OPS, TECH
+  id: 'SEC-001' # Use prefixes: SEC, PERF, DATA, BUS, OPS, TECH
   category: security
-  title: "Insufficient input validation on user forms"
-  description: "Form inputs not properly sanitized could lead to XSS attacks"
+  title: 'Insufficient input validation on user forms'
+  description: 'Form inputs not properly sanitized could lead to XSS attacks'
   affected_components:
-    - "UserRegistrationForm"
-    - "ProfileUpdateForm"
-  detection_method: "Code review revealed missing validation"
+    - 'UserRegistrationForm'
+    - 'ProfileUpdateForm'
+  detection_method: 'Code review revealed missing validation'
 ```
 
 ### 2. Risk Assessment
@@ -4246,20 +4248,20 @@ For each identified risk, provide mitigation:
 
 ```yaml
 mitigation:
-  risk_id: "SEC-001"
-  strategy: "preventive" # preventive|detective|corrective
+  risk_id: 'SEC-001'
+  strategy: 'preventive' # preventive|detective|corrective
   actions:
-    - "Implement input validation library (e.g., validator.js)"
-    - "Add CSP headers to prevent XSS execution"
-    - "Sanitize all user inputs before storage"
-    - "Escape all outputs in templates"
+    - 'Implement input validation library (e.g., validator.js)'
+    - 'Add CSP headers to prevent XSS execution'
+    - 'Sanitize all user inputs before storage'
+    - 'Escape all outputs in templates'
   testing_requirements:
-    - "Security testing with OWASP ZAP"
-    - "Manual penetration testing of forms"
-    - "Unit tests for validation functions"
-  residual_risk: "Low - Some zero-day vulnerabilities may remain"
-  owner: "dev"
-  timeline: "Before deployment"
+    - 'Security testing with OWASP ZAP'
+    - 'Manual penetration testing of forms'
+    - 'Unit tests for validation functions'
+  residual_risk: 'Low - Some zero-day vulnerabilities may remain'
+  owner: 'dev'
+  timeline: 'Before deployment'
 ```
 
 ## Outputs
@@ -4285,12 +4287,12 @@ risk_summary:
   highest:
     id: SEC-001
     score: 9
-    title: "XSS on profile form"
+    title: 'XSS on profile form'
   recommendations:
     must_fix:
-      - "Add input sanitization & CSP"
+      - 'Add input sanitization & CSP'
     monitor:
-      - "Add security alerts for auth endpoints"
+      - 'Add security alerts for auth endpoints'
 ```
 
 ### Output 2: Markdown Report
@@ -4475,299 +4477,79 @@ Create comprehensive test scenarios with appropriate test level recommendations 
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "docs/stories/{epic}.{story}.*.md"
-  - story_title: "{title}" # If missing, derive from story file H1
-  - story_slug: "{slug}" # If missing, derive from title (lowercase, hyphenated)
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from core-config.yaml
+  - story_title: '{title}' # If missing, derive from story file H1
+  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
 
 ## Purpose
 
 Design a complete test strategy that identifies what to test, at which level (unit/integration/e2e), and why. This ensures efficient test coverage without redundancy while maintaining appropriate test boundaries.
 
-## Test Level Decision Framework
-
-### Unit Tests
-
-**When to use:**
-
-- Testing pure functions and business logic
-- Algorithm correctness
-- Input validation and data transformation
-- Error handling in isolated components
-- Complex calculations or state machines
-
-**Characteristics:**
-
-- Fast execution (immediate feedback)
-- No external dependencies (DB, API, file system)
-- Highly maintainable and stable
-- Easy to debug failures
-
-**Example scenarios:**
+## Dependencies
 
 ```yaml
-unit_test:
-  component: "PriceCalculator"
-  scenario: "Calculate discount with multiple rules"
-  justification: "Complex business logic with multiple branches"
-  mock_requirements: "None - pure function"
+data:
+  - test-levels-framework.md # Unit/Integration/E2E decision criteria
+  - test-priorities-matrix.md # P0/P1/P2/P3 classification system
 ```
 
-### Integration Tests
-
-**When to use:**
-
-- Testing component interactions
-- Database operations and queries
-- API endpoint behavior
-- Service layer orchestration
-- External service integration (with test doubles)
-
-**Characteristics:**
-
-- Moderate execution time
-- May use test databases or containers
-- Tests multiple components together
-- Validates contracts between components
-
-**Example scenarios:**
-
-```yaml
-integration_test:
-  components: ["UserService", "UserRepository", "Database"]
-  scenario: "Create user with duplicate email check"
-  justification: "Tests transaction boundaries and constraint handling"
-  test_doubles: "Mock email service, real test database"
-```
-
-### End-to-End Tests
-
-**When to use:**
-
-- Critical user journeys
-- Cross-system workflows
-- UI interaction flows
-- Full stack validation
-- Production-like scenario testing
-
-**Characteristics:**
-
-- Keep under 90 seconds per test
-- Tests complete user scenarios
-- Uses real or production-like environment
-- Higher maintenance cost
-- More prone to flakiness
-
-**Example scenarios:**
-
-```yaml
-e2e_test:
-  flow: "Complete purchase flow"
-  scenario: "User browses, adds to cart, and completes checkout"
-  justification: "Critical business flow requiring full stack validation"
-  environment: "Staging with test payment gateway"
-```
-
-## Test Design Process
+## Process
 
 ### 1. Analyze Story Requirements
 
-Break down each acceptance criterion into testable scenarios:
+Break down each acceptance criterion into testable scenarios. For each AC:
 
-```yaml
-acceptance_criterion: "User can reset password via email"
-test_scenarios:
-  - level: unit
-    what: "Password validation rules"
-    why: "Complex regex and business rules"
+- Identify the core functionality to test
+- Determine data variations needed
+- Consider error conditions
+- Note edge cases
 
-  - level: integration
-    what: "Password reset token generation and storage"
-    why: "Database interaction with expiry logic"
+### 2. Apply Test Level Framework
 
-  - level: integration
-    what: "Email service integration"
-    why: "External service with retry logic"
+**Reference:** Load `test-levels-framework.md` for detailed criteria
 
-  - level: e2e
-    what: "Complete password reset flow"
-    why: "Critical security flow needing full validation"
-```
+Quick rules:
 
-### 2. Apply Test Level Heuristics
+- **Unit**: Pure logic, algorithms, calculations
+- **Integration**: Component interactions, DB operations
+- **E2E**: Critical user journeys, compliance
 
-Use these rules to determine appropriate test levels:
+### 3. Assign Priorities
 
-```markdown
-## Test Level Selection Rules
+**Reference:** Load `test-priorities-matrix.md` for classification
 
-### Favor Unit Tests When:
+Quick priority assignment:
 
-- Logic can be isolated
-- No side effects involved
-- Fast feedback needed
-- High cyclomatic complexity
+- **P0**: Revenue-critical, security, compliance
+- **P1**: Core user journeys, frequently used
+- **P2**: Secondary features, admin functions
+- **P3**: Nice-to-have, rarely used
 
-### Favor Integration Tests When:
+### 4. Design Test Scenarios
 
-- Testing persistence layer
-- Validating service contracts
-- Testing middleware/interceptors
-- Component boundaries critical
-
-### Favor E2E Tests When:
-
-- User-facing critical paths
-- Multi-system interactions
-- Regulatory compliance scenarios
-- Visual regression important
-
-### Anti-patterns to Avoid:
-
-- E2E testing for business logic validation
-- Unit testing framework behavior
-- Integration testing third-party libraries
-- Duplicate coverage across levels
-
-### Duplicate Coverage Guard
-
-**Before adding any test, check:**
-
-1. Is this already tested at a lower level?
-2. Can a unit test cover this instead of integration?
-3. Can an integration test cover this instead of E2E?
-
-**Coverage overlap is only acceptable when:**
-
-- Testing different aspects (unit: logic, integration: interaction, e2e: user experience)
-- Critical paths requiring defense in depth
-- Regression prevention for previously broken functionality
-```
-
-### 3. Design Test Scenarios
-
-**Test ID Format:** `{EPIC}.{STORY}-{LEVEL}-{SEQ}`
-
-- Example: `1.3-UNIT-001`, `1.3-INT-002`, `1.3-E2E-001`
-- Ensures traceability across all artifacts
-
-**Naming Convention:**
-
-- Unit: `test_{component}_{scenario}`
-- Integration: `test_{flow}_{interaction}`
-- E2E: `test_{journey}_{outcome}`
-
-**Risk Linkage:**
-
-- Tag tests with risk IDs they mitigate
-- Prioritize tests for high-risk areas (P0)
-- Link to risk profile when available
-
-For each identified test need:
+For each identified test need, create:
 
 ```yaml
 test_scenario:
-  id: "1.3-INT-002"
-  requirement: "AC2: Rate limiting on login attempts"
-  mitigates_risks: ["SEC-001", "PERF-003"] # Links to risk profile
-  priority: P0 # Based on risk score
-
-  unit_tests:
-    - name: "RateLimiter calculates window correctly"
-      input: "Timestamp array"
-      expected: "Correct window calculation"
-
-  integration_tests:
-    - name: "Login endpoint enforces rate limit"
-      setup: "5 failed attempts"
-      action: "6th attempt"
-      expected: "429 response with retry-after header"
-
-  e2e_tests:
-    - name: "User sees rate limit message"
-      setup: "Trigger rate limit"
-      validation: "Error message displayed, retry timer shown"
+  id: '{epic}.{story}-{LEVEL}-{SEQ}'
+  requirement: 'AC reference'
+  priority: P0|P1|P2|P3
+  level: unit|integration|e2e
+  description: 'What is being tested'
+  justification: 'Why this level was chosen'
+  mitigates_risks: ['RISK-001'] # If risk profile exists
 ```
 
-## Deterministic Test Level Minimums
+### 5. Validate Coverage
 
-**Per Acceptance Criterion:**
+Ensure:
 
-- At least 1 unit test for business logic
-- At least 1 integration test if multiple components interact
-- At least 1 E2E test if it's a user-facing feature
-
-**Exceptions:**
-
-- Pure UI changes: May skip unit tests
-- Pure logic changes: May skip E2E tests
-- Infrastructure changes: May focus on integration tests
-
-**When in doubt:** Start with unit tests, add integration for interactions, E2E for critical paths only.
-
-## Test Quality Standards
-
-### Core Testing Principles
-
-**No Flaky Tests:** Ensure reliability through proper async handling, explicit waits, and atomic test design.
-
-**No Hard Waits/Sleeps:** Use dynamic waiting strategies (e.g., polling, event-based triggers).
-
-**Stateless & Parallel-Safe:** Tests run independently; use cron jobs or semaphores only if unavoidable.
-
-**No Order Dependency:** Every it/describe/context block works in isolation (supports .only execution).
-
-**Self-Cleaning Tests:** Test sets up its own data and automatically deletes/deactivates entities created during testing.
-
-**Tests Live Near Source Code:** Co-locate test files with the code they validate (e.g., `*.spec.js` alongside components).
-
-### Execution Strategy
-
-**Shifted Left:**
-
-- Start with local environments or ephemeral stacks
-- Validate functionality across all deployment stages (local → dev → stage)
-
-**Low Maintenance:** Minimize manual upkeep (avoid brittle selectors, do not repeat UI actions, leverage APIs).
-
-**CI Execution Evidence:** Integrate into pipelines with clear logs/artifacts.
-
-**Visibility:** Generate test reports (e.g., JUnit XML, HTML) for failures and trends.
-
-### Coverage Requirements
-
-**Release Confidence:**
-
-- Happy Path: Core user journeys are prioritized
-- Edge Cases: Critical error/validation scenarios are covered
-- Feature Flags: Test both enabled and disabled states where applicable
-
-### Test Design Rules
-
-**Assertions:** Keep them explicit in tests; avoid abstraction into helpers. Use parametrized tests for soft assertions.
-
-**Naming:** Follow conventions (e.g., `describe('Component')`, `it('should do X when Y')`).
-
-**Size:** Aim for files ≤200 lines; split/chunk large tests logically.
-
-**Speed:** Target individual tests ≤90 seconds; optimize slow setups (e.g., shared fixtures).
-
-**Careful Abstractions:** Favor readability over DRY when balancing helper reuse (page objects are okay, assertion logic is not).
-
-**Test Cleanup:** Ensure tests clean up resources they create (e.g., closing browser, deleting test data).
-
-**Deterministic Flow:** Tests should refrain from using conditionals (e.g., if/else) to control flow or try/catch blocks where possible.
-
-### API Testing Standards
-
-- Tests must not depend on hardcoded data → use factories and per-test setup
-- Always test both happy path and negative/error cases
-- API tests should run parallel safely (no global state shared)
-- Test idempotency where applicable (e.g., duplicate requests)
-- Tests should clean up their data
-- Response logs should only be printed in case of failure
-- Auth tests must validate token expiration and renewal
+- Every AC has at least one test
+- No duplicate coverage across levels
+- Critical paths have multiple levels
+- Risk mitigations are addressed
 
 ## Outputs
 
@@ -4775,13 +4557,11 @@ test_scenario:
 
 **Save to:** `docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md`
 
-Generate a comprehensive test design document:
-
 ```markdown
 # Test Design: Story {epic}.{story}
 
 Date: {date}
-Reviewer: Quinn (Test Architect)
+Designer: Quinn (Test Architect)
 
 ## Test Strategy Overview
 
@@ -4789,212 +4569,80 @@ Reviewer: Quinn (Test Architect)
 - Unit tests: Y (A%)
 - Integration tests: Z (B%)
 - E2E tests: W (C%)
+- Priority distribution: P0: X, P1: Y, P2: Z
 
-## Test Level Rationale
+## Test Scenarios by Acceptance Criteria
 
-[Explain why this distribution was chosen]
+### AC1: {description}
 
-## Detailed Test Scenarios
+#### Scenarios
 
-### Requirement: AC1 - {description}
+| ID           | Level       | Priority | Test                      | Justification            |
+| ------------ | ----------- | -------- | ------------------------- | ------------------------ |
+| 1.3-UNIT-001 | Unit        | P0       | Validate input format     | Pure validation logic    |
+| 1.3-INT-001  | Integration | P0       | Service processes request | Multi-component flow     |
+| 1.3-E2E-001  | E2E         | P1       | User completes journey    | Critical path validation |
 
-#### Unit Tests (3 scenarios)
+[Continue for all ACs...]
 
-1. **ID**: 1.3-UNIT-001
-   **Test**: Validate input format
-   - **Why Unit**: Pure validation logic
-   - **Coverage**: Input edge cases
-   - **Mocks**: None needed
-   - **Mitigates**: DATA-001 (if applicable)
+## Risk Coverage
 
-#### Integration Tests (2 scenarios)
+[Map test scenarios to identified risks if risk profile exists]
 
-1. **ID**: 1.3-INT-001
-   **Test**: Service processes valid request
-   - **Why Integration**: Multiple components involved
-   - **Coverage**: Happy path + error handling
-   - **Test Doubles**: Mock external API
-   - **Mitigates**: TECH-002
+## Recommended Execution Order
 
-#### E2E Tests (1 scenario)
-
-1. **ID**: 1.3-E2E-001
-   **Test**: Complete user workflow
-   - **Why E2E**: Critical user journey
-   - **Coverage**: Full stack validation
-   - **Environment**: Staging
-   - **Max Duration**: 90 seconds
-   - **Mitigates**: BUS-001
-
-[Continue for all requirements...]
-
-## Test Data Requirements
-
-### Unit Test Data
-
-- Static fixtures for calculations
-- Edge case values arrays
-
-### Integration Test Data
-
-- Test database seeds
-- API response fixtures
-
-### E2E Test Data
-
-- Test user accounts
-- Sandbox environment data
-
-## Mock/Stub Strategy
-
-### What to Mock
-
-- External services (payment, email)
-- Time-dependent functions
-- Random number generators
-
-### What NOT to Mock
-
-- Core business logic
-- Database in integration tests
-- Critical security functions
-
-## Test Execution Implementation
-
-### Parallel Execution
-
-- All unit tests: Fully parallel (stateless requirement)
-- Integration tests: Parallel with isolated databases
-- E2E tests: Sequential or limited parallelism
-
-### Execution Order
-
-1. Unit tests first (fail fast)
-2. Integration tests second
-3. E2E tests last (expensive, max 90 seconds each)
-
-## Risk-Based Test Priority
-
-### P0 - Must Have (Linked to Critical/High Risks)
-
-- Security-related tests (SEC-\* risks)
-- Data integrity tests (DATA-\* risks)
-- Critical business flow tests (BUS-\* risks)
-- Tests for risks scored ≥6 in risk profile
-
-### P1 - Should Have (Medium Risks)
-
-- Edge case coverage
-- Performance tests (PERF-\* risks)
-- Error recovery tests
-- Tests for risks scored 4-5
-
-### P2 - Nice to Have (Low Risks)
-
-- UI polish tests
-- Minor validation tests
-- Tests for risks scored ≤3
-
-## Test Maintenance Considerations
-
-### High Maintenance Tests
-
-[List tests that may need frequent updates]
-
-### Stability Measures
-
-- No retry strategies (tests must be deterministic)
-- Dynamic waits only (no hard sleeps)
-- Environment isolation
-- Self-cleaning test data
-
-## Coverage Goals
-
-### Unit Test Coverage
-
-- Target: 80% line coverage
-- Focus: Business logic, calculations
-
-### Integration Coverage
-
-- Target: All API endpoints
-- Focus: Contract validation
-
-### E2E Coverage
-
-- Target: Critical paths only
-- Focus: User value delivery
+1. P0 Unit tests (fail fast)
+2. P0 Integration tests
+3. P0 E2E tests
+4. P1 tests in order
+5. P2+ as time permits
 ```
 
-## Test Level Smells to Flag
+### Output 2: Gate YAML Block
 
-### Over-testing Smells
+Generate for inclusion in quality gate:
 
-- Same logic tested at multiple levels
-- E2E tests for calculations
-- Integration tests for framework features
+```yaml
+test_design:
+  scenarios_total: X
+  by_level:
+    unit: Y
+    integration: Z
+    e2e: W
+  by_priority:
+    p0: A
+    p1: B
+    p2: C
+  coverage_gaps: [] # List any ACs without tests
+```
 
-### Under-testing Smells
+### Output 3: Trace References
 
-- No unit tests for complex logic
-- Missing integration tests for data operations
-- No E2E tests for critical user paths
+Print for use by trace-requirements task:
 
-### Wrong Level Smells
+```text
+Test design matrix: docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md
+P0 tests identified: {count}
+```
 
-- Unit tests with real database
-- E2E tests checking calculation results
-- Integration tests mocking everything
+## Quality Checklist
 
-## Quality Indicators
+Before finalizing, verify:
 
-Good test design shows:
-
-- Clear level separation
-- No redundant coverage
-- Fast feedback from unit tests
-- Reliable integration tests
-- Focused e2e tests
+- [ ] Every AC has test coverage
+- [ ] Test levels are appropriate (not over-testing)
+- [ ] No duplicate coverage across levels
+- [ ] Priorities align with business risk
+- [ ] Test IDs follow naming convention
+- [ ] Scenarios are atomic and independent
 
 ## Key Principles
 
-- Test at the lowest appropriate level
-- One clear owner per test
-- Fast tests run first
-- Mock at boundaries, not internals
-- E2E for user value, not implementation
-- Maintain test/production parity where critical
-- Tests must be atomic and self-contained
-- No shared state between tests
-- Explicit assertions in test files (not helpers)
-
-### Output 2: Story Hook Line
-
-**Print this line for review task to quote:**
-
-```text
-Test design: docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md
-```
-
-**For traceability:** This planning document will be referenced by trace-requirements task.
-
-### Output 3: Test Count Summary
-
-**Print summary for quick reference:**
-
-```yaml
-test_summary:
-  total: { total_count }
-  by_level:
-    unit: { unit_count }
-    integration: { int_count }
-    e2e: { e2e_count }
-  by_priority:
-    P0: { p0_count }
-    P1: { p1_count }
-    P2: { p2_count }
-  coverage_gaps: [] # List any ACs without tests
-```
+- **Shift left**: Prefer unit over integration, integration over E2E
+- **Risk-based**: Focus on what could go wrong
+- **Efficient coverage**: Test once at the right level
+- **Maintainability**: Consider long-term test maintenance
+- **Fast feedback**: Quick tests run first
 ==================== END: .bmad-core/tasks/test-design.md ====================
 
 ==================== START: .bmad-core/tasks/nfr-assess.md ====================
@@ -5006,12 +4654,12 @@ Quick NFR validation focused on the core four: security, performance, reliabilit
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "docs/stories/{epic}.{story}.*.md"
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: 'docs/stories/{epic}.{story}.*.md'
 
 optional:
-  - architecture_refs: "docs/architecture/*.md"
-  - technical_preferences: "docs/technical-preferences.md"
+  - architecture_refs: 'docs/architecture/*.md'
+  - technical_preferences: 'docs/technical-preferences.md'
   - acceptance_criteria: From story file
 ```
 
@@ -5092,16 +4740,16 @@ nfr_validation:
   _assessed: [security, performance, reliability, maintainability]
   security:
     status: CONCERNS
-    notes: "No rate limiting on auth endpoints"
+    notes: 'No rate limiting on auth endpoints'
   performance:
     status: PASS
-    notes: "Response times < 200ms verified"
+    notes: 'Response times < 200ms verified'
   reliability:
     status: PASS
-    notes: "Error handling and retries implemented"
+    notes: 'Error handling and retries implemented'
   maintainability:
     status: CONCERNS
-    notes: "Test coverage at 65%, target is 80%"
+    notes: 'Test coverage at 65%, target is 80%'
 ```
 
 ## Deterministic Status Rules
@@ -5331,10 +4979,10 @@ performance_deep_dive:
     p99: 350ms
   database:
     slow_queries: 2
-    missing_indexes: ["users.email", "orders.user_id"]
+    missing_indexes: ['users.email', 'orders.user_id']
   caching:
     hit_rate: 0%
-    recommendation: "Add Redis for session data"
+    recommendation: 'Add Redis for session data'
   load_test:
     max_rps: 150
     breaking_point: 200 rps
@@ -5351,16 +4999,16 @@ template:
   output:
     format: yaml
     filename: docs/qa/gates/{{epic_num}}.{{story_num}}-{{story_slug}}.yml
-    title: "Quality Gate: {{epic_num}}.{{story_num}}"
+    title: 'Quality Gate: {{epic_num}}.{{story_num}}'
 
 # Required fields (keep these first)
 schema: 1
-story: "{{epic_num}}.{{story_num}}"
-story_title: "{{story_title}}"
-gate: "{{gate_status}}"  # PASS|CONCERNS|FAIL|WAIVED
-status_reason: "{{status_reason}}"  # 1-2 sentence summary of why this gate decision
-reviewer: "Quinn (Test Architect)"
-updated: "{{iso_timestamp}}"
+story: '{{epic_num}}.{{story_num}}'
+story_title: '{{story_title}}'
+gate: '{{gate_status}}' # PASS|CONCERNS|FAIL|WAIVED
+status_reason: '{{status_reason}}' # 1-2 sentence summary of why this gate decision
+reviewer: 'Quinn (Test Architect)'
+updated: '{{iso_timestamp}}'
 
 # Always present but only active when WAIVED
 waiver: { active: false }
@@ -5375,68 +5023,77 @@ risk_summary:
     must_fix: []
     monitor: []
 
-# Example with issues:
-# top_issues:
-#   - id: "SEC-001"
-#     severity: high  # ONLY: low|medium|high
-#     finding: "No rate limiting on login endpoint"
-#     suggested_action: "Add rate limiting middleware before production"
-#   - id: "TEST-001"  
-#     severity: medium
-#     finding: "Missing integration tests for auth flow"
-#     suggested_action: "Add test coverage for critical paths"
+# Examples section using block scalars for clarity
+examples:
+  with_issues: |
+    top_issues:
+      - id: "SEC-001"
+        severity: high  # ONLY: low|medium|high
+        finding: "No rate limiting on login endpoint"
+        suggested_action: "Add rate limiting middleware before production"
+      - id: "TEST-001"  
+        severity: medium
+        finding: "Missing integration tests for auth flow"
+        suggested_action: "Add test coverage for critical paths"
 
-# Example when waived:
-# waiver:
-#   active: true
-#   reason: "Accepted for MVP release - will address in next sprint"
-#   approved_by: "Product Owner"
+  when_waived: |
+    waiver:
+      active: true
+      reason: "Accepted for MVP release - will address in next sprint"
+      approved_by: "Product Owner"
 
 # ============ Optional Extended Fields ============
 # Uncomment and use if your team wants more detail
 
-# quality_score: 75  # 0-100 (optional scoring)
-# expires: "2025-01-26T00:00:00Z"  # Optional gate freshness window
+optional_fields_examples:
+  quality_and_expiry: |
+    quality_score: 75  # 0-100 (optional scoring)
+    expires: "2025-01-26T00:00:00Z"  # Optional gate freshness window
 
-# evidence:
-#   tests_reviewed: 15
-#   risks_identified: 3
-#   trace:
-#     ac_covered: [1, 2, 3]  # AC numbers with test coverage
-#     ac_gaps: [4]  # AC numbers lacking coverage
+  evidence: |
+    evidence:
+      tests_reviewed: 15
+      risks_identified: 3
+      trace:
+        ac_covered: [1, 2, 3]  # AC numbers with test coverage
+        ac_gaps: [4]  # AC numbers lacking coverage
 
-# nfr_validation:
-#   security: { status: CONCERNS, notes: "Rate limiting missing" }
-#   performance: { status: PASS, notes: "" }
-#   reliability: { status: PASS, notes: "" }
-#   maintainability: { status: PASS, notes: "" }
+  nfr_validation: |
+    nfr_validation:
+      security: { status: CONCERNS, notes: "Rate limiting missing" }
+      performance: { status: PASS, notes: "" }
+      reliability: { status: PASS, notes: "" }
+      maintainability: { status: PASS, notes: "" }
 
-# history:  # Append-only audit trail
-#   - at: "2025-01-12T10:00:00Z"
-#     gate: FAIL
-#     note: "Initial review - missing tests"
-#   - at: "2025-01-12T15:00:00Z"  
-#     gate: CONCERNS
-#     note: "Tests added but rate limiting still missing"
+  history: |
+    history:  # Append-only audit trail
+      - at: "2025-01-12T10:00:00Z"
+        gate: FAIL
+        note: "Initial review - missing tests"
+      - at: "2025-01-12T15:00:00Z"  
+        gate: CONCERNS
+        note: "Tests added but rate limiting still missing"
 
-# risk_summary:  # From risk-profile task
-#   totals:
-#     critical: 0
-#     high: 0
-#     medium: 0
-#     low: 0
-#   # 'highest' is emitted only when risks exist
-#   recommendations:
-#     must_fix: []
-#     monitor: []
+  risk_summary: |
+    risk_summary:  # From risk-profile task
+      totals:
+        critical: 0
+        high: 0
+        medium: 0
+        low: 0
+      # 'highest' is emitted only when risks exist
+      recommendations:
+        must_fix: []
+        monitor: []
 
-# recommendations:
-#   immediate:  # Must fix before production
-#     - action: "Add rate limiting to auth endpoints"
-#       refs: ["api/auth/login.ts:42-68"]
-#   future:  # Can be addressed later
-#     - action: "Consider caching for better performance"
-#       refs: ["services/data.service.ts"]
+  recommendations: |
+    recommendations:
+      immediate:  # Must fix before production
+        - action: "Add rate limiting to auth endpoints"
+          refs: ["api/auth/login.ts:42-68"]
+      future:  # Can be addressed later
+        - action: "Consider caching for better performance"
+          refs: ["services/data.service.ts"]
 ==================== END: .bmad-core/templates/qa-gate-tmpl.yaml ====================
 
 ==================== START: .bmad-core/data/technical-preferences.md ====================

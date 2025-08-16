@@ -1,18 +1,21 @@
-const path = require("node:path");
-const { execFile } = require("node:child_process");
-const { promisify } = require("node:util");
-const { glob } = require("glob");
-const { loadIgnore } = require("./ignoreRules.js");
+const path = require('node:path');
+const { execFile } = require('node:child_process');
+const { promisify } = require('node:util');
+const { glob } = require('glob');
+const { loadIgnore } = require('./ignoreRules.js');
 
 const pExecFile = promisify(execFile);
 
 async function isGitRepo(rootDir) {
   try {
-    const { stdout } = await pExecFile("git", [
-      "rev-parse",
-      "--is-inside-work-tree",
-    ], { cwd: rootDir });
-    return String(stdout || "").toString().trim() === "true";
+    const { stdout } = await pExecFile('git', ['rev-parse', '--is-inside-work-tree'], {
+      cwd: rootDir,
+    });
+    return (
+      String(stdout || '')
+        .toString()
+        .trim() === 'true'
+    );
   } catch {
     return false;
   }
@@ -20,12 +23,10 @@ async function isGitRepo(rootDir) {
 
 async function gitListFiles(rootDir) {
   try {
-    const { stdout } = await pExecFile("git", [
-      "ls-files",
-      "-co",
-      "--exclude-standard",
-    ], { cwd: rootDir });
-    return String(stdout || "")
+    const { stdout } = await pExecFile('git', ['ls-files', '-co', '--exclude-standard'], {
+      cwd: rootDir,
+    });
+    return String(stdout || '')
       .split(/\r?\n/)
       .map((s) => s.trim())
       .filter(Boolean);
@@ -48,14 +49,14 @@ async function discoverFiles(rootDir, options = {}) {
   const { filter } = await loadIgnore(rootDir);
 
   // Try git first
-  if (preferGit && await isGitRepo(rootDir)) {
+  if (preferGit && (await isGitRepo(rootDir))) {
     const relFiles = await gitListFiles(rootDir);
     const filteredRel = relFiles.filter((p) => filter(p));
     return filteredRel.map((p) => path.resolve(rootDir, p));
   }
 
   // Glob fallback
-  const globbed = await glob("**/*", {
+  const globbed = await glob('**/*', {
     cwd: rootDir,
     nodir: true,
     dot: true,

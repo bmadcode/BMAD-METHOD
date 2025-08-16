@@ -1159,7 +1159,7 @@ template:
   output:
     format: markdown
     filename: docs/prd.md
-    title: "{{project_name}} Product Requirements Document (PRD)"
+    title: '{{project_name}} Product Requirements Document (PRD)'
 
 workflow:
   mode: interactive
@@ -1196,21 +1196,21 @@ sections:
         prefix: FR
         instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with FR
         examples:
-          - "FR6: The Todo List uses AI to detect and warn against potentially duplicate todo items that are worded differently."
+          - 'FR6: The Todo List uses AI to detect and warn against potentially duplicate todo items that are worded differently.'
       - id: non-functional
         title: Non Functional
         type: numbered-list
         prefix: NFR
         instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with NFR
         examples:
-          - "NFR1: AWS service usage must aim to stay within free-tier limits where feasible."
+          - 'NFR1: AWS service usage must aim to stay within free-tier limits where feasible.'
 
   - id: ui-goals
     title: User Interface Design Goals
     condition: PRD has UX/UI requirements
     instruction: |
       Capture high-level UI/UX vision to guide Design Architect and to inform story creation. Steps:
-      
+
       1. Pre-fill all subsections with educated guesses based on project context
       2. Present the complete rendered section to user
       3. Clearly let the user know where assumptions were made
@@ -1229,30 +1229,30 @@ sections:
         title: Core Screens and Views
         instruction: From a product perspective, what are the most critical screens or views necessary to deliver the the PRD values and goals? This is meant to be Conceptual High Level to Drive Rough Epic or User Stories
         examples:
-          - "Login Screen"
-          - "Main Dashboard"
-          - "Item Detail Page"
-          - "Settings Page"
+          - 'Login Screen'
+          - 'Main Dashboard'
+          - 'Item Detail Page'
+          - 'Settings Page'
       - id: accessibility
-        title: "Accessibility: {None|WCAG AA|WCAG AAA|Custom Requirements}"
+        title: 'Accessibility: {None|WCAG AA|WCAG AAA|Custom Requirements}'
       - id: branding
         title: Branding
         instruction: Any known branding elements or style guides that must be incorporated?
         examples:
-          - "Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions."
-          - "Attached is the full color pallet and tokens for our corporate branding."
+          - 'Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions.'
+          - 'Attached is the full color pallet and tokens for our corporate branding.'
       - id: target-platforms
-        title: "Target Device and Platforms: {Web Responsive|Mobile Only|Desktop Only|Cross-Platform}"
+        title: 'Target Device and Platforms: {Web Responsive|Mobile Only|Desktop Only|Cross-Platform}'
         examples:
-          - "Web Responsive, and all mobile platforms"
-          - "iPhone Only"
-          - "ASCII Windows Desktop"
+          - 'Web Responsive, and all mobile platforms'
+          - 'iPhone Only'
+          - 'ASCII Windows Desktop'
 
   - id: technical-assumptions
     title: Technical Assumptions
     instruction: |
       Gather technical decisions that will guide the Architect. Steps:
-      
+
       1. Check if .bmad-core/data/technical-preferences.yaml or an attached technical-preferences file exists - use it to pre-populate choices
       2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
       3. For unknowns, offer guidance based on project goals and MVP scope
@@ -1265,13 +1265,13 @@ sections:
       testing: [Unit Only, Unit + Integration, Full Testing Pyramid]
     sections:
       - id: repository-structure
-        title: "Repository Structure: {Monorepo|Polyrepo|Multi-repo}"
+        title: 'Repository Structure: {Monorepo|Polyrepo|Multi-repo}'
       - id: service-architecture
         title: Service Architecture
-        instruction: "CRITICAL DECISION - Document the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo)."
+        instruction: 'CRITICAL DECISION - Document the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo).'
       - id: testing-requirements
         title: Testing Requirements
-        instruction: "CRITICAL DECISION - Document the testing requirements, unit only, integration, e2e, manual, need for manual testing convenience methods)."
+        instruction: 'CRITICAL DECISION - Document the testing requirements, unit only, integration, e2e, manual, need for manual testing convenience methods).'
       - id: additional-assumptions
         title: Additional Technical Assumptions and Requests
         instruction: Throughout the entire process of drafting this document, if any other technical assumptions are raised or discovered appropriate for the architect, add them here as additional bulleted items
@@ -1280,9 +1280,9 @@ sections:
     title: Epic List
     instruction: |
       Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
-      
+
       CRITICAL: Epics MUST be logically sequential following agile best practices:
-      
+
       - Each epic should deliver a significant, end-to-end, fully deployable increment of testable functionality
       - Epic 1 must establish foundational project infrastructure (app setup, Git, CI/CD, core services) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, even as simple as a health-check route or display of a simple canary page - remember this when we produce the stories for the first epic!
       - Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
@@ -1291,21 +1291,21 @@ sections:
       - Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.
     elicit: true
     examples:
-      - "Epic 1: Foundation & Core Infrastructure: Establish project setup, authentication, and basic user management"
-      - "Epic 2: Core Business Entities: Create and manage primary domain objects with CRUD operations"
-      - "Epic 3: User Workflows & Interactions: Enable key user journeys and business processes"
-      - "Epic 4: Reporting & Analytics: Provide insights and data visualization for users"
+      - 'Epic 1: Foundation & Core Infrastructure: Establish project setup, authentication, and basic user management'
+      - 'Epic 2: Core Business Entities: Create and manage primary domain objects with CRUD operations'
+      - 'Epic 3: User Workflows & Interactions: Enable key user journeys and business processes'
+      - 'Epic 4: Reporting & Analytics: Provide insights and data visualization for users'
 
   - id: epic-details
     title: Epic {{epic_number}} {{epic_title}}
     repeatable: true
     instruction: |
       After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
-      
+
       For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
-      
+
       CRITICAL STORY SEQUENCING REQUIREMENTS:
-      
+
       - Stories within each epic MUST be logically sequential
       - Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
       - No story should depend on work from a later story or epic
@@ -1316,7 +1316,7 @@ sections:
       - Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
       - If a story seems complex, break it down further as long as it can deliver a vertical slice
     elicit: true
-    template: "{{epic_goal}}"
+    template: '{{epic_goal}}'
     sections:
       - id: story
         title: Story {{epic_number}}.{{story_number}} {{story_title}}
@@ -1329,11 +1329,11 @@ sections:
           - id: acceptance-criteria
             title: Acceptance Criteria
             type: numbered-list
-            item_template: "{{criterion_number}}: {{criteria}}"
+            item_template: '{{criterion_number}}: {{criteria}}'
             repeatable: true
             instruction: |
               Define clear, comprehensive, and testable acceptance criteria that:
-              
+
               - Precisely define what "done" means from a functional perspective
               - Are unambiguous and serve as basis for verification
               - Include any critical non-functional requirements from the PRD
@@ -1364,7 +1364,7 @@ template:
   output:
     format: markdown
     filename: docs/prd.md
-    title: "{{project_name}} Brownfield Enhancement PRD"
+    title: '{{project_name}} Brownfield Enhancement PRD'
 
 workflow:
   mode: interactive
@@ -1375,19 +1375,19 @@ sections:
     title: Intro Project Analysis and Context
     instruction: |
       IMPORTANT - SCOPE ASSESSMENT REQUIRED:
-      
+
       This PRD is for SIGNIFICANT enhancements to existing projects that require comprehensive planning and multiple stories. Before proceeding:
-      
+
       1. **Assess Enhancement Complexity**: If this is a simple feature addition or bug fix that could be completed in 1-2 focused development sessions, STOP and recommend: "For simpler changes, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead. This full PRD process is designed for substantial enhancements that require architectural planning and multiple coordinated stories."
-      
+
       2. **Project Context**: Determine if we're working in an IDE with the project already loaded or if the user needs to provide project information. If project files are available, analyze existing documentation in the docs folder. If insufficient documentation exists, recommend running the document-project task first.
-      
+
       3. **Deep Assessment Requirement**: You MUST thoroughly analyze the existing project structure, patterns, and constraints before making ANY suggestions. Every recommendation must be grounded in actual project analysis, not assumptions.
-      
+
       Gather comprehensive information about the existing project. This section must be completed before proceeding with requirements.
-      
+
       CRITICAL: Throughout this analysis, explicitly confirm your understanding with the user. For every assumption you make about the existing project, ask: "Based on my analysis, I understand that [assumption]. Is this correct?"
-      
+
       Do not proceed with any recommendations until the user has validated your understanding of the existing system.
     sections:
       - id: existing-project-overview
@@ -1413,7 +1413,7 @@ sections:
           - Note: "Document-project analysis available - using existing technical documentation"
           - List key documents created by document-project
           - Skip the missing documentation check below
-          
+
           Otherwise, check for existing documentation:
         sections:
           - id: available-docs
@@ -1427,7 +1427,7 @@ sections:
               - External API Documentation [[LLM: If from document-project, check ✓]]
               - UX/UI Guidelines [[LLM: May not be in document-project]]
               - Technical Debt Documentation [[LLM: If from document-project, check ✓]]
-              - "Other: {{other_docs}}"
+              - 'Other: {{other_docs}}'
             instruction: |
               - If document-project was already run: "Using existing project analysis from document-project output."
               - If critical documentation is missing and no document-project: "I recommend running the document-project task first..."
@@ -1447,7 +1447,7 @@ sections:
               - UI/UX Overhaul
               - Technology Stack Upgrade
               - Bug Fix and Stability Improvements
-              - "Other: {{other_type}}"
+              - 'Other: {{other_type}}'
           - id: enhancement-description
             title: Enhancement Description
             instruction: 2-3 sentences describing what the user wants to add or change
@@ -1488,29 +1488,29 @@ sections:
         prefix: FR
         instruction: Each Requirement will be a bullet markdown with identifier starting with FR
         examples:
-          - "FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality."
+          - 'FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality.'
       - id: non-functional
         title: Non Functional
         type: numbered-list
         prefix: NFR
         instruction: Each Requirement will be a bullet markdown with identifier starting with NFR. Include constraints from existing system
         examples:
-          - "NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%."
+          - 'NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%.'
       - id: compatibility
         title: Compatibility Requirements
         instruction: Critical for brownfield - what must remain compatible
         type: numbered-list
         prefix: CR
-        template: "{{requirement}}: {{description}}"
+        template: '{{requirement}}: {{description}}'
         items:
           - id: cr1
-            template: "CR1: {{existing_api_compatibility}}"
+            template: 'CR1: {{existing_api_compatibility}}'
           - id: cr2
-            template: "CR2: {{database_schema_compatibility}}"
+            template: 'CR2: {{database_schema_compatibility}}'
           - id: cr3
-            template: "CR3: {{ui_ux_consistency}}"
+            template: 'CR3: {{ui_ux_consistency}}'
           - id: cr4
-            template: "CR4: {{integration_compatibility}}"
+            template: 'CR4: {{integration_compatibility}}'
 
   - id: ui-enhancement-goals
     title: User Interface Enhancement Goals
@@ -1537,7 +1537,7 @@ sections:
           If document-project output available:
           - Extract from "Actual Tech Stack" table in High Level Architecture section
           - Include version numbers and any noted constraints
-          
+
           Otherwise, document the current technology stack:
         template: |
           **Languages**: {{languages}}
@@ -1576,7 +1576,7 @@ sections:
           - Reference "Technical Debt and Known Issues" section
           - Include "Workarounds and Gotchas" that might impact enhancement
           - Note any identified constraints from "Critical Technical Debt"
-          
+
           Build risk assessment incorporating existing known issues:
         template: |
           **Technical Risks**: {{technical_risks}}
@@ -1593,13 +1593,13 @@ sections:
       - id: epic-approach
         title: Epic Approach
         instruction: Explain the rationale for epic structure - typically single epic for brownfield unless multiple unrelated features
-        template: "**Epic Structure Decision**: {{epic_decision}} with rationale"
+        template: '**Epic Structure Decision**: {{epic_decision}} with rationale'
 
   - id: epic-details
-    title: "Epic 1: {{enhancement_title}}"
+    title: 'Epic 1: {{enhancement_title}}'
     instruction: |
       Comprehensive epic that delivers the brownfield enhancement while maintaining existing functionality
-      
+
       CRITICAL STORY SEQUENCING FOR BROWNFIELD:
       - Stories must ensure existing functionality remains intact
       - Each story should include verification that existing features still work
@@ -1612,11 +1612,11 @@ sections:
       - Each story must deliver value while maintaining system integrity
     template: |
       **Epic Goal**: {{epic_goal}}
-      
+
       **Integration Requirements**: {{integration_requirements}}
     sections:
       - id: story
-        title: "Story 1.{{story_number}} {{story_title}}"
+        title: 'Story 1.{{story_number}} {{story_title}}'
         repeatable: true
         template: |
           As a {{user_type}},
@@ -1627,16 +1627,16 @@ sections:
             title: Acceptance Criteria
             type: numbered-list
             instruction: Define criteria that include both new functionality and existing system integrity
-            item_template: "{{criterion_number}}: {{criteria}}"
+            item_template: '{{criterion_number}}: {{criteria}}'
           - id: integration-verification
             title: Integration Verification
             instruction: Specific verification steps to ensure existing functionality remains intact
             type: numbered-list
             prefix: IV
             items:
-              - template: "IV1: {{existing_functionality_verification}}"
-              - template: "IV2: {{integration_point_verification}}"
-              - template: "IV3: {{performance_impact_verification}}"
+              - template: 'IV1: {{existing_functionality_verification}}'
+              - template: 'IV2: {{integration_point_verification}}'
+              - template: 'IV3: {{performance_impact_verification}}'
 ==================== END: .bmad-core/templates/brownfield-prd-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/pm-checklist.md ====================

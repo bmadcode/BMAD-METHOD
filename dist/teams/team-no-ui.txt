@@ -1044,7 +1044,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 - **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
 - **Cursor**: `@agent-name` (e.g., `@bmad-master`)
-- **Windsurf**: `@agent-name` (e.g., `@bmad-master`)
+- **Windsurf**: `/agent-name` (e.g., `/bmad-master`)
 - **Trae**: `@agent-name` (e.g., `@bmad-master`)
 - **Roo Code**: Select mode from mode selector (e.g., `bmad-master`)
 - **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
@@ -1784,7 +1784,7 @@ Agents should be workflow-aware: know active workflow, their role, access artifa
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
 ---
 docOutputLocation: docs/brainstorming-session-results.md
-template: ".bmad-core/templates/brainstorming-output-tmpl.yaml"
+template: '.bmad-core/templates/brainstorming-output-tmpl.yaml'
 ---
 
 # Facilitate Brainstorming Session Task
@@ -2555,35 +2555,35 @@ template:
   output:
     format: markdown
     filename: docs/brief.md
-    title: "Project Brief: {{project_name}}"
+    title: 'Project Brief: {{project_name}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Project Brief Elicitation Actions"
+    title: 'Project Brief Elicitation Actions'
     options:
-      - "Expand section with more specific details"
-      - "Validate against similar successful products"
-      - "Stress test assumptions with edge cases"
-      - "Explore alternative solution approaches"
-      - "Analyze resource/constraint trade-offs"
-      - "Generate risk mitigation strategies"
-      - "Challenge scope from MVP minimalist view"
-      - "Brainstorm creative feature possibilities"
-      - "If only we had [resource/capability/time]..."
-      - "Proceed to next section"
+      - 'Expand section with more specific details'
+      - 'Validate against similar successful products'
+      - 'Stress test assumptions with edge cases'
+      - 'Explore alternative solution approaches'
+      - 'Analyze resource/constraint trade-offs'
+      - 'Generate risk mitigation strategies'
+      - 'Challenge scope from MVP minimalist view'
+      - 'Brainstorm creative feature possibilities'
+      - 'If only we had [resource/capability/time]...'
+      - 'Proceed to next section'
 
 sections:
   - id: introduction
     instruction: |
       This template guides creation of a comprehensive Project Brief that serves as the foundational input for product development.
-      
+
       Start by asking the user which mode they prefer:
-      
+
       1. **Interactive Mode** - Work through each section collaboratively
       2. **YOLO Mode** - Generate complete draft for review and refinement
-      
+
       Before beginning, understand what inputs are available (brainstorming results, market research, competitive analysis, initial ideas) and gather project context.
 
   - id: executive-summary
@@ -2594,7 +2594,7 @@ sections:
       - Primary problem being solved
       - Target market identification
       - Key value proposition
-    template: "{{executive_summary_content}}"
+    template: '{{executive_summary_content}}'
 
   - id: problem-statement
     title: Problem Statement
@@ -2604,7 +2604,7 @@ sections:
       - Impact of the problem (quantify if possible)
       - Why existing solutions fall short
       - Urgency and importance of solving this now
-    template: "{{detailed_problem_description}}"
+    template: '{{detailed_problem_description}}'
 
   - id: proposed-solution
     title: Proposed Solution
@@ -2614,7 +2614,7 @@ sections:
       - Key differentiators from existing solutions
       - Why this solution will succeed where others haven't
       - High-level vision for the product
-    template: "{{solution_description}}"
+    template: '{{solution_description}}'
 
   - id: target-users
     title: Target Users
@@ -2626,12 +2626,12 @@ sections:
       - Goals they're trying to achieve
     sections:
       - id: primary-segment
-        title: "Primary User Segment: {{segment_name}}"
-        template: "{{primary_user_description}}"
+        title: 'Primary User Segment: {{segment_name}}'
+        template: '{{primary_user_description}}'
       - id: secondary-segment
-        title: "Secondary User Segment: {{segment_name}}"
+        title: 'Secondary User Segment: {{segment_name}}'
         condition: Has secondary user segment
-        template: "{{secondary_user_description}}"
+        template: '{{secondary_user_description}}'
 
   - id: goals-metrics
     title: Goals & Success Metrics
@@ -2640,15 +2640,15 @@ sections:
       - id: business-objectives
         title: Business Objectives
         type: bullet-list
-        template: "- {{objective_with_metric}}"
+        template: '- {{objective_with_metric}}'
       - id: user-success-metrics
         title: User Success Metrics
         type: bullet-list
-        template: "- {{user_metric}}"
+        template: '- {{user_metric}}'
       - id: kpis
         title: Key Performance Indicators (KPIs)
         type: bullet-list
-        template: "- {{kpi}}: {{definition_and_target}}"
+        template: '- {{kpi}}: {{definition_and_target}}'
 
   - id: mvp-scope
     title: MVP Scope
@@ -2657,14 +2657,14 @@ sections:
       - id: core-features
         title: Core Features (Must Have)
         type: bullet-list
-        template: "- **{{feature}}:** {{description_and_rationale}}"
+        template: '- **{{feature}}:** {{description_and_rationale}}'
       - id: out-of-scope
         title: Out of Scope for MVP
         type: bullet-list
-        template: "- {{feature_or_capability}}"
+        template: '- {{feature_or_capability}}'
       - id: mvp-success-criteria
         title: MVP Success Criteria
-        template: "{{mvp_success_definition}}"
+        template: '{{mvp_success_definition}}'
 
   - id: post-mvp-vision
     title: Post-MVP Vision
@@ -2672,13 +2672,13 @@ sections:
     sections:
       - id: phase-2-features
         title: Phase 2 Features
-        template: "{{next_priority_features}}"
+        template: '{{next_priority_features}}'
       - id: long-term-vision
         title: Long-term Vision
-        template: "{{one_two_year_vision}}"
+        template: '{{one_two_year_vision}}'
       - id: expansion-opportunities
         title: Expansion Opportunities
-        template: "{{potential_expansions}}"
+        template: '{{potential_expansions}}'
 
   - id: technical-considerations
     title: Technical Considerations
@@ -2719,7 +2719,7 @@ sections:
       - id: key-assumptions
         title: Key Assumptions
         type: bullet-list
-        template: "- {{assumption}}"
+        template: '- {{assumption}}'
 
   - id: risks-questions
     title: Risks & Open Questions
@@ -2728,15 +2728,15 @@ sections:
       - id: key-risks
         title: Key Risks
         type: bullet-list
-        template: "- **{{risk}}:** {{description_and_impact}}"
+        template: '- **{{risk}}:** {{description_and_impact}}'
       - id: open-questions
         title: Open Questions
         type: bullet-list
-        template: "- {{question}}"
+        template: '- {{question}}'
       - id: research-areas
         title: Areas Needing Further Research
         type: bullet-list
-        template: "- {{research_topic}}"
+        template: '- {{research_topic}}'
 
   - id: appendices
     title: Appendices
@@ -2753,10 +2753,10 @@ sections:
       - id: stakeholder-input
         title: B. Stakeholder Input
         condition: Has stakeholder feedback
-        template: "{{stakeholder_feedback}}"
+        template: '{{stakeholder_feedback}}'
       - id: references
         title: C. References
-        template: "{{relevant_links_and_docs}}"
+        template: '{{relevant_links_and_docs}}'
 
   - id: next-steps
     title: Next Steps
@@ -2764,7 +2764,7 @@ sections:
       - id: immediate-actions
         title: Immediate Actions
         type: numbered-list
-        template: "{{action_item}}"
+        template: '{{action_item}}'
       - id: pm-handoff
         title: PM Handoff
         content: |
@@ -2779,24 +2779,24 @@ template:
   output:
     format: markdown
     filename: docs/market-research.md
-    title: "Market Research Report: {{project_product_name}}"
+    title: 'Market Research Report: {{project_product_name}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Market Research Elicitation Actions"
+    title: 'Market Research Elicitation Actions'
     options:
-      - "Expand market sizing calculations with sensitivity analysis"
-      - "Deep dive into a specific customer segment"
-      - "Analyze an emerging market trend in detail"
-      - "Compare this market to an analogous market"
-      - "Stress test market assumptions"
-      - "Explore adjacent market opportunities"
-      - "Challenge market definition and boundaries"
-      - "Generate strategic scenarios (best/base/worst case)"
-      - "If only we had considered [X market factor]..."
-      - "Proceed to next section"
+      - 'Expand market sizing calculations with sensitivity analysis'
+      - 'Deep dive into a specific customer segment'
+      - 'Analyze an emerging market trend in detail'
+      - 'Compare this market to an analogous market'
+      - 'Stress test market assumptions'
+      - 'Explore adjacent market opportunities'
+      - 'Challenge market definition and boundaries'
+      - 'Generate strategic scenarios (best/base/worst case)'
+      - 'If only we had considered [X market factor]...'
+      - 'Proceed to next section'
 
 sections:
   - id: executive-summary
@@ -2878,7 +2878,7 @@ sections:
         repeatable: true
         sections:
           - id: segment
-            title: "Segment {{segment_number}}: {{segment_name}}"
+            title: 'Segment {{segment_number}}: {{segment_name}}'
             template: |
               - **Description:** {{brief_overview}}
               - **Size:** {{number_of_customers_market_value}}
@@ -2904,7 +2904,7 @@ sections:
         instruction: Map the end-to-end customer experience for primary segments
         template: |
           For primary customer segment:
-          
+
           1. **Awareness:** {{discovery_process}}
           2. **Consideration:** {{evaluation_criteria}}
           3. **Purchase:** {{decision_triggers}}
@@ -2947,20 +2947,20 @@ sections:
         instruction: Analyze each force with specific evidence and implications
         sections:
           - id: supplier-power
-            title: "Supplier Power: {{power_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Supplier Power: {{power_level}}'
+            template: '{{analysis_and_implications}}'
           - id: buyer-power
-            title: "Buyer Power: {{power_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Buyer Power: {{power_level}}'
+            template: '{{analysis_and_implications}}'
           - id: competitive-rivalry
-            title: "Competitive Rivalry: {{intensity_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Competitive Rivalry: {{intensity_level}}'
+            template: '{{analysis_and_implications}}'
           - id: threat-new-entry
-            title: "Threat of New Entry: {{threat_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Threat of New Entry: {{threat_level}}'
+            template: '{{analysis_and_implications}}'
           - id: threat-substitutes
-            title: "Threat of Substitutes: {{threat_level}}"
-            template: "{{analysis_and_implications}}"
+            title: 'Threat of Substitutes: {{threat_level}}'
+            template: '{{analysis_and_implications}}'
       - id: adoption-lifecycle
         title: Technology Adoption Lifecycle Stage
         instruction: |
@@ -2978,7 +2978,7 @@ sections:
         repeatable: true
         sections:
           - id: opportunity
-            title: "Opportunity {{opportunity_number}}: {{name}}"
+            title: 'Opportunity {{opportunity_number}}: {{name}}'
             template: |
               - **Description:** {{what_is_the_opportunity}}
               - **Size/Potential:** {{quantified_potential}}
@@ -3034,24 +3034,24 @@ template:
   output:
     format: markdown
     filename: docs/competitor-analysis.md
-    title: "Competitive Analysis Report: {{project_product_name}}"
+    title: 'Competitive Analysis Report: {{project_product_name}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Competitive Analysis Elicitation Actions"
+    title: 'Competitive Analysis Elicitation Actions'
     options:
       - "Deep dive on a specific competitor's strategy"
-      - "Analyze competitive dynamics in a specific segment"
-      - "War game competitive responses to your moves"
-      - "Explore partnership vs. competition scenarios"
-      - "Stress test differentiation claims"
-      - "Analyze disruption potential (yours or theirs)"
-      - "Compare to competition in adjacent markets"
-      - "Generate win/loss analysis insights"
+      - 'Analyze competitive dynamics in a specific segment'
+      - 'War game competitive responses to your moves'
+      - 'Explore partnership vs. competition scenarios'
+      - 'Stress test differentiation claims'
+      - 'Analyze disruption potential (yours or theirs)'
+      - 'Compare to competition in adjacent markets'
+      - 'Generate win/loss analysis insights'
       - "If only we had known about [competitor X's plan]..."
-      - "Proceed to next section"
+      - 'Proceed to next section'
 
 sections:
   - id: executive-summary
@@ -3105,7 +3105,7 @@ sections:
         title: Competitor Prioritization Matrix
         instruction: |
           Help categorize competitors by market share and strategic threat level
-          
+
           Create a 2x2 matrix:
           - Priority 1 (Core Competitors): High Market Share + High Threat
           - Priority 2 (Emerging Threats): Low Market Share + High Threat
@@ -3118,7 +3118,7 @@ sections:
     repeatable: true
     sections:
       - id: competitor
-        title: "{{competitor_name}} - Priority {{priority_level}}"
+        title: '{{competitor_name}} - Priority {{priority_level}}'
         sections:
           - id: company-overview
             title: Company Overview
@@ -3150,11 +3150,11 @@ sections:
               - id: strengths
                 title: Strengths
                 type: bullet-list
-                template: "- {{strength}}"
+                template: '- {{strength}}'
               - id: weaknesses
                 title: Weaknesses
                 type: bullet-list
-                template: "- {{weakness}}"
+                template: '- {{weakness}}'
           - id: market-position
             title: Market Position & Performance
             template: |
@@ -3170,24 +3170,37 @@ sections:
         title: Feature Comparison Matrix
         instruction: Create a detailed comparison table of key features across competitors
         type: table
-        columns: ["Feature Category", "{{your_company}}", "{{competitor_1}}", "{{competitor_2}}", "{{competitor_3}}"]
+        columns:
+          [
+            'Feature Category',
+            '{{your_company}}',
+            '{{competitor_1}}',
+            '{{competitor_2}}',
+            '{{competitor_3}}',
+          ]
         rows:
-          - category: "Core Functionality"
+          - category: 'Core Functionality'
             items:
-              - ["Feature A", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
-              - ["Feature B", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
-          - category: "User Experience"
+              - ['Feature A', '{{status}}', '{{status}}', '{{status}}', '{{status}}']
+              - ['Feature B', '{{status}}', '{{status}}', '{{status}}', '{{status}}']
+          - category: 'User Experience'
             items:
-              - ["Mobile App", "{{rating}}", "{{rating}}", "{{rating}}", "{{rating}}"]
-              - ["Onboarding Time", "{{time}}", "{{time}}", "{{time}}", "{{time}}"]
-          - category: "Integration & Ecosystem"
+              - ['Mobile App', '{{rating}}', '{{rating}}', '{{rating}}', '{{rating}}']
+              - ['Onboarding Time', '{{time}}', '{{time}}', '{{time}}', '{{time}}']
+          - category: 'Integration & Ecosystem'
             items:
-              - ["API Availability", "{{availability}}", "{{availability}}", "{{availability}}", "{{availability}}"]
-              - ["Third-party Integrations", "{{number}}", "{{number}}", "{{number}}", "{{number}}"]
-          - category: "Pricing & Plans"
+              - [
+                  'API Availability',
+                  '{{availability}}',
+                  '{{availability}}',
+                  '{{availability}}',
+                  '{{availability}}',
+                ]
+              - ['Third-party Integrations', '{{number}}', '{{number}}', '{{number}}', '{{number}}']
+          - category: 'Pricing & Plans'
             items:
-              - ["Starting Price", "{{price}}", "{{price}}", "{{price}}", "{{price}}"]
-              - ["Free Tier", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}"]
+              - ['Starting Price', '{{price}}', '{{price}}', '{{price}}', '{{price}}']
+              - ['Free Tier', '{{yes_no}}', '{{yes_no}}', '{{yes_no}}', '{{yes_no}}']
       - id: swot-comparison
         title: SWOT Comparison
         instruction: Create SWOT analysis for your solution vs. top competitors
@@ -3200,7 +3213,7 @@ sections:
               - **Opportunities:** {{opportunities}}
               - **Threats:** {{threats}}
           - id: vs-competitor
-            title: "vs. {{main_competitor}}"
+            title: 'vs. {{main_competitor}}'
             template: |
               - **Competitive Advantages:** {{your_advantages}}
               - **Competitive Disadvantages:** {{their_advantages}}
@@ -3209,7 +3222,7 @@ sections:
         title: Positioning Map
         instruction: |
           Describe competitor positions on key dimensions
-          
+
           Create a positioning description using 2 key dimensions relevant to the market, such as:
           - Price vs. Features
           - Ease of Use vs. Power
@@ -3244,7 +3257,7 @@ sections:
         title: Blue Ocean Opportunities
         instruction: |
           Identify uncontested market spaces
-          
+
           List opportunities to create new market space:
           - Underserved segments
           - Unaddressed use cases
@@ -3330,7 +3343,7 @@ template:
   output:
     format: markdown
     filename: docs/brainstorming-session-results.md
-    title: "Brainstorming Session Results"
+    title: 'Brainstorming Session Results'
 
 workflow:
   mode: non-interactive
@@ -3348,45 +3361,45 @@ sections:
       - id: summary-details
         template: |
           **Topic:** {{session_topic}}
-          
+
           **Session Goals:** {{stated_goals}}
-          
+
           **Techniques Used:** {{techniques_list}}
-          
+
           **Total Ideas Generated:** {{total_ideas}}
       - id: key-themes
-        title: "Key Themes Identified:"
+        title: 'Key Themes Identified:'
         type: bullet-list
-        template: "- {{theme}}"
+        template: '- {{theme}}'
 
   - id: technique-sessions
     title: Technique Sessions
     repeatable: true
     sections:
       - id: technique
-        title: "{{technique_name}} - {{duration}}"
+        title: '{{technique_name}} - {{duration}}'
         sections:
           - id: description
-            template: "**Description:** {{technique_description}}"
+            template: '**Description:** {{technique_description}}'
           - id: ideas-generated
-            title: "Ideas Generated:"
+            title: 'Ideas Generated:'
             type: numbered-list
-            template: "{{idea}}"
+            template: '{{idea}}'
           - id: insights
-            title: "Insights Discovered:"
+            title: 'Insights Discovered:'
             type: bullet-list
-            template: "- {{insight}}"
+            template: '- {{insight}}'
           - id: connections
-            title: "Notable Connections:"
+            title: 'Notable Connections:'
             type: bullet-list
-            template: "- {{connection}}"
+            template: '- {{connection}}'
 
   - id: idea-categorization
     title: Idea Categorization
     sections:
       - id: immediate-opportunities
         title: Immediate Opportunities
-        content: "*Ideas ready to implement now*"
+        content: '*Ideas ready to implement now*'
         repeatable: true
         type: numbered-list
         template: |
@@ -3396,7 +3409,7 @@ sections:
           - Resources needed: {{requirements}}
       - id: future-innovations
         title: Future Innovations
-        content: "*Ideas requiring development/research*"
+        content: '*Ideas requiring development/research*'
         repeatable: true
         type: numbered-list
         template: |
@@ -3406,7 +3419,7 @@ sections:
           - Timeline estimate: {{timeline}}
       - id: moonshots
         title: Moonshots
-        content: "*Ambitious, transformative concepts*"
+        content: '*Ambitious, transformative concepts*'
         repeatable: true
         type: numbered-list
         template: |
@@ -3416,9 +3429,9 @@ sections:
           - Challenges to overcome: {{challenges}}
       - id: insights-learnings
         title: Insights & Learnings
-        content: "*Key realizations from the session*"
+        content: '*Key realizations from the session*'
         type: bullet-list
-        template: "- {{insight}}: {{description_and_implications}}"
+        template: '- {{insight}}: {{description_and_implications}}'
 
   - id: action-planning
     title: Action Planning
@@ -3427,21 +3440,21 @@ sections:
         title: Top 3 Priority Ideas
         sections:
           - id: priority-1
-            title: "#1 Priority: {{idea_name}}"
+            title: '#1 Priority: {{idea_name}}'
             template: |
               - Rationale: {{rationale}}
               - Next steps: {{next_steps}}
               - Resources needed: {{resources}}
               - Timeline: {{timeline}}
           - id: priority-2
-            title: "#2 Priority: {{idea_name}}"
+            title: '#2 Priority: {{idea_name}}'
             template: |
               - Rationale: {{rationale}}
               - Next steps: {{next_steps}}
               - Resources needed: {{resources}}
               - Timeline: {{timeline}}
           - id: priority-3
-            title: "#3 Priority: {{idea_name}}"
+            title: '#3 Priority: {{idea_name}}'
             template: |
               - Rationale: {{rationale}}
               - Next steps: {{next_steps}}
@@ -3454,19 +3467,19 @@ sections:
       - id: what-worked
         title: What Worked Well
         type: bullet-list
-        template: "- {{aspect}}"
+        template: '- {{aspect}}'
       - id: areas-exploration
         title: Areas for Further Exploration
         type: bullet-list
-        template: "- {{area}}: {{reason}}"
+        template: '- {{area}}: {{reason}}'
       - id: recommended-techniques
         title: Recommended Follow-up Techniques
         type: bullet-list
-        template: "- {{technique}}: {{reason}}"
+        template: '- {{technique}}: {{reason}}'
       - id: questions-emerged
         title: Questions That Emerged
         type: bullet-list
-        template: "- {{question}}"
+        template: '- {{question}}'
       - id: next-session
         title: Next Session Planning
         template: |
@@ -3477,7 +3490,7 @@ sections:
   - id: footer
     content: |
       ---
-      
+
       *Session facilitated using the BMAD-METHOD brainstorming framework*
 ==================== END: .bmad-core/templates/brainstorming-output-tmpl.yaml ====================
 
@@ -4191,7 +4204,7 @@ template:
   output:
     format: markdown
     filename: docs/prd.md
-    title: "{{project_name}} Product Requirements Document (PRD)"
+    title: '{{project_name}} Product Requirements Document (PRD)'
 
 workflow:
   mode: interactive
@@ -4228,21 +4241,21 @@ sections:
         prefix: FR
         instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with FR
         examples:
-          - "FR6: The Todo List uses AI to detect and warn against potentially duplicate todo items that are worded differently."
+          - 'FR6: The Todo List uses AI to detect and warn against potentially duplicate todo items that are worded differently.'
       - id: non-functional
         title: Non Functional
         type: numbered-list
         prefix: NFR
         instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with NFR
         examples:
-          - "NFR1: AWS service usage must aim to stay within free-tier limits where feasible."
+          - 'NFR1: AWS service usage must aim to stay within free-tier limits where feasible.'
 
   - id: ui-goals
     title: User Interface Design Goals
     condition: PRD has UX/UI requirements
     instruction: |
       Capture high-level UI/UX vision to guide Design Architect and to inform story creation. Steps:
-      
+
       1. Pre-fill all subsections with educated guesses based on project context
       2. Present the complete rendered section to user
       3. Clearly let the user know where assumptions were made
@@ -4261,30 +4274,30 @@ sections:
         title: Core Screens and Views
         instruction: From a product perspective, what are the most critical screens or views necessary to deliver the the PRD values and goals? This is meant to be Conceptual High Level to Drive Rough Epic or User Stories
         examples:
-          - "Login Screen"
-          - "Main Dashboard"
-          - "Item Detail Page"
-          - "Settings Page"
+          - 'Login Screen'
+          - 'Main Dashboard'
+          - 'Item Detail Page'
+          - 'Settings Page'
       - id: accessibility
-        title: "Accessibility: {None|WCAG AA|WCAG AAA|Custom Requirements}"
+        title: 'Accessibility: {None|WCAG AA|WCAG AAA|Custom Requirements}'
       - id: branding
         title: Branding
         instruction: Any known branding elements or style guides that must be incorporated?
         examples:
-          - "Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions."
-          - "Attached is the full color pallet and tokens for our corporate branding."
+          - 'Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions.'
+          - 'Attached is the full color pallet and tokens for our corporate branding.'
       - id: target-platforms
-        title: "Target Device and Platforms: {Web Responsive|Mobile Only|Desktop Only|Cross-Platform}"
+        title: 'Target Device and Platforms: {Web Responsive|Mobile Only|Desktop Only|Cross-Platform}'
         examples:
-          - "Web Responsive, and all mobile platforms"
-          - "iPhone Only"
-          - "ASCII Windows Desktop"
+          - 'Web Responsive, and all mobile platforms'
+          - 'iPhone Only'
+          - 'ASCII Windows Desktop'
 
   - id: technical-assumptions
     title: Technical Assumptions
     instruction: |
       Gather technical decisions that will guide the Architect. Steps:
-      
+
       1. Check if .bmad-core/data/technical-preferences.yaml or an attached technical-preferences file exists - use it to pre-populate choices
       2. Ask user about: languages, frameworks, starter templates, libraries, APIs, deployment targets
       3. For unknowns, offer guidance based on project goals and MVP scope
@@ -4297,13 +4310,13 @@ sections:
       testing: [Unit Only, Unit + Integration, Full Testing Pyramid]
     sections:
       - id: repository-structure
-        title: "Repository Structure: {Monorepo|Polyrepo|Multi-repo}"
+        title: 'Repository Structure: {Monorepo|Polyrepo|Multi-repo}'
       - id: service-architecture
         title: Service Architecture
-        instruction: "CRITICAL DECISION - Document the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo)."
+        instruction: 'CRITICAL DECISION - Document the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo).'
       - id: testing-requirements
         title: Testing Requirements
-        instruction: "CRITICAL DECISION - Document the testing requirements, unit only, integration, e2e, manual, need for manual testing convenience methods)."
+        instruction: 'CRITICAL DECISION - Document the testing requirements, unit only, integration, e2e, manual, need for manual testing convenience methods).'
       - id: additional-assumptions
         title: Additional Technical Assumptions and Requests
         instruction: Throughout the entire process of drafting this document, if any other technical assumptions are raised or discovered appropriate for the architect, add them here as additional bulleted items
@@ -4312,9 +4325,9 @@ sections:
     title: Epic List
     instruction: |
       Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
-      
+
       CRITICAL: Epics MUST be logically sequential following agile best practices:
-      
+
       - Each epic should deliver a significant, end-to-end, fully deployable increment of testable functionality
       - Epic 1 must establish foundational project infrastructure (app setup, Git, CI/CD, core services) unless we are adding new functionality to an existing app, while also delivering an initial piece of functionality, even as simple as a health-check route or display of a simple canary page - remember this when we produce the stories for the first epic!
       - Each subsequent epic builds upon previous epics' functionality delivering major blocks of functionality that provide tangible value to users or business when deployed
@@ -4323,21 +4336,21 @@ sections:
       - Cross Cutting Concerns should flow through epics and stories and not be final stories. For example, adding a logging framework as a last story of an epic, or at the end of a project as a final epic or story would be terrible as we would not have logging from the beginning.
     elicit: true
     examples:
-      - "Epic 1: Foundation & Core Infrastructure: Establish project setup, authentication, and basic user management"
-      - "Epic 2: Core Business Entities: Create and manage primary domain objects with CRUD operations"
-      - "Epic 3: User Workflows & Interactions: Enable key user journeys and business processes"
-      - "Epic 4: Reporting & Analytics: Provide insights and data visualization for users"
+      - 'Epic 1: Foundation & Core Infrastructure: Establish project setup, authentication, and basic user management'
+      - 'Epic 2: Core Business Entities: Create and manage primary domain objects with CRUD operations'
+      - 'Epic 3: User Workflows & Interactions: Enable key user journeys and business processes'
+      - 'Epic 4: Reporting & Analytics: Provide insights and data visualization for users'
 
   - id: epic-details
     title: Epic {{epic_number}} {{epic_title}}
     repeatable: true
     instruction: |
       After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
-      
+
       For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
-      
+
       CRITICAL STORY SEQUENCING REQUIREMENTS:
-      
+
       - Stories within each epic MUST be logically sequential
       - Each story should be a "vertical slice" delivering complete functionality aside from early enabler stories for project foundation
       - No story should depend on work from a later story or epic
@@ -4348,7 +4361,7 @@ sections:
       - Think "junior developer working for 2-4 hours" - stories must be small, focused, and self-contained
       - If a story seems complex, break it down further as long as it can deliver a vertical slice
     elicit: true
-    template: "{{epic_goal}}"
+    template: '{{epic_goal}}'
     sections:
       - id: story
         title: Story {{epic_number}}.{{story_number}} {{story_title}}
@@ -4361,11 +4374,11 @@ sections:
           - id: acceptance-criteria
             title: Acceptance Criteria
             type: numbered-list
-            item_template: "{{criterion_number}}: {{criteria}}"
+            item_template: '{{criterion_number}}: {{criteria}}'
             repeatable: true
             instruction: |
               Define clear, comprehensive, and testable acceptance criteria that:
-              
+
               - Precisely define what "done" means from a functional perspective
               - Are unambiguous and serve as basis for verification
               - Include any critical non-functional requirements from the PRD
@@ -4396,7 +4409,7 @@ template:
   output:
     format: markdown
     filename: docs/prd.md
-    title: "{{project_name}} Brownfield Enhancement PRD"
+    title: '{{project_name}} Brownfield Enhancement PRD'
 
 workflow:
   mode: interactive
@@ -4407,19 +4420,19 @@ sections:
     title: Intro Project Analysis and Context
     instruction: |
       IMPORTANT - SCOPE ASSESSMENT REQUIRED:
-      
+
       This PRD is for SIGNIFICANT enhancements to existing projects that require comprehensive planning and multiple stories. Before proceeding:
-      
+
       1. **Assess Enhancement Complexity**: If this is a simple feature addition or bug fix that could be completed in 1-2 focused development sessions, STOP and recommend: "For simpler changes, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead. This full PRD process is designed for substantial enhancements that require architectural planning and multiple coordinated stories."
-      
+
       2. **Project Context**: Determine if we're working in an IDE with the project already loaded or if the user needs to provide project information. If project files are available, analyze existing documentation in the docs folder. If insufficient documentation exists, recommend running the document-project task first.
-      
+
       3. **Deep Assessment Requirement**: You MUST thoroughly analyze the existing project structure, patterns, and constraints before making ANY suggestions. Every recommendation must be grounded in actual project analysis, not assumptions.
-      
+
       Gather comprehensive information about the existing project. This section must be completed before proceeding with requirements.
-      
+
       CRITICAL: Throughout this analysis, explicitly confirm your understanding with the user. For every assumption you make about the existing project, ask: "Based on my analysis, I understand that [assumption]. Is this correct?"
-      
+
       Do not proceed with any recommendations until the user has validated your understanding of the existing system.
     sections:
       - id: existing-project-overview
@@ -4445,7 +4458,7 @@ sections:
           - Note: "Document-project analysis available - using existing technical documentation"
           - List key documents created by document-project
           - Skip the missing documentation check below
-          
+
           Otherwise, check for existing documentation:
         sections:
           - id: available-docs
@@ -4459,7 +4472,7 @@ sections:
               - External API Documentation [[LLM: If from document-project, check ✓]]
               - UX/UI Guidelines [[LLM: May not be in document-project]]
               - Technical Debt Documentation [[LLM: If from document-project, check ✓]]
-              - "Other: {{other_docs}}"
+              - 'Other: {{other_docs}}'
             instruction: |
               - If document-project was already run: "Using existing project analysis from document-project output."
               - If critical documentation is missing and no document-project: "I recommend running the document-project task first..."
@@ -4479,7 +4492,7 @@ sections:
               - UI/UX Overhaul
               - Technology Stack Upgrade
               - Bug Fix and Stability Improvements
-              - "Other: {{other_type}}"
+              - 'Other: {{other_type}}'
           - id: enhancement-description
             title: Enhancement Description
             instruction: 2-3 sentences describing what the user wants to add or change
@@ -4520,29 +4533,29 @@ sections:
         prefix: FR
         instruction: Each Requirement will be a bullet markdown with identifier starting with FR
         examples:
-          - "FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality."
+          - 'FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality.'
       - id: non-functional
         title: Non Functional
         type: numbered-list
         prefix: NFR
         instruction: Each Requirement will be a bullet markdown with identifier starting with NFR. Include constraints from existing system
         examples:
-          - "NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%."
+          - 'NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%.'
       - id: compatibility
         title: Compatibility Requirements
         instruction: Critical for brownfield - what must remain compatible
         type: numbered-list
         prefix: CR
-        template: "{{requirement}}: {{description}}"
+        template: '{{requirement}}: {{description}}'
         items:
           - id: cr1
-            template: "CR1: {{existing_api_compatibility}}"
+            template: 'CR1: {{existing_api_compatibility}}'
           - id: cr2
-            template: "CR2: {{database_schema_compatibility}}"
+            template: 'CR2: {{database_schema_compatibility}}'
           - id: cr3
-            template: "CR3: {{ui_ux_consistency}}"
+            template: 'CR3: {{ui_ux_consistency}}'
           - id: cr4
-            template: "CR4: {{integration_compatibility}}"
+            template: 'CR4: {{integration_compatibility}}'
 
   - id: ui-enhancement-goals
     title: User Interface Enhancement Goals
@@ -4569,7 +4582,7 @@ sections:
           If document-project output available:
           - Extract from "Actual Tech Stack" table in High Level Architecture section
           - Include version numbers and any noted constraints
-          
+
           Otherwise, document the current technology stack:
         template: |
           **Languages**: {{languages}}
@@ -4608,7 +4621,7 @@ sections:
           - Reference "Technical Debt and Known Issues" section
           - Include "Workarounds and Gotchas" that might impact enhancement
           - Note any identified constraints from "Critical Technical Debt"
-          
+
           Build risk assessment incorporating existing known issues:
         template: |
           **Technical Risks**: {{technical_risks}}
@@ -4625,13 +4638,13 @@ sections:
       - id: epic-approach
         title: Epic Approach
         instruction: Explain the rationale for epic structure - typically single epic for brownfield unless multiple unrelated features
-        template: "**Epic Structure Decision**: {{epic_decision}} with rationale"
+        template: '**Epic Structure Decision**: {{epic_decision}} with rationale'
 
   - id: epic-details
-    title: "Epic 1: {{enhancement_title}}"
+    title: 'Epic 1: {{enhancement_title}}'
     instruction: |
       Comprehensive epic that delivers the brownfield enhancement while maintaining existing functionality
-      
+
       CRITICAL STORY SEQUENCING FOR BROWNFIELD:
       - Stories must ensure existing functionality remains intact
       - Each story should include verification that existing features still work
@@ -4644,11 +4657,11 @@ sections:
       - Each story must deliver value while maintaining system integrity
     template: |
       **Epic Goal**: {{epic_goal}}
-      
+
       **Integration Requirements**: {{integration_requirements}}
     sections:
       - id: story
-        title: "Story 1.{{story_number}} {{story_title}}"
+        title: 'Story 1.{{story_number}} {{story_title}}'
         repeatable: true
         template: |
           As a {{user_type}},
@@ -4659,16 +4672,16 @@ sections:
             title: Acceptance Criteria
             type: numbered-list
             instruction: Define criteria that include both new functionality and existing system integrity
-            item_template: "{{criterion_number}}: {{criteria}}"
+            item_template: '{{criterion_number}}: {{criteria}}'
           - id: integration-verification
             title: Integration Verification
             instruction: Specific verification steps to ensure existing functionality remains intact
             type: numbered-list
             prefix: IV
             items:
-              - template: "IV1: {{existing_functionality_verification}}"
-              - template: "IV2: {{integration_point_verification}}"
-              - template: "IV3: {{performance_impact_verification}}"
+              - template: 'IV1: {{existing_functionality_verification}}'
+              - template: 'IV2: {{integration_point_verification}}'
+              - template: 'IV3: {{performance_impact_verification}}'
 ==================== END: .bmad-core/templates/brownfield-prd-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/pm-checklist.md ====================
@@ -5243,7 +5256,7 @@ template:
   output:
     format: markdown
     filename: docs/architecture.md
-    title: "{{project_name}} Architecture Document"
+    title: '{{project_name}} Architecture Document'
 
 workflow:
   mode: interactive
@@ -5258,20 +5271,20 @@ sections:
       - id: intro-content
         content: |
           This document outlines the overall project architecture for {{project_name}}, including backend systems, shared services, and non-UI specific concerns. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development, ensuring consistency and adherence to chosen patterns and technologies.
-          
+
           **Relationship to Frontend Architecture:**
           If the project includes a significant user interface, a separate Frontend Architecture Document will detail the frontend-specific design and MUST be used in conjunction with this document. Core technology stack choices documented herein (see "Tech Stack") are definitive for the entire project, including any frontend components.
       - id: starter-template
         title: Starter Template or Existing Project
         instruction: |
           Before proceeding further with architecture design, check if the project is based on a starter template or existing codebase:
-          
+
           1. Review the PRD and brainstorming brief for any mentions of:
           - Starter templates (e.g., Create React App, Next.js, Vue CLI, Angular CLI, etc.)
           - Existing projects or codebases being used as a foundation
           - Boilerplate projects or scaffolding tools
           - Previous projects to be cloned or adapted
-          
+
           2. If a starter template or existing project is mentioned:
           - Ask the user to provide access via one of these methods:
             - Link to the starter template documentation
@@ -5284,16 +5297,16 @@ sections:
             - Existing architectural patterns and conventions
             - Any limitations or constraints imposed by the starter
           - Use this analysis to inform and align your architecture decisions
-          
+
           3. If no starter template is mentioned but this is a greenfield project:
           - Suggest appropriate starter templates based on the tech stack preferences
           - Explain the benefits (faster setup, best practices, community support)
           - Let the user decide whether to use one
-          
+
           4. If the user confirms no starter template will be used:
           - Proceed with architecture design from scratch
           - Note that manual setup will be required for all tooling and configuration
-          
+
           Document the decision here before proceeding with the architecture design. If none, just say N/A
         elicit: true
       - id: changelog
@@ -5321,7 +5334,7 @@ sections:
         title: High Level Overview
         instruction: |
           Based on the PRD's Technical Assumptions section, describe:
-          
+
           1. The main architectural style (e.g., Monolith, Microservices, Serverless, Event-Driven)
           2. Repository structure decision from PRD (Monorepo/Polyrepo)
           3. Service architecture decision from PRD
@@ -5338,49 +5351,49 @@ sections:
           - Data flow directions
           - External integrations
           - User entry points
-          
+
       - id: architectural-patterns
         title: Architectural and Design Patterns
         instruction: |
           List the key high-level patterns that will guide the architecture. For each pattern:
-          
+
           1. Present 2-3 viable options if multiple exist
           2. Provide your recommendation with clear rationale
           3. Get user confirmation before finalizing
           4. These patterns should align with the PRD's technical assumptions and project goals
-          
+
           Common patterns to consider:
           - Architectural style patterns (Serverless, Event-Driven, Microservices, CQRS, Hexagonal)
           - Code organization patterns (Dependency Injection, Repository, Module, Factory)
           - Data patterns (Event Sourcing, Saga, Database per Service)
           - Communication patterns (REST, GraphQL, Message Queue, Pub/Sub)
-        template: "- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}"
+        template: '- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}'
         examples:
-          - "**Serverless Architecture:** Using AWS Lambda for compute - _Rationale:_ Aligns with PRD requirement for cost optimization and automatic scaling"
-          - "**Repository Pattern:** Abstract data access logic - _Rationale:_ Enables testing and future database migration flexibility"
-          - "**Event-Driven Communication:** Using SNS/SQS for service decoupling - _Rationale:_ Supports async processing and system resilience"
+          - '**Serverless Architecture:** Using AWS Lambda for compute - _Rationale:_ Aligns with PRD requirement for cost optimization and automatic scaling'
+          - '**Repository Pattern:** Abstract data access logic - _Rationale:_ Enables testing and future database migration flexibility'
+          - '**Event-Driven Communication:** Using SNS/SQS for service decoupling - _Rationale:_ Supports async processing and system resilience'
 
   - id: tech-stack
     title: Tech Stack
     instruction: |
       This is the DEFINITIVE technology selection section. Work with the user to make specific choices:
-      
+
       1. Review PRD technical assumptions and any preferences from .bmad-core/data/technical-preferences.yaml or an attached technical-preferences
       2. For each category, present 2-3 viable options with pros/cons
       3. Make a clear recommendation based on project needs
       4. Get explicit user approval for each selection
       5. Document exact versions (avoid "latest" - pin specific versions)
       6. This table is the single source of truth - all other docs must reference these choices
-      
+
       Key decisions to finalize - before displaying the table, ensure you are aware of or ask the user about - let the user know if they are not sure on any that you can also provide suggestions with rationale:
-      
+
       - Starter templates (if any)
       - Languages and runtimes with exact versions
       - Frameworks and libraries / packages
       - Cloud provider and key services choices
       - Database and storage solutions - if unclear suggest sql or nosql or other types depending on the project and depending on cloud provider offer a suggestion
       - Development tools
-      
+
       Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away elicit feedback - this statement and the options should be rendered and then prompt right all before allowing user input.
     elicit: true
     sections:
@@ -5396,34 +5409,34 @@ sections:
         columns: [Category, Technology, Version, Purpose, Rationale]
         instruction: Populate the technology stack table with all relevant technologies
         examples:
-          - "| **Language** | TypeScript | 5.3.3 | Primary development language | Strong typing, excellent tooling, team expertise |"
-          - "| **Runtime** | Node.js | 20.11.0 | JavaScript runtime | LTS version, stable performance, wide ecosystem |"
-          - "| **Framework** | NestJS | 10.3.2 | Backend framework | Enterprise-ready, good DI, matches team patterns |"
+          - '| **Language** | TypeScript | 5.3.3 | Primary development language | Strong typing, excellent tooling, team expertise |'
+          - '| **Runtime** | Node.js | 20.11.0 | JavaScript runtime | LTS version, stable performance, wide ecosystem |'
+          - '| **Framework** | NestJS | 10.3.2 | Backend framework | Enterprise-ready, good DI, matches team patterns |'
 
   - id: data-models
     title: Data Models
     instruction: |
       Define the core data models/entities:
-      
+
       1. Review PRD requirements and identify key business entities
       2. For each model, explain its purpose and relationships
       3. Include key attributes and data types
       4. Show relationships between models
       5. Discuss design decisions with user
-      
+
       Create a clear conceptual model before moving to database schema.
     elicit: true
     repeatable: true
     sections:
       - id: model
-        title: "{{model_name}}"
+        title: '{{model_name}}'
         template: |
           **Purpose:** {{model_purpose}}
-          
+
           **Key Attributes:**
           - {{attribute_1}}: {{type_1}} - {{description_1}}
           - {{attribute_2}}: {{type_2}} - {{description_2}}
-          
+
           **Relationships:**
           - {{relationship_1}}
           - {{relationship_2}}
@@ -5432,7 +5445,7 @@ sections:
     title: Components
     instruction: |
       Based on the architectural patterns, tech stack, and data models from above:
-      
+
       1. Identify major logical components/services and their responsibilities
       2. Consider the repository structure (monorepo/polyrepo) from PRD
       3. Define clear boundaries and interfaces between components
@@ -5441,22 +5454,22 @@ sections:
       - Key interfaces/APIs exposed
       - Dependencies on other components
       - Technology specifics based on tech stack choices
-      
+
       5. Create component diagrams where helpful
     elicit: true
     sections:
       - id: component-list
         repeatable: true
-        title: "{{component_name}}"
+        title: '{{component_name}}'
         template: |
           **Responsibility:** {{component_description}}
-          
+
           **Key Interfaces:**
           - {{interface_1}}
           - {{interface_2}}
-          
+
           **Dependencies:** {{dependencies}}
-          
+
           **Technology Stack:** {{component_tech_details}}
       - id: component-diagrams
         title: Component Diagrams
@@ -5473,29 +5486,29 @@ sections:
     condition: Project requires external API integrations
     instruction: |
       For each external service integration:
-      
+
       1. Identify APIs needed based on PRD requirements and component design
       2. If documentation URLs are unknown, ask user for specifics
       3. Document authentication methods and security considerations
       4. List specific endpoints that will be used
       5. Note any rate limits or usage constraints
-      
+
       If no external APIs are needed, state this explicitly and skip to next section.
     elicit: true
     repeatable: true
     sections:
       - id: api
-        title: "{{api_name}} API"
+        title: '{{api_name}} API'
         template: |
           - **Purpose:** {{api_purpose}}
           - **Documentation:** {{api_docs_url}}
           - **Base URL(s):** {{api_base_url}}
           - **Authentication:** {{auth_method}}
           - **Rate Limits:** {{rate_limits}}
-          
+
           **Key Endpoints Used:**
           - `{{method}} {{endpoint_path}}` - {{endpoint_purpose}}
-          
+
           **Integration Notes:** {{integration_considerations}}
 
   - id: core-workflows
@@ -5504,13 +5517,13 @@ sections:
     mermaid_type: sequence
     instruction: |
       Illustrate key system workflows using sequence diagrams:
-      
+
       1. Identify critical user journeys from PRD
       2. Show component interactions including external APIs
       3. Include error handling paths
       4. Document async operations
       5. Create both high-level and detailed diagrams as needed
-      
+
       Focus on workflows that clarify architecture decisions or complex interactions.
     elicit: true
 
@@ -5521,13 +5534,13 @@ sections:
     language: yaml
     instruction: |
       If the project includes a REST API:
-      
+
       1. Create an OpenAPI 3.0 specification
       2. Include all endpoints from epics/stories
       3. Define request/response schemas based on data models
       4. Document authentication requirements
       5. Include example requests/responses
-      
+
       Use YAML format for better readability. If no REST API, skip this section.
     elicit: true
     template: |
@@ -5544,13 +5557,13 @@ sections:
     title: Database Schema
     instruction: |
       Transform the conceptual data models into concrete database schemas:
-      
+
       1. Use the database type(s) selected in Tech Stack
       2. Create schema definitions using appropriate notation
       3. Include indexes, constraints, and relationships
       4. Consider performance and scalability
       5. For NoSQL, show document structures
-      
+
       Present schema in format appropriate to database type (SQL DDL, JSON schema, etc.)
     elicit: true
 
@@ -5560,14 +5573,14 @@ sections:
     language: plaintext
     instruction: |
       Create a project folder structure that reflects:
-      
+
       1. The chosen repository structure (monorepo/polyrepo)
       2. The service architecture (monolith/microservices/serverless)
       3. The selected tech stack and languages
       4. Component organization from above
       5. Best practices for the chosen frameworks
       6. Clear separation of concerns
-      
+
       Adapt the structure based on project needs. For monorepos, show service separation. For serverless, show function organization. Include language-specific conventions.
     elicit: true
     examples:
@@ -5585,13 +5598,13 @@ sections:
     title: Infrastructure and Deployment
     instruction: |
       Define the deployment architecture and practices:
-      
+
       1. Use IaC tool selected in Tech Stack
       2. Choose deployment strategy appropriate for the architecture
       3. Define environments and promotion flow
       4. Establish rollback procedures
       5. Consider security, monitoring, and cost optimization
-      
+
       Get user input on deployment preferences and CI/CD tool choices.
     elicit: true
     sections:
@@ -5610,12 +5623,12 @@ sections:
       - id: environments
         title: Environments
         repeatable: true
-        template: "- **{{env_name}}:** {{env_purpose}} - {{env_details}}"
+        template: '- **{{env_name}}:** {{env_purpose}} - {{env_details}}'
       - id: promotion-flow
         title: Environment Promotion Flow
         type: code
         language: text
-        template: "{{promotion_flow_diagram}}"
+        template: '{{promotion_flow_diagram}}'
       - id: rollback-strategy
         title: Rollback Strategy
         template: |
@@ -5627,13 +5640,13 @@ sections:
     title: Error Handling Strategy
     instruction: |
       Define comprehensive error handling approach:
-      
+
       1. Choose appropriate patterns for the language/framework from Tech Stack
       2. Define logging standards and tools
       3. Establish error categories and handling rules
       4. Consider observability and debugging needs
       5. Ensure security (no sensitive data in logs)
-      
+
       This section guides both AI and human developers in consistent error handling.
     elicit: true
     sections:
@@ -5680,13 +5693,13 @@ sections:
     title: Coding Standards
     instruction: |
       These standards are MANDATORY for AI agents. Work with user to define ONLY the critical rules needed to prevent bad code. Explain that:
-      
+
       1. This section directly controls AI developer behavior
       2. Keep it minimal - assume AI knows general best practices
       3. Focus on project-specific conventions and gotchas
       4. Overly detailed standards bloat context and slow development
       5. Standards will be extracted to separate file for dev agent use
-      
+
       For each standard, get explicit user confirmation it's necessary.
     elicit: true
     sections:
@@ -5708,32 +5721,32 @@ sections:
           - "Never use console.log in production code - use logger"
           - "All API responses must use ApiResponse wrapper type"
           - "Database queries must use repository pattern, never direct ORM"
-          
+
           Avoid obvious rules like "use SOLID principles" or "write clean code"
         repeatable: true
-        template: "- **{{rule_name}}:** {{rule_description}}"
+        template: '- **{{rule_name}}:** {{rule_description}}'
       - id: language-specifics
         title: Language-Specific Guidelines
         condition: Critical language-specific rules needed
         instruction: Add ONLY if critical for preventing AI mistakes. Most teams don't need this section.
         sections:
           - id: language-rules
-            title: "{{language_name}} Specifics"
+            title: '{{language_name}} Specifics'
             repeatable: true
-            template: "- **{{rule_topic}}:** {{rule_detail}}"
+            template: '- **{{rule_topic}}:** {{rule_detail}}'
 
   - id: test-strategy
     title: Test Strategy and Standards
     instruction: |
       Work with user to define comprehensive test strategy:
-      
+
       1. Use test frameworks from Tech Stack
       2. Decide on TDD vs test-after approach
       3. Define test organization and naming
       4. Establish coverage goals
       5. Determine integration test infrastructure
       6. Plan for test data and external dependencies
-      
+
       Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference.
     elicit: true
     sections:
@@ -5754,7 +5767,7 @@ sections:
               - **Location:** {{unit_test_location}}
               - **Mocking Library:** {{mocking_library}}
               - **Coverage Requirement:** {{unit_coverage}}
-              
+
               **AI Agent Requirements:**
               - Generate tests for all public methods
               - Cover edge cases and error conditions
@@ -5768,9 +5781,9 @@ sections:
               - **Test Infrastructure:**
                 - **{{dependency_name}}:** {{test_approach}} ({{test_tool}})
             examples:
-              - "**Database:** In-memory H2 for unit tests, Testcontainers PostgreSQL for integration"
-              - "**Message Queue:** Embedded Kafka for tests"
-              - "**External APIs:** WireMock for stubbing"
+              - '**Database:** In-memory H2 for unit tests, Testcontainers PostgreSQL for integration'
+              - '**Message Queue:** Embedded Kafka for tests'
+              - '**External APIs:** WireMock for stubbing'
           - id: e2e-tests
             title: End-to-End Tests
             template: |
@@ -5796,7 +5809,7 @@ sections:
     title: Security
     instruction: |
       Define MANDATORY security requirements for AI and human developers:
-      
+
       1. Focus on implementation-specific rules
       2. Reference security tools from Tech Stack
       3. Define clear patterns for common scenarios
@@ -5865,16 +5878,16 @@ sections:
     title: Next Steps
     instruction: |
       After completing the architecture:
-      
+
       1. If project has UI components:
       - Use "Frontend Architecture Mode"
       - Provide this document as input
-      
+
       2. For all projects:
       - Review with Product Owner
       - Begin story implementation with Dev agent
       - Set up infrastructure with DevOps agent
-      
+
       3. Include specific prompts for next agents if needed
     sections:
       - id: architect-prompt
@@ -5896,7 +5909,7 @@ template:
   output:
     format: markdown
     filename: docs/ui-architecture.md
-    title: "{{project_name}} Frontend Architecture Document"
+    title: '{{project_name}} Frontend Architecture Document'
 
 workflow:
   mode: interactive
@@ -5907,16 +5920,16 @@ sections:
     title: Template and Framework Selection
     instruction: |
       Review provided documents including PRD, UX-UI Specification, and main Architecture Document. Focus on extracting technical implementation details needed for AI frontend tools and developer agents. Ask the user for any of these documents if you are unable to locate and were not provided.
-      
+
       Before proceeding with frontend architecture design, check if the project is using a frontend starter template or existing codebase:
-      
+
       1. Review the PRD, main architecture document, and brainstorming brief for mentions of:
          - Frontend starter templates (e.g., Create React App, Next.js, Vite, Vue CLI, Angular CLI, etc.)
          - UI kit or component library starters
          - Existing frontend projects being used as a foundation
          - Admin dashboard templates or other specialized starters
          - Design system implementations
-      
+
       2. If a frontend starter template or existing project is mentioned:
          - Ask the user to provide access via one of these methods:
            - Link to the starter template documentation
@@ -5932,7 +5945,7 @@ sections:
            - Testing setup and patterns
            - Build and development scripts
          - Use this analysis to ensure your frontend architecture aligns with the starter's patterns
-      
+
       3. If no frontend starter is mentioned but this is a new UI, ensure we know what the ui language and framework is:
          - Based on the framework choice, suggest appropriate starters:
            - React: Create React App, Next.js, Vite + React
@@ -5940,11 +5953,11 @@ sections:
            - Angular: Angular CLI
            - Or suggest popular UI templates if applicable
          - Explain benefits specific to frontend development
-      
+
       4. If the user confirms no starter template will be used:
          - Note that all tooling, bundling, and configuration will need manual setup
          - Proceed with frontend architecture from scratch
-      
+
       Document the starter template decision and any constraints it imposes before proceeding.
     sections:
       - id: changelog
@@ -5964,17 +5977,29 @@ sections:
         columns: [Category, Technology, Version, Purpose, Rationale]
         instruction: Fill in appropriate technology choices based on the selected framework and project requirements.
         rows:
-          - ["Framework", "{{framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["UI Library", "{{ui_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["State Management", "{{state_management}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Routing", "{{routing_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Build Tool", "{{build_tool}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Styling", "{{styling_solution}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Testing", "{{test_framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Component Library", "{{component_lib}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Form Handling", "{{form_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Animation", "{{animation_lib}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Dev Tools", "{{dev_tools}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ['Framework', '{{framework}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['UI Library', '{{ui_library}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - [
+              'State Management',
+              '{{state_management}}',
+              '{{version}}',
+              '{{purpose}}',
+              '{{why_chosen}}',
+            ]
+          - ['Routing', '{{routing_library}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Build Tool', '{{build_tool}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Styling', '{{styling_solution}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Testing', '{{test_framework}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - [
+              'Component Library',
+              '{{component_lib}}',
+              '{{version}}',
+              '{{purpose}}',
+              '{{why_chosen}}',
+            ]
+          - ['Form Handling', '{{form_library}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Animation', '{{animation_lib}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Dev Tools', '{{dev_tools}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
 
   - id: project-structure
     title: Project Structure
@@ -6068,12 +6093,12 @@ sections:
         title: Testing Best Practices
         type: numbered-list
         items:
-          - "**Unit Tests**: Test individual components in isolation"
-          - "**Integration Tests**: Test component interactions"
-          - "**E2E Tests**: Test critical user flows (using Cypress/Playwright)"
-          - "**Coverage Goals**: Aim for 80% code coverage"
-          - "**Test Structure**: Arrange-Act-Assert pattern"
-          - "**Mock External Dependencies**: API calls, routing, state management"
+          - '**Unit Tests**: Test individual components in isolation'
+          - '**Integration Tests**: Test component interactions'
+          - '**E2E Tests**: Test critical user flows (using Cypress/Playwright)'
+          - '**Coverage Goals**: Aim for 80% code coverage'
+          - '**Test Structure**: Arrange-Act-Assert pattern'
+          - '**Mock External Dependencies**: API calls, routing, state management'
 
   - id: environment-configuration
     title: Environment Configuration
@@ -6105,7 +6130,7 @@ template:
   output:
     format: markdown
     filename: docs/architecture.md
-    title: "{{project_name}} Fullstack Architecture Document"
+    title: '{{project_name}} Fullstack Architecture Document'
 
 workflow:
   mode: interactive
@@ -6119,33 +6144,33 @@ sections:
     elicit: true
     content: |
       This document outlines the complete fullstack architecture for {{project_name}}, including backend systems, frontend implementation, and their integration. It serves as the single source of truth for AI-driven development, ensuring consistency across the entire technology stack.
-      
+
       This unified approach combines what would traditionally be separate backend and frontend architecture documents, streamlining the development process for modern fullstack applications where these concerns are increasingly intertwined.
     sections:
       - id: starter-template
         title: Starter Template or Existing Project
         instruction: |
           Before proceeding with architecture design, check if the project is based on any starter templates or existing codebases:
-          
+
           1. Review the PRD and other documents for mentions of:
           - Fullstack starter templates (e.g., T3 Stack, MEAN/MERN starters, Django + React templates)
           - Monorepo templates (e.g., Nx, Turborepo starters)
           - Platform-specific starters (e.g., Vercel templates, AWS Amplify starters)
           - Existing projects being extended or cloned
-          
+
           2. If starter templates or existing projects are mentioned:
           - Ask the user to provide access (links, repos, or files)
           - Analyze to understand pre-configured choices and constraints
           - Note any architectural decisions already made
           - Identify what can be modified vs what must be retained
-          
+
           3. If no starter is mentioned but this is greenfield:
           - Suggest appropriate fullstack starters based on tech preferences
           - Consider platform-specific options (Vercel, AWS, etc.)
           - Let user decide whether to use one
-          
+
           4. Document the decision and any constraints it imposes
-          
+
           If none, state "N/A - Greenfield project"
       - id: changelog
         title: Change Log
@@ -6171,17 +6196,17 @@ sections:
         title: Platform and Infrastructure Choice
         instruction: |
           Based on PRD requirements and technical assumptions, make a platform recommendation:
-          
+
           1. Consider common patterns (not an exhaustive list, use your own best judgement and search the web as needed for emerging trends):
           - **Vercel + Supabase**: For rapid development with Next.js, built-in auth/storage
           - **AWS Full Stack**: For enterprise scale with Lambda, API Gateway, S3, Cognito
           - **Azure**: For .NET ecosystems or enterprise Microsoft environments
           - **Google Cloud**: For ML/AI heavy applications or Google ecosystem integration
-          
+
           2. Present 2-3 viable options with clear pros/cons
           3. Make a recommendation with rationale
           4. Get explicit user confirmation
-          
+
           Document the choice and key services that will be used.
         template: |
           **Platform:** {{selected_platform}}
@@ -6191,7 +6216,7 @@ sections:
         title: Repository Structure
         instruction: |
           Define the repository approach based on PRD requirements and platform choice, explain your rationale or ask questions to the user if unsure:
-          
+
           1. For modern fullstack apps, monorepo is often preferred
           2. Consider tooling (Nx, Turborepo, Lerna, npm workspaces)
           3. Define package/app boundaries
@@ -6213,7 +6238,7 @@ sections:
           - Databases and storage
           - External integrations
           - CDN and caching layers
-          
+
           Use appropriate diagram type for clarity.
       - id: architectural-patterns
         title: Architectural Patterns
@@ -6223,21 +6248,21 @@ sections:
           - Frontend patterns (e.g., Component-based, State management)
           - Backend patterns (e.g., Repository, CQRS, Event-driven)
           - Integration patterns (e.g., BFF, API Gateway)
-          
+
           For each pattern, provide recommendation and rationale.
         repeatable: true
-        template: "- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}"
+        template: '- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}'
         examples:
-          - "**Jamstack Architecture:** Static site generation with serverless APIs - _Rationale:_ Optimal performance and scalability for content-heavy applications"
-          - "**Component-Based UI:** Reusable React components with TypeScript - _Rationale:_ Maintainability and type safety across large codebases"
-          - "**Repository Pattern:** Abstract data access logic - _Rationale:_ Enables testing and future database migration flexibility"
-          - "**API Gateway Pattern:** Single entry point for all API calls - _Rationale:_ Centralized auth, rate limiting, and monitoring"
+          - '**Jamstack Architecture:** Static site generation with serverless APIs - _Rationale:_ Optimal performance and scalability for content-heavy applications'
+          - '**Component-Based UI:** Reusable React components with TypeScript - _Rationale:_ Maintainability and type safety across large codebases'
+          - '**Repository Pattern:** Abstract data access logic - _Rationale:_ Enables testing and future database migration flexibility'
+          - '**API Gateway Pattern:** Single entry point for all API calls - _Rationale:_ Centralized auth, rate limiting, and monitoring'
 
   - id: tech-stack
     title: Tech Stack
     instruction: |
       This is the DEFINITIVE technology selection for the entire project. Work with user to finalize all choices. This table is the single source of truth - all development must use these exact versions.
-      
+
       Key areas to cover:
       - Frontend and backend languages/frameworks
       - Databases and caching
@@ -6246,7 +6271,7 @@ sections:
       - Testing tools for both frontend and backend
       - Build and deployment tools
       - Monitoring and logging
-      
+
       Upon render, elicit feedback immediately.
     elicit: true
     sections:
@@ -6255,49 +6280,67 @@ sections:
         type: table
         columns: [Category, Technology, Version, Purpose, Rationale]
         rows:
-          - ["Frontend Language", "{{fe_language}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Frontend Framework", "{{fe_framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["UI Component Library", "{{ui_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["State Management", "{{state_mgmt}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Backend Language", "{{be_language}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Backend Framework", "{{be_framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["API Style", "{{api_style}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Database", "{{database}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Cache", "{{cache}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["File Storage", "{{storage}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Authentication", "{{auth}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Frontend Testing", "{{fe_test}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Backend Testing", "{{be_test}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["E2E Testing", "{{e2e_test}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Build Tool", "{{build_tool}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Bundler", "{{bundler}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["IaC Tool", "{{iac_tool}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["CI/CD", "{{cicd}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Monitoring", "{{monitoring}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["Logging", "{{logging}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
-          - ["CSS Framework", "{{css_framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ['Frontend Language', '{{fe_language}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - [
+              'Frontend Framework',
+              '{{fe_framework}}',
+              '{{version}}',
+              '{{purpose}}',
+              '{{why_chosen}}',
+            ]
+          - [
+              'UI Component Library',
+              '{{ui_library}}',
+              '{{version}}',
+              '{{purpose}}',
+              '{{why_chosen}}',
+            ]
+          - ['State Management', '{{state_mgmt}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Backend Language', '{{be_language}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - [
+              'Backend Framework',
+              '{{be_framework}}',
+              '{{version}}',
+              '{{purpose}}',
+              '{{why_chosen}}',
+            ]
+          - ['API Style', '{{api_style}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Database', '{{database}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Cache', '{{cache}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['File Storage', '{{storage}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Authentication', '{{auth}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Frontend Testing', '{{fe_test}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Backend Testing', '{{be_test}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['E2E Testing', '{{e2e_test}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Build Tool', '{{build_tool}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Bundler', '{{bundler}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['IaC Tool', '{{iac_tool}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['CI/CD', '{{cicd}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Monitoring', '{{monitoring}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['Logging', '{{logging}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
+          - ['CSS Framework', '{{css_framework}}', '{{version}}', '{{purpose}}', '{{why_chosen}}']
 
   - id: data-models
     title: Data Models
     instruction: |
       Define the core data models/entities that will be shared between frontend and backend:
-      
+
       1. Review PRD requirements and identify key business entities
       2. For each model, explain its purpose and relationships
       3. Include key attributes and data types
       4. Show relationships between models
       5. Create TypeScript interfaces that can be shared
       6. Discuss design decisions with user
-      
+
       Create a clear conceptual model before moving to database schema.
     elicit: true
     repeatable: true
     sections:
       - id: model
-        title: "{{model_name}}"
+        title: '{{model_name}}'
         template: |
           **Purpose:** {{model_purpose}}
-          
+
           **Key Attributes:**
           - {{attribute_1}}: {{type_1}} - {{description_1}}
           - {{attribute_2}}: {{type_2}} - {{description_2}}
@@ -6306,17 +6349,17 @@ sections:
             title: TypeScript Interface
             type: code
             language: typescript
-            template: "{{model_interface}}"
+            template: '{{model_interface}}'
           - id: relationships
             title: Relationships
             type: bullet-list
-            template: "- {{relationship}}"
+            template: '- {{relationship}}'
 
   - id: api-spec
     title: API Specification
     instruction: |
       Based on the chosen API style from Tech Stack:
-      
+
       1. If REST API, create an OpenAPI 3.0 specification
       2. If GraphQL, provide the GraphQL schema
       3. If tRPC, show router definitions
@@ -6324,7 +6367,7 @@ sections:
       5. Define request/response schemas based on data models
       6. Document authentication requirements
       7. Include example requests/responses
-      
+
       Use appropriate format for the chosen API style. If no API (e.g., static site), skip this section.
     elicit: true
     sections:
@@ -6347,19 +6390,19 @@ sections:
         condition: API style is GraphQL
         type: code
         language: graphql
-        template: "{{graphql_schema}}"
+        template: '{{graphql_schema}}'
       - id: trpc-api
         title: tRPC Router Definitions
         condition: API style is tRPC
         type: code
         language: typescript
-        template: "{{trpc_routers}}"
+        template: '{{trpc_routers}}'
 
   - id: components
     title: Components
     instruction: |
       Based on the architectural patterns, tech stack, and data models from above:
-      
+
       1. Identify major logical components/services across the fullstack
       2. Consider both frontend and backend components
       3. Define clear boundaries and interfaces between components
@@ -6368,22 +6411,22 @@ sections:
       - Key interfaces/APIs exposed
       - Dependencies on other components
       - Technology specifics based on tech stack choices
-      
+
       5. Create component diagrams where helpful
     elicit: true
     sections:
       - id: component-list
         repeatable: true
-        title: "{{component_name}}"
+        title: '{{component_name}}'
         template: |
           **Responsibility:** {{component_description}}
-          
+
           **Key Interfaces:**
           - {{interface_1}}
           - {{interface_2}}
-          
+
           **Dependencies:** {{dependencies}}
-          
+
           **Technology Stack:** {{component_tech_details}}
       - id: component-diagrams
         title: Component Diagrams
@@ -6400,29 +6443,29 @@ sections:
     condition: Project requires external API integrations
     instruction: |
       For each external service integration:
-      
+
       1. Identify APIs needed based on PRD requirements and component design
       2. If documentation URLs are unknown, ask user for specifics
       3. Document authentication methods and security considerations
       4. List specific endpoints that will be used
       5. Note any rate limits or usage constraints
-      
+
       If no external APIs are needed, state this explicitly and skip to next section.
     elicit: true
     repeatable: true
     sections:
       - id: api
-        title: "{{api_name}} API"
+        title: '{{api_name}} API'
         template: |
           - **Purpose:** {{api_purpose}}
           - **Documentation:** {{api_docs_url}}
           - **Base URL(s):** {{api_base_url}}
           - **Authentication:** {{auth_method}}
           - **Rate Limits:** {{rate_limits}}
-          
+
           **Key Endpoints Used:**
           - `{{method}} {{endpoint_path}}` - {{endpoint_purpose}}
-          
+
           **Integration Notes:** {{integration_considerations}}
 
   - id: core-workflows
@@ -6431,14 +6474,14 @@ sections:
     mermaid_type: sequence
     instruction: |
       Illustrate key system workflows using sequence diagrams:
-      
+
       1. Identify critical user journeys from PRD
       2. Show component interactions including external APIs
       3. Include both frontend and backend flows
       4. Include error handling paths
       5. Document async operations
       6. Create both high-level and detailed diagrams as needed
-      
+
       Focus on workflows that clarify architecture decisions or complex interactions.
     elicit: true
 
@@ -6446,13 +6489,13 @@ sections:
     title: Database Schema
     instruction: |
       Transform the conceptual data models into concrete database schemas:
-      
+
       1. Use the database type(s) selected in Tech Stack
       2. Create schema definitions using appropriate notation
       3. Include indexes, constraints, and relationships
       4. Consider performance and scalability
       5. For NoSQL, show document structures
-      
+
       Present schema in format appropriate to database type (SQL DDL, JSON schema, etc.)
     elicit: true
 
@@ -6469,12 +6512,12 @@ sections:
             title: Component Organization
             type: code
             language: text
-            template: "{{component_structure}}"
+            template: '{{component_structure}}'
           - id: component-template
             title: Component Template
             type: code
             language: typescript
-            template: "{{component_template}}"
+            template: '{{component_template}}'
       - id: state-management
         title: State Management Architecture
         instruction: Detail state management approach based on chosen solution.
@@ -6483,11 +6526,11 @@ sections:
             title: State Structure
             type: code
             language: typescript
-            template: "{{state_structure}}"
+            template: '{{state_structure}}'
           - id: state-patterns
             title: State Management Patterns
             type: bullet-list
-            template: "- {{pattern}}"
+            template: '- {{pattern}}'
       - id: routing-architecture
         title: Routing Architecture
         instruction: Define routing structure based on framework choice.
@@ -6496,12 +6539,12 @@ sections:
             title: Route Organization
             type: code
             language: text
-            template: "{{route_structure}}"
+            template: '{{route_structure}}'
           - id: protected-routes
             title: Protected Route Pattern
             type: code
             language: typescript
-            template: "{{protected_route_example}}"
+            template: '{{protected_route_example}}'
       - id: frontend-services
         title: Frontend Services Layer
         instruction: Define how frontend communicates with backend.
@@ -6510,12 +6553,12 @@ sections:
             title: API Client Setup
             type: code
             language: typescript
-            template: "{{api_client_setup}}"
+            template: '{{api_client_setup}}'
           - id: service-example
             title: Service Example
             type: code
             language: typescript
-            template: "{{service_example}}"
+            template: '{{service_example}}'
 
   - id: backend-architecture
     title: Backend Architecture
@@ -6533,12 +6576,12 @@ sections:
                 title: Function Organization
                 type: code
                 language: text
-                template: "{{function_structure}}"
+                template: '{{function_structure}}'
               - id: function-template
                 title: Function Template
                 type: code
                 language: typescript
-                template: "{{function_template}}"
+                template: '{{function_template}}'
           - id: traditional-server
             condition: Traditional server architecture chosen
             sections:
@@ -6546,12 +6589,12 @@ sections:
                 title: Controller/Route Organization
                 type: code
                 language: text
-                template: "{{controller_structure}}"
+                template: '{{controller_structure}}'
               - id: controller-template
                 title: Controller Template
                 type: code
                 language: typescript
-                template: "{{controller_template}}"
+                template: '{{controller_template}}'
       - id: database-architecture
         title: Database Architecture
         instruction: Define database schema and access patterns.
@@ -6560,12 +6603,12 @@ sections:
             title: Schema Design
             type: code
             language: sql
-            template: "{{database_schema}}"
+            template: '{{database_schema}}'
           - id: data-access-layer
             title: Data Access Layer
             type: code
             language: typescript
-            template: "{{repository_pattern}}"
+            template: '{{repository_pattern}}'
       - id: auth-architecture
         title: Authentication and Authorization
         instruction: Define auth implementation details.
@@ -6574,12 +6617,12 @@ sections:
             title: Auth Flow
             type: mermaid
             mermaid_type: sequence
-            template: "{{auth_flow_diagram}}"
+            template: '{{auth_flow_diagram}}'
           - id: auth-middleware
             title: Middleware/Guards
             type: code
             language: typescript
-            template: "{{auth_middleware}}"
+            template: '{{auth_middleware}}'
 
   - id: unified-project-structure
     title: Unified Project Structure
@@ -6588,60 +6631,60 @@ sections:
     type: code
     language: plaintext
     examples:
-    - |
-      {{project-name}}/
-      ├── .github/                    # CI/CD workflows
-      │   └── workflows/
-      │       ├── ci.yaml
-      │       └── deploy.yaml
-      ├── apps/                       # Application packages
-      │   ├── web/                    # Frontend application
-      │   │   ├── src/
-      │   │   │   ├── components/     # UI components
-      │   │   │   ├── pages/          # Page components/routes
-      │   │   │   ├── hooks/          # Custom React hooks
-      │   │   │   ├── services/       # API client services
-      │   │   │   ├── stores/         # State management
-      │   │   │   ├── styles/         # Global styles/themes
-      │   │   │   └── utils/          # Frontend utilities
-      │   │   ├── public/             # Static assets
-      │   │   ├── tests/              # Frontend tests
-      │   │   └── package.json
-      │   └── api/                    # Backend application
-      │       ├── src/
-      │       │   ├── routes/         # API routes/controllers
-      │       │   ├── services/       # Business logic
-      │       │   ├── models/         # Data models
-      │       │   ├── middleware/     # Express/API middleware
-      │       │   ├── utils/          # Backend utilities
-      │       │   └── {{serverless_or_server_entry}}
-      │       ├── tests/              # Backend tests
-      │       └── package.json
-      ├── packages/                   # Shared packages
-      │   ├── shared/                 # Shared types/utilities
-      │   │   ├── src/
-      │   │   │   ├── types/          # TypeScript interfaces
-      │   │   │   ├── constants/      # Shared constants
-      │   │   │   └── utils/          # Shared utilities
-      │   │   └── package.json
-      │   ├── ui/                     # Shared UI components
-      │   │   ├── src/
-      │   │   └── package.json
-      │   └── config/                 # Shared configuration
-      │       ├── eslint/
-      │       ├── typescript/
-      │       └── jest/
-      ├── infrastructure/             # IaC definitions
-      │   └── {{iac_structure}}
-      ├── scripts/                    # Build/deploy scripts
-      ├── docs/                       # Documentation
-      │   ├── prd.md
-      │   ├── front-end-spec.md
-      │   └── fullstack-architecture.md
-      ├── .env.example                # Environment template
-      ├── package.json                # Root package.json
-      ├── {{monorepo_config}}         # Monorepo configuration
-      └── README.md
+      - |
+        {{project-name}}/
+        ├── .github/                    # CI/CD workflows
+        │   └── workflows/
+        │       ├── ci.yaml
+        │       └── deploy.yaml
+        ├── apps/                       # Application packages
+        │   ├── web/                    # Frontend application
+        │   │   ├── src/
+        │   │   │   ├── components/     # UI components
+        │   │   │   ├── pages/          # Page components/routes
+        │   │   │   ├── hooks/          # Custom React hooks
+        │   │   │   ├── services/       # API client services
+        │   │   │   ├── stores/         # State management
+        │   │   │   ├── styles/         # Global styles/themes
+        │   │   │   └── utils/          # Frontend utilities
+        │   │   ├── public/             # Static assets
+        │   │   ├── tests/              # Frontend tests
+        │   │   └── package.json
+        │   └── api/                    # Backend application
+        │       ├── src/
+        │       │   ├── routes/         # API routes/controllers
+        │       │   ├── services/       # Business logic
+        │       │   ├── models/         # Data models
+        │       │   ├── middleware/     # Express/API middleware
+        │       │   ├── utils/          # Backend utilities
+        │       │   └── {{serverless_or_server_entry}}
+        │       ├── tests/              # Backend tests
+        │       └── package.json
+        ├── packages/                   # Shared packages
+        │   ├── shared/                 # Shared types/utilities
+        │   │   ├── src/
+        │   │   │   ├── types/          # TypeScript interfaces
+        │   │   │   ├── constants/      # Shared constants
+        │   │   │   └── utils/          # Shared utilities
+        │   │   └── package.json
+        │   ├── ui/                     # Shared UI components
+        │   │   ├── src/
+        │   │   └── package.json
+        │   └── config/                 # Shared configuration
+        │       ├── eslint/
+        │       ├── typescript/
+        │       └── jest/
+        ├── infrastructure/             # IaC definitions
+        │   └── {{iac_structure}}
+        ├── scripts/                    # Build/deploy scripts
+        ├── docs/                       # Documentation
+        │   ├── prd.md
+        │   ├── front-end-spec.md
+        │   └── fullstack-architecture.md
+        ├── .env.example                # Environment template
+        ├── package.json                # Root package.json
+        ├── {{monorepo_config}}         # Monorepo configuration
+        └── README.md
 
   - id: development-workflow
     title: Development Workflow
@@ -6655,12 +6698,12 @@ sections:
             title: Prerequisites
             type: code
             language: bash
-            template: "{{prerequisites_commands}}"
+            template: '{{prerequisites_commands}}'
           - id: initial-setup
             title: Initial Setup
             type: code
             language: bash
-            template: "{{setup_commands}}"
+            template: '{{setup_commands}}'
           - id: dev-commands
             title: Development Commands
             type: code
@@ -6668,13 +6711,13 @@ sections:
             template: |
               # Start all services
               {{start_all_command}}
-              
+
               # Start frontend only
               {{start_frontend_command}}
-              
+
               # Start backend only
               {{start_backend_command}}
-              
+
               # Run tests
               {{test_commands}}
       - id: environment-config
@@ -6687,10 +6730,10 @@ sections:
             template: |
               # Frontend (.env.local)
               {{frontend_env_vars}}
-              
+
               # Backend (.env)
               {{backend_env_vars}}
-              
+
               # Shared
               {{shared_env_vars}}
 
@@ -6707,7 +6750,7 @@ sections:
           - **Build Command:** {{frontend_build_command}}
           - **Output Directory:** {{frontend_output_dir}}
           - **CDN/Edge:** {{cdn_strategy}}
-          
+
           **Backend Deployment:**
           - **Platform:** {{backend_deploy_platform}}
           - **Build Command:** {{backend_build_command}}
@@ -6716,15 +6759,15 @@ sections:
         title: CI/CD Pipeline
         type: code
         language: yaml
-        template: "{{cicd_pipeline_config}}"
+        template: '{{cicd_pipeline_config}}'
       - id: environments
         title: Environments
         type: table
         columns: [Environment, Frontend URL, Backend URL, Purpose]
         rows:
-          - ["Development", "{{dev_fe_url}}", "{{dev_be_url}}", "Local development"]
-          - ["Staging", "{{staging_fe_url}}", "{{staging_be_url}}", "Pre-production testing"]
-          - ["Production", "{{prod_fe_url}}", "{{prod_be_url}}", "Live environment"]
+          - ['Development', '{{dev_fe_url}}', '{{dev_be_url}}', 'Local development']
+          - ['Staging', '{{staging_fe_url}}', '{{staging_be_url}}', 'Pre-production testing']
+          - ['Production', '{{prod_fe_url}}', '{{prod_be_url}}', 'Live environment']
 
   - id: security-performance
     title: Security and Performance
@@ -6738,12 +6781,12 @@ sections:
           - CSP Headers: {{csp_policy}}
           - XSS Prevention: {{xss_strategy}}
           - Secure Storage: {{storage_strategy}}
-          
+
           **Backend Security:**
           - Input Validation: {{validation_approach}}
           - Rate Limiting: {{rate_limit_config}}
           - CORS Policy: {{cors_config}}
-          
+
           **Authentication Security:**
           - Token Storage: {{token_strategy}}
           - Session Management: {{session_approach}}
@@ -6755,7 +6798,7 @@ sections:
           - Bundle Size Target: {{bundle_size}}
           - Loading Strategy: {{loading_approach}}
           - Caching Strategy: {{fe_cache_strategy}}
-          
+
           **Backend Performance:**
           - Response Time Target: {{response_target}}
           - Database Optimization: {{db_optimization}}
@@ -6771,10 +6814,10 @@ sections:
         type: code
         language: text
         template: |
-                  E2E Tests
-                 /        \
-            Integration Tests
-               /            \
+          E2E Tests
+          /        \
+          Integration Tests
+          /            \
           Frontend Unit  Backend Unit
       - id: test-organization
         title: Test Organization
@@ -6783,17 +6826,17 @@ sections:
             title: Frontend Tests
             type: code
             language: text
-            template: "{{frontend_test_structure}}"
+            template: '{{frontend_test_structure}}'
           - id: backend-tests
             title: Backend Tests
             type: code
             language: text
-            template: "{{backend_test_structure}}"
+            template: '{{backend_test_structure}}'
           - id: e2e-tests
             title: E2E Tests
             type: code
             language: text
-            template: "{{e2e_test_structure}}"
+            template: '{{e2e_test_structure}}'
       - id: test-examples
         title: Test Examples
         sections:
@@ -6801,17 +6844,17 @@ sections:
             title: Frontend Component Test
             type: code
             language: typescript
-            template: "{{frontend_test_example}}"
+            template: '{{frontend_test_example}}'
           - id: backend-test
             title: Backend API Test
             type: code
             language: typescript
-            template: "{{backend_test_example}}"
+            template: '{{backend_test_example}}'
           - id: e2e-test
             title: E2E Test
             type: code
             language: typescript
-            template: "{{e2e_test_example}}"
+            template: '{{e2e_test_example}}'
 
   - id: coding-standards
     title: Coding Standards
@@ -6821,22 +6864,22 @@ sections:
       - id: critical-rules
         title: Critical Fullstack Rules
         repeatable: true
-        template: "- **{{rule_name}}:** {{rule_description}}"
+        template: '- **{{rule_name}}:** {{rule_description}}'
         examples:
-          - "**Type Sharing:** Always define types in packages/shared and import from there"
-          - "**API Calls:** Never make direct HTTP calls - use the service layer"
-          - "**Environment Variables:** Access only through config objects, never process.env directly"
-          - "**Error Handling:** All API routes must use the standard error handler"
-          - "**State Updates:** Never mutate state directly - use proper state management patterns"
+          - '**Type Sharing:** Always define types in packages/shared and import from there'
+          - '**API Calls:** Never make direct HTTP calls - use the service layer'
+          - '**Environment Variables:** Access only through config objects, never process.env directly'
+          - '**Error Handling:** All API routes must use the standard error handler'
+          - '**State Updates:** Never mutate state directly - use proper state management patterns'
       - id: naming-conventions
         title: Naming Conventions
         type: table
         columns: [Element, Frontend, Backend, Example]
         rows:
-          - ["Components", "PascalCase", "-", "`UserProfile.tsx`"]
-          - ["Hooks", "camelCase with 'use'", "-", "`useAuth.ts`"]
-          - ["API Routes", "-", "kebab-case", "`/api/user-profile`"]
-          - ["Database Tables", "-", "snake_case", "`user_profiles`"]
+          - ['Components', 'PascalCase', '-', '`UserProfile.tsx`']
+          - ['Hooks', "camelCase with 'use'", '-', '`useAuth.ts`']
+          - ['API Routes', '-', 'kebab-case', '`/api/user-profile`']
+          - ['Database Tables', '-', 'snake_case', '`user_profiles`']
 
   - id: error-handling
     title: Error Handling Strategy
@@ -6847,7 +6890,7 @@ sections:
         title: Error Flow
         type: mermaid
         mermaid_type: sequence
-        template: "{{error_flow_diagram}}"
+        template: '{{error_flow_diagram}}'
       - id: error-format
         title: Error Response Format
         type: code
@@ -6866,12 +6909,12 @@ sections:
         title: Frontend Error Handling
         type: code
         language: typescript
-        template: "{{frontend_error_handler}}"
+        template: '{{frontend_error_handler}}'
       - id: backend-error-handling
         title: Backend Error Handling
         type: code
         language: typescript
-        template: "{{backend_error_handler}}"
+        template: '{{backend_error_handler}}'
 
   - id: monitoring
     title: Monitoring and Observability
@@ -6893,7 +6936,7 @@ sections:
           - JavaScript errors
           - API response times
           - User interactions
-          
+
           **Backend Metrics:**
           - Request rate
           - Error rate
@@ -6913,7 +6956,7 @@ template:
   output:
     format: markdown
     filename: docs/architecture.md
-    title: "{{project_name}} Brownfield Enhancement Architecture"
+    title: '{{project_name}} Brownfield Enhancement Architecture'
 
 workflow:
   mode: interactive
@@ -6924,40 +6967,40 @@ sections:
     title: Introduction
     instruction: |
       IMPORTANT - SCOPE AND ASSESSMENT REQUIRED:
-      
+
       This architecture document is for SIGNIFICANT enhancements to existing projects that require comprehensive architectural planning. Before proceeding:
-      
+
       1. **Verify Complexity**: Confirm this enhancement requires architectural planning. For simple additions, recommend: "For simpler changes that don't require architectural planning, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead."
-      
+
       2. **REQUIRED INPUTS**:
          - Completed brownfield-prd.md
          - Existing project technical documentation (from docs folder or user-provided)
          - Access to existing project structure (IDE or uploaded files)
-      
+
       3. **DEEP ANALYSIS MANDATE**: You MUST conduct thorough analysis of the existing codebase, architecture patterns, and technical constraints before making ANY architectural recommendations. Every suggestion must be based on actual project analysis, not assumptions.
-      
+
       4. **CONTINUOUS VALIDATION**: Throughout this process, explicitly validate your understanding with the user. For every architectural decision, confirm: "Based on my analysis of your existing system, I recommend [decision] because [evidence from actual project]. Does this align with your system's reality?"
-      
+
       If any required inputs are missing, request them before proceeding.
     elicit: true
     sections:
       - id: intro-content
         content: |
           This document outlines the architectural approach for enhancing {{project_name}} with {{enhancement_description}}. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development of new features while ensuring seamless integration with the existing system.
-          
+
           **Relationship to Existing Architecture:**
           This document supplements existing project architecture by defining how new components will integrate with current systems. Where conflicts arise between new and existing patterns, this document provides guidance on maintaining consistency while implementing enhancements.
       - id: existing-project-analysis
         title: Existing Project Analysis
         instruction: |
           Analyze the existing project structure and architecture:
-          
+
           1. Review existing documentation in docs folder
           2. Examine current technology stack and versions
           3. Identify existing architectural patterns and conventions
           4. Note current deployment and infrastructure setup
           5. Document any constraints or limitations
-          
+
           CRITICAL: After your analysis, explicitly validate your findings: "Based on my analysis of your project, I've identified the following about your existing system: [key findings]. Please confirm these observations are accurate before I proceed with architectural recommendations."
         elicit: true
         sections:
@@ -6971,11 +7014,11 @@ sections:
           - id: available-docs
             title: Available Documentation
             type: bullet-list
-            template: "- {{existing_docs_summary}}"
+            template: '- {{existing_docs_summary}}'
           - id: constraints
             title: Identified Constraints
             type: bullet-list
-            template: "- {{constraint}}"
+            template: '- {{constraint}}'
       - id: changelog
         title: Change Log
         type: table
@@ -6986,12 +7029,12 @@ sections:
     title: Enhancement Scope and Integration Strategy
     instruction: |
       Define how the enhancement will integrate with the existing system:
-      
+
       1. Review the brownfield PRD enhancement scope
       2. Identify integration points with existing code
       3. Define boundaries between new and existing functionality
       4. Establish compatibility requirements
-      
+
       VALIDATION CHECKPOINT: Before presenting the integration strategy, confirm: "Based on my analysis, the integration approach I'm proposing takes into account [specific existing system characteristics]. These integration points and boundaries respect your current architecture patterns. Is this assessment accurate?"
     elicit: true
     sections:
@@ -7020,7 +7063,7 @@ sections:
     title: Tech Stack Alignment
     instruction: |
       Ensure new components align with existing technology choices:
-      
+
       1. Use existing technology stack as the foundation
       2. Only introduce new technologies if absolutely necessary
       3. Justify any new additions with clear rationale
@@ -7043,7 +7086,7 @@ sections:
     title: Data Models and Schema Changes
     instruction: |
       Define new data models and how they integrate with existing schema:
-      
+
       1. Identify new entities required for the enhancement
       2. Define relationships with existing data models
       3. Plan database schema changes (additions, modifications)
@@ -7055,15 +7098,15 @@ sections:
         repeatable: true
         sections:
           - id: model
-            title: "{{model_name}}"
+            title: '{{model_name}}'
             template: |
               **Purpose:** {{model_purpose}}
               **Integration:** {{integration_with_existing}}
-              
+
               **Key Attributes:**
               - {{attribute_1}}: {{type_1}} - {{description_1}}
               - {{attribute_2}}: {{type_2}} - {{description_2}}
-              
+
               **Relationships:**
               - **With Existing:** {{existing_relationships}}
               - **With New:** {{new_relationships}}
@@ -7075,7 +7118,7 @@ sections:
           - **Modified Tables:** {{modified_tables_list}}
           - **New Indexes:** {{new_indexes_list}}
           - **Migration Strategy:** {{migration_approach}}
-          
+
           **Backward Compatibility:**
           - {{compatibility_measure_1}}
           - {{compatibility_measure_2}}
@@ -7084,12 +7127,12 @@ sections:
     title: Component Architecture
     instruction: |
       Define new components and their integration with existing architecture:
-      
+
       1. Identify new components required for the enhancement
       2. Define interfaces with existing components
       3. Establish clear boundaries and responsibilities
       4. Plan integration points and data flow
-      
+
       MANDATORY VALIDATION: Before presenting component architecture, confirm: "The new components I'm proposing follow the existing architectural patterns I identified in your codebase: [specific patterns]. The integration interfaces respect your current component structure and communication patterns. Does this match your project's reality?"
     elicit: true
     sections:
@@ -7098,19 +7141,19 @@ sections:
         repeatable: true
         sections:
           - id: component
-            title: "{{component_name}}"
+            title: '{{component_name}}'
             template: |
               **Responsibility:** {{component_description}}
               **Integration Points:** {{integration_points}}
-              
+
               **Key Interfaces:**
               - {{interface_1}}
               - {{interface_2}}
-              
+
               **Dependencies:**
               - **Existing Components:** {{existing_dependencies}}
               - **New Components:** {{new_dependencies}}
-              
+
               **Technology Stack:** {{component_tech_details}}
       - id: interaction-diagram
         title: Component Interaction Diagram
@@ -7123,7 +7166,7 @@ sections:
     condition: Enhancement requires API changes
     instruction: |
       Define new API endpoints and integration with existing APIs:
-      
+
       1. Plan new API endpoints required for the enhancement
       2. Ensure consistency with existing API patterns
       3. Define authentication and authorization integration
@@ -7141,7 +7184,7 @@ sections:
         repeatable: true
         sections:
           - id: endpoint
-            title: "{{endpoint_name}}"
+            title: '{{endpoint_name}}'
             template: |
               - **Method:** {{http_method}}
               - **Endpoint:** {{endpoint_path}}
@@ -7152,12 +7195,12 @@ sections:
                 title: Request
                 type: code
                 language: json
-                template: "{{request_schema}}"
+                template: '{{request_schema}}'
               - id: response
                 title: Response
                 type: code
                 language: json
-                template: "{{response_schema}}"
+                template: '{{response_schema}}'
 
   - id: external-api-integration
     title: External API Integration
@@ -7166,24 +7209,24 @@ sections:
     repeatable: true
     sections:
       - id: external-api
-        title: "{{api_name}} API"
+        title: '{{api_name}} API'
         template: |
           - **Purpose:** {{api_purpose}}
           - **Documentation:** {{api_docs_url}}
           - **Base URL:** {{api_base_url}}
           - **Authentication:** {{auth_method}}
           - **Integration Method:** {{integration_approach}}
-          
+
           **Key Endpoints Used:**
           - `{{method}} {{endpoint_path}}` - {{endpoint_purpose}}
-          
+
           **Error Handling:** {{error_handling_strategy}}
 
   - id: source-tree-integration
     title: Source Tree Integration
     instruction: |
       Define how new code will integrate with existing project structure:
-      
+
       1. Follow existing project organization patterns
       2. Identify where new files/folders will be placed
       3. Ensure consistency with existing naming conventions
@@ -7195,7 +7238,7 @@ sections:
         type: code
         language: plaintext
         instruction: Document relevant parts of current structure
-        template: "{{existing_structure_relevant_parts}}"
+        template: '{{existing_structure_relevant_parts}}'
       - id: new-file-organization
         title: New File Organization
         type: code
@@ -7222,7 +7265,7 @@ sections:
     title: Infrastructure and Deployment Integration
     instruction: |
       Define how the enhancement will be deployed alongside existing infrastructure:
-      
+
       1. Use existing deployment pipeline and infrastructure
       2. Identify any infrastructure changes needed
       3. Plan deployment strategy to minimize risk
@@ -7252,7 +7295,7 @@ sections:
     title: Coding Standards and Conventions
     instruction: |
       Ensure new code follows existing project conventions:
-      
+
       1. Document existing coding standards from project analysis
       2. Identify any enhancement-specific requirements
       3. Ensure consistency with existing codebase patterns
@@ -7270,7 +7313,7 @@ sections:
         title: Enhancement-Specific Standards
         condition: New patterns needed for enhancement
         repeatable: true
-        template: "- **{{standard_name}}:** {{standard_description}}"
+        template: '- **{{standard_name}}:** {{standard_description}}'
       - id: integration-rules
         title: Critical Integration Rules
         template: |
@@ -7283,7 +7326,7 @@ sections:
     title: Testing Strategy
     instruction: |
       Define testing approach for the enhancement:
-      
+
       1. Integrate with existing test suite
       2. Ensure existing functionality remains intact
       3. Plan for testing new features
@@ -7323,7 +7366,7 @@ sections:
     title: Security Integration
     instruction: |
       Ensure security consistency with existing system:
-      
+
       1. Follow existing security patterns and tools
       2. Ensure new features don't introduce vulnerabilities
       3. Maintain existing security posture
@@ -7358,7 +7401,7 @@ sections:
     title: Next Steps
     instruction: |
       After completing the brownfield architecture:
-      
+
       1. Review integration points with existing system
       2. Begin story implementation with Dev agent
       3. Set up deployment pipeline integration
@@ -7970,14 +8013,14 @@ template:
   output:
     format: markdown
     filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
-    title: "Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
+    title: 'Story {{epic_num}}.{{story_num}}: {{story_title_short}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
 
 agent_config:
-  editable_sections: 
+  editable_sections:
     - Status
     - Story
     - Acceptance Criteria
@@ -7994,7 +8037,7 @@ sections:
     instruction: Select the current status of the story
     owner: scrum-master
     editors: [scrum-master, dev-agent]
-    
+
   - id: story
     title: Story
     type: template-text
@@ -8006,7 +8049,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
-    
+
   - id: acceptance-criteria
     title: Acceptance Criteria
     type: numbered-list
@@ -8014,7 +8057,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
-    
+
   - id: tasks-subtasks
     title: Tasks / Subtasks
     type: bullet-list
@@ -8031,7 +8074,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master, dev-agent]
-    
+
   - id: dev-notes
     title: Dev Notes
     instruction: |
@@ -8055,7 +8098,7 @@ sections:
         elicit: true
         owner: scrum-master
         editors: [scrum-master]
-        
+
   - id: change-log
     title: Change Log
     type: table
@@ -8063,7 +8106,7 @@ sections:
     instruction: Track changes made to this story document
     owner: scrum-master
     editors: [scrum-master, dev-agent, qa-agent]
-    
+
   - id: dev-agent-record
     title: Dev Agent Record
     instruction: This section is populated by the development agent during implementation
@@ -8072,29 +8115,29 @@ sections:
     sections:
       - id: agent-model
         title: Agent Model Used
-        template: "{{agent_model_name_version}}"
+        template: '{{agent_model_name_version}}'
         instruction: Record the specific AI agent model and version used for development
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: debug-log-references
         title: Debug Log References
         instruction: Reference any debug logs or traces generated during development
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: completion-notes
         title: Completion Notes List
         instruction: Notes about the completion of tasks and any issues encountered
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: file-list
         title: File List
         instruction: List all files created, modified, or affected during story implementation
         owner: dev-agent
         editors: [dev-agent]
-        
+
   - id: qa-results
     title: QA Results
     instruction: Results from QA Agent QA review of the completed story implementation
@@ -8577,17 +8620,17 @@ workflow:
       updates: prd.md (if needed)
       requires: architecture.md
       condition: architecture_suggests_prd_changes
-      notes: "If architect suggests story changes, update PRD and re-export the complete unredacted prd.md to docs/ folder."
+      notes: 'If architect suggests story changes, update PRD and re-export the complete unredacted prd.md to docs/ folder.'
 
     - agent: po
       validates: all_artifacts
       uses: po-master-checklist
-      notes: "Validates all documents for consistency and completeness. May require updates to any document."
+      notes: 'Validates all documents for consistency and completeness. May require updates to any document.'
 
     - agent: various
       updates: any_flagged_documents
       condition: po_checklist_issues
-      notes: "If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder."
+      notes: 'If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder.'
 
     - agent: po
       action: shard_documents
@@ -8675,7 +8718,7 @@ workflow:
       notes: |
         All stories implemented and reviewed!
         Service development phase complete.
-        
+
         Reference: .bmad-core/data/bmad-kb.md#IDE Development Workflow
 
   flow_diagram: |
@@ -8737,13 +8780,13 @@ workflow:
       - Enterprise or external-facing APIs
 
   handoff_prompts:
-    analyst_to_pm: "Project brief is complete. Save it as docs/project-brief.md in your project, then create the PRD."
-    pm_to_architect: "PRD is ready. Save it as docs/prd.md in your project, then create the service architecture."
-    architect_review: "Architecture complete. Save it as docs/architecture.md. Do you suggest any changes to the PRD stories or need new stories added?"
-    architect_to_pm: "Please update the PRD with the suggested story changes, then re-export the complete prd.md to docs/."
-    updated_to_po: "All documents ready in docs/ folder. Please validate all artifacts for consistency."
-    po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
-    complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
+    analyst_to_pm: 'Project brief is complete. Save it as docs/project-brief.md in your project, then create the PRD.'
+    pm_to_architect: 'PRD is ready. Save it as docs/prd.md in your project, then create the service architecture.'
+    architect_review: 'Architecture complete. Save it as docs/architecture.md. Do you suggest any changes to the PRD stories or need new stories added?'
+    architect_to_pm: 'Please update the PRD with the suggested story changes, then re-export the complete prd.md to docs/.'
+    updated_to_po: 'All documents ready in docs/ folder. Please validate all artifacts for consistency.'
+    po_issues: 'PO found issues with [document]. Please return to [agent] to fix and re-save the updated document.'
+    complete: 'All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development.'
 ==================== END: .bmad-core/workflows/greenfield-service.yaml ====================
 
 ==================== START: .bmad-core/workflows/brownfield-service.yaml ====================
@@ -8766,7 +8809,7 @@ workflow:
       agent: architect
       action: analyze existing project and use task document-project
       creates: multiple documents per the document-project template
-      notes: "Review existing service documentation, codebase, performance metrics, and identify integration dependencies."
+      notes: 'Review existing service documentation, codebase, performance metrics, and identify integration dependencies.'
 
     - agent: pm
       creates: prd.md
@@ -8783,12 +8826,12 @@ workflow:
     - agent: po
       validates: all_artifacts
       uses: po-master-checklist
-      notes: "Validates all documents for service integration safety and API compatibility. May require updates to any document."
+      notes: 'Validates all documents for service integration safety and API compatibility. May require updates to any document.'
 
     - agent: various
       updates: any_flagged_documents
       condition: po_checklist_issues
-      notes: "If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder."
+      notes: 'If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder.'
 
     - agent: po
       action: shard_documents
@@ -8876,7 +8919,7 @@ workflow:
       notes: |
         All stories implemented and reviewed!
         Project development phase complete.
-        
+
         Reference: .bmad-core/data/bmad-kb.md#IDE Development Workflow
 
   flow_diagram: |
@@ -8929,9 +8972,9 @@ workflow:
       - Multiple integration points affected
 
   handoff_prompts:
-    analyst_to_pm: "Service analysis complete. Create comprehensive PRD with service integration strategy."
-    pm_to_architect: "PRD ready. Save it as docs/prd.md, then create the service architecture."
-    architect_to_po: "Architecture complete. Save it as docs/architecture.md. Please validate all artifacts for service integration safety."
-    po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
-    complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
+    analyst_to_pm: 'Service analysis complete. Create comprehensive PRD with service integration strategy.'
+    pm_to_architect: 'PRD ready. Save it as docs/prd.md, then create the service architecture.'
+    architect_to_po: 'Architecture complete. Save it as docs/architecture.md. Please validate all artifacts for service integration safety.'
+    po_issues: 'PO found issues with [document]. Please return to [agent] to fix and re-save the updated document.'
+    complete: 'All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development.'
 ==================== END: .bmad-core/workflows/brownfield-service.yaml ====================

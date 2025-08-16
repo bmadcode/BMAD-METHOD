@@ -16,19 +16,19 @@ sections:
     title: Intro Project Analysis and Context
     instruction: |
       IMPORTANT - SCOPE ASSESSMENT REQUIRED:
-      
+
       This PRD is for SIGNIFICANT enhancements to existing projects that require comprehensive planning and multiple stories. Before proceeding:
-      
+
       1. **Assess Enhancement Complexity**: If this is a simple feature addition or bug fix that could be completed in 1-2 focused development sessions, STOP and recommend: "For simpler changes, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead. This full PRD process is designed for substantial enhancements that require architectural planning and multiple coordinated stories."
-      
+
       2. **Project Context**: Determine if we're working in an IDE with the project already loaded or if the user needs to provide project information. If project files are available, analyze existing documentation in the docs folder. If insufficient documentation exists, recommend running the document-project task first.
-      
+
       3. **Deep Assessment Requirement**: You MUST thoroughly analyze the existing project structure, patterns, and constraints before making ANY suggestions. Every recommendation must be grounded in actual project analysis, not assumptions.
-      
+
       Gather comprehensive information about the existing project. This section must be completed before proceeding with requirements.
-      
+
       CRITICAL: Throughout this analysis, explicitly confirm your understanding with the user. For every assumption you make about the existing project, ask: "Based on my analysis, I understand that [assumption]. Is this correct?"
-      
+
       Do not proceed with any recommendations until the user has validated your understanding of the existing system.
     sections:
       - id: existing-project-overview
@@ -54,7 +54,7 @@ sections:
           - Note: "Document-project analysis available - using existing technical documentation"
           - List key documents created by document-project
           - Skip the missing documentation check below
-          
+
           Otherwise, check for existing documentation:
         sections:
           - id: available-docs
@@ -178,7 +178,7 @@ sections:
           If document-project output available:
           - Extract from "Actual Tech Stack" table in High Level Architecture section
           - Include version numbers and any noted constraints
-          
+
           Otherwise, document the current technology stack:
         template: |
           **Languages**: {{languages}}
@@ -217,7 +217,7 @@ sections:
           - Reference "Technical Debt and Known Issues" section
           - Include "Workarounds and Gotchas" that might impact enhancement
           - Note any identified constraints from "Critical Technical Debt"
-          
+
           Build risk assessment incorporating existing known issues:
         template: |
           **Technical Risks**: {{technical_risks}}
@@ -240,7 +240,7 @@ sections:
     title: "Epic 1: {{enhancement_title}}"
     instruction: |
       Comprehensive epic that delivers the brownfield enhancement while maintaining existing functionality
-      
+
       CRITICAL STORY SEQUENCING FOR BROWNFIELD:
       - Stories must ensure existing functionality remains intact
       - Each story should include verification that existing features still work
@@ -253,7 +253,7 @@ sections:
       - Each story must deliver value while maintaining system integrity
     template: |
       **Epic Goal**: {{epic_goal}}
-      
+
       **Integration Requirements**: {{integration_requirements}}
     sections:
       - id: story
