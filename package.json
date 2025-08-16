@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "bmad-method",
-  "version": "4.36.2",
+  "version": "4.37.0-beta.6",
   "description": "Breakthrough Method of Agile AI-driven Development",
   "keywords": [
     "agile",
@@ -75,7 +75,8 @@
     "ignore": "^7.0.5",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
-    "ora": "^5.4.1"
+    "ora": "^5.4.1",
+    "semver": "^7.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
