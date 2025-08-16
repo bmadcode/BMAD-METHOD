@@ -7,7 +7,7 @@ const yaml = require('js-yaml');
 const chalk = require('chalk').default || require('chalk');
 const inquirer = require('inquirer').default || require('inquirer');
 const semver = require('semver');
-const https = require('https');
+const https = require('node:https');
 
 // Handle both execution contexts (from root via npx or from installer directory)
 let version;
@@ -104,28 +104,30 @@ program
   .description('Check for BMad Update')
   .action(async () => {
     console.log('Checking for updates...');
-    
+
     // Make HTTP request to npm registry for latest version info
-    const req = https.get(`https://registry.npmjs.org/${packageName}/latest`, res => {
+    const req = https.get(`https://registry.npmjs.org/${packageName}/latest`, (res) => {
       // Check for HTTP errors (non-200 status codes)
       if (res.statusCode !== 200) {
         console.error(chalk.red(`Update check failed: Received status code ${res.statusCode}`));
         return;
       }
-      
+
       // Accumulate response data chunks
       let data = '';
-      res.on('data', chunk => data += chunk);
-      
+      res.on('data', (chunk) => (data += chunk));
+
       // Process complete response
       res.on('end', () => {
         try {
           // Parse npm registry response and extract version
           const latest = JSON.parse(data).version;
-          
+
           // Compare versions using semver
           if (semver.gt(latest, version)) {
-            console.log(chalk.bold.blue(`⚠️  ${packageName} update available: ${version} → ${latest}`));
+            console.log(
+              chalk.bold.blue(`⚠️  ${packageName} update available: ${version} → ${latest}`),
+            );
             console.log(chalk.bold.blue('\nInstall latest by running:'));
             console.log(chalk.bold.magenta(`  npm install ${packageName}@latest`));
             console.log(chalk.dim('  or'));
@@ -139,14 +141,14 @@ program
         }
       });
     });
-    
+
     // Handle network/connection errors
-    req.on('error', error => {
+    req.on('error', (error) => {
       console.error(chalk.red('Update check failed:'), error.message);
     });
-    
+
     // Set 30 second timeout to prevent hanging
-    req.setTimeout(30000, () => {
+    req.setTimeout(30_000, () => {
       req.destroy();
       console.error(chalk.red('Update check timed out'));
     });

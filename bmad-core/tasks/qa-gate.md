@@ -27,11 +27,11 @@ Slug rules:
 
 ```yaml
 schema: 1
-story: "{epic}.{story}"
+story: '{epic}.{story}'
 gate: PASS|CONCERNS|FAIL|WAIVED
-status_reason: "1-2 sentence explanation of gate decision"
-reviewer: "Quinn"
-updated: "{ISO-8601 timestamp}"
+status_reason: '1-2 sentence explanation of gate decision'
+reviewer: 'Quinn'
+updated: '{ISO-8601 timestamp}'
 top_issues: [] # Empty array if no issues
 waiver: { active: false } # Only set active: true if WAIVED
 ```
@@ -40,20 +40,20 @@ waiver: { active: false } # Only set active: true if WAIVED
 
 ```yaml
 schema: 1
-story: "1.3"
+story: '1.3'
 gate: CONCERNS
-status_reason: "Missing rate limiting on auth endpoints poses security risk."
-reviewer: "Quinn"
-updated: "2025-01-12T10:15:00Z"
+status_reason: 'Missing rate limiting on auth endpoints poses security risk.'
+reviewer: 'Quinn'
+updated: '2025-01-12T10:15:00Z'
 top_issues:
-  - id: "SEC-001"
+  - id: 'SEC-001'
     severity: high # ONLY: low|medium|high
-    finding: "No rate limiting on login endpoint"
-    suggested_action: "Add rate limiting middleware before production"
-  - id: "TEST-001"
+    finding: 'No rate limiting on login endpoint'
+    suggested_action: 'Add rate limiting middleware before production'
+  - id: 'TEST-001'
     severity: medium
-    finding: "No integration tests for auth flow"
-    suggested_action: "Add integration test coverage"
+    finding: 'No integration tests for auth flow'
+    suggested_action: 'Add integration test coverage'
 waiver: { active: false }
 ```
 
@@ -61,20 +61,20 @@ waiver: { active: false }
 
 ```yaml
 schema: 1
-story: "1.3"
+story: '1.3'
 gate: WAIVED
-status_reason: "Known issues accepted for MVP release."
-reviewer: "Quinn"
-updated: "2025-01-12T10:15:00Z"
+status_reason: 'Known issues accepted for MVP release.'
+reviewer: 'Quinn'
+updated: '2025-01-12T10:15:00Z'
 top_issues:
-  - id: "PERF-001"
+  - id: 'PERF-001'
     severity: low
-    finding: "Dashboard loads slowly with 1000+ items"
-    suggested_action: "Implement pagination in next sprint"
+    finding: 'Dashboard loads slowly with 1000+ items'
+    suggested_action: 'Implement pagination in next sprint'
 waiver:
   active: true
-  reason: "MVP release - performance optimization deferred"
-  approved_by: "Product Owner"
+  reason: 'MVP release - performance optimization deferred'
+  approved_by: 'Product Owner'
 ```
 
 ## Gate Decision Criteria

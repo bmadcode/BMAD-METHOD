@@ -3,7 +3,7 @@
  * Reduces duplication and provides shared methods
  */
 
-const path = require('path');
+const path = require('node:path');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
 const chalk = require('chalk').default || require('chalk');

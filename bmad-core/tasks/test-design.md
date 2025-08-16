@@ -6,10 +6,10 @@ Create comprehensive test scenarios with appropriate test level recommendations 
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "{devStoryLocation}/{epic}.{story}.*.md" # Path from core-config.yaml
-  - story_title: "{title}" # If missing, derive from story file H1
-  - story_slug: "{slug}" # If missing, derive from title (lowercase, hyphenated)
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from core-config.yaml
+  - story_title: '{title}' # If missing, derive from story file H1
+  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
 
 ## Purpose
@@ -62,13 +62,13 @@ For each identified test need, create:
 
 ```yaml
 test_scenario:
-  id: "{epic}.{story}-{LEVEL}-{SEQ}"
-  requirement: "AC reference"
+  id: '{epic}.{story}-{LEVEL}-{SEQ}'
+  requirement: 'AC reference'
   priority: P0|P1|P2|P3
   level: unit|integration|e2e
-  description: "What is being tested"
-  justification: "Why this level was chosen"
-  mitigates_risks: ["RISK-001"] # If risk profile exists
+  description: 'What is being tested'
+  justification: 'Why this level was chosen'
+  mitigates_risks: ['RISK-001'] # If risk profile exists
 ```
 
 ### 5. Validate Coverage

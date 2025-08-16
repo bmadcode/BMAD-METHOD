@@ -25,10 +25,10 @@ Comprehensive guide for determining appropriate test levels (unit, integration, 
 
 ```yaml
 unit_test:
-  component: "PriceCalculator"
-  scenario: "Calculate discount with multiple rules"
-  justification: "Complex business logic with multiple branches"
-  mock_requirements: "None - pure function"
+  component: 'PriceCalculator'
+  scenario: 'Calculate discount with multiple rules'
+  justification: 'Complex business logic with multiple branches'
+  mock_requirements: 'None - pure function'
 ```
 
 ### Integration Tests
@@ -52,10 +52,10 @@ unit_test:
 
 ```yaml
 integration_test:
-  components: ["UserService", "AuthRepository"]
-  scenario: "Create user with role assignment"
-  justification: "Critical data flow between service and persistence"
-  test_environment: "In-memory database"
+  components: ['UserService', 'AuthRepository']
+  scenario: 'Create user with role assignment'
+  justification: 'Critical data flow between service and persistence'
+  test_environment: 'In-memory database'
 ```
 
 ### End-to-End Tests
@@ -79,10 +79,10 @@ integration_test:
 
 ```yaml
 e2e_test:
-  journey: "Complete checkout process"
-  scenario: "User purchases with saved payment method"
-  justification: "Revenue-critical path requiring full validation"
-  environment: "Staging with test payment gateway"
+  journey: 'Complete checkout process'
+  scenario: 'User purchases with saved payment method'
+  justification: 'Revenue-critical path requiring full validation'
+  environment: 'Staging with test payment gateway'
 ```
 
 ## Test Level Selection Rules

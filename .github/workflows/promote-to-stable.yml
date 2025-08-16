@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       version_bump:
-        description: 'Version bump type'
+        description: "Version bump type"
         required: true
-        default: 'minor'
+        default: "minor"
         type: choice
         options:
           - patch
@@ -19,7 +19,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,8 +30,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Configure Git
         run: |
@@ -57,17 +57,17 @@ jobs:
           # Get current version from package.json
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          
+
           # Remove beta suffix if present
           BASE_VERSION=$(echo $CURRENT_VERSION | sed 's/-beta\.[0-9]\+//')
           echo "base_version=$BASE_VERSION" >> $GITHUB_OUTPUT
-          
+
           # Calculate new version based on bump type
           IFS='.' read -ra VERSION_PARTS <<< "$BASE_VERSION"
           MAJOR=${VERSION_PARTS[0]}
           MINOR=${VERSION_PARTS[1]}
           PATCH=${VERSION_PARTS[2]}
-          
+
           case "${{ github.event.inputs.version_bump }}" in
             "major")
               NEW_VERSION="$((MAJOR + 1)).0.0"
@@ -82,7 +82,7 @@ jobs:
               NEW_VERSION="$BASE_VERSION"
               ;;
           esac
-          
+
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "Promoting from $CURRENT_VERSION to $NEW_VERSION"
 
@@ -90,7 +90,7 @@ jobs:
         run: |
           # Update main package.json
           npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
-          
+
           # Update installer package.json
           sed -i 's/"version": ".*"/"version": "${{ steps.version.outputs.new_version }}"/' tools/installer/package.json
 
