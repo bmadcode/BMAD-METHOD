@@ -1,0 +1,83 @@
+template:
+  name: SEO Requirements Document
+  version: 1.0
+  description: SEO requirements to be integrated into PRD and Architecture documents
+  sections:
+    - name: SEO Objectives
+      required: true
+      prompts:
+        - Primary SEO goals for this project
+        - Target audience search behavior
+        - Key performance indicators (KPIs)
+        - Success metrics and benchmarks
+    
+    - name: Technical SEO Requirements
+      required: true
+      subsections:
+        - name: Site Architecture
+          prompts:
+            - URL structure requirements
+            - Navigation hierarchy for SEO
+            - Internal linking strategy
+            - Sitemap generation needs
+        - name: Performance Requirements
+          prompts:
+            - Page speed targets (Mobile/Desktop)
+            - Core Web Vitals requirements
+            - Image optimization standards
+            - Code optimization needs
+        - name: Crawlability & Indexing
+          prompts:
+            - Robots.txt configuration
+            - Canonical URL strategy
+            - Pagination handling
+            - JavaScript rendering requirements
+    
+    - name: Content Requirements
+      required: true
+      subsections:
+        - name: Content Structure
+          prompts:
+            - Page template SEO requirements
+            - Meta data requirements
+            - Heading hierarchy standards
+            - Content depth guidelines
+        - name: Keyword Strategy
+          prompts:
+            - Primary keyword targets
+            - Secondary keywords
+            - Long-tail opportunities
+            - Semantic keyword clusters
+    
+    - name: Development Considerations
+      required: true
+      prompts:
+        - Schema markup implementation
+        - Open Graph and Twitter Cards
+        - Accessibility requirements (overlap with SEO)
+        - Mobile-first development approach
+        - Progressive enhancement strategy
+    
+    - name: User Story SEO Criteria
+      required: true
+      prompts:
+        - SEO acceptance criteria for stories
+        - Testing requirements for SEO features
+        - Performance benchmarks for stories
+        - SEO validation checkpoints
+    
+    - name: Monitoring & Analytics
+      required: true
+      prompts:
+        - Analytics implementation requirements
+        - Search Console setup needs
+        - Tracking and reporting setup
+        - Dashboard and alerting requirements
+    
+    - name: Integration Points
+      required: true
+      prompts:
+        - CMS/backend SEO features needed
+        - API requirements for SEO data
+        - Third-party tool integrations
+        - CDN and caching considerations
