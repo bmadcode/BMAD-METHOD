@@ -19,1009 +19,348 @@ sections:
     sections:
       - id: intro-content
         content: |
-          This document outlines the complete technical architecture for {{project_name}}, a 2D game built with Godot using GDScript and/or C#. It serves as the technical foundation for AI-driven game development, ensuring consistency and scalability across all game systems.
+          This document outlines the complete technical architecture for {{project_name}}, a game built with Godot Engine and GDScript. It serves as the technical foundation for AI-driven game development, ensuring consistency and scalability across all game systems.
 
-          This architecture is designed to support the gameplay mechanics defined in the Game Design Document while maintaining stable performance and cross-platform compatibility.
+          This architecture is designed to support the gameplay mechanics defined in the Game Design Document while maintaining stable performance and cross-platform compatibility, whether the game is developed in 2D or 3D.
       - id: starter-template
         title: Starter Template or Existing Project
         instruction: |
           Before proceeding further with game architecture design, check if the project is based on a Godot template or existing codebase:
 
           1. Review the GDD and brainstorming brief for any mentions of:
-          - Godot project templates (2D, Mobile, etc.)
+          - Godot project templates or demo projects
           - Existing Godot projects being used as a foundation
-          - Asset Store packages or game development frameworks
+          - Asset Library packages or game development frameworks
           - Previous game projects to be cloned or adapted
 
           2. If a starter template or existing project is mentioned:
           - Ask the user to provide access via one of these methods:
-            - Link to the Godot template documentation
+            - Link to the Godot demo project
             - Upload/attach the project files (for small projects)
             - Share a link to the project repository (GitHub, GitLab, etc.)
           - Analyze the starter/existing project to understand:
             - Pre-configured Godot version and renderer settings
-            - Project structure and organization patterns
-            - Built-in packages and dependencies
+            - Project structure and scene organization patterns
+            - Built-in plugins and dependencies
             - Existing architectural patterns and conventions
             - Any limitations or constraints imposed by the starter
           - Use this analysis to inform and align your architecture decisions
 
           3. If no starter template is mentioned but this is a greenfield project:
-          - Suggest appropriate Godot templates based on the target platform
-          - Explain the benefits (faster setup, best practices, package integration)
-          - Let the user decide whether to use one
+          - Suggest appropriate Godot project structure based on the target platform
+          - Recommend relevant demo projects or learning resources
+          - Consider Godot Asset Library resources for common game mechanics
 
-          4. If the user confirms no starter template will be used:
-          - Proceed with architecture design from scratch
-          - Note that manual setup will be required for all Godot configuration
-
-          Document the decision here before proceeding with the architecture design. If none, just say N/A
-        elicit: true
-      - id: changelog
-        title: Change Log
-        type: table
-        columns: [Date, Version, Description, Author]
-        instruction: Track document versions and changes
-
-  - id: high-level-architecture
-    title: High Level Architecture
-    instruction: |
-      This section contains multiple subsections that establish the foundation of the game architecture. Present all subsections together at once.
-    elicit: true
+  - id: target-platforms
+    title: Target Platforms and Performance Requirements
+    instruction: Analyze the GDD's platform requirements and establish technical baselines
     sections:
-      - id: technical-summary
-        title: Technical Summary
+      - id: platform-overview
+        title: Platform Overview
         instruction: |
-          Provide a brief paragraph (3-5 sentences) overview of:
-          - The game's overall architecture style (node-based Godot architecture)
-          - Key game systems and their relationships
-          - Primary technology choices (Godot, GDScript/C#, target platforms)
-          - Core architectural patterns being used (Node components, Resources, Godot signals)
-          - Reference back to the GDD goals and how this architecture supports them
-      - id: high-level-overview
-        title: High Level Overview
+          Based on the GDD, identify all target platforms for this game. For each platform, document:
+          - Primary target devices (e.g., PC, Mobile, Web)
+          - Minimum and recommended system specifications
+          - Input methods (keyboard/mouse, touch, gamepad)
+          - Distribution platforms (Steam, itch.io, mobile app stores, web)
+          - Platform-specific requirements or constraints
+
+      - id: performance-targets
+        title: Performance Targets
         instruction: |
-          Based on the GDD's Technical Assumptions section, describe:
+          Establish performance baselines for each target platform:
+          - Frame rate targets (30fps minimum, 60fps target, etc.)
+          - Memory usage limits per platform
+          - Loading time requirements
+          - Battery life considerations (mobile)
+          - Network requirements (if multiplayer/online features)
 
-          1. The main architectural style (node-based Godot architecture with Node inheritance)
-          2. Repository structure decision from GDD (single Godot project vs multiple projects)
-          3. Game system architecture (modular systems, manager singletons, data-driven design)
-          4. Primary player interaction flow and core game loop
-          5. Key architectural decisions and their rationale (render pipeline, input system, physics)
-      - id: project-diagram
-        title: High Level Project Diagram
-        type: mermaid
-        mermaid_type: graph
-        instruction: |
-          Create a Mermaid diagram that visualizes the high-level game architecture. Consider:
-          - Core game systems (Input, Physics, Rendering, Audio, UI)
-          - Game managers and their responsibilities
-          - Data flow between systems
-          - External integrations (platform services, analytics)
-          - Player interaction points
-
-      - id: architectural-patterns
-        title: Architectural and Design Patterns
-        instruction: |
-          List the key high-level patterns that will guide the game architecture. For each pattern:
-
-          1. Present 2-3 viable options if multiple exist
-          2. Provide your recommendation with clear rationale
-          3. Get user confirmation before finalizing
-          4. These patterns should align with the GDD's technical assumptions and project goals
-
-          Common Godot patterns to consider:
-          - Node patterns (Node inheritance, composition, Resource data)
-          - Game management patterns (Singleton managers, Event systems, State machines)
-          - Data patterns (Resource configuration, Save/Load systems)
-          - Godot-specific patterns (Object pooling, await/Timer, Godot signals)
-        template: "- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}"
-        examples:
-          - "**Node-Based Architecture:** Using Node inheritance for game logic - _Rationale:_ Aligns with Godot's design philosophy and enables reusable, testable game systems"
-          - "**Resource Data:** Using Resources for game configuration - _Rationale:_ Enables data-driven design and easy balancing without code changes"
-          - "**Signal-Driven Communication:** Using Godot signals for system decoupling - _Rationale:_ Supports modular architecture and easier testing"
-
-  - id: tech-stack
-    title: Tech Stack
-    instruction: |
-      This is the DEFINITIVE technology selection section for the Godot game. Work with the user to make specific choices:
-
-      1. Review GDD technical assumptions and any preferences from {root}/data/technical-preferences.yaml or an attached technical-preferences
-      2. For each category, present 2-3 viable options with pros/cons
-      3. Make a clear recommendation based on project needs
-      4. Get explicit user approval for each selection
-      5. Document exact versions (avoid "latest" - pin specific versions)
-      6. This table is the single source of truth - all other docs must reference these choices
-
-      Key decisions to finalize - before displaying the table, ensure you are aware of or ask the user about:
-
-      - Godot version and renderer settings
-      - Target platforms and their specific requirements
-      - Godot Asset Library addons and versions
-      - Third-party assets or frameworks
-      - Platform SDKs and services
-      - Build and deployment tools
-
-      Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away elicit feedback.
-    elicit: true
+  - id: godot-setup
+    title: Godot Project Setup
+    instruction: Define the foundational Godot project configuration
     sections:
-      - id: platform-infrastructure
-        title: Platform Infrastructure
-        template: |
-          - **Target Platforms:** {{target_platforms}}
-          - **Primary Platform:** {{primary_platform}}
-          - **Platform Services:** {{platform_services_list}}
-          - **Distribution:** {{distribution_channels}}
-      - id: technology-stack-table
-        title: Technology Stack Table
-        type: table
-        columns: [Category, Technology, Version, Purpose, Rationale]
-        instruction: Populate the technology stack table with all relevant Godot technologies
-        examples:
-          - "| **Game Engine** | Godot | 4.2 LTS | Core game development platform | Latest LTS version, stable 2D tooling, comprehensive addon ecosystem |"
-          - "| **Language** | GDScript/C# | 2.0/.NET 6+ | Primary scripting languages | Godot's native language + C# support, strong typing available |"
-          - "| **Renderer** | Godot Renderer | Built-in | 2D/3D rendering | Optimized for both mobile and desktop, excellent 2D features |"
-          - "| **Input System** | Godot Input | Built-in | Cross-platform input handling | Built-in input system, supports multiple devices, rebindable controls |"
-          - "| **Physics** | Godot 2D Physics | Built-in | 2D collision and physics | Integrated physics engine, optimized for 2D games |"
-          - "| **Audio** | Godot Audio | Built-in | Audio playback and mixing | Built-in audio system with AudioBus mixer support |"
-          - "| **Testing** | GUT/GoDotTest | Addon | Unit and integration testing | Community testing frameworks for GDScript and C# |"
-
-  - id: data-models
-    title: Game Data Models
-    instruction: |
-      Define the core game data models/entities using Godot's Resource system:
-
-      1. Review GDD requirements and identify key game entities
-      2. For each model, explain its purpose and relationships
-      3. Include key attributes and data types appropriate for Godot/GDScript/C#
-      4. Show relationships between models using Resource references
-      5. Discuss design decisions with user
-
-      Create a clear conceptual model before moving to specific implementations.
-    elicit: true
-    repeatable: true
-    sections:
-      - id: model
-        title: "{{model_name}}"
-        template: |
-          **Purpose:** {{model_purpose}}
-
-          **Key Attributes:**
-          - {{attribute_1}}: {{type_1}} - {{description_1}}
-          - {{attribute_2}}: {{type_2}} - {{description_2}}
-
-          **Relationships:**
-          - {{relationship_1}}
-          - {{relationship_2}}
-
-          **Resource Implementation:**
-          - Create as custom Resource class
-          - Store in `Assets/_Project/Data/{{ModelName}}/`
-
-  - id: components
-    title: Game Systems & Components
-    instruction: |
-      Based on the architectural patterns, tech stack, and data models from above:
-
-      1. Identify major game systems and their responsibilities
-      2. Consider Godot's node-based architecture with Node inheritance
-      3. Define clear interfaces between systems using Godot signals
-      4. For each system, specify:
-      - Primary responsibility and core functionality
-      - Key Node components and Resources
-      - Dependencies on other systems
-      - Godot-specific implementation details (lifecycle methods, await/Timer, etc.)
-
-      5. Create system diagrams where helpful using Godot terminology
-    elicit: true
-    sections:
-      - id: system-list
-        repeatable: true
-        title: "{{system_name}} System"
-        template: |
-          **Responsibility:** {{system_description}}
-
-          **Key Components:**
-          - {{component_1}} (Node)
-          - {{component_2}} (Resource)
-          - {{component_3}} (Autoload/Controller)
-
-          **Godot Implementation Details:**
-          - Lifecycle: {{lifecycle_methods}}
-          - Signals: {{godot_signals_used}}
-          - Dependencies: {{system_dependencies}}
-
-          **Files to Create:**
-          - `res://scripts/{{SystemName}}/{{MainScript}}.gd` or `.cs`
-          - `res://scenes/{{SystemName}}/{{MainScene}}.tscn`
-      - id: component-diagrams
-        title: System Interaction Diagrams
-        type: mermaid
+      - id: godot-version
+        title: Godot Version and Configuration
         instruction: |
-          Create Mermaid diagrams to visualize game system relationships. Options:
-          - System architecture diagram for high-level view
-          - Component interaction diagram for detailed relationships
-          - Sequence diagrams for complex game loops (_process, _physics_process flows)
-          Choose the most appropriate for clarity and Godot-specific understanding
+          Document the Godot setup:
+          - Godot version (recommend 4.4 for stability)
+          - Renderer selection (Forward+ for desktop, Mobile for mobile/web)
+          - Project settings configuration
+          - Input map setup for target platforms
+
+      - id: project-structure
+        title: Project Structure
+        instruction: |
+          Design a scalable project folder structure:
+          ```
+          project/
+          ├── scenes/          # Game scenes (.tscn files)
+          │   ├── main/        # Main menu, settings, etc.
+          │   ├── levels/      # Game levels and gameplay scenes
+          │   ├── ui/          # UI components and HUD
+          │   └── components/  # Reusable scene components
+          ├── scripts/         # GDScript files (.gd)
+          │   ├── managers/    # Singleton managers (GameManager, etc.)
+          │   ├── components/  # Reusable script components
+          │   ├── data/        # Custom Resource classes
+          │   └── utils/       # Utility functions and helpers
+          ├── assets/          # Game assets
+          │   ├── 2d/          # For 2D: sprites, textures, animations
+          │   ├── 3d/          # For 3D: models, materials, shaders
+          │   ├── audio/       # Music and sound effects
+          │   └── fonts/       # Font files
+          ├── data/            # Game data files
+          │   └── resources/   # .tres resource files
+          └── tests/           # Unit and integration tests
+              ├── unit/        # Unit tests
+              └── integration/ # Integration tests
+          ```
+
+  - id: core-architecture
+    title: Core Game Architecture
+    instruction: Design the fundamental system architecture following Godot best practices
+    sections:
+      - id: scene-architecture
+        title: Scene Architecture
+        instruction: |
+          Design the scene hierarchy and organization:
+          - Main scene structure and autoloads
+          - Scene transition management
+          - UI layer organization (CanvasLayer usage)
+          - Scene instancing patterns for reusable components
+
+      - id: node-patterns
+        title: Node and Component Patterns
+        instruction: |
+          Establish patterns for game object architecture:
+          - Component composition using child nodes
+          - Signal-based communication patterns
+          - Node group usage for categorization
+          - Scene inheritance and variation patterns
+
+      - id: singleton-systems
+        title: Singleton Systems (AutoLoad)
+        instruction: |
+          Design singleton managers for global systems:
+          - GameManager: Game state, scoring, level management
+          - AudioManager: Music and sound effect management
+          - SaveManager: Save/load game data
+          - SceneManager: Scene transition handling
+          - InputManager: Input handling and action management
 
   - id: gameplay-systems
     title: Gameplay Systems Architecture
-    instruction: |
-      Define the core gameplay systems that drive the player experience. Focus on game-specific logic and mechanics.
-    elicit: true
+    instruction: Design specific game mechanics based on the GDD
     sections:
-      - id: gameplay-overview
-        title: Gameplay Systems Overview
-        template: |
-          **Core Game Loop:** {{core_game_loop_description}}
+      - id: player-system
+        title: Player System
+        instruction: |
+          Design the player character architecture:
+          - Player scene structure (CharacterBody2D/3D, RigidBody2D/3D based on game dimension)
+          - Movement and physics handling (2D or 3D physics)
+          - Animation system integration (AnimationPlayer, AnimationTree)
+          - Input processing and state management
+          - Camera system (Camera2D for 2D, Camera3D for 3D with appropriate controls)
 
-          **Player Actions:** {{primary_player_actions}}
+      - id: game-mechanics
+        title: Core Game Mechanics
+        instruction: |
+          For each major game mechanic identified in the GDD:
+          - System design and node structure
+          - Data flow and state management
+          - Integration with other systems
+          - Performance considerations
 
-          **Game State Flow:** {{game_state_transitions}}
-      - id: gameplay-components
-        title: Gameplay Component Architecture
-        template: |
-          **Player Controller Components:**
-          - {{player_controller_components}}
+      - id: ui-system
+        title: User Interface System
+        instruction: |
+          Design the UI architecture:
+          - UI scene organization and layering
+          - Theme and styling approach
+          - Menu system and navigation
+          - HUD and in-game UI elements
 
-          **Game Logic Components:**
-          - {{game_logic_components}}
-
-          **Interaction Systems:**
-          - {{interaction_system_components}}
-
-  - id: component-architecture
-    title: Component Architecture Details
-    instruction: |
-      Define detailed Godot node architecture patterns and conventions for the game.
-    elicit: true
+  - id: data-management
+    title: Data Management and Resources
+    instruction: Design data architecture for game content and state
     sections:
-      - id: monobehaviour-patterns
-        title: Node Patterns
-        template: |
-          **Component Composition:** {{component_composition_approach}}
+      - id: resource-system
+        title: Resource System
+        instruction: |
+          Design custom Resource classes for game data:
+          - Game configuration data (difficulty, settings)
+          - Level data and progression
+          - Character/enemy statistics
+          - Item and inventory data
 
-          **Lifecycle Management:** {{lifecycle_management_patterns}}
+      - id: save-system
+        title: Save System
+        instruction: |
+          Design the save/load architecture:
+          - Save data structure and format
+          - Save file location and naming
+          - Versioning for save compatibility
+          - Backup and recovery strategies
 
-          **Component Communication:** {{component_communication_methods}}
-      - id: scriptableobject-usage
-        title: Resource Architecture
-        template: |
-          **Data Architecture:** {{scriptableobject_data_patterns}}
-
-          **Configuration Management:** {{config_scriptableobject_usage}}
-
-          **Runtime Data:** {{runtime_scriptableobject_patterns}}
-
-  - id: physics-config
-    title: Physics Configuration
-    instruction: |
-      Define Unity 2D physics setup and configuration for the game.
-    elicit: true
+  - id: performance-optimization
+    title: Performance Optimization Strategy
+    instruction: Plan for performance from the architecture level
     sections:
-      - id: physics-settings
-        title: Physics Settings
-        template: |
-          **Physics 2D Settings:** {{physics_2d_configuration}}
-
-          **Collision Layers:** {{collision_layer_matrix}}
-
-          **Physics Materials:** {{physics_materials_setup}}
-      - id: rigidbody-patterns
-        title: Rigidbody Patterns
-        template: |
-          **Player Physics:** {{player_rigidbody2d_setup}}
-
-          **Object Physics:** {{object_physics_patterns}}
-
-          **Performance Optimization:** {{physics_optimization_strategies}}
-
-  - id: input-system
-    title: Input System Architecture
-    instruction: |
-      Define input handling using Godot's built-in Input system.
-    elicit: true
-    sections:
-      - id: input-actions
-        title: Input Actions Configuration
-        template: |
-          **Input Map Configuration:** {{input_map_structure}}
-
-          **Action Definitions:** {{input_action_definitions}}
-
-          **Device Handling:** {{input_device_handling}}
-      - id: input-handling
-        title: Input Handling Patterns
-        template: |
-          **Player Input:** {{player_input_handling}}
-
-          **UI Input:** {{ui_input_handling_patterns}}
-
-          **Input Validation:** {{input_validation_strategies}}
-
-  - id: state-machines
-    title: State Machine Architecture
-    instruction: |
-      Define state machine patterns for game states, player states, and AI behavior.
-    elicit: true
-    sections:
-      - id: game-state-machine
-        title: Game State Machine
-        template: |
-          **Game States:** {{game_state_definitions}}
-
-          **State Transitions:** {{game_state_transition_rules}}
-
-          **State Management:** {{game_state_manager_implementation}}
-      - id: entity-state-machines
-        title: Entity State Machines
-        template: |
-          **Player States:** {{player_state_machine_design}}
-
-          **AI Behavior States:** {{ai_state_machine_patterns}}
-
-          **Object States:** {{object_state_management}}
-
-  - id: ui-architecture
-    title: UI Architecture
-    instruction: |
-      Define Godot UI system architecture using Control nodes.
-    elicit: true
-    sections:
-      - id: ui-system-choice
-        title: UI System Selection
-        template: |
-          **UI Framework:** {{ui_framework_choice}} (Control nodes)
-
-          **UI Scaling:** {{ui_scaling_strategy}}
-
-          **Canvas Setup:** {{canvas_configuration}}
-      - id: ui-navigation
-        title: UI Navigation System
-        template: |
-          **Screen Management:** {{screen_management_system}}
-
-          **Navigation Flow:** {{ui_navigation_patterns}}
-
-          **Back Button Handling:** {{back_button_implementation}}
-
-  - id: ui-components
-    title: UI Component System
-    instruction: |
-      Define reusable UI components and their implementation patterns.
-    elicit: true
-    sections:
-      - id: ui-component-library
-        title: UI Component Library
-        template: |
-          **Base Components:** {{base_ui_components}}
-
-          **Custom Components:** {{custom_ui_components}}
-
-          **Component Scenes:** {{ui_scene_organization}}
-      - id: ui-data-binding
-        title: UI Data Binding
-        template: |
-          **Data Binding Patterns:** {{ui_data_binding_approach}}
-
-          **UI Events:** {{ui_event_system}}
-
-          **View Model Patterns:** {{ui_viewmodel_implementation}}
-
-  - id: ui-state-management
-    title: UI State Management
-    instruction: |
-      Define how UI state is managed across the game.
-    elicit: true
-    sections:
-      - id: ui-state-patterns
-        title: UI State Patterns
-        template: |
-          **State Persistence:** {{ui_state_persistence}}
-
-          **Screen State:** {{screen_state_management}}
-
-          **UI Configuration:** {{ui_configuration_management}}
-
-  - id: scene-management
-    title: Scene Management Architecture
-    instruction: |
-      Define scene loading, unloading, and transition strategies.
-    elicit: true
-    sections:
-      - id: scene-structure
-        title: Scene Structure
-        template: |
-          **Scene Organization:** {{scene_organization_strategy}}
-
-          **Scene Hierarchy:** {{scene_hierarchy_patterns}}
-
-          **Persistent Scenes:** {{persistent_scene_usage}}
-      - id: scene-loading
-        title: Scene Loading System
-        template: |
-          **Loading Strategies:** {{scene_loading_patterns}}
-
-          **Async Loading:** {{async_scene_loading_implementation}}
-
-          **Loading Screens:** {{loading_screen_management}}
-
-  - id: data-persistence
-    title: Data Persistence Architecture
-    instruction: |
-      Define save system and data persistence strategies.
-    elicit: true
-    sections:
-      - id: save-data-structure
-        title: Save Data Structure
-        template: |
-          **Save Data Models:** {{save_data_model_design}}
-
-          **Serialization Format:** {{serialization_format_choice}}
-
-          **Data Validation:** {{save_data_validation}}
-      - id: persistence-strategy
-        title: Persistence Strategy
-        template: |
-          **Save Triggers:** {{save_trigger_events}}
-
-          **Auto-Save:** {{auto_save_implementation}}
-
-          **Cloud Save:** {{cloud_save_integration}}
-
-  - id: save-system
-    title: Save System Implementation
-    instruction: |
-      Define detailed save system implementation patterns.
-    elicit: true
-    sections:
-      - id: save-load-api
-        title: Save/Load API
-        template: |
-          **Save Interface:** {{save_interface_design}}
-
-          **Load Interface:** {{load_interface_design}}
-
-          **Error Handling:** {{save_load_error_handling}}
-      - id: save-file-management
-        title: Save File Management
-        template: |
-          **File Structure:** {{save_file_structure}}
-
-          **Backup Strategy:** {{save_backup_strategy}}
-
-          **Migration:** {{save_data_migration_strategy}}
-
-  - id: analytics-integration
-    title: Analytics Integration
-    instruction: |
-      Define analytics tracking and integration patterns.
-    condition: Game requires analytics tracking
-    elicit: true
-    sections:
-      - id: analytics-events
-        title: Analytics Event Design
-        template: |
-          **Event Categories:** {{analytics_event_categories}}
-
-          **Custom Events:** {{custom_analytics_events}}
-
-          **Player Progression:** {{progression_analytics}}
-      - id: analytics-implementation
-        title: Analytics Implementation
-        template: |
-          **Analytics SDK:** {{analytics_sdk_choice}}
-
-          **Event Tracking:** {{event_tracking_patterns}}
-
-          **Privacy Compliance:** {{analytics_privacy_considerations}}
-
-  - id: multiplayer-architecture
-    title: Multiplayer Architecture
-    instruction: |
-      Define multiplayer system architecture if applicable.
-    condition: Game includes multiplayer features
-    elicit: true
-    sections:
-      - id: networking-approach
-        title: Networking Approach
-        template: |
-          **Networking Solution:** {{networking_solution_choice}}
-
-          **Architecture Pattern:** {{multiplayer_architecture_pattern}}
-
-          **Synchronization:** {{state_synchronization_strategy}}
-      - id: multiplayer-systems
-        title: Multiplayer System Components
-        template: |
-          **Client Components:** {{multiplayer_client_components}}
-
-          **Server Components:** {{multiplayer_server_components}}
-
-          **Network Messages:** {{network_message_design}}
-
-  - id: rendering-pipeline
-    title: Rendering Pipeline Configuration
-    instruction: |
-      Define Godot renderer setup and optimization.
-    elicit: true
-    sections:
-      - id: render-pipeline-setup
-        title: Render Pipeline Setup
-        template: |
-          **Pipeline Choice:** {{render_pipeline_choice}} (URP/Built-in)
-
-          **Pipeline Asset:** {{render_pipeline_asset_config}}
-
-          **Quality Settings:** {{quality_settings_configuration}}
       - id: rendering-optimization
-        title: Rendering Optimization
-        template: |
-          **Batching Strategies:** {{sprite_batching_optimization}}
-
-          **Draw Call Optimization:** {{draw_call_reduction_strategies}}
-
-          **Texture Optimization:** {{texture_optimization_settings}}
-
-  - id: shader-guidelines
-    title: Shader Guidelines
-    instruction: |
-      Define shader usage and custom shader guidelines.
-    elicit: true
-    sections:
-      - id: shader-usage
-        title: Shader Usage Patterns
-        template: |
-          **Built-in Shaders:** {{builtin_shader_usage}}
-
-          **Custom Shaders:** {{custom_shader_requirements}}
-
-          **Shader Variants:** {{shader_variant_management}}
-      - id: shader-performance
-        title: Shader Performance Guidelines
-        template: |
-          **Mobile Optimization:** {{mobile_shader_optimization}}
-
-          **Performance Budgets:** {{shader_performance_budgets}}
-
-          **Profiling Guidelines:** {{shader_profiling_approach}}
-
-  - id: sprite-management
-    title: Sprite Management
-    instruction: |
-      Define sprite asset management and optimization strategies.
-    elicit: true
-    sections:
-      - id: sprite-organization
-        title: Sprite Organization
-        template: |
-          **Atlas Strategy:** {{sprite_atlas_organization}}
-
-          **Sprite Naming:** {{sprite_naming_conventions}}
-
-          **Import Settings:** {{sprite_import_settings}}
-      - id: sprite-optimization
-        title: Sprite Optimization
-        template: |
-          **Compression Settings:** {{sprite_compression_settings}}
-
-          **Resolution Strategy:** {{sprite_resolution_strategy}}
-
-          **Memory Optimization:** {{sprite_memory_optimization}}
-
-  - id: particle-systems
-    title: Particle System Architecture
-    instruction: |
-      Define particle system usage and optimization.
-    elicit: true
-    sections:
-      - id: particle-design
-        title: Particle System Design
-        template: |
-          **Effect Categories:** {{particle_effect_categories}}
-
-          **Scene Organization:** {{particle_scene_organization}}
-
-          **Pooling Strategy:** {{particle_pooling_implementation}}
-      - id: particle-performance
-        title: Particle Performance
-        template: |
-          **Performance Budgets:** {{particle_performance_budgets}}
-
-          **Mobile Optimization:** {{particle_mobile_optimization}}
-
-          **LOD Strategy:** {{particle_lod_implementation}}
-
-  - id: audio-architecture
-    title: Audio Architecture
-    instruction: |
-      Define audio system architecture and implementation.
-    elicit: true
-    sections:
-      - id: audio-system-design
-        title: Audio System Design
-        template: |
-          **Audio Manager:** {{audio_manager_implementation}}
-
-          **Audio Sources:** {{audio_source_management}}
-
-          **3D Audio:** {{spatial_audio_implementation}}
-      - id: audio-categories
-        title: Audio Categories
-        template: |
-          **Music System:** {{music_system_architecture}}
-
-          **Sound Effects:** {{sfx_system_design}}
-
-          **Voice/Dialog:** {{dialog_system_implementation}}
-
-  - id: audio-mixing
-    title: Audio Mixing Configuration
-    instruction: |
-      Define Godot AudioBus setup and configuration.
-    elicit: true
-    sections:
-      - id: mixer-setup
-        title: Audio Mixer Setup
-        template: |
-          **Audio Buses:** {{audio_bus_structure}}
-
-          **Effects Chain:** {{audio_effects_configuration}}
-
-          **Bus Layout:** {{audio_bus_layout}}
-      - id: dynamic-mixing
-        title: Dynamic Audio Mixing
-        template: |
-          **Volume Control:** {{volume_control_implementation}}
-
-          **Dynamic Range:** {{dynamic_range_management}}
-
-          **Platform Optimization:** {{platform_audio_optimization}}
-
-  - id: sound-banks
-    title: Sound Bank Management
-    instruction: |
-      Define sound asset organization and loading strategies.
-    elicit: true
-    sections:
-      - id: sound-organization
-        title: Sound Asset Organization
-        template: |
-          **Bank Structure:** {{sound_bank_organization}}
-
-          **Loading Strategy:** {{audio_loading_patterns}}
-
-          **Memory Management:** {{audio_memory_management}}
-      - id: sound-streaming
-        title: Audio Streaming
-        template: |
-          **Streaming Strategy:** {{audio_streaming_implementation}}
-
-          **Compression Settings:** {{audio_compression_settings}}
-
-          **Platform Considerations:** {{platform_audio_considerations}}
-
-  - id: unity-conventions
-    title: Godot Development Conventions
-    instruction: |
-      Define Godot-specific development conventions and best practices.
-    elicit: true
-    sections:
-      - id: unity-best-practices
-        title: Godot Best Practices
-        template: |
-          **Node Design:** {{godot_node_best_practices}}
-
-          **Performance Guidelines:** {{godot_performance_guidelines}}
-
-          **Memory Management:** {{godot_memory_best_practices}}
-      - id: unity-workflow
-        title: Godot Workflow Conventions
-        template: |
-          **Scene Workflow:** {{scene_workflow_conventions}}
-
-          **PackedScene Workflow:** {{packed_scene_workflow_conventions}}
-
-          **Asset Workflow:** {{asset_workflow_conventions}}
-
-  - id: external-integrations
-    title: External Integrations
-    condition: Game requires external service integrations
-    instruction: |
-      For each external service integration required by the game:
-
-      1. Identify services needed based on GDD requirements and platform needs
-      2. If documentation URLs are unknown, ask user for specifics
-      3. Document authentication methods and Godot-specific integration approaches
-      4. List specific APIs that will be used
-      5. Note any platform-specific SDKs or Godot addons required
-
-      If no external integrations are needed, state this explicitly and skip to next section.
-    elicit: true
-    repeatable: true
-    sections:
-      - id: integration
-        title: "{{service_name}} Integration"
-        template: |
-          - **Purpose:** {{service_purpose}}
-          - **Documentation:** {{service_docs_url}}
-          - **Godot Addon:** {{godot_addon_name}} {{version}}
-          - **Platform SDK:** {{platform_sdk_requirements}}
-          - **Authentication:** {{auth_method}}
-
-          **Key Features Used:**
-          - {{feature_1}} - {{feature_purpose}}
-          - {{feature_2}} - {{feature_purpose}}
-
-          **Godot Implementation Notes:** {{godot_integration_details}}
-
-  - id: core-workflows
-    title: Core Game Workflows
-    type: mermaid
-    mermaid_type: sequence
-    instruction: |
-      Illustrate key game workflows using sequence diagrams:
-
-      1. Identify critical player journeys from GDD (game loop, level progression, etc.)
-      2. Show system interactions including Godot lifecycle methods
-      3. Include error handling paths and state transitions
-      4. Document async operations (scene loading, asset loading)
-      5. Create both high-level game flow and detailed system interaction diagrams
-
-      Focus on workflows that clarify Godot-specific architecture decisions or complex system interactions.
-    elicit: true
-
-  - id: unity-project-structure
-    title: Godot Project Structure
-    type: code
-    language: plaintext
-    instruction: |
-      Create a Godot project folder structure that reflects:
-
-      1. Godot best practices for 2D game organization
-      2. The selected renderer settings and addons
-      3. Node organization from above systems
-      4. Clear separation of concerns for game assets
-      5. Testing structure for GUT/GoDotTest framework
-      6. Platform-specific asset organization
-
-      Follow Godot naming conventions and folder organization standards.
-    elicit: true
-    examples:
-      - |
-        ProjectName/
-        ├── scenes/                         # Game scenes
-        │   ├── gameplay/                   # Level scenes
-        │   ├── ui/                         # UI scenes
-        │   └── loading/                    # Loading scenes
-        ├── scripts/                        # GDScript/C# scripts
-        │   ├── core/                       # Core systems
-        │   ├── gameplay/                   # Gameplay mechanics
-        │   ├── ui/                         # UI controllers
-        │   └── data/                       # Resources
-        ├── prefabs/                        # PackedScenes
-        │   ├── characters/                 # Player, enemies
-        │   ├── environment/                # Level elements
-        │   └── ui/                         # UI components
-        ├── assets/                         # Visual assets
-        │   ├── sprites/                    # 2D sprites
-        │   ├── materials/                  # Godot materials
-        │   └── shaders/                    # Custom shaders
-        ├── audio/                          # Audio assets
-        │   ├── music/                      # Background music
-        │   ├── sfx/                        # Sound effects
-        │   └── buses/                      # AudioBus layouts
-        ├── data/                           # Game data
-        │   ├── settings/                   # Game settings
-        │   └── balance/                    # Balance data
-        ├── tests/                          # Tests
-        │   ├── unit/                       # Unit tests
-        │   └── integration/                # Integration tests
-        ├── addons/                         # Third-party addons
-        └── project.godot                   # Godot project settings
-
-  - id: infrastructure-deployment
-    title: Infrastructure and Deployment
-    instruction: |
-      Define the Godot export and deployment architecture:
-
-      1. Use Godot's export system and any additional tools
-      2. Choose deployment strategy appropriate for target platforms
-      3. Define environments (development, staging, production builds)
-      4. Establish version control and build pipeline practices
-      5. Consider platform-specific requirements and store submissions
-
-      Get user input on export preferences and CI/CD tool choices for Godot projects.
-    elicit: true
-    sections:
-      - id: unity-build-configuration
-        title: Godot Export Configuration
-        template: |
-          - **Godot Version:** {{godot_version}} LTS
-          - **Build Pipeline:** {{build_pipeline_type}}
-          - **Resource Loading:** {{resource_loading_usage}}
-          - **Asset Bundles:** {{asset_bundle_strategy}}
-      - id: deployment-strategy
-        title: Deployment Strategy
-        template: |
-          - **Build Automation:** {{build_automation_tool}}
-          - **Version Control:** {{version_control_integration}}
-          - **Distribution:** {{distribution_platforms}}
-      - id: environments
-        title: Build Environments
-        repeatable: true
-        template: "- **{{env_name}}:** {{env_purpose}} - {{platform_settings}}"
-      - id: platform-specific-builds
-        title: Platform-Specific Build Settings
-        type: code
-        language: text
-        template: "{{platform_build_configurations}}"
-
-  - id: coding-standards
-    title: Coding Standards
-    instruction: |
-      These standards are MANDATORY for AI agents working on Godot game development. Work with user to define ONLY the critical rules needed to prevent bad Godot code. Explain that:
-
-      1. This section directly controls AI developer behavior
-      2. Keep it minimal - assume AI knows general GDScript/C# and Godot best practices
-      3. Focus on project-specific Godot conventions and gotchas
-      4. Overly detailed standards bloat context and slow development
-      5. Standards will be extracted to separate file for dev agent use
-
-      For each standard, get explicit user confirmation it's necessary.
-    elicit: true
-    sections:
-      - id: core-standards
-        title: Core Standards
-        template: |
-          - **Godot Version:** {{godot_version}} LTS
-          - **Language:** GDScript 2.0 / C# (.NET 6+)
-          - **Code Style:** Godot conventions + language-specific naming
-          - **Testing Framework:** GUT (GDScript) / GoDotTest (C#)
-      - id: unity-naming-conventions
-        title: Godot Naming Conventions
-        type: table
-        columns: [Element, Convention, Example]
-        instruction: Only include if deviating from Godot defaults
-        examples:
-          - "| Node Script | PascalCase + descriptive suffix | PlayerController, HealthSystem |"
-          - "| Resource | PascalCase + Data/Config suffix | PlayerData, GameConfig |"
-          - "| PackedScene | PascalCase descriptive | PlayerCharacter, EnvironmentTile |"
-      - id: critical-rules
-        title: Critical Godot Rules
+        title: Rendering and Graphics Optimization
         instruction: |
-          List ONLY rules that AI might violate or Godot-specific requirements. Examples:
-          - "Always cache get_node() calls in _ready()"
-          - "Use @export for variables that need Inspector access"
-          - "Prefer Godot signals over direct method calls for decoupling"
-          - "Never call get_tree().get_nodes_in_group() in _process() or _physics_process()"
+          Design for optimal rendering performance:
+          - Texture management and compression
+          - Sprite batching and draw call optimization
+          - Particle system usage and limits
+          - Camera and viewport optimization
 
-          Avoid obvious rules like "follow SOLID principles" or "optimize performance"
-        repeatable: true
-        template: "- **{{rule_name}}:** {{rule_description}}"
-      - id: unity-specifics
-        title: Godot-Specific Guidelines
-        condition: Critical Godot-specific rules needed
-        instruction: Add ONLY if critical for preventing AI mistakes with Godot APIs
-        sections:
-          - id: unity-lifecycle
-            title: Godot Lifecycle Rules
-            repeatable: true
-            template: "- **{{lifecycle_method}}:** {{usage_rule}}"
-
-  - id: test-strategy
-    title: Test Strategy and Standards
-    instruction: |
-      Work with user to define comprehensive Godot test strategy:
-
-      1. Use GUT (GDScript) and GoDotTest (C#) testing frameworks
-      2. Decide on test-driven development vs test-after approach
-      3. Define test organization and naming for Godot projects
-      4. Establish coverage goals for game logic
-      5. Determine integration test infrastructure (scene-based testing)
-      6. Plan for test data and mock external dependencies
-
-      Note: Basic info goes in Coding Standards for dev agent. This detailed section is for comprehensive testing strategy.
-    elicit: true
-    sections:
-      - id: testing-philosophy
-        title: Testing Philosophy
-        template: |
-          - **Approach:** {{test_approach}}
-          - **Coverage Goals:** {{coverage_targets}}
-          - **Test Distribution:** {{edit_mode_vs_play_mode_split}}
-      - id: unity-test-types
-        title: Godot Test Types and Organization
-        sections:
-          - id: edit-mode-tests
-            title: Unit Tests
-            template: |
-              - **Framework:** GUT (GDScript) / GoDotTest (C#)
-              - **File Convention:** {{unit_test_naming}}
-              - **Location:** `res://tests/unit/`
-              - **Purpose:** Logic testing without scene dependencies
-              - **Coverage Requirement:** {{unit_test_coverage}}
-
-              **AI Agent Requirements:**
-              - Test Resource data validation
-              - Test utility classes and static methods
-              - Test serialization/deserialization logic
-              - Mock Godot APIs where necessary
-          - id: play-mode-tests
-            title: Integration Tests
-            template: |
-              - **Framework:** GUT / GoDotTest with test scenes
-              - **Location:** `res://tests/integration/`
-              - **Purpose:** Integration testing with Godot runtime
-              - **Test Scenes:** {{test_scene_requirements}}
-              - **Coverage Requirement:** {{integration_test_coverage}}
-
-              **AI Agent Requirements:**
-              - Test Node component interactions
-              - Test scene loading and Node lifecycle
-              - Test physics interactions and collision systems
-              - Test UI interactions and signal systems
-      - id: test-data-management
-        title: Test Data Management
-        template: |
-          - **Strategy:** {{test_data_approach}}
-          - **Resource Fixtures:** {{test_resource_location}}
-          - **Test Scene Templates:** {{test_scene_templates}}
-          - **Cleanup Strategy:** {{cleanup_approach}}
-
-  - id: security
-    title: Security Considerations
-    instruction: |
-      Define security requirements specific to Godot game development:
-
-      1. Focus on Godot-specific security concerns
-      2. Consider platform store requirements
-      3. Address save data protection and anti-cheat measures
-      4. Define secure communication patterns for multiplayer
-      5. These rules directly impact Godot code generation
-    elicit: true
-    sections:
-      - id: save-data-security
-        title: Save Data Security
-        template: |
-          - **Encryption:** {{save_data_encryption_method}}
-          - **Validation:** {{save_data_validation_approach}}
-          - **Anti-Tampering:** {{anti_tampering_measures}}
-      - id: platform-security
-        title: Platform Security Requirements
-        template: |
-          - **Mobile Permissions:** {{mobile_permission_requirements}}
-          - **Store Compliance:** {{platform_store_requirements}}
-          - **Privacy Policy:** {{privacy_policy_requirements}}
-      - id: multiplayer-security
-        title: Multiplayer Security (if applicable)
-        condition: Game includes multiplayer features
-        template: |
-          - **Client Validation:** {{client_validation_rules}}
-          - **Server Authority:** {{server_authority_approach}}
-          - **Anti-Cheat:** {{anti_cheat_measures}}
-
-  - id: checklist-results
-    title: Checklist Results Report
-    instruction: Before running the checklist, offer to output the full game architecture document. Once user confirms, execute the architect-checklist and populate results here.
-
-  - id: next-steps
-    title: Next Steps
-    instruction: |
-      After completing the game architecture:
-
-      1. Review with Game Designer and technical stakeholders
-      2. Begin story implementation with Game Developer agent
-      3. Set up Godot project structure and initial configuration
-      4. Configure version control and build pipeline
-
-      Include specific prompts for next agents if needed.
-    sections:
-      - id: developer-prompt
-        title: Game Developer Prompt
+      - id: memory-management
+        title: Memory Management
         instruction: |
-          Create a brief prompt to hand off to Game Developer for story implementation. Include:
-          - Reference to this game architecture document
-          - Key Godot-specific requirements from this architecture
-          - Any Godot addon or configuration decisions made here
-          - Request for adherence to established coding standards and patterns
+          Plan memory usage and optimization:
+          - Object pooling for frequently created objects
+          - Resource loading and unloading strategies
+          - Garbage collection optimization
+          - Memory profiling and monitoring
+
+      - id: cpu-optimization
+        title: CPU Optimization
+        instruction: |
+          Design for CPU performance:
+          - Process scheduling (_process vs _physics_process)
+          - Signal vs polling patterns
+          - Multithreading considerations
+          - Performance profiling integration
+
+  - id: platform-specific
+    title: Platform-Specific Considerations
+    instruction: Address platform-specific requirements and optimizations
+    sections:
+      - id: mobile-optimization
+        title: Mobile Platform Optimization
+        instruction: |
+          If targeting mobile platforms:
+          - Touch input handling and UI scaling
+          - Battery life optimization
+          - Performance scaling for different devices
+          - App lifecycle management (pause/resume)
+
+      - id: web-deployment
+        title: Web Platform Considerations
+        instruction: |
+          If targeting web deployment:
+          - File size optimization and streaming
+          - Browser compatibility considerations
+          - Input handling for web browsers
+          - Loading screen and progress indicators
+
+  - id: testing-architecture
+    title: Testing and Quality Assurance
+    instruction: Plan testing strategy and tooling
+    sections:
+      - id: automated-testing
+        title: Automated Testing Strategy
+        instruction: |
+          Design testing approach:
+          - Unit testing with GUT framework (GDScript) or GoDotTest (C#)
+          - Integration testing for game systems using builtin testing (GDScript) or GodotTestDriver (C#)
+          - Performance testing and benchmarking
+          - Automated build and testing pipeline
+
+      - id: debugging-tools
+        title: Debugging and Development Tools
+        instruction: |
+          Plan development and debugging support:
+          - Debug UI and console commands
+          - Performance monitoring and profiling
+          - Logging and error reporting
+          - Development mode features
+
+  - id: deployment-architecture
+    title: Deployment and Distribution
+    instruction: Plan build and deployment strategy
+    sections:
+      - id: build-pipeline
+        title: Build Pipeline
+        instruction: |
+          Design the build and export process:
+          - Export templates and configurations
+          - Asset optimization pipeline
+          - Platform-specific build settings
+          - Version management and tagging
+
+      - id: distribution-strategy
+        title: Distribution Strategy
+        instruction: |
+          Plan distribution approach:
+          - Target distribution platforms
+          - Update and patching strategy
+          - Analytics and telemetry integration
+          - User feedback collection systems
+
+  - id: development-standards
+    title: Development Standards and Guidelines
+    instruction: Establish coding and development standards
+    sections:
+      - id: coding-standards
+        title: C# and GDScript Coding Standards
+        instruction: |
+          Establish coding conventions:
+          - Naming conventions (snake_case for variables/functions, PascalCase for classes)
+          - Code organization and structure
+          - Comment and documentation standards
+          - Error handling patterns
+
+      - id: scene-standards
+        title: Scene Organization Standards
+        instruction: |
+          Define scene creation standards:
+          - Node naming conventions
+          - Scene composition patterns
+          - Signal connection standards
+          - Resource usage guidelines
+
+  - id: risk-assessment
+    title: Risk Assessment and Mitigation
+    instruction: Identify and plan for potential technical risks
+    sections:
+      - id: technical-risks
+        title: Technical Risk Analysis
+        instruction: |
+          Identify potential risks:
+          - Performance bottlenecks and scalability limits
+          - Platform compatibility issues
+          - Third-party dependency risks
+          - Team skill gaps and learning curves
+
+      - id: mitigation-strategies
+        title: Risk Mitigation Strategies
+        instruction: |
+          Plan mitigation approaches:
+          - Prototype critical systems early
+          - Performance testing milestones
+          - Fallback plans for complex features
+          - Knowledge sharing and documentation
+
+  - id: implementation-roadmap
+    title: Implementation Roadmap
+    instruction: Create development phases and priorities
+    sections:
+      - id: development-phases
+        title: Development Phase Planning
+        instruction: |
+          Break down implementation into phases:
+          - Phase 1: Core systems and foundation
+          - Phase 2: Gameplay mechanics implementation
+          - Phase 3: Content creation and level building
+          - Phase 4: Polish, optimization, and testing
+
+      - id: story-breakdown
+        title: Story Breakdown Guidance
+        instruction: |
+          Provide guidance for breaking this architecture into implementation stories:
+          - Recommended story size and scope
+          - Dependencies between architectural components
+          - Testing requirements for each story
+          - Integration points and validation criteria

@@ -275,33 +275,32 @@ sections:
     instruction: Define Godot-specific technical requirements that will guide architecture and implementation decisions. Reference Godot documentation and best practices.
     elicit: true
     choices:
-      render_pipeline: [Built-in, URP, HDRP]
-      input_system: [Legacy, New Input System, Both]
-      physics: [2D Only, 3D Only, Hybrid]
-    sections:
-      - id: unity-configuration
-        title: Godot Project Configuration
-        template: |
-          **Godot Version:** {{godot_version}} (LTS recommended)
-          **Renderer:** {{Forward+|Mobile|Compatibility}}
-          **Physics:** {{2D Only|3D Only|Hybrid}}
-          **Scripting:** {{GDScript|C#|Both}}
-          **Threading:** {{Single|Multi}}
-          **Audio Driver:** {{PulseAudio|ALSA|WASAPI}}
-
-          **Required Addons:**
-
-          - {{addon_name}} {{version}} - {{purpose}}
-
-          **Project Settings:**
-
-          - Color Space: {{Linear|Gamma}}
-          - Quality Settings: {{quality_levels}}
-          - Physics Settings: {{physics_config}}
-        examples:
-          - gut 7.4.0 - Testing framework for GDScript
-          - "Color Space: Linear, Quality: Mobile/Desktop presets, Gravity: -20"
-      - id: performance-requirements
+      render_pipeline: [ Forward+, Forward Mobile, Compatibility ]
+      scripting: [ GDScript. C#. Mixed ]
+      physics: [ 2D Only, 3D Only, Hybrid ]
+      sections:
+        - id: godot-configuration
+          title: Godot Project Configuration
+          template: |
+            **Godot Version:** {{godot_version}} (4.x LTS recommended)
+            **Renderer:** {{Forward+|Forward Mobile|Compatibility}}
+            **Input System:** {{Godot Input Actions}}
+            **Physics:** {{2D Only|3D Only|Hybrid}}
+            **Scripting:** {{GDScript|C#|Mixed}}
+            **Target Platform:** {{Desktop|Mobile|Web|Console}}
+            
+            **Required Packages:**
+            
+            - {{package_name}} {{version}} - {{purpose}}
+            
+            **Project Settings:**
+            
+            - Color Space: {{Linear|Gamma}}
+            - Quality Settings: {{quality_levels}}
+            - Physics Settings: {{physics_config}}
+          examples:
+            - godot-plugin.example 1.0.0 - Asset loading and memory management
+            - "Color Space: Linear, Quality: Mobile/Desktop presets, Gravity: -20"      - id: performance-requirements
         title: Performance Requirements
         template: |
           **Frame Rate:** {{fps_target}} FPS (minimum {{min_fps}} on low-end devices)

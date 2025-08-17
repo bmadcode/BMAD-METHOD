@@ -733,7 +733,7 @@ This 2D Godot Game Development expansion pack extends BMad-Method beyond traditi
 
 1. **Keep Core Lean**: Game dev agents maintain maximum context for Godot coding
 2. **Game Domain Expertise**: Deep, specialized Godot and game development knowledge
-3. **Commgodot Game Innovation**: Game developers can contribute and share Godot patterns
+3. **Community Game Innovation**: Game developers can contribute and share Godot patterns
 4. **Modular Game Design**: Install only game development capabilities you need
 
 ### Using This Game Development Expansion Pack
@@ -754,7 +754,7 @@ Use the **expansion-creator** pack to build your own game development extensions
 1. **Define Game Domain**: What game development expertise are you capturing?
 2. **Design Game Agents**: Create specialized game roles with clear Godot boundaries
 3. **Build Game Resources**: Tasks, templates, checklists for your game domain
-4. **Test & Share**: Validate with real Godot use cases, share with game development commgodot
+4. **Test & Share**: Validate with real Godot use cases, share with game development community
 
 **Key Principle**: Game development expansion packs democratize game development expertise by making specialized Godot and game design knowledge accessible through AI agents.
 
@@ -763,7 +763,7 @@ Use the **expansion-creator** pack to build your own game development extensions
 - **Commands**: Use `*/*help` in any environment to see available game development commands
 - **Game Agent Switching**: Use `*/*switch game-agent-name` with orchestrator for role changes
 - **Game Documentation**: Check `docs/` folder for Godot project-specific context
-- **Game Commgodot**: Discord and GitHub resources available for game development support
+- **Game Community**: Discord and GitHub resources available for game development support
 - **Game Contributing**: See `CONTRIBUTING.md` for full game development guidelines
 
 This knowledge base provides the foundation for effective game development using the BMad-Method framework with specialized focus on 2D game creation using Godot and GDScript/C#.
