@@ -45,17 +45,17 @@ To identify the next logical game story based on project progress and epic defin
 
 #### 3.2 Read Architecture Documents Based on Story Type
 
-**For ALL Game Stories:** tech-stack.md, unity-project-structure.md, coding-standards.md, testing-resilience-architecture.md
+**For ALL Game Stories:** tech-stack.md, godot-project-structure.md, coding-standards.md, testing-architecture.md
 
-**For Gameplay/Mechanics Stories, additionally:** gameplay-systems-architecture.md, component-architecture-details.md, physics-config.md, input-system.md, state-machines.md, game-data-models.md
+**For Gameplay/Mechanics Stories, additionally:** gameplay-systems-architecture.md, component-architecture-details.md, data-management.md
 
-**For UI/UX Stories, additionally:** ui-architecture.md, ui-components.md, ui-state-management.md, scene-management.md
+**For UI/UX Stories, additionally:** ui-system-2d.md, scene-standards.md
 
-**For Backend/Services Stories, additionally:** game-data-models.md, data-persistence.md, save-system.md, analytics-integration.md, multiplayer-architecture.md
+**For Backend/Services Stories, additionally:** data-management.md, analytics-integration.md, multiplayer-architecture.md
 
-**For Graphics/Rendering Stories, additionally:** rendering-pipeline.md, shader-guidelines.md, sprite-management.md, particle-systems.md
+**For Graphics/Rendering Stories, additionally:** shader-guidelines.md, sprite-management.md, particle-effects-2d.md
 
-**For Audio Stories, additionally:** audio-architecture.md, audio-mixing.md, sound-banks.md
+**For Audio Stories, additionally:** audio-system-2d.md
 
 #### 3.3 Extract Story-Specific Technical Details
 

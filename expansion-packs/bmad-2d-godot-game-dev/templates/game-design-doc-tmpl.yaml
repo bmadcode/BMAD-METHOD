@@ -185,7 +185,7 @@ sections:
           ```gdscript
           class_name PlayerProgress
           extends Resource
-          
+
           @export var {{progress_fields}}
           ```
         examples:
@@ -245,7 +245,7 @@ sections:
 
               **Level Flow Template:**
 
-              - **Introduction:** {{intro_description}} - Area: {{unity_area_bounds}}
+              - **Introduction:** {{intro_description}} - Area: {{godot_area_bounds}}
               - **Challenge:** {{main_challenge}} - Mechanics: {{active_components}}
               - **Resolution:** {{completion_requirement}} - Trigger: {{completion_trigger}}
 
@@ -260,7 +260,7 @@ sections:
           **World Structure:** {{linear|hub|open}}
           **Total Levels:** {{number}}
           **Unlock Pattern:** {{progression_method}}
-          **Scene Management:** {{unity_scene_loading}}
+          **Scene Management:** {{godot_scene_loading}}
 
           **Godot Scene Organization:**
 
@@ -275,9 +275,9 @@ sections:
     instruction: Define Godot-specific technical requirements that will guide architecture and implementation decisions. Reference Godot documentation and best practices.
     elicit: true
     choices:
-      render_pipeline: [ Forward+, Forward Mobile, Compatibility ]
-      scripting: [ GDScript, C#, Mixed ]
-      physics: [ 2D Only, 3D Only, Hybrid ]
+      render_pipeline: [Forward+, Forward Mobile, Compatibility]
+      scripting: [GDScript, C#, Mixed]
+      physics: [2D Only, 3D Only, Hybrid]
       sections:
         - id: godot-configuration
           title: Godot Project Configuration
@@ -288,83 +288,84 @@ sections:
             **Physics:** {{2D Only|3D Only|Hybrid}}
             **Scripting:** {{GDScript|C#|Mixed}}
             **Target Platform:** {{Desktop|Mobile|Web|Console}}
-            
+
             **Required Packages:**
-            
+
             - {{package_name}} {{version}} - {{purpose}}
-            
+
             **Project Settings:**
-            
+
             - Color Space: {{Linear|Gamma}}
             - Quality Settings: {{quality_levels}}
             - Physics Settings: {{physics_config}}
           examples:
             - godot-plugin.example 1.0.0 - Asset loading and memory management
-            - "Color Space: Linear, Quality: Mobile/Desktop presets, Gravity: -20"      - id: performance-requirements
-        title: Performance Requirements
-        template: |
-          **Frame Rate:** {{fps_target}} FPS (minimum {{min_fps}} on low-end devices)
-          **Memory Usage:** <{{memory_limit}}MB heap, <{{texture_memory}}MB textures
-          **Load Times:** <{{load_time}}s initial, <{{level_load}}s between levels
-          **Battery Usage:** Optimized for mobile devices - {{battery_target}} hours gameplay
+            - "Color Space: Linear, Quality: Mobile/Desktop presets, Gravity: -20"
+        - id: performance-requirements
+          title: Performance Requirements
+          template: |
+            **Frame Rate:** {{fps_target}} FPS (minimum {{min_fps}} on low-end devices)
+            **Memory Usage:** <{{memory_limit}}MB heap, <{{texture_memory}}MB textures
+            **Load Times:** <{{load_time}}s initial, <{{level_load}}s between levels
+            **Battery Usage:** Optimized for mobile devices - {{battery_target}} hours gameplay
 
-          **Godot Profiler Targets:**
+            **Godot Profiler Targets:**
 
-          - CPU Frame Time: <{{cpu_time}}ms
-          - GPU Frame Time: <{{gpu_time}}ms
-          - GC Allocs: <{{gc_limit}}KB per frame
-          - Draw Calls: <{{draw_calls}} per frame
-        examples:
-          - "60 FPS (minimum 30), CPU: <16.67ms, GPU: <16.67ms, GC: <4KB, Draws: <50"
-      - id: platform-specific
-        title: Platform Specific Requirements
-        template: |
-          **Desktop:**
+            - CPU Frame Time: <{{cpu_time}}ms
+            - GPU Frame Time: <{{gpu_time}}ms
+            - GC Allocs: <{{gc_limit}}KB per frame
+            - Draw Calls: <{{draw_calls}} per frame
+          examples:
+            - "60 FPS (minimum 30), CPU: <16.67ms, GPU: <16.67ms, GC: <4KB, Draws: <50"
+        - id: platform-specific
+          title: Platform Specific Requirements
+          template: |
+            **Desktop:**
 
-          - Resolution: {{min_resolution}} - {{max_resolution}}
-          - Input: Keyboard, Mouse, Gamepad ({{gamepad_support}})
-          - Build Target: {{desktop_targets}}
+            - Resolution: {{min_resolution}} - {{max_resolution}}
+            - Input: Keyboard, Mouse, Gamepad ({{gamepad_support}})
+            - Build Target: {{desktop_targets}}
 
-          **Mobile:**
+            **Mobile:**
 
-          - Resolution: {{mobile_min}} - {{mobile_max}}
-          - Input: Touch, Accelerometer ({{sensor_support}})
-          - OS: iOS {{ios_min}}+, Android {{android_min}}+ (API {{api_level}})
-          - Device Requirements: {{device_specs}}
+            - Resolution: {{mobile_min}} - {{mobile_max}}
+            - Input: Touch, Accelerometer ({{sensor_support}})
+            - OS: iOS {{ios_min}}+, Android {{android_min}}+ (API {{api_level}})
+            - Device Requirements: {{device_specs}}
 
-          **Web (if applicable):**
+            **Web (if applicable):**
 
-          - WebGL Version: {{webgl_version}}
-          - Browser Support: {{browser_list}}
-          - Compression: {{compression_format}}
-        examples:
-          - "Resolution: 1280x720 - 4K, Gamepad: Xbox/PlayStation controllers via Input System"
-      - id: asset-requirements
-        title: Asset Requirements
-        instruction: Define asset specifications for Godot import pipeline optimization
-        template: |
-          **2D Art Assets:**
+            - WebGL Version: {{webgl_version}}
+            - Browser Support: {{browser_list}}
+            - Compression: {{compression_format}}
+          examples:
+            - "Resolution: 1280x720 - 4K, Gamepad: Xbox/PlayStation controllers via Input System"
+        - id: asset-requirements
+          title: Asset Requirements
+          instruction: Define asset specifications for Godot import pipeline optimization
+          template: |
+            **2D Art Assets:**
 
-          - Sprites: {{sprite_resolution}} at {{ppu}} PPU
-          - Texture Format: {{texture_compression}}
-          - Atlas Strategy: {{sprite_atlas_setup}}
-          - Animation: {{animation_type}} at {{framerate}} FPS
+            - Sprites: {{sprite_resolution}} at {{ppu}} PPU
+            - Texture Format: {{texture_compression}}
+            - Atlas Strategy: {{sprite_atlas_setup}}
+            - Animation: {{animation_type}} at {{framerate}} FPS
 
-          **Audio Assets:**
+            **Audio Assets:**
 
-          - Music: {{audio_format}} at {{sample_rate}} Hz
-          - SFX: {{sfx_format}} at {{sfx_sample_rate}} Hz
-          - Compression: {{audio_compression}}
-          - 3D Audio: {{spatial_audio}}
+            - Music: {{audio_format}} at {{sample_rate}} Hz
+            - SFX: {{sfx_format}} at {{sfx_sample_rate}} Hz
+            - Compression: {{audio_compression}}
+            - 3D Audio: {{spatial_audio}}
 
-          **UI Assets:**
+            **UI Assets:**
 
-          - Canvas Resolution: {{ui_resolution}}
-          - UI Scale Mode: {{scale_mode}}
-          - Font: {{font_requirements}}
-          - Icon Sizes: {{icon_specifications}}
-        examples:
-          - "Sprites: 32x32 to 256x256 at 16 PPU, Format: RGBA32 for quality/RGBA16 for performance"
+            - Canvas Resolution: {{ui_resolution}}
+            - UI Scale Mode: {{scale_mode}}
+            - Font: {{font_requirements}}
+            - Icon Sizes: {{icon_specifications}}
+          examples:
+            - "Sprites: 32x32 to 256x256 at 16 PPU, Format: RGBA32 for quality/RGBA16 for performance"
 
   - id: technical-architecture-requirements
     title: Technical Architecture Requirements
@@ -378,7 +379,7 @@ sections:
       - id: code-architecture
         title: Code Architecture Pattern
         template: |
-          **Architecture Pattern:** {{MVC|MVVM|ECS|Component-Based|Custom}}
+          **Architecture Pattern:** {{MVC|MVVM|Component-Based|Custom}}
 
           **Core Systems Required:**
 

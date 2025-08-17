@@ -88,10 +88,10 @@ sections:
           - Project settings configuration
           - Input map setup for target platforms
 
-      - id: project-structure
+      - id: godot-project-structure
         title: Project Structure
         instruction: |
-          Design a scalable project folder structure:
+          Design a scalable project folder structure supporting both C# and GDScript:
           ```
           project/
           ├── scenes/          # Game scenes (.tscn files)
@@ -99,22 +99,69 @@ sections:
           │   ├── levels/      # Game levels and gameplay scenes
           │   ├── ui/          # UI components and HUD
           │   └── components/  # Reusable scene components
-          ├── scripts/         # GDScript files (.gd)
-          │   ├── managers/    # Singleton managers (GameManager, etc.)
-          │   ├── components/  # Reusable script components
-          │   ├── data/        # Custom Resource classes
-          │   └── utils/       # Utility functions and helpers
+          ├── scripts/         # Script files (both languages)
+          │   ├── gdscript/    # GDScript files (.gd)
+          │   │   ├── autoload/    # GDScript singletons
+          │   │   ├── components/  # Reusable components
+          │   │   ├── player/      # Player-related scripts
+          │   │   ├── enemies/     # Enemy behaviors
+          │   │   ├── ui/          # UI controllers
+          │   │   └── utils/       # Utility functions
+          │   └── csharp/      # C# files (.cs)
+          │       ├── Core/        # Core game systems
+          │       ├── Managers/    # Singleton managers
+          │       ├── Components/  # Reusable components
+          │       ├── Player/      # Player systems
+          │       ├── Enemies/     # Enemy systems
+          │       ├── UI/          # UI controllers
+          │       └── Utils/       # Utility classes
           ├── assets/          # Game assets
-          │   ├── 2d/          # For 2D: sprites, textures, animations
-          │   ├── 3d/          # For 3D: models, materials, shaders
+          │   ├── art/         # Visual assets for 2D games
+          │   │   ├── sprites/     # Sprite sheets and images
+          │   │   ├── animations/  # Animation resources
+          │   │   ├── tilemaps/    # Tilemap resources
+          │   │   ├── ui/          # UI graphics and icons
+          │   │   ├── backgrounds/ # Background images
+          │   │   ├── particles/   # Particle textures
+          │   │   └── shaders/     # 2D shader files
           │   ├── audio/       # Music and sound effects
+          │   │   ├── music/       # Background music
+          │   │   ├── sfx/         # Sound effects
+          │   │   └── ambient/     # Ambient sounds
           │   └── fonts/       # Font files
           ├── data/            # Game data files
-          │   └── resources/   # .tres resource files
-          └── tests/           # Unit and integration tests
-              ├── unit/        # Unit tests
-              └── integration/ # Integration tests
+          │   ├── resources/   # .tres resource files
+          │   │   ├── items/       # Item definitions
+          │   │   ├── enemies/     # Enemy data
+          │   │   └── levels/      # Level data
+          │   └── config/      # Configuration files
+          ├── addons/          # Godot plugins and addons
+          ├── tests/           # Unit and integration tests
+          │   ├── unit/        # Unit tests
+          │   │   ├── gdscript/    # GDScript tests (GUT)
+          │   │   └── csharp/      # C# tests (GoDotTest)
+          │   └── integration/ # Integration tests
+          └── builds/          # Export templates and builds
+              ├── windows/     # Windows builds
+              ├── linux/       # Linux builds
+              ├── macos/       # macOS builds
+              ├── android/     # Android builds
+              └── web/         # Web builds
+
+          Additional files in root:
+          - project.godot      # Godot project file
+          - .csproj            # C# project file (if using C#)
+          - .gitignore         # Version control ignore file
+          - README.md          # Project documentation
           ```
+
+          Language Organization Guidelines:
+          - Keep GDScript and C# code separated in their respective folders
+          - Use consistent folder structure patterns within each language directory
+          - GDScript follows snake_case for folder names
+          - C# follows PascalCase for folder names
+          - Scene files can reference scripts from either language
+          - Prefer one language per system/feature for maintainability
 
   - id: core-architecture
     title: Core Game Architecture
@@ -148,59 +195,561 @@ sections:
           - SceneManager: Scene transition handling
           - InputManager: Input handling and action management
 
-  - id: gameplay-systems
-    title: Gameplay Systems Architecture
-    instruction: Design specific game mechanics based on the GDD
+  - id: gameplay-systems-architecture
+    title: Gameplay Systems Architecture (2D)
+    instruction: Design specific 2D game mechanics based on the GDD using Godot's 2D systems
     sections:
-      - id: player-system
-        title: Player System
+      - id: player-system-2d
+        title: Player System (2D)
         instruction: |
-          Design the player character architecture:
-          - Player scene structure (CharacterBody2D/3D, RigidBody2D/3D based on game dimension)
-          - Movement and physics handling (2D or 3D physics)
-          - Animation system integration (AnimationPlayer, AnimationTree)
-          - Input processing and state management
-          - Camera system (Camera2D for 2D, Camera3D for 3D with appropriate controls)
+          Design the 2D player character architecture:
 
-      - id: game-mechanics
-        title: Core Game Mechanics
-        instruction: |
-          For each major game mechanic identified in the GDD:
-          - System design and node structure
-          - Data flow and state management
-          - Integration with other systems
-          - Performance considerations
+          Scene Structure:
+          ```
+          Player (CharacterBody2D or RigidBody2D)
+          ├── CollisionShape2D (capsule or rectangle for character)
+          ├── Sprite2D or AnimatedSprite2D
+          │   └── AnimationPlayer (for complex animations)
+          ├── Area2D (for interaction detection)
+          │   └── CollisionShape2D (interaction radius)
+          ├── StateMachine (Node)
+          │   ├── IdleState
+          │   ├── MoveState
+          │   ├── JumpState
+          │   └── AttackState
+          ├── HealthComponent (Node)
+          ├── AudioStreamPlayer2D (for player sounds)
+          └── Marker2D nodes (for spawn points, weapon positions)
+          ```
 
-      - id: ui-system
-        title: User Interface System
+          Movement Types (based on game genre):
+          - Platformer: CharacterBody2D with move_and_slide()
+          - Top-down: CharacterBody2D with velocity-based movement
+          - Physics-based: RigidBody2D with forces/impulses
+          - Grid-based: Position snapping with tweening
+
+          Input Handling:
+          - Input mapping configuration in Project Settings
+          - Action-based input (jump, move_left, attack)
+          - Analog stick support with dead zones
+          - Touch input for mobile (virtual joystick/buttons)
+
+      - id: camera-system-2d
+        title: Camera System (2D)
         instruction: |
-          Design the UI architecture:
-          - UI scene organization and layering
-          - Theme and styling approach
-          - Menu system and navigation
-          - HUD and in-game UI elements
+          Design the 2D camera system:
+
+          Camera Setup:
+          ```
+          Camera2D
+          ├── Properties to configure:
+          │   ├── enabled = true
+          │   ├── anchor_mode = DRAG_CENTER
+          │   ├── process_callback = PHYSICS
+          │   ├── position_smoothing_enabled = true
+          │   ├── position_smoothing_speed = 5.0
+          │   └── rotation_smoothing_enabled = false
+          ├── Limits (for world boundaries)
+          │   ├── limit_left
+          │   ├── limit_top
+          │   ├── limit_right
+          │   └── limit_bottom
+          └── Drag margins (for delayed following)
+          ```
+
+          Camera Behaviors:
+          - Follow player with smoothing
+          - Look-ahead based on velocity/input
+          - Screen shake for impacts/explosions
+          - Zoom in/out for dramatic effects
+          - Multi-target following (average position)
+          - Room-based cameras (Metroidvania style)
+          - Parallax background scrolling support
+
+      - id: collision-system-2d
+        title: Collision and Physics (2D)
+        instruction: |
+          Design the 2D collision system:
+
+          Collision Layers and Masks:
+          - Layer 1: Player
+          - Layer 2: Enemies
+          - Layer 3: Player projectiles
+          - Layer 4: Enemy projectiles
+          - Layer 5: Environment
+          - Layer 6: Pickups
+          - Layer 7: Triggers
+          - Layer 8: One-way platforms
+
+          Collision Detection Patterns:
+          - Continuous collision detection for fast objects
+          - Area2D for triggers and overlap detection
+          - RayCast2D for line-of-sight and ground detection
+          - ShapeCast2D for wide collision queries
+
+          Physics Optimization:
+          - Use simple shapes (rectangles, circles) when possible
+          - Compound shapes only when necessary
+          - Disable collision for off-screen objects
+          - Use physics layers effectively to minimize checks
+
+      - id: enemy-system-2d
+        title: Enemy and AI System (2D)
+        instruction: |
+          Design 2D enemy architecture:
+
+          Enemy Scene Structure:
+          ```
+          Enemy (CharacterBody2D or RigidBody2D)
+          ├── CollisionShape2D
+          ├── Sprite2D or AnimatedSprite2D
+          ├── Area2D (detection range)
+          │   └── CollisionShape2D
+          ├── NavigationAgent2D (for pathfinding)
+          ├── StateMachine
+          │   ├── PatrolState
+          │   ├── ChaseState
+          │   ├── AttackState
+          │   └── StunnedState
+          ├── HealthComponent
+          ├── RayCast2D (for vision)
+          └── AudioStreamPlayer2D
+          ```
+
+          AI Patterns:
+          - State-based behavior (FSM or behavior tree)
+          - Navigation2D for pathfinding
+          - Line-of-sight detection with RayCast2D
+          - Steering behaviors (seek, flee, wander)
+          - Group behaviors (flocking, formations)
+
+          Performance Considerations:
+          - LOD system for AI complexity
+          - Disable AI for off-screen enemies
+          - Object pooling for spawning
+          - Batch AI updates across frames
+
+      - id: combat-system-2d
+        title: Combat System (2D)
+        instruction: |
+          Design 2D combat mechanics:
+
+          Melee Combat:
+          - Hitbox activation with Area2D
+          - Attack animation timing
+          - Combo system with input buffering
+          - Knockback and hitstun
+          - Invincibility frames (i-frames)
+
+          Ranged Combat:
+          - Projectile pooling system
+          - Bullet patterns (for bullet-hell games)
+          - Hitscan vs projectile physics
+          - Ammunition management
+
+      - id: level-system-2d
+        title: Level and Environment System (2D)
+        instruction: |
+          Design 2D level architecture:
+
+          TileMap System:
+          ```
+          Level (Node2D)
+          ├── TileMapLayer (terrain)
+          ├── TileMapLayer (decorations)
+          ├── TileMapLayer (collision)
+          ├── Navigation2D
+          │   └── NavigationRegion2D
+          ├── Spawners (Node2D)
+          │   ├── EnemySpawners
+          │   └── ItemSpawners
+          ├── Triggers (Node2D)
+          │   └── Area2D nodes
+          └── ParallaxBackground
+              └── ParallaxLayer nodes
+          ```
+
+          Level Features:
+          - Autotiling for terrain
+          - Collision layers from tilemap
+          - Navigation mesh generation
+          - Destructible terrain
+          - Moving platforms
+          - Environmental hazards
+          - Interactive objects
+
+          Level Loading:
+          - Scene-based levels
+          - Procedural generation
+          - Chunk-based streaming
+          - Level transitions and doors
+
+      - id: particle-effects-2d
+        title: Particle and Effects System (2D)
+        instruction: |
+          Design comprehensive 2D particle effects system using Godot best practices:
+
+          Particle System Selection:
+          ```
+          CPUParticles2D:
+          - Best for: Simple effects, < 1000 particles
+          - Advantages: No GPU requirement, per-particle collision
+          - Use cases: Hit sparks, small explosions, pickups
+
+          GPUParticles2D:
+          - Best for: Complex effects, > 1000 particles
+          - Advantages: GPU acceleration, better performance
+          - Use cases: Rain, snow, large explosions, magic effects
+          ```          
+          Performance Best Practices:
+          - Pool all particle systems
+          - Disable particles outside camera view
+          - Use LOD system for particle density
+          - Batch similar effects together
+          - Limit maximum concurrent effects
+          - Use SubViewport for complex effects
+          - Pre-warm particles with preprocess
+          - Cache ParticleProcessMaterial resources
+
+      - id: shader-guidelines
+        title: Shader Guidelines for 2D Games
+        instruction: |
+          Design shader architecture following Godot best practices for 2D games:
+
+          Shader Types and Usage:
+          ```
+          CanvasItem Shaders (2D):
+          - Used for: Sprite2D, Control nodes, TileMap
+          - Features: vertex(), fragment(), light()
+          - Best for: Most 2D effects
+
+          Visual Shaders:
+          - Node-based shader creation
+          - Good for: Artists, prototyping
+          - Limitation: Less optimized than code
+          ```
+
+          Shader Performance Guidelines:
+          - Minimize texture samples
+          - Avoid branching (if/else) in shaders
+          - Use hint_range for uniforms
+          - Precompute values in vertex shader
+          - Cache materials when possible
+          - Batch draw calls with same shader
+          - Use GPU-friendly math (avoid sin/cos when possible)
+          - Profile with RenderingServer.get_rendering_info()
+
+      - id: sprite-management
+        title: Sprite Management and Optimization
+        instruction: |
+          Design sprite management system for 2D games in Godot:
+
+          Sprite Organization:
+          ```
+          assets/art/sprites/
+          ├── characters/
+          │   ├── player/
+          │   │   ├── idle.png (sprite sheet)
+          │   │   ├── run.png
+          │   │   └── player.tres (SpriteFrames resource)
+          │   └── enemies/
+          │       └── enemy_sprites.png (atlas)
+          ├── environment/
+          │   ├── tileset.png
+          │   └── props_atlas.png
+          └── ui/
+              └── ui_atlas.png
+          ```
+                    
+          Sprite Optimization Techniques:
+          - Use texture atlases to reduce draw calls
+          - Enable texture filtering appropriately (nearest for pixel art)
+          - Batch sprites with same material/shader
+          - Use sprite pooling for frequently created/destroyed sprites
+          - Implement LOD system for distant sprites
+          - Disable sprites outside camera view
+          - Use region_rect for atlas sprites
+          - Compress textures appropriately (lossless for pixel art)
+          - Power-of-two texture dimensions when possible
+          - Z-index sorting for proper layering
+          - Modulate instead of separate colored sprites
+          - Cache SpriteFrames resources
+
+      - id: ui-system-2d
+        title: User Interface System (2D)
+        instruction: |
+          Design the 2D UI architecture:
+
+          UI Scene Structure:
+          ```
+          UI (CanvasLayer)
+          ├── HUD (Control)
+          │   ├── HealthBar (ProgressBar)
+          │   ├── ScoreLabel (Label)
+          │   ├── AmmoCounter (HBoxContainer)
+          │   └── Minimap (SubViewport)
+          ├── Menus (Control)
+          │   ├── PauseMenu (PopupPanel)
+          │   ├── InventoryMenu (Panel)
+          │   └── DialogueBox (NinePatchRect)
+          └── TouchControls (Control)
+              ├── VirtualJoystick
+              └── ActionButtons
+          ```
+
+          UI Components:
+          - Health/mana bars with tweening
+          - Score and combo counters
+          - Inventory grids
+          - Dialogue system
+          - Quest tracker
+          - Notification system
+          - Virtual controls for mobile
+
+          UI Patterns:
+          - Theme resources for consistent styling
+          - Signal-based UI updates
+          - UI animation with Tween
+          - Responsive scaling for different resolutions
+          - Input handling priority with mouse_filter
+
+      - id: audio-system-2d
+        title: Audio System (2D)
+        instruction: |
+          Design comprehensive 2D audio architecture using Godot best practices:
+
+          Audio Bus Layout:
+          ```
+          Master
+          ├── Music (volume: -6db)
+          │   ├── Reverb effect
+          │   └── Compressor
+          ├── SFX (volume: 0db)
+          │   ├── Environment
+          │   ├── Combat
+          │   └── UI
+          ├── Voice (volume: 0db)
+          │   └── Compressor
+          └── Ambient (volume: -12db)
+              └── Low-pass filter
+          ```
+                    
+          Best Practices:
+          - Pool audio players to avoid allocations
+          - Limit simultaneous sounds for performance
+          - Use audio buses for organized mixing
+          - Implement LOD for distant sounds
+          - Crossfade music for smooth transitions
+          - Pre-load frequently used sounds
+          - Use .ogg for music, .wav for short SFX
+          - Keep sample rates consistent (44.1kHz or 48kHz)
+          - Compress audio appropriately
+          - Disable audio players when not in use
+
+      - id: game-mechanics-implementation
+        title: Core Game Mechanics Implementation
+        instruction: |
+          Implement comprehensive game mechanics using Godot best practices.
+                    
+          Best Practices:
+          - Use object pooling for all spawnable mechanics
+          - Pre-allocate arrays to avoid runtime allocations
+          - Implement frame-spreading for expensive operations
+          - Use Resources for data-driven design
+          - Emit signals for loose coupling
+          - Cache node references
+          - Use groups for efficient queries
+          - Implement proper cleanup methods
+          - Profile performance regularly
+          - Document complex mechanics thoroughly
 
   - id: data-management
     title: Data Management and Resources
-    instruction: Design data architecture for game content and state
+    instruction: Design data architecture for game content and state using JSON serialization
     sections:
-      - id: resource-system
-        title: Resource System
+      - id: json-data-architecture
+        title: JSON Data Architecture
         instruction: |
-          Design custom Resource classes for game data:
-          - Game configuration data (difficulty, settings)
-          - Level data and progression
-          - Character/enemy statistics
-          - Item and inventory data
+          Design JSON-based data management system:
 
-      - id: save-system
-        title: Save System
+          File Structure:
+          ```
+          data/
+          ├── json/                # JSON data files
+          │   ├── items/           # Item definitions
+          │   │   ├── weapons.json
+          │   │   ├── armor.json
+          │   │   └── consumables.json
+          │   ├── enemies/         # Enemy configurations
+          │   │   └── enemy_data.json
+          │   ├── levels/          # Level definitions
+          │   │   ├── level_1.json
+          │   │   └── level_metadata.json
+          │   └── config/          # Game configuration
+          │       ├── settings.json
+          │       └── difficulty.json
+          └── saves/               # Save game files
+              ├── save_slot_1.json
+              ├── save_slot_2.json
+              └── save_slot_3.json
+          ```
+
+          Performance Considerations:
+          - Pre-parse JSON at startup for read-only data
+          - Cache frequently accessed data in memory
+          - Use streaming for large JSON files
+          - Compress save files for smaller storage
+          - Implement autosave with configurable intervals
+          - Keep backup of previous save before overwriting
+
+  - id: analytics-integration
+    title: Analytics and Telemetry Integration
+    instruction: Design analytics system for player behavior tracking and game metrics
+    sections:
+      - id: analytics-architecture
+        title: Analytics Architecture Overview
         instruction: |
-          Design the save/load architecture:
-          - Save data structure and format
-          - Save file location and naming
-          - Versioning for save compatibility
-          - Backup and recovery strategies
+          Design comprehensive analytics system:
+
+          Analytics Categories:
+          - Player Behavior: Movement patterns, choices, playtime
+          - Game Performance: FPS, load times, crashes
+          - Monetization: Purchase events, ad views, conversion rates
+          - Progression: Level completion, difficulty spikes, drop-off points
+          - Social: Sharing, multiplayer engagement, friend invites
+
+          Privacy Considerations:
+          - GDPR compliance (EU)
+          - COPPA compliance (children)
+          - User consent management
+          - Data anonymization
+          - Opt-out mechanisms
+
+          Recommended Services:
+          - GameAnalytics (free tier available)
+          - Unity Analytics (works with Godot via REST API)
+          - Custom backend with Supabase/Firebase
+          - Open-source: Matomo, Plausible
+          - Steam Stats API (for Steam releases)
+
+          Implementation guidelines:
+
+          Event Naming Conventions:
+          - Use snake_case for event names
+          - Be consistent and descriptive
+          - Group related events with prefixes
+          - Examples: level_start, level_complete, ui_button_click
+
+          Essential Events to Track:
+          ```
+          // Core gameplay
+          - session_start / session_end
+          - level_start / level_complete / level_fail
+          - tutorial_start / tutorial_complete / tutorial_skip
+
+          // Monetization
+          - purchase_initiated / purchase_complete / purchase_failed
+          - ad_requested / ad_shown / ad_clicked / ad_skipped
+
+          // Player progression
+          - achievement_unlocked
+          - level_up
+          - item_acquired / item_used
+
+          // Technical
+          - error / crash
+          - low_fps
+          - long_load_time
+
+          // Social
+          - share_initiated / share_complete
+          - friend_invited
+          - multiplayer_match_start / multiplayer_match_end
+          ```
+
+          Performance Considerations:
+          - Batch events to reduce network calls
+          - Use background threads for sending
+          - Implement retry logic with exponential backoff
+          - Store events locally if offline
+          - Limit event properties size
+          - Sample high-frequency events
+
+          Privacy Requirements:
+          - Always get user consent before tracking
+          - Provide clear opt-out mechanism
+          - Anonymize user data
+          - Don't track PII without explicit consent
+          - Implement data retention policies
+          - Support data deletion requests (GDPR)
+
+  - id: multiplayer-architecture
+    title: Multiplayer and Networking Architecture
+    instruction: Design multiplayer systems for networked gameplay
+    sections:
+      - id: multiplayer-overview
+        title: Multiplayer Architecture Overview
+        instruction: |
+          Design networking architecture:
+
+          Network Topologies:
+          - Peer-to-Peer (P2P): Direct connections, good for small groups
+          - Client-Server: Authoritative server, prevents cheating
+          - Relay-based: Using services like Steam Relay, Photon
+          - Hybrid: P2P with relay fallback
+
+          Godot Networking Options:
+          - Built-in MultiplayerAPI (ENet-based)
+          - WebRTC for browser-based multiplayer
+          - WebSocket for real-time communication
+          - Steam Networking (via GodotSteam)
+          - Third-party: Nakama, Photon, Mirror
+
+          Architecture Patterns:
+          - Authoritative server with client prediction
+          - Lag compensation and interpolation
+          - State synchronization
+          - Rollback netcode (for fighting games)
+          - Deterministic lockstep (for RTS)
+
+          Network Optimization:
+          - Use unreliable for frequent updates (position)
+          - Use reliable for important events (damage, items)
+          - Implement delta compression
+          - Send only changed values
+          - Use bit packing for booleans
+          - Implement interest management (culling)
+
+          Anti-Cheat Measures:
+          - Server authoritative gameplay
+          - Validate all client inputs
+          - Implement speed hack detection
+          - Use server-side physics
+          - Encrypt sensitive data
+          - Implement rate limiting
+
+          Lag Compensation:
+          - Client-side prediction
+          - Server reconciliation
+          - Interpolation for smooth movement
+          - Extrapolation for high latency
+          - Lag compensation for hit detection
+          - Rollback and replay for fighting games
+
+          Scalability:
+          - Use dedicated servers for competitive games
+          - Implement matchmaking and lobbies
+          - Regional server distribution
+          - Load balancing
+          - Database for persistent data
+          - Consider cloud services (AWS GameLift, Google Cloud Game Servers)
+
+          Testing Strategies:
+          - Simulate network conditions (latency, packet loss)
+          - Bot players for testing
+          - Stress testing with multiple clients
+          - Cross-platform testing
+          - Network profiling tools
 
   - id: performance-optimization
     title: Performance Optimization Strategy
@@ -257,25 +806,201 @@ sections:
 
   - id: testing-architecture
     title: Testing and Quality Assurance
-    instruction: Plan testing strategy and tooling
+    instruction: Design comprehensive TDD-driven testing architecture
     sections:
-      - id: automated-testing
-        title: Automated Testing Strategy
+      - id: tdd-philosophy
+        title: Test-Driven Development Approach
         instruction: |
-          Design testing approach:
-          - Unit testing with GUT framework (GDScript) or GoDotTest (C#)
-          - Integration testing for game systems using builtin testing (GDScript) or GodotTestDriver (C#)
-          - Performance testing and benchmarking
-          - Automated build and testing pipeline
+          Establish TDD as the core development methodology:
+          - Write tests BEFORE implementation code
+          - Red-Green-Refactor cycle for all features
+          - Tests define the specification and API design
+          - Maintain test coverage goals:
+            - Core game logic: 90% minimum
+            - Utility functions: 100% coverage
+            - UI: Critical path automation tests
+            - Performance: All hot paths tested
+
+          Test Pyramid Structure:
+          1. Unit Tests (70%) - Fast, isolated logic tests
+          2. Integration Tests (20%) - System interaction tests
+          3. UI/E2E Tests (10%) - Critical user path validation
+
+      - id: testing-structure
+        title: Test Organization and Structure
+        instruction: |
+          Define dual testing strategy for both languages:
+
+          For C# Projects:
+          ```
+          tests/
+          ├── unit/                  # Pure C# unit tests
+          │   ├── Core/              # Core game logic tests
+          │   ├── Utils/             # Utility function tests
+          │   └── Performance/       # Zero-allocation tests
+          ├── integration/           # Godot integration tests
+          │   ├── Systems/           # Game system tests
+          │   ├── UI/                # UI automation tests
+          │   └── Scenes/            # Scene loading tests
+          └── fixtures/              # Test data and mocks
+              └── TestData.cs        # Pre-allocated test buffers
+          ```
+
+          For GDScript Projects:
+          ```
+          tests/
+          ├── unit/                  # GUT unit tests
+          │   ├── core/              # Core game logic tests
+          │   ├── utils/             # Utility function tests
+          │   └── components/        # Component tests
+          ├── integration/           # Scene integration tests
+          │   ├── systems/           # Game system tests
+          │   ├── ui/                # UI automation tests
+          │   └── scenes/            # Scene loading tests
+          └── fixtures/              # Test data and resources
+              └── test_data.gd       # Test resource files
+          ```
+
+      - id: unit-testing-strategy
+        title: Unit Testing Strategy
+        instruction: |
+          Design unit testing approach for both languages:
+
+          C# Unit Testing (Performance-First):
+          - Use custom test runner (avoid standard dotnet test)
+          - Zero-allocation testing patterns:
+            ```csharp
+            // Pre-allocated buffers for tests
+            private readonly Vector2I[] _neighborBuffer = new Vector2I[6];
+            private readonly Unit[] _unitBuffer = new Unit[100];
+            
+            [Test]
+            public void TestHexNeighbors_ZeroAllocation()
+            {
+                HexUtils.GetNeighbors(hex, _neighborBuffer);
+                Assert.AreEqual(expected, _neighborBuffer[0]);
+            }
+            ```
+          - Performance requirements:
+            - Zero allocations during test execution
+            - Test execution < 10ms per test
+            - No LINQ, reflection, or dynamic allocations
+            - Use stackalloc for temporary buffers
+
+          GDScript Unit Testing (GUT Framework):
+          - Test file naming: test_*.gd
+          - Test method naming: test_*()
+          - Pre-allocated test data:
+            ```gdscript
+            var _test_buffer := []
+            var _unit_pool := []
+            
+            func before_all():
+                # Pre-allocate test resources
+                _test_buffer.resize(100)
+                for i in 100:
+                    _unit_pool.append(Unit.new())
+            
+            func test_hex_distance():
+                var hex1 = Vector2i(10, 10)
+                var hex2 = Vector2i(12, 11)
+                assert_eq(HexUtils.get_distance(hex1, hex2), 2)
+            ```
+
+      - id: integration-testing
+        title: Integration Testing Strategy
+        instruction: |
+          Design Godot integration testing for C# (GoDotTest + GodotTestDriver) or GDScript (GUT Scene Testing).
+
+      - id: performance-testing
+        title: Performance and Allocation Testing
+        instruction: |
+          Design performance validation tests in preferred language.
+
+      - id: ui-automation
+        title: UI Automation Testing
+        instruction: |
+          Design UI testing strategy:
+
+          For C# (GodotTestDriver):
+          - Button interactions
+          - Text input simulation
+          - Tab/menu navigation
+          - Mouse/touch input
+          - Drag and drop testing
+
+          For GDScript (Input Simulation):
+          - Create input events programmatically
+          - Test signal emissions
+          - Verify UI state changes
+          - Test scene transitions
+
+      - id: test-runners
+        title: Test Execution and Runners
+        instruction: |
+          Configure test execution:
+
+          C# Test Execution:
+          ```bash
+          # Unit tests (custom runner for zero-allocation)
+          ./run_tests.sh --unit
+
+          # Integration tests (Godot headless)
+          godot --headless --script tests/TestRunner.cs
+
+          # Performance tests
+          ./run_tests.sh --performance --release
+          ```
+
+          GDScript Test Execution:
+          ```bash
+          # Run all GUT tests
+          godot --headless -s addons/gut/gut_cmdln.gd
+
+          # Run specific test suite
+          godot --headless -s addons/gut/gut_cmdln.gd -gtest=tests/unit/test_*.gd
+
+          # Run with coverage
+          godot --headless -s addons/gut/gut_cmdln.gd -gcoverage
+          ```
+
+      - id: ci-integration
+        title: Continuous Integration Pipeline
+        instruction: |
+          Design automated testing pipeline using GitHub CI/CD.
+
+      - id: test-data-management
+        title: Test Data and Fixtures
+        instruction: |
+          Design test data strategy:
+          - Pre-allocated buffers for zero-allocation testing
+          - Reusable test scenes and resources
+          - Mock data generators
+          - Test-specific Resource files (.tres)
+          - Deterministic random seeds for reproducible tests
 
       - id: debugging-tools
         title: Debugging and Development Tools
         instruction: |
           Plan development and debugging support:
-          - Debug UI and console commands
-          - Performance monitoring and profiling
-          - Logging and error reporting
-          - Development mode features
+          - Debug overlay UI showing:
+            - FPS and frame time
+            - Memory allocation tracking
+            - Active object counts
+            - Performance metrics
+          - Console commands for testing:
+            - Spawn test entities
+            - Trigger game states
+            - Load test scenarios
+          - Logging system:
+            - Structured logging with levels
+            - Performance event tracking
+            - Error aggregation
+          - Development cheats:
+            - God mode
+            - Resource manipulation
+            - Time control
+            - State inspection
 
   - id: deployment-architecture
     title: Deployment and Distribution
@@ -304,13 +1029,111 @@ sections:
     instruction: Establish coding and development standards
     sections:
       - id: coding-standards
-        title: C# and GDScript Coding Standards
+        title: Coding Standards
         instruction: |
-          Establish coding conventions:
-          - Naming conventions (snake_case for variables/functions, PascalCase for classes)
-          - Code organization and structure
-          - Comment and documentation standards
-          - Error handling patterns
+          These standards are MANDATORY for AI agents. Work with user to define ONLY the critical rules needed to prevent bad code. Explain that:
+
+          1. This section directly controls AI developer behavior
+          2. Keep it minimal - assume AI knows general best practices
+          3. Focus on project-specific conventions and gotchas
+          4. Overly detailed standards bloat context and slow development
+          5. Standards will be extracted to separate file for dev agent use
+
+          For each standard, get explicit user confirmation it's necessary.
+        elicit: true
+        sections:
+          - id: core-standards
+            title: Core Standards
+            template: |
+              - **Languages & Runtimes:** {{languages_and_versions}}
+              - **Style & Linting:** {{linter_config}}
+              - **Test Organization:** {{test_file_convention}}
+          - id: naming-conventions
+            title: Naming Conventions
+            type: table
+            columns: [Element, Convention (C#), Convention (GDScript), Example]
+            instruction: |
+              Define naming conventions for both C# and GDScript. Default conventions:
+
+              C# Naming:
+              - Methods: PascalCase
+              - Public Properties: PascalCase
+              - Private Fields: _camelCase (underscore prefix)
+              - Local Variables: camelCase
+              - Constants: PascalCase
+              - Interfaces: IPascalCase (avoid unless necessary)
+
+              GDScript Naming (Godot style guide):
+              - Functions: snake_case
+              - Properties/Variables: snake_case
+              - Private members: _snake_case (underscore prefix)
+              - Constants: UPPER_SNAKE_CASE
+              - Signals: snake_case
+              - Enums: PascalCase, members: UPPER_SNAKE_CASE
+          - id: critical-rules
+            title: Critical Rules
+            instruction: |
+              List ONLY rules that AI might violate or project-specific requirements. Examples:
+              - "Never use console.log in production code - use logger"
+              - "All API responses must use ApiResponse wrapper type"
+              - "Database queries must use repository pattern, never direct ORM"
+
+              Avoid obvious rules like "use SOLID principles" or "write clean code"
+            repeatable: true
+            template: "- **{{rule_name}}:** {{rule_description}}"
+          - id: performance-patterns
+            title: Performance-Critical Patterns
+            instruction: |
+              Define performance requirements if this is a performance-sensitive game:
+
+              For C#:
+              - Pre-allocate all buffers and arrays
+              - Reuse collections with Clear() instead of new
+              - Pass arrays as parameters to fill, don't return new ones
+              - Use stackalloc for small temporary buffers
+              - AVOID: LINQ (causes allocations), var for collections, unnecessary interfaces, reflection
+
+              For GDScript:
+              - Pre-allocate arrays when size is known
+              - Reuse objects from object pools for frequently created/destroyed items
+              - Use typed arrays when possible (Array[Type])
+              - Cache node references instead of repeated get_node() calls
+              - Prefer signals over polling in _process()
+              - Use _physics_process() for physics-related code
+            condition: Performance-sensitive game
+          - id: language-specifics
+            title: Language-Specific Guidelines
+            condition: Critical language-specific rules needed
+            instruction: Add ONLY if critical for preventing AI mistakes. Most teams don't need this section.
+            sections:
+              - id: csharp-rules
+                title: C# Specific Rules
+                condition: Using C# for scripting
+                instruction: |
+                  Critical C# patterns for Godot development:
+                  - Use Godot types (Vector2I, Color) instead of System types
+                  - Prefer GD.Print for logging
+                  - Handle signals with direct connections, not C# events
+                  - Use [Export] for editor-visible properties
+                  - Always use explicit types, never var for collections
+                  - Mark allocation points with // ALLOC: comment if unavoidable
+                  - Use // PERF: comments for performance-sensitive sections
+                repeatable: true
+                template: "- **{{rule_topic}}:** {{rule_detail}}"
+              - id: gdscript-rules
+                title: GDScript Specific Rules
+                condition: Using GDScript
+                instruction: |
+                  Critical GDScript patterns:
+                  - Use @export for editor-visible properties
+                  - Prefer typed variables (var name: Type) for better performance
+                  - Use @onready for node references
+                  - Avoid creating nodes in _process() or _physics_process()
+                  - Use match statements instead of long if-elif chains
+                  - Prefer Resource classes for data structures
+                  - Use await for coroutines instead of yield (Godot 4.x)
+                repeatable: true
+                template: "- **{{rule_topic}}:** {{rule_detail}}"
 
       - id: scene-standards
         title: Scene Organization Standards
