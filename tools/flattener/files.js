@@ -1,8 +1,8 @@
-const path = require("node:path");
-const discovery = require("./discovery.js");
-const ignoreRules = require("./ignoreRules.js");
-const { isBinaryFile } = require("./binary.js");
-const { aggregateFileContents } = require("./aggregate.js");
+const path = require('node:path');
+const discovery = require('./discovery.js');
+const ignoreRules = require('./ignoreRules.js');
+const { isBinaryFile } = require('./binary.js');
+const { aggregateFileContents } = require('./aggregate.js');
 
 // Backward-compatible signature; delegate to central loader
 async function parseGitignore(gitignorePath) {
@@ -14,7 +14,7 @@ async function discoverFiles(rootDir) {
     // Delegate to discovery module which respects .gitignore and defaults
     return await discovery.discoverFiles(rootDir, { preferGit: true });
   } catch (error) {
-    console.error("Error discovering files:", error.message);
+    console.error('Error discovering files:', error.message);
     return [];
   }
 }

@@ -1,4 +1,6 @@
 markdownExploder: true
+qa:
+  qaLocation: docs/qa
 prd:
   prdFile: docs/prd.md
   prdVersion: v4

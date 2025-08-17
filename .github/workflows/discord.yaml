@@ -1,6 +1,15 @@
 name: Discord Notification
 
-on: [pull_request, release, create, delete, issue_comment, pull_request_review, pull_request_review_comment]
+"on":
+  [
+    pull_request,
+    release,
+    create,
+    delete,
+    issue_comment,
+    pull_request_review,
+    pull_request_review_comment,
+  ]
 
 jobs:
   notify:

@@ -25,7 +25,6 @@ Thumbs.db
 # Development tools and configs
 .prettierignore
 .prettierrc
-.husky/
 
 # IDE and editor configs
 .windsurf/
@@ -44,4 +43,4 @@ CLAUDE.md
 test-project-install/*
 sample-project/*
 flattened-codebase.xml
-
+*.stats.md
