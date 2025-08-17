@@ -101,7 +101,7 @@ Ask the user if they want to work through the checklist:
 - [ ] Architecture supports adding new content and features
 - [ ] System designed for AI agent implementation of game features
 
-## 3. UNITY TECHNOLOGY STACK & DECISIONS
+## 3. GODOT TECHNOLOGY STACK & DECISIONS
 
 [[LLM: Godot technology choices impact long-term maintainability. For each Godot-specific decision, consider: Is this using Godot's strengths? Will this scale to full production? Are we fighting against Godot's paradigms? Verify that specific Godot versions and package versions are defined.]]
 

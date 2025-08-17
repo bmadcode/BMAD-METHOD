@@ -84,7 +84,7 @@ ALWAYS cite source documents: `[Source: gamearchitecture/{filename}.md#{section}
 - Identify Godot addons required for the story
 - Document package versions from manifest.json
 - Note any package-specific APIs or components being used
-- List package configuration requirements (e.g., Input System settings, URP asset config)
+- List package configuration requirements (using NuGet for C#, Asset Store for GDScript)
 - Identify any third-party Asset Store packages and their integration points
 
 #### 4.2 Scene and Node Planning
@@ -108,7 +108,7 @@ ALWAYS cite source documents: `[Source: gamearchitecture/{filename}.md#{section}
 - Define animation clips and animator controllers needed
 - Specify audio clips and their import settings
 - Document any shader or material requirements
-- Note any package-specific assets (e.g., URP materials, Input Action maps)
+- Note any package-specific assets (e.g., textures, shaders, Input Action maps)
 
 ### 5. Populate Story Template with Full Context
 
