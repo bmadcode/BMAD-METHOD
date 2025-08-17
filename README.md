@@ -23,7 +23,7 @@ Foundations in Agentic Agile Driven Development, known as the Breakthrough Metho
 
 This two-phase approach eliminates both **planning inconsistency** and **context loss** - the biggest problems in AI-assisted development. Your Dev agent opens a story file with complete understanding of what to build, how to build it, and why.
 
-**📖 [See the complete workflow in the User Guide](bmad-core/user-guide.md)** - Planning phase, development cycle, and all agent roles
+**📖 [See the complete workflow in the User Guide](docs/user-guide.md)** - Planning phase, development cycle, and all agent roles
 
 ## Quick Navigation
 
@@ -31,18 +31,18 @@ This two-phase approach eliminates both **planning inconsistency** and **context
 
 **Before diving in, review these critical workflow diagrams that explain how BMad works:**
 
-1. **[Planning Workflow (Web UI)](bmad-core/user-guide.md#the-planning-workflow-web-ui)** - How to create PRD and Architecture documents
-2. **[Core Development Cycle (IDE)](bmad-core/user-guide.md#the-core-development-cycle-ide)** - How SM, Dev, and QA agents collaborate through story files
+1. **[Planning Workflow (Web UI)](docs/user-guide.md#the-planning-workflow-web-ui)** - How to create PRD and Architecture documents
+2. **[Core Development Cycle (IDE)](docs/user-guide.md#the-core-development-cycle-ide)** - How SM, Dev, and QA agents collaborate through story files
 
 > ⚠️ **These diagrams explain 90% of BMad Method Agentic Agile flow confusion** - Understanding the PRD+Architecture creation and the SM/Dev/QA workflow and how agents pass notes through story files is essential - and also explains why this is NOT taskmaster or just a simple task runner!
 
 ### What would you like to do?
 
 - **[Install and Build software with Full Stack Agile AI Team](#quick-start)** → Quick Start Instruction
-- **[Learn how to use BMad](bmad-core/user-guide.md)** → Complete user guide and walkthrough
-- **[See available AI agents](#available-agents)** → Specialized roles for your team
+- **[Learn how to use BMad](docs/user-guide.md)** → Complete user guide and walkthrough
+- **[See available AI agents](/bmad-core/agents))** → Specialized roles for your team
 - **[Explore non-technical uses](#-beyond-software-development---expansion-packs)** → Creative writing, business, wellness, education
-- **[Create my own AI agents](#creating-your-own-expansion-pack)** → Build agents for your domain
+- **[Create my own AI agents](docs/expansion-packs.md)** → Build agents for your domain
 - **[Browse ready-made expansion packs](expansion-packs/)** → Game dev, DevOps, infrastructure and get inspired with ideas and examples
 - **[Understand the architecture](docs/core-architecture.md)** → Technical deep dive
 - **[Join the community](https://discord.gg/gk8jAdXWmj)** → Get help and share ideas
@@ -75,6 +75,8 @@ This makes it easy to benefit from the latest improvements, bug fixes, and new a
 
 ```bash
 npx bmad-method install
+# OR explicitly use stable tag:
+npx bmad-method@stable install
 # OR if you already have BMad installed:
 git pull
 npm run install:bmad
@@ -97,7 +99,7 @@ This single command handles:
 3. **Upload & configure**: Upload the file and set instructions: "Your critical operating instructions are attached, do not break character as directed"
 4. **Start Ideating and Planning**: Start chatting! Type `*help` to see available commands or pick an agent like `*analyst` to start right in on creating a brief.
 5. **CRITICAL**: Talk to BMad Orchestrator in the web at ANY TIME (#bmad-orchestrator command) and ask it questions about how this all works!
-6. **When to move to the IDE**: Once you have your PRD, Architecture, optional UX and Briefs - its time to switch over to the IDE to shard your docs, and start implementing the actual code! See the [User guide](bmad-core/user-guide.md) for more details
+6. **When to move to the IDE**: Once you have your PRD, Architecture, optional UX and Briefs - its time to switch over to the IDE to shard your docs, and start implementing the actual code! See the [User guide](docs/user-guide.md) for more details
 
 ### Alternative: Clone and Build
 
@@ -126,18 +128,25 @@ The BMad-Method includes a powerful codebase flattener tool designed to prepare 
 
 ```bash
 # Basic usage - creates flattened-codebase.xml in current directory
-npm run flatten
+npx bmad-method flatten
+
+# Specify custom input directory
+npx bmad-method flatten --input /path/to/source/directory
+npx bmad-method flatten -i /path/to/source/directory
 
 # Specify custom output file
-npm run flatten -- --output my-project.xml
-npm run flatten -- -o /path/to/output/codebase.xml
+npx bmad-method flatten --output my-project.xml
+npx bmad-method flatten -o /path/to/output/codebase.xml
+
+# Combine input and output options
+npx bmad-method flatten --input /path/to/source --output /path/to/output/codebase.xml
 ```
 
 ### Example Output
 
 The tool will display progress and provide a comprehensive summary:
 
-```
+```text
 📊 Completion Summary:
 ✅ Successfully processed 156 files into flattened-codebase.xml
 📁 Output file: /path/to/your/project/flattened-codebase.xml
@@ -148,13 +157,46 @@ The tool will display progress and provide a comprehensive summary:
 📊 File breakdown: 142 text, 14 binary, 0 errors
 ```
 
-The generated XML file contains all your project's source code in a structured format that AI models can easily parse and understand, making it perfect for code reviews, architecture discussions, or getting AI assistance with your BMad-Method projects.
+The generated XML file contains your project's text-based source files in a structured format that AI models can easily parse and understand, making it perfect for code reviews, architecture discussions, or getting AI assistance with your BMad-Method projects.
+
+#### Advanced Usage & Options
+
+- CLI options
+  - `-i, --input <path>`: Directory to flatten. Default: current working directory or auto-detected project root when run interactively.
+  - `-o, --output <path>`: Output file path. Default: `flattened-codebase.xml` in the chosen directory.
+- Interactive mode
+  - If you do not pass `--input` and `--output` and the terminal is interactive (TTY), the tool will attempt to detect your project root (by looking for markers like `.git`, `package.json`, etc.) and prompt you to confirm or override the paths.
+  - In non-interactive contexts (e.g., CI), it will prefer the detected root silently; otherwise it falls back to the current directory and default filename.
+- File discovery and ignoring
+  - Uses `git ls-files` when inside a git repository for speed and correctness; otherwise falls back to a glob-based scan.
+  - Applies your `.gitignore` plus a curated set of default ignore patterns (e.g., `node_modules`, build outputs, caches, logs, IDE folders, lockfiles, large media/binaries, `.env*`, and previously generated XML outputs).
+- Binary handling
+  - Binary files are detected and excluded from the XML content. They are counted in the final summary but not embedded in the output.
+- XML format and safety
+  - UTF-8 encoded file with root element `<files>`.
+  - Each text file is emitted as a `<file path="relative/path">` element whose content is wrapped in `<![CDATA[ ... ]]>`.
+  - The tool safely handles occurrences of `]]>` inside content by splitting the CDATA to preserve correctness.
+  - File contents are preserved as-is and indented for readability inside the XML.
+- Performance
+  - Concurrency is selected automatically based on your CPU and workload size. No configuration required.
+  - Running inside a git repo improves discovery performance.
+
+#### Minimal XML example
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+  <file path="src/index.js"><![CDATA[
+    // your source content
+  ]]></file>
+</files>
+```
 
 ## Documentation & Resources
 
 ### Essential Guides
 
-- 📖 **[User Guide](bmad-core/user-guide.md)** - Complete walkthrough from project inception to completion
+- 📖 **[User Guide](docs/user-guide.md)** - Complete walkthrough from project inception to completion
 - 🏗️ **[Core Architecture](docs/core-architecture.md)** - Technical deep dive and system design
 - 🚀 **[Expansion Packs Guide](docs/expansion-packs.md)** - Extend BMad to any domain beyond software development
 

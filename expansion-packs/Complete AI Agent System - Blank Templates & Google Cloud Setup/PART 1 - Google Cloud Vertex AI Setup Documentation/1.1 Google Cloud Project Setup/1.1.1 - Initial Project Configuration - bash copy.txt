@@ -1,0 +1,13 @@
+# 1. Create new Google Cloud Project
+gcloud projects create {{PROJECT_ID}} --name="{{COMPANY_NAME}} AI Agent System"
+
+# 2. Set default project
+gcloud config set project {{PROJECT_ID}}
+
+# 3. Enable required APIs
+gcloud services enable aiplatform.googleapis.com
+gcloud services enable storage.googleapis.com
+gcloud services enable cloudfunctions.googleapis.com
+gcloud services enable run.googleapis.com
+gcloud services enable firestore.googleapis.com
+gcloud services enable secretmanager.googleapis.com

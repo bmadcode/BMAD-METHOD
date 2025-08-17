@@ -6,7 +6,7 @@ Provide a user-friendly interface to the BMad knowledge base without overwhelmin
 
 ## Instructions
 
-When entering KB mode (*kb-mode), follow these steps:
+When entering KB mode (\*kb-mode), follow these steps:
 
 ### 1. Welcome and Guide
 
@@ -48,12 +48,12 @@ Or ask me about anything else related to BMad-Method!
 When user is done or wants to exit KB mode:
 
 - Summarize key points discussed if helpful
-- Remind them they can return to KB mode anytime with *kb-mode
+- Remind them they can return to KB mode anytime with \*kb-mode
 - Suggest next steps based on what was discussed
 
 ## Example Interaction
 
-**User**: *kb-mode
+**User**: \*kb-mode
 
 **Assistant**: I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method.
 

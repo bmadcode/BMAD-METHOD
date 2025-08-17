@@ -211,7 +211,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
@@ -224,14 +223,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -240,7 +237,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -248,7 +244,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -262,7 +257,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -272,7 +266,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -376,14 +369,14 @@ template:
   output:
     format: markdown
     filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
-    title: "Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
+    title: 'Story {{epic_num}}.{{story_num}}: {{story_title_short}}'
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
 
 agent_config:
-  editable_sections: 
+  editable_sections:
     - Status
     - Story
     - Acceptance Criteria
@@ -400,7 +393,7 @@ sections:
     instruction: Select the current status of the story
     owner: scrum-master
     editors: [scrum-master, dev-agent]
-    
+
   - id: story
     title: Story
     type: template-text
@@ -412,7 +405,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
-    
+
   - id: acceptance-criteria
     title: Acceptance Criteria
     type: numbered-list
@@ -420,7 +413,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
-    
+
   - id: tasks-subtasks
     title: Tasks / Subtasks
     type: bullet-list
@@ -437,7 +430,7 @@ sections:
     elicit: true
     owner: scrum-master
     editors: [scrum-master, dev-agent]
-    
+
   - id: dev-notes
     title: Dev Notes
     instruction: |
@@ -461,7 +454,7 @@ sections:
         elicit: true
         owner: scrum-master
         editors: [scrum-master]
-        
+
   - id: change-log
     title: Change Log
     type: table
@@ -469,7 +462,7 @@ sections:
     instruction: Track changes made to this story document
     owner: scrum-master
     editors: [scrum-master, dev-agent, qa-agent]
-    
+
   - id: dev-agent-record
     title: Dev Agent Record
     instruction: This section is populated by the development agent during implementation
@@ -478,29 +471,29 @@ sections:
     sections:
       - id: agent-model
         title: Agent Model Used
-        template: "{{agent_model_name_version}}"
+        template: '{{agent_model_name_version}}'
         instruction: Record the specific AI agent model and version used for development
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: debug-log-references
         title: Debug Log References
         instruction: Reference any debug logs or traces generated during development
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: completion-notes
         title: Completion Notes List
         instruction: Notes about the completion of tasks and any issues encountered
         owner: dev-agent
         editors: [dev-agent]
-        
+
       - id: file-list
         title: File List
         instruction: List all files created, modified, or affected during story implementation
         owner: dev-agent
         editors: [dev-agent]
-        
+
   - id: qa-results
     title: QA Results
     instruction: Results from QA Agent QA review of the completed story implementation
@@ -628,19 +621,16 @@ Note: We don't need every file listed - just the important ones.]]
 Generate a concise validation report:
 
 1. Quick Summary
-
    - Story readiness: READY / NEEDS REVISION / BLOCKED
    - Clarity score (1-10)
    - Major gaps identified
 
 2. Fill in the validation table with:
-
    - PASS: Requirements clearly met
    - PARTIAL: Some gaps but workable
    - FAIL: Critical information missing
 
 3. Specific Issues (if any)
-
    - List concrete problems to fix
    - Suggest specific improvements
    - Identify any blocking dependencies

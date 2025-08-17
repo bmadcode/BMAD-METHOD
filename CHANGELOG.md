@@ -1,15 +1,73 @@
-# [4.32.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.31.0...v4.32.0) (2025-07-27)
-
+## [4.36.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.36.1...v4.36.2) (2025-08-10)
 
 ### Bug Fixes
 
-* Add package-lock.json to fix GitHub Actions dependency resolution ([cce7a75](https://github.com/bmadcode/BMAD-METHOD/commit/cce7a758a632053e26d143b678eb7963599b432d))
-* GHA fix ([62ccccd](https://github.com/bmadcode/BMAD-METHOD/commit/62ccccdc9e85f8621f63f99bd1ce0d14abe09783))
+- align installer dependencies with root package versions for ESM compatibility ([#420](https://github.com/bmadcode/BMAD-METHOD/issues/420)) ([3f6b674](https://github.com/bmadcode/BMAD-METHOD/commit/3f6b67443d61ae6add98656374bed27da4704644))
 
+## [4.36.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.36.0...v4.36.1) (2025-08-09)
+
+### Bug Fixes
+
+- update Node.js version to 20 in release workflow and reduce Discord spam ([3f7e19a](https://github.com/bmadcode/BMAD-METHOD/commit/3f7e19a098155341a2b89796addc47b0623cb87a))
+
+# [4.36.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.3...v4.36.0) (2025-08-09)
 
 ### Features
 
-* Overhaul and Enhance 2D Unity Game Dev Expansion Pack ([#350](https://github.com/bmadcode/BMAD-METHOD/issues/350)) ([a7038d4](https://github.com/bmadcode/BMAD-METHOD/commit/a7038d43d18246f6aef175aa89ba059b7c94f61f))
+- modularize flattener tool into separate components with improved project root detection ([#417](https://github.com/bmadcode/BMAD-METHOD/issues/417)) ([0fdbca7](https://github.com/bmadcode/BMAD-METHOD/commit/0fdbca73fc60e306109f682f018e105e2b4623a2))
+
+## [4.35.3](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.2...v4.35.3) (2025-08-06)
+
+### Bug Fixes
+
+- doc location improvement ([1676f51](https://github.com/bmadcode/BMAD-METHOD/commit/1676f5189ed057fa2d7facbd6a771fe67cdb6372))
+
+## [4.35.2](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.1...v4.35.2) (2025-08-06)
+
+### Bug Fixes
+
+- npx status check ([f7c2a4f](https://github.com/bmadcode/BMAD-METHOD/commit/f7c2a4fb6c454b17d250b85537129b01ffee6b85))
+
+## [4.35.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.35.0...v4.35.1) (2025-08-06)
+
+### Bug Fixes
+
+- npx hanging commands ([2cf322e](https://github.com/bmadcode/BMAD-METHOD/commit/2cf322ee0d9b563a4998c72b2c5eab259594739b))
+
+# [4.35.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.34.0...v4.35.0) (2025-08-04)
+
+### Features
+
+- add qwen-code ide support to bmad installer. ([#392](https://github.com/bmadcode/BMAD-METHOD/issues/392)) ([a72b790](https://github.com/bmadcode/BMAD-METHOD/commit/a72b790f3be6c77355511ace2d63e6bec4d751f1))
+
+# [4.34.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.33.1...v4.34.0) (2025-08-03)
+
+### Features
+
+- add KiloCode integration support to BMAD installer ([#390](https://github.com/bmadcode/BMAD-METHOD/issues/390)) ([dcebe91](https://github.com/bmadcode/BMAD-METHOD/commit/dcebe91d5ea68e69aa27183411a81639d444efd7))
+
+## [4.33.1](https://github.com/bmadcode/BMAD-METHOD/compare/v4.33.0...v4.33.1) (2025-07-29)
+
+### Bug Fixes
+
+- dev agent yaml syntax for develop-story command ([#362](https://github.com/bmadcode/BMAD-METHOD/issues/362)) ([bcb3728](https://github.com/bmadcode/BMAD-METHOD/commit/bcb3728f8868c0f83bca3d61fbd7e15c4e114526))
+
+# [4.33.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.32.0...v4.33.0) (2025-07-28)
+
+### Features
+
+- version bump ([e9dd4e7](https://github.com/bmadcode/BMAD-METHOD/commit/e9dd4e7beb46d0c80df0cd65ae02d1867a56d7c1))
+
+# [4.32.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.31.0...v4.32.0) (2025-07-27)
+
+### Bug Fixes
+
+- Add package-lock.json to fix GitHub Actions dependency resolution ([cce7a75](https://github.com/bmadcode/BMAD-METHOD/commit/cce7a758a632053e26d143b678eb7963599b432d))
+- GHA fix ([62ccccd](https://github.com/bmadcode/BMAD-METHOD/commit/62ccccdc9e85f8621f63f99bd1ce0d14abe09783))
+
+### Features
+
+- Overhaul and Enhance 2D Unity Game Dev Expansion Pack ([#350](https://github.com/bmadcode/BMAD-METHOD/issues/350)) ([a7038d4](https://github.com/bmadcode/BMAD-METHOD/commit/a7038d43d18246f6aef175aa89ba059b7c94f61f))
 
 # [4.31.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.30.4...v4.31.0) (2025-07-20)
 
@@ -516,10 +574,6 @@
 
 - Manual version bumping via npm scripts is now disabled. Use conventional commits for automated releases.
 
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-
 # [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
 
 ### Bug Fixes
@@ -628,3 +682,5 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ### Features
 
 - add versioning and release automation ([0ea5e50](https://github.com/bmadcode/BMAD-METHOD/commit/0ea5e50aa7ace5946d0100c180dd4c0da3e2fd8c))
+
+# Promote to stable release 5.0.0

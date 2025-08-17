@@ -65,7 +65,7 @@ See [Expansion Packs Guide](../docs/expansion-packs.md) for detailed examples an
 
 ### Template Rules
 
-Templates follow the [BMad Document Template](common/utils/bmad-doc-template.md) specification using YAML format:
+Templates follow the [BMad Document Template](../common/utils/bmad-doc-template.md) specification using YAML format:
 
 1. **Structure**: Templates are defined in YAML with clear metadata, workflow configuration, and section hierarchy
 2. **Separation of Concerns**: Instructions for LLMs are in `instruction` fields, separate from content
