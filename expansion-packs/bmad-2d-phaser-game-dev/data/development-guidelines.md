@@ -73,7 +73,7 @@ interface GameState {
 interface GameSettings {
   musicVolume: number;
   sfxVolume: number;
-  difficulty: "easy" | "normal" | "hard";
+  difficulty: 'easy' | 'normal' | 'hard';
   controls: ControlScheme;
 }
 ```
@@ -114,12 +114,12 @@ class GameScene extends Phaser.Scene {
   private inputManager!: InputManager;
 
   constructor() {
-    super({ key: "GameScene" });
+    super({ key: 'GameScene' });
   }
 
   preload(): void {
     // Load only scene-specific assets
-    this.load.image("player", "assets/player.png");
+    this.load.image('player', 'assets/player.png');
   }
 
   create(data: SceneData): void {
@@ -144,7 +144,7 @@ class GameScene extends Phaser.Scene {
     this.inputManager.destroy();
 
     // Remove event listeners
-    this.events.off("*");
+    this.events.off('*');
   }
 }
 ```
@@ -153,13 +153,13 @@ class GameScene extends Phaser.Scene {
 
 ```typescript
 // Proper scene transitions with data
-this.scene.start("NextScene", {
+this.scene.start('NextScene', {
   playerScore: this.playerScore,
   currentLevel: this.currentLevel + 1,
 });
 
 // Scene overlays for UI
-this.scene.launch("PauseMenuScene");
+this.scene.launch('PauseMenuScene');
 this.scene.pause();
 ```
 
@@ -203,7 +203,7 @@ class Player extends GameEntity {
   private health!: HealthComponent;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y, "player");
+    super(scene, x, y, 'player');
 
     this.movement = this.addComponent(new MovementComponent(this));
     this.health = this.addComponent(new HealthComponent(this, 100));
@@ -223,7 +223,7 @@ class GameManager {
 
   constructor(scene: Phaser.Scene) {
     if (GameManager.instance) {
-      throw new Error("GameManager already exists!");
+      throw new Error('GameManager already exists!');
     }
 
     this.scene = scene;
@@ -233,7 +233,7 @@ class GameManager {
 
   static getInstance(): GameManager {
     if (!GameManager.instance) {
-      throw new Error("GameManager not initialized!");
+      throw new Error('GameManager not initialized!');
     }
     return GameManager.instance;
   }
@@ -280,7 +280,7 @@ class BulletPool {
     }
 
     // Pool exhausted - create new bullet
-    console.warn("Bullet pool exhausted, creating new bullet");
+    console.warn('Bullet pool exhausted, creating new bullet');
     return new Bullet(this.scene, 0, 0);
   }
 
@@ -380,14 +380,12 @@ class InputManager {
   }
 
   private setupKeyboard(): void {
-    this.keys = this.scene.input.keyboard.addKeys(
-      "W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT",
-    );
+    this.keys = this.scene.input.keyboard.addKeys('W,A,S,D,SPACE,ESC,UP,DOWN,LEFT,RIGHT');
   }
 
   private setupTouch(): void {
-    this.scene.input.on("pointerdown", this.handlePointerDown, this);
-    this.scene.input.on("pointerup", this.handlePointerUp, this);
+    this.scene.input.on('pointerdown', this.handlePointerDown, this);
+    this.scene.input.on('pointerup', this.handlePointerUp, this);
   }
 
   update(): void {
@@ -414,9 +412,9 @@ class InputManager {
 class AssetManager {
   loadAssets(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.scene.load.on("filecomplete", this.handleFileComplete, this);
-      this.scene.load.on("loaderror", this.handleLoadError, this);
-      this.scene.load.on("complete", () => resolve());
+      this.scene.load.on('filecomplete', this.handleFileComplete, this);
+      this.scene.load.on('loaderror', this.handleLoadError, this);
+      this.scene.load.on('complete', () => resolve());
 
       this.scene.load.start();
     });
@@ -432,8 +430,8 @@ class AssetManager {
   private loadFallbackAsset(key: string): void {
     // Load placeholder or default assets
     switch (key) {
-      case "player":
-        this.scene.load.image("player", "assets/defaults/default-player.png");
+      case 'player':
+        this.scene.load.image('player', 'assets/defaults/default-player.png');
         break;
       default:
         console.warn(`No fallback for asset: ${key}`);
@@ -460,11 +458,11 @@ class GameSystem {
 
   private attemptRecovery(context: string): void {
     switch (context) {
-      case "update":
+      case 'update':
         // Reset system state
         this.reset();
         break;
-      case "render":
+      case 'render':
         // Disable visual effects
         this.disableEffects();
         break;
@@ -484,7 +482,7 @@ class GameSystem {
 
 ```typescript
 // Example test for game mechanics
-describe("HealthComponent", () => {
+describe('HealthComponent', () => {
   let healthComponent: HealthComponent;
 
   beforeEach(() => {
@@ -492,18 +490,18 @@ describe("HealthComponent", () => {
     healthComponent = new HealthComponent(mockEntity, 100);
   });
 
-  test("should initialize with correct health", () => {
+  test('should initialize with correct health', () => {
     expect(healthComponent.currentHealth).toBe(100);
     expect(healthComponent.maxHealth).toBe(100);
   });
 
-  test("should handle damage correctly", () => {
+  test('should handle damage correctly', () => {
     healthComponent.takeDamage(25);
     expect(healthComponent.currentHealth).toBe(75);
     expect(healthComponent.isAlive()).toBe(true);
   });
 
-  test("should handle death correctly", () => {
+  test('should handle death correctly', () => {
     healthComponent.takeDamage(150);
     expect(healthComponent.currentHealth).toBe(0);
     expect(healthComponent.isAlive()).toBe(false);
@@ -516,7 +514,7 @@ describe("HealthComponent", () => {
 **Scene Testing:**
 
 ```typescript
-describe("GameScene Integration", () => {
+describe('GameScene Integration', () => {
   let scene: GameScene;
   let mockGame: Phaser.Game;
 
@@ -526,7 +524,7 @@ describe("GameScene Integration", () => {
     scene = new GameScene();
   });
 
-  test("should initialize all systems", () => {
+  test('should initialize all systems', () => {
     scene.create({});
 
     expect(scene.gameManager).toBeDefined();

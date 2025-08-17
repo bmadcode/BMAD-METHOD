@@ -1,13 +1,13 @@
-const path = require("path");
-const fs = require("fs-extra");
-const yaml = require("js-yaml");
-const chalk = require("chalk").default || require("chalk");
-const inquirer = require("inquirer").default || require("inquirer");
-const fileManager = require("./file-manager");
-const configLoader = require("./config-loader");
-const { extractYamlFromAgent } = require("../../lib/yaml-utils");
-const BaseIdeSetup = require("./ide-base-setup");
-const resourceLocator = require("./resource-locator");
+const path = require('node:path');
+const fs = require('fs-extra');
+const yaml = require('js-yaml');
+const chalk = require('chalk');
+const inquirer = require('inquirer');
+const fileManager = require('./file-manager');
+const configLoader = require('./config-loader');
+const { extractYamlFromAgent } = require('../../lib/yaml-utils');
+const BaseIdeSetup = require('./ide-base-setup');
+const resourceLocator = require('./resource-locator');
 
 class IdeSetup extends BaseIdeSetup {
   constructor() {
@@ -23,11 +23,11 @@ class IdeSetup extends BaseIdeSetup {
       const configContent = await fs.readFile(configPath, 'utf8');
       this.ideAgentConfig = yaml.load(configContent);
       return this.ideAgentConfig;
-    } catch (error) {
+    } catch {
       console.warn('Failed to load IDE agent configuration, using defaults');
       return {
         'roo-permissions': {},
-        'cline-order': {}
+        'cline-order': {},
       };
     }
   }
@@ -41,36 +41,48 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     switch (ide) {
-      case "cursor":
+      case 'cursor': {
         return this.setupCursor(installDir, selectedAgent);
-      case "claude-code":
+      }
+      case 'claude-code': {
         return this.setupClaudeCode(installDir, selectedAgent);
-      case "crush":
+      }
+      case 'crush': {
         return this.setupCrush(installDir, selectedAgent);
-      case "windsurf":
+      }
+      case 'windsurf': {
         return this.setupWindsurf(installDir, selectedAgent);
-      case "trae":
+      }
+      case 'trae': {
         return this.setupTrae(installDir, selectedAgent);
-      case "roo":
+      }
+      case 'roo': {
         return this.setupRoo(installDir, selectedAgent);
-      case "cline":
+      }
+      case 'cline': {
         return this.setupCline(installDir, selectedAgent);
-      case "kilo":
+      }
+      case 'kilo': {
         return this.setupKilocode(installDir, selectedAgent);
-      case "gemini":
+      }
+      case 'gemini': {
         return this.setupGeminiCli(installDir, selectedAgent);
-      case "github-copilot":
+      }
+      case 'github-copilot': {
         return this.setupGitHubCopilot(installDir, selectedAgent, spinner, preConfiguredSettings);
-      case "qwen-code":
+      }
+      case 'qwen-code': {
         return this.setupQwenCode(installDir, selectedAgent);
-      default:
+      }
+      default: {
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
+      }
     }
   }
 
   async setupCursor(installDir, selectedAgent) {
-    const cursorRulesDir = path.join(installDir, ".cursor", "rules", "bmad");
+    const cursorRulesDir = path.join(installDir, '.cursor', 'rules', 'bmad');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(cursorRulesDir);
@@ -95,7 +107,14 @@ class IdeSetup extends BaseIdeSetup {
     const coreSlashPrefix = await this.getCoreSlashPrefix(installDir);
     const coreAgents = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
     const coreTasks = await this.getCoreTaskIds(installDir);
-    await this.setupCrushForPackage(installDir, "core", coreSlashPrefix, coreAgents, coreTasks, ".bmad-core");
+    await this.setupCrushForPackage(
+      installDir,
+      'core',
+      coreSlashPrefix,
+      coreAgents,
+      coreTasks,
+      '.bmad-core',
+    );
 
     // Setup expansion pack commands
     const expansionPacks = await this.getInstalledExpansionPacks(installDir);
@@ -107,7 +126,14 @@ class IdeSetup extends BaseIdeSetup {
       if (packAgents.length > 0 || packTasks.length > 0) {
         // Use the actual directory name where the expansion pack is installed
         const rootPath = path.relative(installDir, packInfo.path);
-        await this.setupCrushForPackage(installDir, packInfo.name, packSlashPrefix, packAgents, packTasks, rootPath);
+        await this.setupCrushForPackage(
+          installDir,
+          packInfo.name,
+          packSlashPrefix,
+          packAgents,
+          packTasks,
+          rootPath,
+        );
       }
     }
 
@@ -119,7 +145,14 @@ class IdeSetup extends BaseIdeSetup {
     const coreSlashPrefix = await this.getCoreSlashPrefix(installDir);
     const coreAgents = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
     const coreTasks = await this.getCoreTaskIds(installDir);
-    await this.setupClaudeCodeForPackage(installDir, "core", coreSlashPrefix, coreAgents, coreTasks, ".bmad-core");
+    await this.setupClaudeCodeForPackage(
+      installDir,
+      'core',
+      coreSlashPrefix,
+      coreAgents,
+      coreTasks,
+      '.bmad-core',
+    );
 
     // Setup expansion pack commands
     const expansionPacks = await this.getInstalledExpansionPacks(installDir);
@@ -131,17 +164,31 @@ class IdeSetup extends BaseIdeSetup {
       if (packAgents.length > 0 || packTasks.length > 0) {
         // Use the actual directory name where the expansion pack is installed
         const rootPath = path.relative(installDir, packInfo.path);
-        await this.setupClaudeCodeForPackage(installDir, packInfo.name, packSlashPrefix, packAgents, packTasks, rootPath);
+        await this.setupClaudeCodeForPackage(
+          installDir,
+          packInfo.name,
+          packSlashPrefix,
+          packAgents,
+          packTasks,
+          rootPath,
+        );
       }
     }
 
     return true;
   }
 
-  async setupClaudeCodeForPackage(installDir, packageName, slashPrefix, agentIds, taskIds, rootPath) {
-    const commandsBaseDir = path.join(installDir, ".claude", "commands", slashPrefix);
-    const agentsDir = path.join(commandsBaseDir, "agents");
-    const tasksDir = path.join(commandsBaseDir, "tasks");
+  async setupClaudeCodeForPackage(
+    installDir,
+    packageName,
+    slashPrefix,
+    agentIds,
+    taskIds,
+    rootPath,
+  ) {
+    const commandsBaseDir = path.join(installDir, '.claude', 'commands', slashPrefix);
+    const agentsDir = path.join(commandsBaseDir, 'agents');
+    const tasksDir = path.join(commandsBaseDir, 'tasks');
 
     // Ensure directories exist
     await fileManager.ensureDirectory(agentsDir);
@@ -151,18 +198,18 @@ class IdeSetup extends BaseIdeSetup {
     for (const agentId of agentIds) {
       // Find the agent file - for expansion packs, prefer the expansion pack version
       let agentPath;
-      if (packageName !== "core") {
+      if (packageName === 'core') {
+        // For core, use the normal search
+        agentPath = await this.findAgentPath(agentId, installDir);
+      } else {
         // For expansion packs, first try to find the agent in the expansion pack directory
-        const expansionPackPath = path.join(installDir, rootPath, "agents", `${agentId}.md`);
+        const expansionPackPath = path.join(installDir, rootPath, 'agents', `${agentId}.md`);
         if (await fileManager.pathExists(expansionPackPath)) {
           agentPath = expansionPackPath;
         } else {
           // Fall back to core if not found in expansion pack
           agentPath = await this.findAgentPath(agentId, installDir);
         }
-      } else {
-        // For core, use the normal search
-        agentPath = await this.findAgentPath(agentId, installDir);
       }
 
       const commandPath = path.join(agentsDir, `${agentId}.md`);
@@ -172,7 +219,7 @@ class IdeSetup extends BaseIdeSetup {
         let agentContent = await fileManager.readFile(agentPath);
 
         // Replace {root} placeholder with the appropriate root path for this context
-        agentContent = agentContent.replace(/{root}/g, rootPath);
+        agentContent = agentContent.replaceAll('{root}', rootPath);
 
         // Add command header
         let commandContent = `# /${agentId} Command\n\n`;
@@ -188,18 +235,18 @@ class IdeSetup extends BaseIdeSetup {
     for (const taskId of taskIds) {
       // Find the task file - for expansion packs, prefer the expansion pack version
       let taskPath;
-      if (packageName !== "core") {
+      if (packageName === 'core') {
+        // For core, use the normal search
+        taskPath = await this.findTaskPath(taskId, installDir);
+      } else {
         // For expansion packs, first try to find the task in the expansion pack directory
-        const expansionPackPath = path.join(installDir, rootPath, "tasks", `${taskId}.md`);
+        const expansionPackPath = path.join(installDir, rootPath, 'tasks', `${taskId}.md`);
         if (await fileManager.pathExists(expansionPackPath)) {
           taskPath = expansionPackPath;
         } else {
           // Fall back to core if not found in expansion pack
           taskPath = await this.findTaskPath(taskId, installDir);
         }
-      } else {
-        // For core, use the normal search
-        taskPath = await this.findTaskPath(taskId, installDir);
       }
 
       const commandPath = path.join(tasksDir, `${taskId}.md`);
@@ -209,7 +256,7 @@ class IdeSetup extends BaseIdeSetup {
         let taskContent = await fileManager.readFile(taskPath);
 
         // Replace {root} placeholder with the appropriate root path for this context
-        taskContent = taskContent.replace(/{root}/g, rootPath);
+        taskContent = taskContent.replaceAll('{root}', rootPath);
 
         // Add command header
         let commandContent = `# /${taskId} Task\n\n`;
@@ -221,15 +268,17 @@ class IdeSetup extends BaseIdeSetup {
       }
     }
 
-    console.log(chalk.green(`\n✓ Created Claude Code commands for ${packageName} in ${commandsBaseDir}`));
+    console.log(
+      chalk.green(`\n✓ Created Claude Code commands for ${packageName} in ${commandsBaseDir}`),
+    );
     console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
     console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
   }
 
   async setupCrushForPackage(installDir, packageName, slashPrefix, agentIds, taskIds, rootPath) {
-    const commandsBaseDir = path.join(installDir, ".crush", "commands", slashPrefix);
-    const agentsDir = path.join(commandsBaseDir, "agents");
-    const tasksDir = path.join(commandsBaseDir, "tasks");
+    const commandsBaseDir = path.join(installDir, '.crush', 'commands', slashPrefix);
+    const agentsDir = path.join(commandsBaseDir, 'agents');
+    const tasksDir = path.join(commandsBaseDir, 'tasks');
 
     // Ensure directories exist
     await fileManager.ensureDirectory(agentsDir);
@@ -239,18 +288,18 @@ class IdeSetup extends BaseIdeSetup {
     for (const agentId of agentIds) {
       // Find the agent file - for expansion packs, prefer the expansion pack version
       let agentPath;
-      if (packageName !== "core") {
+      if (packageName === 'core') {
+        // For core, use the normal search
+        agentPath = await this.findAgentPath(agentId, installDir);
+      } else {
         // For expansion packs, first try to find the agent in the expansion pack directory
-        const expansionPackPath = path.join(installDir, rootPath, "agents", `${agentId}.md`);
+        const expansionPackPath = path.join(installDir, rootPath, 'agents', `${agentId}.md`);
         if (await fileManager.pathExists(expansionPackPath)) {
           agentPath = expansionPackPath;
         } else {
           // Fall back to core if not found in expansion pack
           agentPath = await this.findAgentPath(agentId, installDir);
         }
-      } else {
-        // For core, use the normal search
-        agentPath = await this.findAgentPath(agentId, installDir);
       }
 
       const commandPath = path.join(agentsDir, `${agentId}.md`);
@@ -260,7 +309,7 @@ class IdeSetup extends BaseIdeSetup {
         let agentContent = await fileManager.readFile(agentPath);
 
         // Replace {root} placeholder with the appropriate root path for this context
-        agentContent = agentContent.replace(/{root}/g, rootPath);
+        agentContent = agentContent.replaceAll('{root}', rootPath);
 
         // Add command header
         let commandContent = `# /${agentId} Command\n\n`;
@@ -276,18 +325,18 @@ class IdeSetup extends BaseIdeSetup {
     for (const taskId of taskIds) {
       // Find the task file - for expansion packs, prefer the expansion pack version
       let taskPath;
-      if (packageName !== "core") {
+      if (packageName === 'core') {
+        // For core, use the normal search
+        taskPath = await this.findTaskPath(taskId, installDir);
+      } else {
         // For expansion packs, first try to find the task in the expansion pack directory
-        const expansionPackPath = path.join(installDir, rootPath, "tasks", `${taskId}.md`);
+        const expansionPackPath = path.join(installDir, rootPath, 'tasks', `${taskId}.md`);
         if (await fileManager.pathExists(expansionPackPath)) {
           taskPath = expansionPackPath;
         } else {
           // Fall back to core if not found in expansion pack
           taskPath = await this.findTaskPath(taskId, installDir);
         }
-      } else {
-        // For core, use the normal search
-        taskPath = await this.findTaskPath(taskId, installDir);
       }
 
       const commandPath = path.join(tasksDir, `${taskId}.md`);
@@ -297,7 +346,7 @@ class IdeSetup extends BaseIdeSetup {
         let taskContent = await fileManager.readFile(taskPath);
 
         // Replace {root} placeholder with the appropriate root path for this context
-        taskContent = taskContent.replace(/{root}/g, rootPath);
+        taskContent = taskContent.replaceAll('{root}', rootPath);
 
         // Add command header
         let commandContent = `# /${taskId} Task\n\n`;
@@ -315,10 +364,10 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async setupWindsurf(installDir, selectedAgent) {
-    const windsurfRulesDir = path.join(installDir, ".windsurf", "rules");
+    const windsurfWorkflowDir = path.join(installDir, '.windsurf', 'workflows');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
-    await fileManager.ensureDirectory(windsurfRulesDir);
+    await fileManager.ensureDirectory(windsurfWorkflowDir);
 
     for (const agentId of agents) {
       // Find the agent file
@@ -326,49 +375,28 @@ class IdeSetup extends BaseIdeSetup {
 
       if (agentPath) {
         const agentContent = await fileManager.readFile(agentPath);
-        const mdPath = path.join(windsurfRulesDir, `${agentId}.md`);
+        const mdPath = path.join(windsurfWorkflowDir, `${agentId}.md`);
 
-        // Create MD content (similar to Cursor but without frontmatter)
-        let mdContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
-        mdContent += `This rule is triggered when the user types \`@${agentId}\` and activates the ${await this.getAgentTitle(
-          agentId,
-          installDir
-        )} agent persona.\n\n`;
-        mdContent += "## Agent Activation\n\n";
-        mdContent +=
-          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
-        mdContent += "```yaml\n";
-        // Extract just the YAML content from the agent file
-        const yamlContent = extractYamlFromAgent(agentContent);
-        if (yamlContent) {
-          mdContent += yamlContent;
-        } else {
-          // If no YAML found, include the whole content minus the header
-          mdContent += agentContent.replace(/^#.*$/m, "").trim();
-        }
-        mdContent += "\n```\n\n";
-        mdContent += "## File Reference\n\n";
-        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
-        mdContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
-        mdContent += "## Usage\n\n";
-        mdContent += `When the user types \`@${agentId}\`, activate this ${await this.getAgentTitle(
-          agentId,
-          installDir
-        )} persona and follow all instructions defined in the YAML configuration above.\n`;
+        // Write the agent file contents prefixed with Windsurf frontmatter
+        let mdContent = `---\n`;
+        mdContent += `description: ${agentId}\n`;
+        mdContent += `auto_execution_mode: 3\n`;
+        mdContent += `---\n\n`;
+        mdContent += agentContent;
 
         await fileManager.writeFile(mdPath, mdContent);
-        console.log(chalk.green(`✓ Created rule: ${agentId}.md`));
+        console.log(chalk.green(`✓ Created workflow: ${agentId}.md`));
       }
     }
 
-    console.log(chalk.green(`\n✓ Created Windsurf rules in ${windsurfRulesDir}`));
+    console.log(chalk.green(`\n✓ Created Windsurf workflows in ${windsurfWorkflowDir}`));
 
     return true;
   }
 
   async setupTrae(installDir, selectedAgent) {
-    const traeRulesDir = path.join(installDir, ".trae", "rules");
-    const agents = selectedAgent? [selectedAgent] : await this.getAllAgentIds(installDir);
+    const traeRulesDir = path.join(installDir, '.trae', 'rules');
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(traeRulesDir);
 
@@ -384,29 +412,28 @@ class IdeSetup extends BaseIdeSetup {
         let mdContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
         mdContent += `This rule is triggered when the user types \`@${agentId}\` and activates the ${await this.getAgentTitle(
           agentId,
-          installDir
+          installDir,
         )} agent persona.\n\n`;
-        mdContent += "## Agent Activation\n\n";
+        mdContent += '## Agent Activation\n\n';
         mdContent +=
-          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
-        mdContent += "```yaml\n";
+          'CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n';
+        mdContent += '```yaml\n';
         // Extract just the YAML content from the agent file
         const yamlContent = extractYamlFromAgent(agentContent);
         if (yamlContent) {
           mdContent += yamlContent;
-        }
-        else {
+        } else {
           // If no YAML found, include the whole content minus the header
-          mdContent += agentContent.replace(/^#.*$/m, "").trim();
+          mdContent += agentContent.replace(/^#.*$/m, '').trim();
         }
-        mdContent += "\n```\n\n";
-        mdContent += "## File Reference\n\n";
-        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        mdContent += '\n```\n\n';
+        mdContent += '## File Reference\n\n';
+        const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
         mdContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
-        mdContent += "## Usage\n\n";
+        mdContent += '## Usage\n\n';
         mdContent += `When the user types \`@${agentId}\`, activate this ${await this.getAgentTitle(
           agentId,
-          installDir
+          installDir,
         )} persona and follow all instructions defined in the YAML configuration above.\n`;
 
         await fileManager.writeFile(mdPath, mdContent);
@@ -418,14 +445,14 @@ class IdeSetup extends BaseIdeSetup {
   async findAgentPath(agentId, installDir) {
     // Try to find the agent file in various locations
     const possiblePaths = [
-      path.join(installDir, ".bmad-core", "agents", `${agentId}.md`),
-      path.join(installDir, "agents", `${agentId}.md`)
+      path.join(installDir, '.bmad-core', 'agents', `${agentId}.md`),
+      path.join(installDir, 'agents', `${agentId}.md`),
     ];
 
     // Also check expansion pack directories
-    const glob = require("glob");
-    const expansionDirs = glob.sync(".*/agents", { cwd: installDir });
-    for (const expDir of expansionDirs) {
+    const glob = require('glob');
+    const expansionDirectories = glob.sync('.*/agents', { cwd: installDir });
+    for (const expDir of expansionDirectories) {
       possiblePaths.push(path.join(installDir, expDir, `${agentId}.md`));
     }
 
@@ -439,26 +466,26 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async getAllAgentIds(installDir) {
-    const glob = require("glob");
+    const glob = require('glob');
     const allAgentIds = [];
 
     // Check core agents in .bmad-core or root
-    let agentsDir = path.join(installDir, ".bmad-core", "agents");
+    let agentsDir = path.join(installDir, '.bmad-core', 'agents');
     if (!(await fileManager.pathExists(agentsDir))) {
-      agentsDir = path.join(installDir, "agents");
+      agentsDir = path.join(installDir, 'agents');
     }
 
     if (await fileManager.pathExists(agentsDir)) {
-      const agentFiles = glob.sync("*.md", { cwd: agentsDir });
-      allAgentIds.push(...agentFiles.map((file) => path.basename(file, ".md")));
+      const agentFiles = glob.sync('*.md', { cwd: agentsDir });
+      allAgentIds.push(...agentFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Also check for expansion pack agents in dot folders
-    const expansionDirs = glob.sync(".*/agents", { cwd: installDir });
-    for (const expDir of expansionDirs) {
+    const expansionDirectories = glob.sync('.*/agents', { cwd: installDir });
+    for (const expDir of expansionDirectories) {
       const fullExpDir = path.join(installDir, expDir);
-      const expAgentFiles = glob.sync("*.md", { cwd: fullExpDir });
-      allAgentIds.push(...expAgentFiles.map((file) => path.basename(file, ".md")));
+      const expAgentFiles = glob.sync('*.md', { cwd: fullExpDir });
+      allAgentIds.push(...expAgentFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Remove duplicates
@@ -469,15 +496,15 @@ class IdeSetup extends BaseIdeSetup {
     const allAgentIds = [];
 
     // Check core agents in .bmad-core or root only
-    let agentsDir = path.join(installDir, ".bmad-core", "agents");
+    let agentsDir = path.join(installDir, '.bmad-core', 'agents');
     if (!(await fileManager.pathExists(agentsDir))) {
-      agentsDir = path.join(installDir, "bmad-core", "agents");
+      agentsDir = path.join(installDir, 'bmad-core', 'agents');
     }
 
     if (await fileManager.pathExists(agentsDir)) {
-      const glob = require("glob");
-      const agentFiles = glob.sync("*.md", { cwd: agentsDir });
-      allAgentIds.push(...agentFiles.map((file) => path.basename(file, ".md")));
+      const glob = require('glob');
+      const agentFiles = glob.sync('*.md', { cwd: agentsDir });
+      allAgentIds.push(...agentFiles.map((file) => path.basename(file, '.md')));
     }
 
     return [...new Set(allAgentIds)];
@@ -487,22 +514,22 @@ class IdeSetup extends BaseIdeSetup {
     const allTaskIds = [];
 
     // Check core tasks in .bmad-core or root only
-    let tasksDir = path.join(installDir, ".bmad-core", "tasks");
+    let tasksDir = path.join(installDir, '.bmad-core', 'tasks');
     if (!(await fileManager.pathExists(tasksDir))) {
-      tasksDir = path.join(installDir, "bmad-core", "tasks");
+      tasksDir = path.join(installDir, 'bmad-core', 'tasks');
     }
 
     if (await fileManager.pathExists(tasksDir)) {
-      const glob = require("glob");
-      const taskFiles = glob.sync("*.md", { cwd: tasksDir });
-      allTaskIds.push(...taskFiles.map((file) => path.basename(file, ".md")));
+      const glob = require('glob');
+      const taskFiles = glob.sync('*.md', { cwd: tasksDir });
+      allTaskIds.push(...taskFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Check common tasks
-    const commonTasksDir = path.join(installDir, "common", "tasks");
+    const commonTasksDir = path.join(installDir, 'common', 'tasks');
     if (await fileManager.pathExists(commonTasksDir)) {
-      const commonTaskFiles = glob.sync("*.md", { cwd: commonTasksDir });
-      allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, ".md")));
+      const commonTaskFiles = glob.sync('*.md', { cwd: commonTasksDir });
+      allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, '.md')));
     }
 
     return [...new Set(allTaskIds)];
@@ -511,14 +538,14 @@ class IdeSetup extends BaseIdeSetup {
   async getAgentTitle(agentId, installDir) {
     // Try to find the agent file in various locations
     const possiblePaths = [
-      path.join(installDir, ".bmad-core", "agents", `${agentId}.md`),
-      path.join(installDir, "agents", `${agentId}.md`)
+      path.join(installDir, '.bmad-core', 'agents', `${agentId}.md`),
+      path.join(installDir, 'agents', `${agentId}.md`),
     ];
 
     // Also check expansion pack directories
-    const glob = require("glob");
-    const expansionDirs = glob.sync(".*/agents", { cwd: installDir });
-    for (const expDir of expansionDirs) {
+    const glob = require('glob');
+    const expansionDirectories = glob.sync('.*/agents', { cwd: installDir });
+    for (const expDir of expansionDirectories) {
       possiblePaths.push(path.join(installDir, expDir, `${agentId}.md`));
     }
 
@@ -542,49 +569,50 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     // Fallback to formatted agent ID
-    return agentId.split('-').map(word =>
-      word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+    return agentId
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   async getAllTaskIds(installDir) {
-    const glob = require("glob");
+    const glob = require('glob');
     const allTaskIds = [];
 
     // Check core tasks in .bmad-core or root
-    let tasksDir = path.join(installDir, ".bmad-core", "tasks");
+    let tasksDir = path.join(installDir, '.bmad-core', 'tasks');
     if (!(await fileManager.pathExists(tasksDir))) {
-      tasksDir = path.join(installDir, "bmad-core", "tasks");
+      tasksDir = path.join(installDir, 'bmad-core', 'tasks');
     }
 
     if (await fileManager.pathExists(tasksDir)) {
-      const taskFiles = glob.sync("*.md", { cwd: tasksDir });
-      allTaskIds.push(...taskFiles.map((file) => path.basename(file, ".md")));
+      const taskFiles = glob.sync('*.md', { cwd: tasksDir });
+      allTaskIds.push(...taskFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Check common tasks
-    const commonTasksDir = path.join(installDir, "common", "tasks");
+    const commonTasksDir = path.join(installDir, 'common', 'tasks');
     if (await fileManager.pathExists(commonTasksDir)) {
-      const commonTaskFiles = glob.sync("*.md", { cwd: commonTasksDir });
-      allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, ".md")));
+      const commonTaskFiles = glob.sync('*.md', { cwd: commonTasksDir });
+      allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Also check for expansion pack tasks in dot folders
-    const expansionDirs = glob.sync(".*/tasks", { cwd: installDir });
-    for (const expDir of expansionDirs) {
+    const expansionDirectories = glob.sync('.*/tasks', { cwd: installDir });
+    for (const expDir of expansionDirectories) {
       const fullExpDir = path.join(installDir, expDir);
-      const expTaskFiles = glob.sync("*.md", { cwd: fullExpDir });
-      allTaskIds.push(...expTaskFiles.map((file) => path.basename(file, ".md")));
+      const expTaskFiles = glob.sync('*.md', { cwd: fullExpDir });
+      allTaskIds.push(...expTaskFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Check expansion-packs folder tasks
-    const expansionPacksDir = path.join(installDir, "expansion-packs");
+    const expansionPacksDir = path.join(installDir, 'expansion-packs');
     if (await fileManager.pathExists(expansionPacksDir)) {
-      const expPackDirs = glob.sync("*/tasks", { cwd: expansionPacksDir });
-      for (const expDir of expPackDirs) {
+      const expPackDirectories = glob.sync('*/tasks', { cwd: expansionPacksDir });
+      for (const expDir of expPackDirectories) {
         const fullExpDir = path.join(expansionPacksDir, expDir);
-        const expTaskFiles = glob.sync("*.md", { cwd: fullExpDir });
-        allTaskIds.push(...expTaskFiles.map((file) => path.basename(file, ".md")));
+        const expTaskFiles = glob.sync('*.md', { cwd: fullExpDir });
+        allTaskIds.push(...expTaskFiles.map((file) => path.basename(file, '.md')));
       }
     }
 
@@ -595,25 +623,25 @@ class IdeSetup extends BaseIdeSetup {
   async findTaskPath(taskId, installDir) {
     // Try to find the task file in various locations
     const possiblePaths = [
-      path.join(installDir, ".bmad-core", "tasks", `${taskId}.md`),
-      path.join(installDir, "bmad-core", "tasks", `${taskId}.md`),
-      path.join(installDir, "common", "tasks", `${taskId}.md`)
+      path.join(installDir, '.bmad-core', 'tasks', `${taskId}.md`),
+      path.join(installDir, 'bmad-core', 'tasks', `${taskId}.md`),
+      path.join(installDir, 'common', 'tasks', `${taskId}.md`),
     ];
 
     // Also check expansion pack directories
-    const glob = require("glob");
+    const glob = require('glob');
 
     // Check dot folder expansion packs
-    const expansionDirs = glob.sync(".*/tasks", { cwd: installDir });
-    for (const expDir of expansionDirs) {
+    const expansionDirectories = glob.sync('.*/tasks', { cwd: installDir });
+    for (const expDir of expansionDirectories) {
       possiblePaths.push(path.join(installDir, expDir, `${taskId}.md`));
     }
 
     // Check expansion-packs folder
-    const expansionPacksDir = path.join(installDir, "expansion-packs");
+    const expansionPacksDir = path.join(installDir, 'expansion-packs');
     if (await fileManager.pathExists(expansionPacksDir)) {
-      const expPackDirs = glob.sync("*/tasks", { cwd: expansionPacksDir });
-      for (const expDir of expPackDirs) {
+      const expPackDirectories = glob.sync('*/tasks', { cwd: expansionPacksDir });
+      for (const expDir of expPackDirectories) {
         possiblePaths.push(path.join(expansionPacksDir, expDir, `${taskId}.md`));
       }
     }
@@ -629,24 +657,24 @@ class IdeSetup extends BaseIdeSetup {
 
   async getCoreSlashPrefix(installDir) {
     try {
-      const coreConfigPath = path.join(installDir, ".bmad-core", "core-config.yaml");
+      const coreConfigPath = path.join(installDir, '.bmad-core', 'core-config.yaml');
       if (!(await fileManager.pathExists(coreConfigPath))) {
         // Try bmad-core directory
-        const altConfigPath = path.join(installDir, "bmad-core", "core-config.yaml");
+        const altConfigPath = path.join(installDir, 'bmad-core', 'core-config.yaml');
         if (await fileManager.pathExists(altConfigPath)) {
           const configContent = await fileManager.readFile(altConfigPath);
           const config = yaml.load(configContent);
-          return config.slashPrefix || "BMad";
+          return config.slashPrefix || 'BMad';
         }
-        return "BMad"; // fallback
+        return 'BMad'; // fallback
       }
 
       const configContent = await fileManager.readFile(coreConfigPath);
       const config = yaml.load(configContent);
-      return config.slashPrefix || "BMad";
+      return config.slashPrefix || 'BMad';
     } catch (error) {
       console.warn(`Failed to read core slashPrefix, using default 'BMad': ${error.message}`);
-      return "BMad";
+      return 'BMad';
     }
   }
 
@@ -654,32 +682,34 @@ class IdeSetup extends BaseIdeSetup {
     const expansionPacks = [];
 
     // Check for dot-prefixed expansion packs in install directory
-    const glob = require("glob");
-    const dotExpansions = glob.sync(".bmad-*", { cwd: installDir });
+    const glob = require('glob');
+    const dotExpansions = glob.sync('.bmad-*', { cwd: installDir });
 
     for (const dotExpansion of dotExpansions) {
-      if (dotExpansion !== ".bmad-core") {
+      if (dotExpansion !== '.bmad-core') {
         const packPath = path.join(installDir, dotExpansion);
-        const packName = dotExpansion.substring(1); // remove the dot
+        const packName = dotExpansion.slice(1); // remove the dot
         expansionPacks.push({
           name: packName,
-          path: packPath
+          path: packPath,
         });
       }
     }
 
     // Check for expansion-packs directory style
-    const expansionPacksDir = path.join(installDir, "expansion-packs");
+    const expansionPacksDir = path.join(installDir, 'expansion-packs');
     if (await fileManager.pathExists(expansionPacksDir)) {
-      const packDirs = glob.sync("*", { cwd: expansionPacksDir });
+      const packDirectories = glob.sync('*', { cwd: expansionPacksDir });
 
-      for (const packDir of packDirs) {
+      for (const packDir of packDirectories) {
         const packPath = path.join(expansionPacksDir, packDir);
-        if ((await fileManager.pathExists(packPath)) &&
-            (await fileManager.pathExists(path.join(packPath, "config.yaml")))) {
+        if (
+          (await fileManager.pathExists(packPath)) &&
+          (await fileManager.pathExists(path.join(packPath, 'config.yaml')))
+        ) {
           expansionPacks.push({
             name: packDir,
-            path: packPath
+            path: packPath,
           });
         }
       }
@@ -690,7 +720,7 @@ class IdeSetup extends BaseIdeSetup {
 
   async getExpansionPackSlashPrefix(packPath) {
     try {
-      const configPath = path.join(packPath, "config.yaml");
+      const configPath = path.join(packPath, 'config.yaml');
       if (await fileManager.pathExists(configPath)) {
         const configContent = await fileManager.readFile(configPath);
         const config = yaml.load(configContent);
@@ -704,15 +734,15 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async getExpansionPackAgents(packPath) {
-    const agentsDir = path.join(packPath, "agents");
+    const agentsDir = path.join(packPath, 'agents');
     if (!(await fileManager.pathExists(agentsDir))) {
       return [];
     }
 
     try {
-      const glob = require("glob");
-      const agentFiles = glob.sync("*.md", { cwd: agentsDir });
-      return agentFiles.map(file => path.basename(file, ".md"));
+      const glob = require('glob');
+      const agentFiles = glob.sync('*.md', { cwd: agentsDir });
+      return agentFiles.map((file) => path.basename(file, '.md'));
     } catch (error) {
       console.warn(`Failed to read expansion pack agents from ${packPath}: ${error.message}`);
       return [];
@@ -720,15 +750,15 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async getExpansionPackTasks(packPath) {
-    const tasksDir = path.join(packPath, "tasks");
+    const tasksDir = path.join(packPath, 'tasks');
     if (!(await fileManager.pathExists(tasksDir))) {
       return [];
     }
 
     try {
-      const glob = require("glob");
-      const taskFiles = glob.sync("*.md", { cwd: tasksDir });
-      return taskFiles.map(file => path.basename(file, ".md"));
+      const glob = require('glob');
+      const taskFiles = glob.sync('*.md', { cwd: tasksDir });
+      return taskFiles.map((file) => path.basename(file, '.md'));
     } catch (error) {
       console.warn(`Failed to read expansion pack tasks from ${packPath}: ${error.message}`);
       return [];
@@ -739,9 +769,9 @@ class IdeSetup extends BaseIdeSetup {
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     // Check for existing .roomodes file in project root
-    const roomodesPath = path.join(installDir, ".roomodes");
+    const roomodesPath = path.join(installDir, '.roomodes');
     let existingModes = [];
-    let existingContent = "";
+    let existingContent = '';
 
     if (await fileManager.pathExists(roomodesPath)) {
       existingContent = await fileManager.readFile(roomodesPath);
@@ -754,7 +784,7 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     // Create new modes content
-    let newModesContent = "";
+    let newModesContent = '';
 
     // Load dynamic agent permissions from configuration
     const config = await this.loadIdeAgentConfig();
@@ -786,13 +816,14 @@ class IdeSetup extends BaseIdeSetup {
           const whenToUseMatch = yaml.match(/whenToUse:\s*"(.+)"/);
           const roleDefinitionMatch = yaml.match(/roleDefinition:\s*"(.+)"/);
 
-          const title = titleMatch ? titleMatch[1].trim() : await this.getAgentTitle(agentId, installDir);
-          const icon = iconMatch ? iconMatch[1].trim() : "🤖";
+          const title = titleMatch
+            ? titleMatch[1].trim()
+            : await this.getAgentTitle(agentId, installDir);
+          const icon = iconMatch ? iconMatch[1].trim() : '🤖';
           const whenToUse = whenToUseMatch ? whenToUseMatch[1].trim() : `Use for ${title} tasks`;
           const roleDefinition = roleDefinitionMatch
             ? roleDefinitionMatch[1].trim()
             : `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
-
 
           // Add permissions based on agent type
           const permissions = agentPermissions[agentId];
@@ -802,12 +833,12 @@ class IdeSetup extends BaseIdeSetup {
           newModesContent += ` - slug: ${slug}\n`;
           newModesContent += `   name: '${icon} ${title}'\n`;
           if (permissions) {
-          newModesContent += `   description: '${permissions.description}'\n`;
+            newModesContent += `   description: '${permissions.description}'\n`;
           }
           newModesContent += `   roleDefinition: ${roleDefinition}\n`;
           newModesContent += `   whenToUse: ${whenToUse}\n`;
           // Get relative path from installDir to agent file
-          const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+          const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
           newModesContent += `   customInstructions: CRITICAL Read the full YAML from ${relativePath} start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode\n`;
           newModesContent += `   groups:\n`;
           newModesContent += `    - read\n`;
@@ -826,42 +857,45 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     // Build final roomodes content
-    let roomodesContent = "";
+    let roomodesContent = '';
     if (existingContent) {
       // If there's existing content, append new modes to it
-      roomodesContent = existingContent.trim() + "\n" + newModesContent;
+      roomodesContent = existingContent.trim() + '\n' + newModesContent;
     } else {
       // Create new .roomodes file with proper YAML structure
-      roomodesContent = "customModes:\n" + newModesContent;
+      roomodesContent = 'customModes:\n' + newModesContent;
     }
 
     // Write .roomodes file
     await fileManager.writeFile(roomodesPath, roomodesContent);
-    console.log(chalk.green("✓ Created .roomodes file in project root"));
+    console.log(chalk.green('✓ Created .roomodes file in project root'));
 
     console.log(chalk.green(`\n✓ Roo Code setup complete!`));
-    console.log(chalk.dim("Custom modes will be available when you open this project in Roo Code"));
+    console.log(chalk.dim('Custom modes will be available when you open this project in Roo Code'));
 
     return true;
   }
 
   async setupKilocode(installDir, selectedAgent) {
-    const filePath = path.join(installDir, ".kilocodemodes");
+    const filePath = path.join(installDir, '.kilocodemodes');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
-    let existingModes = [], existingContent = "";
+    let existingModes = [],
+      existingContent = '';
     if (await fileManager.pathExists(filePath)) {
       existingContent = await fileManager.readFile(filePath);
       for (const match of existingContent.matchAll(/- slug: ([\w-]+)/g)) {
         existingModes.push(match[1]);
       }
-      console.log(chalk.yellow(`Found existing .kilocodemodes file with ${existingModes.length} modes`));
+      console.log(
+        chalk.yellow(`Found existing .kilocodemodes file with ${existingModes.length} modes`),
+      );
     }
 
     const config = await this.loadIdeAgentConfig();
     const permissions = config['roo-permissions'] || {}; // reuse same roo permissions block (Kilo Code understands same mode schema)
 
-    let newContent = "";
+    let newContent = '';
 
     for (const agentId of agents) {
       const slug = agentId.startsWith('bmad-') ? agentId : `bmad-${agentId}`;
@@ -886,13 +920,15 @@ class IdeSetup extends BaseIdeSetup {
       const yaml = yamlMatch[1];
 
       // Robust fallback for title and icon
-      const title = (yaml.match(/title:\s*(.+)/)?.[1]?.trim()) || await this.getAgentTitle(agentId, installDir);
-      const icon = (yaml.match(/icon:\s*(.+)/)?.[1]?.trim()) || '🤖';
-      const whenToUse = (yaml.match(/whenToUse:\s*"(.+)"/)?.[1]?.trim()) || `Use for ${title} tasks`;
-      const roleDefinition = (yaml.match(/roleDefinition:\s*"(.+)"/)?.[1]?.trim()) ||
+      const title =
+        yaml.match(/title:\s*(.+)/)?.[1]?.trim() || (await this.getAgentTitle(agentId, installDir));
+      const icon = yaml.match(/icon:\s*(.+)/)?.[1]?.trim() || '🤖';
+      const whenToUse = yaml.match(/whenToUse:\s*"(.+)"/)?.[1]?.trim() || `Use for ${title} tasks`;
+      const roleDefinition =
+        yaml.match(/roleDefinition:\s*"(.+)"/)?.[1]?.trim() ||
         `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
 
-      const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+      const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
       const customInstructions = `CRITICAL Read the full YAML from ${relativePath} start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode`;
 
       // Add permissions from config if they exist
@@ -902,7 +938,7 @@ class IdeSetup extends BaseIdeSetup {
       newContent += ` - slug: ${slug}\n`;
       newContent += `   name: '${icon} ${title}'\n`;
       if (agentPermission) {
-      newContent += `   description: '${agentPermission.description}'\n`;
+        newContent += `   description: '${agentPermission.description}'\n`;
       }
 
       newContent += `   roleDefinition: ${roleDefinition}\n`;
@@ -910,7 +946,6 @@ class IdeSetup extends BaseIdeSetup {
       newContent += `   customInstructions: ${customInstructions}\n`;
       newContent += `   groups:\n`;
       newContent += `    - read\n`;
-
 
       if (agentPermission) {
         newContent += `    - - edit\n`;
@@ -925,19 +960,19 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     const finalContent = existingContent
-      ? existingContent.trim() + "\n" + newContent
-      : "customModes:\n" + newContent;
+      ? existingContent.trim() + '\n' + newContent
+      : 'customModes:\n' + newContent;
 
     await fileManager.writeFile(filePath, finalContent);
-    console.log(chalk.green("✓ Created .kilocodemodes file in project root"));
+    console.log(chalk.green('✓ Created .kilocodemodes file in project root'));
     console.log(chalk.green(`✓ KiloCode setup complete!`));
-    console.log(chalk.dim("Custom modes will be available when you open this project in KiloCode"));
+    console.log(chalk.dim('Custom modes will be available when you open this project in KiloCode'));
 
     return true;
   }
 
   async setupCline(installDir, selectedAgent) {
-    const clineRulesDir = path.join(installDir, ".clinerules");
+    const clineRulesDir = path.join(installDir, '.clinerules');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(clineRulesDir);
@@ -961,26 +996,28 @@ class IdeSetup extends BaseIdeSetup {
         // Create MD content for Cline (focused on project standards and role)
         let mdContent = `# ${await this.getAgentTitle(agentId, installDir)} Agent\n\n`;
         mdContent += `This rule defines the ${await this.getAgentTitle(agentId, installDir)} persona and project standards.\n\n`;
-        mdContent += "## Role Definition\n\n";
+        mdContent += '## Role Definition\n\n';
         mdContent +=
-          "When the user types `@" + agentId + "`, adopt this persona and follow these guidelines:\n\n";
-        mdContent += "```yaml\n";
+          'When the user types `@' +
+          agentId +
+          '`, adopt this persona and follow these guidelines:\n\n';
+        mdContent += '```yaml\n';
         // Extract just the YAML content from the agent file
         const yamlContent = extractYamlFromAgent(agentContent);
         if (yamlContent) {
           mdContent += yamlContent;
         } else {
           // If no YAML found, include the whole content minus the header
-          mdContent += agentContent.replace(/^#.*$/m, "").trim();
+          mdContent += agentContent.replace(/^#.*$/m, '').trim();
         }
-        mdContent += "\n```\n\n";
-        mdContent += "## Project Standards\n\n";
+        mdContent += '\n```\n\n';
+        mdContent += '## Project Standards\n\n';
         mdContent += `- Always maintain consistency with project documentation in .bmad-core/\n`;
         mdContent += `- Follow the agent's specific guidelines and constraints\n`;
         mdContent += `- Update relevant project files when making changes\n`;
-        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
         mdContent += `- Reference the complete agent definition in [${relativePath}](${relativePath})\n\n`;
-        mdContent += "## Usage\n\n";
+        mdContent += '## Usage\n\n';
         mdContent += `Type \`@${agentId}\` to activate this ${await this.getAgentTitle(agentId, installDir)} persona.\n`;
 
         await fileManager.writeFile(mdPath, mdContent);
@@ -994,12 +1031,12 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async setupGeminiCli(installDir) {
-    const geminiDir = path.join(installDir, ".gemini");
-    const bmadMethodDir = path.join(geminiDir, "bmad-method");
+    const geminiDir = path.join(installDir, '.gemini');
+    const bmadMethodDir = path.join(geminiDir, 'bmad-method');
     await fileManager.ensureDirectory(bmadMethodDir);
 
     // Update logic for existing settings.json
-    const settingsPath = path.join(geminiDir, "settings.json");
+    const settingsPath = path.join(geminiDir, 'settings.json');
     if (await fileManager.pathExists(settingsPath)) {
       try {
         const settingsContent = await fileManager.readFile(settingsPath);
@@ -1010,7 +1047,7 @@ class IdeSetup extends BaseIdeSetup {
         if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
           const originalLength = settings.contextFileName.length;
           settings.contextFileName = settings.contextFileName.filter(
-            (fileName) => !fileName.startsWith("agents/")
+            (fileName) => !fileName.startsWith('agents/'),
           );
           if (settings.contextFileName.length !== originalLength) {
             updated = true;
@@ -1018,30 +1055,26 @@ class IdeSetup extends BaseIdeSetup {
         }
 
         if (updated) {
-          await fileManager.writeFile(
-            settingsPath,
-            JSON.stringify(settings, null, 2)
+          await fileManager.writeFile(settingsPath, JSON.stringify(settings, null, 2));
+          console.log(
+            chalk.green('✓ Updated .gemini/settings.json - removed agent file references'),
           );
-          console.log(chalk.green("✓ Updated .gemini/settings.json - removed agent file references"));
         }
       } catch (error) {
-        console.warn(
-          chalk.yellow("Could not update .gemini/settings.json"),
-          error
-        );
+        console.warn(chalk.yellow('Could not update .gemini/settings.json'), error);
       }
     }
 
     // Remove old agents directory
-    const agentsDir = path.join(geminiDir, "agents");
+    const agentsDir = path.join(geminiDir, 'agents');
     if (await fileManager.pathExists(agentsDir)) {
       await fileManager.removeDirectory(agentsDir);
-      console.log(chalk.green("✓ Removed old .gemini/agents directory"));
+      console.log(chalk.green('✓ Removed old .gemini/agents directory'));
     }
 
     // Get all available agents
     const agents = await this.getAllAgentIds(installDir);
-    let concatenatedContent = "";
+    let concatenatedContent = '';
 
     for (const agentId of agents) {
       // Find the source agent file
@@ -1054,39 +1087,38 @@ class IdeSetup extends BaseIdeSetup {
         let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
         agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
           agentId,
-          installDir
+          installDir,
         )} agent persona.\n\n`;
-        agentRuleContent += "## Agent Activation\n\n";
+        agentRuleContent += '## Agent Activation\n\n';
         agentRuleContent +=
-          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
-        agentRuleContent += "```yaml\n";
+          'CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n';
+        agentRuleContent += '```yaml\n';
         // Extract just the YAML content from the agent file
         const yamlContent = extractYamlFromAgent(agentContent);
         if (yamlContent) {
           agentRuleContent += yamlContent;
-        }
-        else {
+        } else {
           // If no YAML found, include the whole content minus the header
-          agentRuleContent += agentContent.replace(/^#.*$/m, "").trim();
+          agentRuleContent += agentContent.replace(/^#.*$/m, '').trim();
         }
-        agentRuleContent += "\n```\n\n";
-        agentRuleContent += "## File Reference\n\n";
-        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        agentRuleContent += '\n```\n\n';
+        agentRuleContent += '## File Reference\n\n';
+        const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
         agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
-        agentRuleContent += "## Usage\n\n";
+        agentRuleContent += '## Usage\n\n';
         agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
           agentId,
-          installDir
+          installDir,
         )} persona and follow all instructions defined in the YAML configuration above.\n`;
 
         // Add to concatenated content with separator
-        concatenatedContent += agentRuleContent + "\n\n---\n\n";
+        concatenatedContent += agentRuleContent + '\n\n---\n\n';
         console.log(chalk.green(`✓ Added context for @${agentId}`));
       }
     }
 
     // Write the concatenated content to GEMINI.md
-    const geminiMdPath = path.join(bmadMethodDir, "GEMINI.md");
+    const geminiMdPath = path.join(bmadMethodDir, 'GEMINI.md');
     await fileManager.writeFile(geminiMdPath, concatenatedContent);
     console.log(chalk.green(`\n✓ Created GEMINI.md in ${bmadMethodDir}`));
 
@@ -1094,12 +1126,12 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async setupQwenCode(installDir, selectedAgent) {
-    const qwenDir = path.join(installDir, ".qwen");
-    const bmadMethodDir = path.join(qwenDir, "bmad-method");
+    const qwenDir = path.join(installDir, '.qwen');
+    const bmadMethodDir = path.join(qwenDir, 'bmad-method');
     await fileManager.ensureDirectory(bmadMethodDir);
 
     // Update logic for existing settings.json
-    const settingsPath = path.join(qwenDir, "settings.json");
+    const settingsPath = path.join(qwenDir, 'settings.json');
     if (await fileManager.pathExists(settingsPath)) {
       try {
         const settingsContent = await fileManager.readFile(settingsPath);
@@ -1110,7 +1142,7 @@ class IdeSetup extends BaseIdeSetup {
         if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
           const originalLength = settings.contextFileName.length;
           settings.contextFileName = settings.contextFileName.filter(
-            (fileName) => !fileName.startsWith("agents/")
+            (fileName) => !fileName.startsWith('agents/'),
           );
           if (settings.contextFileName.length !== originalLength) {
             updated = true;
@@ -1118,30 +1150,24 @@ class IdeSetup extends BaseIdeSetup {
         }
 
         if (updated) {
-          await fileManager.writeFile(
-            settingsPath,
-            JSON.stringify(settings, null, 2)
-          );
-          console.log(chalk.green("✓ Updated .qwen/settings.json - removed agent file references"));
+          await fileManager.writeFile(settingsPath, JSON.stringify(settings, null, 2));
+          console.log(chalk.green('✓ Updated .qwen/settings.json - removed agent file references'));
         }
       } catch (error) {
-        console.warn(
-          chalk.yellow("Could not update .qwen/settings.json"),
-          error
-        );
+        console.warn(chalk.yellow('Could not update .qwen/settings.json'), error);
       }
     }
 
     // Remove old agents directory
-    const agentsDir = path.join(qwenDir, "agents");
+    const agentsDir = path.join(qwenDir, 'agents');
     if (await fileManager.pathExists(agentsDir)) {
       await fileManager.removeDirectory(agentsDir);
-      console.log(chalk.green("✓ Removed old .qwen/agents directory"));
+      console.log(chalk.green('✓ Removed old .qwen/agents directory'));
     }
 
     // Get all available agents
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
-    let concatenatedContent = "";
+    let concatenatedContent = '';
 
     for (const agentId of agents) {
       // Find the source agent file
@@ -1154,50 +1180,54 @@ class IdeSetup extends BaseIdeSetup {
         let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
         agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
           agentId,
-          installDir
+          installDir,
         )} agent persona.\n\n`;
-        agentRuleContent += "## Agent Activation\n\n";
+        agentRuleContent += '## Agent Activation\n\n';
         agentRuleContent +=
-          "CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n";
-        agentRuleContent += "```yaml\n";
+          'CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n';
+        agentRuleContent += '```yaml\n';
         // Extract just the YAML content from the agent file
         const yamlContent = extractYamlFromAgent(agentContent);
         if (yamlContent) {
           agentRuleContent += yamlContent;
-        }
-        else {
+        } else {
           // If no YAML found, include the whole content minus the header
-          agentRuleContent += agentContent.replace(/^#.*$/m, "").trim();
+          agentRuleContent += agentContent.replace(/^#.*$/m, '').trim();
         }
-        agentRuleContent += "\n```\n\n";
-        agentRuleContent += "## File Reference\n\n";
-        const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
+        agentRuleContent += '\n```\n\n';
+        agentRuleContent += '## File Reference\n\n';
+        const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
         agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
-        agentRuleContent += "## Usage\n\n";
+        agentRuleContent += '## Usage\n\n';
         agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
           agentId,
-          installDir
+          installDir,
         )} persona and follow all instructions defined in the YAML configuration above.\n`;
 
         // Add to concatenated content with separator
-        concatenatedContent += agentRuleContent + "\n\n---\n\n";
+        concatenatedContent += agentRuleContent + '\n\n---\n\n';
         console.log(chalk.green(`✓ Added context for *${agentId}`));
       }
     }
 
     // Write the concatenated content to QWEN.md
-    const qwenMdPath = path.join(bmadMethodDir, "QWEN.md");
+    const qwenMdPath = path.join(bmadMethodDir, 'QWEN.md');
     await fileManager.writeFile(qwenMdPath, concatenatedContent);
     console.log(chalk.green(`\n✓ Created QWEN.md in ${bmadMethodDir}`));
 
     return true;
   }
 
-  async setupGitHubCopilot(installDir, selectedAgent, spinner = null, preConfiguredSettings = null) {
+  async setupGitHubCopilot(
+    installDir,
+    selectedAgent,
+    spinner = null,
+    preConfiguredSettings = null,
+  ) {
     // Configure VS Code workspace settings first to avoid UI conflicts with loading spinners
     await this.configureVsCodeSettings(installDir, spinner, preConfiguredSettings);
 
-    const chatmodesDir = path.join(installDir, ".github", "chatmodes");
+    const chatmodesDir = path.join(installDir, '.github', 'chatmodes');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(chatmodesDir);
@@ -1223,7 +1253,7 @@ class IdeSetup extends BaseIdeSetup {
         }
 
         let chatmodeContent = `---
-description: "${description.replace(/"/g, '\\"')}"
+description: "${description.replaceAll('"', String.raw`\"`)}"
 tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'usages', 'editFiles', 'runCommands', 'runTasks', 'runTests', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure']
 ---
 
@@ -1242,8 +1272,8 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
   }
 
   async configureVsCodeSettings(installDir, spinner, preConfiguredSettings = null) {
-    const vscodeDir = path.join(installDir, ".vscode");
-    const settingsPath = path.join(vscodeDir, "settings.json");
+    const vscodeDir = path.join(installDir, '.vscode');
+    const settingsPath = path.join(vscodeDir, 'settings.json');
 
     await fileManager.ensureDirectory(vscodeDir);
 
@@ -1253,9 +1283,9 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
       try {
         const existingContent = await fileManager.readFile(settingsPath);
         existingSettings = JSON.parse(existingContent);
-        console.log(chalk.yellow("Found existing .vscode/settings.json. Merging BMad settings..."));
-      } catch (error) {
-        console.warn(chalk.yellow("Could not parse existing settings.json. Creating new one."));
+        console.log(chalk.yellow('Found existing .vscode/settings.json. Merging BMad settings...'));
+      } catch {
+        console.warn(chalk.yellow('Could not parse existing settings.json. Creating new one.'));
         existingSettings = {};
       }
     }
@@ -1268,8 +1298,10 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     } else {
       // Clear any previous output and add spacing to avoid conflicts with loaders
       console.log('\n'.repeat(2));
-      console.log(chalk.blue("🔧 Github Copilot Agent Settings Configuration"));
-      console.log(chalk.dim("BMad works best with specific VS Code settings for optimal agent experience."));
+      console.log(chalk.blue('🔧 Github Copilot Agent Settings Configuration'));
+      console.log(
+        chalk.dim('BMad works best with specific VS Code settings for optimal agent experience.'),
+      );
       console.log(''); // Add extra spacing
 
       const response = await inquirer.prompt([
@@ -1280,19 +1312,19 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
           choices: [
             {
               name: 'Use recommended defaults (fastest setup)',
-              value: 'defaults'
+              value: 'defaults',
             },
             {
               name: 'Configure each setting manually (customize to your preferences)',
-              value: 'manual'
+              value: 'manual',
             },
             {
-              name: 'Skip settings configuration (I\'ll configure manually later)',
-              value: 'skip'
-            }
+              name: "Skip settings configuration (I'll configure manually later)",
+              value: 'skip',
+            },
           ],
-          default: 'defaults'
-        }
+          default: 'defaults',
+        },
       ]);
       configChoice = response.configChoice;
     }
@@ -1300,28 +1332,28 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     let bmadSettings = {};
 
     if (configChoice === 'skip') {
-      console.log(chalk.yellow("⚠️  Skipping VS Code settings configuration."));
-      console.log(chalk.dim("You can manually configure these settings in .vscode/settings.json:"));
-      console.log(chalk.dim("  • chat.agent.enabled: true"));
-      console.log(chalk.dim("  • chat.agent.maxRequests: 15"));
-      console.log(chalk.dim("  • github.copilot.chat.agent.runTasks: true"));
-      console.log(chalk.dim("  • chat.mcp.discovery.enabled: true"));
-      console.log(chalk.dim("  • github.copilot.chat.agent.autoFix: true"));
-      console.log(chalk.dim("  • chat.tools.autoApprove: false"));
+      console.log(chalk.yellow('⚠️  Skipping VS Code settings configuration.'));
+      console.log(chalk.dim('You can manually configure these settings in .vscode/settings.json:'));
+      console.log(chalk.dim('  • chat.agent.enabled: true'));
+      console.log(chalk.dim('  • chat.agent.maxRequests: 15'));
+      console.log(chalk.dim('  • github.copilot.chat.agent.runTasks: true'));
+      console.log(chalk.dim('  • chat.mcp.discovery.enabled: true'));
+      console.log(chalk.dim('  • github.copilot.chat.agent.autoFix: true'));
+      console.log(chalk.dim('  • chat.tools.autoApprove: false'));
       return true;
     }
 
     if (configChoice === 'defaults') {
       // Use recommended defaults
       bmadSettings = {
-        "chat.agent.enabled": true,
-        "chat.agent.maxRequests": 15,
-        "github.copilot.chat.agent.runTasks": true,
-        "chat.mcp.discovery.enabled": true,
-        "github.copilot.chat.agent.autoFix": true,
-        "chat.tools.autoApprove": false
+        'chat.agent.enabled': true,
+        'chat.agent.maxRequests': 15,
+        'github.copilot.chat.agent.runTasks': true,
+        'chat.mcp.discovery.enabled': true,
+        'github.copilot.chat.agent.autoFix': true,
+        'chat.tools.autoApprove': false,
       };
-      console.log(chalk.green("✓ Using recommended BMad defaults for Github Copilot settings"));
+      console.log(chalk.green('✓ Using recommended BMad defaults for Github Copilot settings'));
     } else {
       // Manual configuration
       console.log(chalk.blue("\n📋 Let's configure each setting for your preferences:"));
@@ -1340,37 +1372,37 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
           message: 'Maximum requests per agent session (recommended: 15)?',
           default: '15',
           validate: (input) => {
-            const num = parseInt(input);
-            if (isNaN(num) || num < 1 || num > 50) {
+            const number_ = Number.parseInt(input);
+            if (isNaN(number_) || number_ < 1 || number_ > 50) {
               return 'Please enter a number between 1 and 50';
             }
             return true;
-          }
+          },
         },
         {
           type: 'confirm',
           name: 'runTasks',
           message: 'Allow agents to run workspace tasks (package.json scripts, etc.)?',
-          default: true
+          default: true,
         },
         {
           type: 'confirm',
           name: 'mcpDiscovery',
           message: 'Enable MCP (Model Context Protocol) server discovery?',
-          default: true
+          default: true,
         },
         {
           type: 'confirm',
           name: 'autoFix',
           message: 'Enable automatic error detection and fixing in generated code?',
-          default: true
+          default: true,
         },
         {
           type: 'confirm',
           name: 'autoApprove',
           message: 'Auto-approve ALL tools without confirmation? (⚠️  EXPERIMENTAL - less secure)',
-          default: false
-        }
+          default: false,
+        },
       ]);
 
       // Restart spinner if it was active before prompts
@@ -1379,15 +1411,15 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
       }
 
       bmadSettings = {
-        "chat.agent.enabled": true, // Always enabled - required for BMad agents
-        "chat.agent.maxRequests": parseInt(manualSettings.maxRequests),
-        "github.copilot.chat.agent.runTasks": manualSettings.runTasks,
-        "chat.mcp.discovery.enabled": manualSettings.mcpDiscovery,
-        "github.copilot.chat.agent.autoFix": manualSettings.autoFix,
-        "chat.tools.autoApprove": manualSettings.autoApprove
+        'chat.agent.enabled': true, // Always enabled - required for BMad agents
+        'chat.agent.maxRequests': Number.parseInt(manualSettings.maxRequests),
+        'github.copilot.chat.agent.runTasks': manualSettings.runTasks,
+        'chat.mcp.discovery.enabled': manualSettings.mcpDiscovery,
+        'github.copilot.chat.agent.autoFix': manualSettings.autoFix,
+        'chat.tools.autoApprove': manualSettings.autoApprove,
       };
 
-      console.log(chalk.green("✓ Custom settings configured"));
+      console.log(chalk.green('✓ Custom settings configured'));
     }
 
     // Merge settings (existing settings take precedence to avoid overriding user preferences)
@@ -1396,13 +1428,13 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     // Write the updated settings
     await fileManager.writeFile(settingsPath, JSON.stringify(mergedSettings, null, 2));
 
-    console.log(chalk.green("✓ VS Code workspace settings configured successfully"));
-    console.log(chalk.dim("  Settings written to .vscode/settings.json:"));
-    Object.entries(bmadSettings).forEach(([key, value]) => {
+    console.log(chalk.green('✓ VS Code workspace settings configured successfully'));
+    console.log(chalk.dim('  Settings written to .vscode/settings.json:'));
+    for (const [key, value] of Object.entries(bmadSettings)) {
       console.log(chalk.dim(`  • ${key}: ${value}`));
-    });
-    console.log(chalk.dim(""));
-    console.log(chalk.dim("You can modify these settings anytime in .vscode/settings.json"));
+    }
+    console.log(chalk.dim(''));
+    console.log(chalk.dim('You can modify these settings anytime in .vscode/settings.json'));
   }
 }
 

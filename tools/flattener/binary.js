@@ -1,6 +1,6 @@
-const fsp = require("node:fs/promises");
-const path = require("node:path");
-const { Buffer } = require("node:buffer");
+const fsp = require('node:fs/promises');
+const path = require('node:path');
+const { Buffer } = require('node:buffer');
 
 /**
  * Efficiently determine if a file is binary without reading the whole file.
@@ -13,25 +13,54 @@ async function isBinaryFile(filePath) {
   try {
     const stats = await fsp.stat(filePath);
     if (stats.isDirectory()) {
-      throw new Error("EISDIR: illegal operation on a directory");
+      throw new Error('EISDIR: illegal operation on a directory');
     }
 
     const binaryExtensions = new Set([
-      ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".ico", ".svg",
-      ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx",
-      ".zip", ".tar", ".gz", ".rar", ".7z",
-      ".exe", ".dll", ".so", ".dylib",
-      ".mp3", ".mp4", ".avi", ".mov", ".wav",
-      ".ttf", ".otf", ".woff", ".woff2",
-      ".bin", ".dat", ".db", ".sqlite",
+      '.jpg',
+      '.jpeg',
+      '.png',
+      '.gif',
+      '.bmp',
+      '.ico',
+      '.svg',
+      '.pdf',
+      '.doc',
+      '.docx',
+      '.xls',
+      '.xlsx',
+      '.ppt',
+      '.pptx',
+      '.zip',
+      '.tar',
+      '.gz',
+      '.rar',
+      '.7z',
+      '.exe',
+      '.dll',
+      '.so',
+      '.dylib',
+      '.mp3',
+      '.mp4',
+      '.avi',
+      '.mov',
+      '.wav',
+      '.ttf',
+      '.otf',
+      '.woff',
+      '.woff2',
+      '.bin',
+      '.dat',
+      '.db',
+      '.sqlite',
     ]);
 
-    const ext = path.extname(filePath).toLowerCase();
-    if (binaryExtensions.has(ext)) return true;
+    const extension = path.extname(filePath).toLowerCase();
+    if (binaryExtensions.has(extension)) return true;
     if (stats.size === 0) return false;
 
     const sampleSize = Math.min(4096, stats.size);
-    const fd = await fsp.open(filePath, "r");
+    const fd = await fsp.open(filePath, 'r');
     try {
       const buffer = Buffer.allocUnsafe(sampleSize);
       const { bytesRead } = await fd.read(buffer, 0, sampleSize, 0);
@@ -41,9 +70,7 @@ async function isBinaryFile(filePath) {
       await fd.close();
     }
   } catch (error) {
-    console.warn(
-      `Warning: Could not determine if file is binary: ${filePath} - ${error.message}`,
-    );
+    console.warn(`Warning: Could not determine if file is binary: ${filePath} - ${error.message}`);
     return false;
   }
 }

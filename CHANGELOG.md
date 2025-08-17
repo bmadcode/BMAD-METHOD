@@ -574,10 +574,6 @@
 
 - Manual version bumping via npm scripts is now disabled. Use conventional commits for automated releases.
 
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-
 # [4.2.0](https://github.com/bmadcode/BMAD-METHOD/compare/v4.1.0...v4.2.0) (2025-06-15)
 
 ### Bug Fixes
@@ -686,4 +682,5 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ### Features
 
 - add versioning and release automation ([0ea5e50](https://github.com/bmadcode/BMAD-METHOD/commit/0ea5e50aa7ace5946d0100c180dd4c0da3e2fd8c))
+
 # Promote to stable release 5.0.0

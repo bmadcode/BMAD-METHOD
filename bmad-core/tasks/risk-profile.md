@@ -6,10 +6,10 @@ Generate a comprehensive risk assessment matrix for a story implementation using
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "docs/stories/{epic}.{story}.*.md"
-  - story_title: "{title}" # If missing, derive from story file H1
-  - story_slug: "{slug}" # If missing, derive from title (lowercase, hyphenated)
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: 'docs/stories/{epic}.{story}.*.md'
+  - story_title: '{title}' # If missing, derive from story file H1
+  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
 
 ## Purpose
@@ -79,14 +79,14 @@ For each category, identify specific risks:
 
 ```yaml
 risk:
-  id: "SEC-001" # Use prefixes: SEC, PERF, DATA, BUS, OPS, TECH
+  id: 'SEC-001' # Use prefixes: SEC, PERF, DATA, BUS, OPS, TECH
   category: security
-  title: "Insufficient input validation on user forms"
-  description: "Form inputs not properly sanitized could lead to XSS attacks"
+  title: 'Insufficient input validation on user forms'
+  description: 'Form inputs not properly sanitized could lead to XSS attacks'
   affected_components:
-    - "UserRegistrationForm"
-    - "ProfileUpdateForm"
-  detection_method: "Code review revealed missing validation"
+    - 'UserRegistrationForm'
+    - 'ProfileUpdateForm'
+  detection_method: 'Code review revealed missing validation'
 ```
 
 ### 2. Risk Assessment
@@ -105,7 +105,7 @@ Evaluate each risk using probability × impact:
 - `Medium (2)`: Moderate consequences (degraded performance, minor data issues)
 - `Low (1)`: Minor consequences (cosmetic issues, slight inconvenience)
 
-**Risk Score = Probability × Impact**
+### Risk Score = Probability × Impact
 
 - 9: Critical Risk (Red)
 - 6: High Risk (Orange)
@@ -133,20 +133,20 @@ For each identified risk, provide mitigation:
 
 ```yaml
 mitigation:
-  risk_id: "SEC-001"
-  strategy: "preventive" # preventive|detective|corrective
+  risk_id: 'SEC-001'
+  strategy: 'preventive' # preventive|detective|corrective
   actions:
-    - "Implement input validation library (e.g., validator.js)"
-    - "Add CSP headers to prevent XSS execution"
-    - "Sanitize all user inputs before storage"
-    - "Escape all outputs in templates"
+    - 'Implement input validation library (e.g., validator.js)'
+    - 'Add CSP headers to prevent XSS execution'
+    - 'Sanitize all user inputs before storage'
+    - 'Escape all outputs in templates'
   testing_requirements:
-    - "Security testing with OWASP ZAP"
-    - "Manual penetration testing of forms"
-    - "Unit tests for validation functions"
-  residual_risk: "Low - Some zero-day vulnerabilities may remain"
-  owner: "dev"
-  timeline: "Before deployment"
+    - 'Security testing with OWASP ZAP'
+    - 'Manual penetration testing of forms'
+    - 'Unit tests for validation functions'
+  residual_risk: 'Low - Some zero-day vulnerabilities may remain'
+  owner: 'dev'
+  timeline: 'Before deployment'
 ```
 
 ## Outputs
@@ -172,17 +172,17 @@ risk_summary:
   highest:
     id: SEC-001
     score: 9
-    title: "XSS on profile form"
+    title: 'XSS on profile form'
   recommendations:
     must_fix:
-      - "Add input sanitization & CSP"
+      - 'Add input sanitization & CSP'
     monitor:
-      - "Add security alerts for auth endpoints"
+      - 'Add security alerts for auth endpoints'
 ```
 
 ### Output 2: Markdown Report
 
-**Save to:** `docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md`
+**Save to:** `qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md`
 
 ```markdown
 # Risk Profile: Story {epic}.{story}
@@ -290,7 +290,7 @@ Review and update risk profile when:
 
 Calculate overall story risk score:
 
-```
+```text
 Base Score = 100
 For each risk:
   - Critical (9): Deduct 20 points
@@ -339,8 +339,8 @@ Based on risk profile, recommend:
 
 **Print this line for review task to quote:**
 
-```
-Risk profile: docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
+```text
+Risk profile: qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
 ```
 
 ## Key Principles

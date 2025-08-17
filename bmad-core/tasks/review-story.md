@@ -6,10 +6,10 @@ Perform a comprehensive test architecture review with quality gate decision. Thi
 
 ```yaml
 required:
-  - story_id: "{epic}.{story}" # e.g., "1.3"
-  - story_path: "{devStoryLocation}/{epic}.{story}.*.md" # Path from core-config.yaml
-  - story_title: "{title}" # If missing, derive from story file H1
-  - story_slug: "{slug}" # If missing, derive from title (lowercase, hyphenated)
+  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from core-config.yaml
+  - story_title: '{title}' # If missing, derive from story file H1
+  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
 
 ## Prerequisites
@@ -167,9 +167,9 @@ After review and any refactoring, append your results to the story file in the Q
 
 ### Gate Status
 
-Gate: {STATUS} → docs/qa/gates/{epic}.{story}-{slug}.yml
-Risk profile: docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
-NFR assessment: docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
+Gate: {STATUS} → qa.qaLocation/gates/{epic}.{story}-{slug}.yml
+Risk profile: qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
+NFR assessment: qa.qaLocation/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
 
 # Note: Paths should reference core-config.yaml for custom configurations
 
@@ -183,27 +183,27 @@ NFR assessment: docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
 
 **Template and Directory:**
 
-- Render from `templates/qa-gate-tmpl.yaml`
-- Create `docs/qa/gates/` directory if missing (or configure in core-config.yaml)
-- Save to: `docs/qa/gates/{epic}.{story}-{slug}.yml`
+- Render from `../templates/qa-gate-tmpl.yaml`
+- Create directory defined in `qa.qaLocation/gates` (see `bmad-core/core-config.yaml`) if missing
+- Save to: `qa.qaLocation/gates/{epic}.{story}-{slug}.yml`
 
 Gate file structure:
 
 ```yaml
 schema: 1
-story: "{epic}.{story}"
-story_title: "{story title}"
+story: '{epic}.{story}'
+story_title: '{story title}'
 gate: PASS|CONCERNS|FAIL|WAIVED
-status_reason: "1-2 sentence explanation of gate decision"
-reviewer: "Quinn (Test Architect)"
-updated: "{ISO-8601 timestamp}"
+status_reason: '1-2 sentence explanation of gate decision'
+reviewer: 'Quinn (Test Architect)'
+updated: '{ISO-8601 timestamp}'
 
 top_issues: [] # Empty if no issues
 waiver: { active: false } # Set active: true only if WAIVED
 
 # Extended fields (optional but recommended):
 quality_score: 0-100 # 100 - (20*FAILs) - (10*CONCERNS) or use technical-preferences.md weights
-expires: "{ISO-8601 timestamp}" # Typically 2 weeks from review
+expires: '{ISO-8601 timestamp}' # Typically 2 weeks from review
 
 evidence:
   tests_reviewed: { count }
@@ -215,24 +215,24 @@ evidence:
 nfr_validation:
   security:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
   performance:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
   reliability:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
   maintainability:
     status: PASS|CONCERNS|FAIL
-    notes: "Specific findings"
+    notes: 'Specific findings'
 
 recommendations:
   immediate: # Must fix before production
-    - action: "Add rate limiting"
-      refs: ["api/auth/login.ts"]
+    - action: 'Add rate limiting'
+      refs: ['api/auth/login.ts']
   future: # Can be addressed later
-    - action: "Consider caching"
-      refs: ["services/data.ts"]
+    - action: 'Consider caching'
+      refs: ['services/data.ts']
 ```
 
 ### Gate Decision Criteria
@@ -308,7 +308,7 @@ Stop the review and request clarification if:
 After review:
 
 1. Update the QA Results section in the story file
-2. Create the gate file in `docs/qa/gates/`
+2. Create the gate file in directory from `qa.qaLocation/gates`
 3. Recommend status: "Ready for Done" or "Changes Required" (owner decides)
 4. If files were modified, list them in QA Results and ask Dev to update File List
 5. Always provide constructive feedback and actionable recommendations

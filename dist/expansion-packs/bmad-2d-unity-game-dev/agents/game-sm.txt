@@ -514,8 +514,8 @@ template:
   version: 3.0
   output:
     format: markdown
-    filename: "stories/{{epic_name}}/{{story_id}}-{{story_name}}.md"
-    title: "Story: {{story_title}}"
+    filename: 'stories/{{epic_name}}/{{story_id}}-{{story_name}}.md'
+    title: 'Story: {{story_title}}'
 
 workflow:
   mode: interactive
@@ -524,13 +524,13 @@ sections:
   - id: initial-setup
     instruction: |
       This template creates detailed game development stories that are immediately actionable by game developers. Each story should focus on a single, implementable feature that contributes to the overall game functionality.
-      
+
       Before starting, ensure you have access to:
-      
+
       - Game Design Document (GDD)
       - Game Architecture Document
       - Any existing stories in this epic
-      
+
       The story should be specific enough that a developer can implement it without requiring additional design decisions.
 
   - id: story-header
@@ -544,7 +544,7 @@ sections:
   - id: description
     title: Description
     instruction: Provide a clear, concise description of what this story implements. Focus on the specific game feature or system being built. Reference the GDD section that defines this feature.
-    template: "{{clear_description_of_what_needs_to_be_implemented}}"
+    template: '{{clear_description_of_what_needs_to_be_implemented}}'
 
   - id: acceptance-criteria
     title: Acceptance Criteria
@@ -554,7 +554,7 @@ sections:
         title: Functional Requirements
         type: checklist
         items:
-          - "{{specific_functional_requirement}}"
+          - '{{specific_functional_requirement}}'
       - id: technical-requirements
         title: Technical Requirements
         type: checklist
@@ -562,14 +562,14 @@ sections:
           - Code follows C# best practices
           - Maintains stable frame rate on target devices
           - No memory leaks or performance degradation
-          - "{{specific_technical_requirement}}"
+          - '{{specific_technical_requirement}}'
       - id: game-design-requirements
         title: Game Design Requirements
         type: checklist
         items:
-          - "{{gameplay_requirement_from_gdd}}"
-          - "{{balance_requirement_if_applicable}}"
-          - "{{player_experience_requirement}}"
+          - '{{gameplay_requirement_from_gdd}}'
+          - '{{balance_requirement_if_applicable}}'
+          - '{{player_experience_requirement}}'
 
   - id: technical-specifications
     title: Technical Specifications
@@ -579,12 +579,12 @@ sections:
         title: Files to Create/Modify
         template: |
           **New Files:**
-          
+
           - `{{file_path_1}}` - {{purpose}}
           - `{{file_path_2}}` - {{purpose}}
-          
+
           **Modified Files:**
-          
+
           - `{{existing_file_1}}` - {{changes_needed}}
           - `{{existing_file_2}}` - {{changes_needed}}
       - id: class-interface-definitions
@@ -667,13 +667,13 @@ sections:
     instruction: Reference the specific sections of the GDD that this story implements
     template: |
       **GDD Reference:** {{section_name}} ({{page_or_section_number}})
-      
+
       **Game Mechanic:** {{mechanic_name}}
-      
+
       **Player Experience Goal:** {{experience_description}}
-      
+
       **Balance Parameters:**
-      
+
       - {{parameter_1}}: {{value_or_range}}
       - {{parameter_2}}: {{value_or_range}}
 
@@ -720,15 +720,15 @@ sections:
     instruction: List any dependencies that must be completed before this story can be implemented
     template: |
       **Story Dependencies:**
-      
+
       - {{story_id}}: {{dependency_description}}
-      
+
       **Technical Dependencies:**
-      
+
       - {{system_or_file}}: {{requirement}}
-      
+
       **Asset Dependencies:**
-      
+
       - {{asset_type}}: {{asset_description}}
       - Location: `{{asset_path}}`
 
@@ -744,24 +744,24 @@ sections:
       - Performance targets met
       - No C# compiler errors or warnings
       - Documentation updated
-      - "{{game_specific_dod_item}}"
+      - '{{game_specific_dod_item}}'
 
   - id: notes
     title: Notes
     instruction: Any additional context, design decisions, or implementation notes
     template: |
       **Implementation Notes:**
-      
+
       - {{note_1}}
       - {{note_2}}
-      
+
       **Design Decisions:**
-      
+
       - {{decision_1}}: {{rationale}}
       - {{decision_2}}: {{rationale}}
-      
+
       **Future Considerations:**
-      
+
       - {{future_enhancement_1}}
       - {{future_optimization_1}}
 ==================== END: .bmad-2d-unity-game-dev/templates/game-story-tmpl.yaml ====================

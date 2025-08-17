@@ -981,8 +981,8 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-design-document.md"
-    title: "{{game_title}} Game Design Document (GDD)"
+    filename: 'docs/{{game_name}}-game-design-document.md'
+    title: '{{game_title}} Game Design Document (GDD)'
 
 workflow:
   mode: interactive
@@ -991,7 +991,7 @@ sections:
   - id: initial-setup
     instruction: |
       This template creates a comprehensive Game Design Document that will serve as the foundation for all game development work. The GDD should be detailed enough that developers can create user stories and epics from it. Focus on gameplay systems, mechanics, and technical requirements that can be broken down into implementable features.
-      
+
       If available, review any provided documents or ask if any are optionally available: Project Brief, Market Research, Competitive Analysis
 
   - id: executive-summary
@@ -1019,7 +1019,7 @@ sections:
         title: Unique Selling Points
         instruction: List 3-5 key features that differentiate this game from competitors
         type: numbered-list
-        template: "{{usp}}"
+        template: '{{usp}}'
 
   - id: core-gameplay
     title: Core Gameplay
@@ -1036,7 +1036,7 @@ sections:
         instruction: Define the 30-60 second loop that players will repeat. Be specific about timing and player actions.
         template: |
           **Primary Loop ({{duration}} seconds):**
-          
+
           1. {{action_1}} ({{time_1}}s)
           2. {{action_2}} ({{time_2}}s)
           3. {{action_3}} ({{time_3}}s)
@@ -1046,12 +1046,12 @@ sections:
         instruction: Clearly define success and failure states
         template: |
           **Victory Conditions:**
-          
+
           - {{win_condition_1}}
           - {{win_condition_2}}
-          
+
           **Failure States:**
-          
+
           - {{loss_condition_1}}
           - {{loss_condition_2}}
 
@@ -1064,20 +1064,20 @@ sections:
         repeatable: true
         sections:
           - id: mechanic
-            title: "{{mechanic_name}}"
+            title: '{{mechanic_name}}'
             template: |
               **Description:** {{detailed_description}}
-              
+
               **Player Input:** {{input_method}}
-              
+
               **System Response:** {{game_response}}
-              
+
               **Implementation Notes:**
-              
+
               - {{tech_requirement_1}}
               - {{tech_requirement_2}}
               - {{performance_consideration}}
-              
+
               **Dependencies:** {{other_mechanics_needed}}
       - id: controls
         title: Controls
@@ -1096,9 +1096,9 @@ sections:
         title: Player Progression
         template: |
           **Progression Type:** {{linear|branching|metroidvania}}
-          
+
           **Key Milestones:**
-          
+
           1. **{{milestone_1}}** - {{unlock_description}}
           2. **{{milestone_2}}** - {{unlock_description}}
           3. **{{milestone_3}}** - {{unlock_description}}
@@ -1129,15 +1129,15 @@ sections:
         repeatable: true
         sections:
           - id: level-type
-            title: "{{level_type_name}}"
+            title: '{{level_type_name}}'
             template: |
               **Purpose:** {{gameplay_purpose}}
               **Duration:** {{target_time}}
               **Key Elements:** {{required_mechanics}}
               **Difficulty:** {{relative_difficulty}}
-              
+
               **Structure Template:**
-              
+
               - Introduction: {{intro_description}}
               - Challenge: {{main_challenge}}
               - Resolution: {{completion_requirement}}
@@ -1163,13 +1163,13 @@ sections:
         title: Platform Specific
         template: |
           **Desktop:**
-          
+
           - Resolution: {{min_resolution}} - {{max_resolution}}
           - Input: Keyboard, Mouse, Gamepad
           - Browser: Chrome 80+, Firefox 75+, Safari 13+
-          
+
           **Mobile:**
-          
+
           - Resolution: {{mobile_min}} - {{mobile_max}}
           - Input: Touch, Tilt (optional)
           - OS: iOS 13+, Android 8+
@@ -1178,14 +1178,14 @@ sections:
         instruction: Define asset specifications for the art and audio teams
         template: |
           **Visual Assets:**
-          
+
           - Art Style: {{style_description}}
           - Color Palette: {{color_specification}}
           - Animation: {{animation_requirements}}
           - UI Resolution: {{ui_specs}}
-          
+
           **Audio Assets:**
-          
+
           - Music Style: {{music_genre}}
           - Sound Effects: {{sfx_requirements}}
           - Voice Acting: {{voice_needs}}
@@ -1198,7 +1198,7 @@ sections:
         title: Engine Configuration
         template: |
           **Phaser 3 Setup:**
-          
+
           - TypeScript: Strict mode enabled
           - Physics: {{physics_system}} (Arcade/Matter)
           - Renderer: WebGL with Canvas fallback
@@ -1207,7 +1207,7 @@ sections:
         title: Code Architecture
         template: |
           **Required Systems:**
-          
+
           - Scene Management
           - State Management
           - Asset Loading
@@ -1219,7 +1219,7 @@ sections:
         title: Data Management
         template: |
           **Save Data:**
-          
+
           - Progress tracking
           - Settings persistence
           - Statistics collection
@@ -1230,10 +1230,10 @@ sections:
     instruction: Break down the development into phases that can be converted to epics
     sections:
       - id: phase-1-core-systems
-        title: "Phase 1: Core Systems ({{duration}})"
+        title: 'Phase 1: Core Systems ({{duration}})'
         sections:
           - id: foundation-epic
-            title: "Epic: Foundation"
+            title: 'Epic: Foundation'
             type: bullet-list
             template: |
               - Engine setup and configuration
@@ -1241,41 +1241,41 @@ sections:
               - Core input handling
               - Asset loading pipeline
           - id: core-mechanics-epic
-            title: "Epic: Core Mechanics"
+            title: 'Epic: Core Mechanics'
             type: bullet-list
             template: |
               - {{primary_mechanic}} implementation
               - Basic physics and collision
               - Player controller
       - id: phase-2-gameplay-features
-        title: "Phase 2: Gameplay Features ({{duration}})"
+        title: 'Phase 2: Gameplay Features ({{duration}})'
         sections:
           - id: game-systems-epic
-            title: "Epic: Game Systems"
+            title: 'Epic: Game Systems'
             type: bullet-list
             template: |
               - {{mechanic_2}} implementation
               - {{mechanic_3}} implementation
               - Game state management
           - id: content-creation-epic
-            title: "Epic: Content Creation"
+            title: 'Epic: Content Creation'
             type: bullet-list
             template: |
               - Level loading system
               - First playable levels
               - Basic UI implementation
       - id: phase-3-polish-optimization
-        title: "Phase 3: Polish & Optimization ({{duration}})"
+        title: 'Phase 3: Polish & Optimization ({{duration}})'
         sections:
           - id: performance-epic
-            title: "Epic: Performance"
+            title: 'Epic: Performance'
             type: bullet-list
             template: |
               - Optimization and profiling
               - Mobile platform testing
               - Memory management
           - id: user-experience-epic
-            title: "Epic: User Experience"
+            title: 'Epic: User Experience'
             type: bullet-list
             template: |
               - Audio implementation
@@ -1317,7 +1317,7 @@ sections:
         title: References
         instruction: List any competitive analysis, inspiration, or research sources
         type: bullet-list
-        template: "{{reference}}"
+        template: '{{reference}}'
 ==================== END: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
@@ -1327,8 +1327,8 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-level-design-document.md"
-    title: "{{game_title}} Level Design Document"
+    filename: 'docs/{{game_name}}-level-design-document.md'
+    title: '{{game_title}} Level Design Document'
 
 workflow:
   mode: interactive
@@ -1337,7 +1337,7 @@ sections:
   - id: initial-setup
     instruction: |
       This template creates comprehensive level design documentation that guides both content creation and technical implementation. This document should provide enough detail for developers to create level loading systems and for designers to create specific levels.
-      
+
       If available, review: Game Design Document (GDD), Game Architecture Document. This document should align with the game mechanics and technical systems defined in those documents.
 
   - id: introduction
@@ -1345,7 +1345,7 @@ sections:
     instruction: Establish the purpose and scope of level design for this game
     content: |
       This document defines the level design framework for {{game_title}}, providing guidelines for creating engaging, balanced levels that support the core gameplay mechanics defined in the Game Design Document.
-      
+
       This framework ensures consistency across all levels while providing flexibility for creative level design within established technical and design constraints.
     sections:
       - id: change-log
@@ -1389,32 +1389,32 @@ sections:
     repeatable: true
     sections:
       - id: level-category
-        title: "{{category_name}} Levels"
+        title: '{{category_name}} Levels'
         template: |
           **Purpose:** {{gameplay_purpose}}
-          
+
           **Target Duration:** {{min_time}} - {{max_time}} minutes
-          
+
           **Difficulty Range:** {{difficulty_scale}}
-          
+
           **Key Mechanics Featured:**
-          
+
           - {{mechanic_1}} - {{usage_description}}
           - {{mechanic_2}} - {{usage_description}}
-          
+
           **Player Objectives:**
-          
+
           - Primary: {{primary_objective}}
           - Secondary: {{secondary_objective}}
           - Hidden: {{secret_objective}}
-          
+
           **Success Criteria:**
-          
+
           - {{completion_requirement_1}}
           - {{completion_requirement_2}}
-          
+
           **Technical Requirements:**
-          
+
           - Maximum entities: {{entity_limit}}
           - Performance target: {{fps_target}} FPS
           - Memory budget: {{memory_limit}}MB
@@ -1429,11 +1429,11 @@ sections:
         instruction: Based on GDD requirements, define the overall level organization
         template: |
           **Organization Type:** {{linear|hub_world|open_world}}
-          
+
           **Total Level Count:** {{number}}
-          
+
           **World Breakdown:**
-          
+
           - World 1: {{level_count}} levels - {{theme}} - {{difficulty_range}}
           - World 2: {{level_count}} levels - {{theme}} - {{difficulty_range}}
           - World 3: {{level_count}} levels - {{theme}} - {{difficulty_range}}
@@ -1468,7 +1468,7 @@ sections:
         instruction: Define how players access new levels
         template: |
           **Progression Gates:**
-          
+
           - Linear progression: Complete previous level
           - Star requirements: {{star_count}} stars to unlock
           - Skill gates: Demonstrate {{skill_requirement}}
@@ -1483,17 +1483,17 @@ sections:
         instruction: Define all environmental components that can be used in levels
         template: |
           **Terrain Types:**
-          
+
           - {{terrain_1}}: {{properties_and_usage}}
           - {{terrain_2}}: {{properties_and_usage}}
-          
+
           **Interactive Objects:**
-          
+
           - {{object_1}}: {{behavior_and_purpose}}
           - {{object_2}}: {{behavior_and_purpose}}
-          
+
           **Hazards and Obstacles:**
-          
+
           - {{hazard_1}}: {{damage_and_behavior}}
           - {{hazard_2}}: {{damage_and_behavior}}
       - id: collectibles-rewards
@@ -1501,18 +1501,18 @@ sections:
         instruction: Define all collectible items and their placement rules
         template: |
           **Collectible Types:**
-          
+
           - {{collectible_1}}: {{value_and_purpose}}
           - {{collectible_2}}: {{value_and_purpose}}
-          
+
           **Placement Guidelines:**
-          
+
           - Mandatory collectibles: {{placement_rules}}
           - Optional collectibles: {{placement_rules}}
           - Secret collectibles: {{placement_rules}}
-          
+
           **Reward Distribution:**
-          
+
           - Easy to find: {{percentage}}%
           - Moderate challenge: {{percentage}}%
           - High skill required: {{percentage}}%
@@ -1521,18 +1521,18 @@ sections:
         instruction: Define how enemies should be placed and balanced in levels
         template: |
           **Enemy Categories:**
-          
+
           - {{enemy_type_1}}: {{behavior_and_usage}}
           - {{enemy_type_2}}: {{behavior_and_usage}}
-          
+
           **Placement Principles:**
-          
+
           - Introduction encounters: {{guideline}}
           - Standard encounters: {{guideline}}
           - Challenge encounters: {{guideline}}
-          
+
           **Difficulty Scaling:**
-          
+
           - Enemy count progression: {{scaling_rule}}
           - Enemy type introduction: {{pacing_rule}}
           - Encounter complexity: {{complexity_rule}}
@@ -1545,14 +1545,14 @@ sections:
         title: Level Layout Principles
         template: |
           **Spatial Design:**
-          
+
           - Grid size: {{grid_dimensions}}
           - Minimum path width: {{width_units}}
           - Maximum vertical distance: {{height_units}}
           - Safe zones placement: {{safety_guidelines}}
-          
+
           **Navigation Design:**
-          
+
           - Clear path indication: {{visual_cues}}
           - Landmark placement: {{landmark_rules}}
           - Dead end avoidance: {{dead_end_policy}}
@@ -1562,13 +1562,13 @@ sections:
         instruction: Define how to control the rhythm and pace of gameplay within levels
         template: |
           **Action Sequences:**
-          
+
           - High intensity duration: {{max_duration}}
           - Rest period requirement: {{min_rest_time}}
           - Intensity variation: {{pacing_pattern}}
-          
+
           **Learning Sequences:**
-          
+
           - New mechanic introduction: {{teaching_method}}
           - Practice opportunity: {{practice_duration}}
           - Skill application: {{application_context}}
@@ -1577,14 +1577,14 @@ sections:
         instruction: Define how to create appropriate challenges for each level type
         template: |
           **Challenge Types:**
-          
+
           - Execution challenges: {{skill_requirements}}
           - Puzzle challenges: {{complexity_guidelines}}
           - Time challenges: {{time_pressure_rules}}
           - Resource challenges: {{resource_management}}
-          
+
           **Difficulty Calibration:**
-          
+
           - Skill check frequency: {{frequency_guidelines}}
           - Failure recovery: {{retry_mechanics}}
           - Hint system integration: {{help_system}}
@@ -1598,7 +1598,7 @@ sections:
         instruction: Define how level data should be structured for implementation
         template: |
           **Level File Format:**
-          
+
           - Data format: {{json|yaml|custom}}
           - File naming: `level_{{world}}_{{number}}.{{extension}}`
           - Data organization: {{structure_description}}
@@ -1636,14 +1636,14 @@ sections:
         instruction: Define how level assets are organized and loaded
         template: |
           **Tilemap Requirements:**
-          
+
           - Tile size: {{tile_dimensions}}px
           - Tileset organization: {{tileset_structure}}
           - Layer organization: {{layer_system}}
           - Collision data: {{collision_format}}
-          
+
           **Audio Integration:**
-          
+
           - Background music: {{music_requirements}}
           - Ambient sounds: {{ambient_system}}
           - Dynamic audio: {{dynamic_audio_rules}}
@@ -1652,19 +1652,19 @@ sections:
         instruction: Define performance requirements for level systems
         template: |
           **Entity Limits:**
-          
+
           - Maximum active entities: {{entity_limit}}
           - Maximum particles: {{particle_limit}}
           - Maximum audio sources: {{audio_limit}}
-          
+
           **Memory Management:**
-          
+
           - Texture memory budget: {{texture_memory}}MB
           - Audio memory budget: {{audio_memory}}MB
           - Level loading time: <{{load_time}}s
-          
+
           **Culling and LOD:**
-          
+
           - Off-screen culling: {{culling_distance}}
           - Level-of-detail rules: {{lod_system}}
           - Asset streaming: {{streaming_requirements}}
@@ -1677,13 +1677,13 @@ sections:
         title: Automated Testing
         template: |
           **Performance Testing:**
-          
+
           - Frame rate validation: Maintain {{fps_target}} FPS
           - Memory usage monitoring: Stay under {{memory_limit}}MB
           - Loading time verification: Complete in <{{load_time}}s
-          
+
           **Gameplay Testing:**
-          
+
           - Completion path validation: All objectives achievable
           - Collectible accessibility: All items reachable
           - Softlock prevention: No unwinnable states
@@ -1694,31 +1694,31 @@ sections:
             title: Playtesting Checklist
             type: checklist
             items:
-              - "Level completes within target time range"
-              - "All mechanics function correctly"
-              - "Difficulty feels appropriate for level category"
-              - "Player guidance is clear and effective"
-              - "No exploits or sequence breaks (unless intended)"
+              - 'Level completes within target time range'
+              - 'All mechanics function correctly'
+              - 'Difficulty feels appropriate for level category'
+              - 'Player guidance is clear and effective'
+              - 'No exploits or sequence breaks (unless intended)'
           - id: player-experience-testing
             title: Player Experience Testing
             type: checklist
             items:
-              - "Tutorial levels teach effectively"
-              - "Challenge feels fair and rewarding"
-              - "Flow and pacing maintain engagement"
-              - "Audio and visual feedback support gameplay"
+              - 'Tutorial levels teach effectively'
+              - 'Challenge feels fair and rewarding'
+              - 'Flow and pacing maintain engagement'
+              - 'Audio and visual feedback support gameplay'
       - id: balance-validation
         title: Balance Validation
         template: |
           **Metrics Collection:**
-          
+
           - Completion rate: Target {{completion_percentage}}%
           - Average completion time: {{target_time}} ± {{variance}}
           - Death count per level: <{{max_deaths}}
           - Collectible discovery rate: {{discovery_percentage}}%
-          
+
           **Iteration Guidelines:**
-          
+
           - Adjustment criteria: {{criteria_for_changes}}
           - Testing sample size: {{minimum_testers}}
           - Validation period: {{testing_duration}}
@@ -1731,14 +1731,14 @@ sections:
         title: Design Phase
         template: |
           **Concept Development:**
-          
+
           1. Define level purpose and goals
           2. Create rough layout sketch
           3. Identify key mechanics and challenges
           4. Estimate difficulty and duration
-          
+
           **Documentation Requirements:**
-          
+
           - Level design brief
           - Layout diagrams
           - Mechanic integration notes
@@ -1747,15 +1747,15 @@ sections:
         title: Implementation Phase
         template: |
           **Technical Implementation:**
-          
+
           1. Create level data file
           2. Build tilemap and layout
           3. Place entities and objects
           4. Configure level logic and triggers
           5. Integrate audio and visual effects
-          
+
           **Quality Assurance:**
-          
+
           1. Automated testing execution
           2. Internal playtesting
           3. Performance validation
@@ -1764,14 +1764,14 @@ sections:
         title: Integration Phase
         template: |
           **Game Integration:**
-          
+
           1. Level progression integration
           2. Save system compatibility
           3. Analytics integration
           4. Achievement system integration
-          
+
           **Final Validation:**
-          
+
           1. Full game context testing
           2. Performance regression testing
           3. Platform compatibility verification
@@ -1814,8 +1814,8 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-brief.md"
-    title: "{{game_title}} Game Brief"
+    filename: 'docs/{{game_name}}-game-brief.md'
+    title: '{{game_title}} Game Brief'
 
 workflow:
   mode: interactive
@@ -1824,7 +1824,7 @@ sections:
   - id: initial-setup
     instruction: |
       This template creates a comprehensive game brief that serves as the foundation for all subsequent game development work. The brief should capture the essential vision, scope, and requirements needed to create a detailed Game Design Document.
-      
+
       This brief is typically created early in the ideation process, often after brainstorming sessions, to crystallize the game concept before moving into detailed design.
 
   - id: game-vision
@@ -1881,7 +1881,7 @@ sections:
         repeatable: true
         template: |
           **Core Mechanic: {{mechanic_name}}**
-          
+
           - **Description:** {{how_it_works}}
           - **Player Value:** {{why_its_fun}}
           - **Implementation Scope:** {{complexity_estimate}}
@@ -1908,12 +1908,12 @@ sections:
         title: Technical Constraints
         template: |
           **Platform Requirements:**
-          
+
           - Primary: {{platform_1}} - {{requirements}}
           - Secondary: {{platform_2}} - {{requirements}}
-          
+
           **Technical Specifications:**
-          
+
           - Engine: Phaser 3 + TypeScript
           - Performance Target: {{fps_target}} FPS on {{target_device}}
           - Memory Budget: <{{memory_limit}}MB
@@ -1951,10 +1951,10 @@ sections:
         title: Competitive Analysis
         template: |
           **Direct Competitors:**
-          
+
           - {{competitor_1}}: {{strengths_and_weaknesses}}
           - {{competitor_2}}: {{strengths_and_weaknesses}}
-          
+
           **Differentiation Strategy:**
           {{how_we_differ_and_why_thats_valuable}}
       - id: market-opportunity
@@ -1978,16 +1978,16 @@ sections:
         title: Content Categories
         template: |
           **Core Content:**
-          
+
           - {{content_type_1}}: {{quantity_and_description}}
           - {{content_type_2}}: {{quantity_and_description}}
-          
+
           **Optional Content:**
-          
+
           - {{optional_content_type}}: {{quantity_and_description}}
-          
+
           **Replay Elements:**
-          
+
           - {{replayability_features}}
       - id: difficulty-accessibility
         title: Difficulty and Accessibility
@@ -2054,13 +2054,13 @@ sections:
         title: Player Experience Metrics
         template: |
           **Engagement Goals:**
-          
+
           - Tutorial completion rate: >{{percentage}}%
           - Average session length: {{duration}} minutes
           - Player retention: D1 {{d1}}%, D7 {{d7}}%, D30 {{d30}}%
-          
+
           **Quality Benchmarks:**
-          
+
           - Player satisfaction: >{{rating}}/10
           - Completion rate: >{{percentage}}%
           - Technical performance: {{fps_target}} FPS consistent
@@ -2068,13 +2068,13 @@ sections:
         title: Development Metrics
         template: |
           **Technical Targets:**
-          
+
           - Zero critical bugs at launch
           - Performance targets met on all platforms
           - Load times under {{seconds}}s
-          
+
           **Process Goals:**
-          
+
           - Development timeline adherence
           - Feature scope completion
           - Quality assurance standards
@@ -2083,7 +2083,7 @@ sections:
         condition: has_business_goals
         template: |
           **Commercial Goals:**
-          
+
           - {{revenue_target}} in first {{time_period}}
           - {{user_acquisition_target}} players in first {{time_period}}
           - {{retention_target}} monthly active users
@@ -2101,21 +2101,21 @@ sections:
         title: Development Roadmap
         sections:
           - id: phase-1-preproduction
-            title: "Phase 1: Pre-Production ({{duration}})"
+            title: 'Phase 1: Pre-Production ({{duration}})'
             type: bullet-list
             template: |
               - Detailed Game Design Document creation
               - Technical architecture planning
               - Art style exploration and pipeline setup
           - id: phase-2-prototype
-            title: "Phase 2: Prototype ({{duration}})"
+            title: 'Phase 2: Prototype ({{duration}})'
             type: bullet-list
             template: |
               - Core mechanic implementation
               - Technical proof of concept
               - Initial playtesting and iteration
           - id: phase-3-production
-            title: "Phase 3: Production ({{duration}})"
+            title: 'Phase 3: Production ({{duration}})'
             type: bullet-list
             template: |
               - Full feature development
@@ -2136,12 +2136,12 @@ sections:
         title: Validation Plan
         template: |
           **Concept Testing:**
-          
+
           - {{validation_method_1}} - {{timeline}}
           - {{validation_method_2}} - {{timeline}}
-          
+
           **Prototype Testing:**
-          
+
           - {{testing_approach}} - {{timeline}}
           - {{feedback_collection_method}} - {{timeline}}
 

@@ -40,12 +40,12 @@ ide-configurations:
       # 3. Crush will switch to that agent's persona / task
   windsurf:
     name: Windsurf
-    rule-dir: .windsurf/rules/
+    rule-dir: .windsurf/workflows/
     format: multi-file
     command-suffix: .md
     instructions: |
       # To use BMad agents in Windsurf:
-      # 1. Type @agent-name (e.g., "@dev", "@pm")
+      # 1. Type /agent-name (e.g., "/dev", "/pm")
       # 2. Windsurf will adopt that agent's persona
   trae:
     name: Trae

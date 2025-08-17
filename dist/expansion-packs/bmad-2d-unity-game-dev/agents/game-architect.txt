@@ -1231,7 +1231,7 @@ template:
   output:
     format: markdown
     filename: docs/game-architecture.md
-    title: "{{project_name}} Game Architecture Document"
+    title: '{{project_name}} Game Architecture Document'
 
 workflow:
   mode: interactive
@@ -1341,11 +1341,11 @@ sections:
           - Game management patterns (Singleton managers, Event systems, State machines)
           - Data patterns (ScriptableObject configuration, Save/Load systems)
           - Unity-specific patterns (Object pooling, Coroutines, Unity Events)
-        template: "- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}"
+        template: '- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}'
         examples:
           - "**Component-Based Architecture:** Using MonoBehaviour components for game logic - _Rationale:_ Aligns with Unity's design philosophy and enables reusable, testable game systems"
-          - "**ScriptableObject Data:** Using ScriptableObjects for game configuration - _Rationale:_ Enables data-driven design and easy balancing without code changes"
-          - "**Event-Driven Communication:** Using Unity Events and C# events for system decoupling - _Rationale:_ Supports modular architecture and easier testing"
+          - '**ScriptableObject Data:** Using ScriptableObjects for game configuration - _Rationale:_ Enables data-driven design and easy balancing without code changes'
+          - '**Event-Driven Communication:** Using Unity Events and C# events for system decoupling - _Rationale:_ Supports modular architecture and easier testing'
 
   - id: tech-stack
     title: Tech Stack
@@ -1384,13 +1384,13 @@ sections:
         columns: [Category, Technology, Version, Purpose, Rationale]
         instruction: Populate the technology stack table with all relevant Unity technologies
         examples:
-          - "| **Game Engine** | Unity | 2022.3.21f1 | Core game development platform | Latest LTS version, stable 2D tooling, comprehensive package ecosystem |"
+          - '| **Game Engine** | Unity | 2022.3.21f1 | Core game development platform | Latest LTS version, stable 2D tooling, comprehensive package ecosystem |'
           - "| **Language** | C# | 10.0 | Primary scripting language | Unity's native language, strong typing, excellent tooling |"
-          - "| **Render Pipeline** | Universal Render Pipeline (URP) | 14.0.10 | 2D/3D rendering | Optimized for mobile, excellent 2D features, future-proof |"
-          - "| **Input System** | Unity Input System | 1.7.0 | Cross-platform input handling | Modern input system, supports multiple devices, rebindable controls |"
-          - "| **Physics** | Unity 2D Physics | Built-in | 2D collision and physics | Integrated Box2D, optimized for 2D games |"
-          - "| **Audio** | Unity Audio | Built-in | Audio playback and mixing | Built-in audio system with mixer support |"
-          - "| **Testing** | Unity Test Framework | 1.1.33 | Unit and integration testing | Built-in testing framework based on NUnit |"
+          - '| **Render Pipeline** | Universal Render Pipeline (URP) | 14.0.10 | 2D/3D rendering | Optimized for mobile, excellent 2D features, future-proof |'
+          - '| **Input System** | Unity Input System | 1.7.0 | Cross-platform input handling | Modern input system, supports multiple devices, rebindable controls |'
+          - '| **Physics** | Unity 2D Physics | Built-in | 2D collision and physics | Integrated Box2D, optimized for 2D games |'
+          - '| **Audio** | Unity Audio | Built-in | Audio playback and mixing | Built-in audio system with mixer support |'
+          - '| **Testing** | Unity Test Framework | 1.1.33 | Unit and integration testing | Built-in testing framework based on NUnit |'
 
   - id: data-models
     title: Game Data Models
@@ -1408,7 +1408,7 @@ sections:
     repeatable: true
     sections:
       - id: model
-        title: "{{model_name}}"
+        title: '{{model_name}}'
         template: |
           **Purpose:** {{model_purpose}}
 
@@ -1443,7 +1443,7 @@ sections:
     sections:
       - id: system-list
         repeatable: true
-        title: "{{system_name}} System"
+        title: '{{system_name}} System'
         template: |
           **Responsibility:** {{system_description}}
 
@@ -1967,7 +1967,7 @@ sections:
     repeatable: true
     sections:
       - id: integration
-        title: "{{service_name}} Integration"
+        title: '{{service_name}} Integration'
         template: |
           - **Purpose:** {{service_purpose}}
           - **Documentation:** {{service_docs_url}}
@@ -2079,12 +2079,12 @@ sections:
       - id: environments
         title: Build Environments
         repeatable: true
-        template: "- **{{env_name}}:** {{env_purpose}} - {{platform_settings}}"
+        template: '- **{{env_name}}:** {{env_purpose}} - {{platform_settings}}'
       - id: platform-specific-builds
         title: Platform-Specific Build Settings
         type: code
         language: text
-        template: "{{platform_build_configurations}}"
+        template: '{{platform_build_configurations}}'
 
   - id: coding-standards
     title: Coding Standards
@@ -2113,9 +2113,9 @@ sections:
         columns: [Element, Convention, Example]
         instruction: Only include if deviating from Unity defaults
         examples:
-          - "| MonoBehaviour | PascalCase + Component suffix | PlayerController, HealthSystem |"
-          - "| ScriptableObject | PascalCase + Data/Config suffix | PlayerData, GameConfig |"
-          - "| Prefab | PascalCase descriptive | PlayerCharacter, EnvironmentTile |"
+          - '| MonoBehaviour | PascalCase + Component suffix | PlayerController, HealthSystem |'
+          - '| ScriptableObject | PascalCase + Data/Config suffix | PlayerData, GameConfig |'
+          - '| Prefab | PascalCase descriptive | PlayerCharacter, EnvironmentTile |'
       - id: critical-rules
         title: Critical Unity Rules
         instruction: |
@@ -2127,7 +2127,7 @@ sections:
 
           Avoid obvious rules like "follow SOLID principles" or "optimize performance"
         repeatable: true
-        template: "- **{{rule_name}}:** {{rule_description}}"
+        template: '- **{{rule_name}}:** {{rule_description}}'
       - id: unity-specifics
         title: Unity-Specific Guidelines
         condition: Critical Unity-specific rules needed
@@ -2136,7 +2136,7 @@ sections:
           - id: unity-lifecycle
             title: Unity Lifecycle Rules
             repeatable: true
-            template: "- **{{lifecycle_method}}:** {{usage_rule}}"
+            template: '- **{{lifecycle_method}}:** {{usage_rule}}'
 
   - id: test-strategy
     title: Test Strategy and Standards
@@ -3698,7 +3698,7 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic ga
 
 - **Claude Code**: `/bmad2du/game-designer`, `/bmad2du/game-developer`, `/bmad2du/game-sm`, `/bmad2du/game-architect`
 - **Cursor**: `@bmad2du/game-designer`, `@bmad2du/game-developer`, `@bmad2du/game-sm`, `@bmad2du/game-architect`
-- **Windsurf**: `@bmad2du/game-designer`, `@bmad2du/game-developer`, `@bmad2du/game-sm`, `@bmad2du/game-architect`
+- **Windsurf**: `/bmad2du/game-designer`, `/bmad2du/game-developer`, `/bmad2du/game-sm`, `/bmad2du/game-architect`
 - **Trae**: `@bmad2du/game-designer`, `@bmad2du/game-developer`, `@bmad2du/game-sm`, `@bmad2du/game-architect`
 - **Roo Code**: Select mode from mode selector with bmad2du prefix
 - **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select the appropriate game agent.
