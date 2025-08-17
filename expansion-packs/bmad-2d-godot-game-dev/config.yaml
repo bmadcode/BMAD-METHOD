@@ -1,0 +1,6 @@
+name: bmad-2d-godot-game-dev
+version: 1.0.0
+short-title: Godot 2D Game Dev Pack
+description: 2D Game Development expansion pack for BMad Method - Godot focused
+author: sjennings (Lum), based heavily on prior work for Unity by pbean (PinkyD)
+slashPrefix: bmad2dg

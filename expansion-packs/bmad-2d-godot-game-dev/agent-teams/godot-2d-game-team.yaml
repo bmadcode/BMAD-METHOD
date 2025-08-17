@@ -1,0 +1,14 @@
+bundle:
+  name: Godot 2D Game Team
+  icon: 🎮
+  description: Game Development team specialized in 2D games using Godot and C# and/or GDScript.
+agents:
+  - analyst
+  - bmad-orchestrator
+  - game-designer
+  - game-architect
+  - game-developer
+  - game-sm
+workflows:
+  - godot-game-dev-greenfield.md
+  - godot-game-prototype.md
