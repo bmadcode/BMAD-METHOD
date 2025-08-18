@@ -5591,7 +5591,6 @@ workflow:
 ==================== END: .bmad-creative-writing/workflows/novel-greenfield-workflow.yaml ====================
 
 ==================== START: .bmad-creative-writing/workflows/novel-serial-workflow.yaml ====================
----
 workflow:
   id: novel-serial-workflow
   name: Iterative Release Novel Workflow
@@ -5643,7 +5642,6 @@ workflow:
 ==================== END: .bmad-creative-writing/workflows/novel-serial-workflow.yaml ====================
 
 ==================== START: .bmad-creative-writing/workflows/novel-snowflake-workflow.yaml ====================
----
 workflow:
   id: novel-snowflake-workflow
   name: Snowflake Novel Workflow
@@ -5710,7 +5708,6 @@ workflow:
         output: critic-review.md
   completion_criteria:
     - critic-review.md exists
-# end
 ==================== END: .bmad-creative-writing/workflows/novel-snowflake-workflow.yaml ====================
 
 ==================== START: .bmad-creative-writing/workflows/novel-writing.yaml ====================
