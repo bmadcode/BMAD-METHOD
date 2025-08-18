@@ -1,3 +1,4 @@
+# <!-- Powered by BMAD™ Core -->
 workflow:
   id: brownfield-service
   name: Brownfield Service/API Enhancement
@@ -127,7 +128,7 @@ workflow:
       notes: |
         All stories implemented and reviewed!
         Project development phase complete.
-        
+
         Reference: {root}/data/bmad-kb.md#IDE Development Workflow
 
   flow_diagram: |

@@ -1,3 +1,4 @@
+# <!-- Powered by BMAD™ Core -->
 workflow:
   id: greenfield-fullstack
   name: Greenfield Full-Stack Application Development
@@ -159,7 +160,7 @@ workflow:
       notes: |
         All stories implemented and reviewed!
         Project development phase complete.
-        
+
         Reference: {root}/data/bmad-kb.md#IDE Development Workflow
 
   flow_diagram: |
