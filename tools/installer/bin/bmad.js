@@ -216,7 +216,7 @@ async function promptInstallation() {
       type: 'input',
       name: 'directory',
       message: 'Enter the full path to your project directory where BMad should be installed:',
-      default: process.cwd(),
+      default: path.resolve('.'),
       validate: (input) => {
         if (!input.trim()) {
           return 'Please enter a valid project path';

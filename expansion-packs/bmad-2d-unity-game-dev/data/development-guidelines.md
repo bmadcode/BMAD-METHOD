@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Game Development Guidelines (Unity & C#)
 
 ## Overview

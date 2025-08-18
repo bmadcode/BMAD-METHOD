@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Game Architect Solution Validation Checklist
 
 This checklist serves as a comprehensive framework for the Game Architect to validate the technical design and architecture before game development execution. The Game Architect should systematically work through each item, ensuring the game architecture is robust, scalable, performant, and aligned with the Game Design Document requirements.

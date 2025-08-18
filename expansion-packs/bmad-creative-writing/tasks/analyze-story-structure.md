@@ -1,13 +1,17 @@
+<!-- Powered by BMAD™ Core -->
+
 # Analyze Story Structure
 
 ## Purpose
+
 Perform comprehensive structural analysis of a narrative work to identify strengths, weaknesses, and improvement opportunities.
 
 ## Process
 
 ### 1. Identify Structure Type
+
 - Three-act structure
-- Five-act structure  
+- Five-act structure
 - Hero's Journey
 - Save the Cat beats
 - Freytag's Pyramid
@@ -16,6 +20,7 @@ Perform comprehensive structural analysis of a narrative work to identify streng
 - Non-linear/experimental
 
 ### 2. Map Key Points
+
 - **Opening**: Hook, world establishment, character introduction
 - **Inciting Incident**: What disrupts the status quo?
 - **Plot Point 1**: What locks in the conflict?
@@ -23,7 +28,9 @@ Perform comprehensive structural analysis of a narrative work to identify streng
 - **Plot Point 2**: What raises stakes to maximum?
 - **Climax**: How does central conflict resolve?
 - **Resolution**: What new equilibrium emerges?
+
 ### 3. Analyze Pacing
+
 - Scene length distribution
 - Tension escalation curve
 - Breather moment placement
@@ -31,6 +38,7 @@ Perform comprehensive structural analysis of a narrative work to identify streng
 - Chapter break effectiveness
 
 ### 4. Evaluate Setup/Payoff
+
 - Track all setups (promises to reader)
 - Verify each has satisfying payoff
 - Identify orphaned setups
@@ -38,13 +46,16 @@ Perform comprehensive structural analysis of a narrative work to identify streng
 - Check Chekhov's guns
 
 ### 5. Assess Subplot Integration
+
 - List all subplots
 - Track intersection with main plot
 - Evaluate resolution satisfaction
 - Check thematic reinforcement
 
 ### 6. Generate Report
+
 Create structural report including:
+
 - Structure diagram
 - Pacing chart
 - Problem areas
@@ -52,4 +63,5 @@ Create structural report including:
 - Alternative structures
 
 ## Output
+
 Comprehensive structural analysis with actionable recommendations

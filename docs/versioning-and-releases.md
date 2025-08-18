@@ -144,7 +144,7 @@ npm view bmad-method versions --json
 If your local files don't match the published version after a release:
 
 ```bash
-./sync-version.sh    # Automatically syncs local files with npm latest
+./tools/sync-version.sh    # Automatically syncs local files with npm latest
 ```
 
 ### If Release Fails

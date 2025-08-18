@@ -101,6 +101,7 @@ dependencies:
 You are the Character Psychologist, an expert in human nature and its fictional representation. You understand that compelling characters emerge from the intersection of desire, fear, and circumstance.
 
 Focus on:
+
 - **Core wounds** that shape worldview
 - **Defense mechanisms** that create behavior patterns
 - **Ghost/lie/want/need** framework
@@ -114,6 +115,7 @@ Remember to present all options as numbered lists for easy selection.
 ==================== END: .bmad-creative-writing/agents/character-psychologist.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -218,35 +220,45 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-creative-writing/tasks/create-doc.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/develop-character.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 3. Develop Character
+
 # ------------------------------------------------------------
+
 ---
+
 task:
-  id: develop-character
-  name: Develop Character
-  description: Produce rich character profiles with goals, flaws, arcs, and voice notes.
-  persona_default: character-psychologist
+id: develop-character
+name: Develop Character
+description: Produce rich character profiles with goals, flaws, arcs, and voice notes.
+persona_default: character-psychologist
 inputs:
-  - concept-brief.md
-steps:
-  - Identify protagonist(s), antagonist(s), key side characters.
-  - For each, fill character-profile-tmpl.
-  - Offer advanced‑elicitation for each profile.
-output: characters.md
-...
+
+- concept-brief.md
+  steps:
+- Identify protagonist(s), antagonist(s), key side characters.
+- For each, fill character-profile-tmpl.
+- Offer advanced‑elicitation for each profile.
+  output: characters.md
+  ...
 ==================== END: .bmad-creative-writing/tasks/develop-character.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/workshop-dialog.md ====================
+<!-- Powered by BMAD™ Core -->
 # Workshop Dialog
 
 ## Purpose
+
 Refine dialog for authenticity, character voice, and dramatic effectiveness.
 
 ## Process
 
 ### 1. Voice Audit
+
 For each character, assess:
+
 - Vocabulary level and word choice
 - Sentence structure preferences
 - Speech rhythms and patterns
@@ -255,7 +267,9 @@ For each character, assess:
 - Emotional expression style
 
 ### 2. Subtext Analysis
+
 For each exchange:
+
 - What's being said directly
 - What's really being communicated
 - Power dynamics at play
@@ -264,14 +278,18 @@ For each exchange:
 - Obstacles to directness
 
 ### 3. Flow Enhancement
+
 - Remove unnecessary dialogue tags
 - Vary attribution methods
 - Add action beats
 - Incorporate silence/pauses
 - Balance dialog with narrative
 - Ensure natural interruptions
+
 ### 4. Conflict Injection
+
 Where dialog lacks tension:
+
 - Add opposing goals
 - Insert misunderstandings
 - Create subtext conflicts
@@ -280,6 +298,7 @@ Where dialog lacks tension:
 - Add environmental pressure
 
 ### 5. Polish Pass
+
 - Read aloud for rhythm
 - Check period authenticity
 - Verify character consistency
@@ -288,28 +307,36 @@ Where dialog lacks tension:
 - Add distinctive character markers
 
 ## Output
+
 Refined dialog with stronger voices and dramatic impact
 ==================== END: .bmad-creative-writing/tasks/workshop-dialog.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/character-depth-pass.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 9. Character Depth Pass
+
 # ------------------------------------------------------------
+
 ---
+
 task:
-  id: character-depth-pass
-  name: Character Depth Pass
-  description: Enrich character profiles with backstory and arc details.
-  persona_default: character-psychologist
+id: character-depth-pass
+name: Character Depth Pass
+description: Enrich character profiles with backstory and arc details.
+persona_default: character-psychologist
 inputs:
-  - character-summaries.md
-steps:
-  - For each character, add formative events, internal conflicts, arc milestones.
-output: characters.md
-...
+
+- character-summaries.md
+  steps:
+- For each character, add formative events, internal conflicts, arc milestones.
+  output: characters.md
+  ...
 ==================== END: .bmad-creative-writing/tasks/character-depth-pass.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/execute-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
@@ -321,7 +348,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "plot checklist" -> "plot-structure-checklist")
      - If multiple matches found, ask user to clarify
@@ -334,14 +360,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -350,7 +374,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -358,7 +381,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -372,7 +394,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -382,7 +403,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -406,6 +426,7 @@ The LLM will:
 ==================== END: .bmad-creative-writing/tasks/execute-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -526,6 +547,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-creative-writing/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-creative-writing/templates/character-profile-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 ---
 template:
   id: character-profile
@@ -620,25 +642,32 @@ sections:
 ==================== END: .bmad-creative-writing/templates/character-profile-tmpl.yaml ====================
 
 ==================== START: .bmad-creative-writing/checklists/character-consistency-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 1. Character Consistency Checklist
+
 # ------------------------------------------------------------
+
 ---
+
 checklist:
-  id: character-consistency-checklist
-  name: Character Consistency Checklist
-  description: Verify character details and voice remain consistent throughout the manuscript.
+id: character-consistency-checklist
+name: Character Consistency Checklist
+description: Verify character details and voice remain consistent throughout the manuscript.
 items:
-  - "[ ] Names spelled consistently (incl. diacritics)"
-  - "[ ] Physical descriptors match across chapters"
-  - "[ ] Goals and motivations do not contradict earlier scenes"
-  - "[ ] Character voice (speech patterns, vocabulary) is uniform"
-  - "[ ] Relationships and histories align with timeline"
-  - "[ ] Internal conflict/arc progression is logical"
-...
+
+- "[ ] Names spelled consistently (incl. diacritics)"
+- "[ ] Physical descriptors match across chapters"
+- "[ ] Goals and motivations do not contradict earlier scenes"
+- "[ ] Character voice (speech patterns, vocabulary) is uniform"
+- "[ ] Relationships and histories align with timeline"
+- "[ ] Internal conflict/arc progression is logical"
+  ...
 ==================== END: .bmad-creative-writing/checklists/character-consistency-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/data/bmad-kb.md ====================
+<!-- Powered by BMAD™ Core -->
 # BMad Creative Writing Knowledge Base
 
 ## Overview
@@ -744,24 +773,28 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Templates & Tools
 
 ### Character Development
+
 - Comprehensive character profiles
 - Backstory builders
 - Voice and dialogue patterns
 - Relationship mapping
 
 ### Story Structure
+
 - Three-act outlines
 - Save the Cat beat sheets
 - Hero's Journey mapping
 - Scene-by-scene breakdowns
 
 ### World Building
+
 - Setting documentation
 - Magic/technology systems
 - Cultural development
 - Timeline tracking
 
 ### Publishing Support
+
 - KDP formatting guidelines
 - Cover design briefs
 - Marketing copy templates
@@ -770,6 +803,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Genre Support
 
 ### Built-in Genre Checklists
+
 - Fantasy & Sci-Fi
 - Romance & Thriller
 - Mystery & Horror
@@ -777,6 +811,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 - Young Adult
 
 Each genre includes:
+
 - Trope management
 - Reader expectations
 - Market positioning
@@ -785,24 +820,28 @@ Each genre includes:
 ## Best Practices
 
 ### Character Development
+
 1. Start with internal conflict
 2. Build from wound/lie/want/need
 3. Create unique voice patterns
 4. Track arc progression
 
 ### Plot Construction
+
 1. Begin with clear story question
 2. Escalate stakes progressively
 3. Plant setup/payoff pairs
 4. Balance pacing with character moments
 
 ### World Building
+
 1. Maintain internal consistency
 2. Show through character experience
 3. Build only what serves story
 4. Track all established rules
 
 ### Revision Process
+
 1. Complete draft before major edits
 2. Address structure before prose
 3. Read dialogue aloud

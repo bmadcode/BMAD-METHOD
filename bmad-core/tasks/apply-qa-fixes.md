@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # apply-qa-fixes
 
 Implement fixes based on QA results (gate and assessments) for a specific story. This task is for the Dev agent to systematically consume QA outputs and apply code/test changes while only updating allowed sections in the story file.

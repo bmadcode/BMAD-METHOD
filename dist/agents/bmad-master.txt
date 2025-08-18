@@ -127,6 +127,7 @@ dependencies:
 ==================== END: .bmad-core/agents/bmad-master.md ====================
 
 ==================== START: .bmad-core/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -247,6 +248,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-core/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-core/tasks/brownfield-create-epic.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Brownfield Epic Task
 
 ## Purpose
@@ -410,6 +412,7 @@ The epic creation is successful when:
 ==================== END: .bmad-core/tasks/brownfield-create-epic.md ====================
 
 ==================== START: .bmad-core/tasks/brownfield-create-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Brownfield Story Task
 
 ## Purpose
@@ -560,6 +563,7 @@ The story creation is successful when:
 ==================== END: .bmad-core/tasks/brownfield-create-story.md ====================
 
 ==================== START: .bmad-core/tasks/correct-course.md ====================
+<!-- Powered by BMAD™ Core -->
 # Correct Course Task
 
 ## Purpose
@@ -633,6 +637,7 @@ The story creation is successful when:
 ==================== END: .bmad-core/tasks/correct-course.md ====================
 
 ==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -914,6 +919,7 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 ==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -1018,6 +1024,7 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/create-next-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Next Story Task
 
 ## Purpose
@@ -1133,6 +1140,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
 ==================== END: .bmad-core/tasks/create-next-story.md ====================
 
 ==================== START: .bmad-core/tasks/document-project.md ====================
+<!-- Powered by BMAD™ Core -->
 # Document an Existing Project
 
 ## Purpose
@@ -1479,6 +1487,7 @@ Apply the advanced elicitation task after major sections to refine based on user
 ==================== END: .bmad-core/tasks/document-project.md ====================
 
 ==================== START: .bmad-core/tasks/execute-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
@@ -1568,6 +1577,7 @@ The LLM will:
 ==================== END: .bmad-core/tasks/execute-checklist.md ====================
 
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
+<!-- Powered by BMAD™ Core -->
 ---
 docOutputLocation: docs/brainstorming-session-results.md
 template: '.bmad-core/templates/brainstorming-output-tmpl.yaml'
@@ -1707,6 +1717,7 @@ Generate structured document with these sections:
 ==================== END: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
 
 ==================== START: .bmad-core/tasks/generate-ai-frontend-prompt.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create AI Frontend Prompt Task
 
 ## Purpose
@@ -1761,6 +1772,7 @@ You will now synthesize the inputs and the above principles into a final, compre
 ==================== END: .bmad-core/tasks/generate-ai-frontend-prompt.md ====================
 
 ==================== START: .bmad-core/tasks/index-docs.md ====================
+<!-- Powered by BMAD™ Core -->
 # Index Documentation Task
 
 ## Purpose
@@ -1937,6 +1949,7 @@ Would you like to proceed with documentation indexing? Please provide the requir
 ==================== END: .bmad-core/tasks/index-docs.md ====================
 
 ==================== START: .bmad-core/tasks/shard-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Document Sharding Task
 
 ## Purpose
@@ -2125,6 +2138,7 @@ Document sharded successfully:
 ==================== END: .bmad-core/tasks/shard-doc.md ====================
 
 ==================== START: .bmad-core/templates/architecture-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: architecture-template-v2
   name: Architecture Document
@@ -2778,6 +2792,7 @@ sections:
 ==================== END: .bmad-core/templates/architecture-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/brownfield-architecture-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: brownfield-architecture-template-v2
   name: Brownfield Enhancement Architecture
@@ -3257,6 +3272,7 @@ sections:
 ==================== END: .bmad-core/templates/brownfield-architecture-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/brownfield-prd-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: brownfield-prd-template-v2
   name: Brownfield Enhancement PRD
@@ -3540,6 +3556,7 @@ sections:
 ==================== END: .bmad-core/templates/brownfield-prd-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/competitor-analysis-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: competitor-analysis-template-v2
   name: Competitive Analysis Report
@@ -3849,6 +3866,7 @@ sections:
 ==================== END: .bmad-core/templates/competitor-analysis-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/front-end-architecture-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: frontend-architecture-template-v2
   name: Frontend Architecture Document
@@ -4070,6 +4088,7 @@ sections:
 ==================== END: .bmad-core/templates/front-end-architecture-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/front-end-spec-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: frontend-spec-template-v2
   name: UI/UX Specification
@@ -4422,6 +4441,7 @@ sections:
 ==================== END: .bmad-core/templates/front-end-spec-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/fullstack-architecture-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: fullstack-architecture-template-v2
   name: Fullstack Architecture Document
@@ -5248,6 +5268,7 @@ sections:
 ==================== END: .bmad-core/templates/fullstack-architecture-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/market-research-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: market-research-template-v2
   name: Market Research Report
@@ -5503,6 +5524,7 @@ sections:
 ==================== END: .bmad-core/templates/market-research-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/prd-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: prd-template-v2
   name: Product Requirements Document
@@ -5708,6 +5730,7 @@ sections:
 ==================== END: .bmad-core/templates/prd-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/project-brief-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: project-brief-template-v2
   name: Project Brief
@@ -5932,6 +5955,7 @@ sections:
 ==================== END: .bmad-core/templates/project-brief-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/story-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: story-template-v2
   name: Story Document
@@ -6072,6 +6096,7 @@ sections:
 ==================== END: .bmad-core/templates/story-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/architect-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Architect Solution Validation Checklist
 
 This checklist serves as a comprehensive framework for the Architect to validate the technical design and architecture before development execution. The Architect should systematically work through each item, ensuring the architecture is robust, scalable, secure, and aligned with the product requirements.
@@ -6513,6 +6538,7 @@ After presenting the report, ask the user if they would like detailed analysis o
 ==================== END: .bmad-core/checklists/architect-checklist.md ====================
 
 ==================== START: .bmad-core/checklists/change-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Change Navigation Checklist
 
 **Purpose:** To systematically guide the selected Agent and user through the analysis and planning required when a significant change (pivot, tech issue, missing requirement, failed story) is identified during the BMad workflow.
@@ -6698,6 +6724,7 @@ Keep it action-oriented and forward-looking.]]
 ==================== END: .bmad-core/checklists/change-checklist.md ====================
 
 ==================== START: .bmad-core/checklists/pm-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Product Manager (PM) Requirements Checklist
 
 This checklist serves as a comprehensive framework to ensure the Product Requirements Document (PRD) and Epic definitions are complete, well-structured, and appropriately scoped for MVP development. The PM should systematically work through each item during the product definition process.
@@ -7071,6 +7098,7 @@ After presenting the report, ask if the user wants:
 ==================== END: .bmad-core/checklists/pm-checklist.md ====================
 
 ==================== START: .bmad-core/checklists/po-master-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Product Owner (PO) Master Validation Checklist
 
 This checklist serves as a comprehensive framework for the Product Owner to validate project plans before development execution. It adapts intelligently based on project type (greenfield vs brownfield) and includes UI/UX considerations when applicable.
@@ -7506,6 +7534,7 @@ After presenting the report, ask if the user wants:
 ==================== END: .bmad-core/checklists/po-master-checklist.md ====================
 
 ==================== START: .bmad-core/checklists/story-dod-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Story Definition of Done (DoD) Checklist
 
 ## Instructions for Developer Agent
@@ -7603,6 +7632,7 @@ Be honest - it's better to flag issues now than have them discovered later.]]
 ==================== END: .bmad-core/checklists/story-dod-checklist.md ====================
 
 ==================== START: .bmad-core/checklists/story-draft-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Story Draft Checklist
 
 The Scrum Master should use this checklist to validate that each story contains sufficient context for a developer agent to implement it successfully, while assuming the dev agent has reasonable capabilities to figure things out.
@@ -7759,11 +7789,12 @@ Be pragmatic - perfect documentation doesn't exist, but it must be enough to pro
 ==================== END: .bmad-core/checklists/story-draft-checklist.md ====================
 
 ==================== START: .bmad-core/data/bmad-kb.md ====================
-# BMad Knowledge Base
+<!-- Powered by BMAD™ Core -->
+# BMAD™ Knowledge Base
 
 ## Overview
 
-BMad-Method (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
+BMAD-METHOD™ (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
 
 ### Key Features
 
@@ -7862,7 +7893,7 @@ npx bmad-method install
   - **Roo Code**: Web-based IDE with agent support
   - **GitHub Copilot**: VS Code extension with AI peer programming assistant
 
-**Note for VS Code Users**: BMad-Method assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
+**Note for VS Code Users**: BMAD-METHOD™ assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
 
 **Verify Installation**:
 
@@ -7870,7 +7901,7 @@ npx bmad-method install
 - IDE-specific integration files created
 - All agent commands/rules/modes available
 
-**Remember**: At its core, BMad-Method is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
+**Remember**: At its core, BMAD-METHOD™ is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
 
 ### Environment Selection Guide
 
@@ -8114,7 +8145,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 ### System Overview
 
-The BMad-Method is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
+The BMAD-METHOD™ is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
 
 ### Key Architectural Components
 
@@ -8469,7 +8500,7 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sh
 - **Keep conversations focused** - One agent, one task per conversation
 - **Review everything** - Always review and approve before marking complete
 
-## Contributing to BMad-Method
+## Contributing to BMAD-METHOD™
 
 ### Quick Contribution Guidelines
 
@@ -8501,7 +8532,7 @@ For full details, see `CONTRIBUTING.md`. Key points:
 
 ### What Are Expansion Packs?
 
-Expansion packs extend BMad-Method beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
+Expansion packs extend BMAD-METHOD™ beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
 
 ### Why Use Expansion Packs?
 
@@ -8568,6 +8599,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/bmad-kb.md ====================
 
 ==================== START: .bmad-core/data/brainstorming-techniques.md ====================
+<!-- Powered by BMAD™ Core -->
 # Brainstorming Techniques Data
 
 ## Creative Expansion
@@ -8607,6 +8639,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/brainstorming-techniques.md ====================
 
 ==================== START: .bmad-core/data/elicitation-methods.md ====================
+<!-- Powered by BMAD™ Core -->
 # Elicitation Methods Data
 
 ## Core Reflective Methods
@@ -8764,6 +8797,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/elicitation-methods.md ====================
 
 ==================== START: .bmad-core/data/technical-preferences.md ====================
+<!-- Powered by BMAD™ Core -->
 # User-Defined Preferred Patterns and Preferences
 
 None Listed

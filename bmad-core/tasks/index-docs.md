@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Index Documentation Task
 
 ## Purpose

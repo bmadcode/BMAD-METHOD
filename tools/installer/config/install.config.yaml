@@ -105,7 +105,7 @@ ide-configurations:
     format: custom-modes
     file: .kilocodemodes
     instructions: |
-      # To use BMAD agents in Kilo Code:
+      # To use BMAD™ agents in Kilo Code:
       # 1. Open the mode selector in VSCode
       # 2. Select a bmad-{agent} mode (e.g. "bmad-dev")
       # 3. The AI adopts that agent's persona and capabilities

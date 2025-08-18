@@ -1,3 +1,4 @@
+# <!-- Powered by BMAD™ Core -->
 ---
 template:
   id: character-profile
@@ -89,4 +90,3 @@ sections:
       - Pet peeves
       - Hidden talents
       - Contradictions
-

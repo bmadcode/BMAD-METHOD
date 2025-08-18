@@ -40,6 +40,7 @@ These references map directly to bundle sections:
 
 
 ==================== START: .bmad-core/agent-teams/team-ide-minimal.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 bundle:
   name: Team IDE Minimal
   icon: ⚡
@@ -95,13 +96,8 @@ commands:
   doc-out: Output full document
   kb-mode: Load full BMad knowledge base
   party-mode: Group chat with all agents
-  plan: Create detailed workflow plan before starting
-  plan-status: Show current workflow plan progress
-  plan-update: Update workflow plan status
   status: Show current context, active agent, and progress
   task: Run a specific task (list if name not specified)
-  workflow: Start a specific workflow (list if name not specified)
-  workflow-guidance: Get personalized help selecting the right workflow
   yolo: Toggle skip confirmations mode
   exit: Return to BMad or exit session
 help-display-template: |
@@ -413,6 +409,7 @@ dependencies:
 ==================== END: .bmad-core/agents/qa.md ====================
 
 ==================== START: .bmad-core/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -533,6 +530,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-core/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -637,6 +635,7 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/kb-mode-interaction.md ====================
+<!-- Powered by BMAD™ Core -->
 # KB Mode Interaction Task
 
 ## Purpose
@@ -715,11 +714,12 @@ Or ask me about anything else related to BMad-Method!
 ==================== END: .bmad-core/tasks/kb-mode-interaction.md ====================
 
 ==================== START: .bmad-core/data/bmad-kb.md ====================
-# BMad Knowledge Base
+<!-- Powered by BMAD™ Core -->
+# BMAD™ Knowledge Base
 
 ## Overview
 
-BMad-Method (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
+BMAD-METHOD™ (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
 
 ### Key Features
 
@@ -818,7 +818,7 @@ npx bmad-method install
   - **Roo Code**: Web-based IDE with agent support
   - **GitHub Copilot**: VS Code extension with AI peer programming assistant
 
-**Note for VS Code Users**: BMad-Method assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
+**Note for VS Code Users**: BMAD-METHOD™ assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
 
 **Verify Installation**:
 
@@ -826,7 +826,7 @@ npx bmad-method install
 - IDE-specific integration files created
 - All agent commands/rules/modes available
 
-**Remember**: At its core, BMad-Method is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
+**Remember**: At its core, BMAD-METHOD™ is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
 
 ### Environment Selection Guide
 
@@ -1070,7 +1070,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 ### System Overview
 
-The BMad-Method is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
+The BMAD-METHOD™ is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
 
 ### Key Architectural Components
 
@@ -1425,7 +1425,7 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sh
 - **Keep conversations focused** - One agent, one task per conversation
 - **Review everything** - Always review and approve before marking complete
 
-## Contributing to BMad-Method
+## Contributing to BMAD-METHOD™
 
 ### Quick Contribution Guidelines
 
@@ -1457,7 +1457,7 @@ For full details, see `CONTRIBUTING.md`. Key points:
 
 ### What Are Expansion Packs?
 
-Expansion packs extend BMad-Method beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
+Expansion packs extend BMAD-METHOD™ beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
 
 ### Why Use Expansion Packs?
 
@@ -1524,6 +1524,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/bmad-kb.md ====================
 
 ==================== START: .bmad-core/data/elicitation-methods.md ====================
+<!-- Powered by BMAD™ Core -->
 # Elicitation Methods Data
 
 ## Core Reflective Methods
@@ -1681,6 +1682,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/elicitation-methods.md ====================
 
 ==================== START: .bmad-core/utils/workflow-management.md ====================
+<!-- Powered by BMAD™ Core -->
 # Workflow Management
 
 Enables BMad orchestrator to manage and execute team workflows.
@@ -1753,6 +1755,7 @@ Agents should be workflow-aware: know active workflow, their role, access artifa
 ==================== END: .bmad-core/utils/workflow-management.md ====================
 
 ==================== START: .bmad-core/tasks/correct-course.md ====================
+<!-- Powered by BMAD™ Core -->
 # Correct Course Task
 
 ## Purpose
@@ -1826,6 +1829,7 @@ Agents should be workflow-aware: know active workflow, their role, access artifa
 ==================== END: .bmad-core/tasks/correct-course.md ====================
 
 ==================== START: .bmad-core/tasks/execute-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
@@ -1915,6 +1919,7 @@ The LLM will:
 ==================== END: .bmad-core/tasks/execute-checklist.md ====================
 
 ==================== START: .bmad-core/tasks/shard-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Document Sharding Task
 
 ## Purpose
@@ -2103,6 +2108,7 @@ Document sharded successfully:
 ==================== END: .bmad-core/tasks/shard-doc.md ====================
 
 ==================== START: .bmad-core/tasks/validate-next-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # Validate Next Story Task
 
 ## Purpose
@@ -2240,6 +2246,7 @@ Provide a structured validation report including:
 ==================== END: .bmad-core/tasks/validate-next-story.md ====================
 
 ==================== START: .bmad-core/templates/story-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: story-template-v2
   name: Story Document
@@ -2380,6 +2387,7 @@ sections:
 ==================== END: .bmad-core/templates/story-tmpl.yaml ====================
 
 ==================== START: .bmad-core/checklists/change-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Change Navigation Checklist
 
 **Purpose:** To systematically guide the selected Agent and user through the analysis and planning required when a significant change (pivot, tech issue, missing requirement, failed story) is identified during the BMad workflow.
@@ -2565,6 +2573,7 @@ Keep it action-oriented and forward-looking.]]
 ==================== END: .bmad-core/checklists/change-checklist.md ====================
 
 ==================== START: .bmad-core/checklists/po-master-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Product Owner (PO) Master Validation Checklist
 
 This checklist serves as a comprehensive framework for the Product Owner to validate project plans before development execution. It adapts intelligently based on project type (greenfield vs brownfield) and includes UI/UX considerations when applicable.
@@ -3000,6 +3009,7 @@ After presenting the report, ask if the user wants:
 ==================== END: .bmad-core/checklists/po-master-checklist.md ====================
 
 ==================== START: .bmad-core/tasks/create-next-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Next Story Task
 
 ## Purpose
@@ -3115,6 +3125,7 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
 ==================== END: .bmad-core/tasks/create-next-story.md ====================
 
 ==================== START: .bmad-core/checklists/story-draft-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Story Draft Checklist
 
 The Scrum Master should use this checklist to validate that each story contains sufficient context for a developer agent to implement it successfully, while assuming the dev agent has reasonable capabilities to figure things out.
@@ -3271,6 +3282,7 @@ Be pragmatic - perfect documentation doesn't exist, but it must be enough to pro
 ==================== END: .bmad-core/checklists/story-draft-checklist.md ====================
 
 ==================== START: .bmad-core/tasks/apply-qa-fixes.md ====================
+<!-- Powered by BMAD™ Core -->
 # apply-qa-fixes
 
 Implement fixes based on QA results (gate and assessments) for a specific story. This task is for the Dev agent to systematically consume QA outputs and apply code/test changes while only updating allowed sections in the story file.
@@ -3422,6 +3434,7 @@ Fix plan:
 ==================== END: .bmad-core/tasks/apply-qa-fixes.md ====================
 
 ==================== START: .bmad-core/checklists/story-dod-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Story Definition of Done (DoD) Checklist
 
 ## Instructions for Developer Agent
@@ -3519,6 +3532,7 @@ Be honest - it's better to flag issues now than have them discovered later.]]
 ==================== END: .bmad-core/checklists/story-dod-checklist.md ====================
 
 ==================== START: .bmad-core/tasks/nfr-assess.md ====================
+<!-- Powered by BMAD™ Core -->
 # nfr-assess
 
 Quick NFR validation focused on the core four: security, performance, reliability, maintainability.
@@ -3865,6 +3879,7 @@ performance_deep_dive:
 ==================== END: .bmad-core/tasks/nfr-assess.md ====================
 
 ==================== START: .bmad-core/tasks/qa-gate.md ====================
+<!-- Powered by BMAD™ Core -->
 # qa-gate
 
 Create or update a quality gate decision file for a story based on review findings.
@@ -4029,6 +4044,7 @@ Gate: CONCERNS → qa.qaLocation/gates/{epic}.{story}-{slug}.yml
 ==================== END: .bmad-core/tasks/qa-gate.md ====================
 
 ==================== START: .bmad-core/tasks/review-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # review-story
 
 Perform a comprehensive test architecture review with quality gate decision. This adaptive, risk-aware review creates both a story update and a detailed gate file.
@@ -4346,6 +4362,7 @@ After review:
 ==================== END: .bmad-core/tasks/review-story.md ====================
 
 ==================== START: .bmad-core/tasks/risk-profile.md ====================
+<!-- Powered by BMAD™ Core -->
 # risk-profile
 
 Generate a comprehensive risk assessment matrix for a story implementation using probability × impact analysis.
@@ -4702,6 +4719,7 @@ Risk profile: qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
 ==================== END: .bmad-core/tasks/risk-profile.md ====================
 
 ==================== START: .bmad-core/tasks/test-design.md ====================
+<!-- Powered by BMAD™ Core -->
 # test-design
 
 Create comprehensive test scenarios with appropriate test level recommendations for story implementation.
@@ -4879,6 +4897,7 @@ Before finalizing, verify:
 ==================== END: .bmad-core/tasks/test-design.md ====================
 
 ==================== START: .bmad-core/tasks/trace-requirements.md ====================
+<!-- Powered by BMAD™ Core -->
 # trace-requirements
 
 Map story requirements to test cases using Given-When-Then patterns for comprehensive traceability.
@@ -5146,6 +5165,7 @@ Trace matrix: qa.qaLocation/assessments/{epic}.{story}-trace-{YYYYMMDD}.md
 ==================== END: .bmad-core/tasks/trace-requirements.md ====================
 
 ==================== START: .bmad-core/templates/qa-gate-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: qa-gate-template-v1
   name: Quality Gate Decision
@@ -5251,6 +5271,7 @@ optional_fields_examples:
 ==================== END: .bmad-core/templates/qa-gate-tmpl.yaml ====================
 
 ==================== START: .bmad-core/data/technical-preferences.md ====================
+<!-- Powered by BMAD™ Core -->
 # User-Defined Preferred Patterns and Preferences
 
 None Listed

@@ -101,6 +101,7 @@ dependencies:
 ==================== END: .bmad-infrastructure-devops/agents/infra-devops-platform.md ====================
 
 ==================== START: .bmad-infrastructure-devops/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -205,6 +206,7 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-infrastructure-devops/tasks/create-doc.md ====================
 
 ==================== START: .bmad-infrastructure-devops/tasks/review-infrastructure.md ====================
+<!-- Powered by BMAD™ Core -->
 # Infrastructure Review Task
 
 ## Purpose
@@ -367,6 +369,7 @@ REPEAT by Asking the user if they would like to perform another Reflective, Elic
 ==================== END: .bmad-infrastructure-devops/tasks/review-infrastructure.md ====================
 
 ==================== START: .bmad-infrastructure-devops/tasks/validate-infrastructure.md ====================
+<!-- Powered by BMAD™ Core -->
 # Infrastructure Validation Task
 
 ## Purpose
@@ -523,6 +526,7 @@ REPEAT by Asking the user if they would like to perform another Reflective, Elic
 ==================== END: .bmad-infrastructure-devops/tasks/validate-infrastructure.md ====================
 
 ==================== START: .bmad-infrastructure-devops/templates/infrastructure-architecture-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: infrastructure-architecture-template-v2
   name: Infrastructure Architecture
@@ -950,6 +954,7 @@ sections:
 ==================== END: .bmad-infrastructure-devops/templates/infrastructure-architecture-tmpl.yaml ====================
 
 ==================== START: .bmad-infrastructure-devops/templates/infrastructure-platform-from-arch-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: infrastructure-platform-template-v2
   name: Platform Infrastructure Implementation
@@ -1582,6 +1587,7 @@ sections:
 ==================== END: .bmad-infrastructure-devops/templates/infrastructure-platform-from-arch-tmpl.yaml ====================
 
 ==================== START: .bmad-infrastructure-devops/checklists/infrastructure-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Infrastructure Change Validation Checklist
 
 This checklist serves as a comprehensive framework for validating infrastructure changes before deployment to production. The DevOps/Platform Engineer should systematically work through each item, ensuring the infrastructure is secure, compliant, resilient, and properly implemented according to organizational standards.
@@ -2069,6 +2075,7 @@ This checklist serves as a comprehensive framework for validating infrastructure
 ==================== END: .bmad-infrastructure-devops/checklists/infrastructure-checklist.md ====================
 
 ==================== START: .bmad-infrastructure-devops/data/technical-preferences.md ====================
+<!-- Powered by BMAD™ Core -->
 # User-Defined Preferred Patterns and Preferences
 
 None Listed

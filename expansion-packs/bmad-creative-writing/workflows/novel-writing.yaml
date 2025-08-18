@@ -1,10 +1,10 @@
----
+# <!-- Powered by BMAD™ Core -->
 # workflows/novel-writing.yaml
 name: novel-writing
 title: Novel Writing Workflow
 description: |
   End‑to‑end pipeline for drafting, revising, and polishing a full‑length novel
-  using the BMAD Creative Writing team.
+  using the BMAD™ Creative Writing team.
 
 triggers:
   - command: /novel
@@ -89,4 +89,3 @@ steps:
 
 outputs:
   - final_manuscript
-

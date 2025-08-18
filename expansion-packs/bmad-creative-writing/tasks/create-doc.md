@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️

@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Advanced Game Design Elicitation Task
 
 ## Purpose

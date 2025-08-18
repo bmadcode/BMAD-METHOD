@@ -1,3 +1,4 @@
+# <!-- Powered by BMAD™ Core -->
 ---
 workflow:
   id: novel-snowflake-workflow
@@ -65,5 +66,4 @@ workflow:
         output: critic-review.md
   completion_criteria:
     - critic-review.md exists
-...
-
+# end

@@ -1,4 +1,4 @@
----
+# <!-- Powered by BMAD™ Core -->
 # workflows/short-story-creation.yaml
 name: short-story-creation
 title: Short Story Creation Workflow
@@ -62,4 +62,3 @@ steps:
 
 outputs:
   - final_story
-

@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Elicitation Methods Data
 
 ## Core Reflective Methods

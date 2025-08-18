@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Game Design Brainstorming Techniques Task
 
 This task provides a comprehensive toolkit of creative brainstorming techniques specifically designed for game design ideation and innovative thinking. The game designer can use these techniques to facilitate productive brainstorming sessions focused on game mechanics, player experience, and creative concepts.

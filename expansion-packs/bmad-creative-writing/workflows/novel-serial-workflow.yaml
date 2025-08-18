@@ -1,3 +1,4 @@
+# <!-- Powered by BMAD™ Core -->
 ---
 workflow:
   id: novel-serial-workflow
@@ -47,5 +48,3 @@ workflow:
   completion_criteria:
     - publication-log.md exists
     - critic-review.md exists
-...
-

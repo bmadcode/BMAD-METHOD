@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Document an Existing Project
 
 ## Purpose

@@ -88,6 +88,7 @@ dependencies:
 ==================== END: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Game Development Story Task
 
 ## Purpose
@@ -307,6 +308,7 @@ This task ensures game development stories are immediately actionable and enable
 ==================== END: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
@@ -396,6 +398,7 @@ The LLM will:
 ==================== END: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: game-story-template-v2
   name: Game Development Story
@@ -652,6 +655,7 @@ sections:
 ==================== END: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Game Development Story Definition of Done Checklist
 
 ## Story Completeness

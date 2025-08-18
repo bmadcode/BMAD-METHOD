@@ -111,6 +111,7 @@ dependencies:
 ==================== END: .bmad-core/agents/qa.md ====================
 
 ==================== START: .bmad-core/tasks/nfr-assess.md ====================
+<!-- Powered by BMAD™ Core -->
 # nfr-assess
 
 Quick NFR validation focused on the core four: security, performance, reliability, maintainability.
@@ -457,6 +458,7 @@ performance_deep_dive:
 ==================== END: .bmad-core/tasks/nfr-assess.md ====================
 
 ==================== START: .bmad-core/tasks/qa-gate.md ====================
+<!-- Powered by BMAD™ Core -->
 # qa-gate
 
 Create or update a quality gate decision file for a story based on review findings.
@@ -621,6 +623,7 @@ Gate: CONCERNS → qa.qaLocation/gates/{epic}.{story}-{slug}.yml
 ==================== END: .bmad-core/tasks/qa-gate.md ====================
 
 ==================== START: .bmad-core/tasks/review-story.md ====================
+<!-- Powered by BMAD™ Core -->
 # review-story
 
 Perform a comprehensive test architecture review with quality gate decision. This adaptive, risk-aware review creates both a story update and a detailed gate file.
@@ -938,6 +941,7 @@ After review:
 ==================== END: .bmad-core/tasks/review-story.md ====================
 
 ==================== START: .bmad-core/tasks/risk-profile.md ====================
+<!-- Powered by BMAD™ Core -->
 # risk-profile
 
 Generate a comprehensive risk assessment matrix for a story implementation using probability × impact analysis.
@@ -1294,6 +1298,7 @@ Risk profile: qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
 ==================== END: .bmad-core/tasks/risk-profile.md ====================
 
 ==================== START: .bmad-core/tasks/test-design.md ====================
+<!-- Powered by BMAD™ Core -->
 # test-design
 
 Create comprehensive test scenarios with appropriate test level recommendations for story implementation.
@@ -1471,6 +1476,7 @@ Before finalizing, verify:
 ==================== END: .bmad-core/tasks/test-design.md ====================
 
 ==================== START: .bmad-core/tasks/trace-requirements.md ====================
+<!-- Powered by BMAD™ Core -->
 # trace-requirements
 
 Map story requirements to test cases using Given-When-Then patterns for comprehensive traceability.
@@ -1738,6 +1744,7 @@ Trace matrix: qa.qaLocation/assessments/{epic}.{story}-trace-{YYYYMMDD}.md
 ==================== END: .bmad-core/tasks/trace-requirements.md ====================
 
 ==================== START: .bmad-core/templates/qa-gate-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: qa-gate-template-v1
   name: Quality Gate Decision
@@ -1843,6 +1850,7 @@ optional_fields_examples:
 ==================== END: .bmad-core/templates/qa-gate-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/story-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: story-template-v2
   name: Story Document
@@ -1983,6 +1991,7 @@ sections:
 ==================== END: .bmad-core/templates/story-tmpl.yaml ====================
 
 ==================== START: .bmad-core/data/technical-preferences.md ====================
+<!-- Powered by BMAD™ Core -->
 # User-Defined Preferred Patterns and Preferences
 
 None Listed

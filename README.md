@@ -1,4 +1,4 @@
-# BMad-Method: Universal AI Agent Framework
+# BMAD-METHOD™: Universal AI Agent Framework
 
 [![Version](https://img.shields.io/npm/v/bmad-method?color=blue&label=version)](https://www.npmjs.com/package/bmad-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -11,11 +11,11 @@ Foundations in Agentic Agile Driven Development, known as the Breakthrough Metho
 
 **[Join our Discord Community](https://discord.gg/gk8jAdXWmj)** - A growing community for AI enthusiasts! Get help, share ideas, explore AI agents & frameworks, collaborate on tech projects, enjoy hobbies, and help each other succeed. Whether you're stuck on BMad, building your own agents, or just want to chat about the latest in AI - we're here for you! **Some mobile and VPN may have issue joining the discord, this is a discord issue - if the invite does not work, try from your own internet or another network, or non-VPN.**
 
-⭐ **If you find this project helpful or useful, please give it a star in the upper right hand corner!** It helps others discover BMad-Method and you will be notified of updates!
+⭐ **If you find this project helpful or useful, please give it a star in the upper right hand corner!** It helps others discover BMAD-METHOD™ and you will be notified of updates!
 
 ## Overview
 
-**BMad Method's Two Key Innovations:**
+**BMAD-METHOD™'s Two Key Innovations:**
 
 **1. Agentic Planning:** Dedicated agents (Analyst, PM, Architect) collaborate with you to create detailed, consistent PRDs and Architecture documents. Through advanced prompt engineering and human-in-the-loop refinement, these planning agents produce comprehensive specifications that go far beyond generic AI task generation.
 
@@ -49,7 +49,7 @@ This two-phase approach eliminates both **planning inconsistency** and **context
 
 ## Important: Keep Your BMad Installation Updated
 
-**Stay up-to-date effortlessly!** If you already have BMad-Method installed in your project, simply run:
+**Stay up-to-date effortlessly!** If you already have BMAD-METHOD™ installed in your project, simply run:
 
 ```bash
 npx bmad-method install
@@ -110,11 +110,11 @@ npm run install:bmad # build and install all to a destination folder
 
 ## 🌟 Beyond Software Development - Expansion Packs
 
-BMad's natural language framework works in ANY domain. Expansion packs provide specialized AI agents for creative writing, business strategy, health & wellness, education, and more. Also expansion packs can expand the core BMad-Method with specific functionality that is not generic for all cases. [See the Expansion Packs Guide](docs/expansion-packs.md) and learn to create your own!
+BMAD™'s natural language framework works in ANY domain. Expansion packs provide specialized AI agents for creative writing, business strategy, health & wellness, education, and more. Also expansion packs can expand the core BMAD-METHOD™ with specific functionality that is not generic for all cases. [See the Expansion Packs Guide](docs/expansion-packs.md) and learn to create your own!
 
 ## Codebase Flattener Tool
 
-The BMad-Method includes a powerful codebase flattener tool designed to prepare your project files for AI model consumption. This tool aggregates your entire codebase into a single XML file, making it easy to share your project context with AI assistants for analysis, debugging, or development assistance.
+The BMAD-METHOD™ includes a powerful codebase flattener tool designed to prepare your project files for AI model consumption. This tool aggregates your entire codebase into a single XML file, making it easy to share your project context with AI assistants for analysis, debugging, or development assistance.
 
 ### Features
 
@@ -157,7 +157,7 @@ The tool will display progress and provide a comprehensive summary:
 📊 File breakdown: 142 text, 14 binary, 0 errors
 ```
 
-The generated XML file contains your project's text-based source files in a structured format that AI models can easily parse and understand, making it perfect for code reviews, architecture discussions, or getting AI assistance with your BMad-Method projects.
+The generated XML file contains your project's text-based source files in a structured format that AI models can easily parse and understand, making it perfect for code reviews, architecture discussions, or getting AI assistance with your BMAD-METHOD™ projects.
 
 #### Advanced Usage & Options
 
@@ -215,6 +215,10 @@ The generated XML file contains your project's text-based source files in a stru
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
+
+## Trademark Notice
+
+BMAD™ and BMAD-METHOD™ are trademarks of BMad Code, LLC. All rights reserved.
 
 [![Contributors](https://contrib.rocks/image?repo=bmadcode/bmad-method)](https://github.com/bmadcode/bmad-method/graphs/contributors)
 

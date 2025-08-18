@@ -101,6 +101,7 @@ dependencies:
 You are the Narrative Designer, architect of stories that respond to reader/player choices. You balance authorial vision with participant agency.
 
 Design for:
+
 - **Meaningful choices** not false dilemmas
 - **Consequence chains** that feel logical
 - **Emotional investment** in decisions
@@ -114,6 +115,7 @@ Remember to present all options as numbered lists for easy selection.
 ==================== END: .bmad-creative-writing/agents/narrative-designer.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -218,44 +220,57 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-creative-writing/tasks/create-doc.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/outline-scenes.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 11. Outline Scenes
+
 # ------------------------------------------------------------
+
 ---
+
 task:
-  id: outline-scenes
-  name: Outline Scenes
-  description: Group scene list into chapters with act structure.
-  persona_default: plot-architect
+id: outline-scenes
+name: Outline Scenes
+description: Group scene list into chapters with act structure.
+persona_default: plot-architect
 inputs:
-  - scene-list.md
-steps:
-  - Assign scenes to chapters.
-  - Produce snowflake-outline.md with headings per chapter.
-output: snowflake-outline.md
-...
+
+- scene-list.md
+  steps:
+- Assign scenes to chapters.
+- Produce snowflake-outline.md with headings per chapter.
+  output: snowflake-outline.md
+  ...
 ==================== END: .bmad-creative-writing/tasks/outline-scenes.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/generate-scene-list.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 10. Generate Scene List
+
 # ------------------------------------------------------------
+
 ---
+
 task:
-  id: generate-scene-list
-  name: Generate Scene List
-  description: Break synopsis into a numbered list of scenes.
-  persona_default: plot-architect
+id: generate-scene-list
+name: Generate Scene List
+description: Break synopsis into a numbered list of scenes.
+persona_default: plot-architect
 inputs:
-  - synopsis.md | story-outline.md
-steps:
-  - Identify key beats.
-  - Fill scene-list-tmpl table.
-output: scene-list.md
-...
+
+- synopsis.md | story-outline.md
+  steps:
+- Identify key beats.
+- Fill scene-list-tmpl table.
+  output: scene-list.md
+  ...
 ==================== END: .bmad-creative-writing/tasks/generate-scene-list.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/execute-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
@@ -267,7 +282,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "plot checklist" -> "plot-structure-checklist")
      - If multiple matches found, ask user to clarify
@@ -280,14 +294,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -296,7 +308,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -304,7 +315,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -318,7 +328,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -328,7 +337,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -352,6 +360,7 @@ The LLM will:
 ==================== END: .bmad-creative-writing/tasks/execute-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -472,6 +481,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-creative-writing/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-creative-writing/templates/scene-list-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 ---
 template:
   id: scene-list-tmpl
@@ -529,9 +539,11 @@ sections:
 ==================== END: .bmad-creative-writing/templates/scene-list-tmpl.yaml ====================
 
 ==================== START: .bmad-creative-writing/checklists/plot-structure-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Plot Structure Checklist
 
 ## Opening
+
 - [ ] Hook engages within first page
 - [ ] Genre/tone established early
 - [ ] World rules clear
@@ -539,6 +551,7 @@ sections:
 - [ ] Status quo established before disruption
 
 ## Structure Fundamentals
+
 - [ ] Inciting incident by 10-15% mark
 - [ ] Clear story question posed
 - [ ] Stakes established and clear
@@ -546,19 +559,23 @@ sections:
 - [ ] B-story provides thematic counterpoint
 
 ## Rising Action
+
 - [ ] Complications escalate logically
 - [ ] Try-fail cycles build tension
 - [ ] Subplots weave with main plot
 - [ ] False victories/defeats included
 - [ ] Character growth parallels plot
+
 ## Midpoint
+
 - [ ] Major reversal or revelation
-- [ ] Stakes raised significantly  
+- [ ] Stakes raised significantly
 - [ ] Protagonist approach shifts
 - [ ] Time pressure introduced/increased
 - [ ] Point of no return crossed
 
 ## Crisis Building
+
 - [ ] Bad guys close in (internal/external)
 - [ ] Protagonist plans fail
 - [ ] Allies fall away/betray
@@ -566,6 +583,7 @@ sections:
 - [ ] Dark night of soul (character lowest)
 
 ## Climax
+
 - [ ] Protagonist must act (no rescue)
 - [ ] Uses lessons learned
 - [ ] Internal/external conflicts merge
@@ -573,6 +591,7 @@ sections:
 - [ ] Clear win/loss/transformation
 
 ## Resolution
+
 - [ ] New equilibrium established
 - [ ] Loose threads tied
 - [ ] Character growth demonstrated
@@ -581,6 +600,7 @@ sections:
 ==================== END: .bmad-creative-writing/checklists/plot-structure-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/data/bmad-kb.md ====================
+<!-- Powered by BMAD™ Core -->
 # BMad Creative Writing Knowledge Base
 
 ## Overview
@@ -686,24 +706,28 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Templates & Tools
 
 ### Character Development
+
 - Comprehensive character profiles
 - Backstory builders
 - Voice and dialogue patterns
 - Relationship mapping
 
 ### Story Structure
+
 - Three-act outlines
 - Save the Cat beat sheets
 - Hero's Journey mapping
 - Scene-by-scene breakdowns
 
 ### World Building
+
 - Setting documentation
 - Magic/technology systems
 - Cultural development
 - Timeline tracking
 
 ### Publishing Support
+
 - KDP formatting guidelines
 - Cover design briefs
 - Marketing copy templates
@@ -712,6 +736,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Genre Support
 
 ### Built-in Genre Checklists
+
 - Fantasy & Sci-Fi
 - Romance & Thriller
 - Mystery & Horror
@@ -719,6 +744,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 - Young Adult
 
 Each genre includes:
+
 - Trope management
 - Reader expectations
 - Market positioning
@@ -727,24 +753,28 @@ Each genre includes:
 ## Best Practices
 
 ### Character Development
+
 1. Start with internal conflict
 2. Build from wound/lie/want/need
 3. Create unique voice patterns
 4. Track arc progression
 
 ### Plot Construction
+
 1. Begin with clear story question
 2. Escalate stakes progressively
 3. Plant setup/payoff pairs
 4. Balance pacing with character moments
 
 ### World Building
+
 1. Maintain internal consistency
 2. Show through character experience
 3. Build only what serves story
 4. Track all established rules
 
 ### Revision Process
+
 1. Complete draft before major edits
 2. Address structure before prose
 3. Read dialogue aloud
@@ -781,14 +811,17 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 ==================== END: .bmad-creative-writing/data/bmad-kb.md ====================
 
 ==================== START: .bmad-creative-writing/data/story-structures.md ====================
+<!-- Powered by BMAD™ Core -->
 # Story Structure Patterns
 
 ## Three-Act Structure
+
 - **Act 1 (25%)**: Setup, inciting incident
 - **Act 2 (50%)**: Confrontation, complications
 - **Act 3 (25%)**: Resolution
 
 ## Save the Cat Beats
+
 1. Opening Image (0-1%)
 2. Setup (1-10%)
 3. Theme Stated (5%)
@@ -804,7 +837,9 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 13. Break into Three (80%)
 14. Finale (80-99%)
 15. Final Image (99-100%)
+
 ## Hero's Journey
+
 1. Ordinary World
 2. Call to Adventure
 3. Refusal of Call
@@ -819,6 +854,7 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 12. Return with Elixir
 
 ## Seven-Point Structure
+
 1. Hook
 2. Plot Turn 1
 3. Pinch Point 1
@@ -828,6 +864,7 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 7. Resolution
 
 ## Freytag's Pyramid
+
 1. Exposition
 2. Rising Action
 3. Climax
@@ -835,6 +872,7 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 5. Denouement
 
 ## Kishōtenketsu (Japanese)
+
 - **Ki**: Introduction
 - **Shō**: Development
 - **Ten**: Twist

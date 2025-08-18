@@ -104,6 +104,7 @@ dependencies:
 ==================== END: .bmad-core/agents/analyst.md ====================
 
 ==================== START: .bmad-core/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -224,6 +225,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-core/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -505,6 +507,7 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 ==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -609,6 +612,7 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/document-project.md ====================
+<!-- Powered by BMAD™ Core -->
 # Document an Existing Project
 
 ## Purpose
@@ -955,6 +959,7 @@ Apply the advanced elicitation task after major sections to refine based on user
 ==================== END: .bmad-core/tasks/document-project.md ====================
 
 ==================== START: .bmad-core/tasks/facilitate-brainstorming-session.md ====================
+<!-- Powered by BMAD™ Core -->
 ---
 docOutputLocation: docs/brainstorming-session-results.md
 template: '.bmad-core/templates/brainstorming-output-tmpl.yaml'
@@ -1249,10 +1254,11 @@ sections:
     content: |
       ---
 
-      *Session facilitated using the BMAD-METHOD brainstorming framework*
+      *Session facilitated using the BMAD-METHOD™ brainstorming framework*
 ==================== END: .bmad-core/templates/brainstorming-output-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/competitor-analysis-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: competitor-analysis-template-v2
   name: Competitive Analysis Report
@@ -1562,6 +1568,7 @@ sections:
 ==================== END: .bmad-core/templates/competitor-analysis-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/market-research-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: market-research-template-v2
   name: Market Research Report
@@ -1817,6 +1824,7 @@ sections:
 ==================== END: .bmad-core/templates/market-research-tmpl.yaml ====================
 
 ==================== START: .bmad-core/templates/project-brief-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 template:
   id: project-brief-template-v2
   name: Project Brief
@@ -2041,11 +2049,12 @@ sections:
 ==================== END: .bmad-core/templates/project-brief-tmpl.yaml ====================
 
 ==================== START: .bmad-core/data/bmad-kb.md ====================
-# BMad Knowledge Base
+<!-- Powered by BMAD™ Core -->
+# BMAD™ Knowledge Base
 
 ## Overview
 
-BMad-Method (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
+BMAD-METHOD™ (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
 
 ### Key Features
 
@@ -2144,7 +2153,7 @@ npx bmad-method install
   - **Roo Code**: Web-based IDE with agent support
   - **GitHub Copilot**: VS Code extension with AI peer programming assistant
 
-**Note for VS Code Users**: BMad-Method assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
+**Note for VS Code Users**: BMAD-METHOD™ assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
 
 **Verify Installation**:
 
@@ -2152,7 +2161,7 @@ npx bmad-method install
 - IDE-specific integration files created
 - All agent commands/rules/modes available
 
-**Remember**: At its core, BMad-Method is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
+**Remember**: At its core, BMAD-METHOD™ is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
 
 ### Environment Selection Guide
 
@@ -2396,7 +2405,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 ### System Overview
 
-The BMad-Method is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
+The BMAD-METHOD™ is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
 
 ### Key Architectural Components
 
@@ -2751,7 +2760,7 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sh
 - **Keep conversations focused** - One agent, one task per conversation
 - **Review everything** - Always review and approve before marking complete
 
-## Contributing to BMad-Method
+## Contributing to BMAD-METHOD™
 
 ### Quick Contribution Guidelines
 
@@ -2783,7 +2792,7 @@ For full details, see `CONTRIBUTING.md`. Key points:
 
 ### What Are Expansion Packs?
 
-Expansion packs extend BMad-Method beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
+Expansion packs extend BMAD-METHOD™ beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
 
 ### Why Use Expansion Packs?
 
@@ -2850,6 +2859,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/bmad-kb.md ====================
 
 ==================== START: .bmad-core/data/brainstorming-techniques.md ====================
+<!-- Powered by BMAD™ Core -->
 # Brainstorming Techniques Data
 
 ## Creative Expansion

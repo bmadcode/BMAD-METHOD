@@ -102,6 +102,7 @@ dependencies:
 You are the World Builder, creator of immersive universes. You understand that great settings are characters in their own right, influencing every aspect of the story.
 
 Consider:
+
 - **Geography shapes culture** shapes character
 - **History creates conflicts** that drive plot
 - **Rules and limitations** create dramatic tension
@@ -115,6 +116,7 @@ Remember to present all options as numbered lists for easy selection.
 ==================== END: .bmad-creative-writing/agents/world-builder.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -219,26 +221,33 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-creative-writing/tasks/create-doc.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/build-world.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 2. Build World
+
 # ------------------------------------------------------------
+
 ---
+
 task:
-  id: build-world
-  name: Build World
-  description: Create a concise world guide covering geography, cultures, magic/tech, and history.
-  persona_default: world-builder
+id: build-world
+name: Build World
+description: Create a concise world guide covering geography, cultures, magic/tech, and history.
+persona_default: world-builder
 inputs:
-  - concept-brief.md
-steps:
-  - Summarize key themes from concept.
-  - Draft World Guide using world-guide-tmpl.
-  - Execute tasks#advanced-elicitation.
-output: world-guide.md
-...
+
+- concept-brief.md
+  steps:
+- Summarize key themes from concept.
+- Draft World Guide using world-guide-tmpl.
+- Execute tasks#advanced-elicitation.
+  output: world-guide.md
+  ...
 ==================== END: .bmad-creative-writing/tasks/build-world.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/execute-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
@@ -250,7 +259,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 ## Instructions
 
 1. **Initial Assessment**
-
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "plot checklist" -> "plot-structure-checklist")
      - If multiple matches found, ask user to clarify
@@ -263,14 +271,12 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
 
 2. **Document and Artifact Gathering**
-
    - Each checklist will specify its required documents/artifacts at the beginning
    - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
 
 3. **Checklist Processing**
 
    If in interactive mode:
-
    - Work through each section of the checklist one at a time
    - For each section:
      - Review all items in the section following instructions for that section embedded in the checklist
@@ -279,7 +285,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
      - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
 
    If in YOLO mode:
-
    - Process all sections at once
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
@@ -287,7 +292,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 4. **Validation Approach**
 
    For each checklist item:
-
    - Read and understand the requirement
    - Look for evidence in the documentation that satisfies the requirement
    - Consider both explicit mentions and implicit coverage
@@ -301,7 +305,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 5. **Section Analysis**
 
    For each section:
-
    - think step by step to calculate pass rate
    - Identify common themes in failed items
    - Provide specific recommendations for improvement
@@ -311,7 +314,6 @@ If the user asks or does not specify a specific checklist, list the checklists a
 6. **Final Report**
 
    Prepare a summary that includes:
-
    - Overall checklist completion status
    - Pass rates by section
    - List of failed items with context
@@ -335,6 +337,7 @@ The LLM will:
 ==================== END: .bmad-creative-writing/tasks/execute-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -455,6 +458,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-creative-writing/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-creative-writing/templates/world-guide-tmpl.yaml ====================
+# <!-- Powered by BMAD™ Core -->
 ---
 template:
   id: world-guide-tmpl
@@ -546,63 +550,82 @@ sections:
 ==================== END: .bmad-creative-writing/templates/world-guide-tmpl.yaml ====================
 
 ==================== START: .bmad-creative-writing/checklists/world-building-continuity-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 2. World‑Building Continuity Checklist
+
 # ------------------------------------------------------------
+
 ---
+
 checklist:
-  id: world-building-continuity-checklist
-  name: World‑Building Continuity Checklist
-  description: Ensure geography, cultures, tech/magic rules, and timeline stay coherent.
+id: world-building-continuity-checklist
+name: World‑Building Continuity Checklist
+description: Ensure geography, cultures, tech/magic rules, and timeline stay coherent.
 items:
-  - "[ ] Map geography referenced consistently"
-  - "[ ] Cultural customs/laws remain uniform"
-  - "[ ] Magic/tech limitations not violated"
-  - "[ ] Historical dates/events match world‑guide"
-  - "[ ] Economics/politics align scene to scene"
-  - "[ ] Travel times/distances are plausible"
-...
+
+- "[ ] Map geography referenced consistently"
+- "[ ] Cultural customs/laws remain uniform"
+- "[ ] Magic/tech limitations not violated"
+- "[ ] Historical dates/events match world‑guide"
+- "[ ] Economics/politics align scene to scene"
+- "[ ] Travel times/distances are plausible"
+  ...
 ==================== END: .bmad-creative-writing/checklists/world-building-continuity-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/checklists/fantasy-magic-system-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 17. Fantasy Magic System Consistency Checklist
+
 # ------------------------------------------------------------
+
 ---
+
 checklist:
-  id: fantasy-magic-system-checklist
-  name: Fantasy Magic System Consistency Checklist
-  description: Keep magical rules, costs, and exceptions coherent.
+id: fantasy-magic-system-checklist
+name: Fantasy Magic System Consistency Checklist
+description: Keep magical rules, costs, and exceptions coherent.
 items:
-  - "[ ] Core source and rules defined"
-  - "[ ] Limitations create plot obstacles"
-  - "[ ] Costs or risks for using magic stated"
-  - "[ ] No last‑minute power with no foreshadowing"
-  - "[ ] Societal impact of magic reflected in setting"
-  - "[ ] Rule exceptions justified and rare"
-...
+
+- "[ ] Core source and rules defined"
+- "[ ] Limitations create plot obstacles"
+- "[ ] Costs or risks for using magic stated"
+- "[ ] No last‑minute power with no foreshadowing"
+- "[ ] Societal impact of magic reflected in setting"
+- "[ ] Rule exceptions justified and rare"
+  ...
 ==================== END: .bmad-creative-writing/checklists/fantasy-magic-system-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/checklists/steampunk-gadget-checklist.md ====================
+<!-- Powered by BMAD™ Core -->
 # ------------------------------------------------------------
+
 # 25. Steampunk Gadget Plausibility Checklist
+
 # ------------------------------------------------------------
+
 ---
+
 checklist:
-  id: steampunk-gadget-checklist
-  name: Steampunk Gadget Plausibility Checklist
-  description: Verify brass‑and‑steam inventions obey pseudo‑Victorian tech logic.
+id: steampunk-gadget-checklist
+name: Steampunk Gadget Plausibility Checklist
+description: Verify brass‑and‑steam inventions obey pseudo‑Victorian tech logic.
 items:
-  - "[ ] Power source explained (steam, clockwork, pneumatics)"
-  - "[ ] Materials era‑appropriate (brass, wood, iron)"
-  - "[ ] Gear ratios or pressure levels plausible for function"
-  - "[ ] Airship lift calculated vs envelope size"
-  - "[ ] Aesthetic details (rivets, gauges) consistent"
-  - "[ ] No modern plastics/electronics unless justified"
-...
+
+- "[ ] Power source explained (steam, clockwork, pneumatics)"
+- "[ ] Materials era‑appropriate (brass, wood, iron)"
+- "[ ] Gear ratios or pressure levels plausible for function"
+- "[ ] Airship lift calculated vs envelope size"
+- "[ ] Aesthetic details (rivets, gauges) consistent"
+- "[ ] No modern plastics/electronics unless justified"
+  ...
 ==================== END: .bmad-creative-writing/checklists/steampunk-gadget-checklist.md ====================
 
 ==================== START: .bmad-creative-writing/data/bmad-kb.md ====================
+<!-- Powered by BMAD™ Core -->
 # BMad Creative Writing Knowledge Base
 
 ## Overview
@@ -708,24 +731,28 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Templates & Tools
 
 ### Character Development
+
 - Comprehensive character profiles
 - Backstory builders
 - Voice and dialogue patterns
 - Relationship mapping
 
 ### Story Structure
+
 - Three-act outlines
 - Save the Cat beat sheets
 - Hero's Journey mapping
 - Scene-by-scene breakdowns
 
 ### World Building
+
 - Setting documentation
 - Magic/technology systems
 - Cultural development
 - Timeline tracking
 
 ### Publishing Support
+
 - KDP formatting guidelines
 - Cover design briefs
 - Marketing copy templates
@@ -734,6 +761,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Genre Support
 
 ### Built-in Genre Checklists
+
 - Fantasy & Sci-Fi
 - Romance & Thriller
 - Mystery & Horror
@@ -741,6 +769,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 - Young Adult
 
 Each genre includes:
+
 - Trope management
 - Reader expectations
 - Market positioning
@@ -749,24 +778,28 @@ Each genre includes:
 ## Best Practices
 
 ### Character Development
+
 1. Start with internal conflict
 2. Build from wound/lie/want/need
 3. Create unique voice patterns
 4. Track arc progression
 
 ### Plot Construction
+
 1. Begin with clear story question
 2. Escalate stakes progressively
 3. Plant setup/payoff pairs
 4. Balance pacing with character moments
 
 ### World Building
+
 1. Maintain internal consistency
 2. Show through character experience
 3. Build only what serves story
 4. Track all established rules
 
 ### Revision Process
+
 1. Complete draft before major edits
 2. Address structure before prose
 3. Read dialogue aloud
@@ -803,14 +836,17 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 ==================== END: .bmad-creative-writing/data/bmad-kb.md ====================
 
 ==================== START: .bmad-creative-writing/data/story-structures.md ====================
+<!-- Powered by BMAD™ Core -->
 # Story Structure Patterns
 
 ## Three-Act Structure
+
 - **Act 1 (25%)**: Setup, inciting incident
 - **Act 2 (50%)**: Confrontation, complications
 - **Act 3 (25%)**: Resolution
 
 ## Save the Cat Beats
+
 1. Opening Image (0-1%)
 2. Setup (1-10%)
 3. Theme Stated (5%)
@@ -826,7 +862,9 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 13. Break into Three (80%)
 14. Finale (80-99%)
 15. Final Image (99-100%)
+
 ## Hero's Journey
+
 1. Ordinary World
 2. Call to Adventure
 3. Refusal of Call
@@ -841,6 +879,7 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 12. Return with Elixir
 
 ## Seven-Point Structure
+
 1. Hook
 2. Plot Turn 1
 3. Pinch Point 1
@@ -850,6 +889,7 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 7. Resolution
 
 ## Freytag's Pyramid
+
 1. Exposition
 2. Rising Action
 3. Climax
@@ -857,6 +897,7 @@ Remember: BMad Creative Writing provides structure to liberate creativity, not c
 5. Denouement
 
 ## Kishōtenketsu (Japanese)
+
 - **Ki**: Introduction
 - **Shō**: Development
 - **Ten**: Twist

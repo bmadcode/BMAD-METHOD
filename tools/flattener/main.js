@@ -68,7 +68,7 @@ const program = new Command();
 
 program
   .name('bmad-flatten')
-  .description('BMad-Method codebase flattener tool')
+  .description('BMAD-METHOD™ codebase flattener tool')
   .version('1.0.0')
   .option('-i, --input <path>', 'Input directory to flatten', process.cwd())
   .option('-o, --output <path>', 'Output file path', 'flattened-codebase.xml')

@@ -82,13 +82,8 @@ commands:
   doc-out: Output full document
   kb-mode: Load full BMad knowledge base
   party-mode: Group chat with all agents
-  plan: Create detailed workflow plan before starting
-  plan-status: Show current workflow plan progress
-  plan-update: Update workflow plan status
   status: Show current context, active agent, and progress
   task: Run a specific task (list if name not specified)
-  workflow: Start a specific workflow (list if name not specified)
-  workflow-guidance: Get personalized help selecting the right workflow
   yolo: Toggle skip confirmations mode
   exit: Return to BMad or exit session
 help-display-template: |
@@ -172,6 +167,7 @@ dependencies:
 ==================== END: .bmad-core/agents/bmad-orchestrator.md ====================
 
 ==================== START: .bmad-core/tasks/advanced-elicitation.md ====================
+<!-- Powered by BMAD™ Core -->
 # Advanced Elicitation Task
 
 ## Purpose
@@ -292,6 +288,7 @@ Choose a number (0-8) or 9 to proceed:
 ==================== END: .bmad-core/tasks/advanced-elicitation.md ====================
 
 ==================== START: .bmad-core/tasks/create-doc.md ====================
+<!-- Powered by BMAD™ Core -->
 # Create Document from Template (YAML Driven)
 
 ## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
@@ -396,6 +393,7 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 ==================== END: .bmad-core/tasks/create-doc.md ====================
 
 ==================== START: .bmad-core/tasks/kb-mode-interaction.md ====================
+<!-- Powered by BMAD™ Core -->
 # KB Mode Interaction Task
 
 ## Purpose
@@ -474,11 +472,12 @@ Or ask me about anything else related to BMad-Method!
 ==================== END: .bmad-core/tasks/kb-mode-interaction.md ====================
 
 ==================== START: .bmad-core/data/bmad-kb.md ====================
-# BMad Knowledge Base
+<!-- Powered by BMAD™ Core -->
+# BMAD™ Knowledge Base
 
 ## Overview
 
-BMad-Method (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
+BMAD-METHOD™ (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
 
 ### Key Features
 
@@ -577,7 +576,7 @@ npx bmad-method install
   - **Roo Code**: Web-based IDE with agent support
   - **GitHub Copilot**: VS Code extension with AI peer programming assistant
 
-**Note for VS Code Users**: BMad-Method assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
+**Note for VS Code Users**: BMAD-METHOD™ assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
 
 **Verify Installation**:
 
@@ -585,7 +584,7 @@ npx bmad-method install
 - IDE-specific integration files created
 - All agent commands/rules/modes available
 
-**Remember**: At its core, BMad-Method is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
+**Remember**: At its core, BMAD-METHOD™ is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
 
 ### Environment Selection Guide
 
@@ -829,7 +828,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 ### System Overview
 
-The BMad-Method is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
+The BMAD-METHOD™ is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
 
 ### Key Architectural Components
 
@@ -1184,7 +1183,7 @@ Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sh
 - **Keep conversations focused** - One agent, one task per conversation
 - **Review everything** - Always review and approve before marking complete
 
-## Contributing to BMad-Method
+## Contributing to BMAD-METHOD™
 
 ### Quick Contribution Guidelines
 
@@ -1216,7 +1215,7 @@ For full details, see `CONTRIBUTING.md`. Key points:
 
 ### What Are Expansion Packs?
 
-Expansion packs extend BMad-Method beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
+Expansion packs extend BMAD-METHOD™ beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
 
 ### Why Use Expansion Packs?
 
@@ -1283,6 +1282,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/bmad-kb.md ====================
 
 ==================== START: .bmad-core/data/elicitation-methods.md ====================
+<!-- Powered by BMAD™ Core -->
 # Elicitation Methods Data
 
 ## Core Reflective Methods
@@ -1440,6 +1440,7 @@ Use the **expansion-creator** pack to build your own:
 ==================== END: .bmad-core/data/elicitation-methods.md ====================
 
 ==================== START: .bmad-core/utils/workflow-management.md ====================
+<!-- Powered by BMAD™ Core -->
 # Workflow Management
 
 Enables BMad orchestrator to manage and execute team workflows.

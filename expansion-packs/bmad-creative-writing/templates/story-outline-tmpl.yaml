@@ -1,3 +1,4 @@
+# <!-- Powered by BMAD™ Core -->
 ---
 template:
   id: story-outline
@@ -93,4 +94,3 @@ sections:
       - Hook/cliffhanger
     repeatable: true
     elicit: true
-

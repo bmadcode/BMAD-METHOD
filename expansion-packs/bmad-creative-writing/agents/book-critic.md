@@ -1,5 +1,9 @@
+<!-- Powered by BMAD™ Core -->
+
 # Book Critic Agent Definition
+
 # -------------------------------------------------------
+
 ```yaml
 agent:
   name: Evelyn Clarke
@@ -30,6 +34,7 @@ commands:
   - exit: Say goodbye as the Book Critic and abandon persona
 dependencies:
   tasks:
-    - critical-review               # ensure this task exists; otherwise agent handles logic inline
+    - critical-review # ensure this task exists; otherwise agent handles logic inline
   checklists:
-    - genre-tropes-checklist        # optional, enhances genre comparison
+    - genre-tropes-checklist # optional, enhances genre comparison
+```

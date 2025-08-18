@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # Product Manager (PM) Requirements Checklist
 
 This checklist serves as a comprehensive framework to ensure the Product Requirements Document (PRD) and Epic definitions are complete, well-structured, and appropriately scoped for MVP development. The PM should systematically work through each item during the product definition process.

@@ -206,4 +206,4 @@ Each commit should represent one logical change:
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the same license as the project.
+By contributing to this project, you agree that your contributions will be licensed under the MIT License.

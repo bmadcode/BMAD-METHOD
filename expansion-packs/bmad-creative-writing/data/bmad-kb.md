@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # BMad Creative Writing Knowledge Base
 
 ## Overview
@@ -103,24 +105,28 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Templates & Tools
 
 ### Character Development
+
 - Comprehensive character profiles
 - Backstory builders
 - Voice and dialogue patterns
 - Relationship mapping
 
 ### Story Structure
+
 - Three-act outlines
 - Save the Cat beat sheets
 - Hero's Journey mapping
 - Scene-by-scene breakdowns
 
 ### World Building
+
 - Setting documentation
 - Magic/technology systems
 - Cultural development
 - Timeline tracking
 
 ### Publishing Support
+
 - KDP formatting guidelines
 - Cover design briefs
 - Marketing copy templates
@@ -129,6 +135,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 ## Genre Support
 
 ### Built-in Genre Checklists
+
 - Fantasy & Sci-Fi
 - Romance & Thriller
 - Mystery & Horror
@@ -136,6 +143,7 @@ BMad Creative Writing transforms you into a "Creative Director" - orchestrating 
 - Young Adult
 
 Each genre includes:
+
 - Trope management
 - Reader expectations
 - Market positioning
@@ -144,24 +152,28 @@ Each genre includes:
 ## Best Practices
 
 ### Character Development
+
 1. Start with internal conflict
 2. Build from wound/lie/want/need
 3. Create unique voice patterns
 4. Track arc progression
 
 ### Plot Construction
+
 1. Begin with clear story question
 2. Escalate stakes progressively
 3. Plant setup/payoff pairs
 4. Balance pacing with character moments
 
 ### World Building
+
 1. Maintain internal consistency
 2. Show through character experience
 3. Build only what serves story
 4. Track all established rules
 
 ### Revision Process
+
 1. Complete draft before major edits
 2. Address structure before prose
 3. Read dialogue aloud

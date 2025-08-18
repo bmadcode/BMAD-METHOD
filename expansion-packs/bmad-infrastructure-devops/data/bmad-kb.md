@@ -1,3 +1,5 @@
+<!-- Powered by BMAD™ Core -->
+
 # BMad Infrastructure DevOps Expansion Pack Knowledge Base
 
 ## Overview
