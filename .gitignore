@@ -37,6 +37,16 @@ CLAUDE.md
 .claude
 .gemini
 
+# Python virtual environments
+venv/
+env/
+.venv/
+.env/
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
 # Project-specific
 .bmad-core
 .bmad-creator-tools

@@ -104,7 +104,9 @@ This single command handles:
 ### Alternative: Clone and Build
 
 ```bash
-git clone https://github.com/bmadcode/bmad-method.git
+git clone https://github.com/bmad-code-org/BMAD-METHOD.git
+cd BMAD-METHOD
+npm install # Install dependencies first
 npm run install:bmad # build and install all to a destination folder
 ```
 
