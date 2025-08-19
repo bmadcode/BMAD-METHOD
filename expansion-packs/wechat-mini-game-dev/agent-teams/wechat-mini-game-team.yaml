@@ -1,0 +1,14 @@
+# <!-- Powered by BMAD™ Core -->
+bundle:
+  name: WeChat Mini Game Team
+  icon: 🎮
+  description: Game Development team specialized in WeChat Mini Games.
+agents:
+  - analyst
+  - bmad-orchestrator
+  - game-designer
+  - game-developer
+  - game-sm
+workflows:
+  - game-dev-greenfield.md
+  - game-prototype.md
