@@ -683,17 +683,33 @@ class IdeSetup extends BaseIdeSetup {
 
     // Check for dot-prefixed expansion packs in install directory
     const glob = require('glob');
-    const dotExpansions = glob.sync('.bmad-*', { cwd: installDir });
+    const dotExpansions = glob.sync('.*', {
+      cwd: installDir,
+      ignore: [
+        '.bmad-core',
+        '.git',
+        '.github',
+        '.vscode',
+        '.cursor',
+        '.claude',
+        '.crush',
+        '.windsurf',
+        '.trae',
+        '.roo',
+        '.cline',
+        '.kilo',
+        '.gemini',
+        '.qwen',
+      ],
+    });
 
     for (const dotExpansion of dotExpansions) {
-      if (dotExpansion !== '.bmad-core') {
-        const packPath = path.join(installDir, dotExpansion);
-        const packName = dotExpansion.slice(1); // remove the dot
-        expansionPacks.push({
-          name: packName,
-          path: packPath,
-        });
-      }
+      const packPath = path.join(installDir, dotExpansion);
+      const packName = dotExpansion.slice(1); // remove the dot
+      expansionPacks.push({
+        name: packName,
+        path: packPath,
+      });
     }
 
     // Check for expansion-packs directory style
