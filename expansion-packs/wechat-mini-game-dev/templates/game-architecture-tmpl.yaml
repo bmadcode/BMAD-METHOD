@@ -1,0 +1,428 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: wechat-game-architecture-template-v1
+  name: WeChat Mini-Game Architecture Document
+  version: 1.0
+  output:
+    format: markdown
+    filename: "docs/{{game_name}}-game-architecture.md"
+    title: "{{game_title}} WeChat Mini-Game Architecture Document"
+
+workflow:
+  mode: interactive
+
+sections:
+  - id: initial-setup
+    instruction: |
+      This template creates a comprehensive game architecture document specifically for WeChat Mini-Game projects. This should provide the technical foundation for all game development stories and epics.
+
+      If available, review any provided documents: Game Design Document (GDD), Technical Preferences. This architecture should support all game mechanics defined in the GDD.
+
+  - id: introduction
+    title: Introduction
+    instruction: Establish the document's purpose and scope for game development
+    content: |
+      This document outlines the complete technical architecture for {{game_title}}, a 2D game built for the WeChat Mini-Game platform. It serves as the technical foundation for AI-driven game development, ensuring consistency and scalability across all game systems.
+
+      This architecture is designed to support the gameplay mechanics defined in the Game Design Document while maintaining smooth performance and adhering to platform constraints.
+    sections:
+      - id: change-log
+        title: Change Log
+        instruction: Track document versions and changes
+        type: table
+        template: |
+          | Date | Version | Description | Author |
+          | :--- | :------ | :---------- | :----- |
+
+  - id: technical-overview
+    title: Technical Overview
+    instruction: Present all subsections together, then apply `tasks#advanced-elicitation` protocol to the complete section.
+    sections:
+      - id: architecture-summary
+        title: Architecture Summary
+        instruction: |
+          Provide a comprehensive overview covering:
+
+          - Game engine choice and configuration
+          - Project structure and organization
+          - Key systems and their interactions
+          - Performance and optimization strategy
+          - How this architecture achieves GDD requirements
+      - id: platform-targets
+        title: Platform Targets
+        instruction: Based on GDD requirements, confirm platform support
+        template: |
+          **Primary Platform:** WeChat Mini-Game
+          **Minimum WeChat Version:** {{min_wechat_version}}
+          **Target Performance:** Smooth performance on {{target_device}}
+      - id: technology-stack
+        title: Technology Stack
+        template: |
+          **Core Engine:** WeChat Mini-Game Runtime
+          **Language:** JavaScript/TypeScript
+          **Build Tool:** WeChat DevTools
+          **Package Manager:** {{package_manager}}
+          **Testing:** Manual testing on devices
+          **Deployment:** WeChat Mini-Game Platform
+
+  - id: project-structure
+    title: Project Structure
+    instruction: Define the complete project organization that developers will follow
+    sections:
+      - id: repository-organization
+        title: Repository Organization
+        instruction: Design a clear folder structure for game development
+        type: code
+        language: text
+        template: |
+          {{game_name}}/
+          ├── app.js
+          ├── app.json
+          ├── app.wxss
+          ├── components/
+          ├── images/
+          ├── js/
+          ├── pages/
+          ├── project.config.json
+          └── ...
+      - id: module-organization
+        title: Module Organization
+        instruction: Define how JavaScript/TypeScript modules should be organized
+        sections:
+          - id: page-structure
+            title: Page Structure
+            type: bullet-list
+            template: |
+              - Each page in its own directory
+              - Page-specific logic in `.js` file
+              - Structure in `.wxml`, styling in `.wxss`
+          - id: component-pattern
+            title: Component Pattern
+            type: bullet-list
+            template: |
+              - Reusable UI components in `components` directory
+              - Clear property definitions and event handling
+          - id: system-architecture
+            title: System Architecture
+            type: bullet-list
+            template: |
+              - Global logic in `app.js`
+              - Event-driven communication between pages/components
+              - Clear separation of concerns
+
+  - id: core-game-systems
+    title: Core Game Systems
+    instruction: Detail each major system that needs to be implemented. Each system should be specific enough for developers to create implementation stories.
+    sections:
+      - id: game-state-management
+        title: Game State Management
+        template: |
+          **Purpose:** Track player progress and game status
+
+          **State Categories:**
+
+          - Player progress (levels, unlocks)
+          - Game settings (audio, etc.)
+          - Session data (current level, score)
+          - Persistent data (achievements, statistics)
+
+          **Implementation Requirements:**
+
+          - Save/load system with `wx.setStorage` and `wx.getStorage`
+          - State validation and error recovery
+          - Cross-session data persistence
+
+          **Files to Create:**
+
+          - `js/game-state.js`
+          - `js/save-manager.js`
+      - id: asset-management
+        title: Asset Management System
+        template: |
+          **Purpose:** Efficient loading and management of game assets
+
+          **Asset Categories:**
+
+          - Images and sprite sheets
+          - Audio files
+          - Level data and configurations
+
+          **Implementation Requirements:**
+
+          - Use subpackages for large assets
+          - Asset caching and optimization
+          - Error handling for failed loads
+
+          **Files to Create:**
+
+          - `js/asset-manager.js`
+      - id: input-management
+        title: Input Management System
+        template: |
+          **Purpose:** Handle all player input
+
+          **Input Types:**
+
+          - Touch gestures
+          - Button taps
+
+          **Implementation Requirements:**
+
+          - Use `bindtouchstart`, `bindtouchmove`, `bindtouchend`, `bindtap`
+          - Input buffering for responsive gameplay
+
+          **Files to Create:**
+
+          - `js/input-manager.js`
+      - id: wechat-api-integration
+        title: WeChat API Integration
+        template: |
+          **Purpose:** Integrate with WeChat's social features
+
+          **Key APIs:**
+
+          - `wx.login` for user authentication
+          - `wx.getUserInfo` for player profiles
+          - `wx.shareAppMessage` for sharing
+          - Open Data Context for leaderboards
+
+          **Files to Create:**
+
+          - `js/wechat-api.js`
+      - id: audio-system
+        title: Audio System
+        template: |
+          **Audio Requirements:**
+
+          - Background music with looping
+          - Sound effects for actions
+          - Audio settings and volume control
+
+          **Implementation Features:**
+
+          - Use `wx.createInnerAudioContext`
+          - Audio pooling for performance
+
+          **Files to Create:**
+
+          - `js/audio-manager.js`
+      - id: ui-system
+        title: UI System
+        template: |
+          **UI Components:**
+
+          - HUD elements (score, health, etc.)
+          - Menu navigation
+          - Modal dialogs
+
+          **Implementation Requirements:**
+
+          - Use WXML and WXSS for UI layout and styling
+          - Create reusable custom components
+
+          **Files to Create:**
+
+          - `components/`
+          - `pages/`
+
+  - id: performance-architecture
+    title: Performance Architecture
+    instruction: Define performance requirements and optimization strategies
+    sections:
+      - id: performance-targets
+        title: Performance Targets
+        template: |
+          **Frame Rate:** Smooth performance (30-60 FPS)
+          **Memory Usage:** <{{memory_limit}}MB total
+          **Load Times:** <{{initial_load}}s initial, <{{level_load}}s per level
+          **Package Size:** <{{package_size_limit}}MB initial package
+      - id: optimization-strategies
+        title: Optimization Strategies
+        sections:
+          - id: asset-optimization
+            title: Asset Optimization
+            type: bullet-list
+            template: |
+              - Compress images (e.g., using TinyPNG)
+              - Use appropriate audio formats and compression
+              - Use subpackages for on-demand loading
+          - id: rendering-optimization
+            title: Rendering Optimization
+            type: bullet-list
+            template: |
+              - Avoid unnecessary `setData` calls
+              - Use `requestAnimationFrame` for animations
+              - Optimize complex WXML structures
+
+  - id: game-configuration
+    title: Game Configuration
+    instruction: Define all configurable aspects of the game
+    sections:
+      - id: game-json-configuration
+        title: game.json Configuration
+        type: code
+        language: json
+        template: |
+          {
+            "pages": [
+              "pages/index/index",
+              "pages/game/game"
+            ],
+            "window": {
+              "backgroundTextStyle": "light",
+              "navigationBarBackgroundColor": "#fff",
+              "navigationBarTitleText": "{{game_title}}",
+              "navigationBarTextStyle": "black"
+            },
+            "subpackages": [
+              {
+                "root": "packageA",
+                "pages": [
+                  "pages/feature/feature"
+                ]
+              }
+            ]
+          }
+      - id: game-balance-configuration
+        title: Game Balance Configuration
+        instruction: Based on GDD, define configurable game parameters
+        type: code
+        language: javascript
+        template: |
+          // js/game-balance.js
+          export const GameBalance = {
+              player: {
+                  speed: {{player_speed}},
+                  health: {{player_health}},
+              },
+              difficulty: {
+                  easy: {{easy_params}},
+                  normal: {{normal_params}},
+                  hard: {{hard_params}}
+              },
+          };
+
+  - id: development-guidelines
+    title: Development Guidelines
+    instruction: Provide coding standards specific to game development
+    sections:
+      - id: javascript-typescript-standards
+        title: JavaScript/TypeScript Standards
+        type: bullet-list
+        template: |
+          - Use `const` and `let`
+          - Use strict equality (`===`)
+          - Write modular code
+      - id: wechat-mini-game-best-practices
+        title: WeChat Mini-Game Best Practices
+        type: bullet-list
+        template: |
+          - Follow official documentation
+          - Handle API failures gracefully
+          - Be mindful of platform limitations
+
+  - id: deployment-architecture
+    title: Deployment Architecture
+    instruction: Define how the game will be built and deployed
+    sections:
+      - id: build-process
+        title: Build Process
+        type: bullet-list
+        template: |
+          - Use WeChat DevTools for development and debugging
+          - Configure `project.config.json` for project settings
+      - id: deployment-strategy
+        title: Deployment Strategy
+        type: bullet-list
+        template: |
+          - Upload code via WeChat DevTools
+          - Submit for review by WeChat team
+          - Release to the public
+
+  - id: implementation-roadmap
+    title: Implementation Roadmap
+    instruction: Break down the architecture implementation into phases that align with the GDD development phases
+    sections:
+      - id: phase-1-foundation
+        title: "Phase 1: Foundation ({{duration}})"
+        sections:
+          - id: phase-1-core
+            title: Core Systems
+            type: bullet-list
+            template: |
+              - Project setup and configuration
+              - Basic page management
+              - Asset loading pipeline
+              - Input handling framework
+          - id: phase-1-epics
+            title: Story Epics
+            type: bullet-list
+            template: |
+              - "Project Setup and Configuration"
+              - "Basic Page Management System"
+              - "Asset Loading Foundation"
+      - id: phase-2-game-systems
+        title: "Phase 2: Game Systems ({{duration}})"
+        sections:
+          - id: phase-2-gameplay
+            title: Gameplay Systems
+            type: bullet-list
+            template: |
+              - {{primary_mechanic}} implementation
+              - Game state management
+              - UI framework
+          - id: phase-2-epics
+            title: Story Epics
+            type: bullet-list
+            template: |
+              - "{{primary_mechanic}} System Implementation"
+              - "Game State Management System"
+      - id: phase-3-content-polish
+        title: "Phase 3: Content & Polish ({{duration}})"
+        sections:
+          - id: phase-3-content
+            title: Content Systems
+            type: bullet-list
+            template: |
+              - Level loading and management
+              - Audio system integration
+              - Performance optimization
+              - Final polish and testing
+          - id: phase-3-epics
+            title: Story Epics
+            type: bullet-list
+            template: |
+              - "Level Management System"
+              - "Audio Integration and Optimization"
+              - "Performance Optimization and Testing"
+
+  - id: risk-assessment
+    title: Risk Assessment
+    instruction: Identify potential technical risks and mitigation strategies
+    type: table
+    template: |
+      | Risk                         | Probability | Impact     | Mitigation Strategy |
+      | ---------------------------- | ----------- | ---------- | ------------------- |
+      | Performance issues on devices| {{prob}}    | {{impact}} | {{mitigation}}      |
+      | Asset loading bottlenecks    | {{prob}}    | {{impact}} | {{mitigation}}      |
+      | WeChat API changes           | {{prob}}    | {{impact}} | {{mitigation}}      |
+
+  - id: success-criteria
+    title: Success Criteria
+    instruction: Define measurable technical success criteria
+    sections:
+      - id: technical-metrics
+        title: Technical Metrics
+        type: bullet-list
+        template: |
+          - All systems implemented per specification
+          - Performance targets met consistently
+          - Zero critical bugs in core systems
+          - Successful deployment to WeChat platform
+      - id: code-quality
+        title: Code Quality
+        type: bullet-list
+        template: |
+          - >80% test coverage on game logic
+          - Consistent adherence to coding standards
+          - Comprehensive documentation coverage
