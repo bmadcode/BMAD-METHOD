@@ -56,9 +56,9 @@ App({
     // Called when the mini-game is switched to the background
   },
   globalData: {
-    userInfo: null
-  }
-})
+    userInfo: null,
+  },
+});
 ```
 
 **Page Lifecycle:**
@@ -83,8 +83,8 @@ Page({
   },
   onUnload() {
     // Called when the page is unloaded
-  }
-})
+  },
+});
 ```
 
 ### Component-Based Architecture
