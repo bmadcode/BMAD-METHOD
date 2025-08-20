@@ -1,4 +1,4 @@
-name: format-check
+name: 格式检查
 
 "on":
   pull_request:
@@ -8,34 +8,34 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 检出
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: 设置 Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: npm ci
 
-      - name: Prettier format check
+      - name: Prettier 格式检查
         run: npm run format:check
 
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 检出
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: 设置 Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: npm ci
 
       - name: ESLint

@@ -1,32 +1,32 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: 错误报告
+about: 创建报告以帮助我们改进
 title: ''
 labels: ''
 assignees: ''
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**描述错误**
+清晰简洁地描述错误是什么。
 
-**Steps to Reproduce**
-What lead to the bug and can it be reliable recreated - if so with what steps.
+**重现步骤**
+导致错误的原因是什么，是否可以可靠地重现 - 如果可以，请说明步骤。
 
 **PR**
-If you have an idea to fix and would like to contribute, please indicate here you are working on a fix, or link to a proposed PR to fix the issue. Please review the contribution.md - contributions are always welcome!
+如果您有修复的想法并愿意做出贡献，请在此处注明您正在修复，或链接到修复问题的建议 PR。请查看 contribution.md - 欢迎随时做出贡献！
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**预期行为**
+清晰简洁地描述您期望发生的事情。
 
-**Please be Specific if relevant**
-Model(s) Used:
-Agentic IDE Used:
-WebSite Used:
-Project Language:
-BMad Method version:
+**如果相关，请具体说明**
+使用的模型：
+使用的代理 IDE：
+使用的网站：
+项目语言：
+BMad 方法版本：
 
-**Screenshots or Links**
-If applicable, add screenshots or links (if web sharable record) to help explain your problem.
+**屏幕截图或链接**
+如果适用，请添加屏幕截图或链接（如果是可共享的网络记录）以帮助解释您的问题。
 
-**Additional context**
-Add any other context about the problem here. The more information you can provide, the easier it will be to suggest a fix or resolve
+**其他上下文**
+在此处添加有关问题的任何其他上下文。您提供的信息越多，就越容易建议修复或解决问题。

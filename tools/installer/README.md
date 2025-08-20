@@ -1,8 +1,8 @@
-# BMad Method Installer
+# BMad 方法安装程序
 
-## Usage
+## 用法
 
 ```bash
-# Interactive installation
+# 交互式安装
 npx bmad-method install
 ```

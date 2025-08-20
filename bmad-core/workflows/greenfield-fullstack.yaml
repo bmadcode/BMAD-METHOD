@@ -1,10 +1,10 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ 核心驱动 -->
 workflow:
   id: greenfield-fullstack
-  name: Greenfield Full-Stack Application Development
+  name: 绿地全栈应用程序开发
   description: >-
-    Agent workflow for building full-stack applications from concept to development.
-    Supports both comprehensive planning for complex projects and rapid prototyping for simple ones.
+    用于从概念到开发构建全栈应用程序的代理工作流程。
+    支持复杂项目的全面规划和简单项目的快速原型设计。
   type: greenfield
   project_types:
     - web-app
@@ -19,25 +19,25 @@ workflow:
       optional_steps:
         - brainstorming_session
         - market_research_prompt
-      notes: "Can do brainstorming first, then optional deep research before creating project brief. SAVE OUTPUT: Copy final project-brief.md to your project's docs/ folder."
+      notes: "可以先进行头脑风暴，然后在创建项目简报之前进行可选的深入研究。保存输出：将最终的 project-brief.md 复制到您项目的 docs/ 文件夹中。"
 
     - agent: pm
       creates: prd.md
       requires: project-brief.md
-      notes: "Creates PRD from project brief using prd-tmpl. SAVE OUTPUT: Copy final prd.md to your project's docs/ folder."
+      notes: "根据项目简报使用 prd-tmpl 创建 PRD。保存输出：将最终的 prd.md 复制到您项目的 docs/ 文件夹中。"
 
     - agent: ux-expert
       creates: front-end-spec.md
       requires: prd.md
       optional_steps:
         - user_research_prompt
-      notes: "Creates UI/UX specification using front-end-spec-tmpl. SAVE OUTPUT: Copy final front-end-spec.md to your project's docs/ folder."
+      notes: "使用 front-end-spec-tmpl 创建 UI/UX 规范。保存输出：将最终的 front-end-spec.md 复制到您项目的 docs/ 文件夹中。"
 
     - agent: ux-expert
       creates: v0_prompt (optional)
       requires: front-end-spec.md
       condition: user_wants_ai_generation
-      notes: "OPTIONAL BUT RECOMMENDED: Generate AI UI prompt for tools like v0, Lovable, etc. Use the generate-ai-frontend-prompt task. User can then generate UI in external tool and download project structure."
+      notes: "可选但推荐：为 v0、Lovable 等工具生成 AI UI 提示。使用 generate-ai-frontend-prompt 任务。然后用户可以在外部工具中生成 UI 并下载项目结构。"
 
     - agent: architect
       creates: fullstack-architecture.md
@@ -47,42 +47,42 @@ workflow:
       optional_steps:
         - technical_research_prompt
         - review_generated_ui_structure
-      notes: "Creates comprehensive architecture using fullstack-architecture-tmpl. If user generated UI with v0/Lovable, can incorporate the project structure into architecture. May suggest changes to PRD stories or new stories. SAVE OUTPUT: Copy final fullstack-architecture.md to your project's docs/ folder."
+      notes: "使用 fullstack-architecture-tmpl 创建综合架构。如果用户使用 v0/Lovable 生成了 UI，则可以将项目结构整合到架构中。可能会建议更改 PRD 故事或添加新故事。保存输出：将最终的 fullstack-architecture.md 复制到您项目的 docs/ 文件夹中。"
 
     - agent: pm
       updates: prd.md (if needed)
       requires: fullstack-architecture.md
       condition: architecture_suggests_prd_changes
-      notes: "If architect suggests story changes, update PRD and re-export the complete unredacted prd.md to docs/ folder."
+      notes: "如果架构师建议更改故事，请更新 PRD 并将完整的、未经删节的 prd.md 重新导出到 docs/ 文件夹。"
 
     - agent: po
       validates: all_artifacts
       uses: po-master-checklist
-      notes: "Validates all documents for consistency and completeness. May require updates to any document."
+      notes: "验证所有文档的一致性和完整性。可能需要更新任何文档。"
 
     - agent: various
       updates: any_flagged_documents
       condition: po_checklist_issues
-      notes: "If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder."
+      notes: "如果 PO 发现问题，请返回相关代理进行修复，并将更新后的文档重新导出到 docs/ 文件夹。"
 
     - project_setup_guidance:
       action: guide_project_structure
       condition: user_has_generated_ui
-      notes: "If user generated UI with v0/Lovable: For polyrepo setup, place downloaded project in separate frontend repo alongside backend repo. For monorepo, place in apps/web or packages/frontend directory. Review architecture document for specific guidance."
+      notes: "如果用户使用 v0/Lovable 生成了 UI：对于 polyrepo 设置，将下载的项目放在与后端仓库并行的单独的前端仓库中。对于 monorepo，将其放在 apps/web 或 packages/frontend 目录中。查看架构文档以获取具体指导。"
 
     - development_order_guidance:
       action: guide_development_sequence
-      notes: "Based on PRD stories: If stories are frontend-heavy, start with frontend project/directory first. If backend-heavy or API-first, start with backend. For tightly coupled features, follow story sequence in monorepo setup. Reference sharded PRD epics for development order."
+      notes: "根据 PRD 故事：如果故事偏向前端，则首先从前端项目/目录开始。如果偏向后端或 API 优先，则从后端开始。对于紧密耦合的功能，请在 monorepo 设置中遵循故事顺序。参考分片的 PRD 史诗以了解开发顺序。"
 
     - agent: po
       action: shard_documents
       creates: sharded_docs
       requires: all_artifacts_in_project
       notes: |
-        Shard documents for IDE development:
-        - Option A: Use PO agent to shard: @po then ask to shard docs/prd.md
-        - Option B: Manual: Drag shard-doc task + docs/prd.md into chat
-        - Creates docs/prd/ and docs/architecture/ folders with sharded content
+        为 IDE 开发分片文档：
+        - 选项 A：使用 PO 代理分片：@po 然后要求分片 docs/prd.md
+        - 选项 B：手动：将 shard-doc 任务 + docs/prd.md 拖到聊天中
+        - 创建包含分片内容的 docs/prd/ 和 docs/architecture/ 文件夹
 
     - agent: sm
       action: create_story
@@ -90,10 +90,10 @@ workflow:
       requires: sharded_docs
       repeats: for_each_epic
       notes: |
-        Story creation cycle:
-        - SM Agent (New Chat): @sm → *create
-        - Creates next story from sharded docs
-        - Story starts in "Draft" status
+        故事创建周期：
+        - SM 代理（新聊天）：@sm → *create
+        - 从分片文档创建下一个故事
+        - 故事以“草稿”状态开始
 
     - agent: analyst/pm
       action: review_draft_story
@@ -102,20 +102,20 @@ workflow:
       optional: true
       condition: user_wants_story_review
       notes: |
-        OPTIONAL: Review and approve draft story
-        - NOTE: story-review task coming soon
-        - Review story completeness and alignment
-        - Update story status: Draft → Approved
+        可选：审查并批准故事草稿
+        - 注意：story-review 任务即将推出
+        - 审查故事的完整性和一致性
+        - 更新故事状态：草稿 → 已批准
 
     - agent: dev
       action: implement_story
       creates: implementation_files
       requires: story.md
       notes: |
-        Dev Agent (New Chat): @dev
-        - Implements approved story
-        - Updates File List with all changes
-        - Marks story as "Review" when complete
+        开发代理（新聊天）：@dev
+        - 实施已批准的故事
+        - 使用所有更改更新文件列表
+        - 完成后将故事标记为“审查”
 
     - agent: qa
       action: review_implementation
@@ -123,26 +123,26 @@ workflow:
       requires: implementation_files
       optional: true
       notes: |
-        OPTIONAL: QA Agent (New Chat): @qa → review-story
-        - Senior dev review with refactoring ability
-        - Fixes small issues directly
-        - Leaves checklist for remaining items
-        - Updates story status (Review → Done or stays Review)
+        可选：QA 代理（新聊天）：@qa → review-story
+        - 具有重构能力的高级开发人员审查
+        - 直接修复小问题
+        - 为剩余项目留下清单
+        - 更新故事状态（审查 → 完成或保持审查）
 
     - agent: dev
       action: address_qa_feedback
       updates: implementation_files
       condition: qa_left_unchecked_items
       notes: |
-        If QA left unchecked items:
-        - Dev Agent (New Chat): Address remaining items
-        - Return to QA for final approval
+        如果 QA 留下未检查的项目：
+        - 开发代理（新聊天）：处理剩余项目
+        - 返回 QA 进行最终批准
 
     - repeat_development_cycle:
       action: continue_for_all_stories
       notes: |
-        Repeat story cycle (SM → Dev → QA) for all epic stories
-        Continue until all stories in PRD are complete
+        对所有史诗故事重复故事周期（SM → 开发 → QA）
+        继续直到 PRD 中的所有故事都完成
 
     - agent: po
       action: epic_retrospective
@@ -150,61 +150,61 @@ workflow:
       condition: epic_complete
       optional: true
       notes: |
-        OPTIONAL: After epic completion
-        - NOTE: epic-retrospective task coming soon
-        - Validate epic was completed correctly
-        - Document learnings and improvements
+        可选：史诗完成后
+        - 注意：epic-retrospective 任务即将推出
+        - 验证史诗是否正确完成
+        - 记录经验教训和改进
 
     - workflow_end:
       action: project_complete
       notes: |
-        All stories implemented and reviewed!
-        Project development phase complete.
+        所有故事都已实施和审查！
+        项目开发阶段完成。
 
-        Reference: {root}/data/bmad-kb.md#IDE Development Workflow
+        参考：{root}/data/bmad-kb.md#IDE Development Workflow
 
   flow_diagram: |
     ```mermaid
     graph TD
-        A[Start: Greenfield Project] --> B[analyst: project-brief.md]
-        B --> C[pm: prd.md]
-        C --> D[ux-expert: front-end-spec.md]
-        D --> D2{Generate v0 prompt?}
-        D2 -->|Yes| D3[ux-expert: create v0 prompt]
-        D2 -->|No| E[architect: fullstack-architecture.md]
-        D3 --> D4[User: generate UI in v0/Lovable]
+        A[开始：绿地项目] --> B[分析师：project-brief.md]
+        B --> C[项目经理：prd.md]
+        C --> D[用户体验专家：front-end-spec.md]
+        D --> D2{生成 v0 提示？}
+        D2 -->|是| D3[用户体验专家：创建 v0 提示]
+        D2 -->|否| E[架构师：fullstack-architecture.md]
+        D3 --> D4[用户：在 v0/Lovable 中生成 UI]
         D4 --> E
-        E --> F{Architecture suggests PRD changes?}
-        F -->|Yes| G[pm: update prd.md]
-        F -->|No| H[po: validate all artifacts]
+        E --> F{架构师建议更改 PRD？}
+        F -->|是| G[项目经理：更新 prd.md]
+        F -->|否| H[产品负责人：验证所有工件]
         G --> H
-        H --> I{PO finds issues?}
-        I -->|Yes| J[Return to relevant agent for fixes]
-        I -->|No| K[po: shard documents]
+        H --> I{产品负责人发现问题？}
+        I -->|是| J[返回相关代理进行修复]
+        I -->|否| K[产品负责人：分片文档]
         J --> H
         
-        K --> L[sm: create story]
-        L --> M{Review draft story?}
-        M -->|Yes| N[analyst/pm: review & approve story]
-        M -->|No| O[dev: implement story]
+        K --> L[Scrum Master：创建故事]
+        L --> M{审查故事草稿？}
+        M -->|是| N[分析师/项目经理：审查并批准故事]
+        M -->|否| O[开发人员：实施故事]
         N --> O
-        O --> P{QA review?}
-        P -->|Yes| Q[qa: review implementation]
-        P -->|No| R{More stories?}
-        Q --> S{QA found issues?}
-        S -->|Yes| T[dev: address QA feedback]
-        S -->|No| R
+        O --> P{QA 审查？}
+        P -->|是| Q[QA：审查实施]
+        P -->|否| R{更多故事？}
+        Q --> S{QA 发现问题？}
+        S -->|是| T[开发人员：处理 QA 反馈]
+        S -->|否| R
         T --> Q
-        R -->|Yes| L
-        R -->|No| U{Epic retrospective?}
-        U -->|Yes| V[po: epic retrospective]
-        U -->|No| W[Project Complete]
+        R -->|是| L
+        R -->|否| U{史诗回顾？}
+        U -->|是| V[产品负责人：史诗回顾]
+        U -->|否| W[项目完成]
         V --> W
 
-        B -.-> B1[Optional: brainstorming]
-        B -.-> B2[Optional: market research]
-        D -.-> D1[Optional: user research]
-        E -.-> E1[Optional: technical research]
+        B -.-> B1[可选：头脑风暴]
+        B -.-> B2[可选：市场研究]
+        D -.-> D1[可选：用户研究]
+        E -.-> E1[可选：技术研究]
 
         style W fill:#90EE90
         style K fill:#ADD8E6
@@ -223,19 +223,19 @@ workflow:
 
   decision_guidance:
     when_to_use:
-      - Building production-ready applications
-      - Multiple team members will be involved
-      - Complex feature requirements
-      - Need comprehensive documentation
-      - Long-term maintenance expected
-      - Enterprise or customer-facing applications
+      - 构建可用于生产的应用程序
+      - 将有多个团队成员参与
+      - 复杂的功能需求
+      - 需要全面的文档
+      - 预计需要长期维护
+      - 面向企业或客户的应用程序
 
   handoff_prompts:
-    analyst_to_pm: "Project brief is complete. Save it as docs/project-brief.md in your project, then create the PRD."
-    pm_to_ux: "PRD is ready. Save it as docs/prd.md in your project, then create the UI/UX specification."
-    ux_to_architect: "UI/UX spec complete. Save it as docs/front-end-spec.md in your project, then create the fullstack architecture."
-    architect_review: "Architecture complete. Save it as docs/fullstack-architecture.md. Do you suggest any changes to the PRD stories or need new stories added?"
-    architect_to_pm: "Please update the PRD with the suggested story changes, then re-export the complete prd.md to docs/."
-    updated_to_po: "All documents ready in docs/ folder. Please validate all artifacts for consistency."
-    po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
-    complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
+    analyst_to_pm: "项目简报已完成。将其另存为您项目中的 docs/project-brief.md，然后创建 PRD。"
+    pm_to_ux: "PRD 已准备就绪。将其另存为您项目中的 docs/prd.md，然后创建 UI/UX 规范。"
+    ux_to_architect: "UI/UX 规范已完成。将其另存为 docs/front-end-spec.md，然后创建全栈架构。"
+    architect_review: "架构已完成。将其另存为 docs/fullstack-architecture.md。您是否建议对 PRD 故事进行任何更改或需要添加新故事？"
+    architect_to_pm: "请使用建议的故事更改更新 PRD，然后将完整的 prd.md 重新导出到 docs/。"
+    updated_to_po: "所有文档都已在 docs/ 文件夹中准备就绪。请验证所有工件的一致性。"
+    po_issues: "PO 发现 [文档] 有问题。请返回 [代理] 进行修复并重新保存更新后的文档。"
+    complete: "所有规划工件都已验证并保存在 docs/ 文件夹中。移动到 IDE 环境以开始开发。"

@@ -1,12 +1,12 @@
 installation-options:
   full:
-    name: Complete BMad Core
-    description: Copy the entire .bmad-core folder with all agents, templates, and tools
+    name: 完整的 BMad 核心
+    description: 复制包含所有代理、模板和工具的整个 .bmad-core 文件夹
     action: copy-folder
     source: bmad-core
   single-agent:
-    name: Single Agent
-    description: Select and install a single agent with its dependencies
+    name: 单个代理
+    description: 选择并安装单个代理及其依赖项
     action: copy-agent
 ide-configurations:
   cursor:
@@ -15,100 +15,100 @@ ide-configurations:
     format: multi-file
     command-suffix: .mdc
     instructions: |
-      # To use BMad agents in Cursor:
-      # 1. Press Ctrl+L (Cmd+L on Mac) to open the chat
-      # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
-      # 3. The agent will adopt that persona for the conversation
+      # 在 Cursor 中使用 BMad 代理：
+      # 1. 按 Ctrl+L (Mac 上为 Cmd+L) 打开聊天
+      # 2. 输入 @agent-name (例如, "@dev", "@pm", "@architect")
+      # 3. 代理将采用该角色的身份进行对话
   claude-code:
     name: Claude Code
     rule-dir: .claude/commands/BMad/
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Claude Code:
-      # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
-      # 2. Claude will switch to that agent's persona
+      # 在 Claude Code 中使用 BMad 代理：
+      # 1. 输入 /agent-name (例如, "/dev", "/pm", "/architect")
+      # 2. Claude 将切换到该代理的角色
   crush:
     name: Crush
     rule-dir: .crush/commands/BMad/
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Crush:
-      # 1. Press CTRL + P and press TAB
-      # 2. Select agent or task
-      # 3. Crush will switch to that agent's persona / task
+      # 在 Crush 中使用 BMad 代理：
+      # 1. 按 CTRL + P 并按 TAB
+      # 2. 选择代理或任务
+      # 3. Crush 将切换到该代理的角色/任务
   windsurf:
     name: Windsurf
     rule-dir: .windsurf/workflows/
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Windsurf:
-      # 1. Type /agent-name (e.g., "/dev", "/pm")
-      # 2. Windsurf will adopt that agent's persona
+      # 在 Windsurf 中使用 BMad 代理：
+      # 1. 输入 /agent-name (例如, "/dev", "/pm")
+      # 2. Windsurf 将采用该代理的角色
   trae:
     name: Trae
     rule-dir: .trae/rules/
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Trae:
-      # 1. Type @agent-name (e.g., "@dev", "@pm", "@architect")
-      # 2. Trae will adopt that agent's persona
+      # 在 Trae 中使用 BMad 代理：
+      # 1. 输入 @agent-name (例如, "@dev", "@pm", "@architect")
+      # 2. Trae 将采用该代理的角色
   roo:
     name: Roo Code
     format: custom-modes
     file: .roomodes
     instructions: |
-      # To use BMad agents in Roo Code:
-      # 1. Open the mode selector (usually in the status bar)
-      # 2. Select any bmad-{agent} mode (e.g., "bmad-dev", "bmad-pm")
-      # 3. The AI will adopt that agent's full personality and capabilities
+      # 在 Roo Code 中使用 BMad 代理：
+      # 1. 打开模式选择器 (通常在状态栏中)
+      # 2. 选择任何 bmad-{agent} 模式 (例如, "bmad-dev", "bmad-pm")
+      # 3. AI 将采用该代理的完整个性和能力
   cline:
     name: Cline
     rule-dir: .clinerules/
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Cline:
-      # 1. Open the Cline chat panel in VS Code
-      # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
-      # 3. The agent will adopt that persona for the conversation
-      # 4. Rules are stored in .clinerules/ directory in your project
+      # 在 Cline 中使用 BMad 代理：
+      # 1. 在 VS Code 中打开 Cline 聊天面板
+      # 2. 输入 @agent-name (例如, "@dev", "@pm", "@architect")
+      # 3. 代理将采用该角色的身份进行对话
+      # 4. 规则存储在您项目中的 .clinerules/ 目录中
   gemini:
     name: Gemini CLI
     rule-dir: .gemini/bmad-method/
     format: single-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents with the Gemini CLI:
-      # 1. The installer creates a .gemini/bmad-method/ directory in your project.
-      # 2. It concatenates all agent files into a single GEMINI.md file.
-      # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
-      # 4. The Gemini CLI will automatically have the context for that agent.
+      # 要将 BMad 代理与 Gemini CLI 结合使用：
+      # 1. 安装程序会在您的项目中创建一个 .gemini/bmad-method/ 目录。
+      # 2. 它会将所有代理文件连接成一个 GEMINI.md 文件。
+      # 3. 只需在您的提示中提及代理（例如，“作为 *dev，...”）。
+      # 4. Gemini CLI 将自动拥有该代理的上下文。
   github-copilot:
     name: Github Copilot
     rule-dir: .github/chatmodes/
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents with Github Copilot:
-      # 1. The installer creates a .github/chatmodes/ directory in your project
-      # 2. Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
-      # 3. The agent will adopt that persona for the conversation
-      # 4. Requires VS Code 1.101+ with `chat.agent.enabled: true` in settings
-      # 5. Agent files are stored in .github/chatmodes/
-      # 6. Use `*help` to see available commands and agents
+      # 要将 BMad 代理与 Github Copilot 结合使用：
+      # 1. 安装程序会在您的项目中创建一个 .github/chatmodes/ 目录
+      # 2. 打开聊天视图（Mac 上为 `⌃⌘I`，Windows/Linux 上为 `Ctrl+Alt+I`）并从聊天模式选择器中选择 **Agent**。
+      # 3. 代理将采用该角色的身份进行对话
+      # 4. 需要 VS Code 1.101+ 并在设置中启用 `chat.agent.enabled: true`
+      # 5. 代理文件存储在 .github/chatmodes/ 目录中
+      # 6. 使用 `*help` 查看可用的命令和代理
   kilo:
     name: Kilo Code
     format: custom-modes
     file: .kilocodemodes
     instructions: |
-      # To use BMAD™ agents in Kilo Code:
-      # 1. Open the mode selector in VSCode
-      # 2. Select a bmad-{agent} mode (e.g. "bmad-dev")
-      # 3. The AI adopts that agent's persona and capabilities
+      # 在 Kilo Code 中使用 BMAD™ 代理：
+      # 1. 在 VSCode 中打开模式选择器
+      # 2. 选择一个 bmad-{agent} 模式 (例如 "bmad-dev")
+      # 3. AI 将采用该代理的角色和能力
 
   qwen-code:
     name: Qwen Code
@@ -116,8 +116,8 @@ ide-configurations:
     format: single-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents with Qwen Code:
-      # 1. The installer creates a .qwen/bmad-method/ directory in your project.
-      # 2. It concatenates all agent files into a single QWEN.md file.
-      # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
-      # 4. The Qwen Code CLI will automatically have the context for that agent.
+      # 要将 BMad 代理与 Qwen Code 结合使用：
+      # 1. 安装程序会在您的项目中创建一个 .qwen/bmad-method/ 目录。
+      # 2. 它会将所有代理文件连接成一个 QWEN.md 文件。
+      # 3. 只需在您的提示中提及代理（例如，“作为 *dev，...”）。
+      # 4. Qwen Code CLI 将自动拥有该代理的上下文。

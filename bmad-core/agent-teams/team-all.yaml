@@ -1,8 +1,8 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ 核心驱动 -->
 bundle:
-  name: Team All
+  name: 全体团队
   icon: 👥
-  description: Includes every core system agent.
+  description: 包括每个核心系统代理。
 agents:
   - bmad-orchestrator
   - "*"

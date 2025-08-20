@@ -1,88 +1,88 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ 核心驱动 -->
 
-# Checklist Validation Task
+# 清单验证任务
 
-This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
+本任务提供根据清单验证文档的说明。代理人必须遵循这些说明，以确保对文档进行彻底和系统的验证。
 
-## Available Checklists
+## 可用清单
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the {root}/checklists folder to select the appropriate one to run.
+如果用户询问或未指定具体清单，请列出可供代理人角色使用的清单。如果任务不是由特定代理人运行，请告知用户检查 {root}/checklists 文件夹以选择要运行的适当清单。
 
-## Instructions
+## 说明
 
-1. **Initial Assessment**
-   - If user or the task being run provides a checklist name:
-     - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
-     - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from {root}/checklists/
-   - If no checklist specified:
-     - Ask the user which checklist they want to use
-     - Present the available options from the files in the checklists folder
-   - Confirm if they want to work through the checklist:
-     - Section by section (interactive mode - very time consuming)
-     - All at once (YOLO mode - recommended for checklists, there will be a summary of sections at the end to discuss)
+1.  **初步评估**
+    *   如果用户或正在运行的任务提供了清单名称：
+        *   尝试模糊匹配（例如“architecture checklist” -> “architect-checklist”）
+        *   如果找到多个匹配项，请用户澄清
+        *   从 {root}/checklists/ 加载相应的清单
+    *   如果未指定清单：
+        *   询问用户要使用哪个清单
+        *   从 checklists 文件夹中的文件呈现可用选项
+    *   确认他们是否要逐一处理清单：
+        *   逐节进行（交互模式 - 非常耗时）
+        *   一次性完成（YOLO 模式 - 推荐用于清单，最后会有各部分的摘要供讨论）
 
-2. **Document and Artifact Gathering**
-   - Each checklist will specify its required documents/artifacts at the beginning
-   - Follow the checklist's specific instructions for what to gather, generally a file can be resolved in the docs folder, if not or unsure, halt and ask or confirm with the user.
+2.  **文档和工件收集**
+    *   每个清单都会在开头指定其所需的文档/工件
+    *   遵循清单的具体说明来收集所需内容，通常文件可以在 docs 文件夹中找到，如果不确定或找不到，请暂停并询问或与用户确认。
 
-3. **Checklist Processing**
+3.  **清单处理**
 
-   If in interactive mode:
-   - Work through each section of the checklist one at a time
-   - For each section:
-     - Review all items in the section following instructions for that section embedded in the checklist
-     - Check each item against the relevant documentation or artifacts as appropriate
-     - Present summary of findings for that section, highlighting warnings, errors and non applicable items (rationale for non-applicability).
-     - Get user confirmation before proceeding to next section or if any thing major do we need to halt and take corrective action
+    如果在交互模式下：
+    *   一次一个地处理清单的每个部分
+    *   对于每个部分：
+        *   根据清单中嵌入的该部分的说明，审查该部分中的所有项目
+        *   根据相关文档或工件检查每个项目
+        *   呈现该部分的调查结果摘要，突出显示警告、错误和不适用的项目（并说明不适用的理由）。
+        *   在进入下一部分之前获得用户确认，或者如果有任何重大问题，是否需要暂停并采取纠正措施
 
-   If in YOLO mode:
-   - Process all sections at once
-   - Create a comprehensive report of all findings
-   - Present the complete analysis to the user
+    如果在 YOLO 模式下：
+    *   一次性处理所有部分
+    *   创建一份所有调查结果的综合报告
+    *   向用户呈现完整的分析
 
-4. **Validation Approach**
+4.  **验证方法**
 
-   For each checklist item:
-   - Read and understand the requirement
-   - Look for evidence in the documentation that satisfies the requirement
-   - Consider both explicit mentions and implicit coverage
-   - Aside from this, follow all checklist llm instructions
-   - Mark items as:
-     - ✅ PASS: Requirement clearly met
-     - ❌ FAIL: Requirement not met or insufficient coverage
-     - ⚠️ PARTIAL: Some aspects covered but needs improvement
-     - N/A: Not applicable to this case
+    对于每个清单项目：
+    *   阅读并理解要求
+    *   在文档中寻找满足要求的证据
+    *   考虑明确提及和隐含覆盖
+    *   除此之外，遵循所有清单的 llm 指令
+    *   将项目标记为：
+        *   ✅ 通过：要求明确满足
+        *   ❌ 失败：要求未满足或覆盖不充分
+        *   ⚠️ 部分通过：某些方面已覆盖但需要改进
+        *   N/A：不适用于本案例
 
-5. **Section Analysis**
+5.  **部分分析**
 
-   For each section:
-   - think step by step to calculate pass rate
-   - Identify common themes in failed items
-   - Provide specific recommendations for improvement
-   - In interactive mode, discuss findings with user
-   - Document any user decisions or explanations
+    对于每个部分：
+    *   逐步思考以计算通过率
+    *   识别失败项目中的共同主题
+    *   提供具体的改进建议
+    *   在交互模式下，与用户讨论调查结果
+    *   记录任何用户决定或解释
 
-6. **Final Report**
+6.  **最终报告**
 
-   Prepare a summary that includes:
-   - Overall checklist completion status
-   - Pass rates by section
-   - List of failed items with context
-   - Specific recommendations for improvement
-   - Any sections or items marked as N/A with justification
+    准备一份摘要，包括：
+    *   总体清单完成状态
+    *   各部分的通过率
+    *   包含上下文的失败项目列表
+    *   具体的改进建议
+    *   任何标记为 N/A 的部分或项目及其理由
 
-## Checklist Execution Methodology
+## 清单执行方法论
 
-Each checklist now contains embedded LLM prompts and instructions that will:
+每个清单现在都包含嵌入的 LLM 提示和说明，这些提示和说明将：
 
-1. **Guide thorough thinking** - Prompts ensure deep analysis of each section
-2. **Request specific artifacts** - Clear instructions on what documents/access is needed
-3. **Provide contextual guidance** - Section-specific prompts for better validation
-4. **Generate comprehensive reports** - Final summary with detailed findings
+1.  **指导深入思考** - 提示确保对每个部分进行深入分析
+2.  **请求特定工件** - 关于需要哪些文档/访问权限的明确说明
+3.  **提供上下文指导** - 针对特定部分的提示以实现更好的验证
+4.  **生成综合报告** - 包含详细调查结果的最终摘要
 
-The LLM will:
+LLM 将：
 
-- Execute the complete checklist validation
-- Present a final report with pass/fail rates and key findings
-- Offer to provide detailed analysis of any section, especially those with warnings or failures
+*   执行完整的清单验证
+*   呈现一份包含通过/失败率和关键调查结果的最终报告
+*   主动提出对任何部分进行详细分析，特别是那些有警告或失败的部分

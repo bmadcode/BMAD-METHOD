@@ -1,8 +1,8 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ 核心驱动 -->
 bundle:
-  name: Team IDE Minimal
+  name: 团队 IDE 最小化
   icon: ⚡
-  description: Only the bare minimum for the IDE PO SM dev qa cycle.
+  description: 仅包含 IDE PO SM dev qa 周期的最基本部分。
 agents:
   - po
   - sm

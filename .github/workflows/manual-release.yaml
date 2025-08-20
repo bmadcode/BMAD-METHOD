@@ -1,10 +1,10 @@
-name: Manual Release
+name: 手动发布
 
 on:
   workflow_dispatch:
     inputs:
       version_bump:
-        description: Version bump type
+        description: 版本号提升类型
         required: true
         default: patch
         type: choice
@@ -21,137 +21,137 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 检出
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
+      - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
           registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: npm ci
 
-      - name: Run tests and validation
+      - name: 运行测试和验证
         run: |
           npm run validate
           npm run format:check
           npm run lint
 
-      - name: Configure Git
+      - name: 配置 Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version
+      - name: 提升版本
         run: npm run version:${{ github.event.inputs.version_bump }}
 
-      - name: Get new version and previous tag
+      - name: 获取新版本和上一个标签
         id: version
         run: |
           echo "new_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
           echo "previous_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
 
-      - name: Update installer package.json
+      - name: 更新安装程序的 package.json
         run: |
           sed -i 's/"version": ".*"/"version": "${{ steps.version.outputs.new_version }}"/' tools/installer/package.json
 
-      - name: Build project
+      - name: 构建项目
         run: npm run build
 
-      - name: Commit version bump
+      - name: 提交版本提升
         run: |
           git add .
           git commit -m "release: bump to v${{ steps.version.outputs.new_version }}"
 
-      - name: Generate release notes
+      - name: 生成发布说明
         id: release_notes
         run: |
-          # Get commits since last tag
+          # 获取自上一个标签以来的提交
           COMMITS=$(git log ${{ steps.version.outputs.previous_tag }}..HEAD --pretty=format:"- %s" --reverse)
 
-          # Categorize commits
+          # 分类提交
           FEATURES=$(echo "$COMMITS" | grep -E "^- (feat|Feature)" || true)
           FIXES=$(echo "$COMMITS" | grep -E "^- (fix|Fix)" || true)  
           CHORES=$(echo "$COMMITS" | grep -E "^- (chore|Chore)" || true)
           OTHERS=$(echo "$COMMITS" | grep -v -E "^- (feat|Feature|fix|Fix|chore|Chore|release:|Release:)" || true)
 
-          # Build release notes
+          # 构建发布说明
           cat > release_notes.md << 'EOF'
-          ## 🚀 What's New in v${{ steps.version.outputs.new_version }}
+          ## 🚀 v${{ steps.version.outputs.new_version }} 的新功能
 
           EOF
 
           if [ ! -z "$FEATURES" ]; then
-            echo "### ✨ New Features" >> release_notes.md
+            echo "### ✨ 新功能" >> release_notes.md
             echo "$FEATURES" >> release_notes.md
             echo "" >> release_notes.md
           fi
 
           if [ ! -z "$FIXES" ]; then
-            echo "### 🐛 Bug Fixes" >> release_notes.md
+            echo "### 🐛 错误修复" >> release_notes.md
             echo "$FIXES" >> release_notes.md
             echo "" >> release_notes.md
           fi
 
           if [ ! -z "$OTHERS" ]; then
-            echo "### 📦 Other Changes" >> release_notes.md
+            echo "### 📦 其他更改" >> release_notes.md
             echo "$OTHERS" >> release_notes.md
             echo "" >> release_notes.md
           fi
 
           if [ ! -z "$CHORES" ]; then
-            echo "### 🔧 Maintenance" >> release_notes.md
+            echo "### 🔧 维护" >> release_notes.md
             echo "$CHORES" >> release_notes.md
             echo "" >> release_notes.md
           fi
 
           cat >> release_notes.md << 'EOF'
 
-          ## 📦 Installation
+          ## 📦 安装
 
           ```bash
           npx bmad-method install
           ```
 
-          **Full Changelog**: https://github.com/bmadcode/BMAD-METHOD/compare/${{ steps.version.outputs.previous_tag }}...v${{ steps.version.outputs.new_version }}
+          **完整更新日志**: https://github.com/bmadcode/BMAD-METHOD/compare/${{ steps.version.outputs.previous_tag }}...v${{ steps.version.outputs.new_version }}
           EOF
 
-          # Output for GitHub Actions
+          # 为 GitHub Actions 输出
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
           cat release_notes.md >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Create and push tag
+      - name: 创建并推送标签
         run: |
-          # Check if tag already exists
+          # 检查标签是否已存在
           if git rev-parse "v${{ steps.version.outputs.new_version }}" >/dev/null 2>&1; then
-            echo "Tag v${{ steps.version.outputs.new_version }} already exists, skipping tag creation"
+            echo "标签 v${{ steps.version.outputs.new_version }} 已存在，跳过标签创建"
           else
             git tag -a "v${{ steps.version.outputs.new_version }}" -m "Release v${{ steps.version.outputs.new_version }}"
             git push origin "v${{ steps.version.outputs.new_version }}"
           fi
 
-      - name: Push changes to main
+      - name: 推送更改到 main
         run: |
           if git push origin HEAD:main 2>/dev/null; then
-            echo "✅ Successfully pushed to main branch"
+            echo "✅ 成功推送到 main 分支"
           else
-            echo "⚠️ Could not push to main (protected branch). This is expected."
-            echo "📝 Version bump and tag were created successfully."
+            echo "⚠️ 无法推送到 main (受保护的分支)。这是预期的。"
+            echo "📝 版本提升和标签已成功创建。"
           fi
 
-      - name: Publish to NPM
+      - name: 发布到 NPM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish
 
-      - name: Create GitHub Release
+      - name: 创建 GitHub 发布
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -162,12 +162,12 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Summary
+      - name: 摘要
         run: |
-          echo "🎉 Successfully released v${{ steps.version.outputs.new_version }}!"
-          echo "📦 Published to NPM with @latest tag"
-          echo "🏷️ Git tag: v${{ steps.version.outputs.new_version }}"
-          echo "✅ Users running 'npx bmad-method install' will now get version ${{ steps.version.outputs.new_version }}"
+          echo "🎉 成功发布 v${{ steps.version.outputs.new_version }}!"
+          echo "📦 已发布到 NPM 并带有 @latest 标签"
+          echo "🏷️ Git 标签: v${{ steps.version.outputs.new_version }}"
+          echo "✅ 运行 'npx bmad-method install' 的用户现在将获得版本 ${{ steps.version.outputs.new_version }}"
           echo ""
-          echo "📝 Release notes preview:"
+          echo "📝 发布说明预览:"
           cat release_notes.md

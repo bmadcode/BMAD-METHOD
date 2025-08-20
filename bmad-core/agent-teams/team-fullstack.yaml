@@ -1,8 +1,8 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ 核心驱动 -->
 bundle:
-  name: Team Fullstack
+  name: 全栈团队
   icon: 🚀
-  description: Team capable of full stack, front end only, or service development.
+  description: 能够进行全栈、仅前端或服务开发的团队。
 agents:
   - bmad-orchestrator
   - analyst

@@ -1,45 +1,45 @@
-# IDE-specific agent configurations
-# This file defines agent-specific settings for different IDEs
+# IDE 特定代理配置
+# 此文件定义了不同 IDE 的代理特定设置
 
-# Roo Code file permissions
-# Each agent can have restricted file access based on regex patterns
-# If an agent is not listed here, it gets full edit access
+# Roo Code 文件权限
+# 每个代理可以根据正则表达式模式限制文件访问
+# 如果此处未列出代理，则它将获得完全编辑访问权限
 roo-permissions:
-  # Core agents
+  # 核心代理
   analyst:
     fileRegex: "\\.(md|txt)$"
-    description: "Documentation and text files"
+    description: "文档和文本文件"
   pm:
     fileRegex: "\\.(md|txt)$"
-    description: "Product documentation"
+    description: "产品文档"
   architect:
     fileRegex: "\\.(md|txt|yml|yaml|json)$"
-    description: "Architecture docs and configs"
+    description: "架构文档和配置"
   qa:
     fileRegex: "\\.(test|spec)\\.(js|ts|jsx|tsx)$|\\.md$"
-    description: "Test files and documentation"
+    description: "测试文件和文档"
   ux-expert:
     fileRegex: "\\.(md|css|scss|html|jsx|tsx)$"
-    description: "Design-related files"
+    description: "设计相关文件"
   po:
     fileRegex: "\\.(md|txt)$"
-    description: "Story and requirement docs"
+    description: "故事和需求文档"
   sm:
     fileRegex: "\\.(md|txt)$"
-    description: "Process and planning docs"
-  # Expansion pack agents
+    description: "流程和规划文档"
+  # 扩展包代理
   game-designer:
     fileRegex: "\\.(md|txt|json|yaml|yml)$"
-    description: "Game design documents and configs"
+    description: "游戏设计文档和配置"
   game-sm:
     fileRegex: "\\.(md|txt)$"
-    description: "Game project management docs"
+    description: "游戏项目管理文档"
 
-# Cline agent ordering
-# Lower numbers appear first in the list
-# Agents not listed get order 99
+# Cline 代理排序
+# 数字较小的会先出现在列表中
+# 未列出的代理排序为 99
 cline-order:
-  # Core agents
+  # 核心代理
   bmad-master: 1
   bmad-orchestrator: 2
   pm: 3
@@ -50,7 +50,7 @@ cline-order:
   dev: 8
   qa: 9
   ux-expert: 10
-  # Expansion pack agents
+  # 扩展包代理
   bmad-the-creator: 11
   game-designer: 12
   game-developer: 13

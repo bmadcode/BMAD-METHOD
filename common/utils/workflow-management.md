@@ -1,71 +1,71 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ 核心驱动 -->
 
-# Workflow Management
+# 工作流程管理
 
-Enables BMad orchestrator to manage and execute team workflows.
+使 BMad 编排器能够管理和执行团队工作流程。
 
-## Dynamic Workflow Loading
+## 动态工作流程加载
 
-Read available workflows from current team configuration's `workflows` field. Each team bundle defines its own supported workflows.
+从当前团队配置的 `workflows` 字段中读取可用的工作流程。每个团队包都定义了自己支持的工作流程。
 
-**Key Commands**:
+**主要命令**:
 
-- `/workflows` - List workflows in current bundle or workflows folder
-- `/agent-list` - Show agents in current bundle
+- `/workflows` - 列出当前包或工作流程文件夹中的工作流程
+- `/agent-list` - 显示当前包中的代理
 
-## Workflow Commands
+## 工作流程命令
 
 ### /workflows
 
-Lists available workflows with titles and descriptions.
+列出可用的工作流程及其标题和描述。
 
 ### /workflow-start {workflow-id}
 
-Starts workflow and transitions to first agent.
+启动工作流程并转换到第一个代理。
 
 ### /workflow-status
 
-Shows current progress, completed artifacts, and next steps.
+显示当前进度、已完成的工件和后续步骤。
 
 ### /workflow-resume
 
-Resumes workflow from last position. User can provide completed artifacts.
+从上次的位置恢复工作流程。用户可以提供已完成的工件。
 
 ### /workflow-next
 
-Shows next recommended agent and action.
+显示下一个推荐的代理和操作。
 
-## Execution Flow
+## 执行流程
 
-1. **Starting**: Load definition → Identify first stage → Transition to agent → Guide artifact creation
+1.  **启动**: 加载定义 → 识别第一阶段 → 转换到代理 → 指导工件创建
 
-2. **Stage Transitions**: Mark complete → Check conditions → Load next agent → Pass artifacts
+2.  **阶段转换**: 标记完成 → 检查条件 → 加载下一个代理 → 传递工件
 
-3. **Artifact Tracking**: Track status, creator, timestamps in workflow_state
+3.  **工件跟踪**: 在 workflow_state 中跟踪状态、创建者、时间戳
 
-4. **Interruption Handling**: Analyze provided artifacts → Determine position → Suggest next step
+4.  **中断处理**: 分析提供的工件 → 确定位置 → 建议下一步
 
-## Context Passing
+## 上下文传递
 
-When transitioning, pass:
+转换时，传递：
 
-- Previous artifacts
-- Current workflow stage
-- Expected outputs
-- Decisions/constraints
+-   以前的工件
+-   当前工作流程阶段
+-   预期输出
+-   决策/约束
 
-## Multi-Path Workflows
+## 多路径工作流程
 
-Handle conditional paths by asking clarifying questions when needed.
+在需要时通过提出澄清问题来处理条件路径。
 
-## Best Practices
+## 最佳实践
 
-1. Show progress
-2. Explain transitions
-3. Preserve context
-4. Allow flexibility
-5. Track state
+1.  显示进度
+2.  解释转换
+3.  保留上下文
+4.  允许灵活性
+5.  跟踪状态
 
-## Agent Integration
+## 代理集成
 
-Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
+代理应具备工作流程意识：了解活动的工作流程、其角色、访问工件、理解预期输出。

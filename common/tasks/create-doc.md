@@ -1,103 +1,103 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ 核心驱动 -->
 
-# Create Document from Template (YAML Driven)
+# 从模板创建文档 (YAML 驱动)
 
-## ⚠️ CRITICAL EXECUTION NOTICE ⚠️
+## ⚠️ 关键执行通知 ⚠️
 
-**THIS IS AN EXECUTABLE WORKFLOW - NOT REFERENCE MATERIAL**
+**这是一个可执行的工作流程 - 不是参考材料**
 
-When this task is invoked:
+当此任务被调用时：
 
-1. **DISABLE ALL EFFICIENCY OPTIMIZATIONS** - This workflow requires full user interaction
-2. **MANDATORY STEP-BY-STEP EXECUTION** - Each section must be processed sequentially with user feedback
-3. **ELICITATION IS REQUIRED** - When `elicit: true`, you MUST use the 1-9 format and wait for user response
-4. **NO SHORTCUTS ALLOWED** - Complete documents cannot be created without following this workflow
+1. **禁用所有效率优化** - 此工作流程需要完整的用户交互
+2. **强制性分步执行** - 每个部分必须按顺序处理并获得用户反馈
+3. **需要引导** - 当 `elicit: true` 时, 您必须使用 1-9 格式并等待用户响应
+4. **不允许走捷径** - 不遵循此工作流程无法创建完整的文档
 
-**VIOLATION INDICATOR:** If you create a complete document without user interaction, you have violated this workflow.
+**违规指标:** 如果您在没有用户交互的情况下创建了完整的文档, 则表示您违反了此工作流程。
 
-## Critical: Template Discovery
+## 关键: 模板发现
 
-If a YAML Template has not been provided, list all templates from .bmad-core/templates or ask the user to provide another.
+如果未提供 YAML 模板, 请列出 .bmad-core/templates 中的所有模板, 或要求用户提供另一个。
 
-## CRITICAL: Mandatory Elicitation Format
+## 关键: 强制性引导格式
 
-**When `elicit: true`, this is a HARD STOP requiring user interaction:**
+**当 `elicit: true` 时, 这是一个需要用户交互的硬停止点:**
 
-**YOU MUST:**
+**您必须:**
 
-1. Present section content
-2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
-3. **STOP and present numbered options 1-9:**
-   - **Option 1:** Always "Proceed to next section"
-   - **Options 2-9:** Select 8 methods from data/elicitation-methods
-   - End with: "Select 1-9 or just type your question/feedback:"
-4. **WAIT FOR USER RESPONSE** - Do not proceed until user selects option or provides feedback
+1. 呈现部分内容
+2. 提供详细的理由 (解释权衡、假设、做出的决定)
+3. **停止并呈现编号选项 1-9:**
+   - **选项 1:** 始终为“进入下一部分”
+   - **选项 2-9:** 从 data/elicitation-methods 中选择 8 种方法
+   - 结尾: “选择 1-9 或直接输入您的问题/反馈:”
+4. **等待用户响应** - 在用户选择选项或提供反馈之前不要继续
 
-**WORKFLOW VIOLATION:** Creating content for elicit=true sections without user interaction violates this task.
+**工作流程违规:** 在没有用户交互的情况下为 elicit=true 的部分创建内容违反了此任务。
 
-**NEVER ask yes/no questions or use any other format.**
+**绝不问是/否问题或使用任何其他格式。**
 
-## Processing Flow
+## 处理流程
 
-1. **Parse YAML template** - Load template metadata and sections
-2. **Set preferences** - Show current mode (Interactive), confirm output file
-3. **Process each section:**
-   - Skip if condition unmet
-   - Check agent permissions (owner/editors) - note if section is restricted to specific agents
-   - Draft content using section instruction
-   - Present content + detailed rationale
-   - **IF elicit: true** → MANDATORY 1-9 options format
-   - Save to file if possible
-4. **Continue until complete**
+1. **解析 YAML 模板** - 加载模板元数据和部分
+2. **设置偏好** - 显示当前模式 (交互式), 确认输出文件
+3. **处理每个部分:**
+   - 如果条件不满足则跳过
+   - 检查代理权限 (所有者/编辑者) - 注意部分是否仅限于特定代理
+   - 使用部分说明起草内容
+   - 呈现内容 + 详细理由
+   - **如果 elicit: true** → 强制性 1-9 选项格式
+   - 如果可能, 保存到文件
+4. **继续直到完成**
 
-## Detailed Rationale Requirements
+## 详细理由要求
 
-When presenting section content, ALWAYS include rationale that explains:
+在呈现部分内容时, 始终包括解释以下内容的理由：
 
-- Trade-offs and choices made (what was chosen over alternatives and why)
-- Key assumptions made during drafting
-- Interesting or questionable decisions that need user attention
-- Areas that might need validation
+- 做出的权衡和选择 (选择了什么而不是替代方案以及原因)
+- 起草过程中做出的关键假设
+- 需要用户关注的有趣或有问题的决定
+- 可能需要验证的领域
 
-## Elicitation Results Flow
+## 引导结果流程
 
-After user selects elicitation method (2-9):
+用户选择引导方法 (2-9) 后：
 
-1. Execute method from data/elicitation-methods
-2. Present results with insights
-3. Offer options:
-   - **1. Apply changes and update section**
-   - **2. Return to elicitation menu**
-   - **3. Ask any questions or engage further with this elicitation**
+1. 从 data/elicitation-methods 执行方法
+2. 呈现结果和见解
+3. 提供选项:
+   - **1. 应用更改并更新部分**
+   - **2. 返回引导菜单**
+   - **3. 提出任何问题或进一步参与此引导**
 
-## Agent Permissions
+## 代理权限
 
-When processing sections with agent permission fields:
+在处理带有代理权限字段的部分时：
 
-- **owner**: Note which agent role initially creates/populates the section
-- **editors**: List agent roles allowed to modify the section
-- **readonly**: Mark sections that cannot be modified after creation
+- **owner**: 注意哪个代理角色最初创建/填充该部分
+- **editors**: 列出允许修改该部分的代理角色
+- **readonly**: 标记创建后无法修改的部分
 
-**For sections with restricted access:**
+**对于访问受限的部分:**
 
-- Include a note in the generated document indicating the responsible agent
-- Example: "_(This section is owned by dev-agent and can only be modified by dev-agent)_"
+- 在生成的文档中包含一条注释, 指明负责的代理
+- 示例: “_(此部分由 dev-agent 拥有, 只能由 dev-agent 修改)_”
 
-## YOLO Mode
+## YOLO 模式
 
-User can type `#yolo` to toggle to YOLO mode (process all sections at once).
+用户可以输入 `#yolo` 来切换到 YOLO 模式 (一次性处理所有部分)。
 
-## CRITICAL REMINDERS
+## 关键提醒
 
-**❌ NEVER:**
+**❌ 绝不:**
 
-- Ask yes/no questions for elicitation
-- Use any format other than 1-9 numbered options
-- Create new elicitation methods
+- 对引导提出是/否问题
+- 使用除 1-9 编号选项之外的任何格式
+- 创建新的引导方法
 
-**✅ ALWAYS:**
+**✅ 始终:**
 
-- Use exact 1-9 format when elicit: true
-- Select options 2-9 from data/elicitation-methods only
-- Provide detailed rationale explaining decisions
-- End with "Select 1-9 or just type your question/feedback:"
+- 当 elicit: true 时使用确切的 1-9 格式
+- 仅从 data/elicitation-methods 中选择选项 2-9
+- 提供详细的理由来解释决定
+- 以“选择 1-9 或直接输入您的问题/反馈:”结尾

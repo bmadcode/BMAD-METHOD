@@ -1,314 +1,316 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ 核心驱动 -->
 
-# Create Brownfield Story Task
+# 创建棕地项目故事任务
 
-## Purpose
+## 目的
 
-Create detailed, implementation-ready stories for brownfield projects where traditional sharded PRD/architecture documents may not exist. This task bridges the gap between various documentation formats (document-project output, brownfield PRDs, epics, or user documentation) and executable stories for the Dev agent.
+为棕地项目创建详细的、可随时实施的故事，因为这些项目可能没有传统的、分片的 PRD/架构文档。此任务弥合了各种文档格式（项目文档输出、棕地 PRD、史诗或用户文档）与可供开发代理执行的故事之间的差距。
 
-## When to Use This Task
+## 何时使用此任务
 
-**Use this task when:**
+**在以下情况下使用此任务：**
 
-- Working on brownfield projects with non-standard documentation
-- Stories need to be created from document-project output
-- Working from brownfield epics without full PRD/architecture
-- Existing project documentation doesn't follow BMad v4+ structure
-- Need to gather additional context from user during story creation
+-   处理具有非标准文档的棕地项目
+-   需要从项目文档输出创建故事
+-   根据棕地史诗工作，但没有完整的 PRD/架构
+-   现有项目文档不遵循 BMad v4+ 结构
+-   需要在故事创建期间从用户那里收集更多上下文
 
-**Use create-next-story when:**
+**在以下情况下使用 create-next-story：**
 
-- Working with properly sharded PRD and v4 architecture documents
-- Following standard greenfield or well-documented brownfield workflow
-- All technical context is available in structured format
+-   使用正确分片的 PRD 和 v4 架构文档
+-   遵循标准的绿地或文档齐全的棕地工作流程
+-   所有技术上下文都以结构化格式提供
 
-## Task Execution Instructions
+## 任务执行说明
 
-### 0. Documentation Context
+### 0. 文档上下文
 
-Check for available documentation in this order:
+按以下顺序检查可用文档：
 
-1. **Sharded PRD/Architecture** (docs/prd/, docs/architecture/)
-   - If found, recommend using create-next-story task instead
+1.  **分片的 PRD/架构** (docs/prd/, docs/architecture/)
+    -   如果找到，建议改用 create-next-story 任务
 
-2. **Brownfield Architecture Document** (docs/brownfield-architecture.md or similar)
-   - Created by document-project task
-   - Contains actual system state, technical debt, workarounds
+2.  **棕地架构文档** (docs/brownfield-architecture.md 或类似文件)
+    -   由 document-project 任务创建
+    -   包含实际系统状态、技术债务、变通方法
 
-3. **Brownfield PRD** (docs/prd.md)
-   - May contain embedded technical details
+3.  **棕地 PRD** (docs/prd.md)
+    -   可能包含嵌入的技术细节
 
-4. **Epic Files** (docs/epics/ or similar)
-   - Created by brownfield-create-epic task
+4.  **史诗文件** (docs/epics/ 或类似文件)
+    -   由 brownfield-create-epic 任务创建
 
-5. **User-Provided Documentation**
-   - Ask user to specify location and format
+5.  **用户提供的文档**
+    -   要求用户指定位置和格式
 
-### 1. Story Identification and Context Gathering
+### 1. 故事识别和上下文收集
 
-#### 1.1 Identify Story Source
+#### 1.1 识别故事来源
 
-Based on available documentation:
+根据可用文档：
 
-- **From Brownfield PRD**: Extract stories from epic sections
-- **From Epic Files**: Read epic definition and story list
-- **From User Direction**: Ask user which specific enhancement to implement
-- **No Clear Source**: Work with user to define the story scope
+-   **从棕地 PRD**：从史诗部分提取故事
+-   **从史诗文件**：阅读史诗定义和故事列表
+-   **根据用户指示**：询问用户要实施哪个具体的增强功能
+-   **没有明确来源**：与用户合作定义故事范围
 
-#### 1.2 Gather Essential Context
+#### 1.2 收集基本上下文
 
-CRITICAL: For brownfield stories, you MUST gather enough context for safe implementation. Be prepared to ask the user for missing information.
+关键：对于棕地故事，您必须收集足够的上下文以确保安全实施。准备好向用户询问缺失的信息。
 
-**Required Information Checklist:**
+**所需信息清单：**
 
-- [ ] What existing functionality might be affected?
-- [ ] What are the integration points with current code?
-- [ ] What patterns should be followed (with examples)?
-- [ ] What technical constraints exist?
-- [ ] Are there any "gotchas" or workarounds to know about?
+-   [ ] 哪些现有功能可能会受到影响？
+-   [ ] 与当前代码的集成点是什么？
+-   [ ] 应遵循哪些模式（附带示例）？
+-   [ ] 存在哪些技术限制？
+-   [ ] 是否有任何需要注意的“陷阱”或变通方法？
 
-If any required information is missing, list the missing information and ask the user to provide it.
+如果缺少任何所需信息，请列出缺失的信息并要求用户提供。
 
-### 2. Extract Technical Context from Available Sources
+### 2. 从可用来源中提取技术上下文
 
-#### 2.1 From Document-Project Output
+#### 2.1 从项目文档输出
 
-If using brownfield-architecture.md from document-project:
+如果使用来自 document-project 的 brownfield-architecture.md：
 
-- **Technical Debt Section**: Note any workarounds affecting this story
-- **Key Files Section**: Identify files that will need modification
-- **Integration Points**: Find existing integration patterns
-- **Known Issues**: Check if story touches problematic areas
-- **Actual Tech Stack**: Verify versions and constraints
+-   **技术债务部分**：注意影响此故事的任何变通方法
+-   **关键文件部分**：识别需要修改的文件
+-   **集成点**：查找现有的集成模式
+-   **已知问题**：检查故事是否涉及有问题的地方
+-   **实际技术栈**：验证版本和限制
 
-#### 2.2 From Brownfield PRD
+#### 2.2 从棕地 PRD
 
-If using brownfield PRD:
+如果使用棕地 PRD：
 
-- **Technical Constraints Section**: Extract all relevant constraints
-- **Integration Requirements**: Note compatibility requirements
-- **Code Organization**: Follow specified patterns
-- **Risk Assessment**: Understand potential impacts
+-   **技术限制部分**：提取所有相关的限制
+-   **集成要求**：注意兼容性要求
+-   **代码组织**：遵循指定的模式
+-   **风险评估**：了解潜在影响
 
-#### 2.3 From User Documentation
+#### 2.3 从用户文档
 
-Ask the user to help identify:
+要求用户帮助识别：
 
-- Relevant technical specifications
-- Existing code examples to follow
-- Integration requirements
-- Testing approaches used in the project
+-   相关的技术规范
+-   可供遵循的现有代码示例
+-   集成要求
+-   项目中使用的测试方法
 
-### 3. Story Creation with Progressive Detail Gathering
+### 3. 通过逐步收集细节来创建故事
 
-#### 3.1 Create Initial Story Structure
+#### 3.1 创建初始故事结构
 
-Start with the story template, filling in what's known:
+从故事模板开始，填写已知信息：
 
 ```markdown
-# Story {{Enhancement Title}}
+# 故事 {{增强功能标题}}
 
-## Status: Draft
+## 状态：草稿
 
-## Story
+## 故事
 
-As a {{user_type}},
-I want {{enhancement_capability}},
-so that {{value_delivered}}.
+作为一名 {{user_type}}，
+我想要 {{enhancement_capability}}，
+以便 {{value_delivered}}。
 
-## Context Source
+## 上下文来源
 
-- Source Document: {{document name/type}}
-- Enhancement Type: {{single feature/bug fix/integration/etc}}
-- Existing System Impact: {{brief assessment}}
+-   源文档：{{文档名称/类型}}
+-   增强类型：{{单个功能/错误修复/集成/等}}
+-   对现有系统的影响：{{简要评估}}
 ```
 
-#### 3.2 Develop Acceptance Criteria
+#### 3.2 制定验收标准
 
-Critical: For brownfield, ALWAYS include criteria about maintaining existing functionality
+关键：对于棕地项目，始终包括关于维护现有功能的标准
 
-Standard structure:
+标准结构：
 
-1. New functionality works as specified
-2. Existing {{affected feature}} continues to work unchanged
-3. Integration with {{existing system}} maintains current behavior
-4. No regression in {{related area}}
-5. Performance remains within acceptable bounds
+1.  新功能按规定工作
+2.  现有的 {{受影响的功能}} 继续正常工作
+3.  与 {{现有系统}} 的集成保持当前行为
+4.  {{相关领域}} 没有回归
+5.  性能保持在可接受的范围内
 
-#### 3.3 Gather Technical Guidance
+#### 3.3 收集技术指导
 
-Critical: This is where you'll need to be interactive with the user if information is missing
+关键：如果信息缺失，这是您需要与用户互动的地方
 
-Create Dev Technical Guidance section with available information:
+使用可用信息创建开发技术指导部分：
 
 ````markdown
-## Dev Technical Guidance
+## 开发技术指导
 
-### Existing System Context
+### 现有系统上下文
 
-[Extract from available documentation]
+[从可用文档中提取]
 
-### Integration Approach
+### 集成方法
 
-[Based on patterns found or ask user]
+[根据找到的模式或询问用户]
 
-### Technical Constraints
+### 技术限制
 
-[From documentation or user input]
+[来自文档或用户输入]
 
-### Missing Information
+### 缺失信息
 
-Critical: List anything you couldn't find that dev will need and ask for the missing information
+关键：列出您找不到的、开发人员需要的任何信息，并要求提供缺失的信息
 
-### 4. Task Generation with Safety Checks
+### 4. 带安全检查的任务生成
 
-#### 4.1 Generate Implementation Tasks
+#### 4.1 生成实施任务
 
-Based on gathered context, create tasks that:
+根据收集的上下文，创建以下任务：
 
-- Include exploration tasks if system understanding is incomplete
-- Add verification tasks for existing functionality
-- Include rollback considerations
-- Reference specific files/patterns when known
+-   如果对系统的理解不完整，则包括探索任务
+-   为现有功能添加验证任务
+-   包括回滚考虑
+-   在已知时引用特定的文件/模式
 
-Example task structure for brownfield:
+棕地项目的示例任务结构：
 
 ```markdown
-## Tasks / Subtasks
+## 任务 / 子任务
 
-- [ ] Task 1: Analyze existing {{component/feature}} implementation
-  - [ ] Review {{specific files}} for current patterns
-  - [ ] Document integration points
-  - [ ] Identify potential impacts
+- [ ] 任务 1：分析现有的 {{组件/功能}} 实现
+  - [ ] 查看 {{特定文件}} 以了解当前模式
+  - [ ] 记录集成点
+  - [ ] 识别潜在影响
 
-- [ ] Task 2: Implement {{new functionality}}
-  - [ ] Follow pattern from {{example file}}
-  - [ ] Integrate with {{existing component}}
-  - [ ] Maintain compatibility with {{constraint}}
+- [ ] 任务 2：实施 {{新功能}}
+  - [ ] 遵循 {{示例文件}} 中的模式
+  - [ ] 与 {{现有组件}} 集成
+  - [ ] 保持与 {{约束}} 的兼容性
 
-- [ ] Task 3: Verify existing functionality
-  - [ ] Test {{existing feature 1}} still works
-  - [ ] Verify {{integration point}} behavior unchanged
-  - [ ] Check performance impact
+- [ ] 任务 3：验证现有功能
+  - [ ] 测试 {{现有功能 1}} 仍然有效
+  - [ ] 验证 {{集成点}} 行为未改变
+  - [ ] 检查性能影响
 
-- [ ] Task 4: Add tests
-  - [ ] Unit tests following {{project test pattern}}
-  - [ ] Integration test for {{integration point}}
-  - [ ] Update existing tests if needed
+- [ ] 任务 4：添加测试
+  - [ ] 遵循 {{项目测试模式}} 的单元测试
+  - [ ] {{集成点}} 的集成测试
+  - [ ] 如果需要，更新现有测试
 ```
 ````
 
-### 5. Risk Assessment and Mitigation
+### 5. 风险评估和缓解
 
-CRITICAL: for brownfield - always include risk assessment
+关键：对于棕地项目 - 始终包括风险评估
 
-Add section for brownfield-specific risks:
-
-```markdown
-## Risk Assessment
-
-### Implementation Risks
-
-- **Primary Risk**: {{main risk to existing system}}
-- **Mitigation**: {{how to address}}
-- **Verification**: {{how to confirm safety}}
-
-### Rollback Plan
-
-- {{Simple steps to undo changes if needed}}
-
-### Safety Checks
-
-- [ ] Existing {{feature}} tested before changes
-- [ ] Changes can be feature-flagged or isolated
-- [ ] Rollback procedure documented
-```
-
-### 6. Final Story Validation
-
-Before finalizing:
-
-1. **Completeness Check**:
-   - [ ] Story has clear scope and acceptance criteria
-   - [ ] Technical context is sufficient for implementation
-   - [ ] Integration approach is defined
-   - [ ] Risks are identified with mitigation
-
-2. **Safety Check**:
-   - [ ] Existing functionality protection included
-   - [ ] Rollback plan is feasible
-   - [ ] Testing covers both new and existing features
-
-3. **Information Gaps**:
-   - [ ] All critical missing information gathered from user
-   - [ ] Remaining unknowns documented for dev agent
-   - [ ] Exploration tasks added where needed
-
-### 7. Story Output Format
-
-Save the story with appropriate naming:
-
-- If from epic: `docs/stories/epic-{n}-story-{m}.md`
-- If standalone: `docs/stories/brownfield-{feature-name}.md`
-- If sequential: Follow existing story numbering
-
-Include header noting documentation context:
+为棕地特定风险添加部分：
 
 ```markdown
-# Story: {{Title}}
+## 风险评估
 
-<!-- Source: {{documentation type used}} -->
-<!-- Context: Brownfield enhancement to {{existing system}} -->
+### 实施风险
 
-## Status: Draft
+-   **主要风险**：{{对现有系统的主要风险}}
+-   **缓解措施**：{{如何解决}}
+-   **验证**：{{如何确认安全}}
 
-[Rest of story content...]
+### 回滚计划
+
+-   {{如果需要，撤消更改的简单步骤}}
+
+### 安全检查
+
+-   [ ] 在更改前测试现有的 {{功能}}
+-   [ ] 更改可以通过功能标志或隔离
+-   [ ] 回滚过程已记录
+
 ```
 
-### 8. Handoff Communication
+### 6. 最终故事验证
 
-Provide clear handoff to the user:
+在最终确定之前：
+
+1.  **完整性检查**：
+    -   [ ] 故事有明确的范围和验收标准
+    -   [ ] 技术上下文足以实施
+    -   [ ] 集成方法已定义
+    -   [ ] 风险已识别并有缓解措施
+
+2.  **安全检查**：
+    -   [ ] 包括对现有功能的保护
+    -   [ ] 回滚计划是可行的
+    -   [ ] 测试涵盖了新功能和现有功能
+
+3.  **信息差距**：
+    -   [ ] 从用户那里收集了所有关键的缺失信息
+    -   [ ] 为开发代理记录了剩余的未知数
+    -   [ ] 在需要时添加了探索任务
+
+### 7. 故事输出格式
+
+使用适当的命名保存故事：
+
+-   如果来自史诗：`docs/stories/epic-{n}-story-{m}.md`
+-   如果独立：`docs/stories/brownfield-{feature-name}.md`
+-   如果顺序：遵循现有的故事编号
+
+包括说明文档上下文的标题：
+
+```markdown
+# 故事：{{标题}}
+
+<!-- 来源：{{使用的文档类型}} -->
+<!-- 上下文：对 {{现有系统}} 的棕地增强 -->
+
+## 状态：草稿
+
+[故事内容的其余部分...]
+```
+
+### 8. 交接沟通
+
+向用户提供清晰的交接：
 
 ```text
-Brownfield story created: {{story title}}
+已创建棕地故事：{{故事标题}}
 
-Source Documentation: {{what was used}}
-Story Location: {{file path}}
+源文档：{{使用了什么}}
+故事位置：{{文件路径}}
 
-Key Integration Points Identified:
-- {{integration point 1}}
-- {{integration point 2}}
+已识别的关键集成点：
+- {{集成点 1}}
+- {{集成点 2}}
 
-Risks Noted:
-- {{primary risk}}
+注意到的风险：
+- {{主要风险}}
 
-{{If missing info}}:
-Note: Some technical details were unclear. The story includes exploration tasks to gather needed information during implementation.
+{{如果信息缺失}}：
+注意：一些技术细节尚不清楚。故事中包括了探索任务，以在实施过程中收集所需信息。
 
-Next Steps:
-1. Review story for accuracy
-2. Verify integration approach aligns with your system
-3. Approve story or request adjustments
-4. Dev agent can then implement with safety checks
+后续步骤：
+1.  审查故事的准确性
+2.  验证集成方法是否与您的系统一致
+3.  批准故事或请求调整
+4.  然后开发代理可以带安全检查地实施
 ```
 
-## Success Criteria
+## 成功标准
 
-The brownfield story creation is successful when:
+当满足以下条件时，棕地故事创建成功：
 
-1. Story can be implemented without requiring dev to search multiple documents
-2. Integration approach is clear and safe for existing system
-3. All available technical context has been extracted and organized
-4. Missing information has been identified and addressed
-5. Risks are documented with mitigation strategies
-6. Story includes verification of existing functionality
-7. Rollback approach is defined
+1.  故事可以实施，而无需开发人员搜索多个文档
+2.  集成方法清晰且对现有系统安全
+3.  所有可用的技术上下文都已提取和组织
+4.  缺失的信息已识别并得到解决
+5.  风险已记录并有缓解策略
+6.  故事包括对现有功能的验证
+7.  回滚方法已定义
 
-## Important Notes
+## 重要说明
 
-- This task is specifically for brownfield projects with non-standard documentation
-- Always prioritize existing system stability over new features
-- When in doubt, add exploration and verification tasks
-- It's better to ask the user for clarification than make assumptions
-- Each story should be self-contained for the dev agent
-- Include references to existing code patterns when available
+-   此任务专门用于具有非标准文档的棕地项目
+-   始终将现有系统的稳定性置于新功能之上
+-   如有疑问，请添加探索和验证任务
+-   最好向用户澄清，而不是做出假设
+-   每个故事都应该是为开发代理准备的自包含的
+-   在可用时包括对现有代码模式的引用
+```

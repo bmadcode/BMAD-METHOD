@@ -1,4 +1,4 @@
-name: Discord Notification
+name: Discord 通知
 
 "on":
   [
@@ -15,11 +15,11 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Notify Discord
+      - name: 通知 Discord
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          title: "Triggered by ${{ github.event_name }}"
+          title: "由 ${{ github.event_name }} 触发"
           color: 0x5865F2
