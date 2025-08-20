@@ -4,11 +4,14 @@ bundle:
   icon: 🎮
   description: Game Development team specialized in WeChat Mini Games.
 agents:
-  - analyst
-  - bmad-orchestrator
+  - game-analyst
+  - game-orchestrator
   - game-designer
   - game-developer
   - game-sm
+  - game-pm
+  - game-po
+  - game-qa
 workflows:
   - game-dev-greenfield.md
   - game-prototype.md
