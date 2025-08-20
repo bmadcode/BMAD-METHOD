@@ -158,8 +158,7 @@ workflow:
       - Player reaction and engagement validation
       - Design insights for future development
   handoff_prompts:
-    concept_to_design: Game concept defined. Create minimal design specification focusing on core mechanics and player experience.
-    design_to_technical: Design specification ready. Create technical implementation plan for rapid prototyping.
-    technical_to_stories: Technical plan complete. Create focused implementation stories for prototype development.
-    stories_to_implementation: Stories ready. Begin iterative implementation with frequent playtesting and design validation.
-    prototype_to_evaluation: Prototype playable. Evaluate core mechanics, gather feedback, and determine next development steps.
+    analyst_to_designer: "Prototype concept is defined. The Game Designer should now create a minimal design specification."
+    designer_to_developer: "Prototype spec is ready. The Game Developer should now implement the core mechanic for playtesting."
+    implementation_to_qa: "A working prototype is ready for an optional stability check."
+    prototype_complete: "Prototype implemented. Evaluate mechanics, gather feedback, and decide on next steps."

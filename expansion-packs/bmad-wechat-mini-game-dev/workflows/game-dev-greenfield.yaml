@@ -105,14 +105,15 @@ workflow:
       - Quick validation of game concepts
       - Learning projects or technical demos
   handoff_prompts:
-    designer_to_gdd: Game brief is complete. Save it as docs/design/game-brief.md in your project, then create the comprehensive Game Design Document.
-    gdd_to_level: Game Design Document ready. Save it as docs/design/game-design-doc.md, then create the level design framework.
-    level_to_architect: Level design complete. Save it as docs/design/level-design-doc.md, then create the technical architecture.
-    architect_review: Architecture complete. Save it as docs/architecture/game-architecture.md. Please validate all design documents for consistency.
-    validation_issues: Design validation found issues with [document]. Please return to [agent] to fix and re-save the updated document.
-    full_complete: All design artifacts validated and saved. Set up game project structure and move to story development phase.
-    prototype_designer_to_dev: Prototype brief complete. Save it as docs/game-brief.md, then create minimal design or jump directly to implementation stories.
-    prototype_complete: Prototype defined. Begin rapid implementation focusing on core mechanics and immediate playability.
+    analyst_to_pm: "Game brief is complete. The PM should now create the PRD."
+    pm_to_designer: "PRD is complete. The Game Designer should now create the GDD."
+    designer_to_orchestrator: "GDD is complete. The Game Orchestrator should now create the technical architecture."
+    orchestrator_to_po: "All planning documents are complete. The PO should now shard them for development."
+    validation_issues: "Validation found issues with [document]. Please return to [agent] to fix and re-save the updated document."
+    full_complete: "All planning artifacts are complete and sharded. Set up the game project structure and move to the story development phase."
+    prototype_analyst_to_designer: "Prototype concept is defined. The Game Designer should now create a minimal design specification."
+    prototype_designer_to_dev: "Prototype spec is ready. The Game Developer should now implement the core mechanic for playtesting."
+    prototype_complete: "Prototype implemented. Evaluate mechanics, gather feedback, and decide on next steps."
   story_development_guidance:
     epic_breakdown:
       - Core Game Systems" - Fundamental gameplay mechanics and player controls
