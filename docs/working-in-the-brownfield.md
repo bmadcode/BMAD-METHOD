@@ -1,597 +1,597 @@
-# Working in the Brownfield: A Complete Guide
+# 在棕地中工作：完整指南
 
-> **HIGHLY RECOMMENDED: Use Gemini Web or Gemini CLI for Brownfield Documentation Generation!**
+> **强烈推荐：使用Gemini Web或Gemini CLI进行棕地文档生成！**
 >
-> Gemini Web's 1M+ token context window or Gemini CLI (when it's working) can analyze your ENTIRE codebase, or critical sections of it, all at once (obviously within reason):
+> Gemini Web的1M+令牌上下文窗口或Gemini CLI（当它工作时）可以一次性分析您的整个代码库或其关键部分（当然是在合理范围内）：
 >
-> - Upload via GitHub URL or use gemini cli in the project folder
-> - If working in the web: use `npx bmad-method flatten` to flatten your project into a single file, then upload that file to your web agent.
+> -   通过GitHub URL上传或在项目文件夹中使用gemini cli
+> -   如果在Web中工作：使用`npx bmad-method flatten`将您的项目展平为单个文件，然后将该文件上传到您的Web代理。
 
-## What is Brownfield Development?
+## 什么是棕地开发？
 
-Brownfield development refers to adding features, fixing bugs, or modernizing existing software projects. Unlike greenfield (new) projects, brownfield work requires understanding existing code, respecting constraints, and ensuring new changes integrate seamlessly without breaking existing functionality.
+棕地开发是指为现有软件项目添加功能、修复错误或进行现代化改造。与绿地（新）项目不同，棕地工作需要理解现有代码、尊重约束，并确保新更改无缝集成而不会破坏现有功能。
 
-## When to Use BMad for Brownfield
+## 何时为棕地使用BMad
 
-- Add significant new features to existing applications
-- Modernize legacy codebases
-- Integrate new technologies or services
-- Refactor complex systems
-- Fix bugs that require architectural understanding
-- Document undocumented systems
+-   向现有应用程序添加重要的新功能
+-   现代化遗留代码库
+-   集成新技术或服务
+-   重构复杂系统
+-   修复需要架构理解的错误
+-   记录未记录的系统
 
-## When NOT to use a Brownfield Flow
+## 何时不使用棕地流程
 
-If you have just completed an MVP with BMad, and you want to continue with post-MVP, its easier to just talk to the PM and ask it to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
+如果您刚刚用BMad完成了MVP，并且想继续进行MVP后的工作，那么与PM交谈并要求他与您合作创建一个新的史诗以添加到PRD中，分片史诗，与架构师一起更新任何架构文档，然后从那里开始会更容易。
 
-## The Complete Brownfield Workflow
+## 完整的棕地工作流
 
-1. **Follow the [<ins>User Guide - Installation</ins>](user-guide.md#installation) steps to setup your agent in the web.**
-2. **Generate a 'flattened' single file of your entire codebase** run: `npx bmad-method flatten`
+1.  **遵循[<ins>用户指南-安装</ins>](user-guide.md#installation)步骤在Web中设置您的代理。**
+2.  **生成整个代码库的“扁平化”单个文件** 运行：`npx bmad-method flatten`
 
-### Choose Your Approach
+### 选择您的方法
 
-#### Approach A: PRD-First (Recommended if adding very large and complex new features, single or multiple epics or massive changes)
+#### 方法A：PRD优先（推荐用于添加非常大和复杂的新功能、单个或多个史诗或大规模更改）
 
-**Best for**: Large codebases, monorepos, or when you know exactly what you want to build
+**最适合**：大型代码库、monorepos，或者当您确切知道要构建什么时
 
-1. **Create PRD First** to define requirements
-2. **Document only relevant areas** based on PRD needs
-3. **More efficient** - avoids documenting unused code
+1.  **首先创建PRD**来定义需求
+2.  **仅根据PRD需求记录相关区域**
+3.  **更高效** - 避免记录未使用的代码
 
-#### Approach B: Document-First (Good for Smaller Projects)
+#### 方法B：文档优先（适用于较小项目）
 
-**Best for**: Smaller codebases, unknown systems, or exploratory changes
+**最适合**：较小的代码库、未知的系统或探索性更改
 
-1. **Document entire system** first
-2. **Create PRD** with full context
-3. **More thorough** - captures everything
+1.  **首先记录整个系统**
+2.  **用完整的上下文创建PRD**
+3.  **更彻底** - 捕获所有内容
 
-### Approach A: PRD-First Workflow (Recommended)
+### 方法A：PRD优先工作流（推荐）
 
-#### Phase 1: Define Requirements First
+#### 阶段1：首先定义需求
 
-**In Gemini Web (with your flattened-codebase.xml uploaded):**
+**在Gemini Web中（上传了您的flattened-codebase.xml）：**
 
 ```bash
 @pm
 *create-brownfield-prd
 ```
 
-The PM will:
+PM将：
 
-- **Ask about your enhancement** requirements
-- **Explore the codebase** to understand current state
-- **Identify affected areas** that need documentation
-- **Create focused PRD** with clear scope
+-   **询问您的增强**需求
+-   **探索代码库**以了解当前状态
+-   **识别需要文档的受影响区域**
+-   **创建具有明确范围的专注PRD**
 
-**Key Advantage**: The PRD identifies which parts of your monorepo/large codebase actually need documentation!
+**主要优势**：PRD确定了您的monorepo/大型代码库的哪些部分实际上需要文档！
 
-#### Phase 2: Focused Documentation
+#### 阶段2：专注文档
 
-**Still in Gemini Web, now with PRD context:**
+**仍在Gemini Web中，现在有了PRD上下文：**
 
 ```bash
 @architect
 *document-project
 ```
 
-The architect will:
+架构师将：
 
-- **Ask about your focus** if no PRD was provided
-- **Offer options**: Create PRD, provide requirements, or describe the enhancement
-- **Reference the PRD/description** to understand scope
-- **Focus on relevant modules** identified in PRD or your description
-- **Skip unrelated areas** to keep docs lean
-- **Generate ONE architecture document** for all environments
+-   **如果未提供PRD，则询问您的重点**
+-   **提供选项**：创建PRD、提供需求或描述增强功能
+-   **引用PRD/描述**以了解范围
+-   **专注于PRD或您的描述中识别的相关模块**
+-   **跳过不相关的区域**以保持文档精简
+-   **为所有环境生成一个架构文档**
 
-The architect creates:
+架构师创建：
 
-- **One comprehensive architecture document** following fullstack-architecture template
-- **Covers all system aspects** in a single file
-- **Easy to copy and save** as `docs/architecture.md`
-- **Can be sharded later** in IDE if desired
+-   **一个遵循fullstack-architecture模板的综合架构文档**
+-   **在一个文件中涵盖所有系统方面**
+-   **易于复制并另存为**`docs/architecture.md`
+-   **如果需要，以后可以在IDE中分片**
 
-For example, if you say "Add payment processing to user service":
+例如，如果您说“向用户服务添加支付处理”：
 
-- Documents only: user service, API endpoints, database schemas, payment integrations
-- Creates focused source tree showing only payment-related code paths
-- Skips: admin panels, reporting modules, unrelated microservices
+-   仅记录：用户服务、API端点、数据库模式、支付集成
+-   创建仅显示与支付相关的代码路径的专注源树
+-   跳过：管理面板、报告模块、不相关的微服务
 
-### Approach B: Document-First Workflow
+### 方法B：文档优先工作流
 
-#### Phase 1: Document the Existing System
+#### 阶段1：记录现有系统
 
-**Best Approach - Gemini Web with 1M+ Context**:
+**最佳方法 - 具有1M+上下文的Gemini Web**：
 
-1. **Go to Gemini Web** (gemini.google.com)
-2. **Upload your project**:
-   - **Option A**: Paste your GitHub repository URL directly
-   - **Option B**: Upload your flattened-codebase.xml file
-3. **Load the architect agent**: Upload `dist/agents/architect.txt`
-4. **Run documentation**: Type `*document-project`
+1.  **转到Gemini Web** (gemini.google.com)
+2.  **上传您的项目**：
+    -   **选项A**：直接粘贴您的GitHub存储库URL
+    -   **选项B**：上传您的flattened-codebase.xml文件
+3.  **加载架构师代理**：上传`dist/agents/architect.txt`
+4.  **运行文档**：输入`*document-project`
 
-The architect will generate comprehensive documentation of everything.
+架构师将生成所有内容的综合文档。
 
-#### Phase 2: Plan Your Enhancement
+#### 阶段2：规划您的增强功能
 
-##### Option A: Full Brownfield Workflow (Recommended for Major Changes)
+##### 选项A：完整的棕地工作流（推荐用于重大更改）
 
-**1. Create Brownfield PRD**:
+**1. 创建棕地PRD**：
 
 ```bash
 @pm
 *create-brownfield-prd
 ```
 
-The PM agent will:
+PM代理将：
 
-- **Analyze existing documentation** from Phase 1
-- **Request specific enhancement details** from you
-- **Assess complexity** and recommend approach
-- **Create epic/story structure** for the enhancement
-- **Identify risks and integration points**
+-   **分析来自阶段1的现有文档**
+-   **向您请求具体的增强细节**
+-   **评估复杂性**并推荐方法
+-   **为增强功能创建史诗/故事结构**
+-   **识别风险和集成点**
 
-**How PM Agent Gets Project Context**:
+**PM代理如何获取项目上下文**：
 
-- In Gemini Web: Already has full project context from Phase 1 documentation
-- In IDE: Will ask "Please provide the path to your existing project documentation"
+-   在Gemini Web中：已经从阶段1的文档中获得了完整的项目上下文
+-   在IDE中：会问“请提供您现有项目文档的路径”
 
-**Key Prompts You'll Encounter**:
+**您会遇到的关键提示**：
 
-- "What specific enhancement or feature do you want to add?"
-- "Are there any existing systems or APIs this needs to integrate with?"
-- "What are the critical constraints we must respect?"
-- "What is your timeline and team size?"
+-   “您想添加什么具体的增强或功能？”
+-   “这是否需要与任何现有系统或API集成？”
+-   “我们必须遵守哪些关键约束？”
+-   “您的时间表和团队规模是多少？”
 
-**2. Create Brownfield Architecture**:
+**2. 创建棕地架构**：
 
 ```bash
 @architect
 *create-brownfield-architecture
 ```
 
-The architect will:
+架构师将：
 
-- **Review the brownfield PRD**
-- **Design integration strategy**
-- **Plan migration approach** if needed
-- **Identify technical risks**
-- **Define compatibility requirements**
+-   **审查棕地PRD**
+-   **设计集成策略**
+-   **如果需要，规划迁移方法**
+-   **识别技术风险**
+-   **定义兼容性要求**
 
-##### Option B: Quick Enhancement (For Focused Changes)
+##### 选项B：快速增强（用于专注的更改）
 
-**For Single Epic Without Full PRD**:
+**对于没有完整PRD的单个史诗**：
 
 ```bash
 @pm
 *create-brownfield-epic
 ```
 
-Use when:
+在以下情况下使用：
 
-- Enhancement is well-defined and isolated
-- Existing documentation is comprehensive
-- Changes don't impact multiple systems
-- You need quick turnaround
+-   增强功能定义明确且孤立
+-   现有文档全面
+-   更改不影响多个系统
+-   您需要快速周转
 
-**For Single Story**:
+**对于单个故事**：
 
 ```bash
 @pm
 *create-brownfield-story
 ```
 
-Use when:
+在以下情况下使用：
 
-- Bug fix or tiny feature
-- Very isolated change
-- No architectural impact
-- Clear implementation path
+-   错误修复或微小功能
+-   非常孤立的更改
+-   没有架构影响
+-   清晰的实施路径
 
-### Phase 3: Validate Planning Artifacts
+### 阶段3：验证规划工件
 
 ```bash
 @po
 *execute-checklist-po
 ```
 
-The PO ensures:
+PO确保：
 
-- Compatibility with existing system
-- No breaking changes planned
-- Risk mitigation strategies in place
-- Clear integration approach
+-   与现有系统兼容
+-   没有计划中的重大更改
+-   风险缓解策略到位
+-   清晰的集成方法
 
-### Phase 4: Save and Shard Documents
+### 阶段4：保存和分片文档
 
-1. Save your PRD and Architecture as:
-   docs/prd.md
-   docs/architecture.md
-   (Note: You can optionally prefix with 'brownfield-' if managing multiple versions)
-2. Shard your docs:
-   In your IDE
+1.  将您的PRD和架构另存为：
+    docs/prd.md
+    docs/architecture.md
+    （注意：如果管理多个版本，您可以选择性地以“brownfield-”为前缀）
+2.  分片您的文档：
+    在您的IDE中
 
-   ```bash
-   @po
-   shard docs/prd.md
-   ```
+    ```bash
+    @po
+    shard docs/prd.md
+    ```
 
-   ```bash
-   @po
-   shard docs/architecture.md
-   ```
+    ```bash
+    @po
+    shard docs/architecture.md
+    ```
 
-### Phase 5: Transition to Development
+### 阶段5：过渡到开发
 
-**Follow the [<ins>Enhanced IDE Development Workflow</ins>](enhanced-ide-development-workflow.md)**
+**遵循[<ins>增强的IDE开发工作流</ins>](enhanced-ide-development-workflow.md)**
 
-## Brownfield Best Practices
+## 棕地最佳实践
 
-### 1. Always Document First
+### 1. 始终先记录
 
-Even if you think you know the codebase:
+即使您认为自己了解代码库：
 
-- Run `document-project` to capture current state
-- AI agents need this context
-- Discovers undocumented patterns
+-   运行`document-project`以捕获当前状态
+-   AI代理需要这个上下文
+-   发现未记录的模式
 
-### 2. Respect Existing Patterns
+### 2. 尊重现有模式
 
-The brownfield templates specifically look for:
+棕地模板专门寻找：
 
-- Current coding conventions
-- Existing architectural patterns
-- Technology constraints
-- Team preferences
+-   当前的编码约定
+-   现有的架构模式
+-   技术约束
+-   团队偏好
 
-### 3. Plan for Gradual Rollout
+### 3. 规划逐步推出
 
-Brownfield changes should:
+棕地更改应：
 
-- Support feature flags
-- Plan rollback strategies
-- Include migration scripts
-- Maintain backwards compatibility
+-   支持功能标志
+-   规划回滚策略
+-   包括迁移脚本
+-   保持向后兼容性
 
-### 4. Test Integration Thoroughly
+### 4. 彻底测试集成
 
-#### Why the Test Architect is Critical for Brownfield
+#### 为什么测试架构师对棕地至关重要
 
-In brownfield projects, the Test Architect (Quinn) becomes your safety net against breaking existing functionality. Unlike greenfield where you're building fresh, brownfield requires careful validation that new changes don't destabilize what already works.
+在棕地项目中，测试架构师（Quinn）成为您防止破坏现有功能的安全网。与您从头开始构建的绿地不同，棕地需要仔细验证新更改不会破坏已经正常工作的内容。
 
-#### Brownfield-Specific Testing Challenges
+#### 棕地特定的测试挑战
 
-The Test Architect addresses unique brownfield complexities:
+测试架构师解决了独特的棕地复杂性：
 
-| **Challenge**               | **How Test Architect Helps**                      | **Command**         |
-| --------------------------- | ------------------------------------------------- | ------------------- |
-| **Regression Risks**        | Identifies which existing features might break    | `*risk`             |
-| **Legacy Dependencies**     | Maps integration points and hidden dependencies   | `*trace`            |
-| **Performance Degradation** | Validates no slowdown in existing flows           | `*nfr`              |
-| **Coverage Gaps**           | Finds untested legacy code that new changes touch | `*design`           |
-| **Breaking Changes**        | Detects API/contract violations                   | `*review`           |
-| **Migration Safety**        | Validates data transformations and rollback plans | `*risk` + `*review` |
+| **挑战** | **测试架构师如何帮助** | **命令** |
+| --- | --- | --- |
+| **回归风险** | 识别哪些现有功能可能会中断 | `*risk` |
+| **遗留依赖** | 映射集成点和隐藏的依赖关系 | `*trace` |
+| **性能下降** | 验证现有流程没有减速 | `*nfr` |
+| **覆盖差距** | 查找新更改触及的未经测试的遗留代码 | `*design` |
+| **重大更改** | 检测API/合同违规 | `*review` |
+| **迁移安全** | 验证数据转换和回滚计划 | `*risk` + `*review` |
 
-#### Complete Test Architect Workflow for Brownfield
+#### 棕地的完整测试架构师工作流
 
-##### Stage 1: Before Development (Risk & Strategy)
+##### 阶段1：开发前（风险与策略）
 
-**CRITICAL FOR BROWNFIELD - Run These First:**
+**对棕地至关重要 - 首先运行这些：**
 
 ```bash
-# 1. RISK ASSESSMENT (Run IMMEDIATELY after story creation)
+# 1. 风险评估（故事创建后立即运行）
 @qa *risk {brownfield-story}
-# Identifies: Legacy dependencies, breaking changes, integration points
-# Output: docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
-# Brownfield Focus:
-#   - Regression probability scoring
-#   - Affected downstream systems
-#   - Data migration risks
-#   - Rollback complexity
+# 识别：遗留依赖、重大更改、集成点
+# 输出：docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
+# 棕地重点：
+#   - 回归概率评分
+#   - 受影响的下游系统
+#   - 数据迁移风险
+#   - 回滚复杂性
 
-# 2. TEST DESIGN (After risk assessment)
+# 2. 测试设计（风险评估后）
 @qa *design {brownfield-story}
-# Creates: Regression test strategy + new feature tests
-# Output: docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md
-# Brownfield Focus:
-#   - Existing functionality that needs regression tests
-#   - Integration test requirements
-#   - Performance benchmarks to maintain
-#   - Feature flag test scenarios
+# 创建：回归测试策略+新功能测试
+# 输出：docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md
+# 棕地重点：
+#   - 需要回归测试的现有功能
+#   - 集成测试要求
+#   - 要维持的性能基准
+#   - 功能标志测试场景
 ```
 
-##### Stage 2: During Development (Continuous Validation)
+##### 阶段2：开发期间（持续验证）
 
-**Monitor Integration Health While Coding:**
+**在编码时监控集成健康状况：**
 
 ```bash
-# 3. REQUIREMENTS TRACING (Mid-development checkpoint)
+# 3. 需求跟踪（开发中期检查点）
 @qa *trace {brownfield-story}
-# Maps: New requirements + existing functionality preservation
-# Output: docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md
-# Brownfield Focus:
-#   - Existing features that must still work
-#   - New/old feature interactions
-#   - API contract preservation
-#   - Missing regression test coverage
+# 映射：新需求+现有功能保留
+# 输出：docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md
+# 棕地重点：
+#   - 必须仍然工作的现有功能
+#   - 新/旧功能交互
+#   - API合同保留
+#   - 缺失的回归测试覆盖
 
-# 4. NFR VALIDATION (Before considering "done")
+# 4. NFR验证（考虑“完成”之前）
 @qa *nfr {brownfield-story}
-# Validates: Performance, security, reliability unchanged
-# Output: docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
-# Brownfield Focus:
-#   - Performance regression detection
-#   - Security implications of integrations
-#   - Backward compatibility validation
-#   - Load/stress on legacy components
+# 验证：性能、安全性、可靠性不变
+# 输出：docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
+# 棕地重点：
+#   - 性能回归检测
+#   - 集成的安全影响
+#   - 向后兼容性验证
+#   - 对遗留组件的负载/压力
 ```
 
-##### Stage 3: Code Review (Deep Integration Analysis)
+##### 阶段3：代码审查（深度集成分析）
 
-**Comprehensive Brownfield Review:**
+**全面的棕地审查：**
 
 ```bash
-# 5. FULL REVIEW (When development complete)
+# 5. 全面审查（开发完成时）
 @qa *review {brownfield-story}
-# Performs: Deep analysis + active refactoring
-# Outputs:
-#   - QA Results in story file
-#   - Gate file: docs/qa/gates/{epic}.{story}-{slug}.yml
+# 执行：深度分析+主动重构
+# 输出：
+#   - 故事文件中的QA结果
+#   - 门禁文件：docs/qa/gates/{epic}.{story}-{slug}.yml
 ```
 
-The review specifically analyzes:
+审查特别分析：
 
-- **API Breaking Changes**: Validates all existing contracts maintained
-- **Data Migration Safety**: Checks transformation logic and rollback procedures
-- **Performance Regression**: Compares against baseline metrics
-- **Integration Points**: Validates all touchpoints with legacy code
-- **Feature Flag Logic**: Ensures proper toggle behavior
-- **Dependency Impacts**: Maps affected downstream systems
+-   **API重大更改**：验证所有现有合同是否得到维护
+-   **数据迁移安全**：检查转换逻辑和回滚程序
+-   **性能回归**：与基准指标进行比较
+-   **集成点**：验证与遗留代码的所有接触点
+-   **功能标志逻辑**：确保正确的切换行为
+-   **依赖影响**：映射受影响的下游系统
 
-##### Stage 4: Post-Review (Gate Updates)
+##### 阶段4：审查后（门禁更新）
 
 ```bash
-# 6. GATE STATUS UPDATE (After addressing issues)
+# 6. 门禁状态更新（解决问题后）
 @qa *gate {brownfield-story}
-# Updates: Quality gate decision after fixes
-# Output: docs/qa/gates/{epic}.{story}-{slug}.yml
-# Brownfield Considerations:
-#   - May WAIVE certain legacy code issues
-#   - Documents technical debt acceptance
-#   - Tracks migration progress
+# 更新：修复后的质量门禁决策
+# 输出：docs/qa/gates/{epic}.{story}-{slug}.yml
+# 棕地考虑：
+#   - 可能会豁免某些遗留代码问题
+#   - 记录技术债务接受情况
+#   - 跟踪迁移进度
 ```
 
-#### Brownfield-Specific Risk Scoring
+#### 棕地特定的风险评分
 
-The Test Architect uses enhanced risk scoring for brownfield:
+测试架构师对棕地使用增强的风险评分：
 
-| **Risk Category**      | **Brownfield Factors**                     | **Impact on Gate**  |
-| ---------------------- | ------------------------------------------ | ------------------- |
-| **Regression Risk**    | Number of integration points × Age of code | Score ≥9 = FAIL     |
-| **Data Risk**          | Migration complexity × Data volume         | Score ≥6 = CONCERNS |
-| **Performance Risk**   | Current load × Added complexity            | Score ≥6 = CONCERNS |
-| **Compatibility Risk** | API consumers × Contract changes           | Score ≥9 = FAIL     |
+| **风险类别** | **棕地因素** | **对门禁的影响** |
+| --- | --- | --- |
+| **回归风险** | 集成点数量×代码年龄 | 评分≥9 = FAIL |
+| **数据风险** | 迁移复杂性×数据量 | 评分≥6 = CONCERNS |
+| **性能风险** | 当前负载×增加的复杂性 | 评分≥6 = CONCERNS |
+| **兼容性风险** | API消费者×合同更改 | 评分≥9 = FAIL |
 
-#### Brownfield Testing Standards
+#### 棕地测试标准
 
-Quinn enforces additional standards for brownfield:
+Quinn对棕地强制执行额外的标准：
 
-- **Regression Test Coverage**: Every touched legacy module needs tests
-- **Performance Baselines**: Must maintain or improve current metrics
-- **Rollback Procedures**: Every change needs a rollback plan
-- **Feature Flags**: All risky changes behind toggles
-- **Integration Tests**: Cover all legacy touchpoints
-- **Contract Tests**: Validate API compatibility
-- **Data Validation**: Migration correctness checks
+-   **回归测试覆盖率**：每个接触到的遗留模块都需要测试
+-   **性能基准**：必须维持或改进当前的指标
+-   **回滚程序**：每个更改都需要一个回滚计划
+-   **功能标志**：所有有风险的更改都在切换开关后面
+-   **集成测试**：覆盖所有遗留接触点
+-   **合同测试**：验证API兼容性
+-   **数据验证**：迁移正确性检查
 
-#### Quick Reference: Brownfield Test Commands
+#### 快速参考：棕地测试命令
 
-| **Scenario**                      | **Commands to Run**                                  | **Order**  | **Why Critical**              |
-| --------------------------------- | ---------------------------------------------------- | ---------- | ----------------------------- |
-| **Adding Feature to Legacy Code** | `*risk` → `*design` → `*trace` → `*review`           | Sequential | Map all dependencies first    |
-| **API Modification**              | `*risk` → `*design` → `*nfr` → `*review`             | Sequential | Prevent breaking consumers    |
-| **Performance-Critical Change**   | `*nfr` early and often → `*review`                   | Continuous | Catch degradation immediately |
-| **Data Migration**                | `*risk` → `*design` → `*trace` → `*review` → `*gate` | Full cycle | Ensure data integrity         |
-| **Bug Fix in Complex System**     | `*risk` → `*trace` → `*review`                       | Focused    | Prevent side effects          |
+| **场景** | **要运行的命令** | **顺序** | **为何关键** |
+| --- | --- | --- | --- |
+| **向遗留代码添加功能** | `*risk` → `*design` → `*trace` → `*review` | 顺序 | 首先映射所有依赖 |
+| **API修改** | `*risk` → `*design` → `*nfr` → `*review` | 顺序 | 防止破坏消费者 |
+| **性能关键的更改** | `*nfr`早期并经常→ `*review` | 持续 | 立即发现性能下降 |
+| **数据迁移** | `*risk` → `*design` → `*trace` → `*review` → `*gate` | 完整周期 | 确保数据完整性 |
+| **复杂系统中的错误修复** | `*risk` → `*trace` → `*review` | 专注 | 防止副作用 |
 
-#### Integration with Brownfield Scenarios
+#### 与棕地场景的集成
 
-**Scenario-Specific Guidance:**
+**特定场景指南：**
 
-1. **Legacy Code Modernization**
-   - Start with `*risk` to map all dependencies
-   - Use `*design` to plan strangler fig approach
-   - Run `*trace` frequently to ensure nothing breaks
-   - `*review` with focus on gradual migration
+1.  **遗留代码现代化**
+    -   从`*risk`开始以映射所有依赖关系
+    -   使用`*design`规划绞杀者无花果方法
+    -   经常运行`*trace`以确保没有任何东西损坏
+    -   `*review`时专注于逐步迁移
 
-2. **Adding Features to Monolith**
-   - `*risk` identifies integration complexity
-   - `*design` plans isolation strategies
-   - `*nfr` monitors performance impact
-   - `*review` validates no monolith degradation
+2.  **向单体添加功能**
+    -   `*risk`识别集成复杂性
+    -   `*design`规划隔离策略
+    -   `*nfr`监控性能影响
+    -   `*review`验证没有单体性能下降
 
-3. **Microservice Extraction**
-   - `*risk` maps service boundaries
-   - `*trace` ensures functionality preservation
-   - `*nfr` validates network overhead acceptable
-   - `*gate` documents accepted trade-offs
+3.  **微服务提取**
+    -   `*risk`映射服务边界
+    -   `*trace`确保功能保留
+    -   `*nfr`验证网络开销可接受
+    -   `*gate`记录接受的权衡
 
-4. **Database Schema Changes**
-   - `*risk` assesses migration complexity
-   - `*design` plans backward-compatible approach
-   - `*trace` maps all affected queries
-   - `*review` validates migration safety
+4.  **数据库模式更改**
+    -   `*risk`评估迁移复杂性
+    -   `*design`规划向后兼容的方法
+    -   `*trace`映射所有受影响的查询
+    -   `*review`验证迁移安全性
 
-### 5. Communicate Changes
+### 5. 沟通更改
 
-Document:
+记录：
 
-- What changed and why
-- Migration instructions
-- New patterns introduced
-- Deprecation notices
+-   更改了什么以及为什么
+-   迁移说明
+-   引入的新模式
+-   弃用通知
 
-## Common Brownfield Scenarios
+## 常见棕地场景
 
-### Scenario 1: Adding a New Feature
+### 场景1：添加新功能
 
-1. Document existing system
-2. Create brownfield PRD focusing on integration
-3. **Test Architect Early Involvement**:
-   - Run `@qa *risk` on draft stories to identify integration risks
-   - Use `@qa *design` to plan regression test strategy
-4. Architecture emphasizes compatibility
-5. Stories include integration tasks with test requirements
-6. **During Development**:
-   - Developer runs `@qa *trace` to verify coverage
-   - Use `@qa *nfr` to monitor performance impact
-7. **Review Stage**: `@qa *review` validates integration safety
+1.  记录现有系统
+2.  创建专注于集成的棕地PRD
+3.  **测试架构师早期参与**：
+    -   在草稿故事上运行`@qa *risk`以识别集成风险
+    -   使用`@qa *design`规划回归测试策略
+4.  架构强调兼容性
+5.  故事包括带有测试要求的集成任务
+6.  **开发期间**：
+    -   开发人员运行`@qa *trace`以验证覆盖率
+    -   使用`@qa *nfr`监控性能影响
+7.  **审查阶段**：`@qa *review`验证集成安全性
 
-### Scenario 2: Modernizing Legacy Code
+### 场景2：现代化遗留代码
 
-1. Extensive documentation phase
-2. PRD includes migration strategy
-3. **Test Architect Strategy Planning**:
-   - `@qa *risk` assesses modernization complexity
-   - `@qa *design` plans parallel testing approach
-4. Architecture plans gradual transition (strangler fig pattern)
-5. Stories follow incremental modernization with:
-   - Regression tests for untouched legacy code
-   - Integration tests for new/old boundaries
-   - Performance benchmarks at each stage
-6. **Continuous Validation**: Run `@qa *trace` after each increment
-7. **Gate Management**: Use `@qa *gate` to track technical debt acceptance
+1.  广泛的文档阶段
+2.  PRD包括迁移策略
+3.  **测试架构师策略规划**：
+    -   `@qa *risk`评估现代化复杂性
+    -   `@qa *design`规划并行测试方法
+4.  架构规划逐步过渡（绞杀者无花果模式）
+5.  故事遵循增量现代化，并带有：
+    -   未触及的遗留代码的回归测试
+    -   新/旧边界的集成测试
+    -   每个阶段的性能基准
+6.  **持续验证**：每个增量后运行`@qa *trace`
+7.  **门禁管理**：使用`@qa *gate`跟踪技术债务接受情况
 
-### Scenario 3: Bug Fix in Complex System
+### 场景3：复杂系统中的错误修复
 
-1. Document relevant subsystems
-2. Use `create-brownfield-story` for focused fix
-3. **Test Architect Risk Assessment**: Run `@qa *risk` to identify side effect potential
-4. Include regression test requirements from `@qa *design` output
-5. **During Fix**: Use `@qa *trace` to map affected functionality
-6. **Before Commit**: Run `@qa *review` for comprehensive validation
-7. Test Architect validates no side effects using:
-   - Risk profiling for side effect analysis (probability × impact scoring)
-   - Trace matrix to ensure fix doesn't break related features
-   - NFR assessment to verify performance/security unchanged
-   - Gate decision documents fix safety
+1.  记录相关子系统
+2.  使用`create-brownfield-story`进行专注修复
+3.  **测试架构师风险评估**：运行`@qa *risk`以识别副作用的可能性
+4.  包括来自`@qa *design`输出的回归测试要求
+5.  **修复期间**：使用`@qa *trace`映射受影响的功能
+6.  **提交前**：运行`@qa *review`进行全面验证
+7.  测试架构师使用以下方法验证无副作用：
+    -   用于副作用分析的风险分析（概率×影响评分）
+    -   跟踪矩阵以确保修复不会破坏相关功能
+    -   NFR评估以验证性能/安全性不变
+    -   门禁决策记录修复安全性
 
-### Scenario 4: API Integration
+### 场景4：API集成
 
-1. Document existing API patterns
-2. PRD defines integration requirements
-3. **Test Architect Contract Analysis**:
-   - `@qa *risk` identifies breaking change potential
-   - `@qa *design` creates contract test strategy
-4. Architecture ensures consistent patterns
-5. **API Testing Focus**:
-   - Contract tests for backward compatibility
-   - Integration tests for new endpoints
-   - Performance tests for added load
-6. Stories include API documentation updates
-7. **Validation Checkpoints**:
-   - `@qa *trace` maps all API consumers
-   - `@qa *nfr` validates response times
-   - `@qa *review` ensures no breaking changes
-8. **Gate Decision**: Document any accepted breaking changes with migration path
+1.  记录现有的API模式
+2.  PRD定义集成要求
+3.  **测试架构师合同分析**：
+    -   `@qa *risk`识别重大更改的可能性
+    -   `@qa *design`创建合同测试策略
+4.  架构确保一致的模式
+5.  **API测试重点**：
+    -   用于向后兼容性的合同测试
+    -   新端点的集成测试
+    -   增加负载的性能测试
+6.  故事包括API文档更新
+7.  **验证检查点**：
+    -   `@qa *trace`映射所有API消费者
+    -   `@qa *nfr`验证响应时间
+    -   `@qa *review`确保没有重大更改
+8.  **门禁决策**：记录任何接受的重大更改以及迁移路径
 
-## Troubleshooting
+## 故障排除
 
-### "The AI doesn't understand my codebase"
+### “AI不理解我的代码库”
 
-**Solution**: Re-run `document-project` with more specific paths to critical files
+**解决方案**：用更具体的关键文件路径重新运行`document-project`
 
-### "Generated plans don't fit our patterns"
+### “生成的计划不符合我们的模式”
 
-**Solution**: Update generated documentation with your specific conventions before planning phase
+**解决方案**：在规划阶段之前，用您的特定约定更新生成的文档
 
-### "Too much boilerplate for small changes"
+### “小更改的样板太多”
 
-**Solution**: Use `create-brownfield-story` instead of full workflow
+**解决方案**：使用`create-brownfield-story`代替完整的工作流
 
-### "Integration points unclear"
+### “集成点不清楚”
 
-**Solution**: Provide more context during PRD creation, specifically highlighting integration systems
+**解决方案**：在PRD创建期间提供更多上下文，特别强调集成系统
 
-## Quick Reference
+## 快速参考
 
-### Brownfield-Specific Commands
+### 棕地特定命令
 
 ```bash
-# Document existing project
+# 记录现有项目
 @architect *document-project
 
-# Create enhancement PRD
+# 创建增强PRD
 @pm *create-brownfield-prd
 
-# Create architecture with integration focus
+# 创建具有集成重点的架构
 @architect *create-brownfield-architecture
 
-# Quick epic creation
+# 快速创建史诗
 @pm *create-brownfield-epic
 
-# Single story creation
+# 创建单个故事
 @pm *create-brownfield-story
 ```
 
-### Test Architect Commands for Brownfield
+### 用于棕地的测试架构师命令
 
-Note: Short forms shown below. Full commands: `*risk-profile`, `*test-design`, `*nfr-assess`, `*trace-requirements`
+注意：下面显示的是简写形式。完整命令：`*risk-profile`、`*test-design`、`*nfr-assess`、`*trace-requirements`
 
 ```bash
-# BEFORE DEVELOPMENT (Planning)
-@qa *risk {story}     # Assess regression & integration risks
-@qa *design {story}   # Plan regression + new feature tests
+# 开发前（规划）
+@qa *risk {story}     # 评估回归和集成风险
+@qa *design {story}   # 规划回归+新功能测试
 
-# DURING DEVELOPMENT (Validation)
-@qa *trace {story}    # Verify coverage of old + new
-@qa *nfr {story}      # Check performance degradation
+# 开发期间（验证）
+@qa *trace {story}    # 验证新旧覆盖率
+@qa *nfr {story}      # 检查性能下降
 
-# AFTER DEVELOPMENT (Review)
-@qa *review {story}   # Deep integration analysis
-@qa *gate {story}     # Update quality decision
+# 开发后（审查）
+@qa *review {story}   # 深度集成分析
+@qa *gate {story}     # 更新质量决策
 ```
 
-### Decision Tree
+### 决策树
 
 ```text
-Do you have a large codebase or monorepo?
-├─ Yes → PRD-First Approach
-│   └─ Create PRD → Document only affected areas
-└─ No → Is the codebase well-known to you?
-    ├─ Yes → PRD-First Approach
-    └─ No → Document-First Approach
+您有大型代码库或monorepo吗？
+├─ 是 → PRD优先方法
+│   └─ 创建PRD → 仅记录受影响的区域
+└─ 否 → 您是否熟悉代码库？
+    ├─ 是 → PRD优先方法
+    └─ 否 → 文档优先方法
 
-Is this a major enhancement affecting multiple systems?
-├─ Yes → Full Brownfield Workflow
-│   └─ ALWAYS run Test Architect *risk + *design first
-└─ No → Is this more than a simple bug fix?
-    ├─ Yes → *create-brownfield-epic
-    │   └─ Run Test Architect *risk for integration points
-    └─ No → *create-brownfield-story
-        └─ Still run *risk if touching critical paths
+这是一个影响多个系统的重大增强吗？
+├─ 是 → 完整的棕地工作流
+│   └─ 始终首先运行测试架构师*risk + *design
+└─ 否 → 这是否比简单的错误修复更复杂？
+    ├─ 是 → *create-brownfield-epic
+    │   └─ 为集成点运行测试架构师*risk
+    └─ 否 → *create-brownfield-story
+        └─ 如果触及关键路径，仍运行*risk
 
-Does the change touch legacy code?
-├─ Yes → Test Architect is MANDATORY
-│   ├─ *risk → Identify regression potential
-│   ├─ *design → Plan test coverage
-│   └─ *review → Validate no breakage
-└─ No → Test Architect is RECOMMENDED
-    └─ *review → Ensure quality standards
+更改是否触及遗留代码？
+├─ 是 → 测试架构师是强制性的
+│   ├─ *risk → 识别回归可能性
+│   ├─ *design → 规划测试覆盖率
+│   └─ *review → 验证无中断
+└─ 否 → 推荐测试架构师
+    └─ *review → 确保质量标准
 ```
 
-## Conclusion
+## 结论
 
-Brownfield development with BMad Method provides structure and safety when modifying existing systems. The Test Architect becomes your critical safety net, using risk assessment, regression testing, and continuous validation to ensure new changes don't destabilize existing functionality.
+在修改现有系统时，使用BMad方法的棕地开发提供了结构和安全性。测试架构师成为您防止破坏现有功能的关键安全网，使用风险评估、回归测试和持续验证来确保新更改不会破坏现有功能。
 
-**The Brownfield Success Formula:**
+**棕地成功公式：**
 
-1. **Document First** - Understand what exists
-2. **Assess Risk Early** - Use Test Architect `*risk` before coding
-3. **Plan Test Strategy** - Design regression + new feature tests
-4. **Validate Continuously** - Check integration health during development
-5. **Review Comprehensively** - Deep analysis before committing
-6. **Gate Decisively** - Document quality decisions
+1.  **首先记录** - 了解存在什么
+2.  **尽早评估风险** - 在编码前使用测试架构师`*risk`
+3.  **规划测试策略** - 设计回归+新功能测试
+4.  **持续验证** - 在开发期间检查集成健康状况
+5.  **全面审查** - 在提交前进行深度分析
+6.  **果断地进行门禁** - 记录质量决策
 
-Remember: **In brownfield, the Test Architect isn't optional - it's your insurance policy against breaking production.**
+请记住：**在棕地中，测试架构师不是可选的——它是您防止生产中断的保险单。**

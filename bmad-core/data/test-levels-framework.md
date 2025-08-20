@@ -1,148 +1,148 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Test Levels Framework
+# 测试级别框架
 
-Comprehensive guide for determining appropriate test levels (unit, integration, E2E) for different scenarios.
+用于确定不同场景下适当测试级别（单元、集成、端到端）的综合指南。
 
-## Test Level Decision Matrix
+## 测试级别决策矩阵
 
-### Unit Tests
+### 单元测试
 
-**When to use:**
+**何时使用：**
 
-- Testing pure functions and business logic
-- Algorithm correctness
-- Input validation and data transformation
-- Error handling in isolated components
-- Complex calculations or state machines
+-   测试纯函数和业务逻辑
+-   算法正确性
+-   输入验证和数据转换
+-   隔离组件中的错误处理
+-   复杂计算或状态机
 
-**Characteristics:**
+**特点：**
 
-- Fast execution (immediate feedback)
-- No external dependencies (DB, API, file system)
-- Highly maintainable and stable
-- Easy to debug failures
+-   执行速度快（即时反馈）
+-   无外部依赖（数据库、API、文件系统）
+-   高度可维护和稳定
+-   易于调试失败
 
-**Example scenarios:**
+**示例场景：**
 
 ```yaml
 unit_test:
   component: 'PriceCalculator'
-  scenario: 'Calculate discount with multiple rules'
-  justification: 'Complex business logic with multiple branches'
-  mock_requirements: 'None - pure function'
+  scenario: '使用多条规则计算折扣'
+  justification: '具有多个分支的复杂业务逻辑'
+  mock_requirements: '无 - 纯函数'
 ```
 
-### Integration Tests
+### 集成测试
 
-**When to use:**
+**何时使用：**
 
-- Component interaction verification
-- Database operations and transactions
-- API endpoint contracts
-- Service-to-service communication
-- Middleware and interceptor behavior
+-   组件交互验证
+-   数据库操作和事务
+-   API 端点合约
+-   服务间通信
+-   中间件和拦截器行为
 
-**Characteristics:**
+**特点：**
 
-- Moderate execution time
-- Tests component boundaries
-- May use test databases or containers
-- Validates system integration points
+-   执行时间适中
+-   测试组件边界
+-   可能使用测试数据库或容器
+-   验证系统集成点
 
-**Example scenarios:**
+**示例场景：**
 
 ```yaml
 integration_test:
   components: ['UserService', 'AuthRepository']
-  scenario: 'Create user with role assignment'
-  justification: 'Critical data flow between service and persistence'
-  test_environment: 'In-memory database'
+  scenario: '创建具有角色分配的用户'
+  justification: '服务与持久化之间的关键数据流'
+  test_environment: '内存数据库'
 ```
 
-### End-to-End Tests
+### 端到端测试
 
-**When to use:**
+**何时使用：**
 
-- Critical user journeys
-- Cross-system workflows
-- Visual regression testing
-- Compliance and regulatory requirements
-- Final validation before release
+-   关键用户旅程
+-   跨系统工作流
+-   可视化回归测试
+-   合规性和法规要求
+-   发布前最终验证
 
-**Characteristics:**
+**特点：**
 
-- Slower execution
-- Tests complete workflows
-- Requires full environment setup
-- Most realistic but most brittle
+-   执行速度较慢
+-   测试完整工作流
+-   需要完整的环境设置
+-   最真实但最脆弱
 
-**Example scenarios:**
+**示例场景：**
 
 ```yaml
 e2e_test:
-  journey: 'Complete checkout process'
-  scenario: 'User purchases with saved payment method'
-  justification: 'Revenue-critical path requiring full validation'
-  environment: 'Staging with test payment gateway'
+  journey: '完成结账流程'
+  scenario: '用户使用已保存的支付方式购买'
+  justification: '需要全面验证的收入关键路径'
+  environment: '带有测试支付网关的预发环境'
 ```
 
-## Test Level Selection Rules
+## 测试级别选择规则
 
-### Favor Unit Tests When:
+### 何时倾向于单元测试：
 
-- Logic can be isolated
-- No side effects involved
-- Fast feedback needed
-- High cyclomatic complexity
+-   逻辑可以被隔离
+-   不涉及副作用
+-   需要快速反馈
+-   圈复杂度高
 
-### Favor Integration Tests When:
+### 何时倾向于集成测试：
 
-- Testing persistence layer
-- Validating service contracts
-- Testing middleware/interceptors
-- Component boundaries critical
+-   测试持久层
+-   验证服务合约
+-   测试中间件/拦截器
+-   组件边界至关重要
 
-### Favor E2E Tests When:
+### 何时倾向于端到端测试：
 
-- User-facing critical paths
-- Multi-system interactions
-- Regulatory compliance scenarios
-- Visual regression important
+-   面向用户的关键路径
+-   多系统交互
+-   法规遵从性场景
+-   可视化回归很重要
 
-## Anti-patterns to Avoid
+## 要避免的反模式
 
-- E2E testing for business logic validation
-- Unit testing framework behavior
-- Integration testing third-party libraries
-- Duplicate coverage across levels
+-   使用端到端测试进行业务逻辑验证
+-   单元测试框架行为
+-   集成测试第三方库
+-   跨级别的重复覆盖
 
-## Duplicate Coverage Guard
+## 重复覆盖防护
 
-**Before adding any test, check:**
+**在添加任何测试之前，请检查：**
 
-1. Is this already tested at a lower level?
-2. Can a unit test cover this instead of integration?
-3. Can an integration test cover this instead of E2E?
+1.  这是否已经在较低级别进行了测试？
+2.  单元测试能否代替集成测试覆盖此项？
+3.  集成测试能否代替端到端测试覆盖此项？
 
-**Coverage overlap is only acceptable when:**
+**仅在以下情况下，覆盖范围重叠是可接受的：**
 
-- Testing different aspects (unit: logic, integration: interaction, e2e: user experience)
-- Critical paths requiring defense in depth
-- Regression prevention for previously broken functionality
+-   测试不同方面（单元：逻辑，集成：交互，端到端：用户体验）
+-   需要深度防御的关键路径
+-   防止先前已损坏功能的回归
 
-## Test Naming Conventions
+## 测试命名约定
 
-- Unit: `test_{component}_{scenario}`
-- Integration: `test_{flow}_{interaction}`
-- E2E: `test_{journey}_{outcome}`
+-   单元：`test_{component}_{scenario}`
+-   集成：`test_{flow}_{interaction}`
+-   端到端：`test_{journey}_{outcome}`
 
-## Test ID Format
+## 测试ID格式
 
 `{EPIC}.{STORY}-{LEVEL}-{SEQ}`
 
-Examples:
+**示例：**
 
-- `1.3-UNIT-001`
-- `1.3-INT-002`
-- `1.3-E2E-001`
+-   `1.3-UNIT-001`
+-   `1.3-INT-002`
+-   `1.3-E2E-001`

@@ -1,12 +1,12 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: brownfield-prd-template-v2
-  name: Brownfield Enhancement PRD
+  name: 棕地增强PRD
   version: 2.0
   output:
     format: markdown
     filename: docs/prd.md
-    title: "{{project_name}} Brownfield Enhancement PRD"
+    title: "{{project_name}} 棕地增强PRD"
 
 workflow:
   mode: interactive
@@ -14,133 +14,133 @@ workflow:
 
 sections:
   - id: intro-analysis
-    title: Intro Project Analysis and Context
+    title: 引言项目分析和背景
     instruction: |
-      IMPORTANT - SCOPE ASSESSMENT REQUIRED:
+      重要 - 需要范围评估：
 
-      This PRD is for SIGNIFICANT enhancements to existing projects that require comprehensive planning and multiple stories. Before proceeding:
+      此PRD适用于需要全面规划和多个故事的现有项目的重大增强。在继续之前：
 
-      1. **Assess Enhancement Complexity**: If this is a simple feature addition or bug fix that could be completed in 1-2 focused development sessions, STOP and recommend: "For simpler changes, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead. This full PRD process is designed for substantial enhancements that require architectural planning and multiple coordinated stories."
+      1. **评估增强复杂性**：如果这是一个简单的功能添加或错误修复，可以在1-2个专注的开发会话中完成，请停止并建议：“对于更简单的更改，请考虑改用产品负责人的brownfield-create-epic或brownfield-create-story任务。这个完整的PRD流程是为需要架构规划和多个协调故事的重大增强而设计的。”
 
-      2. **Project Context**: Determine if we're working in an IDE with the project already loaded or if the user needs to provide project information. If project files are available, analyze existing documentation in the docs folder. If insufficient documentation exists, recommend running the document-project task first.
+      2. **项目背景**：确定我们是在已加载项目的IDE中工作，还是需要用户提供项目信息。如果项目文件可用，请分析docs文件夹中的现有文档。如果文档不足，建议首先运行document-project任务。
 
-      3. **Deep Assessment Requirement**: You MUST thoroughly analyze the existing project structure, patterns, and constraints before making ANY suggestions. Every recommendation must be grounded in actual project analysis, not assumptions.
+      3. **深度评估要求**：在提出任何建议之前，您必须彻底分析现有的项目结构、模式和约束。每个建议都必须基于实际的项目分析，而不是假设。
 
-      Gather comprehensive information about the existing project. This section must be completed before proceeding with requirements.
+      收集有关现有项目的全面信息。在继续进行需求之前，必须完成此部分。
 
-      CRITICAL: Throughout this analysis, explicitly confirm your understanding with the user. For every assumption you make about the existing project, ask: "Based on my analysis, I understand that [assumption]. Is this correct?"
+      关键：在此分析过程中，明确地与用户确认您的理解。对于您对现有项目做出的每个假设，请询问：“根据我的分析，我了解到[假设]。这是否正确？”
 
-      Do not proceed with any recommendations until the user has validated your understanding of the existing system.
+      在用户验证您对现有系统的理解之前，不要继续提出任何建议。
     sections:
       - id: existing-project-overview
-        title: Existing Project Overview
-        instruction: Check if document-project analysis was already performed. If yes, reference that output instead of re-analyzing.
+        title: 现有项目概述
+        instruction: 检查是否已执行document-project分析。如果是，请引用该输出而不是重新分析。
         sections:
           - id: analysis-source
-            title: Analysis Source
+            title: 分析来源
             instruction: |
-              Indicate one of the following:
-              - Document-project output available at: {{path}}
-              - IDE-based fresh analysis
-              - User-provided information
+              指出以下之一：
+              - document-project输出位于：{{path}}
+              - 基于IDE的全新分析
+              - 用户提供的信息
           - id: current-state
-            title: Current Project State
+            title: 当前项目状态
             instruction: |
-              - If document-project output exists: Extract summary from "High Level Architecture" and "Technical Summary" sections
-              - Otherwise: Brief description of what the project currently does and its primary purpose
+              - 如果存在document-project输出：从“高层架构”和“技术摘要”部分提取摘要
+              - 否则：简要描述项目当前的功能及其主要目的
       - id: documentation-analysis
-        title: Available Documentation Analysis
+        title: 可用文档分析
         instruction: |
-          If document-project was run:
-          - Note: "Document-project analysis available - using existing technical documentation"
-          - List key documents created by document-project
-          - Skip the missing documentation check below
+          如果已运行document-project：
+          - 注意：“可用的document-project分析 - 使用现有的技术文档”
+          - 列出document-project创建的关键文档
+          - 跳过下面的缺失文档检查
 
-          Otherwise, check for existing documentation:
+          否则，检查现有文档：
         sections:
           - id: available-docs
-            title: Available Documentation
+            title: 可用文档
             type: checklist
             items:
-              - Tech Stack Documentation [[LLM: If from document-project, check ✓]]
-              - Source Tree/Architecture [[LLM: If from document-project, check ✓]]
-              - Coding Standards [[LLM: If from document-project, may be partial]]
-              - API Documentation [[LLM: If from document-project, check ✓]]
-              - External API Documentation [[LLM: If from document-project, check ✓]]
-              - UX/UI Guidelines [[LLM: May not be in document-project]]
-              - Technical Debt Documentation [[LLM: If from document-project, check ✓]]
-              - "Other: {{other_docs}}"
+              - 技术栈文档 [[LLM: 如果来自document-project，请勾选 ✓]]
+              - 源代码树/架构 [[LLM: 如果来自document-project，请勾选 ✓]]
+              - 编码标准 [[LLM: 如果来自document-project，可能不完整]]
+              - API文档 [[LLM: 如果来自document-project，请勾选 ✓]]
+              - 外部API文档 [[LLM: 如果来自document-project，请勾选 ✓]]
+              - UX/UI指南 [[LLM: 可能不在document-project中]]
+              - 技术债务文档 [[LLM: 如果来自document-project，请勾选 ✓]]
+              - "其他：{{other_docs}}"
             instruction: |
-              - If document-project was already run: "Using existing project analysis from document-project output."
-              - If critical documentation is missing and no document-project: "I recommend running the document-project task first..."
+              - 如果已运行document-project：“使用来自document-project输出的现有项目分析。”
+              - 如果缺少关键文档且没有document-project：“我建议首先运行document-project任务...”
       - id: enhancement-scope
-        title: Enhancement Scope Definition
-        instruction: Work with user to clearly define what type of enhancement this is. This is critical for scoping and approach.
+        title: 增强范围定义
+        instruction: 与用户合作，明确定义这是哪种类型的增强。这对于范围界定和方法至关重要。
         sections:
           - id: enhancement-type
-            title: Enhancement Type
+            title: 增强类型
             type: checklist
-            instruction: Determine with user which applies
+            instruction: 与用户确定适用哪种
             items:
-              - New Feature Addition
-              - Major Feature Modification
-              - Integration with New Systems
-              - Performance/Scalability Improvements
-              - UI/UX Overhaul
-              - Technology Stack Upgrade
-              - Bug Fix and Stability Improvements
-              - "Other: {{other_type}}"
+              - 新功能添加
+              - 主要功能修改
+              - 与新系统集成
+              - 性能/可扩展性改进
+              - UI/UX大修
+              - 技术栈升级
+              - 错误修复和稳定性改进
+              - "其他：{{other_type}}"
           - id: enhancement-description
-            title: Enhancement Description
-            instruction: 2-3 sentences describing what the user wants to add or change
+            title: 增强描述
+            instruction: 2-3句话描述用户想要添加或更改的内容
           - id: impact-assessment
-            title: Impact Assessment
+            title: 影响评估
             type: checklist
-            instruction: Assess the scope of impact on existing codebase
+            instruction: 评估对现有代码库的影响范围
             items:
-              - Minimal Impact (isolated additions)
-              - Moderate Impact (some existing code changes)
-              - Significant Impact (substantial existing code changes)
-              - Major Impact (architectural changes required)
+              - 最小影响（孤立的添加）
+              - 中等影响（一些现有代码更改）
+              - 重大影响（大量的现有代码更改）
+              - 主要影响（需要架构更改）
       - id: goals-context
-        title: Goals and Background Context
+        title: 目标和背景
         sections:
           - id: goals
-            title: Goals
+            title: 目标
             type: bullet-list
-            instruction: Bullet list of 1-line desired outcomes this enhancement will deliver if successful
+            instruction: 如果成功，此增强将带来的一行所需结果的要点列表
           - id: background
-            title: Background Context
+            title: 背景
             type: paragraphs
-            instruction: 1-2 short paragraphs explaining why this enhancement is needed, what problem it solves, and how it fits with the existing project
+            instruction: 1-2个简短段落，解释为什么需要此增强，它解决了什么问题，以及它如何与现有项目相适应
       - id: changelog
-        title: Change Log
+        title: 变更日志
         type: table
-        columns: [Change, Date, Version, Description, Author]
+        columns: [变更, 日期, 版本, 描述, 作者]
 
   - id: requirements
-    title: Requirements
+    title: 需求
     instruction: |
-      Draft functional and non-functional requirements based on your validated understanding of the existing project. Before presenting requirements, confirm: "These requirements are based on my understanding of your existing system. Please review carefully and confirm they align with your project's reality."
+      根据您对现有项目的已验证理解，起草功能性和非功能性需求。在提出需求之前，请确认：“这些需求是基于我对您现有系统的理解。请仔细审查并确认它们与您项目的实际情况相符。”
     elicit: true
     sections:
       - id: functional
-        title: Functional
+        title: 功能性
         type: numbered-list
         prefix: FR
-        instruction: Each Requirement will be a bullet markdown with identifier starting with FR
+        instruction: 每个需求都将是一个以FR开头的markdown项目符号
         examples:
-          - "FR1: The existing Todo List will integrate with the new AI duplicate detection service without breaking current functionality."
+          - "FR1：现有的待办事项列表将与新的人工智能重复检测服务集成，而不会破坏当前功能。"
       - id: non-functional
-        title: Non Functional
+        title: 非功能性
         type: numbered-list
         prefix: NFR
-        instruction: Each Requirement will be a bullet markdown with identifier starting with NFR. Include constraints from existing system
+        instruction: 每个需求都将是一个以NFR开头的markdown项目符号。包括来自现有系统的约束
         examples:
-          - "NFR1: Enhancement must maintain existing performance characteristics and not exceed current memory usage by more than 20%."
+          - "NFR1：增强功能必须保持现有的性能特征，并且内存使用量不超过当前的20%。"
       - id: compatibility
-        title: Compatibility Requirements
-        instruction: Critical for brownfield - what must remain compatible
+        title: 兼容性要求
+        instruction: 对于棕地项目至关重要 - 必须保持兼容的内容
         type: numbered-list
         prefix: CR
         template: "{{requirement}}: {{description}}"
@@ -155,124 +155,124 @@ sections:
             template: "CR4: {{integration_compatibility}}"
 
   - id: ui-enhancement-goals
-    title: User Interface Enhancement Goals
-    condition: Enhancement includes UI changes
-    instruction: For UI changes, capture how they will integrate with existing UI patterns and design systems
+    title: 用户界面增强目标
+    condition: 增强包括UI更改
+    instruction: 对于UI更改，捕获它们将如何与现有的UI模式和设计系统集成
     sections:
       - id: existing-ui-integration
-        title: Integration with Existing UI
-        instruction: Describe how new UI elements will fit with existing design patterns, style guides, and component libraries
+        title: 与现有UI集成
+        instruction: 描述新的UI元素将如何适应现有的设计模式、样式指南和组件库
       - id: modified-screens
-        title: Modified/New Screens and Views
-        instruction: List only the screens/views that will be modified or added
+        title: 修改/新屏幕和视图
+        instruction: 仅列出将要修改或添加的屏幕/视图
       - id: ui-consistency
-        title: UI Consistency Requirements
-        instruction: Specific requirements for maintaining visual and interaction consistency with existing application
+        title: UI一致性要求
+        instruction: 保持与现有应用程序的视觉和交互一致性的具体要求
 
   - id: technical-constraints
-    title: Technical Constraints and Integration Requirements
-    instruction: This section replaces separate architecture documentation. Gather detailed technical constraints from existing project analysis.
+    title: 技术约束和集成要求
+    instruction: 本节取代单独的架构文档。从现有项目分析中收集详细的技术约束。
     sections:
       - id: existing-tech-stack
-        title: Existing Technology Stack
+        title: 现有技术栈
         instruction: |
-          If document-project output available:
-          - Extract from "Actual Tech Stack" table in High Level Architecture section
-          - Include version numbers and any noted constraints
+          如果document-project输出可用：
+          - 从高层架构部分的“实际技术栈”表中提取
+          - 包括版本号和任何注意到的约束
 
-          Otherwise, document the current technology stack:
+          否则，记录当前的技术栈：
         template: |
-          **Languages**: {{languages}}
-          **Frameworks**: {{frameworks}}
-          **Database**: {{database}}
-          **Infrastructure**: {{infrastructure}}
-          **External Dependencies**: {{external_dependencies}}
+          **语言**：{{languages}}
+          **框架**：{{frameworks}}
+          **数据库**：{{database}}
+          **基础设施**：{{infrastructure}}
+          **外部依赖**：{{external_dependencies}}
       - id: integration-approach
-        title: Integration Approach
-        instruction: Define how the enhancement will integrate with existing architecture
+        title: 集成方法
+        instruction: 定义增强功能将如何与现有架构集成
         template: |
-          **Database Integration Strategy**: {{database_integration}}
-          **API Integration Strategy**: {{api_integration}}
-          **Frontend Integration Strategy**: {{frontend_integration}}
-          **Testing Integration Strategy**: {{testing_integration}}
+          **数据库集成策略**：{{database_integration}}
+          **API集成策略**：{{api_integration}}
+          **前端集成策略**：{{frontend_integration}}
+          **测试集成策略**：{{testing_integration}}
       - id: code-organization
-        title: Code Organization and Standards
-        instruction: Based on existing project analysis, define how new code will fit existing patterns
+        title: 代码组织和标准
+        instruction: 基于现有项目分析，定义新代码将如何适应现有模式
         template: |
-          **File Structure Approach**: {{file_structure}}
-          **Naming Conventions**: {{naming_conventions}}
-          **Coding Standards**: {{coding_standards}}
-          **Documentation Standards**: {{documentation_standards}}
+          **文件结构方法**：{{file_structure}}
+          **命名约定**：{{naming_conventions}}
+          **编码标准**：{{coding_standards}}
+          **文档标准**：{{documentation_standards}}
       - id: deployment-operations
-        title: Deployment and Operations
-        instruction: How the enhancement fits existing deployment pipeline
+        title: 部署和运营
+        instruction: 增强功能如何适应现有的部署管道
         template: |
-          **Build Process Integration**: {{build_integration}}
-          **Deployment Strategy**: {{deployment_strategy}}
-          **Monitoring and Logging**: {{monitoring_logging}}
-          **Configuration Management**: {{config_management}}
+          **构建过程集成**：{{build_integration}}
+          **部署策略**：{{deployment_strategy}}
+          **监控和日志记录**：{{monitoring_logging}}
+          **配置管理**：{{config_management}}
       - id: risk-assessment
-        title: Risk Assessment and Mitigation
+        title: 风险评估和缓解
         instruction: |
-          If document-project output available:
-          - Reference "Technical Debt and Known Issues" section
-          - Include "Workarounds and Gotchas" that might impact enhancement
-          - Note any identified constraints from "Critical Technical Debt"
+          如果document-project输出可用：
+          - 引用“技术债务和已知问题”部分
+          - 包括可能影响增强功能的“变通方法和陷阱”
+          - 注意从“关键技术债务”中识别出的任何约束
 
-          Build risk assessment incorporating existing known issues:
+          结合现有的已知问题进行风险评估：
         template: |
-          **Technical Risks**: {{technical_risks}}
-          **Integration Risks**: {{integration_risks}}
-          **Deployment Risks**: {{deployment_risks}}
-          **Mitigation Strategies**: {{mitigation_strategies}}
+          **技术风险**：{{technical_risks}}
+          **集成风险**：{{integration_risks}}
+          **部署风险**：{{deployment_risks}}
+          **缓解策略**：{{mitigation_strategies}}
 
   - id: epic-structure
-    title: Epic and Story Structure
+    title: 史诗和故事结构
     instruction: |
-      For brownfield projects, favor a single comprehensive epic unless the user is clearly requesting multiple unrelated enhancements. Before presenting the epic structure, confirm: "Based on my analysis of your existing project, I believe this enhancement should be structured as [single epic/multiple epics] because [rationale based on actual project analysis]. Does this align with your understanding of the work required?"
+      对于棕地项目，除非用户明确要求多个不相关的增强功能，否则倾向于使用单个综合史诗。在提出史诗结构之前，请确认：“根据我对您现有项目的分析，我认为此增强功能应构建为[单个史诗/多个史诗]，因为[基于实际项目分析的理由]。这是否符合您对所需工作的理解？”
     elicit: true
     sections:
       - id: epic-approach
-        title: Epic Approach
-        instruction: Explain the rationale for epic structure - typically single epic for brownfield unless multiple unrelated features
-        template: "**Epic Structure Decision**: {{epic_decision}} with rationale"
+        title: 史诗方法
+        instruction: 解释史诗结构的理由 - 通常对于棕地项目是单个史诗，除非有多个不相关的功能
+        template: "**史诗结构决策**：{{epic_decision}}，并附上理由"
 
   - id: epic-details
-    title: "Epic 1: {{enhancement_title}}"
+    title: "史诗1：{{enhancement_title}}"
     instruction: |
-      Comprehensive epic that delivers the brownfield enhancement while maintaining existing functionality
+      提供棕地增强功能的综合史诗，同时保持现有功能
 
-      CRITICAL STORY SEQUENCING FOR BROWNFIELD:
-      - Stories must ensure existing functionality remains intact
-      - Each story should include verification that existing features still work
-      - Stories should be sequenced to minimize risk to existing system
-      - Include rollback considerations for each story
-      - Focus on incremental integration rather than big-bang changes
-      - Size stories for AI agent execution in existing codebase context
-      - MANDATORY: Present the complete story sequence and ask: "This story sequence is designed to minimize risk to your existing system. Does this order make sense given your project's architecture and constraints?"
-      - Stories must be logically sequential with clear dependencies identified
-      - Each story must deliver value while maintaining system integrity
+      棕地项目的关键故事排序：
+      - 故事必须确保现有功能保持不变
+      - 每个故事都应包括对现有功能仍然有效的验证
+      - 故事应按顺序排列，以最小化对现有系统的风险
+      - 为每个故事包括回滚考虑
+      - 专注于增量集成而不是一次性集成
+      - 在现有代码库上下文中为AI代理执行确定故事的大小
+      - 强制性：提出完整的故事序列，并询问：“这个故事序列旨在最小化对您现有系统的风险。鉴于您项目的架构和约束，这个顺序是否合理？”
+      - 故事必须在逻辑上是连续的，并明确识别出依赖关系
+      - 每个故事都必须在保持系统完整性的同时交付价值
     template: |
-      **Epic Goal**: {{epic_goal}}
+      **史诗目标**：{{epic_goal}}
 
-      **Integration Requirements**: {{integration_requirements}}
+      **集成要求**：{{integration_requirements}}
     sections:
       - id: story
-        title: "Story 1.{{story_number}} {{story_title}}"
+        title: "故事1.{{story_number}} {{story_title}}"
         repeatable: true
         template: |
-          As a {{user_type}},
-          I want {{action}},
-          so that {{benefit}}.
+          作为一个{{user_type}}，
+          我想要{{action}}，
+          以便{{benefit}}。
         sections:
           - id: acceptance-criteria
-            title: Acceptance Criteria
+            title: 验收标准
             type: numbered-list
-            instruction: Define criteria that include both new functionality and existing system integrity
+            instruction: 定义既包括新功能又包括现有系统完整性的标准
             item_template: "{{criterion_number}}: {{criteria}}"
           - id: integration-verification
-            title: Integration Verification
-            instruction: Specific verification steps to ensure existing functionality remains intact
+            title: 集成验证
+            instruction: 确保现有功能保持不变的具体验证步骤
             type: numbered-list
             prefix: IV
             items:

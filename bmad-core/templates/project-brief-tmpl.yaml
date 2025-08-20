@@ -1,222 +1,222 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: project-brief-template-v2
-  name: Project Brief
+  name: 项目简报
   version: 2.0
   output:
     format: markdown
     filename: docs/brief.md
-    title: "Project Brief: {{project_name}}"
+    title: "项目简报: {{project_name}}"
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Project Brief Elicitation Actions"
+    title: "项目简报启发行动"
     options:
-      - "Expand section with more specific details"
-      - "Validate against similar successful products"
-      - "Stress test assumptions with edge cases"
-      - "Explore alternative solution approaches"
-      - "Analyze resource/constraint trade-offs"
-      - "Generate risk mitigation strategies"
-      - "Challenge scope from MVP minimalist view"
-      - "Brainstorm creative feature possibilities"
-      - "If only we had [resource/capability/time]..."
-      - "Proceed to next section"
+      - "用更具体的细节扩展章节"
+      - "与类似的成功产品进行验证"
+      - "用边缘案例对假设进行压力测试"
+      - "探索替代解决方案"
+      - "分析资源/约束的权衡"
+      - "生成风险缓解策略"
+      - "从MVP极简主义视角挑战范围"
+      - "头脑风暴创意功能可能性"
+      - "如果我们有[资源/能力/时间]就好了..."
+      - "进入下一节"
 
 sections:
   - id: introduction
     instruction: |
-      This template guides creation of a comprehensive Project Brief that serves as the foundational input for product development.
+      此模板指导创建全面的项目简报，作为产品开发的基础输入。
 
-      Start by asking the user which mode they prefer:
+      首先询问用户他们偏好哪种模式：
 
-      1. **Interactive Mode** - Work through each section collaboratively
-      2. **YOLO Mode** - Generate complete draft for review and refinement
+      1. **互动模式** - 协作完成每个章节
+      2. **YOLO模式** - 生成完整的草稿供审查和完善
 
-      Before beginning, understand what inputs are available (brainstorming results, market research, competitive analysis, initial ideas) and gather project context.
+      在开始之前，了解有哪些可用的输入（头脑风暴结果、市场研究、竞争分析、初步想法）并收集项目背景。
 
   - id: executive-summary
-    title: Executive Summary
+    title: 执行摘要
     instruction: |
-      Create a concise overview that captures the essence of the project. Include:
-      - Product concept in 1-2 sentences
-      - Primary problem being solved
-      - Target market identification
-      - Key value proposition
+      创建一个简洁的概述，抓住项目的精髓。包括：
+      - 1-2句话的产品概念
+      - 正在解决的主要问题
+      - 目标市场识别
+      - 关键价值主张
     template: "{{executive_summary_content}}"
 
   - id: problem-statement
-    title: Problem Statement
+    title: 问题陈述
     instruction: |
-      Articulate the problem with clarity and evidence. Address:
-      - Current state and pain points
-      - Impact of the problem (quantify if possible)
-      - Why existing solutions fall short
-      - Urgency and importance of solving this now
+      清晰并有证据地阐述问题。解决：
+      - 当前状态和痛点
+      - 问题的影响（如果可能，量化）
+      - 为什么现有解决方案不足
+      - 现在解决这个问题的紧迫性和重要性
     template: "{{detailed_problem_description}}"
 
   - id: proposed-solution
-    title: Proposed Solution
+    title: 提议的解决方案
     instruction: |
-      Describe the solution approach at a high level. Include:
-      - Core concept and approach
-      - Key differentiators from existing solutions
-      - Why this solution will succeed where others haven't
-      - High-level vision for the product
+      高层次地描述解决方案。包括：
+      - 核心概念和方法
+      - 与现有解决方案的关键差异化
+      - 为什么这个解决方案能在其他方案失败的地方成功
+      - 产品的高层愿景
     template: "{{solution_description}}"
 
   - id: target-users
-    title: Target Users
+    title: 目标用户
     instruction: |
-      Define and characterize the intended users with specificity. For each user segment include:
-      - Demographic/firmographic profile
-      - Current behaviors and workflows
-      - Specific needs and pain points
-      - Goals they're trying to achieve
+      具体地定义和描述目标用户。对于每个用户细分，包括：
+      - 人口统计/公司统计概况
+      - 当前行为和工作流程
+      - 具体需求和痛点
+      - 他们试图实现的目标
     sections:
       - id: primary-segment
-        title: "Primary User Segment: {{segment_name}}"
+        title: "主要用户细分：{{segment_name}}"
         template: "{{primary_user_description}}"
       - id: secondary-segment
-        title: "Secondary User Segment: {{segment_name}}"
-        condition: Has secondary user segment
+        title: "次要用户细分：{{segment_name}}"
+        condition: 有次要用户细分
         template: "{{secondary_user_description}}"
 
   - id: goals-metrics
-    title: Goals & Success Metrics
-    instruction: Establish clear objectives and how to measure success. Make goals SMART (Specific, Measurable, Achievable, Relevant, Time-bound)
+    title: 目标与成功指标
+    instruction: 建立明确的目标以及如何衡量成功。使目标SMART（具体的、可衡量的、可实现的、相关的、有时限的）
     sections:
       - id: business-objectives
-        title: Business Objectives
+        title: 业务目标
         type: bullet-list
         template: "- {{objective_with_metric}}"
       - id: user-success-metrics
-        title: User Success Metrics
+        title: 用户成功指标
         type: bullet-list
         template: "- {{user_metric}}"
       - id: kpis
-        title: Key Performance Indicators (KPIs)
+        title: 关键绩效指标 (KPIs)
         type: bullet-list
         template: "- {{kpi}}: {{definition_and_target}}"
 
   - id: mvp-scope
-    title: MVP Scope
-    instruction: Define the minimum viable product clearly. Be specific about what's in and what's out. Help user distinguish must-haves from nice-to-haves.
+    title: MVP范围
+    instruction: 明确定义最小可行产品。具体说明哪些在范围内，哪些不在。帮助用户区分必须有的和最好有的。
     sections:
       - id: core-features
-        title: Core Features (Must Have)
+        title: 核心功能（必须有）
         type: bullet-list
         template: "- **{{feature}}:** {{description_and_rationale}}"
       - id: out-of-scope
-        title: Out of Scope for MVP
+        title: MVP范围之外
         type: bullet-list
         template: "- {{feature_or_capability}}"
       - id: mvp-success-criteria
-        title: MVP Success Criteria
+        title: MVP成功标准
         template: "{{mvp_success_definition}}"
 
   - id: post-mvp-vision
-    title: Post-MVP Vision
-    instruction: Outline the longer-term product direction without overcommitting to specifics
+    title: MVP后愿景
+    instruction: 概述长期的产品方向，而不过多承诺具体细节
     sections:
       - id: phase-2-features
-        title: Phase 2 Features
+        title: 第二阶段功能
         template: "{{next_priority_features}}"
       - id: long-term-vision
-        title: Long-term Vision
+        title: 长期愿景
         template: "{{one_two_year_vision}}"
       - id: expansion-opportunities
-        title: Expansion Opportunities
+        title: 扩张机会
         template: "{{potential_expansions}}"
 
   - id: technical-considerations
-    title: Technical Considerations
-    instruction: Document known technical constraints and preferences. Note these are initial thoughts, not final decisions.
+    title: 技术考虑
+    instruction: 记录已知的技术约束和偏好。注意这些是初步想法，不是最终决定。
     sections:
       - id: platform-requirements
-        title: Platform Requirements
+        title: 平台要求
         template: |
-          - **Target Platforms:** {{platforms}}
-          - **Browser/OS Support:** {{specific_requirements}}
-          - **Performance Requirements:** {{performance_specs}}
+          - **目标平台：** {{platforms}}
+          - **浏览器/操作系统支持：** {{specific_requirements}}
+          - **性能要求：** {{performance_specs}}
       - id: technology-preferences
-        title: Technology Preferences
+        title: 技术偏好
         template: |
-          - **Frontend:** {{frontend_preferences}}
-          - **Backend:** {{backend_preferences}}
-          - **Database:** {{database_preferences}}
-          - **Hosting/Infrastructure:** {{infrastructure_preferences}}
+          - **前端：** {{frontend_preferences}}
+          - **后端：** {{backend_preferences}}
+          - **数据库：** {{database_preferences}}
+          - **托管/基础设施：** {{infrastructure_preferences}}
       - id: architecture-considerations
-        title: Architecture Considerations
+        title: 架构考虑
         template: |
-          - **Repository Structure:** {{repo_thoughts}}
-          - **Service Architecture:** {{service_thoughts}}
-          - **Integration Requirements:** {{integration_needs}}
-          - **Security/Compliance:** {{security_requirements}}
+          - **存储库结构：** {{repo_thoughts}}
+          - **服务架构：** {{service_thoughts}}
+          - **集成要求：** {{integration_needs}}
+          - **安全/合规：** {{security_requirements}}
 
   - id: constraints-assumptions
-    title: Constraints & Assumptions
-    instruction: Clearly state limitations and assumptions to set realistic expectations
+    title: 约束与假设
+    instruction: 明确陈述限制和假设，以设定切合实际的期望
     sections:
       - id: constraints
-        title: Constraints
+        title: 约束
         template: |
-          - **Budget:** {{budget_info}}
-          - **Timeline:** {{timeline_info}}
-          - **Resources:** {{resource_info}}
-          - **Technical:** {{technical_constraints}}
+          - **预算：** {{budget_info}}
+          - **时间线：** {{timeline_info}}
+          - **资源：** {{resource_info}}
+          - **技术：** {{technical_constraints}}
       - id: key-assumptions
-        title: Key Assumptions
+        title: 关键假设
         type: bullet-list
         template: "- {{assumption}}"
 
   - id: risks-questions
-    title: Risks & Open Questions
-    instruction: Identify unknowns and potential challenges proactively
+    title: 风险与开放性问题
+    instruction: 主动识别未知数和潜在挑战
     sections:
       - id: key-risks
-        title: Key Risks
+        title: 关键风险
         type: bullet-list
         template: "- **{{risk}}:** {{description_and_impact}}"
       - id: open-questions
-        title: Open Questions
+        title: 开放性问题
         type: bullet-list
         template: "- {{question}}"
       - id: research-areas
-        title: Areas Needing Further Research
+        title: 需要进一步研究的领域
         type: bullet-list
         template: "- {{research_topic}}"
 
   - id: appendices
-    title: Appendices
+    title: 附录
     sections:
       - id: research-summary
-        title: A. Research Summary
-        condition: Has research findings
+        title: A. 研究摘要
+        condition: 有研究发现
         instruction: |
-          If applicable, summarize key findings from:
-          - Market research
-          - Competitive analysis
-          - User interviews
-          - Technical feasibility studies
+          如果适用，总结以下方面的关键发现：
+          - 市场研究
+          - 竞争分析
+          - 用户访谈
+          - 技术可行性研究
       - id: stakeholder-input
-        title: B. Stakeholder Input
-        condition: Has stakeholder feedback
+        title: B. 利益相关者输入
+        condition: 有利益相关者反馈
         template: "{{stakeholder_feedback}}"
       - id: references
-        title: C. References
+        title: C. 参考资料
         template: "{{relevant_links_and_docs}}"
 
   - id: next-steps
-    title: Next Steps
+    title: 下一步
     sections:
       - id: immediate-actions
-        title: Immediate Actions
+        title: 立即行动
         type: numbered-list
         template: "{{action_item}}"
       - id: pm-handoff
-        title: PM Handoff
+        title: PM交接
         content: |
-          This Project Brief provides the full context for {{project_name}}. Please start in 'PRD Generation Mode', review the brief thoroughly to work with the user to create the PRD section by section as the template indicates, asking for any necessary clarification or suggesting improvements.
+          本项目简报为{{project_name}}提供了完整的背景。请以“PRD生成模式”开始，彻底审查简报，与用户合作，按照模板指示逐节创建PRD，要求任何必要的澄清或提出改进建议。

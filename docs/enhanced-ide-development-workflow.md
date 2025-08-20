@@ -1,248 +1,248 @@
-# Enhanced IDE Development Workflow
+# 增强的IDE开发工作流
 
-This is a simple step-by-step guide to help you efficiently manage your development workflow using the BMad Method. The workflow integrates the Test Architect (QA agent) throughout the development lifecycle to ensure quality, prevent regressions, and maintain high standards. Refer to the **[<ins>User Guide</ins>](user-guide.md)** for any scenario that is not covered here.
+这是一个简单的分步指南，可帮助您使用BMad方法高效地管理开发工作流。该工作流在整个开发生命周期中集成了测试架构师（QA代理），以确保质量、防止回归并保持高标准。有关此处未涵盖的任何场景，请参阅**[<ins>用户指南</ins>](user-guide.md)**。
 
-## Create New Branch
+## 创建新分支
 
-1. **Start new branch**
+1.  **启动新分支**
 
-## Story Creation (Scrum Master)
+## 故事创建（Scrum Master）
 
-1. **Start new chat/conversation**
-2. **Load SM agent**
-3. **Execute**: `*draft` (runs create-next-story task)
-4. **Review generated story** in `docs/stories/`
-5. **Update status**: Change from "Draft" to "Approved"
+1.  **开始新的聊天/对话**
+2.  **加载SM代理**
+3.  **执行**：`*draft`（运行create-next-story任务）
+4.  **审查生成的故事**，位于`docs/stories/`
+5.  **更新状态**：将状态从“草稿”更改为“已批准”
 
-## Story Implementation (Developer)
+## 故事实施（开发人员）
 
-1. **Start new chat/conversation**
-2. **Load Dev agent**
-3. **Execute**: `*develop-story {selected-story}` (runs execute-checklist task)
-4. **Review generated report** in `{selected-story}`
+1.  **开始新的聊天/对话**
+2.  **加载开发代理**
+3.  **执行**：`*develop-story {selected-story}`（运行execute-checklist任务）
+4.  **审查生成的报告**，位于`{selected-story}`
 
-## Test Architect Integration Throughout Workflow
+## 在整个工作流中集成测试架构师
 
-The Test Architect (Quinn) provides comprehensive quality assurance throughout the development lifecycle. Here's how to leverage each capability at the right time.
+测试架构师（Quinn）在整个开发生命周期中提供全面的质量保证。以下是如何在适当的时候利用每项功能。
 
-**Command Aliases:** Documentation uses short forms (`*risk`, `*design`, `*nfr`, `*trace`) for the full commands (`*risk-profile`, `*test-design`, `*nfr-assess`, `*trace-requirements`).
+**命令别名：** 文档使用简写形式（`*risk`, `*design`, `*nfr`, `*trace`）来表示完整命令（`*risk-profile`, `*test-design`, `*nfr-assess`, `*trace-requirements`）。
 
-### Quick Command Reference
+### 快速命令参考
 
-| **Stage**                | **Command** | **Purpose**                             | **Output**                                                      | **Priority**                |
-| ------------------------ | ----------- | --------------------------------------- | --------------------------------------------------------------- | --------------------------- |
-| **After Story Approval** | `*risk`     | Identify integration & regression risks | `docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md`         | High for complex/brownfield |
-|                          | `*design`   | Create test strategy for dev            | `docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md`  | High for new features       |
-| **During Development**   | `*trace`    | Verify test coverage                    | `docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md`        | Medium                      |
-|                          | `*nfr`      | Validate quality attributes             | `docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md`          | High for critical features  |
-| **After Development**    | `*review`   | Comprehensive assessment                | QA Results in story + `docs/qa/gates/{epic}.{story}-{slug}.yml` | **Required**                |
-| **Post-Review**          | `*gate`     | Update quality decision                 | Updated `docs/qa/gates/{epic}.{story}-{slug}.yml`               | As needed                   |
+| **阶段** | **命令** | **目的** | **输出** | **优先级** |
+| --- | --- | --- | --- | --- |
+| **故事批准后** | `*risk` | 识别集成和回归风险 | `docs/qa/assessments/{epic}.{story}-risk-{YYYYMMDD}.md` | 对于复杂/棕地项目为高 |
+| | `*design` | 为开发创建测试策略 | `docs/qa/assessments/{epic}.{story}-test-design-{YYYYMMDD}.md` | 对于新功能为高 |
+| **开发期间** | `*trace` | 验证测试覆盖率 | `docs/qa/assessments/{epic}.{story}-trace-{YYYYMMDD}.md` | 中 |
+| | `*nfr` | 验证质量属性 | `docs/qa/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md` | 对于关键功能为高 |
+| **开发后** | `*review` | 全面评估 | 故事中的QA结果 + `docs/qa/gates/{epic}.{story}-{slug}.yml` | **必需** |
+| **审查后** | `*gate` | 更新质量决策 | 更新的 `docs/qa/gates/{epic}.{story}-{slug}.yml` | 根据需要 |
 
-### Stage 1: After Story Creation (Before Dev Starts)
+### 阶段1：故事创建后（开发开始前）
 
-**RECOMMENDED - Set Developer Up for Success:**
+**推荐 - 为开发人员的成功做好准备：**
 
 ```bash
-# 1. RISK ASSESSMENT (Run FIRST for complex stories)
+# 1. 风险评估（对于复杂的故事首先运行）
 @qa *risk {approved-story}
-# Identifies:
-#   - Technical debt impact
-#   - Integration complexity
-#   - Regression potential (1-9 scoring)
-#   - Mitigation strategies
-# Critical for: Brownfield, API changes, data migrations
+# 识别：
+#   - 技术债务影响
+#   - 集成复杂性
+#   - 回归可能性（1-9评分）
+#   - 缓解策略
+# 对于以下情况至关重要：棕地、API更改、数据迁移
 
-# 2. TEST DESIGN (Run SECOND to guide implementation)
+# 2. 测试设计（其次运行以指导实施）
 @qa *design {approved-story}
-# Provides:
-#   - Test scenarios per acceptance criterion
-#   - Test level recommendations (unit/integration/E2E)
-#   - Risk-based priorities (P0/P1/P2)
-#   - Test data requirements
-# Share with Dev: Include in story comments or attach to ticket
+# 提供：
+#   - 每个验收标准的测试场景
+#   - 测试级别建议（单元/集成/E2E）
+#   - 基于风险的优先级（P0/P1/P2）
+#   - 测试数据要求
+# 与开发人员共享：包含在故事评论中或附加到工单
 ```
 
-### Stage 2: During Development (Mid-Implementation Checkpoints)
+### 阶段2：开发期间（实施中期检查点）
 
-**Developer Self-Service Quality Checks:**
+**开发人员自助质量检查：**
 
 ```bash
-# 3. REQUIREMENTS TRACING (Verify coverage mid-development)
+# 3. 需求跟踪（在开发中期验证覆盖率）
 @qa *trace {story-in-progress}
-# Validates:
-#   - All acceptance criteria have tests
-#   - No missing test scenarios
-#   - Appropriate test levels
-#   - Given-When-Then documentation clarity
-# Run when: After writing initial tests
+# 验证：
+#   - 所有验收标准都有测试
+#   - 没有遗漏的测试场景
+#   - 适当的测试级别
+#   - Given-When-Then文档的清晰度
+# 运行时机：编写初始测试后
 
-# 4. NFR VALIDATION (Check quality attributes)
+# 4. NFR验证（检查质量属性）
 @qa *nfr {story-in-progress}
-# Assesses:
-#   - Security: Authentication, authorization, data protection
-#   - Performance: Response times, resource usage
-#   - Reliability: Error handling, recovery
-#   - Maintainability: Code quality, documentation
-# Run when: Before marking "Ready for Review"
+# 评估：
+#   - 安全性：身份验证、授权、数据保护
+#   - 性能：响应时间、资源使用
+#   - 可靠性：错误处理、恢复
+#   - 可维护性：代码质量、文档
+# 运行时机：标记“准备审查”之前
 ```
 
-### Stage 3: Story Review (Quality Gate Assessment)
+### 阶段3：故事审查（质量门评估）
 
-**REQUIRED - Comprehensive Test Architecture Review:**
+**必需 - 全面的测试架构审查：**
 
-**Prerequisite:** All tests green locally; lint & type checks pass.
+**先决条件：** 所有测试在本地通过；lint和类型检查通过。
 
 ```bash
-# 5. FULL REVIEW (Standard review process)
+# 5. 全面审查（标准审查流程）
 @qa *review {completed-story}
 ```
 
-**What Happens During Review:**
+**审查期间会发生什么：**
 
-1. **Deep Code Analysis**
-   - Architecture pattern compliance
-   - Code quality and maintainability
-   - Security vulnerability scanning
-   - Performance bottleneck detection
+1.  **深度代码分析**
+    -   架构模式合规性
+    -   代码质量和可维护性
+    -   安全漏洞扫描
+    -   性能瓶颈检测
 
-2. **Active Refactoring**
-   - Improves code directly when safe
-   - Fixes obvious issues immediately
-   - Suggests complex refactoring for dev
+2.  **主动重构**
+    -   在安全的情况下直接改进代码
+    -   立即修复明显的问题
+    -   为开发人员建议复杂的重构
 
-3. **Test Validation**
-   - Coverage at all levels (unit/integration/E2E)
-   - Test quality (no flaky tests, proper assertions)
-   - Regression test adequacy
+3.  **测试验证**
+    -   所有级别的覆盖率（单元/集成/E2E）
+    -   测试质量（无不稳定测试、正确的断言）
+    -   回归测试的充分性
 
-4. **Gate Decision**
-   - Creates: `docs/qa/gates/{epic}.{story}-{slug}.yml`
-   - Adds: QA Results section to story file
-   - Status: PASS/CONCERNS/FAIL/WAIVED
+4.  **门禁决策**
+    -   创建：`docs/qa/gates/{epic}.{story}-{slug}.yml`
+    -   添加：QA结果部分到故事文件
+    -   状态：PASS/CONCERNS/FAIL/WAIVED
 
-### Stage 4: Post-Review (After Addressing Issues)
+### 阶段4：审查后（解决问题后）
 
-**Update Gate Status After Fixes:**
+**修复后更新门禁状态：**
 
 ```bash
-# 6. GATE UPDATE (Document final decision)
+# 6. 门禁更新（记录最终决策）
 @qa *gate {reviewed-story}
-# Updates: Quality gate with new status
-# Use when: After addressing review feedback
-# Documents: What was fixed, what was waived
+# 更新：带有新状态的质量门禁
+# 使用时机：解决审查反馈后
+# 记录：修复了什么，豁免了什么
 ```
 
-### Understanding Gate Decisions
+### 理解门禁决策
 
-| **Status**   | **Meaning**                                  | **Action Required**     | **Can Proceed?** |
-| ------------ | -------------------------------------------- | ----------------------- | ---------------- |
-| **PASS**     | All critical requirements met                | None                    | ✅ Yes           |
-| **CONCERNS** | Non-critical issues found                    | Team review recommended | ⚠️ With caution  |
-| **FAIL**     | Critical issues (security, missing P0 tests) | Must fix                | ❌ No            |
-| **WAIVED**   | Issues acknowledged and accepted             | Document reasoning      | ✅ With approval |
+| **状态** | **含义** | **所需操作** | **可以继续吗？** |
+| --- | --- | --- | --- |
+| **PASS** | 所有关键要求均已满足 | 无 | ✅ 是 |
+| **CONCERNS** | 发现非关键问题 | 建议团队审查 | ⚠️ 谨慎 |
+| **FAIL** | 关键问题（安全、缺少P0测试） | 必须修复 | ❌ 否 |
+| **WAIVED** | 问题已确认并接受 | 记录理由 | ✅ 经批准 |
 
-### Risk-Based Testing Strategy
+### 基于风险的测试策略
 
-The Test Architect uses risk scoring to prioritize testing:
+测试架构师使用风险评分来确定测试的优先级：
 
-| **Risk Score** | **Calculation**                | **Testing Priority**      | **Gate Impact**          |
-| -------------- | ------------------------------ | ------------------------- | ------------------------ |
-| **9**          | High probability × High impact | P0 - Must test thoroughly | FAIL if untested         |
-| **6**          | Medium-high combinations       | P1 - Should test well     | CONCERNS if gaps         |
-| **4**          | Medium combinations            | P1 - Should test          | CONCERNS if notable gaps |
-| **2-3**        | Low-medium combinations        | P2 - Nice to have         | Note in review           |
-| **1**          | Minimal risk                   | P2 - Minimal              | Note in review           |
+| **风险评分** | **计算** | **测试优先级** | **门禁影响** |
+| --- | --- | --- | --- |
+| **9** | 高概率 × 高影响 | P0 - 必须彻底测试 | 如果未测试则FAIL |
+| **6** | 中高组合 | P1 - 应充分测试 | 如果有差距则CONCERNS |
+| **4** | 中等组合 | P1 - 应测试 | 如果有显著差距则CONCERNS |
+| **2-3** | 中低组合 | P2 - 最好有 | 在审查中注明 |
+| **1** | 风险极小 | P2 - 最低限度 | 在审查中注明 |
 
-### Special Situations & Best Practices
+### 特殊情况与最佳实践
 
-#### High-Risk or Brownfield Stories
+#### 高风险或棕地故事
 
 ```bash
-# ALWAYS run this sequence:
-@qa *risk {story}    # First - identify dangers
-@qa *design {story}  # Second - plan defense
-# Then during dev:
-@qa *trace {story}   # Verify regression coverage
-@qa *nfr {story}     # Check performance impact
-# Finally:
-@qa *review {story}  # Deep integration analysis
+# 始终运行此序列：
+@qa *risk {story}    # 首先 - 识别危险
+@qa *design {story}  # 其次 - 规划防御
+# 然后在开发期间：
+@qa *trace {story}   # 验证回归覆盖率
+@qa *nfr {story}     # 检查性能影响
+# 最后：
+@qa *review {story}  # 深度集成分析
 ```
 
-#### Complex Integrations
+#### 复杂集成
 
-- Run `*trace` multiple times during development
-- Focus on integration test coverage
-- Use `*nfr` to validate cross-system performance
-- Review with extra attention to API contracts
+-   在开发期间多次运行`*trace`
+-   关注集成测试覆盖率
+-   使用`*nfr`验证跨系统性能
+-   在审查时特别关注API合约
 
-#### Performance-Critical Features
+#### 性能关键功能
 
-- Run `*nfr` early and often (not just at review)
-- Establish performance baselines before changes
-- Document acceptable performance degradation
-- Consider load testing requirements in `*design`
+-   尽早并经常运行`*nfr`（不仅仅是在审查时）
+-   在更改前建立性能基线
+-   记录可接受的性能下降
+-   在`*design`中考虑负载测试要求
 
-### Test Quality Standards Enforced
+### 强制执行的测试质量标准
 
-Quinn ensures all tests meet these standards:
+Quinn确保所有测试都符合这些标准：
 
-- **No Flaky Tests**: Proper async handling, explicit waits
-- **No Hard Waits**: Dynamic strategies only (polling, events)
-- **Stateless**: Tests run independently and in parallel
-- **Self-Cleaning**: Tests manage their own test data
-- **Appropriate Levels**: Unit for logic, integration for interactions, E2E for journeys
-- **Clear Assertions**: Keep assertions in tests, not buried in helpers
+-   **无不稳定测试**：正确的异步处理、明确的等待
+-   **无硬等待**：仅使用动态策略（轮询、事件）
+-   **无状态**：测试独立并行运行
+-   **自清理**：测试管理自己的测试数据
+-   **适当的级别**：单元测试用于逻辑，集成测试用于交互，E2E测试用于流程
+-   **清晰的断言**：将断言保留在测试中，而不是埋在辅助函数里
 
-### Documentation & Audit Trail
+### 文档与审计跟踪
 
-All Test Architect activities create permanent records:
+所有测试架构师的活动都会创建永久记录：
 
-- **Assessment Reports**: Timestamped analysis in `docs/qa/assessments/`
-- **Gate Files**: Decision records in `docs/qa/gates/`
-- **Story Updates**: QA Results sections in story files
-- **Traceability**: Requirements to test mapping maintained
+-   **评估报告**：位于`docs/qa/assessments/`的带时间戳的分析
+-   **门禁文件**：位于`docs/qa/gates/`的决策记录
+-   **故事更新**：故事文件中的QA结果部分
+-   **可追溯性**：保持需求到测试的映射
 
-## Commit Changes and Push
+## 提交更改并推送
 
-1. **Commit changes**
-2. **Push to remote**
+1.  **提交更改**
+2.  **推送到远程**
 
-## Complete Development Cycle Flow
+## 完整的开发周期流程
 
-### The Full Workflow with Test Architect
+### 带有测试架构师的完整工作流
 
-1. **SM**: Create next story → Review → Approve
-2. **QA (Optional)**: Risk assessment (`*risk`) → Test design (`*design`)
-3. **Dev**: Implement story → Write tests → Complete
-4. **QA (Optional)**: Mid-dev checks (`*trace`, `*nfr`)
-5. **Dev**: Mark Ready for Review
-6. **QA (Required)**: Review story (`*review`) → Gate decision
-7. **Dev (If needed)**: Address issues
-8. **QA (If needed)**: Update gate (`*gate`)
-9. **Commit**: All changes
-10. **Push**: To remote
-11. **Continue**: Until all features implemented
+1.  **SM**：创建下一个故事 → 审查 → 批准
+2.  **QA（可选）**：风险评估（`*risk`）→ 测试设计（`*design`）
+3.  **开发**：实施故事 → 编写测试 → 完成
+4.  **QA（可选）**：开发中期检查（`*trace`, `*nfr`）
+5.  **开发**：标记为准备审查
+6.  **QA（必需）**：审查故事（`*review`）→ 门禁决策
+7.  **开发（如果需要）**：解决问题
+8.  **QA（如果需要）**：更新门禁（`*gate`）
+9.  **提交**：所有更改
+10. **推送**：到远程
+11. **继续**：直到所有功能实施完毕
 
-### Quick Decision Guide
+### 快速决策指南
 
-**Should I run Test Architect commands?**
+**我应该运行测试架构师命令吗？**
 
-| **Scenario**             | **Before Dev**                  | **During Dev**               | **After Dev**                |
-| ------------------------ | ------------------------------- | ---------------------------- | ---------------------------- |
-| **Simple bug fix**       | Optional                        | Optional                     | Required `*review`           |
-| **New feature**          | Recommended `*risk`, `*design`  | Optional `*trace`            | Required `*review`           |
-| **Brownfield change**    | **Required** `*risk`, `*design` | Recommended `*trace`, `*nfr` | Required `*review`           |
-| **API modification**     | **Required** `*risk`, `*design` | **Required** `*trace`        | Required `*review`           |
-| **Performance-critical** | Recommended `*design`           | **Required** `*nfr`          | Required `*review`           |
-| **Data migration**       | **Required** `*risk`, `*design` | **Required** `*trace`        | Required `*review` + `*gate` |
+| **场景** | **开发前** | **开发中** | **开发后** |
+| --- | --- | --- | --- |
+| **简单错误修复** | 可选 | 可选 | 必需 `*review` |
+| **新功能** | 推荐 `*risk`, `*design` | 可选 `*trace` | 必需 `*review` |
+| **棕地更改** | **必需** `*risk`, `*design` | 推荐 `*trace`, `*nfr` | 必需 `*review` |
+| **API修改** | **必需** `*risk`, `*design` | **必需** `*trace` | 必需 `*review` |
+| **性能关键** | 推荐 `*design` | **必需** `*nfr` | 必需 `*review` |
+| **数据迁移** | **必需** `*risk`, `*design` | **必需** `*trace` | 必需 `*review` + `*gate` |
 
-### Success Metrics
+### 成功指标
 
-The Test Architect helps achieve:
+测试架构师有助于实现：
 
-- **Zero regression defects** in production
-- **100% requirements coverage** with tests
-- **Clear quality gates** for go/no-go decisions
-- **Documented risk acceptance** for technical debt
-- **Consistent test quality** across the team
-- **Shift-left testing** with early risk identification
+-   生产中**零回归缺陷**
+-   **100%需求覆盖率**的测试
+-   用于**go/no-go决策**的清晰质量门禁
+-   **记录在案的技术债务风险接受**
+-   团队中**一致的测试质量**
+-   通过早期风险识别实现**左移测试**

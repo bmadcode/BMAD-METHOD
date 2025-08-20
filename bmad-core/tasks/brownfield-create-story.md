@@ -1,149 +1,155 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Create Brownfield Story Task
+# 创建棕地故事任务
 
-## Purpose
+## 目的
 
-Create a single user story for very small brownfield enhancements that can be completed in one focused development session. This task is for minimal additions or bug fixes that require existing system integration awareness.
+为非常小的棕地增强创建一个单一的用户故事，这些增强可以在一次专注的开发会话中完成。此任务适用于需要了解现有系统集成的最小添加或错误修复。
 
-## When to Use This Task
+## 何时使用此任务
 
-**Use this task when:**
+**在以下情况下使用此任务：**
 
-- The enhancement can be completed in a single story
-- No new architecture or significant design is required
-- The change follows existing patterns exactly
-- Integration is straightforward with minimal risk
-- Change is isolated with clear boundaries
+-   增强功能可以在一个故事中完成
+-   不需要新的架构或重要的设计
+-   更改完全遵循现有模式
+-   集成直接且风险最小
+-   更改是孤立的，边界清晰
 
-**Use brownfield-create-epic when:**
+**在以下情况下使用 brownfield-create-epic：**
 
-- The enhancement requires 2-3 coordinated stories
-- Some design work is needed
-- Multiple integration points are involved
+-   增强功能需要2-3个协调的故事
+-   需要一些设计工作
+-   涉及多个集成点
 
-**Use the full brownfield PRD/Architecture process when:**
+**在以下情况下使用完整的棕地PRD/架构流程：**
 
-- The enhancement requires multiple coordinated stories
-- Architectural planning is needed
-- Significant integration work is required
+-   增强功能需要多个协调的故事
+-   需要进行架构规划
+-   需要大量的集成工作
 
-## Instructions
+## 说明
 
-### 1. Quick Project Assessment
+### 1. 快速项目评估
 
-Gather minimal but essential context about the existing project:
+收集关于现有项目的最少但必要的信息：
 
-**Current System Context:**
+**当前系统背景：**
 
-- [ ] Relevant existing functionality identified
-- [ ] Technology stack for this area noted
-- [ ] Integration point(s) clearly understood
-- [ ] Existing patterns for similar work identified
+- [ ] 确定了相关的现有功能
+- [ ] 注意到该领域的技术栈
+- [ ] 清楚地理解了集成点
+- [ ] 确定了类似工作的现有模式
 
-**Change Scope:**
+**变更范围：**
 
-- [ ] Specific change clearly defined
-- [ ] Impact boundaries identified
-- [ ] Success criteria established
+- [ ] 明确定义了具体变更
+- [ ] 确定了影响边界
+- [ ] 建立了成功标准
 
-### 2. Story Creation
+### 2. 故事创建
 
-Create a single focused story following this structure:
+按照此结构创建一个专注的单一故事：
 
-#### Story Title
+#### 故事标题
 
-{{Specific Enhancement}} - Brownfield Addition
+{{具体增强}} - 棕地添加
 
-#### User Story
+#### 用户故事
 
-As a {{user type}},
-I want {{specific action/capability}},
-So that {{clear benefit/value}}.
+作为一个{{用户类型}}，
+我想要{{具体行动/能力}}，
+以便于{{明确的益处/价值}}。
 
-#### Story Context
+#### 故事背景
 
-**Existing System Integration:**
+**现有系统集成：**
 
-- Integrates with: {{existing component/system}}
-- Technology: {{relevant tech stack}}
-- Follows pattern: {{existing pattern to follow}}
-- Touch points: {{specific integration points}}
+-   集成于：{{现有组件/系统}}
+-   技术：{{相关技术栈}}
+-   遵循模式：{{要遵循的现有模式}}
+-   接触点：{{具体的集成点}}
 
-#### Acceptance Criteria
+#### 验收标准
 
-**Functional Requirements:**
+**功能性需求：**
 
-1. {{Primary functional requirement}}
-2. {{Secondary functional requirement (if any)}}
-3. {{Integration requirement}}
+1.  {{主要功能性需求}}
+2.  {{次要功能性需求（如有）}}
+3.  {{集成需求}}
 
-**Integration Requirements:** 4. Existing {{relevant functionality}} continues to work unchanged 5. New functionality follows existing {{pattern}} pattern 6. Integration with {{system/component}} maintains current behavior
+**集成需求：**
+4. 现有{{相关功能}}继续保持不变
+5. 新功能遵循现有{{模式}}模式
+6. 与{{系统/组件}}的集成保持当前行为
 
-**Quality Requirements:** 7. Change is covered by appropriate tests 8. Documentation is updated if needed 9. No regression in existing functionality verified
+**质量需求：**
+7. 更改由适当的测试覆盖
+8. 如果需要，更新文档
+9. 验证现有功能无回归
 
-#### Technical Notes
+#### 技术说明
 
-- **Integration Approach:** {{how it connects to existing system}}
-- **Existing Pattern Reference:** {{link or description of pattern to follow}}
-- **Key Constraints:** {{any important limitations or requirements}}
+-   **集成方法：** {{它如何连接到现有系统}}
+-   **现有模式参考：** {{要遵循的模式的链接或描述}}
+-   **关键约束：** {{任何重要的限制或要求}}
 
-#### Definition of Done
+#### 完成的定义
 
-- [ ] Functional requirements met
-- [ ] Integration requirements verified
-- [ ] Existing functionality regression tested
-- [ ] Code follows existing patterns and standards
-- [ ] Tests pass (existing and new)
-- [ ] Documentation updated if applicable
+- [ ] 满足功能性需求
+- [ ] 验证了集成需求
+- [ ] 对现有功能进行了回归测试
+- [ ] 代码遵循现有模式和标准
+- [ ] 测试通过（现有和新的）
+- [ ] 如果适用，更新了文档
 
-### 3. Risk and Compatibility Check
+### 3. 风险和兼容性检查
 
-**Minimal Risk Assessment:**
+**最小风险评估：**
 
-- **Primary Risk:** {{main risk to existing system}}
-- **Mitigation:** {{simple mitigation approach}}
-- **Rollback:** {{how to undo if needed}}
+-   **主要风险：** {{对现有系统的主要风险}}
+-   **缓解措施：** {{简单的缓解方法}}
+-   **回滚：** {{如果需要，如何撤销}}
 
-**Compatibility Verification:**
+**兼容性验证：**
 
-- [ ] No breaking changes to existing APIs
-- [ ] Database changes (if any) are additive only
-- [ ] UI changes follow existing design patterns
-- [ ] Performance impact is negligible
+- [ ] 对现有API无重大变更
+- [ ] 数据库变更（如有）仅为增量式
+- [ ] UI变更遵循现有设计模式
+- [ ] 性能影响可忽略不计
 
-### 4. Validation Checklist
+### 4. 验证清单
 
-Before finalizing the story, confirm:
+在最终确定故事之前，请确认：
 
-**Scope Validation:**
+**范围验证：**
 
-- [ ] Story can be completed in one development session
-- [ ] Integration approach is straightforward
-- [ ] Follows existing patterns exactly
-- [ ] No design or architecture work required
+- [ ] 故事可以在一次开发会话中完成
+- [ ] 集成方法直接
+- [ ] 完全遵循现有模式
+- [ ] 不需要设计或架构工作
 
-**Clarity Check:**
+**清晰度检查：**
 
-- [ ] Story requirements are unambiguous
-- [ ] Integration points are clearly specified
-- [ ] Success criteria are testable
-- [ ] Rollback approach is simple
+- [ ] 故事需求明确
+- [ ] 集成点明确指定
+- [ ] 成功标准可测试
+- [ ] 回滚方法简单
 
-## Success Criteria
+## 成功标准
 
-The story creation is successful when:
+当满足以下条件时，故事创建成功：
 
-1. Enhancement is clearly defined and appropriately scoped for single session
-2. Integration approach is straightforward and low-risk
-3. Existing system patterns are identified and will be followed
-4. Rollback plan is simple and feasible
-5. Acceptance criteria include existing functionality verification
+1.  增强功能定义清晰，范围适合单次会话
+2.  集成方法直接且风险低
+3.  确定并将遵循现有系统模式
+4.  回滚计划简单可行
+5.  验收标准包括对现有功能的验证
 
-## Important Notes
+## 重要说明
 
-- This task is for VERY SMALL brownfield changes only
-- If complexity grows during analysis, escalate to brownfield-create-epic
-- Always prioritize existing system integrity
-- When in doubt about integration complexity, use brownfield-create-epic instead
-- Stories should take no more than 4 hours of focused development work
+-   此任务仅适用于非常小的棕地变更
+-   如果分析过程中复杂性增加，请升级到 brownfield-create-epic
+-   始终将现有系统的完整性置于首位
+-   当对集成复杂性有疑问时，请改用 brownfield-create-epic
+-   故事的专注开发工作时间不应超过4小时

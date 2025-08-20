@@ -1,5 +1,5 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# User-Defined Preferred Patterns and Preferences
+# 用户定义的首选模式和偏好
 
-None Listed
+未列出

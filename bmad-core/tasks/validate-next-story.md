@@ -1,136 +1,136 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Validate Next Story Task
+# 验证下一个故事任务
 
-## Purpose
+## 目的
 
-To comprehensively validate a story draft before implementation begins, ensuring it is complete, accurate, and provides sufficient context for successful development. This task identifies issues and gaps that need to be addressed, preventing hallucinations and ensuring implementation readiness.
+在实施开始前，全面验证故事草稿，确保其完整、准确，并为成功开发提供足够的上下文。此任务旨在识别需要解决的问题和差距，防止产生幻觉，并确保实施准备就绪。
 
-## SEQUENTIAL Task Execution (Do not proceed until current Task is complete)
+## 顺序任务执行（在当前任务完成前不要继续）
 
-### 0. Load Core Configuration and Inputs
+### 0. 加载核心配置和输入
 
-- Load `.bmad-core/core-config.yaml`
-- If the file does not exist, HALT and inform the user: "core-config.yaml not found. This file is required for story validation."
-- Extract key configurations: `devStoryLocation`, `prd.*`, `architecture.*`
-- Identify and load the following inputs:
-  - **Story file**: The drafted story to validate (provided by user or discovered in `devStoryLocation`)
-  - **Parent epic**: The epic containing this story's requirements
-  - **Architecture documents**: Based on configuration (sharded or monolithic)
-  - **Story template**: `bmad-core/templates/story-tmpl.md` for completeness validation
+-   加载 `.bmad-core/core-config.yaml`
+-   如果文件不存在，则停止并通知用户：“未找到 core-config.yaml。此文件是故事验证所必需的。”
+-   提取关键配置：`devStoryLocation`、`prd.*`、`architecture.*`
+-   识别并加载以下输入：
+    -   **故事文件**：要验证的草稿故事（由用户提供或在`devStoryLocation`中发现）
+    -   **父史诗**：包含此故事需求的史诗
+    -   **架构文档**：根据配置（分片或单片）
+    -   **故事模板**：`bmad-core/templates/story-tmpl.md` 用于完整性验证
 
-### 1. Template Completeness Validation
+### 1. 模板完整性验证
 
-- Load `bmad-core/templates/story-tmpl.md` and extract all section headings from the template
-- **Missing sections check**: Compare story sections against template sections to verify all required sections are present
-- **Placeholder validation**: Ensure no template placeholders remain unfilled (e.g., `{{EpicNum}}`, `{{role}}`, `_TBD_`)
-- **Agent section verification**: Confirm all sections from template exist for future agent use
-- **Structure compliance**: Verify story follows template structure and formatting
+-   加载 `bmad-core/templates/story-tmpl.md` 并从模板中提取所有章节标题
+-   **缺失章节检查**：将故事章节与模板章节进行比较，以验证所有必需的章节都存在
+-   **占位符验证**：确保没有模板占位符未被填充（例如，`{{EpicNum}}`、`{{role}}`、`_TBD_`）
+-   **代理章节验证**：确认模板中的所有章节都存在，以供将来的代理使用
+-   **结构合规性**：验证故事遵循模板结构和格式
 
-### 2. File Structure and Source Tree Validation
+### 2. 文件结构和源代码树验证
 
-- **File paths clarity**: Are new/existing files to be created/modified clearly specified?
-- **Source tree relevance**: Is relevant project structure included in Dev Notes?
-- **Directory structure**: Are new directories/components properly located according to project structure?
-- **File creation sequence**: Do tasks specify where files should be created in logical order?
-- **Path accuracy**: Are file paths consistent with project structure from architecture docs?
+-   **文件路径清晰度**：是否清楚地指定了要创建/修改的新/现有文件？
+-   **源代码树相关性**：开发说明中是否包含相关的项目结构？
+-   **目录结构**：新目录/组件是否根据项目结构正确定位？
+-   **文件创建顺序**：任务是否按逻辑顺序列出了应在何处创建文件？
+-   **路径准确性**：文件路径是否与架构文档中的项目结构一致？
 
-### 3. UI/Frontend Completeness Validation (if applicable)
+### 3. UI/前端完整性验证（如果适用）
 
-- **Component specifications**: Are UI components sufficiently detailed for implementation?
-- **Styling/design guidance**: Is visual implementation guidance clear?
-- **User interaction flows**: Are UX patterns and behaviors specified?
-- **Responsive/accessibility**: Are these considerations addressed if required?
-- **Integration points**: Are frontend-backend integration points clear?
+-   **组件规范**：UI组件的详细程度是否足以进行实施？
+-   **样式/设计指导**：视觉实施指导是否清晰？
+-   **用户交互流程**：是否指定了UX模式和行为？
+-   **响应式/可访问性**：如果需要，是否解决了这些考虑因素？
+-   **集成点**：前后端集成点是否清晰？
 
-### 4. Acceptance Criteria Satisfaction Assessment
+### 4. 验收标准满意度评估
 
-- **AC coverage**: Will all acceptance criteria be satisfied by the listed tasks?
-- **AC testability**: Are acceptance criteria measurable and verifiable?
-- **Missing scenarios**: Are edge cases or error conditions covered?
-- **Success definition**: Is "done" clearly defined for each AC?
-- **Task-AC mapping**: Are tasks properly linked to specific acceptance criteria?
+-   **AC覆盖率**：列出的任务是否能满足所有验收标准？
+-   **AC可测试性**：验收标准是否可衡量和可验证？
+-   **缺失场景**：是否覆盖了边缘情况或错误条件？
+-   **成功定义**：是否为每个AC明确定义了“完成”？
+-   **任务-AC映射**：任务是否正确链接到特定的验收标准？
 
-### 5. Validation and Testing Instructions Review
+### 5. 验证和测试说明审查
 
-- **Test approach clarity**: Are testing methods clearly specified?
-- **Test scenarios**: Are key test cases identified?
-- **Validation steps**: Are acceptance criteria validation steps clear?
-- **Testing tools/frameworks**: Are required testing tools specified?
-- **Test data requirements**: Are test data needs identified?
+-   **测试方法清晰度**：是否清楚地指定了测试方法？
+-   **测试场景**：是否确定了关键测试用例？
+-   **验证步骤**：验收标准验证步骤是否清晰？
+-   **测试工具/框架**：是否指定了所需的测试工具？
+-   **测试数据要求**：是否确定了测试数据需求？
 
-### 6. Security Considerations Assessment (if applicable)
+### 6. 安全考虑评估（如果适用）
 
-- **Security requirements**: Are security needs identified and addressed?
-- **Authentication/authorization**: Are access controls specified?
-- **Data protection**: Are sensitive data handling requirements clear?
-- **Vulnerability prevention**: Are common security issues addressed?
-- **Compliance requirements**: Are regulatory/compliance needs addressed?
+-   **安全要求**：是否确定并解决了安全需求？
+-   **认证/授权**：是否指定了访问控制？
+-   **数据保护**：敏感数据处理要求是否清晰？
+-   **漏洞预防**：是否解决了常见的安全问题？
+-   **合规要求**：是否解决了法规/合规需求？
 
-### 7. Tasks/Subtasks Sequence Validation
+### 7. 任务/子任务顺序验证
 
-- **Logical order**: Do tasks follow proper implementation sequence?
-- **Dependencies**: Are task dependencies clear and correct?
-- **Granularity**: Are tasks appropriately sized and actionable?
-- **Completeness**: Do tasks cover all requirements and acceptance criteria?
-- **Blocking issues**: Are there any tasks that would block others?
+-   **逻辑顺序**：任务是否遵循正确的实施顺序？
+-   **依赖关系**：任务依赖关系是否清晰正确？
+-   **粒度**：任务的大小是否适当且可操作？
+-   **完整性**：任务是否涵盖了所有需求和验收标准？
+-   **阻塞问题**：是否有任何任务会阻塞其他任务？
 
-### 8. Anti-Hallucination Verification
+### 8. 反幻觉验证
 
-- **Source verification**: Every technical claim must be traceable to source documents
-- **Architecture alignment**: Dev Notes content matches architecture specifications
-- **No invented details**: Flag any technical decisions not supported by source documents
-- **Reference accuracy**: Verify all source references are correct and accessible
-- **Fact checking**: Cross-reference claims against epic and architecture documents
+-   **来源验证**：每个技术声明都必须可以追溯到源文档
+-   **架构对齐**：开发说明内容与架构规范匹配
+-   **无杜撰细节**：标记任何不受源文档支持的技术决策
+-   **引用准确性**：验证所有源引用是否正确且可访问
+-   **事实核查**：将声明与史诗和架构文档进行交叉引用
 
-### 9. Dev Agent Implementation Readiness
+### 9. 开发代理实施准备情况
 
-- **Self-contained context**: Can the story be implemented without reading external docs?
-- **Clear instructions**: Are implementation steps unambiguous?
-- **Complete technical context**: Are all required technical details present in Dev Notes?
-- **Missing information**: Identify any critical information gaps
-- **Actionability**: Are all tasks actionable by a development agent?
+-   **自包含上下文**：无需阅读外部文档即可实施故事吗？
+-   **清晰的说明**：实施步骤是否明确？
+-   **完整的技术上下文**：开发说明中是否包含所有必需的技术细节？
+-   **信息缺失**：识别任何关键信息差距
+-   **可操作性**：所有任务是否都可由开发代理操作？
 
-### 10. Generate Validation Report
+### 10. 生成验证报告
 
-Provide a structured validation report including:
+提供结构化的验证报告，包括：
 
-#### Template Compliance Issues
+#### 模板合规性问题
 
-- Missing sections from story template
-- Unfilled placeholders or template variables
-- Structural formatting issues
+-   故事模板中缺失的章节
+-   未填充的占位符或模板变量
+-   结构格式问题
 
-#### Critical Issues (Must Fix - Story Blocked)
+#### 关键问题（必须修复 - 故事受阻）
 
-- Missing essential information for implementation
-- Inaccurate or unverifiable technical claims
-- Incomplete acceptance criteria coverage
-- Missing required sections
+-   实施所需的基本信息缺失
+-   不准确或无法验证的技术声明
+-   验收标准覆盖不完整
+-   缺少必需的章节
 
-#### Should-Fix Issues (Important Quality Improvements)
+#### 应修复问题（重要的质量改进）
 
-- Unclear implementation guidance
-- Missing security considerations
-- Task sequencing problems
-- Incomplete testing instructions
+-   不清晰的实施指导
+-   缺少安全考虑
+-   任务排序问题
+-   不完整的测试说明
 
-#### Nice-to-Have Improvements (Optional Enhancements)
+#### 可有可无的改进（可选增强）
 
-- Additional context that would help implementation
-- Clarifications that would improve efficiency
-- Documentation improvements
+-   有助于实施的额外上下文
+-   可以提高效率的澄清说明
+-   文档改进
 
-#### Anti-Hallucination Findings
+#### 反幻觉发现
 
-- Unverifiable technical claims
-- Missing source references
-- Inconsistencies with architecture documents
-- Invented libraries, patterns, or standards
+-   无法验证的技术声明
+-   缺少来源引用
+-   与架构文档不一致
+-   杜撰的库、模式或标准
 
-#### Final Assessment
+#### 最终评估
 
-- **GO**: Story is ready for implementation
-- **NO-GO**: Story requires fixes before implementation
-- **Implementation Readiness Score**: 1-10 scale
-- **Confidence Level**: High/Medium/Low for successful implementation
+-   **GO**：故事已准备好实施
+-   **NO-GO**：故事在实施前需要修复
+-   **实施准备就绪分数**：1-10分
+-   **成功实施的置信度**：高/中/低

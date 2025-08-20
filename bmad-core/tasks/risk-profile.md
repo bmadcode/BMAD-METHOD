@@ -1,355 +1,355 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# risk-profile
+# 风险概况
 
-Generate a comprehensive risk assessment matrix for a story implementation using probability × impact analysis.
+使用概率×影响分析，为故事实施生成全面的风险评估矩阵。
 
-## Inputs
+## 输入
 
 ```yaml
 required:
-  - story_id: '{epic}.{story}' # e.g., "1.3"
+  - story_id: '{epic}.{story}' # 例如, "1.3"
   - story_path: 'docs/stories/{epic}.{story}.*.md'
-  - story_title: '{title}' # If missing, derive from story file H1
-  - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
+  - story_title: '{title}' # 如果缺少，则从故事文件的H1派生
+  - story_slug: '{slug}' # 如果缺少，则从标题派生（小写，连字符连接）
 ```
 
-## Purpose
+## 目的
 
-Identify, assess, and prioritize risks in the story implementation. Provide risk mitigation strategies and testing focus areas based on risk levels.
+识别、评估和优先处理故事实施中的风险。根据风险级别提供风险缓解策略和测试重点领域。
 
-## Risk Assessment Framework
+## 风险评估框架
 
-### Risk Categories
+### 风险类别
 
-**Category Prefixes:**
+**类别前缀：**
 
-- `TECH`: Technical Risks
-- `SEC`: Security Risks
-- `PERF`: Performance Risks
-- `DATA`: Data Risks
-- `BUS`: Business Risks
-- `OPS`: Operational Risks
+-   `TECH`: 技术风险
+-   `SEC`: 安全风险
+-   `PERF`: 性能风险
+-   `DATA`: 数据风险
+-   `BUS`: 业务风险
+-   `OPS`: 运营风险
 
-1. **Technical Risks (TECH)**
-   - Architecture complexity
-   - Integration challenges
-   - Technical debt
-   - Scalability concerns
-   - System dependencies
+1.  **技术风险 (TECH)**
+    -   架构复杂性
+    -   集成挑战
+    -   技术债务
+    -   可扩展性问题
+    -   系统依赖
 
-2. **Security Risks (SEC)**
-   - Authentication/authorization flaws
-   - Data exposure vulnerabilities
-   - Injection attacks
-   - Session management issues
-   - Cryptographic weaknesses
+2.  **安全风险 (SEC)**
+    -   认证/授权缺陷
+    -   数据泄露漏洞
+    -   注入攻击
+    -   会话管理问题
+    -   加密弱点
 
-3. **Performance Risks (PERF)**
-   - Response time degradation
-   - Throughput bottlenecks
-   - Resource exhaustion
-   - Database query optimization
-   - Caching failures
+3.  **性能风险 (PERF)**
+    -   响应时间下降
+    -   吞吐量瓶颈
+    -   资源耗尽
+    -   数据库查询优化
+    -   缓存失败
 
-4. **Data Risks (DATA)**
-   - Data loss potential
-   - Data corruption
-   - Privacy violations
-   - Compliance issues
-   - Backup/recovery gaps
+4.  **数据风险 (DATA)**
+    -   数据丢失的可能性
+    -   数据损坏
+    -   侵犯隐私
+    -   合规性问题
+    -   备份/恢复差距
 
-5. **Business Risks (BUS)**
-   - Feature doesn't meet user needs
-   - Revenue impact
-   - Reputation damage
-   - Regulatory non-compliance
-   - Market timing
+5.  **业务风险 (BUS)**
+    -   功能不符合用户需求
+    -   收入影响
+    -   声誉损害
+    -   法规不合规
+    -   市场时机
 
-6. **Operational Risks (OPS)**
-   - Deployment failures
-   - Monitoring gaps
-   - Incident response readiness
-   - Documentation inadequacy
-   - Knowledge transfer issues
+6.  **运营风险 (OPS)**
+    -   部署失败
+    -   监控差距
+    -   事件响应准备情况
+    -   文档不足
+    -   知识转移问题
 
-## Risk Analysis Process
+## 风险分析流程
 
-### 1. Risk Identification
+### 1. 风险识别
 
-For each category, identify specific risks:
+为每个类别识别具体风险：
 
 ```yaml
 risk:
-  id: 'SEC-001' # Use prefixes: SEC, PERF, DATA, BUS, OPS, TECH
+  id: 'SEC-001' # 使用前缀：SEC, PERF, DATA, BUS, OPS, TECH
   category: security
-  title: 'Insufficient input validation on user forms'
-  description: 'Form inputs not properly sanitized could lead to XSS attacks'
+  title: '用户表单输入验证不足'
+  description: '表单输入未正确清理可能导致XSS攻击'
   affected_components:
     - 'UserRegistrationForm'
     - 'ProfileUpdateForm'
-  detection_method: 'Code review revealed missing validation'
+  detection_method: '代码审查发现缺少验证'
 ```
 
-### 2. Risk Assessment
+### 2. 风险评估
 
-Evaluate each risk using probability × impact:
+使用概率×影响评估每个风险：
 
-**Probability Levels:**
+**概率级别：**
 
-- `High (3)`: Likely to occur (>70% chance)
-- `Medium (2)`: Possible occurrence (30-70% chance)
-- `Low (1)`: Unlikely to occur (<30% chance)
+-   `高 (3)`: 很可能发生 (>70%的几率)
+-   `中 (2)`: 可能发生 (30-70%的几率)
+-   `低 (1)`: 不太可能发生 (<30%的几率)
 
-**Impact Levels:**
+**影响级别：**
 
-- `High (3)`: Severe consequences (data breach, system down, major financial loss)
-- `Medium (2)`: Moderate consequences (degraded performance, minor data issues)
-- `Low (1)`: Minor consequences (cosmetic issues, slight inconvenience)
+-   `高 (3)`: 严重后果（数据泄露、系统宕机、重大财务损失）
+-   `中 (2)`: 中等后果（性能下降、轻微数据问题）
+-   `低 (1)`: 轻微后果（外观问题、轻微不便）
 
-### Risk Score = Probability × Impact
+### 风险评分 = 概率 × 影响
 
-- 9: Critical Risk (Red)
-- 6: High Risk (Orange)
-- 4: Medium Risk (Yellow)
-- 2-3: Low Risk (Green)
-- 1: Minimal Risk (Blue)
+-   9: 严重风险 (红色)
+-   6: 高风险 (橙色)
+-   4: 中风险 (黄色)
+-   2-3: 低风险 (绿色)
+-   1: 极小风险 (蓝色)
 
-### 3. Risk Prioritization
+### 3. 风险优先级排序
 
-Create risk matrix:
+创建风险矩阵：
 
 ```markdown
-## Risk Matrix
+## 风险矩阵
 
-| Risk ID  | Description             | Probability | Impact     | Score | Priority |
-| -------- | ----------------------- | ----------- | ---------- | ----- | -------- |
-| SEC-001  | XSS vulnerability       | High (3)    | High (3)   | 9     | Critical |
-| PERF-001 | Slow query on dashboard | Medium (2)  | Medium (2) | 4     | Medium   |
-| DATA-001 | Backup failure          | Low (1)     | High (3)   | 3     | Low      |
+| 风险ID | 描述 | 概率 | 影响 | 评分 | 优先级 |
+| --- | --- | --- | --- | --- | --- |
+| SEC-001 | XSS漏洞 | 高 (3) | 高 (3) | 9 | 严重 |
+| PERF-001 | 仪表板查询缓慢 | 中 (2) | 中 (2) | 4 | 中 |
+| DATA-001 | 备份失败 | 低 (1) | 高 (3) | 3 | 低 |
 ```
 
-### 4. Risk Mitigation Strategies
+### 4. 风险缓解策略
 
-For each identified risk, provide mitigation:
+为每个已识别的风险提供缓解措施：
 
 ```yaml
 mitigation:
   risk_id: 'SEC-001'
-  strategy: 'preventive' # preventive|detective|corrective
+  strategy: '预防性' # 预防性|检测性|纠正性
   actions:
-    - 'Implement input validation library (e.g., validator.js)'
-    - 'Add CSP headers to prevent XSS execution'
-    - 'Sanitize all user inputs before storage'
-    - 'Escape all outputs in templates'
+    - '实施输入验证库（例如，validator.js）'
+    - '添加CSP头以防止XSS执行'
+    - '在存储前清理所有用户输入'
+    - '在模板中对所有输出进行转义'
   testing_requirements:
-    - 'Security testing with OWASP ZAP'
-    - 'Manual penetration testing of forms'
-    - 'Unit tests for validation functions'
-  residual_risk: 'Low - Some zero-day vulnerabilities may remain'
+    - '使用OWASP ZAP进行安全测试'
+    - '对表单进行手动渗透测试'
+    - '验证函数的单元测试'
+  residual_risk: '低 - 可能仍存在一些零日漏洞'
   owner: 'dev'
-  timeline: 'Before deployment'
+  timeline: '部署前'
 ```
 
-## Outputs
+## 输出
 
-### Output 1: Gate YAML Block
+### 输出1：门禁YAML块
 
-Generate for pasting into gate file under `risk_summary`:
+生成用于粘贴到门禁文件的`risk_summary`下的内容：
 
-**Output rules:**
+**输出规则：**
 
-- Only include assessed risks; do not emit placeholders
-- Sort risks by score (desc) when emitting highest and any tabular lists
-- If no risks: totals all zeros, omit highest, keep recommendations arrays empty
+-   仅包括评估的风险；不要输出占位符
+-   在输出最高风险和任何表格列表时，按分数（降序）对风险进行排序
+-   如果没有风险：总数全为零，省略最高风险，保持建议数组为空
 
 ```yaml
-# risk_summary (paste into gate file):
+# risk_summary（粘贴到门禁文件）：
 risk_summary:
   totals:
-    critical: X # score 9
-    high: Y # score 6
-    medium: Z # score 4
-    low: W # score 2-3
+    critical: X # 评分 9
+    high: Y # 评分 6
+    medium: Z # 评分 4
+    low: W # 评分 2-3
   highest:
     id: SEC-001
     score: 9
-    title: 'XSS on profile form'
+    title: '个人资料表单上的XSS'
   recommendations:
     must_fix:
-      - 'Add input sanitization & CSP'
+      - '添加入口清理和CSP'
     monitor:
-      - 'Add security alerts for auth endpoints'
+      - '为认证端点添加安全警报'
 ```
 
-### Output 2: Markdown Report
+### 输出2：Markdown报告
 
-**Save to:** `qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md`
+**保存到：** `qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md`
 
 ```markdown
-# Risk Profile: Story {epic}.{story}
+# 风险概况：故事 {epic}.{story}
 
-Date: {date}
-Reviewer: Quinn (Test Architect)
+日期：{date}
+审查员：Quinn（测试架构师）
 
-## Executive Summary
+## 执行摘要
 
-- Total Risks Identified: X
-- Critical Risks: Y
-- High Risks: Z
-- Risk Score: XX/100 (calculated)
+-   已识别风险总数：X
+-   严重风险：Y
+-   高风险：Z
+-   风险评分：XX/100（已计算）
 
-## Critical Risks Requiring Immediate Attention
+## 需要立即关注的严重风险
 
-### 1. [ID]: Risk Title
+### 1. [ID]：风险标题
 
-**Score: 9 (Critical)**
-**Probability**: High - Detailed reasoning
-**Impact**: High - Potential consequences
-**Mitigation**:
+**评分：9（严重）**
+**概率**：高 - 详细理由
+**影响**：高 - 潜在后果
+**缓解**：
 
-- Immediate action required
-- Specific steps to take
-  **Testing Focus**: Specific test scenarios needed
+-   需要立即采取行动
+-   要采取的具体步骤
+  **测试重点**：需要的具体测试场景
 
-## Risk Distribution
+## 风险分布
 
-### By Category
+### 按类别
 
-- Security: X risks (Y critical)
-- Performance: X risks (Y critical)
-- Data: X risks (Y critical)
-- Business: X risks (Y critical)
-- Operational: X risks (Y critical)
+-   安全性：X个风险（Y个严重）
+-   性能：X个风险（Y个严重）
+-   数据：X个风险（Y个严重）
+-   业务：X个风险（Y个严重）
+-   运营：X个风险（Y个严重）
 
-### By Component
+### 按组件
 
-- Frontend: X risks
-- Backend: X risks
-- Database: X risks
-- Infrastructure: X risks
+-   前端：X个风险
+-   后端：X个风险
+-   数据库：X个风险
+-   基础设施：X个风险
 
-## Detailed Risk Register
+## 详细风险登记册
 
-[Full table of all risks with scores and mitigations]
+[包含所有风险、评分和缓解措施的完整表格]
 
-## Risk-Based Testing Strategy
+## 基于风险的测试策略
 
-### Priority 1: Critical Risk Tests
+### 优先级1：严重风险测试
 
-- Test scenarios for critical risks
-- Required test types (security, load, chaos)
-- Test data requirements
+-   严重风险的测试场景
+-   所需的测试类型（安全、负载、混沌）
+-   测试数据要求
 
-### Priority 2: High Risk Tests
+### 优先级2：高风险测试
 
-- Integration test scenarios
-- Edge case coverage
+-   集成测试场景
+-   边缘情况覆盖
 
-### Priority 3: Medium/Low Risk Tests
+### 优先级3：中/低风险测试
 
-- Standard functional tests
-- Regression test suite
+-   标准功能测试
+-   回归测试套件
 
-## Risk Acceptance Criteria
+## 风险接受标准
 
-### Must Fix Before Production
+### 生产前必须修复
 
-- All critical risks (score 9)
-- High risks affecting security/data
+-   所有严重风险（评分9）
+-   影响安全/数据的高风险
 
-### Can Deploy with Mitigation
+### 可以在有缓解措施的情况下部署
 
-- Medium risks with compensating controls
-- Low risks with monitoring in place
+-   有补偿控制的中等风险
+-   有监控的低风险
 
-### Accepted Risks
+### 已接受的风险
 
-- Document any risks team accepts
-- Include sign-off from appropriate authority
+-   记录团队接受的任何风险
+-   包括适当授权的签字
 
-## Monitoring Requirements
+## 监控要求
 
-Post-deployment monitoring for:
+部署后监控：
 
-- Performance metrics for PERF risks
-- Security alerts for SEC risks
-- Error rates for operational risks
-- Business KPIs for business risks
+-   PERF风险的性能指标
+-   SEC风险的安全警报
+-   运营风险的错误率
+-   业务风险的业务KPI
 
-## Risk Review Triggers
+## 风险审查触发器
 
-Review and update risk profile when:
+在以下情况下审查和更新风险概况：
 
-- Architecture changes significantly
-- New integrations added
-- Security vulnerabilities discovered
-- Performance issues reported
-- Regulatory requirements change
+-   架构发生重大变化
+-   添加了新的集成
+-   发现了安全漏洞
+-   报告了性能问题
+-   法规要求变更
 ```
 
-## Risk Scoring Algorithm
+## 风险评分算法
 
-Calculate overall story risk score:
+计算总体故事风险评分：
 
 ```text
-Base Score = 100
-For each risk:
-  - Critical (9): Deduct 20 points
-  - High (6): Deduct 10 points
-  - Medium (4): Deduct 5 points
-  - Low (2-3): Deduct 2 points
+基础分 = 100
+对于每个风险：
+  - 严重 (9)：扣20分
+  - 高 (6)：扣10分
+  - 中 (4)：扣5分
+  - 低 (2-3)：扣2分
 
-Minimum score = 0 (extremely risky)
-Maximum score = 100 (minimal risk)
+最低分 = 0（极度危险）
+最高分 = 100（风险极小）
 ```
 
-## Risk-Based Recommendations
+## 基于风险的建议
 
-Based on risk profile, recommend:
+根据风险概况，建议：
 
-1. **Testing Priority**
-   - Which tests to run first
-   - Additional test types needed
-   - Test environment requirements
+1.  **测试优先级**
+    -   首先运行哪些测试
+    -   需要哪些额外的测试类型
+    -   测试环境要求
 
-2. **Development Focus**
-   - Code review emphasis areas
-   - Additional validation needed
-   - Security controls to implement
+2.  **开发重点**
+    -   代码审查重点领域
+    -   需要额外的验证
+    -   要实施的安全控制
 
-3. **Deployment Strategy**
-   - Phased rollout for high-risk changes
-   - Feature flags for risky features
-   - Rollback procedures
+3.  **部署策略**
+    -   对高风险更改进行分阶段推出
+    -   对有风险的功能使用功能标志
+    -   回滚程序
 
-4. **Monitoring Setup**
-   - Metrics to track
-   - Alerts to configure
-   - Dashboard requirements
+4.  **监控设置**
+    -   要跟踪的指标
+    -   要配置的警报
+    -   仪表板要求
 
-## Integration with Quality Gates
+## 与质量门的集成
 
-**Deterministic gate mapping:**
+**确定性门映射：**
 
-- Any risk with score ≥ 9 → Gate = FAIL (unless waived)
-- Else if any score ≥ 6 → Gate = CONCERNS
-- Else → Gate = PASS
-- Unmitigated risks → Document in gate
+-   任何风险评分≥9 → 门 = 失败（除非豁免）
+-   否则，如果任何评分≥6 → 门 = 关注
+-   否则 → 门 = 通过
+-   未缓解的风险 → 在门中记录
 
-### Output 3: Story Hook Line
+### 输出3：故事钩子行
 
-**Print this line for review task to quote:**
+**打印此行以供审查任务引用：**
 
 ```text
-Risk profile: qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
+风险概况：qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
 ```
 
-## Key Principles
+## 关键原则
 
-- Identify risks early and systematically
-- Use consistent probability × impact scoring
-- Provide actionable mitigation strategies
-- Link risks to specific test requirements
-- Track residual risk after mitigation
-- Update risk profile as story evolves
+-   尽早并系统地识别风险
+-   使用一致的概率×影响评分
+-   提供可操作的缓解策略
+-   将风险与具体的测试要求联系起来
+-   跟踪缓解后的剩余风险
+-   随着故事的发展更新风险概况

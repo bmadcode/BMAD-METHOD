@@ -1,280 +1,280 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Create Deep Research Prompt Task
+# 创建深度研究提示任务
 
-This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
+此任务有助于为各种类型的深度分析创建全面的研究提示。它可以处理来自头脑风暴会议、项目简报、市场研究或特定研究问题的输入，以生成用于更深入调查的目标提示。
 
-## Purpose
+## 目的
 
-Generate well-structured research prompts that:
+生成结构良好的研究提示，以便：
 
-- Define clear research objectives and scope
-- Specify appropriate research methodologies
-- Outline expected deliverables and formats
-- Guide systematic investigation of complex topics
-- Ensure actionable insights are captured
+-   定义明确的研究目标和范围
+-   指定适当的研究方法
+-   概述预期的可交付成果和格式
+-   指导对复杂主题的系统性调查
+-   确保捕获可操作的见解
 
-## Research Type Selection
+## 研究类型选择
 
-CRITICAL: First, help the user select the most appropriate research focus based on their needs and any input documents they've provided.
+关键：首先，根据用户的需求和他们提供的任何输入文件，帮助用户选择最合适的研究重点。
 
-### 1. Research Focus Options
+### 1. 研究重点选项
 
-Present these numbered options to the user:
+向用户呈现这些编号的选项：
 
-1. **Product Validation Research**
-   - Validate product hypotheses and market fit
-   - Test assumptions about user needs and solutions
-   - Assess technical and business feasibility
-   - Identify risks and mitigation strategies
+1.  **产品验证研究**
+    -   验证产品假设和市场契合度
+    -   测试关于用户需求和解决方案的假设
+    -   评估技术和业务可行性
+    -   识别风险和缓解策略
 
-2. **Market Opportunity Research**
-   - Analyze market size and growth potential
-   - Identify market segments and dynamics
-   - Assess market entry strategies
-   - Evaluate timing and market readiness
+2.  **市场机会研究**
+    -   分析市场规模和增长潜力
+    -   识别市场细分和动态
+    -   评估市场进入策略
+    -   评估时机和市场准备情况
 
-3. **User & Customer Research**
-   - Deep dive into user personas and behaviors
-   - Understand jobs-to-be-done and pain points
-   - Map customer journeys and touchpoints
-   - Analyze willingness to pay and value perception
+3.  **用户与客户研究**
+    -   深入研究用户画像和行为
+    -   理解待办任务和痛点
+    -   绘制客户旅程和接触点
+    -   分析支付意愿和价值感知
 
-4. **Competitive Intelligence Research**
-   - Detailed competitor analysis and positioning
-   - Feature and capability comparisons
-   - Business model and strategy analysis
-   - Identify competitive advantages and gaps
+4.  **竞争情报研究**
+    -   详细的竞争对手分析和定位
+    -   功能和能力比较
+    -   商业模式和战略分析
+    -   识别竞争优势和差距
 
-5. **Technology & Innovation Research**
-   - Assess technology trends and possibilities
-   - Evaluate technical approaches and architectures
-   - Identify emerging technologies and disruptions
-   - Analyze build vs. buy vs. partner options
+5.  **技术与创新研究**
+    -   评估技术趋势和可能性
+    -   评估技术方法和架构
+    -   识别新兴技术和颠覆性技术
+    -   分析自建、购买与合作的选项
 
-6. **Industry & Ecosystem Research**
-   - Map industry value chains and dynamics
-   - Identify key players and relationships
-   - Analyze regulatory and compliance factors
-   - Understand partnership opportunities
+6.  **行业与生态系统研究**
+    -   绘制行业价值链和动态
+    -   识别关键参与者和关系
+    -   分析法规和合规因素
+    -   理解合作机会
 
-7. **Strategic Options Research**
-   - Evaluate different strategic directions
-   - Assess business model alternatives
-   - Analyze go-to-market strategies
-   - Consider expansion and scaling paths
+7.  **战略选项研究**
+    -   评估不同的战略方向
+    -   评估商业模式替代方案
+    -   分析市场进入策略
+    -   考虑扩张和扩展路径
 
-8. **Risk & Feasibility Research**
-   - Identify and assess various risk factors
-   - Evaluate implementation challenges
-   - Analyze resource requirements
-   - Consider regulatory and legal implications
+8.  **风险与可行性研究**
+    -   识别和评估各种风险因素
+    -   评估实施挑战
+    -   分析资源需求
+    -   考虑法规和法律影响
 
-9. **Custom Research Focus**
-   - User-defined research objectives
-   - Specialized domain investigation
-   - Cross-functional research needs
+9.  **自定义研究重点**
+    -   用户定义的研究目标
+    -   专业领域调查
+    -   跨职能研究需求
 
-### 2. Input Processing
+### 2. 输入处理
 
-**If Project Brief provided:**
+**如果提供了项目简报：**
 
-- Extract key product concepts and goals
-- Identify target users and use cases
-- Note technical constraints and preferences
-- Highlight uncertainties and assumptions
+-   提取关键产品概念和目标
+-   识别目标用户和用例
+-   注意技术约束和偏好
+-   突出不确定性和假设
 
-**If Brainstorming Results provided:**
+**如果提供了头脑风暴结果：**
 
-- Synthesize main ideas and themes
-- Identify areas needing validation
-- Extract hypotheses to test
-- Note creative directions to explore
+-   综合主要思想和主题
+-   识别需要验证的领域
+-   提取要测试的假设
+-   注意要探索的创意方向
 
-**If Market Research provided:**
+**如果提供了市场研究：**
 
-- Build on identified opportunities
-- Deepen specific market insights
-- Validate initial findings
-- Explore adjacent possibilities
+-   在已识别的机会上进行构建
+-   深化特定的市场见解
+-   验证初步发现
+-   探索相邻的可能性
 
-**If Starting Fresh:**
+**如果从头开始：**
 
-- Gather essential context through questions
-- Define the problem space
-- Clarify research objectives
-- Establish success criteria
+-   通过问题收集基本背景
+-   定义问题空间
+-   澄清研究目标
+-   建立成功标准
 
-## Process
+## 流程
 
-### 3. Research Prompt Structure
+### 3. 研究提示结构
 
-CRITICAL: collaboratively develop a comprehensive research prompt with these components.
+关键：与用户协作制定一个包含这些组成部分的全面研究提示。
 
-#### A. Research Objectives
+#### A. 研究目标
 
-CRITICAL: collaborate with the user to articulate clear, specific objectives for the research.
+关键：与用户协作，阐明清晰、具体的研究目标。
 
-- Primary research goal and purpose
-- Key decisions the research will inform
-- Success criteria for the research
-- Constraints and boundaries
+-   主要研究目标和目的
+-   研究将为哪些关键决策提供信息
+-   研究的成功标准
+-   约束和边界
 
-#### B. Research Questions
+#### B. 研究问题
 
-CRITICAL: collaborate with the user to develop specific, actionable research questions organized by theme.
+关键：与用户协作，按主题组织制定具体的、可操作的研究问题。
 
-**Core Questions:**
+**核心问题：**
 
-- Central questions that must be answered
-- Priority ranking of questions
-- Dependencies between questions
+-   必须回答的核心问题
+-   问题的优先级排序
+-   问题之间的依赖关系
 
-**Supporting Questions:**
+**支持性问题：**
 
-- Additional context-building questions
-- Nice-to-have insights
-- Future-looking considerations
+-   额外的背景构建问题
+-   可有可无的见解
+-   面向未来的考虑
 
-#### C. Research Methodology
+#### C. 研究方法
 
-**Data Collection Methods:**
+**数据收集方法：**
 
-- Secondary research sources
-- Primary research approaches (if applicable)
-- Data quality requirements
-- Source credibility criteria
+-   二手研究来源
+-   一手研究方法（如果适用）
+-   数据质量要求
+-   来源可信度标准
 
-**Analysis Frameworks:**
+**分析框架：**
 
-- Specific frameworks to apply
-- Comparison criteria
-- Evaluation methodologies
-- Synthesis approaches
+-   要应用的具体框架
+-   比较标准
+-   评估方法
+-   综合方法
 
-#### D. Output Requirements
+#### D. 输出要求
 
-**Format Specifications:**
+**格式规范：**
 
-- Executive summary requirements
-- Detailed findings structure
-- Visual/tabular presentations
-- Supporting documentation
+-   执行摘要要求
+-   详细发现的结构
+-   视觉/表格演示
+-   支持文档
 
-**Key Deliverables:**
+**关键可交付成果：**
 
-- Must-have sections and insights
-- Decision-support elements
-- Action-oriented recommendations
-- Risk and uncertainty documentation
+-   必须有的部分和见解
+-   决策支持元素
+-   面向行动的建议
+--   风险和不确定性文档
 
-### 4. Prompt Generation
+### 4. 提示生成
 
-**Research Prompt Template:**
+**研究提示模板：**
 
 ```markdown
-## Research Objective
+## 研究目标
 
-[Clear statement of what this research aims to achieve]
+[清晰陈述本研究旨在实现的目标]
 
-## Background Context
+## 背景情况
 
-[Relevant information from project brief, brainstorming, or other inputs]
+[来自项目简报、头脑风暴或其他输入的相关信息]
 
-## Research Questions
+## 研究问题
 
-### Primary Questions (Must Answer)
+### 主要问题（必须回答）
 
-1. [Specific, actionable question]
-2. [Specific, actionable question]
+1. [具体的、可操作的问题]
+2. [具体的、可操作的问题]
    ...
 
-### Secondary Questions (Nice to Have)
+### 次要问题（最好有）
 
-1. [Supporting question]
-2. [Supporting question]
+1. [支持性问题]
+2. [支持性问题]
    ...
 
-## Research Methodology
+## 研究方法
 
-### Information Sources
+### 信息来源
 
-- [Specific source types and priorities]
+- [具体来源类型和优先级]
 
-### Analysis Frameworks
+### 分析框架
 
-- [Specific frameworks to apply]
+- [要应用的具体框架]
 
-### Data Requirements
+### 数据要求
 
-- [Quality, recency, credibility needs]
+- [质量、时效性、可信度需求]
 
-## Expected Deliverables
+## 预期可交付成果
 
-### Executive Summary
+### 执行摘要
 
-- Key findings and insights
-- Critical implications
-- Recommended actions
+- 关键发现和见解
+- 关键影响
+- 建议的行动
 
-### Detailed Analysis
+### 详细分析
 
-[Specific sections needed based on research type]
+[根据研究类型需要的具体部分]
 
-### Supporting Materials
+### 支持材料
 
-- Data tables
-- Comparison matrices
-- Source documentation
+- 数据表
+- 比较矩阵
+- 源文档
 
-## Success Criteria
+## 成功标准
 
-[How to evaluate if research achieved its objectives]
+[如何评估研究是否达到其目标]
 
-## Timeline and Priority
+## 时间表和优先级
 
-[If applicable, any time constraints or phasing]
+[如果适用，任何时间限制或分期]
 ```
 
-### 5. Review and Refinement
+### 5. 审查和完善
 
-1. **Present Complete Prompt**
-   - Show the full research prompt
-   - Explain key elements and rationale
-   - Highlight any assumptions made
+1.  **呈现完整的提示**
+    -   显示完整的​​研究提示
+    -   解释关键要素和理由
+    -   突出任何假设
 
-2. **Gather Feedback**
-   - Are the objectives clear and correct?
-   - Do the questions address all concerns?
-   - Is the scope appropriate?
-   - Are output requirements sufficient?
+2.  **收集反馈**
+    -   目标是否清晰正确？
+    -   问题是否解决了所有疑虑？
+    -   范围是否合适？
+    -   输出要求是否足够？
 
-3. **Refine as Needed**
-   - Incorporate user feedback
-   - Adjust scope or focus
-   - Add missing elements
-   - Clarify ambiguities
+3.  **根据需要进行完善**
+    -   采纳用户反馈
+    -   调整范围或重点
+    -   添加缺失的元素
+    -   澄清模糊之处
 
-### 6. Next Steps Guidance
+### 6. 后续步骤指导
 
-**Execution Options:**
+**执行选项：**
 
-1. **Use with AI Research Assistant**: Provide this prompt to an AI model with research capabilities
-2. **Guide Human Research**: Use as a framework for manual research efforts
-3. **Hybrid Approach**: Combine AI and human research using this structure
+1.  **与AI研究助理一起使用**：将此提示提供给具有研究能力的AI模型
+2.  **指导人工研究**：作为人工研究工作的框架
+3.  **混合方法**：使用此结构结合AI和人工研究
 
-**Integration Points:**
+**集成点：**
 
-- How findings will feed into next phases
-- Which team members should review results
-- How to validate findings
-- When to revisit or expand research
+-   研究结果将如何融入下一阶段
+-   哪些团队成员应该审查结果
+-   如何验证研究结果
+-   何时重新审视或扩展研究
 
-## Important Notes
+## 重要说明
 
-- The quality of the research prompt directly impacts the quality of insights gathered
-- Be specific rather than general in research questions
-- Consider both current state and future implications
-- Balance comprehensiveness with focus
-- Document assumptions and limitations clearly
-- Plan for iterative refinement based on initial findings
+-   研究提示的质量直接影响所收集见解的质量
+-   研究问题要具体而非笼统
+-   同时考虑当前状态和未来影响
+-   在全面性和专注性之间取得平衡
+-   清晰地记录假设和限制
+-   根据初步发现计划迭代完善

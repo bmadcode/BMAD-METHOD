@@ -1,155 +1,155 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Story Draft Checklist
+# 故事草稿清单
 
-The Scrum Master should use this checklist to validate that each story contains sufficient context for a developer agent to implement it successfully, while assuming the dev agent has reasonable capabilities to figure things out.
+Scrum Master 应使用此清单来验证每个故事是否包含足够的上下文，以便开发代理成功实施，同时假设开发代理具有合理的能力来解决问题。
 
-[[LLM: INITIALIZATION INSTRUCTIONS - STORY DRAFT VALIDATION
+[[LLM: 初始化说明 - 故事草稿验证
 
-Before proceeding with this checklist, ensure you have access to:
+在开始使用此清单之前，请确保您能访问以下内容：
 
-1. The story document being validated (usually in docs/stories/ or provided directly)
-2. The parent epic context
-3. Any referenced architecture or design documents
-4. Previous related stories if this builds on prior work
+1.  正在验证的故事文档（通常在 docs/stories/ 中或直接提供）
+2.  父级史诗的上下文
+3.  任何引用的架构或设计文档
+4.  如果此工作建立在先前工作的基础上，则需提供以前的相关故事
 
-IMPORTANT: This checklist validates individual stories BEFORE implementation begins.
+重要提示：此清单在实施开始前验证单个故事。
 
-VALIDATION PRINCIPLES:
+验证原则：
 
-1. Clarity - A developer should understand WHAT to build
-2. Context - WHY this is being built and how it fits
-3. Guidance - Key technical decisions and patterns to follow
-4. Testability - How to verify the implementation works
-5. Self-Contained - Most info needed is in the story itself
+1.  清晰性 - 开发人员应了解要构建什么
+2.  上下文 - 为什么要构建它以及它如何融入整体
+3.  指导 - 要遵循的关键技术决策和模式
+4.  可测试性 - 如何验证实施是否有效
+5.  自包含性 - 所需的大部分信息都在故事本身中
 
-REMEMBER: We assume competent developer agents who can:
+请记住：我们假设有能力的开发代理可以：
 
-- Research documentation and codebases
-- Make reasonable technical decisions
-- Follow established patterns
-- Ask for clarification when truly stuck
+-   研究文档和代码库
+-   做出合理的技术决策
+-   遵循既定模式
+-   在真正遇到困难时请求澄清
 
-We're checking for SUFFICIENT guidance, not exhaustive detail.]]
+我们正在检查的是足够的指导，而不是详尽的细节。]]
 
-## 1. GOAL & CONTEXT CLARITY
+## 1. 目标与上下文清晰度
 
-[[LLM: Without clear goals, developers build the wrong thing. Verify:
+[[LLM: 没有明确的目标，开发人员会构建错误的东西。验证：
 
-1. The story states WHAT functionality to implement
-2. The business value or user benefit is clear
-3. How this fits into the larger epic/product is explained
-4. Dependencies are explicit ("requires Story X to be complete")
-5. Success looks like something specific, not vague]]
+1.  故事说明了要实施什么功能
+2.  业务价值或用户利益是明确的
+3.  解释了这如何融入更大的史诗/产品
+4.  依赖关系是明确的（“需要故事 X 完成”）
+5.  成功看起来是具体的，而不是模糊的]]
 
-- [ ] Story goal/purpose is clearly stated
-- [ ] Relationship to epic goals is evident
-- [ ] How the story fits into overall system flow is explained
-- [ ] Dependencies on previous stories are identified (if applicable)
-- [ ] Business context and value are clear
+- [ ] 故事目标/目的陈述清晰
+- [ ] 与史诗目标的关系显而易见
+- [ ] 解释了故事如何融入整个系统流程
+- [ ] 确定了对先前故事的依赖关系（如果适用）
+- [ ] 业务背景和价值清晰
 
-## 2. TECHNICAL IMPLEMENTATION GUIDANCE
+## 2. 技术实施指导
 
-[[LLM: Developers need enough technical context to start coding. Check:
+[[LLM: 开发人员需要足够的技术背景才能开始编码。检查：
 
-1. Key files/components to create or modify are mentioned
-2. Technology choices are specified where non-obvious
-3. Integration points with existing code are identified
-4. Data models or API contracts are defined or referenced
-5. Non-standard patterns or exceptions are called out
+1.  提到了要创建或修改的关键文件/组件
+2.  在不明显的地方指定了技术选择
+3.  确定了与现有代码的集成点
+4.  定义或引用了数据模型或 API 合约
+5.  指出了非标准模式或例外情况
 
-Note: We don't need every file listed - just the important ones.]]
+注意：我们不需要列出每个文件 - 只需要重要的文件。]]
 
-- [ ] Key files to create/modify are identified (not necessarily exhaustive)
-- [ ] Technologies specifically needed for this story are mentioned
-- [ ] Critical APIs or interfaces are sufficiently described
-- [ ] Necessary data models or structures are referenced
-- [ ] Required environment variables are listed (if applicable)
-- [ ] Any exceptions to standard coding patterns are noted
+- [ ] 确定了要创建/修改的关键文件（不一定详尽无遗）
+- [ ] 提到了此故事特别需要的技术
+- [ ] 充分描述了关键的 API 或接口
+- [ ] 引用了必要的数据模型或结构
+- [ ] 列出了所需的环境变量（如果适用）
+- [ ] 注意到了标准编码模式的任何例外情况
 
-## 3. REFERENCE EFFECTIVENESS
+## 3. 参考有效性
 
-[[LLM: References should help, not create a treasure hunt. Ensure:
+[[LLM: 参考应该有帮助，而不是制造寻宝游戏。确保：
 
-1. References point to specific sections, not whole documents
-2. The relevance of each reference is explained
-3. Critical information is summarized in the story
-4. References are accessible (not broken links)
-5. Previous story context is summarized if needed]]
+1.  参考指向特定部分，而不是整个文档
+2.  解释了每个参考的相关性
+3.  故事中总结了关键信息
+4.  参考是可访问的（不是损坏的链接）
+5.  如果需要，总结了先前故事的上下文]]
 
-- [ ] References to external documents point to specific relevant sections
-- [ ] Critical information from previous stories is summarized (not just referenced)
-- [ ] Context is provided for why references are relevant
-- [ ] References use consistent format (e.g., `docs/filename.md#section`)
+- [ ] 对外部文档的引用指向特定的相关部分
+- [ ] 总结了先前故事中的关键信息（而不仅仅是引用）
+- [ ] 提供了为什么参考相关的上下文
+- [ ] 参考使用一致的格式（例如，`docs/filename.md#section`）
 
-## 4. SELF-CONTAINMENT ASSESSMENT
+## 4. 自包含性评估
 
-[[LLM: Stories should be mostly self-contained to avoid context switching. Verify:
+[[LLM: 故事应尽可能自包含，以避免上下文切换。验证：
 
-1. Core requirements are in the story, not just in references
-2. Domain terms are explained or obvious from context
-3. Assumptions are stated explicitly
-4. Edge cases are mentioned (even if deferred)
-5. The story could be understood without reading 10 other documents]]
+1.  核心需求在故事中，而不仅仅是在参考中
+2.  领域术语已解释或从上下文中显而易见
+3.  明确陈述了假设
+4.  提到了边缘情况（即使已推迟）
+5.  无需阅读 10 个其他文档即可理解该故事]]
 
-- [ ] Core information needed is included (not overly reliant on external docs)
-- [ ] Implicit assumptions are made explicit
-- [ ] Domain-specific terms or concepts are explained
-- [ ] Edge cases or error scenarios are addressed
+- [ ] 包含了所需的核心信息（不过度依赖外部文档）
+- [ ] 明确了隐含的假设
+- [ ] 解释了特定领域的术语或概念
+- [ ] 解决了边缘情况或错误场景
 
-## 5. TESTING GUIDANCE
+## 5. 测试指导
 
-[[LLM: Testing ensures the implementation actually works. Check:
+[[LLM: 测试确保实施真正有效。检查：
 
-1. Test approach is specified (unit, integration, e2e)
-2. Key test scenarios are listed
-3. Success criteria are measurable
-4. Special test considerations are noted
-5. Acceptance criteria in the story are testable]]
+1.  指定了测试方法（单元、集成、端到端）
+2.  列出了关键测试场景
+3.  成功标准是可衡量的
+4.  注意到了特殊的测试注意事项
+5.  故事中的验收标准是可测试的]]
 
-- [ ] Required testing approach is outlined
-- [ ] Key test scenarios are identified
-- [ ] Success criteria are defined
-- [ ] Special testing considerations are noted (if applicable)
+- [ ] 概述了所需的测试方法
+- [ ] 确定了关键测试场景
+- [ ] 定义了成功标准
+- [ ] 注意到了特殊的测试注意事项（如果适用）
 
-## VALIDATION RESULT
+## 验证结果
 
-[[LLM: FINAL STORY VALIDATION REPORT
+[[LLM: 最终故事验证报告
 
-Generate a concise validation report:
+生成一份简洁的验证报告：
 
-1. Quick Summary
-   - Story readiness: READY / NEEDS REVISION / BLOCKED
-   - Clarity score (1-10)
-   - Major gaps identified
+1.  快速摘要
+    -   故事准备情况：准备就绪 / 需要修订 / 受阻
+    -   清晰度得分 (1-10)
+    -   识别出的主要差距
 
-2. Fill in the validation table with:
-   - PASS: Requirements clearly met
-   - PARTIAL: Some gaps but workable
-   - FAIL: Critical information missing
+2.  填写验证表：
+    -   通过：需求明确满足
+    -   部分：有些差距但可行
+    -   失败：缺少关键信息
 
-3. Specific Issues (if any)
-   - List concrete problems to fix
-   - Suggest specific improvements
-   - Identify any blocking dependencies
+3.  具体问题（如有）
+    -   列出要修复的具体问题
+    -   提出具体的改进建议
+    -   确定任何阻塞性依赖关系
 
-4. Developer Perspective
-   - Could YOU implement this story as written?
-   - What questions would you have?
-   - What might cause delays or rework?
+4.  开发人员视角
+    -   您能按书面形式实施这个故事吗？
+    -   您会有什么问题？
+    -   什么可能导致延误或返工？
 
-Be pragmatic - perfect documentation doesn't exist, but it must be enough to provide the extreme context a dev agent needs to get the work down and not create a mess.]]
+要务实——完美的文档不存在，但必须足以提供开发代理完成工作所需的极端上下文，并且不会造成混乱。]]
 
-| Category                             | Status | Issues |
-| ------------------------------------ | ------ | ------ |
-| 1. Goal & Context Clarity            | _TBD_  |        |
-| 2. Technical Implementation Guidance | _TBD_  |        |
-| 3. Reference Effectiveness           | _TBD_  |        |
-| 4. Self-Containment Assessment       | _TBD_  |        |
-| 5. Testing Guidance                  | _TBD_  |        |
+| 类别 | 状态 | 问题 |
+| --- | --- | --- |
+| 1. 目标与上下文清晰度 | _待定_ | |
+| 2. 技术实施指导 | _待定_ | |
+| 3. 参考有效性 | _待定_ | |
+| 4. 自包含性评估 | _待定_ | |
+| 5. 测试指导 | _待定_ | |
 
-**Final Assessment:**
+**最终评估：**
 
-- READY: The story provides sufficient context for implementation
-- NEEDS REVISION: The story requires updates (see issues)
-- BLOCKED: External information required (specify what information)
+-   **准备就绪**：故事为实施提供了足够的上下文
+-   **需要修订**：故事需要更新（见问题）
+-   **受阻**：需要外部信息（指明需要什么信息）

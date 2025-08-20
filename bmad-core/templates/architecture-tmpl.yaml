@@ -1,12 +1,12 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: architecture-template-v2
-  name: Architecture Document
+  name: 架构文档
   version: 2.0
   output:
     format: markdown
     filename: docs/architecture.md
-    title: "{{project_name}} Architecture Document"
+    title: "{{project_name}} 架构文档"
 
 workflow:
   mode: interactive
@@ -14,284 +14,284 @@ workflow:
 
 sections:
   - id: introduction
-    title: Introduction
+    title: 引言
     instruction: |
-      If available, review any provided relevant documents to gather all relevant context before beginning. If at a minimum you cannot locate docs/prd.md ask the user what docs will provide the basis for the architecture.
+      如果可用，请在开始前审查任何提供的相关文档以收集所有相关背景。如果至少找不到docs/prd.md，请询问用户哪些文档将为架构提供基础。
     sections:
       - id: intro-content
         content: |
-          This document outlines the overall project architecture for {{project_name}}, including backend systems, shared services, and non-UI specific concerns. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development, ensuring consistency and adherence to chosen patterns and technologies.
+          本文档概述了{{project_name}}的整体项目架构，包括后端系统、共享服务和非UI特定的问题。其主要目标是作为AI驱动开发的指导性架构蓝图，确保所选模式和技术的一致性和遵守。
 
-          **Relationship to Frontend Architecture:**
-          If the project includes a significant user interface, a separate Frontend Architecture Document will detail the frontend-specific design and MUST be used in conjunction with this document. Core technology stack choices documented herein (see "Tech Stack") are definitive for the entire project, including any frontend components.
+          **与前端架构的关系：**
+          如果项目包含重要的用户界面，则单独的前端架构文档将详细说明特定于前端的设计，并且必须与本文档结合使用。此处记录的核心技术栈选择（参见“技术栈”）对整个项目（包括任何前端组件）都是决定性的。
       - id: starter-template
-        title: Starter Template or Existing Project
+        title: 入门模板或现有项目
         instruction: |
-          Before proceeding further with architecture design, check if the project is based on a starter template or existing codebase:
+          在继续进行架构设计之前，请检查项目是否基于入门模板或现有代码库：
 
-          1. Review the PRD and brainstorming brief for any mentions of:
-          - Starter templates (e.g., Create React App, Next.js, Vue CLI, Angular CLI, etc.)
-          - Existing projects or codebases being used as a foundation
-          - Boilerplate projects or scaffolding tools
-          - Previous projects to be cloned or adapted
+          1. 审查PRD和头脑风暴简报中是否提及：
+          - 入门模板（例如，Create React App、Next.js、Vue CLI、Angular CLI等）
+          - 用作基础的现有项目或代码库
+          - 样板项目或脚手架工具
+          - 要克隆或改编的以前的项目
 
-          2. If a starter template or existing project is mentioned:
-          - Ask the user to provide access via one of these methods:
-            - Link to the starter template documentation
-            - Upload/attach the project files (for small projects)
-            - Share a link to the project repository (GitHub, GitLab, etc.)
-          - Analyze the starter/existing project to understand:
-            - Pre-configured technology stack and versions
-            - Project structure and organization patterns
-            - Built-in scripts and tooling
-            - Existing architectural patterns and conventions
-            - Any limitations or constraints imposed by the starter
-          - Use this analysis to inform and align your architecture decisions
+          2. 如果提及了入门模板或现有项目：
+          - 要求用户通过以下方法之一提供访问权限：
+            - 指向入门模板文档的链接
+            - 上传/附加项目文件（对于小项目）
+            - 共享项目存储库的链接（GitHub、GitLab等）
+          - 分析入门/现有项目以了解：
+            - 预配置的技术栈和版本
+            - 项目结构和组织模式
+            - 内置脚本和工具
+            - 现有的架构模式和约定
+            - 入门模板施加的任何限制或约束
+          - 使用此分析来为您的架构决策提供信息并与之保持一致
 
-          3. If no starter template is mentioned but this is a greenfield project:
-          - Suggest appropriate starter templates based on the tech stack preferences
-          - Explain the benefits (faster setup, best practices, community support)
-          - Let the user decide whether to use one
+          3. 如果未提及入门模板但这是一个绿地项目：
+          - 根据技术栈偏好建议合适的入门模板
+          - 解释其好处（更快的设置、最佳实践、社区支持）
+          - 让用户决定是否使用
 
-          4. If the user confirms no starter template will be used:
-          - Proceed with architecture design from scratch
-          - Note that manual setup will be required for all tooling and configuration
+          4. 如果用户确认不使用入门模板：
+          - 从头开始进行架构设计
+          - 注意所有工具和配置都需要手动设置
 
-          Document the decision here before proceeding with the architecture design. If none, just say N/A
+          在继续进行架构设计之前，在此处记录决定。如果没有，只需说N/A
         elicit: true
       - id: changelog
-        title: Change Log
+        title: 变更日志
         type: table
-        columns: [Date, Version, Description, Author]
-        instruction: Track document versions and changes
+        columns: [日期, 版本, 描述, 作者]
+        instruction: 跟踪文档版本和变更
 
   - id: high-level-architecture
-    title: High Level Architecture
+    title: 高层架构
     instruction: |
-      This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together at once.
+      本节包含多个小节，它们构成了架构的基础。请一次性呈现所有小节。
     elicit: true
     sections:
       - id: technical-summary
-        title: Technical Summary
+        title: 技术摘要
         instruction: |
-          Provide a brief paragraph (3-5 sentences) overview of:
-          - The system's overall architecture style
-          - Key components and their relationships
-          - Primary technology choices
-          - Core architectural patterns being used
-          - Reference back to the PRD goals and how this architecture supports them
+          提供一段简短的段落（3-5句）概述：
+          - 系统的整体架构风格
+          - 关键组件及其关系
+          - 主要技术选择
+          - 使用的核心架构模式
+          - 回顾PRD目标以及此架构如何支持它们
       - id: high-level-overview
-        title: High Level Overview
+        title: 高层概览
         instruction: |
-          Based on the PRD's Technical Assumptions section, describe:
+          根据PRD的技术假设部分，描述：
 
-          1. The main architectural style (e.g., Monolith, Microservices, Serverless, Event-Driven)
-          2. Repository structure decision from PRD (Monorepo/Polyrepo)
-          3. Service architecture decision from PRD
-          4. Primary user interaction flow or data flow at a conceptual level
-          5. Key architectural decisions and their rationale
+          1. 主要的架构风格（例如，单体、微服务、无服务器、事件驱动）
+          2. PRD中的存储库结构决策（单体仓库/多仓库）
+          3. PRD中的服务架构决策
+          4. 概念层面上的主要用户交互流程或数据流
+          5. 关键架构决策及其理由
       - id: project-diagram
-        title: High Level Project Diagram
+        title: 高层项目图
         type: mermaid
         mermaid_type: graph
         instruction: |
-          Create a Mermaid diagram that visualizes the high-level architecture. Consider:
-          - System boundaries
-          - Major components/services
-          - Data flow directions
-          - External integrations
-          - User entry points
+          创建一个Mermaid图来可视化高层架构。考虑：
+          - 系统边界
+          - 主要组件/服务
+          - 数据流方向
+          - 外部集成
+          - 用户入口点
 
       - id: architectural-patterns
-        title: Architectural and Design Patterns
+        title: 架构和设计模式
         instruction: |
-          List the key high-level patterns that will guide the architecture. For each pattern:
+          列出将指导架构的关键高层模式。对于每个模式：
 
-          1. Present 2-3 viable options if multiple exist
-          2. Provide your recommendation with clear rationale
-          3. Get user confirmation before finalizing
-          4. These patterns should align with the PRD's technical assumptions and project goals
+          1. 如果存在多个选项，则呈现2-3个可行的选项
+          2. 提供带有明确理由的您的建议
+          3. 在最终确定前获得用户确认
+          4. 这些模式应与PRD的技术假设和项目目标保持一致
 
-          Common patterns to consider:
-          - Architectural style patterns (Serverless, Event-Driven, Microservices, CQRS, Hexagonal)
-          - Code organization patterns (Dependency Injection, Repository, Module, Factory)
-          - Data patterns (Event Sourcing, Saga, Database per Service)
-          - Communication patterns (REST, GraphQL, Message Queue, Pub/Sub)
-        template: "- **{{pattern_name}}:** {{pattern_description}} - _Rationale:_ {{rationale}}"
+          要考虑的常见模式：
+          - 架构风格模式（无服务器、事件驱动、微服务、CQRS、六边形）
+          - 代码组织模式（依赖注入、存储库、模块、工厂）
+          - 数据模式（事件溯源、Saga、每个服务一个数据库）
+          - 通信模式（REST、GraphQL、消息队列、发布/订阅）
+        template: "- **{{pattern_name}}:** {{pattern_description}} - _理由:_ {{rationale}}"
         examples:
-          - "**Serverless Architecture:** Using AWS Lambda for compute - _Rationale:_ Aligns with PRD requirement for cost optimization and automatic scaling"
-          - "**Repository Pattern:** Abstract data access logic - _Rationale:_ Enables testing and future database migration flexibility"
-          - "**Event-Driven Communication:** Using SNS/SQS for service decoupling - _Rationale:_ Supports async processing and system resilience"
+          - "**无服务器架构：** 使用AWS Lambda进行计算 - _理由:_ 符合PRD对成本优化和自动扩展的要求"
+          - "**存储库模式：** 抽象数据访问逻辑 - _理由:_ 实现测试和未来数据库迁移的灵活性"
+          - "**事件驱动通信：** 使用SNS/SQS进行服务解耦 - _理由:_ 支持异步处理和系统弹性"
 
   - id: tech-stack
-    title: Tech Stack
+    title: 技术栈
     instruction: |
-      This is the DEFINITIVE technology selection section. Work with the user to make specific choices:
+      这是决定性的技术选择部分。与用户合作做出具体选择：
 
-      1. Review PRD technical assumptions and any preferences from {root}/data/technical-preferences.yaml or an attached technical-preferences
-      2. For each category, present 2-3 viable options with pros/cons
-      3. Make a clear recommendation based on project needs
-      4. Get explicit user approval for each selection
-      5. Document exact versions (avoid "latest" - pin specific versions)
-      6. This table is the single source of truth - all other docs must reference these choices
+      1. 审查PRD技术假设和来自{root}/data/technical-preferences.yaml或附加的technical-preferences的任何偏好
+      2. 对于每个类别，呈现2-3个带有优缺点的可行选项
+      3. 根据项目需求提出明确的建议
+      4. 为每个选择获得明确的用户批准
+      5. 记录确切的版本（避免使用“最新” - 固定特定版本）
+      6. 此表是唯一的真实来源 - 所有其他文档都必须引用这些选择
 
-      Key decisions to finalize - before displaying the table, ensure you are aware of or ask the user about - let the user know if they are not sure on any that you can also provide suggestions with rationale:
+      要最终确定的关键决策 - 在显示表格之前，确保您了解或询问用户 - 如果他们不确定任何内容，请告知用户您也可以提供带有理由的建议：
 
-      - Starter templates (if any)
-      - Languages and runtimes with exact versions
-      - Frameworks and libraries / packages
-      - Cloud provider and key services choices
-      - Database and storage solutions - if unclear suggest sql or nosql or other types depending on the project and depending on cloud provider offer a suggestion
-      - Development tools
+      - 入门模板（如果有）
+      - 语言和运行时及其确切版本
+      - 框架和库/包
+      - 云提供商和关键服务选择
+      - 数据库和存储解决方案 - 如果不清楚，则根据项目建议sql或nosql或其他类型，并根据云提供商提供建议
+      - 开发工具
 
-      Upon render of the table, ensure the user is aware of the importance of this sections choices, should also look for gaps or disagreements with anything, ask for any clarifications if something is unclear why its in the list, and also right away elicit feedback - this statement and the options should be rendered and then prompt right all before allowing user input.
+      渲染表格时，确保用户了解此部分选择的重要性，还应查找与任何内容的差距或分歧，如果不清楚列表中为什么会有某些内容，请要求澄清，并立即征求反馈 - 此声明和选项应在允许用户输入之前全部渲染并提示。
     elicit: true
     sections:
       - id: cloud-infrastructure
-        title: Cloud Infrastructure
+        title: 云基础设施
         template: |
-          - **Provider:** {{cloud_provider}}
-          - **Key Services:** {{core_services_list}}
-          - **Deployment Regions:** {{regions}}
+          - **提供商：** {{cloud_provider}}
+          - **关键服务：** {{core_services_list}}
+          - **部署区域：** {{regions}}
       - id: technology-stack-table
-        title: Technology Stack Table
+        title: 技术栈表
         type: table
-        columns: [Category, Technology, Version, Purpose, Rationale]
-        instruction: Populate the technology stack table with all relevant technologies
+        columns: [类别, 技术, 版本, 目的, 理由]
+        instruction: 用所有相关技术填充技术栈表
         examples:
-          - "| **Language** | TypeScript | 5.3.3 | Primary development language | Strong typing, excellent tooling, team expertise |"
-          - "| **Runtime** | Node.js | 20.11.0 | JavaScript runtime | LTS version, stable performance, wide ecosystem |"
-          - "| **Framework** | NestJS | 10.3.2 | Backend framework | Enterprise-ready, good DI, matches team patterns |"
+          - "| **语言** | TypeScript | 5.3.3 | 主要开发语言 | 强类型，优秀的工具，团队专业知识 |"
+          - "| **运行时** | Node.js | 20.11.0 | JavaScript运行时 | LTS版本，性能稳定，生态系统广泛 |"
+          - "| **框架** | NestJS | 10.3.2 | 后端框架 | 企业级，良好的DI，符合团队模式 |"
 
   - id: data-models
-    title: Data Models
+    title: 数据模型
     instruction: |
-      Define the core data models/entities:
+      定义核心数据模型/实体：
 
-      1. Review PRD requirements and identify key business entities
-      2. For each model, explain its purpose and relationships
-      3. Include key attributes and data types
-      4. Show relationships between models
-      5. Discuss design decisions with user
+      1. 审查PRD需求并识别关键业务实体
+      2. 对于每个模型，解释其目的和关系
+      3. 包括关键属性和数据类型
+      4. 显示模型之间的关系
+      5. 与用户讨论设计决策
 
-      Create a clear conceptual model before moving to database schema.
+      在转向数据库模式之前创建一个清晰的概念模型。
     elicit: true
     repeatable: true
     sections:
       - id: model
         title: "{{model_name}}"
         template: |
-          **Purpose:** {{model_purpose}}
+          **目的：** {{model_purpose}}
 
-          **Key Attributes:**
+          **关键属性：**
           - {{attribute_1}}: {{type_1}} - {{description_1}}
           - {{attribute_2}}: {{type_2}} - {{description_2}}
 
-          **Relationships:**
+          **关系：**
           - {{relationship_1}}
           - {{relationship_2}}
 
   - id: components
-    title: Components
+    title: 组件
     instruction: |
-      Based on the architectural patterns, tech stack, and data models from above:
+      基于上述的架构模式、技术栈和数据模型：
 
-      1. Identify major logical components/services and their responsibilities
-      2. Consider the repository structure (monorepo/polyrepo) from PRD
-      3. Define clear boundaries and interfaces between components
-      4. For each component, specify:
-      - Primary responsibility
-      - Key interfaces/APIs exposed
-      - Dependencies on other components
-      - Technology specifics based on tech stack choices
+      1. 识别主要的逻辑组件/服务及其职责
+      2. 考虑PRD中的存储库结构（单体仓库/多仓库）
+      3. 定义组件之间清晰的边界和接口
+      4. 对于每个组件，指定：
+      - 主要职责
+      - 暴露的关键接口/API
+      - 对其他组件的依赖
+      - 基于技术栈选择的技术细节
 
-      5. Create component diagrams where helpful
+      5. 在有帮助的地方创建组件图
     elicit: true
     sections:
       - id: component-list
         repeatable: true
         title: "{{component_name}}"
         template: |
-          **Responsibility:** {{component_description}}
+          **职责：** {{component_description}}
 
-          **Key Interfaces:**
+          **关键接口：**
           - {{interface_1}}
           - {{interface_2}}
 
-          **Dependencies:** {{dependencies}}
+          **依赖：** {{dependencies}}
 
-          **Technology Stack:** {{component_tech_details}}
+          **技术栈：** {{component_tech_details}}
       - id: component-diagrams
-        title: Component Diagrams
+        title: 组件图
         type: mermaid
         instruction: |
-          Create Mermaid diagrams to visualize component relationships. Options:
-          - C4 Container diagram for high-level view
-          - Component diagram for detailed internal structure
-          - Sequence diagrams for complex interactions
-          Choose the most appropriate for clarity
+          创建Mermaid图来可视化组件关系。选项：
+          - 用于高层视图的C4容器图
+          - 用于详细内部结构的组件图
+          - 用于复杂交互的序列图
+          选择最合适的以求清晰
 
   - id: external-apis
-    title: External APIs
-    condition: Project requires external API integrations
+    title: 外部API
+    condition: 项目需要外部API集成
     instruction: |
-      For each external service integration:
+      对于每个外部服务集成：
 
-      1. Identify APIs needed based on PRD requirements and component design
-      2. If documentation URLs are unknown, ask user for specifics
-      3. Document authentication methods and security considerations
-      4. List specific endpoints that will be used
-      5. Note any rate limits or usage constraints
+      1. 根据PRD需求和组件设计识别所需的API
+      2. 如果文档URL未知，请向用户询问具体信息
+      3. 记录身份验证方法和安全考虑
+      4. 列出将使用的特定端点
+      5. 注意任何速率限制或使用约束
 
-      If no external APIs are needed, state this explicitly and skip to next section.
+      如果不需要外部API，请明确说明并跳到下一节。
     elicit: true
     repeatable: true
     sections:
       - id: api
         title: "{{api_name}} API"
         template: |
-          - **Purpose:** {{api_purpose}}
-          - **Documentation:** {{api_docs_url}}
-          - **Base URL(s):** {{api_base_url}}
-          - **Authentication:** {{auth_method}}
-          - **Rate Limits:** {{rate_limits}}
+          - **目的：** {{api_purpose}}
+          - **文档：** {{api_docs_url}}
+          - **基本URL：** {{api_base_url}}
+          - **身份验证：** {{auth_method}}
+          - **速率限制：** {{rate_limits}}
 
-          **Key Endpoints Used:**
+          **使用的关键端点：**
           - `{{method}} {{endpoint_path}}` - {{endpoint_purpose}}
 
-          **Integration Notes:** {{integration_considerations}}
+          **集成说明：** {{integration_considerations}}
 
   - id: core-workflows
-    title: Core Workflows
+    title: 核心工作流
     type: mermaid
     mermaid_type: sequence
     instruction: |
-      Illustrate key system workflows using sequence diagrams:
+      使用序列图说明关键系统工作流：
 
-      1. Identify critical user journeys from PRD
-      2. Show component interactions including external APIs
-      3. Include error handling paths
-      4. Document async operations
-      5. Create both high-level and detailed diagrams as needed
+      1. 从PRD中识别关键用户旅程
+      2. 显示包括外部API在内的组件交互
+      3. 包括错误处理路径
+      4. 记录异步操作
+      5. 根据需要创建高层和详细的图表
 
-      Focus on workflows that clarify architecture decisions or complex interactions.
+      专注于阐明架构决策或复杂交互的工作流。
     elicit: true
 
   - id: rest-api-spec
-    title: REST API Spec
-    condition: Project includes REST API
+    title: REST API规范
+    condition: 项目包含REST API
     type: code
     language: yaml
     instruction: |
-      If the project includes a REST API:
+      如果项目包含REST API：
 
-      1. Create an OpenAPI 3.0 specification
-      2. Include all endpoints from epics/stories
-      3. Define request/response schemas based on data models
-      4. Document authentication requirements
-      5. Include example requests/responses
+      1. 创建一个OpenAPI 3.0规范
+      2. 包括来自史诗/故事的所有端点
+      3. 根据数据模型定义请求/响应模式
+      4. 记录身份验证要求
+      5. 包括示例请求/响应
 
-      Use YAML format for better readability. If no REST API, skip this section.
+      使用YAML格式以提高可读性。如果没有REST API，则跳过此部分。
     elicit: true
     template: |
       openapi: 3.0.0
@@ -304,348 +304,348 @@ sections:
           description: {{server_description}}
 
   - id: database-schema
-    title: Database Schema
+    title: 数据库模式
     instruction: |
-      Transform the conceptual data models into concrete database schemas:
+      将概念数据模型转换为具体的数据库模式：
 
-      1. Use the database type(s) selected in Tech Stack
-      2. Create schema definitions using appropriate notation
-      3. Include indexes, constraints, and relationships
-      4. Consider performance and scalability
-      5. For NoSQL, show document structures
+      1. 使用技术栈中选择的数据库类型
+      2. 使用适当的表示法创建模式定义
+      3. 包括索引、约束和关系
+      4. 考虑性能和可扩展性
+      5. 对于NoSQL，显示文档结构
 
-      Present schema in format appropriate to database type (SQL DDL, JSON schema, etc.)
+      以适合数据库类型的格式呈现模式（SQL DDL、JSON模式等）
     elicit: true
 
   - id: source-tree
-    title: Source Tree
+    title: 源代码树
     type: code
     language: plaintext
     instruction: |
-      Create a project folder structure that reflects:
+      创建一个反映以下内容的项目文件夹结构：
 
-      1. The chosen repository structure (monorepo/polyrepo)
-      2. The service architecture (monolith/microservices/serverless)
-      3. The selected tech stack and languages
-      4. Component organization from above
-      5. Best practices for the chosen frameworks
-      6. Clear separation of concerns
+      1. 所选的存储库结构（单体仓库/多仓库）
+      2. 服务架构（单体/微服务/无服务器）
+      3. 所选的技术栈和语言
+      4. 上述的组件组织
+      5. 所选框架的最佳实践
+      6. 清晰的关注点分离
 
-      Adapt the structure based on project needs. For monorepos, show service separation. For serverless, show function organization. Include language-specific conventions.
+      根据项目需求调整结构。对于单体仓库，显示服务分离。对于无服务器，显示函数组织。包括特定于语言的约定。
     elicit: true
     examples:
       - |
         project-root/
         ├── packages/
-        │   ├── api/                    # Backend API service
-        │   ├── web/                    # Frontend application
-        │   ├── shared/                 # Shared utilities/types
-        │   └── infrastructure/         # IaC definitions
-        ├── scripts/                    # Monorepo management scripts
-        └── package.json                # Root package.json with workspaces
+        │   ├── api/                    # 后端API服务
+        │   ├── web/                    # 前端应用程序
+        │   ├── shared/                 # 共享工具/类型
+        │   └── infrastructure/         # IaC定义
+        ├── scripts/                    # 单体仓库管理脚本
+        └── package.json                # 带有工作区的根package.json
 
   - id: infrastructure-deployment
-    title: Infrastructure and Deployment
+    title: 基础设施和部署
     instruction: |
-      Define the deployment architecture and practices:
+      定义部署架构和实践：
 
-      1. Use IaC tool selected in Tech Stack
-      2. Choose deployment strategy appropriate for the architecture
-      3. Define environments and promotion flow
-      4. Establish rollback procedures
-      5. Consider security, monitoring, and cost optimization
+      1. 使用技术栈中选择的IaC工具
+      2. 选择适合架构的部署策略
+      3. 定义环境和晋升流程
+      4. 建立回滚程序
+      5. 考虑安全性、监控和成本优化
 
-      Get user input on deployment preferences and CI/CD tool choices.
+      获取用户对部署偏好和CI/CD工具选择的输入。
     elicit: true
     sections:
       - id: infrastructure-as-code
-        title: Infrastructure as Code
+        title: 基础设施即代码
         template: |
-          - **Tool:** {{iac_tool}} {{version}}
-          - **Location:** `{{iac_directory}}`
-          - **Approach:** {{iac_approach}}
+          - **工具：** {{iac_tool}} {{version}}
+          - **位置：** `{{iac_directory}}`
+          - **方法：** {{iac_approach}}
       - id: deployment-strategy
-        title: Deployment Strategy
+        title: 部署策略
         template: |
-          - **Strategy:** {{deployment_strategy}}
-          - **CI/CD Platform:** {{cicd_platform}}
-          - **Pipeline Configuration:** `{{pipeline_config_location}}`
+          - **策略：** {{deployment_strategy}}
+          - **CI/CD平台：** {{cicd_platform}}
+          - **管道配置：** `{{pipeline_config_location}}`
       - id: environments
-        title: Environments
+        title: 环境
         repeatable: true
         template: "- **{{env_name}}:** {{env_purpose}} - {{env_details}}"
       - id: promotion-flow
-        title: Environment Promotion Flow
+        title: 环境晋升流程
         type: code
         language: text
         template: "{{promotion_flow_diagram}}"
       - id: rollback-strategy
-        title: Rollback Strategy
+        title: 回滚策略
         template: |
-          - **Primary Method:** {{rollback_method}}
-          - **Trigger Conditions:** {{rollback_triggers}}
-          - **Recovery Time Objective:** {{rto}}
+          - **主要方法：** {{rollback_method}}
+          - **触发条件：** {{rollback_triggers}}
+          - **恢复时间目标：** {{rto}}
 
   - id: error-handling-strategy
-    title: Error Handling Strategy
+    title: 错误处理策略
     instruction: |
-      Define comprehensive error handling approach:
+      定义全面的错误处理方法：
 
-      1. Choose appropriate patterns for the language/framework from Tech Stack
-      2. Define logging standards and tools
-      3. Establish error categories and handling rules
-      4. Consider observability and debugging needs
-      5. Ensure security (no sensitive data in logs)
+      1. 为技术栈中的语言/框架选择合适的模式
+      2. 定义日志记录标准和工具
+      3. 建立错误类别和处理规则
+      4. 考虑可观察性和调试需求
+      5. 确保安全（日志中不含敏感数据）
 
-      This section guides both AI and human developers in consistent error handling.
+      本节指导AI和人类开发人员进行一致的错误处理。
     elicit: true
     sections:
       - id: general-approach
-        title: General Approach
+        title: 通用方法
         template: |
-          - **Error Model:** {{error_model}}
-          - **Exception Hierarchy:** {{exception_structure}}
-          - **Error Propagation:** {{propagation_rules}}
+          - **错误模型：** {{error_model}}
+          - **异常层次结构：** {{exception_structure}}
+          - **错误传播：** {{propagation_rules}}
       - id: logging-standards
-        title: Logging Standards
+        title: 日志记录标准
         template: |
-          - **Library:** {{logging_library}} {{version}}
-          - **Format:** {{log_format}}
-          - **Levels:** {{log_levels_definition}}
-          - **Required Context:**
-            - Correlation ID: {{correlation_id_format}}
-            - Service Context: {{service_context}}
-            - User Context: {{user_context_rules}}
+          - **库：** {{logging_library}} {{version}}
+          - **格式：** {{log_format}}
+          - **级别：** {{log_levels_definition}}
+          - **所需上下文：**
+            - 关联ID：{{correlation_id_format}}
+            - 服务上下文：{{service_context}}
+            - 用户上下文：{{user_context_rules}}
       - id: error-patterns
-        title: Error Handling Patterns
+        title: 错误处理模式
         sections:
           - id: external-api-errors
-            title: External API Errors
+            title: 外部API错误
             template: |
-              - **Retry Policy:** {{retry_strategy}}
-              - **Circuit Breaker:** {{circuit_breaker_config}}
-              - **Timeout Configuration:** {{timeout_settings}}
-              - **Error Translation:** {{error_mapping_rules}}
+              - **重试策略：** {{retry_strategy}}
+              - **断路器：** {{circuit_breaker_config}}
+              - **超时配置：** {{timeout_settings}}
+              - **错误转换：** {{error_mapping_rules}}
           - id: business-logic-errors
-            title: Business Logic Errors
+            title: 业务逻辑错误
             template: |
-              - **Custom Exceptions:** {{business_exception_types}}
-              - **User-Facing Errors:** {{user_error_format}}
-              - **Error Codes:** {{error_code_system}}
+              - **自定义异常：** {{business_exception_types}}
+              - **面向用户的错误：** {{user_error_format}}
+              - **错误代码：** {{error_code_system}}
           - id: data-consistency
-            title: Data Consistency
+            title: 数据一致性
             template: |
-              - **Transaction Strategy:** {{transaction_approach}}
-              - **Compensation Logic:** {{compensation_patterns}}
-              - **Idempotency:** {{idempotency_approach}}
+              - **事务策略：** {{transaction_approach}}
+              - **补偿逻辑：** {{compensation_patterns}}
+              - **幂等性：** {{idempotency_approach}}
 
   - id: coding-standards
-    title: Coding Standards
+    title: 编码标准
     instruction: |
-      These standards are MANDATORY for AI agents. Work with user to define ONLY the critical rules needed to prevent bad code. Explain that:
+      这些标准对AI代理是强制性的。与用户合作，仅定义防止不良代码所需的关键规则。解释说：
 
-      1. This section directly controls AI developer behavior
-      2. Keep it minimal - assume AI knows general best practices
-      3. Focus on project-specific conventions and gotchas
-      4. Overly detailed standards bloat context and slow development
-      5. Standards will be extracted to separate file for dev agent use
+      1. 本节直接控制AI开发人员的行为
+      2. 保持最小化 - 假设AI了解通用的最佳实践
+      3. 专注于特定于项目的约定和陷阱
+      4. 过度详细的标准会使上下文膨胀并减慢开发速度
+      5. 标准将被提取到单独的文件中供开发代理使用
 
-      For each standard, get explicit user confirmation it's necessary.
+      对于每个标准，都要获得用户的明确确认，确认其是必要的。
     elicit: true
     sections:
       - id: core-standards
-        title: Core Standards
+        title: 核心标准
         template: |
-          - **Languages & Runtimes:** {{languages_and_versions}}
-          - **Style & Linting:** {{linter_config}}
-          - **Test Organization:** {{test_file_convention}}
+          - **语言和运行时：** {{languages_and_versions}}
+          - **样式和Linting：** {{linter_config}}
+          - **测试组织：** {{test_file_convention}}
       - id: naming-conventions
-        title: Naming Conventions
+        title: 命名约定
         type: table
-        columns: [Element, Convention, Example]
-        instruction: Only include if deviating from language defaults
+        columns: [元素, 约定, 示例]
+        instruction: 仅在偏离语言默认值时包括
       - id: critical-rules
-        title: Critical Rules
+        title: 关键规则
         instruction: |
-          List ONLY rules that AI might violate or project-specific requirements. Examples:
-          - "Never use console.log in production code - use logger"
-          - "All API responses must use ApiResponse wrapper type"
-          - "Database queries must use repository pattern, never direct ORM"
+          仅列出AI可能违反的规则或特定于项目的要求。示例：
+          - “切勿在生产代码中使用console.log - 使用logger”
+          - “所有API响应都必须使用ApiResponse包装器类型”
+          - “数据库查询必须使用存储库模式，切勿直接使用ORM”
 
-          Avoid obvious rules like "use SOLID principles" or "write clean code"
+          避免使用“使用SOLID原则”或“编写干净的代码”等显而易见的规则
         repeatable: true
         template: "- **{{rule_name}}:** {{rule_description}}"
       - id: language-specifics
-        title: Language-Specific Guidelines
-        condition: Critical language-specific rules needed
-        instruction: Add ONLY if critical for preventing AI mistakes. Most teams don't need this section.
+        title: 特定于语言的指南
+        condition: 需要关键的特定于语言的规则
+        instruction: 仅在对于防止AI错误至关重要时添加。大多数团队不需要此部分。
         sections:
           - id: language-rules
-            title: "{{language_name}} Specifics"
+            title: "{{language_name}} specifics"
             repeatable: true
             template: "- **{{rule_topic}}:** {{rule_detail}}"
 
   - id: test-strategy
-    title: Test Strategy and Standards
+    title: 测试策略和标准
     instruction: |
-      Work with user to define comprehensive test strategy:
+      与用户合作定义全面的测试策略：
 
-      1. Use test frameworks from Tech Stack
-      2. Decide on TDD vs test-after approach
-      3. Define test organization and naming
-      4. Establish coverage goals
-      5. Determine integration test infrastructure
-      6. Plan for test data and external dependencies
+      1. 使用技术栈中的测试框架
+      2. 决定TDD与测试后方法
+      3. 定义测试组织和命名
+      4. 建立覆盖目标
+      5. 确定集成测试基础设施
+      6. 规划测试数据和外部依赖
 
-      Note: Basic info goes in Coding Standards for dev agent. This detailed section is for QA agent and team reference.
+      注意：基本信息在编码标准中供开发代理使用。此详细部分供QA代理和团队参考。
     elicit: true
     sections:
       - id: testing-philosophy
-        title: Testing Philosophy
+        title: 测试理念
         template: |
-          - **Approach:** {{test_approach}}
-          - **Coverage Goals:** {{coverage_targets}}
-          - **Test Pyramid:** {{test_distribution}}
+          - **方法：** {{test_approach}}
+          - **覆盖目标：** {{coverage_targets}}
+          - **测试金字塔：** {{test_distribution}}
       - id: test-types
-        title: Test Types and Organization
+        title: 测试类型和组织
         sections:
           - id: unit-tests
-            title: Unit Tests
+            title: 单元测试
             template: |
-              - **Framework:** {{unit_test_framework}} {{version}}
-              - **File Convention:** {{unit_test_naming}}
-              - **Location:** {{unit_test_location}}
-              - **Mocking Library:** {{mocking_library}}
-              - **Coverage Requirement:** {{unit_coverage}}
+              - **框架：** {{unit_test_framework}} {{version}}
+              - **文件约定：** {{unit_test_naming}}
+              - **位置：** {{unit_test_location}}
+              - **模拟库：** {{mocking_library}}
+              - **覆盖要求：** {{unit_coverage}}
 
-              **AI Agent Requirements:**
-              - Generate tests for all public methods
-              - Cover edge cases and error conditions
-              - Follow AAA pattern (Arrange, Act, Assert)
-              - Mock all external dependencies
+              **AI代理要求：**
+              - 为所有公共方法生成测试
+              - 覆盖边缘情况和错误条件
+              - 遵循AAA模式（安排、行动、断言）
+              - 模拟所有外部依赖
           - id: integration-tests
-            title: Integration Tests
+            title: 集成测试
             template: |
-              - **Scope:** {{integration_scope}}
-              - **Location:** {{integration_test_location}}
-              - **Test Infrastructure:**
+              - **范围：** {{integration_scope}}
+              - **位置：** {{integration_test_location}}
+              - **测试基础设施：**
                 - **{{dependency_name}}:** {{test_approach}} ({{test_tool}})
             examples:
-              - "**Database:** In-memory H2 for unit tests, Testcontainers PostgreSQL for integration"
-              - "**Message Queue:** Embedded Kafka for tests"
-              - "**External APIs:** WireMock for stubbing"
+              - "**数据库：** 单元测试使用内存H2，集成测试使用Testcontainers PostgreSQL"
+              - "**消息队列：** 测试使用嵌入式Kafka"
+              - "**外部API：** 使用WireMock进行桩模拟"
           - id: e2e-tests
-            title: End-to-End Tests
+            title: 端到端测试
             template: |
-              - **Framework:** {{e2e_framework}} {{version}}
-              - **Scope:** {{e2e_scope}}
-              - **Environment:** {{e2e_environment}}
-              - **Test Data:** {{e2e_data_strategy}}
+              - **框架：** {{e2e_framework}} {{version}}
+              - **范围：** {{e2e_scope}}
+              - **环境：** {{e2e_environment}}
+              - **测试数据：** {{e2e_data_strategy}}
       - id: test-data-management
-        title: Test Data Management
+        title: 测试数据管理
         template: |
-          - **Strategy:** {{test_data_approach}}
-          - **Fixtures:** {{fixture_location}}
-          - **Factories:** {{factory_pattern}}
-          - **Cleanup:** {{cleanup_strategy}}
+          - **策略：** {{test_data_approach}}
+          - **固定数据：** {{fixture_location}}
+          - **工厂：** {{factory_pattern}}
+          - **清理：** {{cleanup_strategy}}
       - id: continuous-testing
-        title: Continuous Testing
+        title: 持续测试
         template: |
-          - **CI Integration:** {{ci_test_stages}}
-          - **Performance Tests:** {{perf_test_approach}}
-          - **Security Tests:** {{security_test_approach}}
+          - **CI集成：** {{ci_test_stages}}
+          - **性能测试：** {{perf_test_approach}}
+          - **安全测试：** {{security_test_approach}}
 
   - id: security
-    title: Security
+    title: 安全性
     instruction: |
-      Define MANDATORY security requirements for AI and human developers:
+      为AI和人类开发人员定义强制性安全要求：
 
-      1. Focus on implementation-specific rules
-      2. Reference security tools from Tech Stack
-      3. Define clear patterns for common scenarios
-      4. These rules directly impact code generation
-      5. Work with user to ensure completeness without redundancy
+      1. 专注于特定于实现的规则
+      2. 引用技术栈中的安全工具
+      3. 为常见场景定义清晰的模式
+      4. 这些规则直接影响代码生成
+      5. 与用户合作，确保完整性而无冗余
     elicit: true
     sections:
       - id: input-validation
-        title: Input Validation
+        title: 输入验证
         template: |
-          - **Validation Library:** {{validation_library}}
-          - **Validation Location:** {{where_to_validate}}
-          - **Required Rules:**
-            - All external inputs MUST be validated
-            - Validation at API boundary before processing
-            - Whitelist approach preferred over blacklist
+          - **验证库：** {{validation_library}}
+          - **验证位置：** {{where_to_validate}}
+          - **所需规则：**
+            - 所有外部输入都必须经过验证
+            - 在处理前在API边界进行验证
+            - 白名单方法优于黑名单方法
       - id: auth-authorization
-        title: Authentication & Authorization
+        title: 身份验证和授权
         template: |
-          - **Auth Method:** {{auth_implementation}}
-          - **Session Management:** {{session_approach}}
-          - **Required Patterns:**
+          - **认证方法：** {{auth_implementation}}
+          - **会话管理：** {{session_approach}}
+          - **所需模式：**
             - {{auth_pattern_1}}
             - {{auth_pattern_2}}
       - id: secrets-management
-        title: Secrets Management
+        title: 密钥管理
         template: |
-          - **Development:** {{dev_secrets_approach}}
-          - **Production:** {{prod_secrets_service}}
-          - **Code Requirements:**
-            - NEVER hardcode secrets
-            - Access via configuration service only
-            - No secrets in logs or error messages
+          - **开发：** {{dev_secrets_approach}}
+          - **生产：** {{prod_secrets_service}}
+          - **代码要求：**
+            - 切勿硬编码密钥
+            - 仅通过配置服务访问
+            - 日志或错误消息中不含密钥
       - id: api-security
-        title: API Security
+        title: API安全
         template: |
-          - **Rate Limiting:** {{rate_limit_implementation}}
-          - **CORS Policy:** {{cors_configuration}}
-          - **Security Headers:** {{required_headers}}
-          - **HTTPS Enforcement:** {{https_approach}}
+          - **速率限制：** {{rate_limit_implementation}}
+          - **CORS策略：** {{cors_configuration}}
+          - **安全头：** {{required_headers}}
+          - **HTTPS强制：** {{https_approach}}
       - id: data-protection
-        title: Data Protection
+        title: 数据保护
         template: |
-          - **Encryption at Rest:** {{encryption_at_rest}}
-          - **Encryption in Transit:** {{encryption_in_transit}}
-          - **PII Handling:** {{pii_rules}}
-          - **Logging Restrictions:** {{what_not_to_log}}
+          - **静态加密：** {{encryption_at_rest}}
+          - **传输中加密：** {{encryption_in_transit}}
+          - **PII处理：** {{pii_rules}}
+          - **日志记录限制：** {{what_not_to_log}}
       - id: dependency-security
-        title: Dependency Security
+        title: 依赖项安全
         template: |
-          - **Scanning Tool:** {{dependency_scanner}}
-          - **Update Policy:** {{update_frequency}}
-          - **Approval Process:** {{new_dep_process}}
+          - **扫描工具：** {{dependency_scanner}}
+          - **更新策略：** {{update_frequency}}
+          - **批准流程：** {{new_dep_process}}
       - id: security-testing
-        title: Security Testing
+        title: 安全测试
         template: |
-          - **SAST Tool:** {{static_analysis}}
-          - **DAST Tool:** {{dynamic_analysis}}
-          - **Penetration Testing:** {{pentest_schedule}}
+          - **SAST工具：** {{static_analysis}}
+          - **DAST工具：** {{dynamic_analysis}}
+          - **渗透测试：** {{pentest_schedule}}
 
   - id: checklist-results
-    title: Checklist Results Report
-    instruction: Before running the checklist, offer to output the full architecture document. Once user confirms, execute the architect-checklist and populate results here.
+    title: 清单结果报告
+    instruction: 在运行清单之前，提议输出完整的架构文档。一旦用户确认，执行architect-checklist并在此处填充结果。
 
   - id: next-steps
-    title: Next Steps
+    title: 下一步
     instruction: |
-      After completing the architecture:
+      完成架构后：
 
-      1. If project has UI components:
-      - Use "Frontend Architecture Mode"
-      - Provide this document as input
+      1. 如果项目有UI组件：
+      - 使用“前端架构模式”
+      - 提供本文档作为输入
 
-      2. For all projects:
-      - Review with Product Owner
-      - Begin story implementation with Dev agent
-      - Set up infrastructure with DevOps agent
+      2. 对于所有项目：
+      - 与产品负责人审查
+      - 与开发代理一起开始故事实施
+      - 与DevOps代理一起设置基础设施
 
-      3. Include specific prompts for next agents if needed
+      3. 如果需要，为下一个代理包括具体的提示
     sections:
       - id: architect-prompt
-        title: Architect Prompt
-        condition: Project has UI components
+        title: 架构师提示
+        condition: 项目有UI组件
         instruction: |
-          Create a brief prompt to hand off to Architect for Frontend Architecture creation. Include:
-          - Reference to this architecture document
-          - Key UI requirements from PRD
-          - Any frontend-specific decisions made here
-          - Request for detailed frontend architecture
+          为前端架构创建创建一个简短的提示以交接给架构师。包括：
+          - 对此架构文档的引用
+          - 来自PRD的关键UI要求
+          - 此处做出的任何特定于前端的决定
+          - 对详细前端架构的要求

@@ -1,280 +1,280 @@
-# The Power of BMad Expansion Packs
+# BMad扩展包的力量
 
-## Overview
+## 概述
 
-BMad Method's expansion packs unlock the framework's true potential by extending its natural language AI orchestration to ANY domain. While the core framework focuses on software development, expansion packs transform BMad into a universal AI agent system.
+BMad方法的扩展包通过将其自然语言AI编排扩展到任何领域，释放了该框架的真正潜力。虽然核心框架专注于软件开发，但扩展包将BMad转变为一个通用的AI代理系统。
 
-## Why Expansion Packs?
+## 为什么需要扩展包？
 
-### Keep Core Lean
+### 保持核心精简
 
-The core BMad framework maintains its focus on software development, ensuring dev agents have maximum context for coding. Expansion packs handle everything else.
+核心BMad框架保持其对软件开发的关注，确保开发代理在编码时拥有最大的上下文。扩展包处理其他所有事情。
 
-### Domain Expertise
+### 领域专业知识
 
-Each expansion pack provides deep, specialized knowledge without bloating the core system. Install only what you need.
+每个扩展包都提供深入、专业的知识，而不会使核心系统膨胀。只安装您需要的东西。
 
-### Community Innovation
+### 社区创新
 
-Anyone can create and share expansion packs, fostering a ecosystem of AI-powered solutions across all industries and interests.
+任何人都可以创建和共享扩展包，从而在所有行业和兴趣领域中培养一个由AI驱动的解决方案生态系统。
 
-## Technical Expansion Packs
+## 技术扩展包
 
-### Game Development Pack
+### 游戏开发包
 
-Transform your AI into a complete game development studio:
+将您的AI转变为一个完整的游戏开发工作室：
 
-- **Game Designer**: Mechanics, balance, progression systems
-- **Level Designer**: Map layouts, puzzle design, difficulty curves
-- **Narrative Designer**: Story arcs, dialog trees, lore creation
-- **Art Director**: Visual style guides, asset specifications
-- **Sound Designer**: Audio direction, music themes, SFX planning
+-   **游戏设计师**：机制、平衡、进度系统
+-   **关卡设计师**：地图布局、谜题设计、难度曲线
+-   **叙事设计师**：故事情节、对话树、传说创作
+-   **艺术总监**：视觉风格指南、资产规格
+-   **音效设计师**：音频指导、音乐主题、音效规划
 
-### Mobile Development Pack
+### 移动开发包
 
-Specialized agents for mobile app creation:
+用于移动应用创建的专业代理：
 
-- **iOS Specialist**: Swift/SwiftUI patterns, Apple guidelines
-- **Android Expert**: Kotlin best practices, Material Design
-- **Mobile UX Designer**: Touch interfaces, gesture patterns
-- **App Store Optimizer**: ASO strategies, listing optimization
-- **Performance Tuner**: Battery optimization, network efficiency
+-   **iOS专家**：Swift/SwiftUI模式、苹果指南
+-   **Android专家**：Kotlin最佳实践、Material Design
+-   **移动UX设计师**：触摸界面、手势模式
+-   **应用商店优化师**：ASO策略、列表优化
+-   **性能调优师**：电池优化、网络效率
 
-### DevOps/Infrastructure Pack
+### DevOps/基础设施包
 
-Complete infrastructure automation team:
+完整的基础设施自动化团队：
 
-- **Cloud Architect**: AWS/Azure/GCP design patterns
-- **Security Specialist**: Zero-trust implementation, compliance
-- **SRE Expert**: Monitoring, alerting, incident response
-- **Container Orchestrator**: Kubernetes, Docker optimization
-- **Cost Optimizer**: Cloud spend analysis, resource right-sizing
+-   **云架构师**：AWS/Azure/GCP设计模式
+-   **安全专家**：零信任实施、合规性
+-   **SRE专家**：监控、警报、事件响应
+-   **容器编排器**：Kubernetes、Docker优化
+-   **成本优化师**：云支出分析、资源优化
 
-### Data Science Pack
+### 数据科学包
 
-AI-powered data analysis team:
+AI驱动的数据分析团队：
 
-- **Data Scientist**: Statistical analysis, ML model selection
-- **Data Engineer**: Pipeline design, ETL processes
-- **ML Engineer**: Model deployment, A/B testing
-- **Visualization Expert**: Dashboard design, insight communication
-- **Ethics Advisor**: Bias detection, fairness assessment
+-   **数据科学家**：统计分析、机器学习模型选择
+-   **数据工程师**：管道设计、ETL流程
+-   **机器学习工程师**：模型部署、A/B测试
+-   **可视化专家**：仪表板设计、洞察沟通
+-   **伦理顾问**：偏见检测、公平性评估
 
-## Non-Technical Expansion Packs
+## 非技术扩展包
 
-### Business Strategy Pack
+### 商业策略包
 
-Complete business advisory team:
+完整的商业咨询团队：
 
-- **Strategy Consultant**: Market positioning, competitive analysis
-- **Financial Analyst**: Projections, unit economics, funding strategies
-- **Operations Manager**: Process optimization, efficiency improvements
-- **Marketing Strategist**: Go-to-market plans, growth hacking
-- **HR Advisor**: Talent strategies, culture building
+-   **战略顾问**：市场定位、竞争分析
+-   **财务分析师**：预测、单位经济学、融资策略
+-   **运营经理**：流程优化、效率改进
+-   **营销策略师**：市场进入计划、增长黑客
+-   **人力资源顾问**：人才策略、文化建设
 
-### Creative Writing Pack
+### 创意写作包
 
-Your personal writing team:
+您的个人写作团队：
 
-- **Plot Architect**: Three-act structure, story beats, pacing
-- **Character Psychologist**: Deep motivations, authentic dialog
-- **World Builder**: Consistent universes, cultural systems
-- **Editor**: Style consistency, grammar, flow
-- **Beta Reader**: Feedback simulation, plot hole detection
+-   **情节架构师**：三幕结构、故事节拍、节奏
+-   **角色心理学家**：深层动机、真实对话
+-   **世界构建者**：一致的宇宙、文化系统
+-   **编辑**：风格一致性、语法、流畅性
+-   **试读者**：反馈模拟、情节漏洞检测
 
-### Health & Wellness Pack
+### 健康与保健包
 
-Personal wellness coaching system:
+个人健康指导系统：
 
-- **Fitness Trainer**: Progressive overload, form correction
-- **Nutritionist**: Macro planning, supplement guidance
-- **Sleep Coach**: Circadian optimization, sleep hygiene
-- **Stress Manager**: Coping strategies, work-life balance
-- **Habit Engineer**: Behavior change, accountability systems
+-   **健身教练**：渐进超负荷、姿势纠正
+-   **营养师**：宏量营养素规划、补充剂指导
+-   **睡眠教练**：昼夜节律优化、睡眠卫生
+-   **压力管理者**：应对策略、工作与生活平衡
+-   **习惯工程师**：行为改变、问责制系统
 
-### Education Pack
+### 教育包
 
-Complete learning design system:
+完整的学习设计系统：
 
-- **Curriculum Architect**: Learning objectives, scope & sequence
-- **Instructional Designer**: Engagement strategies, multimedia learning
-- **Assessment Specialist**: Rubrics, formative/summative evaluation
-- **Differentiation Expert**: Adaptive learning, special needs
-- **EdTech Integrator**: Tool selection, digital pedagogy
+-   **课程架构师**：学习目标、范围与顺序
+-   **教学设计师**：参与策略、多媒体学习
+-   **评估专家**：评分标准、形成性/总结性评估
+-   **差异化专家**：适应性学习、特殊需求
+-   **教育技术集成商**：工具选择、数字教学法
 
-### Mental Health Support Pack
+### 心理健康支持包
 
-Therapeutic support system:
+治疗支持系统：
 
-- **CBT Guide**: Cognitive restructuring, thought challenging
-- **Mindfulness Teacher**: Meditation scripts, awareness exercises
-- **Journal Therapist**: Reflective prompts, emotional processing
-- **Crisis Support**: Coping strategies, safety planning
-- **Habit Tracker**: Mood monitoring, trigger identification
+-   **CBT指南**：认知重构、思维挑战
+-   **正念老师**：冥想脚本、意识练习
+-   **日记治疗师**：反思性提示、情绪处理
+-   **危机支持**：应对策略、安全规划
+-   **习惯追踪器**：情绪监测、触发因素识别
 
-### Legal Assistant Pack
+### 法律助理包
 
-Legal document and research support:
+法律文件和研究支持：
 
-- **Contract Analyst**: Term review, risk assessment
-- **Legal Researcher**: Case law, precedent analysis
-- **Document Drafter**: Template customization, clause libraries
-- **Compliance Checker**: Regulatory alignment, audit prep
-- **IP Advisor**: Patent strategies, trademark guidance
+-   **合同分析师**：条款审查、风险评估
+-   **法律研究员**：判例法、先例分析
+-   **文件起草人**：模板定制、条款库
+-   **合规检查员**：法规对齐、审计准备
+-   **知识产权顾问**：专利策略、商标指导
 
-### Real Estate Pack
+### 房地产包
 
-Property investment and management:
+房地产投资和管理：
 
-- **Market Analyst**: Comparable analysis, trend prediction
-- **Investment Calculator**: ROI modeling, cash flow analysis
-- **Property Manager**: Tenant screening, maintenance scheduling
-- **Flip Strategist**: Renovation ROI, project planning
-- **Agent Assistant**: Listing optimization, showing prep
+-   **市场分析师**：可比分析、趋势预测
+-   **投资计算器**：ROI建模、现金流分析
+-   **物业经理**：租户筛选、维护调度
+-   **翻新策略师**：装修ROI、项目规划
+-   **代理助理**：房源优化、看房准备
 
-### Personal Development Pack
+### 个人发展包
 
-Complete personal growth system:
+完整的个人成长系统：
 
-- **Life Coach**: Guides personal growth and transformation
-- **Goal Strategist**: Helps achieve objectives with SMART goals
-- **Habit Builder**: Creates lasting habits with accountability
-- **Mindset Mentor**: Develops positive thinking patterns
+-   **生活教练**：指导个人成长和转型
+-   **目标策略师**：帮助实现SMART目标
+-   **习惯养成者**：通过问责制建立持久的习惯
+-   **心态导师**：培养积极的思维模式
 
-Key tasks include:
+关键任务包括：
 
-- `goal-setting`: Defines SMART goals with action plans
-- `habit-tracking`: Monitors habit formation progress
-- `reflection-exercise`: Facilitates deep self-reflection
+-   `goal-setting`：定义带有行动计划的SMART目标
+-   `habit-tracking`：监控习惯养成进度
+-   `reflection-exercise`：促进深度自我反思
 
-## Unique & Innovative Packs
+## 独特与创新包
 
-### Role-Playing Game Master Pack
+### 角色扮演游戏主持人包
 
-AI-powered tabletop RPG assistance:
+AI驱动的桌面RPG辅助：
 
-- **World Master**: Dynamic world generation, NPC creation
-- **Combat Referee**: Initiative tracking, rule clarification
-- **Story Weaver**: Plot hooks, side quests, consequences
-- **Character Builder**: Backstory generation, stat optimization
-- **Loot Master**: Treasure generation, magic item creation
+-   **世界大师**：动态世界生成、NPC创建
+-   **战斗裁判**：先攻顺序跟踪、规则澄清
+-   **故事编织者**：情节钩子、支线任务、后果
+-   **角色构建者**：背景故事生成、属性优化
+-   **战利品大师**：宝藏生成、魔法物品创建
 
-### Life Event Planning Pack
+### 生活事件规划包
 
-Major life event coordination:
+重大生活事件协调：
 
-- **Wedding Planner**: Vendor coordination, timeline creation
-- **Event Designer**: Theme development, decoration plans
-- **Budget Manager**: Cost tracking, vendor negotiation
-- **Guest Coordinator**: RSVP tracking, seating arrangements
-- **Timeline Keeper**: Day-of scheduling, contingency planning
+-   **婚礼策划师**：供应商协调、时间线创建
+-   **活动设计师**：主题开发、装饰计划
+-   **预算经理**：成本跟踪、供应商谈判
+-   **宾客协调员**：RSVP跟踪、座位安排
+-   **时间线管理员**：当日日程安排、应急计划
 
-### Hobby Mastery Pack
+### 爱好精通包
 
-Deep dive into specific hobbies:
+深入特定爱好：
 
-- **Garden Designer**: Plant selection, seasonal planning
-- **Brew Master**: Recipe formulation, process optimization
-- **Maker Assistant**: 3D printing, woodworking, crafts
-- **Collection Curator**: Organization, valuation, trading
-- **Photography Coach**: Composition, lighting, post-processing
+-   **花园设计师**：植物选择、季节性规划
+-   **酿酒大师**：配方制定、流程优化
+-   **创客助理**：3D打印、木工、手工艺
+-   **收藏策展人**：组织、估价、交易
+-   **摄影教练**：构图、照明、后期处理
 
-### Scientific Research Pack
+### 科学研究包
 
-Research acceleration tools:
+研究加速工具：
 
-- **Literature Reviewer**: Paper summarization, gap analysis
-- **Hypothesis Generator**: Research question formulation
-- **Methodology Designer**: Experiment planning, control design
-- **Statistical Advisor**: Test selection, power analysis
-- **Grant Writer**: Proposal structure, impact statements
+-   **文献综述员**：论文摘要、差距分析
+-   **假设生成器**：研究问题制定
+-   **方法论设计师**：实验规划、对照设计
+-   **统计顾问**：测试选择、功效分析
+-   **拨款申请撰写人**：提案结构、影响陈述
 
-## Creating Your Own Expansion Pack
+## 创建您自己的扩展包
 
-### Step 1: Define Your Domain
+### 步骤1：定义您的领域
 
-What expertise are you capturing? What problems will it solve?
+您要捕获什么专业知识？它将解决什么问题？
 
-### Step 2: Design Your Agents
+### 步骤2：设计您的代理
 
-Each agent should have:
+每个代理应具有：
 
-- Clear expertise area
-- Specific personality traits
-- Defined capabilities
-- Knowledge boundaries
+-   清晰的专业知识领域
+-   特定的个性特征
+-   明确定义的能力
+-   知识边界
 
-### Step 3: Create Tasks
+### 步骤3：创建任务
 
-Tasks should be:
+任务应：
 
-- Step-by-step procedures
-- Reusable across scenarios
-- Clear and actionable
-- Domain-specific
+-   是分步程序
+-   可在不同场景中重用
+-   清晰且可操作
+-   特定于领域
 
-### Step 4: Build Templates
+### 步骤4：构建模板
 
-Templates need:
+模板需要：
 
-- Structured output format
-- Embedded LLM instructions
-- Placeholders for customization
-- Professional formatting
+-   结构化的输出格式
+-   嵌入式LLM指令
+-   用于定制的占位符
+-   专业的格式
 
-### Step 5: Test & Iterate
+### 步骤5：测试与迭代
 
-- Use with real scenarios
-- Gather user feedback
-- Refine agent responses
-- Improve task clarity
+-   用于真实场景
+-   收集用户反馈
+-   完善代理响应
+-   提高任务清晰度
 
-### Step 6: Package & Share
+### 步骤6：打包与分享
 
-- Create clear documentation
-- Include usage examples
-- Add to expansion-packs directory
-- Share with community
+-   创建清晰的文档
+-   包括使用示例
+-   添加到expansion-packs目录
+-   与社区分享
 
-## The Future of Expansion Packs
+## 扩展包的未来
 
-### Marketplace Potential
+### 市场潜力
 
-Imagine a future where:
+想象一个未来：
 
-- Professional expansion packs are sold
-- Certified packs for regulated industries
-- Community ratings and reviews
-- Automatic updates and improvements
+-   出售专业的扩展包
+-   受监管行业的认证包
+-   社区评级和评论
+-   自动更新和改进
 
-### AI Agent Ecosystems
+### AI代理生态系统
 
-Expansion packs could enable:
+扩展包可以实现：
 
-- Cross-pack agent collaboration
-- Industry-standard agent protocols
-- Interoperable AI workflows
-- Universal agent languages
+-   跨包代理协作
+-   行业标准的代理协议
+-   可互操作的AI工作流
+-   通用的代理语言
 
-### Democratizing Expertise
+### 知识民主化
 
-Every expansion pack:
+每个扩展包：
 
-- Makes expert knowledge accessible
-- Reduces barriers to entry
-- Enables solo entrepreneurs
-- Empowers small teams
+-   使专家知识变得可访问
+-   降低进入门槛
+-   赋能个体创业者
+-   赋能小团队
 
-## Getting Started
+## 开始使用
 
-1. **Browse existing packs**: Check `expansion-packs/` directory
-2. **Install what you need**: Use the installer's expansion pack option
-3. **Create your own**: Use the expansion-creator pack
-4. **Share with others**: Submit PRs with new packs
-5. **Build the future**: Help shape AI-assisted work
+1.  **浏览现有包**：查看`expansion-packs/`目录
+2.  **安装您需要的**：使用安装程序的扩展包选项
+3.  **创建您自己的**：使用expansion-creator包
+4.  **与他人分享**：提交带有新包的PR
+5.  **构建未来**：帮助塑造AI辅助工作
 
-## Remember
+## 请记住
 
-The BMad Method is more than a development framework - it's a platform for structuring human expertise into AI-accessible formats. Every expansion pack you create makes specialized knowledge more accessible to everyone.
+BMad方法不仅仅是一个开发框架——它是一个将人类专业知识结构化为AI可访问格式的平台。您创建的每个扩展包都使专业知识更容易为每个人所用。
 
-**What expertise will you share with the world?**
+**您将与世界分享什么专业知识？**

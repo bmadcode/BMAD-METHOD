@@ -1,174 +1,174 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Test Priorities Matrix
+# 测试优先级矩阵
 
-Guide for prioritizing test scenarios based on risk, criticality, and business impact.
+根据风险、重要性和业务影响来确定测试场景优先级的指南。
 
-## Priority Levels
+## 优先级
 
-### P0 - Critical (Must Test)
+### P0 - 关键（必须测试）
 
-**Criteria:**
+**标准：**
 
-- Revenue-impacting functionality
-- Security-critical paths
-- Data integrity operations
-- Regulatory compliance requirements
-- Previously broken functionality (regression prevention)
+-   影响收入的功能
+-   安全关键路径
+-   数据完整性操作
+-   法规遵从性要求
+-   先前损坏的功能（回归预防）
 
-**Examples:**
+**示例：**
 
-- Payment processing
-- Authentication/authorization
-- User data creation/deletion
-- Financial calculations
-- GDPR/privacy compliance
+-   支付处理
+-   认证/授权
+-   用户数据创建/删除
+-   财务计算
+-   GDPR/隐私合规
 
-**Testing Requirements:**
+**测试要求：**
 
-- Comprehensive coverage at all levels
-- Both happy and unhappy paths
-- Edge cases and error scenarios
-- Performance under load
+-   各级别的全面覆盖
+-   正常路径和异常路径
+-   边缘情况和错误场景
+-   负载下的性能
 
-### P1 - High (Should Test)
+### P1 - 高（应该测试）
 
-**Criteria:**
+**标准：**
 
-- Core user journeys
-- Frequently used features
-- Features with complex logic
-- Integration points between systems
-- Features affecting user experience
+-   核心用户旅程
+-   常用功能
+-   逻辑复杂的功能
+-   系统之间的集成点
+-   影响用户体验的功能
 
-**Examples:**
+**示例：**
 
-- User registration flow
-- Search functionality
-- Data import/export
-- Notification systems
-- Dashboard displays
+-   用户注册流程
+-   搜索功能
+-   数据导入/导出
+-   通知系统
+-   仪表板显示
 
-**Testing Requirements:**
+**测试要求：**
 
-- Primary happy paths required
-- Key error scenarios
-- Critical edge cases
-- Basic performance validation
+-   需要主要的正常路径
+-   关键错误场景
+-   关键边缘情况
+-   基本性能验证
 
-### P2 - Medium (Nice to Test)
+### P2 - 中（最好测试）
 
-**Criteria:**
+**标准：**
 
-- Secondary features
-- Admin functionality
-- Reporting features
-- Configuration options
-- UI polish and aesthetics
+-   次要功能
+-   管理功能
+-   报告功能
+-   配置选项
+-   UI润色和美学
 
-**Examples:**
+**示例：**
 
-- Admin settings panels
-- Report generation
-- Theme customization
-- Help documentation
-- Analytics tracking
+-   管理设置面板
+-   报告生成
+-   主题定制
+-   帮助文档
+-   分析跟踪
 
-**Testing Requirements:**
+**测试要求：**
 
-- Happy path coverage
-- Basic error handling
-- Can defer edge cases
+-   正常路径覆盖
+-   基本错误处理
+-   可以推迟边缘情况
 
-### P3 - Low (Test if Time Permits)
+### P3 - 低（时间允许则测试）
 
-**Criteria:**
+**标准：**
 
-- Rarely used features
-- Nice-to-have functionality
-- Cosmetic issues
-- Non-critical optimizations
+-   很少使用的功能
+-   锦上添花的功能
+-   外观问题
+-   非关键优化
 
-**Examples:**
+**示例：**
 
-- Advanced preferences
-- Legacy feature support
-- Experimental features
-- Debug utilities
+-   高级首选项
+-   旧功能支持
+-   实验性功能
+-   调试工具
 
-**Testing Requirements:**
+**测试要求：**
 
-- Smoke tests only
-- Can rely on manual testing
-- Document known limitations
+-   仅冒烟测试
+-   可以依赖手动测试
+-   记录已知限制
 
-## Risk-Based Priority Adjustments
+## 基于风险的优先级调整
 
-### Increase Priority When:
+### 何时提高优先级：
 
-- High user impact (affects >50% of users)
-- High financial impact (>$10K potential loss)
-- Security vulnerability potential
-- Compliance/legal requirements
-- Customer-reported issues
-- Complex implementation (>500 LOC)
-- Multiple system dependencies
+-   高用户影响（影响>50%的用户）
+-   高财务影响（>1万美元的潜在损失）
+-   潜在的安全漏洞
+-   合规/法律要求
+-   客户报告的问题
+-   复杂实现（>500行代码）
+-   多个系统依赖
 
-### Decrease Priority When:
+### 何时降低优先级：
 
-- Feature flag protected
-- Gradual rollout planned
-- Strong monitoring in place
-- Easy rollback capability
-- Low usage metrics
-- Simple implementation
-- Well-isolated component
+-   受功能标志保护
+-   计划逐步推出
+-   有强大的监控
+-   易于回滚
+-   低使用率指标
+-   简单实现
+-   良好隔离的组件
 
-## Test Coverage by Priority
+## 按优先级划分的测试覆盖率
 
-| Priority | Unit Coverage | Integration Coverage | E2E Coverage       |
-| -------- | ------------- | -------------------- | ------------------ |
-| P0       | >90%          | >80%                 | All critical paths |
-| P1       | >80%          | >60%                 | Main happy paths   |
-| P2       | >60%          | >40%                 | Smoke tests        |
-| P3       | Best effort   | Best effort          | Manual only        |
+| 优先级 | 单元覆盖率 | 集成覆盖率 | 端到端覆盖率 |
+| --- | --- | --- | --- |
+| P0 | >90% | >80% | 所有关键路径 |
+| P1 | >80% | >60% | 主要正常路径 |
+| P2 | >60% | >40% | 冒烟测试 |
+| P3 | 尽力而为 | 尽力而为 | 仅手动 |
 
-## Priority Assignment Rules
+## 优先级分配规则
 
-1. **Start with business impact** - What happens if this fails?
-2. **Consider probability** - How likely is failure?
-3. **Factor in detectability** - Would we know if it failed?
-4. **Account for recoverability** - Can we fix it quickly?
+1.  **从业务影响开始** - 如果失败会怎样？
+2.  **考虑概率** - 失败的可能性有多大？
+3.  **考虑可检测性** - 如果失败了我们能知道吗？
+4.  **考虑可恢复性** - 我们能快速修复吗？
 
-## Priority Decision Tree
+## 优先级决策树
 
 ```
-Is it revenue-critical?
-├─ YES → P0
-└─ NO → Does it affect core user journey?
-    ├─ YES → Is it high-risk?
-    │   ├─ YES → P0
-    │   └─ NO → P1
-    └─ NO → Is it frequently used?
-        ├─ YES → P1
-        └─ NO → Is it customer-facing?
-            ├─ YES → P2
-            └─ NO → P3
+是否对收入至关重要？
+├─ 是 → P0
+└─ 否 → 是否影响核心用户旅程？
+    ├─ 是 → 风险高吗？
+    │   ├─ 是 → P0
+    │   └─ 否 → P1
+    └─ 否 → 是否经常使用？
+        ├─ 是 → P1
+        └─ 否 → 是否面向客户？
+            ├─ 是 → P2
+            └─ 否 → P3
 ```
 
-## Test Execution Order
+## 测试执行顺序
 
-1. Execute P0 tests first (fail fast on critical issues)
-2. Execute P1 tests second (core functionality)
-3. Execute P2 tests if time permits
-4. P3 tests only in full regression cycles
+1.  首先执行P0测试（在关键问题上快速失败）
+2.  其次执行P1测试（核心功能）
+3.  如果时间允许，执行P2测试
+4.  仅在完整回归周期中执行P3测试
 
-## Continuous Adjustment
+## 持续调整
 
-Review and adjust priorities based on:
+根据以下情况审查和调整优先级：
 
-- Production incident patterns
-- User feedback and complaints
-- Usage analytics
-- Test failure history
-- Business priority changes
+-   生产事故模式
+-   用户反馈和投诉
+-   使用情况分析
+-   测试失败历史
+-   业务优先级变更

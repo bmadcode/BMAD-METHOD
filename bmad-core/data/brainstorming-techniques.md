@@ -1,38 +1,38 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Brainstorming Techniques Data
+# 头脑风暴技术数据
 
-## Creative Expansion
+## 创意扩展
 
-1. **What If Scenarios**: Ask one provocative question, get their response, then ask another
-2. **Analogical Thinking**: Give one example analogy, ask them to find 2-3 more
-3. **Reversal/Inversion**: Pose the reverse question, let them work through it
-4. **First Principles Thinking**: Ask "What are the fundamentals?" and guide them to break it down
+1.  **“如果…”场景**：提出一个挑衅性问题，获取他们的回应，然后再问另一个。
+2.  **类比思维**：给出一个类比示例，让他们再找出2-3个。
+3.  **逆向/反转**：提出反向问题，让他们思考。
+4.  **第一性原理思维**：问“基本原理是什么？”，并引导他们进行分解。
 
-## Structured Frameworks
+## 结构化框架
 
-5. **SCAMPER Method**: Go through one letter at a time, wait for their ideas before moving to next
-6. **Six Thinking Hats**: Present one hat, ask for their thoughts, then move to next hat
-7. **Mind Mapping**: Start with central concept, ask them to suggest branches
+5.  **SCAMPER方法**：一次处理一个字母，等待他们的想法，然后再进行下一个。
+6.  **六顶思考帽**：呈现一顶帽子，征求他们的想法，然后换下一顶帽子。
+7.  **思维导图**：从中心概念开始，让他们建议分支。
 
-## Collaborative Techniques
+## 协作技巧
 
-8. **"Yes, And..." Building**: They give idea, you "yes and" it, they "yes and" back - alternate
-9. **Brainwriting/Round Robin**: They suggest idea, you build on it, ask them to build on yours
-10. **Random Stimulation**: Give one random prompt/word, ask them to make connections
+8.  **“是的，而且…”构建**：他们提出想法，你用“是的，而且…”来补充，他们再用“是的，而且…”回应——交替进行。
+9.  **脑力写作/循环**：他们提出想法，你在此基础上构建，再让他们在你的基础上构建。
+10. **随机刺激**：给出一个随机的提示/词语，让他们建立联系。
 
-## Deep Exploration
+## 深度探索
 
-11. **Five Whys**: Ask "why" and wait for their answer before asking next "why"
-12. **Morphological Analysis**: Ask them to list parameters first, then explore combinations together
-13. **Provocation Technique (PO)**: Give one provocative statement, ask them to extract useful ideas
+11. **五个为什么**：问“为什么”，等待他们的回答，然后再问下一个“为什么”。
+12. **形态分析**：先让他们列出参数，然后一起探索组合。
+13. **挑衅技术 (PO)**：给出一个挑衅性的陈述，让他们从中提取有用的想法。
 
-## Advanced Techniques
+## 高级技巧
 
-14. **Forced Relationships**: Connect two unrelated concepts and ask them to find the bridge
-15. **Assumption Reversal**: Challenge their core assumptions and ask them to build from there
-16. **Role Playing**: Ask them to brainstorm from different stakeholder perspectives
-17. **Time Shifting**: "How would you solve this in 1995? 2030?"
-18. **Resource Constraints**: "What if you had only $10 and 1 hour?"
-19. **Metaphor Mapping**: Use extended metaphors to explore solutions
-20. **Question Storming**: Generate questions instead of answers first
+14. **强制关联**：连接两个不相关的概念，让他们找到桥梁。
+15. **假设逆转**：挑战他们的核心假设，让他们从那里开始构建。
+16. **角色扮演**：让他们从不同利益相关者的角度进行头脑风暴。
+17. **时间转移**：“在1995年你会如何解决这个问题？2030年呢？”
+18. **资源限制**：“如果你只有10美元和1小时怎么办？”
+19. **隐喻映射**：使用扩展的隐喻来探索解决方案。
+20. **问题风暴**：首先生成问题而不是答案。

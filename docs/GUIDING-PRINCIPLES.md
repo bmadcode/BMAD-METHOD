@@ -1,91 +1,91 @@
-# BMad Method Guiding Principles
+# BMad方法指导原则
 
-The BMad Method is a natural language framework for AI-assisted software development. These principles ensure contributions maintain the method's effectiveness.
+BMad方法是一个用于AI辅助软件开发的自然语言框架。这些原则确保贡献能保持该方法的有效性。
 
-## Core Principles
+## 核心原则
 
-### 1. Dev Agents Must Be Lean
+### 1. 开发代理必须精简
 
-- **Minimize dev agent dependencies**: Development agents that work in IDEs must have minimal context overhead
-- **Save context for code**: Every line counts - dev agents should focus on coding, not documentation
-- **Web agents can be larger**: Planning agents (PRD Writer, Architect) used in web UI can have more complex tasks and dependencies
-- **Small files, loaded on demand**: Multiple small, focused files are better than large files with many branches
+-   **最小化开发代理的依赖**: 在IDE中工作的开发代理必须有最小的上下文开销
+-   **为代码节省上下文**: 每一行都很重要 - 开发代理应专注于编码，而不是文档
+-   **Web代理可以更大**: 在Web UI中使用的规划代理（PRD编写者、架构师）可以有更复杂的任务和依赖
+-   **小文件，按需加载**: 多个小的、专注的文件比包含许多分支的大文件更好
 
-### 2. Natural Language First
+### 2. 自然语言优先
 
-- **Everything is markdown**: Agents, tasks, templates - all written in plain English
-- **No code in core**: The framework itself contains no programming code, only natural language instructions
-- **Self-contained templates**: Templates are defined as YAML files with structured sections that include metadata, workflow configuration, and detailed instructions for content generation
+-   **一切都是markdown**: 代理、任务、模板 - 都用纯英文编写
+-   **核心中没有代码**: 框架本身不包含编程代码，只有自然语言指令
+-   **自包含的模板**: 模板被定义为YAML文件，具有结构化的部分，包括元数据、工作流配置和内容生成的详细说明
 
-### 3. Agent and Task Design
+### 3. 代理和任务设计
 
-- **Agents define roles**: Each agent is a persona with specific expertise (e.g., Frontend Developer, API Developer)
-- **Tasks are procedures**: Step-by-step instructions an agent follows to complete work
-- **Templates are outputs**: Structured documents with embedded instructions for generation
-- **Dependencies matter**: Explicitly declare only what's needed
+-   **代理定义角色**: 每个代理都是一个具有特定专业知识的角色（例如，前端开发人员、API开发人员）
+-   **任务是程序**: 代理为完成工作而遵循的逐步说明
+-   **模板是输出**: 带有生成说明的结构化文档
+-   **依赖关系很重要**: 明确声明只需要什么
 
-## Practical Guidelines
+## 实践指南
 
-### When to Add to Core
+### 何时添加到核心
 
-- Universal software development needs only
-- Doesn't bloat dev agent contexts
-- Follows existing agent/task/template patterns
+-   仅限通用的软件开发需求
+-   不增加开发代理的上下文负担
+-   遵循现有的代理/任务/模板模式
 
-### When to Create Expansion Packs
+### 何时创建扩展包
 
-- Domain-specific needs beyond software development
-- Non-technical domains (business, wellness, education, creative)
-- Specialized technical domains (games, infrastructure, mobile)
-- Heavy documentation or knowledge bases
-- Anything that would bloat core agents
+-   软件开发之外的特定领域需求
+-   非技术领域（商业、健康、教育、创意）
+-   专业技术领域（游戏、基础设施、移动）
+-   大量的文档或知识库
+-   任何会使核心代理膨胀的东西
 
-See [Expansion Packs Guide](../docs/expansion-packs.md) for detailed examples and ideas.
+有关详细示例和想法，请参阅[扩展包指南](../docs/expansion-packs.md)。
 
-### Agent Design Rules
+### 代理设计规则
 
-1. **Web/Planning Agents**: Can have richer context, multiple tasks, extensive templates
-2. **Dev Agents**: Minimal dependencies, focused on code generation, lean task sets
-3. **All Agents**: Clear persona, specific expertise, well-defined capabilities
+1.  **Web/规划代理**: 可以有更丰富的上下文、多个任务、广泛的模板
+2.  **开发代理**: 最小的依赖、专注于代码生成、精简的任务集
+3.  **所有代理**: 清晰的角色、特定的专业知识、明确定义的能力
 
-### Task Writing Rules
+### 任务编写规则
 
-1. Write clear step-by-step procedures
-2. Use markdown formatting for readability
-3. Keep dev agent tasks focused and concise
-4. Planning tasks can be more elaborate
-5. **Prefer multiple small tasks over one large branching task**
-   - Instead of one task with many conditional paths
-   - Create multiple focused tasks the agent can choose from
-   - This keeps context overhead minimal
-6. **Reuse common tasks** - Don't create new document creation tasks
-   - Use the existing `create-doc` task
-   - Pass the appropriate YAML template with structured sections
-   - This maintains consistency and reduces duplication
+1.  编写清晰的逐步程序
+2.  使用markdown格式以提高可读性
+3.  保持开发代理任务的专注和简洁
+4.  规划任务可以更详尽
+5.  **倾向于多个小任务，而不是一个大的分支任务**
+    -   而不是一个有许多条件路径的任务
+    -   创建多个专注的任务供代理选择
+    -   这使上下文开销保持最小
+6.  **重用通用任务** - 不要创建新的文档创建任务
+    -   使用现有的`create-doc`任务
+    -   传递带有结构化部分的适当YAML模板
+    -   这保持了一致性并减少了重复
 
-### Template Rules
+### 模板规则
 
-Templates follow the [BMad Document Template](../common/utils/bmad-doc-template.md) specification using YAML format:
+模板遵循使用YAML格式的[BMad文档模板](../common/utils/bmad-doc-template.md)规范：
 
-1. **Structure**: Templates are defined in YAML with clear metadata, workflow configuration, and section hierarchy
-2. **Separation of Concerns**: Instructions for LLMs are in `instruction` fields, separate from content
-3. **Reusability**: Templates are agent-agnostic and can be used across different agents
-4. **Key Components**:
-   - `template` block for metadata (id, name, version, output settings)
-   - `workflow` block for interaction mode configuration
-   - `sections` array defining document structure with nested subsections
-   - Each section has `id`, `title`, and `instruction` fields
-5. **Advanced Features**:
-   - Variable substitution using `{{variable_name}}` syntax
-   - Conditional sections with `condition` field
-   - Repeatable sections with `repeatable: true`
-   - Agent permissions with `owner` and `editors` fields
-   - Examples arrays for guidance (never included in output)
-6. **Clean Output**: YAML structure ensures all processing logic stays separate from generated content
+1.  **结构**: 模板在YAML中定义，具有清晰的元数据、工作流配置和章节层次结构
+2.  **关注点分离**: LLM的指令在`instruction`字段中，与内容分开
+3.  **可重用性**: 模板与代理无关，可以在不同的代理之间使用
+4.  **关键组件**:
+    -   用于元数据的`template`块（id、name、version、output设置）
+    -   用于交互模式配置的`workflow`块
+    -   定义文档结构的`sections`数组，带有嵌套的子部分
+    -   每个部分都有`id`、`title`和`instruction`字段
+5.  **高级功能**:
+    -   使用`{{variable_name}}`语法进行变量替换
+    -   带有`condition`字段的条件部分
+    -   带有`repeatable: true`的可重复部分
+    -   带有`owner`和`editors`字段的代理权限
+    -   用于指导的示例数组（从不包含在输出中）
+6.  **干净的输出**: YAML结构确保所有处理逻辑与生成的内容分开
 
-## Remember
+## 请记住
 
-- The power is in natural language orchestration, not code
-- Dev agents code, planning agents plan
-- Keep dev agents lean for maximum coding efficiency
-- Expansion packs handle specialized domains
+-   力量在于自然语言的编排，而不是代码
+-   开发代理编码，规划代理规划
+-   保持开发代理精简以实现最大的编码效率
+-   扩展包处理专业领域

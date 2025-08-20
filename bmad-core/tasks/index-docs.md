@@ -1,175 +1,175 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Index Documentation Task
+# 索引文档任务
 
-## Purpose
+## 目的
 
-This task maintains the integrity and completeness of the `docs/index.md` file by scanning all documentation files and ensuring they are properly indexed with descriptions. It handles both root-level documents and documents within subfolders, organizing them hierarchically.
+此任务通过扫描所有文档文件并确保它们都已正确索引并附有描述，来维护`docs/index.md`文件的完整性。它处理根级文档和子文件夹中的文档，并按层次结构组织它们。
 
-## Task Instructions
+## 任务说明
 
-You are now operating as a Documentation Indexer. Your goal is to ensure all documentation files are properly cataloged in the central index with proper organization for subfolders.
+您现在作为文档索引员操作。您的目标是确保所有文档文件都已在中央索引中正确编目，并为子文件夹进行适当的组织。
 
-### Required Steps
+### 所需步骤
 
-1. First, locate and scan:
-   - The `docs/` directory and all subdirectories
-   - The existing `docs/index.md` file (create if absent)
-   - All markdown (`.md`) and text (`.txt`) files in the documentation structure
-   - Note the folder structure for hierarchical organization
+1.  首先，定位并扫描：
+    -   `docs/`目录及其所有子目录
+    -   现有的`docs/index.md`文件（如果不存在则创建）
+    -   文档结构中的所有markdown (`.md`)和文本(`.txt`)文件
+    -   注意文件夹结构以进行分层组织
 
-2. For the existing `docs/index.md`:
-   - Parse current entries
-   - Note existing file references and descriptions
-   - Identify any broken links or missing files
-   - Keep track of already-indexed content
-   - Preserve existing folder sections
+2.  对于现有的`docs/index.md`：
+    -   解析当前条目
+    -   注意现有的文件引用和描述
+    -   识别任何损坏的链接或丢失的文件
+    -   跟踪已索引的内容
+    -   保留现有的文件夹部分
 
-3. For each documentation file found:
-   - Extract the title (from first heading or filename)
-   - Generate a brief description by analyzing the content
-   - Create a relative markdown link to the file
-   - Check if it's already in the index
-   - Note which folder it belongs to (if in a subfolder)
-   - If missing or outdated, prepare an update
+3.  对于找到的每个文档文件：
+    -   提取标题（从第一个标题或文件名）
+    -   通过分析内容生成简要描述
+    -   创建到文件的相对markdown链接
+    -   检查它是否已在索引中
+    -   注意它属于哪个文件夹（如果在子文件夹中）
+    -   如果丢失或过时，则准备更新
 
-4. For any missing or non-existent files found in index:
-   - Present a list of all entries that reference non-existent files
-   - For each entry:
-     - Show the full entry details (title, path, description)
-     - Ask for explicit confirmation before removal
-     - Provide option to update the path if file was moved
-     - Log the decision (remove/update/keep) for final report
+4.  对于在索引中找到但不存在的任何文件：
+    -   呈现引用不存在的文件的所有条目的列表
+    -   对于每个条目：
+        -   显示完整的条目详细信息（标题、路径、描述）
+        -   在删除前要求明确确认
+        -   如果文件已移动，则提供更新路径的选项
+        -   记录决定（删除/更新/保留）以供最终报告
 
-5. Update `docs/index.md`:
-   - Maintain existing structure and organization
-   - Create level 2 sections (`##`) for each subfolder
-   - List root-level documents first
-   - Add missing entries with descriptions
-   - Update outdated entries
-   - Remove only entries that were confirmed for removal
-   - Ensure consistent formatting throughout
+5.  更新`docs/index.md`：
+    -   保持现有的结构和组织
+    -   为每个子文件夹创建2级部分（`##`）
+    -   首先列出根级文档
+    -   添加带有描述的缺失条目
+    -   更新过时的条目
+    -   仅删除已确认为删除的条目
+    -   确保整个格式一致
 
-### Index Structure Format
+### 索引结构格式
 
-The index should be organized as follows:
-
-```markdown
-# Documentation Index
-
-## Root Documents
-
-### [Document Title](./document.md)
-
-Brief description of the document's purpose and contents.
-
-### [Another Document](./another.md)
-
-Description here.
-
-## Folder Name
-
-Documents within the `folder-name/` directory:
-
-### [Document in Folder](./folder-name/document.md)
-
-Description of this document.
-
-### [Another in Folder](./folder-name/another.md)
-
-Description here.
-
-## Another Folder
-
-Documents within the `another-folder/` directory:
-
-### [Nested Document](./another-folder/document.md)
-
-Description of nested document.
-```
-
-### Index Entry Format
-
-Each entry should follow this format:
+索引应按以下方式组织：
 
 ```markdown
-### [Document Title](relative/path/to/file.md)
+# 文档索引
 
-Brief description of the document's purpose and contents.
+## 根文档
+
+### [文档标题](./document.md)
+
+文档目的和内容的简要描述。
+
+### [另一个文档](./another.md)
+
+此处的描述。
+
+## 文件夹名称
+
+`folder-name/`目录中的文档：
+
+### [文件夹中的文档](./folder-name/document.md)
+
+此文档的描述。
+
+### [文件夹中的另一个](./folder-name/another.md)
+
+此处的描述。
+
+## 另一个文件夹
+
+`another-folder/`目录中的文档：
+
+### [嵌套文档](./another-folder/document.md)
+
+嵌套文档的描述。
 ```
 
-### Rules of Operation
+### 索引条目格式
 
-1. NEVER modify the content of indexed files
-2. Preserve existing descriptions in index.md when they are adequate
-3. Maintain any existing categorization or grouping in the index
-4. Use relative paths for all links (starting with `./`)
-5. Ensure descriptions are concise but informative
-6. NEVER remove entries without explicit confirmation
-7. Report any broken links or inconsistencies found
-8. Allow path updates for moved files before considering removal
-9. Create folder sections using level 2 headings (`##`)
-10. Sort folders alphabetically, with root documents listed first
-11. Within each section, sort documents alphabetically by title
+每个条目应遵循此格式：
 
-### Process Output
+```markdown
+### [文档标题](relative/path/to/file.md)
 
-The task will provide:
+文档目的和内容的简要描述。
+```
 
-1. A summary of changes made to index.md
-2. List of newly indexed files (organized by folder)
-3. List of updated entries
-4. List of entries presented for removal and their status:
-   - Confirmed removals
-   - Updated paths
-   - Kept despite missing file
-5. Any new folders discovered
-6. Any other issues or inconsistencies found
+### 操作规则
 
-### Handling Missing Files
+1.  切勿修改索引文件的内容
+2.  在现有描述足够的情况下，保留index.md中的现有描述
+3.  保持索引中任何现有的分类或分组
+4.  对所有链接使用相对路径（以`./`开头）
+5.  确保描述简洁但信息丰富
+6.  未经明确确认，切勿删除条目
+7.  报告发现的任何损坏链接或不一致之处
+8.  在考虑删除之前，允许为移动的文件更新路径
+9.  使用2级标题（`##`）创建文件夹部分
+10. 按字母顺序对文件夹进行排序，根文档列在最前面
+11. 在每个部分内，按标题字母顺序对文档进行排序
 
-For each file referenced in the index but not found in the filesystem:
+### 流程输出
 
-1. Present the entry:
+该任务将提供：
 
-   ```markdown
-   Missing file detected:
-   Title: [Document Title]
-   Path: relative/path/to/file.md
-   Description: Existing description
-   Section: [Root Documents | Folder Name]
+1.  对index.md所做更改的摘要
+2.  新索引文件的列表（按文件夹组织）
+3.  更新条目的列表
+4.  为删除而呈现的条目及其状态列表：
+    -   已确认删除
+    -   已更新路径
+    -   尽管文件丢失但仍保留
+5.  发现的任何新文件夹
+6.  发现的任何其他问题或不一致之处
 
-   Options:
+### 处理丢失的文件
 
-   1. Remove this entry
-   2. Update the file path
-   3. Keep entry (mark as temporarily unavailable)
+对于索引中引用但在文件系统中未找到的每个文件：
 
-   Please choose an option (1/2/3):
-   ```
+1.  呈现该条目：
 
-2. Wait for user confirmation before taking any action
-3. Log the decision for the final report
+    ```markdown
+    检测到丢失文件：
+    标题：[文档标题]
+    路径：relative/path/to/file.md
+    描述：现有描述
+    部分：[根文档 | 文件夹名称]
 
-### Special Cases
+    选项：
 
-1. **Sharded Documents**: If a folder contains an `index.md` file, treat it as a sharded document:
-   - Use the folder's `index.md` title as the section title
-   - List the folder's documents as subsections
-   - Note in the description that this is a multi-part document
+    1. 删除此条目
+    2. 更新文件路径
+    3. 保留条目（标记为暂时不可用）
 
-2. **README files**: Convert `README.md` to more descriptive titles based on content
+    请选择一个选项（1/2/3）：
+    ```
 
-3. **Nested Subfolders**: For deeply nested folders, maintain the hierarchy but limit to 2 levels in the main index. Deeper structures should have their own index files.
+2.  在采取任何行动之前等待用户确认
+3.  记录决定以供最终报告
 
-## Required Input
+### 特殊情况
 
-Please provide:
+1.  **分片文档**：如果文件夹包含`index.md`文件，则将其视为分片文档：
+    -   使用文件夹的`index.md`标题作为章节标题
+    -   将文件夹的文档列为子部分
+    -   在描述中注明这是一个多部分文档
 
-1. Location of the `docs/` directory (default: `./docs`)
-2. Confirmation of write access to `docs/index.md`
-3. Any specific categorization preferences
-4. Any files or directories to exclude from indexing (e.g., `.git`, `node_modules`)
-5. Whether to include hidden files/folders (starting with `.`)
+2.  **README文件**：根据内容将`README.md`转换为更具描述性的标题
 
-Would you like to proceed with documentation indexing? Please provide the required input above.
+3.  **嵌套子文件夹**：对于深度嵌套的文件夹，保持层次结构，但在主索引中限制为2级。更深的结构应有自己的索引文件。
+
+## 所需输入
+
+请提供：
+
+1.  `docs/`目录的位置（默认：`./docs`）
+2.  对`docs/index.md`的写访问权限的确认
+3.  任何特定的分类偏好
+4.  任何要从索引中排除的文件或目录（例如，`.git`、`node_modules`）
+5.  是否包括隐藏文件/文件夹（以`.`开头）
+
+您想继续进行文档索引吗？请提供上述所需输入。

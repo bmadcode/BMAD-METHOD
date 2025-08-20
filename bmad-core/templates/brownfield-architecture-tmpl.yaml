@@ -1,12 +1,12 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: brownfield-architecture-template-v2
-  name: Brownfield Enhancement Architecture
+  name: 棕地增强架构
   version: 2.0
   output:
     format: markdown
     filename: docs/architecture.md
-    title: "{{project_name}} Brownfield Enhancement Architecture"
+    title: "{{project_name}} 棕地增强架构"
 
 workflow:
   mode: interactive
@@ -14,464 +14,464 @@ workflow:
 
 sections:
   - id: introduction
-    title: Introduction
+    title: 引言
     instruction: |
-      IMPORTANT - SCOPE AND ASSESSMENT REQUIRED:
+      重要 - 需要范围和评估：
 
-      This architecture document is for SIGNIFICANT enhancements to existing projects that require comprehensive architectural planning. Before proceeding:
+      此架构文档适用于需要全面架构规划的现有项目的重大增强。在继续之前：
 
-      1. **Verify Complexity**: Confirm this enhancement requires architectural planning. For simple additions, recommend: "For simpler changes that don't require architectural planning, consider using the brownfield-create-epic or brownfield-create-story task with the Product Owner instead."
+      1. **验证复杂性**：确认此增强需要架构规划。对于简单的添加，建议：“对于不需要架构规划的更简单的更改，请考虑改用产品负责人的 brownfield-create-epic 或 brownfield-create-story 任务。”
 
-      2. **REQUIRED INPUTS**:
-         - Completed brownfield-prd.md
-         - Existing project technical documentation (from docs folder or user-provided)
-         - Access to existing project structure (IDE or uploaded files)
+      2. **必需输入**：
+         - 完成的 brownfield-prd.md
+         - 现有的项目技术文档（来自 docs 文件夹或用户提供）
+         - 对现有项目结构的访问权限（IDE 或上传的文件）
 
-      3. **DEEP ANALYSIS MANDATE**: You MUST conduct thorough analysis of the existing codebase, architecture patterns, and technical constraints before making ANY architectural recommendations. Every suggestion must be based on actual project analysis, not assumptions.
+      3. **深度分析任务**：在提出任何架构建议之前，您必须对现有代码库、架构模式和技术约束进行彻底分析。每个建议都必须基于实际的项目分析，而不是假设。
 
-      4. **CONTINUOUS VALIDATION**: Throughout this process, explicitly validate your understanding with the user. For every architectural decision, confirm: "Based on my analysis of your existing system, I recommend [decision] because [evidence from actual project]. Does this align with your system's reality?"
+      4. **持续验证**：在此过程中，明确地与用户验证您的理解。对于每个架构决策，请确认：“根据我对您现有系统的分析，我建议[决策]，因为[来自实际项目的证据]。这是否符合您系统的实际情况？”
 
-      If any required inputs are missing, request them before proceeding.
+      如果缺少任何必需的输入，请在继续之前请求它们。
     elicit: true
     sections:
       - id: intro-content
         content: |
-          This document outlines the architectural approach for enhancing {{project_name}} with {{enhancement_description}}. Its primary goal is to serve as the guiding architectural blueprint for AI-driven development of new features while ensuring seamless integration with the existing system.
+          本文档概述了使用{{enhancement_description}}增强{{project_name}}的架构方法。其主要目标是作为AI驱动开发新功能的指导性架构蓝图，同时确保与现有系统的无缝集成。
 
-          **Relationship to Existing Architecture:**
-          This document supplements existing project architecture by defining how new components will integrate with current systems. Where conflicts arise between new and existing patterns, this document provides guidance on maintaining consistency while implementing enhancements.
+          **与现有架构的关系：**
+          本文档通过定义新组件如何与当前系统集成来补充现有项目架构。当新旧模式之间出现冲突时，本文档提供了在实施增强功能的同时保持一致性的指导。
       - id: existing-project-analysis
-        title: Existing Project Analysis
+        title: 现有项目分析
         instruction: |
-          Analyze the existing project structure and architecture:
+          分析现有项目结构和架构：
 
-          1. Review existing documentation in docs folder
-          2. Examine current technology stack and versions
-          3. Identify existing architectural patterns and conventions
-          4. Note current deployment and infrastructure setup
-          5. Document any constraints or limitations
+          1. 审查 docs 文件夹中的现有文档
+          2. 检查当前的技术栈和版本
+          3. 识别现有的架构模式和约定
+          4. 注意当前的部署和基础设施设置
+          5. 记录任何约束或限制
 
-          CRITICAL: After your analysis, explicitly validate your findings: "Based on my analysis of your project, I've identified the following about your existing system: [key findings]. Please confirm these observations are accurate before I proceed with architectural recommendations."
+          关键：分析后，明确验证您的发现：“根据我对您项目的分析，我确定了您现有系统的以下几点：[关键发现]。在我提出架构建议之前，请确认这些观察结果是准确的。”
         elicit: true
         sections:
           - id: current-state
-            title: Current Project State
+            title: 当前项目状态
             template: |
-              - **Primary Purpose:** {{existing_project_purpose}}
-              - **Current Tech Stack:** {{existing_tech_summary}}
-              - **Architecture Style:** {{existing_architecture_style}}
-              - **Deployment Method:** {{existing_deployment_approach}}
+              - **主要目的：** {{existing_project_purpose}}
+              - **当前技术栈：** {{existing_tech_summary}}
+              - **架构风格：** {{existing_architecture_style}}
+              - **部署方法：** {{existing_deployment_approach}}
           - id: available-docs
-            title: Available Documentation
+            title: 可用文档
             type: bullet-list
             template: "- {{existing_docs_summary}}"
           - id: constraints
-            title: Identified Constraints
+            title: 已识别的约束
             type: bullet-list
             template: "- {{constraint}}"
       - id: changelog
-        title: Change Log
+        title: 变更日志
         type: table
-        columns: [Change, Date, Version, Description, Author]
-        instruction: Track document versions and changes
+        columns: [变更, 日期, 版本, 描述, 作者]
+        instruction: 跟踪文档版本和变更
 
   - id: enhancement-scope
-    title: Enhancement Scope and Integration Strategy
+    title: 增强范围和集成策略
     instruction: |
-      Define how the enhancement will integrate with the existing system:
+      定义增强功能将如何与现有系统集成：
 
-      1. Review the brownfield PRD enhancement scope
-      2. Identify integration points with existing code
-      3. Define boundaries between new and existing functionality
-      4. Establish compatibility requirements
+      1. 审查棕地PRD增强范围
+      2. 识别与现有代码的集成点
+      3. 定义新旧功能之间的界限
+      4. 建立兼容性要求
 
-      VALIDATION CHECKPOINT: Before presenting the integration strategy, confirm: "Based on my analysis, the integration approach I'm proposing takes into account [specific existing system characteristics]. These integration points and boundaries respect your current architecture patterns. Is this assessment accurate?"
+      验证检查点：在提出集成策略之前，请确认：“根据我的分析，我提出的集成方法考虑了[特定的现有系统特征]。这些集成点和边界尊重您当前的架构模式。此评估是否准确？”
     elicit: true
     sections:
       - id: enhancement-overview
-        title: Enhancement Overview
+        title: 增强概述
         template: |
-          **Enhancement Type:** {{enhancement_type}}
-          **Scope:** {{enhancement_scope}}
-          **Integration Impact:** {{integration_impact_level}}
+          **增强类型：** {{enhancement_type}}
+          **范围：** {{enhancement_scope}}
+          **集成影响：** {{integration_impact_level}}
       - id: integration-approach
-        title: Integration Approach
+        title: 集成方法
         template: |
-          **Code Integration Strategy:** {{code_integration_approach}}
-          **Database Integration:** {{database_integration_approach}}
-          **API Integration:** {{api_integration_approach}}
-          **UI Integration:** {{ui_integration_approach}}
+          **代码集成策略：** {{code_integration_approach}}
+          **数据库集成：** {{database_integration_approach}}
+          **API集成：** {{api_integration_approach}}
+          **UI集成：** {{ui_integration_approach}}
       - id: compatibility-requirements
-        title: Compatibility Requirements
+        title: 兼容性要求
         template: |
-          - **Existing API Compatibility:** {{api_compatibility}}
-          - **Database Schema Compatibility:** {{db_compatibility}}
-          - **UI/UX Consistency:** {{ui_compatibility}}
-          - **Performance Impact:** {{performance_constraints}}
+          - **现有API兼容性：** {{api_compatibility}}
+          - **数据库模式兼容性：** {{db_compatibility}}
+          - **UI/UX一致性：** {{ui_compatibility}}
+          - **性能影响：** {{performance_constraints}}
 
   - id: tech-stack-alignment
-    title: Tech Stack Alignment
+    title: 技术栈对齐
     instruction: |
-      Ensure new components align with existing technology choices:
+      确保新组件与现有技术选择保持一致：
 
-      1. Use existing technology stack as the foundation
-      2. Only introduce new technologies if absolutely necessary
-      3. Justify any new additions with clear rationale
-      4. Ensure version compatibility with existing dependencies
+      1. 使用现有技术栈作为基础
+      2. 仅在绝对必要时才引入新技术
+      3. 用明确的理由证明任何新的添加
+      4. 确保与现有依赖项的版本兼容性
     elicit: true
     sections:
       - id: existing-stack
-        title: Existing Technology Stack
+        title: 现有技术栈
         type: table
-        columns: [Category, Current Technology, Version, Usage in Enhancement, Notes]
-        instruction: Document the current stack that must be maintained or integrated with
+        columns: [类别, 当前技术, 版本, 在增强中的用途, 说明]
+        instruction: 记录必须维护或与之集成的当前技术栈
       - id: new-tech-additions
-        title: New Technology Additions
-        condition: Enhancement requires new technologies
+        title: 新技术添加
+        condition: 增强需要新技术
         type: table
-        columns: [Technology, Version, Purpose, Rationale, Integration Method]
-        instruction: Only include if new technologies are required for the enhancement
+        columns: [技术, 版本, 目的, 理由, 集成方法]
+        instruction: 仅在增强需要新技术时包括
 
   - id: data-models
-    title: Data Models and Schema Changes
+    title: 数据模型和模式更改
     instruction: |
-      Define new data models and how they integrate with existing schema:
+      定义新的数据模型以及它们如何与现有模式集成：
 
-      1. Identify new entities required for the enhancement
-      2. Define relationships with existing data models
-      3. Plan database schema changes (additions, modifications)
-      4. Ensure backward compatibility
+      1. 识别增强所需的新实体
+      2. 定义与现有数据模型的关系
+      3. 规划数据库模式更改（添加、修改）
+      4. 确保向后兼容性
     elicit: true
     sections:
       - id: new-models
-        title: New Data Models
+        title: 新数据模型
         repeatable: true
         sections:
           - id: model
             title: "{{model_name}}"
             template: |
-              **Purpose:** {{model_purpose}}
-              **Integration:** {{integration_with_existing}}
+              **目的：** {{model_purpose}}
+              **集成：** {{integration_with_existing}}
 
-              **Key Attributes:**
+              **关键属性：**
               - {{attribute_1}}: {{type_1}} - {{description_1}}
               - {{attribute_2}}: {{type_2}} - {{description_2}}
 
-              **Relationships:**
-              - **With Existing:** {{existing_relationships}}
-              - **With New:** {{new_relationships}}
+              **关系：**
+              - **与现有：** {{existing_relationships}}
+              - **与新的：** {{new_relationships}}
       - id: schema-integration
-        title: Schema Integration Strategy
+        title: 模式集成策略
         template: |
-          **Database Changes Required:**
-          - **New Tables:** {{new_tables_list}}
-          - **Modified Tables:** {{modified_tables_list}}
-          - **New Indexes:** {{new_indexes_list}}
-          - **Migration Strategy:** {{migration_approach}}
+          **所需数据库更改：**
+          - **新表：** {{new_tables_list}}
+          - **修改的表：** {{modified_tables_list}}
+          - **新索引：** {{new_indexes_list}}
+          - **迁移策略：** {{migration_approach}}
 
-          **Backward Compatibility:**
+          **向后兼容性：**
           - {{compatibility_measure_1}}
           - {{compatibility_measure_2}}
 
   - id: component-architecture
-    title: Component Architecture
+    title: 组件架构
     instruction: |
-      Define new components and their integration with existing architecture:
+      定义新组件及其与现有架构的集成：
 
-      1. Identify new components required for the enhancement
-      2. Define interfaces with existing components
-      3. Establish clear boundaries and responsibilities
-      4. Plan integration points and data flow
+      1. 识别增强所需的新组件
+      2. 定义与现有组件的接口
+      3. 建立清晰的边界和职责
+      4. 规划集成点和数据流
 
-      MANDATORY VALIDATION: Before presenting component architecture, confirm: "The new components I'm proposing follow the existing architectural patterns I identified in your codebase: [specific patterns]. The integration interfaces respect your current component structure and communication patterns. Does this match your project's reality?"
+      强制验证：在提出组件架构之前，请确认：“我提出的新组件遵循我在您代码库中识别出的现有架构模式：[特定模式]。集成接口尊重您当前的组件结构和通信模式。这是否符合您项目的实际情况？”
     elicit: true
     sections:
       - id: new-components
-        title: New Components
+        title: 新组件
         repeatable: true
         sections:
           - id: component
             title: "{{component_name}}"
             template: |
-              **Responsibility:** {{component_description}}
-              **Integration Points:** {{integration_points}}
+              **职责：** {{component_description}}
+              **集成点：** {{integration_points}}
 
-              **Key Interfaces:**
+              **关键接口：**
               - {{interface_1}}
               - {{interface_2}}
 
-              **Dependencies:**
-              - **Existing Components:** {{existing_dependencies}}
-              - **New Components:** {{new_dependencies}}
+              **依赖：**
+              - **现有组件：** {{existing_dependencies}}
+              - **新组件：** {{new_dependencies}}
 
-              **Technology Stack:** {{component_tech_details}}
+              **技术栈：** {{component_tech_details}}
       - id: interaction-diagram
-        title: Component Interaction Diagram
+        title: 组件交互图
         type: mermaid
         mermaid_type: graph
-        instruction: Create Mermaid diagram showing how new components interact with existing ones
+        instruction: 创建Mermaid图，显示新组件如何与现有组件交互
 
   - id: api-design
-    title: API Design and Integration
-    condition: Enhancement requires API changes
+    title: API设计和集成
+    condition: 增强需要API更改
     instruction: |
-      Define new API endpoints and integration with existing APIs:
+      定义新的API端点并与现有API集成：
 
-      1. Plan new API endpoints required for the enhancement
-      2. Ensure consistency with existing API patterns
-      3. Define authentication and authorization integration
-      4. Plan versioning strategy if needed
+      1. 规划增强所需的新的API端点
+      2. 确保与现有API模式的一致性
+      3. 定义身份验证和授权集成
+      4. 如果需要，规划版本控制策略
     elicit: true
     sections:
       - id: api-strategy
-        title: API Integration Strategy
+        title: API集成策略
         template: |
-          **API Integration Strategy:** {{api_integration_strategy}}
-          **Authentication:** {{auth_integration}}
-          **Versioning:** {{versioning_approach}}
+          **API集成策略：** {{api_integration_strategy}}
+          **身份验证：** {{auth_integration}}
+          **版本控制：** {{versioning_approach}}
       - id: new-endpoints
-        title: New API Endpoints
+        title: 新的API端点
         repeatable: true
         sections:
           - id: endpoint
             title: "{{endpoint_name}}"
             template: |
-              - **Method:** {{http_method}}
-              - **Endpoint:** {{endpoint_path}}
-              - **Purpose:** {{endpoint_purpose}}
-              - **Integration:** {{integration_with_existing}}
+              - **方法：** {{http_method}}
+              - **端点：** {{endpoint_path}}
+              - **目的：** {{endpoint_purpose}}
+              - **集成：** {{integration_with_existing}}
             sections:
               - id: request
-                title: Request
+                title: 请求
                 type: code
                 language: json
                 template: "{{request_schema}}"
               - id: response
-                title: Response
+                title: 响应
                 type: code
                 language: json
                 template: "{{response_schema}}"
 
   - id: external-api-integration
-    title: External API Integration
-    condition: Enhancement requires new external APIs
-    instruction: Document new external API integrations required for the enhancement
+    title: 外部API集成
+    condition: 增强需要新的外部API
+    instruction: 记录增强所需的新外部API集成
     repeatable: true
     sections:
       - id: external-api
         title: "{{api_name}} API"
         template: |
-          - **Purpose:** {{api_purpose}}
-          - **Documentation:** {{api_docs_url}}
-          - **Base URL:** {{api_base_url}}
-          - **Authentication:** {{auth_method}}
-          - **Integration Method:** {{integration_approach}}
+          - **目的：** {{api_purpose}}
+          - **文档：** {{api_docs_url}}
+          - **基本URL：** {{api_base_url}}
+          - **身份验证：** {{auth_method}}
+          - **集成方法：** {{integration_approach}}
 
-          **Key Endpoints Used:**
+          **使用的关键端点：**
           - `{{method}} {{endpoint_path}}` - {{endpoint_purpose}}
 
-          **Error Handling:** {{error_handling_strategy}}
+          **错误处理：** {{error_handling_strategy}}
 
   - id: source-tree-integration
-    title: Source Tree Integration
+    title: 源代码树集成
     instruction: |
-      Define how new code will integrate with existing project structure:
+      定义新代码将如何与现有项目结构集成：
 
-      1. Follow existing project organization patterns
-      2. Identify where new files/folders will be placed
-      3. Ensure consistency with existing naming conventions
-      4. Plan for minimal disruption to existing structure
+      1. 遵循现有项目组织模式
+      2. 确定新文件/文件夹的放置位置
+      3. 确保与现有命名约定的一致性
+      4. 规划对现有结构的最小干扰
     elicit: true
     sections:
       - id: existing-structure
-        title: Existing Project Structure
+        title: 现有项目结构
         type: code
         language: plaintext
-        instruction: Document relevant parts of current structure
+        instruction: 记录当前结构的相关部分
         template: "{{existing_structure_relevant_parts}}"
       - id: new-file-organization
-        title: New File Organization
+        title: 新文件组织
         type: code
         language: plaintext
-        instruction: Show only new additions to existing structure
+        instruction: 仅显示对现有结构的新增内容
         template: |
           {{project-root}}/
           ├── {{existing_structure_context}}
           │   ├── {{new_folder_1}}/           # {{purpose_1}}
           │   │   ├── {{new_file_1}}
           │   │   └── {{new_file_2}}
-          │   ├── {{existing_folder}}/        # Existing folder with additions
-          │   │   ├── {{existing_file}}       # Existing file
-          │   │   └── {{new_file_3}}          # New addition
+          │   ├── {{existing_folder}}/        # 带有新增内容的现有文件夹
+          │   │   ├── {{existing_file}}       # 现有文件
+          │   │   └── {{new_file_3}}          # 新增内容
           │   └── {{new_folder_2}}/           # {{purpose_2}}
       - id: integration-guidelines
-        title: Integration Guidelines
+        title: 集成指南
         template: |
-          - **File Naming:** {{file_naming_consistency}}
-          - **Folder Organization:** {{folder_organization_approach}}
-          - **Import/Export Patterns:** {{import_export_consistency}}
+          - **文件命名：** {{file_naming_consistency}}
+          - **文件夹组织：** {{folder_organization_approach}}
+          - **导入/导出模式：** {{import_export_consistency}}
 
   - id: infrastructure-deployment
-    title: Infrastructure and Deployment Integration
+    title: 基础设施和部署集成
     instruction: |
-      Define how the enhancement will be deployed alongside existing infrastructure:
+      定义增强功能将如何与现有基础设施一起部署：
 
-      1. Use existing deployment pipeline and infrastructure
-      2. Identify any infrastructure changes needed
-      3. Plan deployment strategy to minimize risk
-      4. Define rollback procedures
+      1. 使用现有的部署管道和基础设施
+      2. 确定任何需要的基础设施更改
+      3. 规划部署策略以最小化风险
+      4. 定义回滚程序
     elicit: true
     sections:
       - id: existing-infrastructure
-        title: Existing Infrastructure
+        title: 现有基础设施
         template: |
-          **Current Deployment:** {{existing_deployment_summary}}
-          **Infrastructure Tools:** {{existing_infrastructure_tools}}
-          **Environments:** {{existing_environments}}
+          **当前部署：** {{existing_deployment_summary}}
+          **基础设施工具：** {{existing_infrastructure_tools}}
+          **环境：** {{existing_environments}}
       - id: enhancement-deployment
-        title: Enhancement Deployment Strategy
+        title: 增强部署策略
         template: |
-          **Deployment Approach:** {{deployment_approach}}
-          **Infrastructure Changes:** {{infrastructure_changes}}
-          **Pipeline Integration:** {{pipeline_integration}}
+          **部署方法：** {{deployment_approach}}
+          **基础设施更改：** {{infrastructure_changes}}
+          **管道集成：** {{pipeline_integration}}
       - id: rollback-strategy
-        title: Rollback Strategy
+        title: 回滚策略
         template: |
-          **Rollback Method:** {{rollback_method}}
-          **Risk Mitigation:** {{risk_mitigation}}
-          **Monitoring:** {{monitoring_approach}}
+          **回滚方法：** {{rollback_method}}
+          **风险缓解：** {{risk_mitigation}}
+          **监控：** {{monitoring_approach}}
 
   - id: coding-standards
-    title: Coding Standards and Conventions
+    title: 编码标准和约定
     instruction: |
-      Ensure new code follows existing project conventions:
+      确保新代码遵循现有项目约定：
 
-      1. Document existing coding standards from project analysis
-      2. Identify any enhancement-specific requirements
-      3. Ensure consistency with existing codebase patterns
-      4. Define standards for new code organization
+      1. 从项目分析中记录现有编码标准
+      2. 确定任何特定于增强功能的要求
+      3. 确保与现有代码库模式的一致性
+      4. 定义新代码组织的标准
     elicit: true
     sections:
       - id: existing-standards
-        title: Existing Standards Compliance
+        title: 现有标准合规性
         template: |
-          **Code Style:** {{existing_code_style}}
-          **Linting Rules:** {{existing_linting}}
-          **Testing Patterns:** {{existing_test_patterns}}
-          **Documentation Style:** {{existing_doc_style}}
+          **代码风格：** {{existing_code_style}}
+          **Linting规则：** {{existing_linting}}
+          **测试模式：** {{existing_test_patterns}}
+          **文档风格：** {{existing_doc_style}}
       - id: enhancement-standards
-        title: Enhancement-Specific Standards
-        condition: New patterns needed for enhancement
+        title: 特定于增强功能的标准
+        condition: 增强需要新模式
         repeatable: true
         template: "- **{{standard_name}}:** {{standard_description}}"
       - id: integration-rules
-        title: Critical Integration Rules
+        title: 关键集成规则
         template: |
-          - **Existing API Compatibility:** {{api_compatibility_rule}}
-          - **Database Integration:** {{db_integration_rule}}
-          - **Error Handling:** {{error_handling_integration}}
-          - **Logging Consistency:** {{logging_consistency}}
+          - **现有API兼容性：** {{api_compatibility_rule}}
+          - **数据库集成：** {{db_integration_rule}}
+          - **错误处理：** {{error_handling_integration}}
+          - **日志记录一致性：** {{logging_consistency}}
 
   - id: testing-strategy
-    title: Testing Strategy
+    title: 测试策略
     instruction: |
-      Define testing approach for the enhancement:
+      定义增强功能的测试方法：
 
-      1. Integrate with existing test suite
-      2. Ensure existing functionality remains intact
-      3. Plan for testing new features
-      4. Define integration testing approach
+      1. 与现有测试套件集成
+      2. 确保现有功能保持不变
+      3. 规划测试新功能
+      4. 定义集成测试方法
     elicit: true
     sections:
       - id: existing-test-integration
-        title: Integration with Existing Tests
+        title: 与现有测试集成
         template: |
-          **Existing Test Framework:** {{existing_test_framework}}
-          **Test Organization:** {{existing_test_organization}}
-          **Coverage Requirements:** {{existing_coverage_requirements}}
+          **现有测试框架：** {{existing_test_framework}}
+          **测试组织：** {{existing_test_organization}}
+          **覆盖率要求：** {{existing_coverage_requirements}}
       - id: new-testing
-        title: New Testing Requirements
+        title: 新的测试要求
         sections:
           - id: unit-tests
-            title: Unit Tests for New Components
+            title: 新组件的单元测试
             template: |
-              - **Framework:** {{test_framework}}
-              - **Location:** {{test_location}}
-              - **Coverage Target:** {{coverage_target}}
-              - **Integration with Existing:** {{test_integration}}
+              - **框架：** {{test_framework}}
+              - **位置：** {{test_location}}
+              - **覆盖目标：** {{coverage_target}}
+              - **与现有集成：** {{test_integration}}
           - id: integration-tests
-            title: Integration Tests
+            title: 集成测试
             template: |
-              - **Scope:** {{integration_test_scope}}
-              - **Existing System Verification:** {{existing_system_verification}}
-              - **New Feature Testing:** {{new_feature_testing}}
+              - **范围：** {{integration_test_scope}}
+              - **现有系统验证：** {{existing_system_verification}}
+              - **新功能测试：** {{new_feature_testing}}
           - id: regression-tests
-            title: Regression Testing
+            title: 回归测试
             template: |
-              - **Existing Feature Verification:** {{regression_test_approach}}
-              - **Automated Regression Suite:** {{automated_regression}}
-              - **Manual Testing Requirements:** {{manual_testing_requirements}}
+              - **现有功能验证：** {{regression_test_approach}}
+              - **自动化回归套件：** {{automated_regression}}
+              - **手动测试要求：** {{manual_testing_requirements}}
 
   - id: security-integration
-    title: Security Integration
+    title: 安全集成
     instruction: |
-      Ensure security consistency with existing system:
+      确保与现有系统的安全一致性：
 
-      1. Follow existing security patterns and tools
-      2. Ensure new features don't introduce vulnerabilities
-      3. Maintain existing security posture
-      4. Define security testing for new components
+      1. 遵循现有的安全模式和工具
+      2. 确保新功能不引入漏洞
+      3. 保持现有的安全态势
+      4. 为新组件定义安全测试
     elicit: true
     sections:
       - id: existing-security
-        title: Existing Security Measures
+        title: 现有安全措施
         template: |
-          **Authentication:** {{existing_auth}}
-          **Authorization:** {{existing_authz}}
-          **Data Protection:** {{existing_data_protection}}
-          **Security Tools:** {{existing_security_tools}}
+          **身份验证：** {{existing_auth}}
+          **授权：** {{existing_authz}}
+          **数据保护：** {{existing_data_protection}}
+          **安全工具：** {{existing_security_tools}}
       - id: enhancement-security
-        title: Enhancement Security Requirements
+        title: 增强安全要求
         template: |
-          **New Security Measures:** {{new_security_measures}}
-          **Integration Points:** {{security_integration_points}}
-          **Compliance Requirements:** {{compliance_requirements}}
+          **新安全措施：** {{new_security_measures}}
+          **集成点：** {{security_integration_points}}
+          **合规要求：** {{compliance_requirements}}
       - id: security-testing
-        title: Security Testing
+        title: 安全测试
         template: |
-          **Existing Security Tests:** {{existing_security_tests}}
-          **New Security Test Requirements:** {{new_security_tests}}
-          **Penetration Testing:** {{pentest_requirements}}
+          **现有安全测试：** {{existing_security_tests}}
+          **新安全测试要求：** {{new_security_tests}}
+          **渗透测试：** {{pentest_requirements}}
 
   - id: checklist-results
-    title: Checklist Results Report
-    instruction: Execute the architect-checklist and populate results here, focusing on brownfield-specific validation
+    title: 清单结果报告
+    instruction: 执行architect-checklist并在此处填充结果，重点关注特定于棕地的验证
 
   - id: next-steps
-    title: Next Steps
+    title: 下一步
     instruction: |
-      After completing the brownfield architecture:
+      完成棕地架构后：
 
-      1. Review integration points with existing system
-      2. Begin story implementation with Dev agent
-      3. Set up deployment pipeline integration
-      4. Plan rollback and monitoring procedures
+      1. 审查与现有系统的集成点
+      2. 与开发代理一起开始故事实施
+      3. 设置部署管道集成
+      4. 规划回滚和监控程序
     sections:
       - id: story-manager-handoff
-        title: Story Manager Handoff
+        title: 故事管理员交接
         instruction: |
-          Create a brief prompt for Story Manager to work with this brownfield enhancement. Include:
-          - Reference to this architecture document
-          - Key integration requirements validated with user
-          - Existing system constraints based on actual project analysis
-          - First story to implement with clear integration checkpoints
-          - Emphasis on maintaining existing system integrity throughout implementation
+          为此棕地增强创建一个简短的提示，以便与故事管理员一起工作。包括：
+          - 对此架构文档的引用
+          - 与用户验证的关键集成要求
+          - 基于实际项目分析的现有系统约束
+          - 第一个要实施的故事，并带有清晰的集成检查点
+          - 强调在整个实施过程中保持现有系统的完整性
       - id: developer-handoff
-        title: Developer Handoff
+        title: 开发人员交接
         instruction: |
-          Create a brief prompt for developers starting implementation. Include:
-          - Reference to this architecture and existing coding standards analyzed from actual project
-          - Integration requirements with existing codebase validated with user
-          - Key technical decisions based on real project constraints
-          - Existing system compatibility requirements with specific verification steps
-          - Clear sequencing of implementation to minimize risk to existing functionality
+          为开始实施的开发人员创建一个简短的提示。包括：
+          - 对此架构和从实际项目中分析的现有编码标准的引用
+          - 与用户验证的与现有代码库的集成要求
+          - 基于真实项目约束的关键技术决策
+          - 具有特定验证步骤的现有系统兼容性要求
+          - 清晰的实施顺序，以最小化对现有功能的风险

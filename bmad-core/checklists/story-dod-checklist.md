@@ -1,96 +1,96 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Story Definition of Done (DoD) Checklist
+# 故事完成定义 (DoD) 清单
 
-## Instructions for Developer Agent
+## 开发代理说明
 
-Before marking a story as 'Review', please go through each item in this checklist. Report the status of each item (e.g., [x] Done, [ ] Not Done, [N/A] Not Applicable) and provide brief comments if necessary.
+在将故事标记为“待审查”之前，请仔细检查此清单中的每个项目。报告每个项目的状态（例如，[x] 完成，[ ] 未完成，[N/A] 不适用），并在必要时提供简要评论。
 
-[[LLM: INITIALIZATION INSTRUCTIONS - STORY DOD VALIDATION
+[[LLM: 初始化说明 - 故事 DoD 验证
 
-This checklist is for DEVELOPER AGENTS to self-validate their work before marking a story complete.
+此清单供开发代理在标记故事完成前自行验证其工作。
 
-IMPORTANT: This is a self-assessment. Be honest about what's actually done vs what should be done. It's better to identify issues now than have them found in review.
+重要提示：这是一项自我评估。请诚实地说明实际完成的内容与应完成的内容。现在发现问题比在审查中被发现要好。
 
-EXECUTION APPROACH:
+执行方法：
 
-1. Go through each section systematically
-2. Mark items as [x] Done, [ ] Not Done, or [N/A] Not Applicable
-3. Add brief comments explaining any [ ] or [N/A] items
-4. Be specific about what was actually implemented
-5. Flag any concerns or technical debt created
+1.  系统地检查每个部分
+2.  将项目标记为 [x] 完成, [ ] 未完成, 或 [N/A] 不适用
+3.  为任何 [ ] 或 [N/A] 项目添加简要评论以作解释
+4.  具体说明实际实施了什么
+5.  标记任何疑虑或产生的技术债务
 
-The goal is quality delivery, not just checking boxes.]]
+目标是高质量交付，而不仅仅是勾选复选框。]]
 
-## Checklist Items
+## 清单项目
 
-1. **Requirements Met:**
+1.  **需求满足：**
 
-   [[LLM: Be specific - list each requirement and whether it's complete]]
-   - [ ] All functional requirements specified in the story are implemented.
-   - [ ] All acceptance criteria defined in the story are met.
+    [[LLM: 请具体说明——列出每个需求及其是否完成]]
+    - [ ] 故事中指定的所有功能性需求均已实现。
+    - [ ] 故事中定义的所有验收标准均已满足。
 
-2. **Coding Standards & Project Structure:**
+2.  **编码标准与项目结构：**
 
-   [[LLM: Code quality matters for maintainability. Check each item carefully]]
-   - [ ] All new/modified code strictly adheres to `Operational Guidelines`.
-   - [ ] All new/modified code aligns with `Project Structure` (file locations, naming, etc.).
-   - [ ] Adherence to `Tech Stack` for technologies/versions used (if story introduces or modifies tech usage).
-   - [ ] Adherence to `Api Reference` and `Data Models` (if story involves API or data model changes).
-   - [ ] Basic security best practices (e.g., input validation, proper error handling, no hardcoded secrets) applied for new/modified code.
-   - [ ] No new linter errors or warnings introduced.
-   - [ ] Code is well-commented where necessary (clarifying complex logic, not obvious statements).
+    [[LLM: 代码质量对可维护性至关重要。请仔细检查每个项目]]
+    - [ ] 所有新增/修改的代码严格遵守`操作指南`。
+    - [ ] 所有新增/修改的代码与`项目结构`（文件位置、命名等）保持一致。
+    - [ ] 遵守`技术栈`中规定的技术/版本（如果故事引入或修改了技术使用）。
+    - [ ] 遵守`API参考`和`数据模型`（如果故事涉及API或数据模型更改）。
+    - [ ] 对新增/修改的代码应用了基本的安全最佳实践（例如，输入验证、正确的错误处理、无硬编码机密）。
+    - [ ] 没有引入新的 linter 错误或警告。
+    - [ ] 在必要处对代码进行了充分注释（澄清复杂逻辑，而非显而易见的语句）。
 
-3. **Testing:**
+3.  **测试：**
 
-   [[LLM: Testing proves your code works. Be honest about test coverage]]
-   - [ ] All required unit tests as per the story and `Operational Guidelines` Testing Strategy are implemented.
-   - [ ] All required integration tests (if applicable) as per the story and `Operational Guidelines` Testing Strategy are implemented.
-   - [ ] All tests (unit, integration, E2E if applicable) pass successfully.
-   - [ ] Test coverage meets project standards (if defined).
+    [[LLM: 测试证明您的代码有效。请诚实地说明测试覆盖率]]
+    - [ ] 根据故事和`操作指南`测试策略要求的所有单元测试均已实现。
+    - [ ] 根据故事和`操作指南`测试策略要求的所有集成测试（如果适用）均已实现。
+    - [ ] 所有测试（单元、集成、端到端，如果适用）均成功通过。
+    - [ ] 测试覆盖率符合项目标准（如果已定义）。
 
-4. **Functionality & Verification:**
+4.  **功能与验证：**
 
-   [[LLM: Did you actually run and test your code? Be specific about what you tested]]
-   - [ ] Functionality has been manually verified by the developer (e.g., running the app locally, checking UI, testing API endpoints).
-   - [ ] Edge cases and potential error conditions considered and handled gracefully.
+    [[LLM: 您是否实际运行并测试了您的代码？请具体说明您测试了什么]]
+    - [ ] 功能已由开发人员手动验证（例如，在本地运行应用程序、检查UI、测试API端点）。
+    - [ ] 已考虑并妥善处理了边缘情况和潜在的错误条件。
 
-5. **Story Administration:**
+5.  **故事管理：**
 
-   [[LLM: Documentation helps the next developer. What should they know?]]
-   - [ ] All tasks within the story file are marked as complete.
-   - [ ] Any clarifications or decisions made during development are documented in the story file or linked appropriately.
-   - [ ] The story wrap up section has been completed with notes of changes or information relevant to the next story or overall project, the agent model that was primarily used during development, and the changelog of any changes is properly updated.
+    [[LLM: 文档可以帮助下一个开发人员。他们需要知道什么？]]
+    - [ ] 故事文件中的所有任务均已标记为完成。
+    - [ ] 开发过程中做出的任何澄清或决定都已记录在故事文件中或已适当链接。
+    - [ ] 故事总结部分已完成，其中包含与下一个故事或整个项目相关的变更或信息说明、开发期间主要使用的代理模型，以及任何变更的更新日志均已正确更新。
 
-6. **Dependencies, Build & Configuration:**
+6.  **依赖、构建与配置：**
 
-   [[LLM: Build issues block everyone. Ensure everything compiles and runs cleanly]]
-   - [ ] Project builds successfully without errors.
-   - [ ] Project linting passes
-   - [ ] Any new dependencies added were either pre-approved in the story requirements OR explicitly approved by the user during development (approval documented in story file).
-   - [ ] If new dependencies were added, they are recorded in the appropriate project files (e.g., `package.json`, `requirements.txt`) with justification.
-   - [ ] No known security vulnerabilities introduced by newly added and approved dependencies.
-   - [ ] If new environment variables or configurations were introduced by the story, they are documented and handled securely.
+    [[LLM: 构建问题会阻碍所有人。请确保所有内容都能干净地编译和运行]]
+    - [ ] 项目成功构建，无错误。
+    - [ ] 项目 linting 通过。
+    - [ ] 新增的任何依赖项要么在故事需求中预先批准，要么在开发过程中由用户明确批准（批准情况记录在故事文件中）。
+    - [ ] 如果添加了新依赖项，它们会连同理由一起记录在适当的项目文件中（例如，`package.json`、`requirements.txt`）。
+    - [ ] 新增并批准的依赖项未引入已知的安全漏洞。
+    - [ ] 如果故事引入了新的环境变量或配置，它们已被记录并得到安全处理。
 
-7. **Documentation (If Applicable):**
+7.  **文档（如果适用）：**
 
-   [[LLM: Good documentation prevents future confusion. What needs explaining?]]
-   - [ ] Relevant inline code documentation (e.g., JSDoc, TSDoc, Python docstrings) for new public APIs or complex logic is complete.
-   - [ ] User-facing documentation updated, if changes impact users.
-   - [ ] Technical documentation (e.g., READMEs, system diagrams) updated if significant architectural changes were made.
+    [[LLM: 好的文档可以避免未来的困惑。什么需要解释？]]
+    - [ ] 新的公共API或复杂逻辑的相关内联代码文档（例如，JSDoc、TSDoc、Python docstrings）已完成。
+    - [ ] 如果变动影响用户，面向用户的文档已更新。
+    - [ ] 如果进行了重大的架构变更，技术文档（例如，README、系统图）已更新。
 
-## Final Confirmation
+## 最终确认
 
-[[LLM: FINAL DOD SUMMARY
+[[LLM: 最终 DoD 摘要
 
-After completing the checklist:
+完成清单后：
 
-1. Summarize what was accomplished in this story
-2. List any items marked as [ ] Not Done with explanations
-3. Identify any technical debt or follow-up work needed
-4. Note any challenges or learnings for future stories
-5. Confirm whether the story is truly ready for review
+1.  总结此故事中完成的工作
+2.  列出任何标记为 [ ] 未完成的项目并附上解释
+3.  确定任何技术债务或需要跟进的工作
+4.  记录未来故事的任何挑战或经验教训
+5.  确认故事是否真正准备好进行审查
 
-Be honest - it's better to flag issues now than have them discovered later.]]
+请务必诚实——现在标记问题比以后被发现要好。]]
 
-- [ ] I, the Developer Agent, confirm that all applicable items above have been addressed.
+- [ ] 我，作为开发代理，确认以上所有适用项目均已处理。

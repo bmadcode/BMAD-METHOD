@@ -1,158 +1,158 @@
-# How to Contribute with Pull Requests
+# 如何通过Pull Request贡献
 
-**New to GitHub and pull requests?** This guide will walk you through the basics step by step.
+**刚接触GitHub和pull request？** 本指南将逐步引导您了解基础知识。
 
-## What is a Pull Request?
+## 什么是Pull Request？
 
-A pull request (PR) is how you propose changes to a project on GitHub. Think of it as saying "Here are some changes I'd like to make - please review and consider adding them to the main project."
+Pull request (PR) 是您在GitHub上向项目提议更改的方式。可以把它想象成说“这是我想要做的一些更改——请审查并考虑将它们添加到主项目中。”
 
-## Before You Start
+## 开始之前
 
-⚠️ **Important**: Please keep your contributions small and focused! We prefer many small, clear changes rather than one massive change.
+⚠️ **重要提示**：请保持您的贡献小而专注！我们更喜欢许多小的、清晰的更改，而不是一个巨大的更改。
 
-**Required before submitting PRs:**
+**提交PR前需要：**
 
-- **For bug fixes**: Create an issue using the [bug report template](https://github.com/bmadcode/bmad-method/issues/new?template=bug_report.md)
-- **For new features**:
-  1. Discuss in Discord [#general-dev channel](https://discord.gg/gk8jAdXWmj)
-  2. Create an issue using the [feature request template](https://github.com/bmadcode/bmad-method/issues/new?template=feature_request.md)
-- **For large changes**: Always open an issue first to discuss alignment
+-   **对于错误修复**：使用[错误报告模板](https://github.com/bmadcode/bmad-method/issues/new?template=bug_report.md)创建一个issue
+-   **对于新功能**：
+    1.  在Discord的[#general-dev频道](https://discord.gg/gk8jAdXWmj)中讨论
+    2.  使用[功能请求模板](https://github.com/bmadcode/bmad-method/issues/new?template=feature_request.md)创建一个issue
+-   **对于大的更改**：始终先开一个issue来讨论对齐
 
-## Step-by-Step Guide
+## 分步指南
 
-### 1. Fork the Repository
+### 1. Fork存储库
 
-1. Go to the [BMad-Method repository](https://github.com/bmadcode/bmad-method)
-2. Click the "Fork" button in the top-right corner
-3. This creates your own copy of the project
+1.  转到[BMad-Method存储库](https://github.com/bmadcode/bmad-method)
+2.  点击右上角的“Fork”按钮
+3.  这会创建您自己的项目副本
 
-### 2. Clone Your Fork
+### 2. 克隆您的Fork
 
 ```bash
-# Replace YOUR-USERNAME with your actual GitHub username
+# 将YOUR-USERNAME替换为您的实际GitHub用户名
 git clone https://github.com/YOUR-USERNAME/bmad-method.git
 cd bmad-method
 ```
 
-### 3. Create a New Branch
+### 3. 创建一个新分支
 
-**Never work directly on the `main` branch!** Always create a new branch for your changes:
+**切勿直接在`main`分支上工作！** 始终为您的更改创建一个新分支：
 
 ```bash
-# Create and switch to a new branch
+# 创建并切换到一个新分支
 git checkout -b fix/typo-in-readme
-# or
+# 或
 git checkout -b feature/add-new-agent
 ```
 
-**Branch naming tips:**
+**分支命名技巧：**
 
-- `fix/description` - for bug fixes
-- `feature/description` - for new features
-- `docs/description` - for documentation changes
+-   `fix/description` - 用于错误修复
+-   `feature/description` - 用于新功能
+-   `docs/description` - 用于文档更改
 
-### 4. Make Your Changes
+### 4. 进行更改
 
-- Edit the files you want to change
-- Keep changes small and focused on one thing
-- Test your changes if possible
+-   编辑您想要更改的文件
+-   保持更改小而专注
+-   如果可能，测试您的更改
 
-### 5. Commit Your Changes
+### 5. 提交您的更改
 
 ```bash
-# Add your changes
+# 添加您的更改
 git add .
 
-# Commit with a clear message
+# 用清晰的消息提交
 git commit -m "Fix typo in README.md"
 ```
 
-**Good commit messages:**
+**好的提交消息：**
 
-- "Fix typo in installation instructions"
-- "Add example for new agent usage"
-- "Update broken link in docs"
+-   “修复安装说明中的拼写错误”
+-   “为新代理用法添加示例”
+-   “更新文档中的损坏链接”
 
-**Bad commit messages:**
+**不好的提交消息：**
 
-- "stuff"
-- "changes"
-- "update"
+-   “东西”
+-   “更改”
+-   “更新”
 
-### 6. Push to Your Fork
+### 6. 推送到您的Fork
 
 ```bash
-# Push your branch to your fork
+# 将您的分支推送到您的fork
 git push origin fix/typo-in-readme
 ```
 
-### 7. Create the Pull Request
+### 7. 创建Pull Request
 
-1. Go to your fork on GitHub
-2. You'll see a green "Compare & pull request" button - click it
-3. Select the correct target branch:
-   - **`next` branch** for most contributions (features, docs, enhancements)
-   - **`main` branch** only for critical fixes
-4. Fill out the PR description using the template in CONTRIBUTING.md:
-   - **What**: 1-2 sentences describing what changed
-   - **Why**: 1-2 sentences explaining why
-   - **How**: 2-3 bullets on implementation
-   - **Testing**: How you tested
-5. Reference the related issue number (e.g., "Fixes #123")
+1.  在GitHub上转到您的fork
+2.  您会看到一个绿色的“Compare & pull request”按钮 - 点击它
+3.  选择正确的目标分支：
+    -   **`next`分支**用于大多数贡献（功能、文档、增强）
+    -   **`main`分支**仅用于关键修复
+4.  使用CONTRIBUTING.md中的模板填写PR描述：
+    -   **什么**：1-2句话描述更改了什么
+    -   **为什么**：1-2句话解释原因
+    -   **如何**：2-3个要点说明实现方式
+    -   **测试**：您如何测试
+5.  引用相关的issue编号（例如，“Fixes #123”）
 
-### 8. Wait for Review
+### 8. 等待审查
 
-- A maintainer will review your PR
-- They might ask for changes
-- Be patient and responsive to feedback
+-   维护人员将审查您的PR
+-   他们可能会要求更改
+-   请耐心并对反馈做出回应
 
-## What Makes a Good Pull Request?
+## 什么是好的Pull Request？
 
-✅ **Good PRs:**
+✅ **好的PR：**
 
-- Change one thing at a time
-- Have clear, descriptive titles
-- Explain what and why in the description
-- Include only the files that need to change
+-   一次只更改一件事
+-   有清晰、描述性的标题
+-   在描述中解释了什么和为什么
+-   仅包含需要更改的文件
 
-❌ **Avoid:**
+❌ **避免：**
 
-- Changing formatting of entire files
-- Multiple unrelated changes in one PR
-- Copying your entire project/repo into the PR
-- Changes without explanation
+-   更改整个文件的格式
+-   在一个PR中进行多个不相关的更改
+-   将您的整个项目/存储库复制到PR中
+-   没有解释的更改
 
-## Common Mistakes to Avoid
+## 要避免的常见错误
 
-1. **Don't reformat entire files** - only change what's necessary
-2. **Don't include unrelated changes** - stick to one fix/feature per PR
-3. **Don't paste code in issues** - create a proper PR instead
-4. **Don't submit your whole project** - contribute specific improvements
+1.  **不要重新格式化整个文件** - 只更改必要的内容
+2.  **不要包含不相关的更改** - 每个PR只专注于一个修复/功能
+3.  **不要在issue中粘贴代码** - 创建一个合适的PR
+4.  **不要提交您的整个项目** - 贡献具体的改进
 
-## Need Help?
+## 需要帮助？
 
-- 💬 Join our [Discord Community](https://discord.gg/gk8jAdXWmj) for real-time help:
-  - **#general-dev** - Technical questions and feature discussions
-  - **#bugs-issues** - Get help with bugs before filing issues
-- 💬 Ask questions in [GitHub Discussions](https://github.com/bmadcode/bmad-method/discussions)
-- 🐛 Report bugs using the [bug report template](https://github.com/bmadcode/bmad-method/issues/new?template=bug_report.md)
-- 💡 Suggest features using the [feature request template](https://github.com/bmadcode/bmad-method/issues/new?template=feature_request.md)
-- 📖 Read the full [Contributing Guidelines](../CONTRIBUTING.md)
+-   💬 加入我们的[Discord社区](https://discord.gg/gk8jAdXWmj)以获得实时帮助：
+    -   **#general-dev** - 技术问题和功能讨论
+    -   **#bugs-issues** - 在提交issue前获得有关错误的帮助
+-   💬 在[GitHub Discussions](https://github.com/bmadcode/bmad-method/discussions)中提问
+-   🐛 使用[错误报告模板](https://github.com/bmadcode/bmad-method/issues/new?template=bug_report.md)报告错误
+-   💡 使用[功能请求模板](https://github.com/bmadcode/bmad-method/issues/new?template=feature_request.md)建议功能
+-   📖 阅读完整的[贡献指南](../CONTRIBUTING.md)
 
-## Example: Good vs Bad PRs
+## 示例：好的PR vs 坏的PR
 
-### 😀 Good PR Example
+### 😀 好的PR示例
 
-**Title**: "Fix broken link to installation guide"
-**Changes**: One file, one line changed
-**Description**: "The link in README.md was pointing to the wrong file. Updated to point to correct installation guide."
+**标题**：“修复安装指南的损坏链接”
+**更改**：一个文件，一行更改
+**描述**：“README.md中的链接指向了错误的文件。已更新为指向正确的安装指南。”
 
-### 😞 Bad PR Example
+### 😞 坏的PR示例
 
-**Title**: "Updates"
-**Changes**: 50 files, entire codebase reformatted
-**Description**: "Made some improvements"
+**标题**：“更新”
+**更改**：50个文件，整个代码库重新格式化
+**描述**：“做了一些改进”
 
 ---
 
-**Remember**: We're here to help! Don't be afraid to ask questions. Every expert was once a beginner.
+**请记住**：我们随时为您提供帮助！不要害怕提问。每个专家都曾经是初学者。

@@ -1,77 +1,77 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# KB Mode Interaction Task
+# 知识库模式交互任务
 
-## Purpose
+## 目的
 
-Provide a user-friendly interface to the BMad knowledge base without overwhelming users with information upfront.
+为BMad知识库提供一个用户友好的界面，而不会预先用信息淹没用户。
 
-## Instructions
+## 说明
 
-When entering KB mode (\*kb-mode), follow these steps:
+进入知识库模式（\*kb-mode）时，请遵循以下步骤：
 
-### 1. Welcome and Guide
+### 1. 欢迎和引导
 
-Announce entering KB mode with a brief, friendly introduction.
+以简短、友好的介绍宣布进入知识库模式。
 
-### 2. Present Topic Areas
+### 2. 呈现主题领域
 
-Offer a concise list of main topic areas the user might want to explore:
+提供一个简洁的主题领域列表，用户可能想要探索：
 
-**What would you like to know more about?**
+**您想了解更多关于什么的信息？**
 
-1. **Setup & Installation** - Getting started with BMad
-2. **Workflows** - Choosing the right workflow for your project
-3. **Web vs IDE** - When to use each environment
-4. **Agents** - Understanding specialized agents and their roles
-5. **Documents** - PRDs, Architecture, Stories, and more
-6. **Agile Process** - How BMad implements Agile methodologies
-7. **Configuration** - Customizing BMad for your needs
-8. **Best Practices** - Tips for effective BMad usage
+1.  **设置与安装** - 开始使用BMad
+2.  **工作流** - 为您的项目选择正确的工作流
+3.  **Web vs IDE** - 何时使用每个环境
+4.  **代理** - 理解专业代理及其角色
+5.  **文档** - PRD、架构、故事等
+6.  **敏捷流程** - BMad如何实施敏捷方法论
+7.  **配置** - 根据您的需求定制BMad
+8.  **最佳实践** - 有效使用BMad的技巧
 
-Or ask me about anything else related to BMad-Method!
+或者向我询问任何与BMad-Method相关的其他问题！
 
-### 3. Respond Contextually
+### 3. 上下文响应
 
-- Wait for user's specific question or topic selection
-- Provide focused, relevant information from the knowledge base
-- Offer to dive deeper or explore related topics
-- Keep responses concise unless user asks for detailed explanations
+-   等待用户的具体问题或主题选择
+-   从知识库中提供专注、相关的信息
+-   提议深入探讨或探索相关主题
+-   除非用户要求详细解释，否则保持响应简洁
 
-### 4. Interactive Exploration
+### 4. 互动探索
 
-- After answering, suggest related topics they might find helpful
-- Maintain conversational flow rather than data dumping
-- Use examples when appropriate
-- Reference specific documentation sections when relevant
+-   回答后，建议他们可能会觉得有帮助的相关主题
+-   保持对话流畅，而不是数据倾倒
+-   在适当时使用示例
+-   在相关时引用特定的文档部分
 
-### 5. Exit Gracefully
+### 5. 优雅退出
 
-When user is done or wants to exit KB mode:
+当用户完成或想要退出知识库模式时：
 
-- Summarize key points discussed if helpful
-- Remind them they can return to KB mode anytime with \*kb-mode
-- Suggest next steps based on what was discussed
+-   如果需要，总结讨论的要点
+-   提醒他们可以随时使用\*kb-mode返回知识库模式
+-   根据讨论的内容建议下一步
 
-## Example Interaction
+## 示例交互
 
-**User**: \*kb-mode
+**用户**：\*kb-mode
 
-**Assistant**: I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method.
+**助手**：我已进入知识库模式，可以访问完整的BMad知识库。我可以为您提供有关BMad-Method任何方面的详细信息。
 
-**What would you like to know more about?**
+**您想了解更多关于什么的信息？**
 
-1. **Setup & Installation** - Getting started with BMad
-2. **Workflows** - Choosing the right workflow for your project
-3. **Web vs IDE** - When to use each environment
-4. **Agents** - Understanding specialized agents and their roles
-5. **Documents** - PRDs, Architecture, Stories, and more
-6. **Agile Process** - How BMad implements Agile methodologies
-7. **Configuration** - Customizing BMad for your needs
-8. **Best Practices** - Tips for effective BMad usage
+1.  **设置与安装** - 开始使用BMad
+2.  **工作流** - 为您的项目选择正确的工作流
+3.  **Web vs IDE** - 何时使用每个环境
+4.  **代理** - 理解专业代理及其角色
+5.  **文档** - PRD、架构、故事等
+6.  **敏捷流程** - BMad如何实施敏捷方法论
+7.  **配置** - 根据您的需求定制BMad
+8.  **最佳实践** - 有效使用BMad的技巧
 
-Or ask me about anything else related to BMad-Method!
+或者向我询问任何与BMad-Method相关的其他问题！
 
-**User**: Tell me about workflows
+**用户**：告诉我关于工作流的信息
 
-**Assistant**: [Provides focused information about workflows from the KB, then offers to explore specific workflow types or related topics]
+**助手**：[从知识库中提供关于工作流的专注信息，然后提议探索特定的工作流类型或相关主题]

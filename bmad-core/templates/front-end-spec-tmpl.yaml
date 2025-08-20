@@ -1,12 +1,12 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: frontend-spec-template-v2
-  name: UI/UX Specification
+  name: UI/UX规范
   version: 2.0
   output:
     format: markdown
     filename: docs/front-end-spec.md
-    title: "{{project_name}} UI/UX Specification"
+    title: "{{project_name}} UI/UX规范"
 
 workflow:
   mode: interactive
@@ -14,337 +14,337 @@ workflow:
 
 sections:
   - id: introduction
-    title: Introduction
+    title: 引言
     instruction: |
-      Review provided documents including Project Brief, PRD, and any user research to gather context. Focus on understanding user needs, pain points, and desired outcomes before beginning the specification.
+      在开始规范之前，请审查提供的文档，包括项目简报、PRD和任何用户研究，以收集背景信息。重点是了解用户的需求、痛点和期望的结果。
 
-      Establish the document's purpose and scope. Keep the content below but ensure project name is properly substituted.
+      建立文档的目的和范围。保留以下内容，但确保正确替换项目名称。
     content: |
-      This document defines the user experience goals, information architecture, user flows, and visual design specifications for {{project_name}}'s user interface. It serves as the foundation for visual design and frontend development, ensuring a cohesive and user-centered experience.
+      本文档定义了{{project_name}}用户界面的用户体验目标、信息架构、用户流程和视觉设计规范。它作为视觉设计和前端开发的基础，确保提供一个有凝聚力的、以用户为中心的体验。
     sections:
       - id: ux-goals-principles
-        title: Overall UX Goals & Principles
+        title: 整体UX目标与原则
         instruction: |
-          Work with the user to establish and document the following. If not already defined, facilitate a discussion to determine:
+          与用户一起建立和记录以下内容。如果尚未定义，请促成一次讨论以确定：
 
-          1. Target User Personas - elicit details or confirm existing ones from PRD
-          2. Key Usability Goals - understand what success looks like for users
-          3. Core Design Principles - establish 3-5 guiding principles
+          1. 目标用户画像 - 启发细节或确认PRD中已有的画像
+          2. 关键可用性目标 - 了解用户成功的样子
+          3. 核心设计原则 - 建立3-5个指导原则
         elicit: true
         sections:
           - id: user-personas
-            title: Target User Personas
+            title: 目标用户画像
             template: "{{persona_descriptions}}"
             examples:
-              - "**Power User:** Technical professionals who need advanced features and efficiency"
-              - "**Casual User:** Occasional users who prioritize ease of use and clear guidance"
-              - "**Administrator:** System managers who need control and oversight capabilities"
+              - "**高级用户：** 需要高级功能和效率的技术专业人员"
+              - "**普通用户：** 偶尔使用，优先考虑易用性和清晰指导的用户"
+              - "**管理员：** 需要控制和监督能力的系统管理员"
           - id: usability-goals
-            title: Usability Goals
+            title: 可用性目标
             template: "{{usability_goals}}"
             examples:
-              - "Ease of learning: New users can complete core tasks within 5 minutes"
-              - "Efficiency of use: Power users can complete frequent tasks with minimal clicks"
-              - "Error prevention: Clear validation and confirmation for destructive actions"
-              - "Memorability: Infrequent users can return without relearning"
+              - "易学性：新用户可以在5分钟内完成核心任务"
+              - "使用效率：高级用户可以以最少的点击次数完成频繁的任务"
+              - "防错性：为破坏性操作提供清晰的验证和确认"
+              - "易记性：不常使用的用户可以无需重新学习即可返回"
           - id: design-principles
-            title: Design Principles
+            title: 设计原则
             template: "{{design_principles}}"
             type: numbered-list
             examples:
-              - "**Clarity over cleverness** - Prioritize clear communication over aesthetic innovation"
-              - "**Progressive disclosure** - Show only what's needed, when it's needed"
-              - "**Consistent patterns** - Use familiar UI patterns throughout the application"
-              - "**Immediate feedback** - Every action should have a clear, immediate response"
-              - "**Accessible by default** - Design for all users from the start"
+              - "**清晰优于巧妙** - 优先考虑清晰的沟通，而不是美学创新"
+              - "**渐进式披露** - 只在需要时显示所需内容"
+              - "**一致的模式** - 在整个应用程序中使用熟悉的UI模式"
+              - "**即时反馈** - 每个操作都应有清晰、即时的响应"
+              - "**默认可访问** - 从一开始就为所有用户设计"
       - id: changelog
-        title: Change Log
+        title: 变更日志
         type: table
-        columns: [Date, Version, Description, Author]
-        instruction: Track document versions and changes
+        columns: [日期, 版本, 描述, 作者]
+        instruction: 跟踪文档版本和变更
 
   - id: information-architecture
-    title: Information Architecture (IA)
+    title: 信息架构 (IA)
     instruction: |
-      Collaborate with the user to create a comprehensive information architecture:
+      与用户协作创建全面的信息架构：
 
-      1. Build a Site Map or Screen Inventory showing all major areas
-      2. Define the Navigation Structure (primary, secondary, breadcrumbs)
-      3. Use Mermaid diagrams for visual representation
-      4. Consider user mental models and expected groupings
+      1. 构建一个显示所有主要区域的站点地图或屏幕清单
+      2. 定义导航结构（主导航、次导航、面包屑）
+      3. 使用Mermaid图进行可视化表示
+      4. 考虑用户的心理模型和预期的分组
     elicit: true
     sections:
       - id: sitemap
-        title: Site Map / Screen Inventory
+        title: 站点地图/屏幕清单
         type: mermaid
         mermaid_type: graph
         template: "{{sitemap_diagram}}"
         examples:
           - |
             graph TD
-                A[Homepage] --> B[Dashboard]
-                A --> C[Products]
-                A --> D[Account]
-                B --> B1[Analytics]
-                B --> B2[Recent Activity]
-                C --> C1[Browse]
-                C --> C2[Search]
-                C --> C3[Product Details]
-                D --> D1[Profile]
-                D --> D2[Settings]
-                D --> D3[Billing]
+                A[主页] --> B[仪表板]
+                A --> C[产品]
+                A --> D[账户]
+                B --> B1[分析]
+                B --> B2[最近活动]
+                C --> C1[浏览]
+                C --> C2[搜索]
+                C --> C3[产品详情]
+                D --> D1[个人资料]
+                D --> D2[设置]
+                D --> D3[账单]
       - id: navigation-structure
-        title: Navigation Structure
+        title: 导航结构
         template: |
-          **Primary Navigation:** {{primary_nav_description}}
+          **主导航：** {{primary_nav_description}}
 
-          **Secondary Navigation:** {{secondary_nav_description}}
+          **次导航：** {{secondary_nav_description}}
 
-          **Breadcrumb Strategy:** {{breadcrumb_strategy}}
+          **面包屑策略：** {{breadcrumb_strategy}}
 
   - id: user-flows
-    title: User Flows
+    title: 用户流程
     instruction: |
-      For each critical user task identified in the PRD:
+      对于PRD中确定的每个关键用户任务：
 
-      1. Define the user's goal clearly
-      2. Map out all steps including decision points
-      3. Consider edge cases and error states
-      4. Use Mermaid flow diagrams for clarity
-      5. Link to external tools (Figma/Miro) if detailed flows exist there
+      1. 明确定义用户的目标
+      2. 规划出所有步骤，包括决策点
+      3. 考虑边缘情况和错误状态
+      4. 使用Mermaid流程图以求清晰
+      5. 如果有详细的流程图，则链接到外部工具（Figma/Miro）
 
-      Create subsections for each major flow.
+      为每个主要流程创建子部分。
     elicit: true
     repeatable: true
     sections:
       - id: flow
         title: "{{flow_name}}"
         template: |
-          **User Goal:** {{flow_goal}}
+          **用户目标：** {{flow_goal}}
 
-          **Entry Points:** {{entry_points}}
+          **入口点：** {{entry_points}}
 
-          **Success Criteria:** {{success_criteria}}
+          **成功标准：** {{success_criteria}}
         sections:
           - id: flow-diagram
-            title: Flow Diagram
+            title: 流程图
             type: mermaid
             mermaid_type: graph
             template: "{{flow_diagram}}"
           - id: edge-cases
-            title: "Edge Cases & Error Handling:"
+            title: "边缘情况与错误处理："
             type: bullet-list
             template: "- {{edge_case}}"
           - id: notes
-            template: "**Notes:** {{flow_notes}}"
+            template: "**说明：** {{flow_notes}}"
 
   - id: wireframes-mockups
-    title: Wireframes & Mockups
+    title: 线框图与模型
     instruction: |
-      Clarify where detailed visual designs will be created (Figma, Sketch, etc.) and how to reference them. If low-fidelity wireframes are needed, offer to help conceptualize layouts for key screens.
+      澄清将在何处创建详细的视觉设计（Figma、Sketch等），以及如何引用它们。如果需要低保真线框图，请提议帮助为关键屏幕构思布局。
     elicit: true
     sections:
       - id: design-files
-        template: "**Primary Design Files:** {{design_tool_link}}"
+        template: "**主要设计文件：** {{design_tool_link}}"
       - id: key-screen-layouts
-        title: Key Screen Layouts
+        title: 关键屏幕布局
         repeatable: true
         sections:
           - id: screen
             title: "{{screen_name}}"
             template: |
-              **Purpose:** {{screen_purpose}}
+              **目的：** {{screen_purpose}}
 
-              **Key Elements:**
+              **关键元素：**
               - {{element_1}}
               - {{element_2}}
               - {{element_3}}
 
-              **Interaction Notes:** {{interaction_notes}}
+              **交互说明：** {{interaction_notes}}
 
-              **Design File Reference:** {{specific_frame_link}}
+              **设计文件参考：** {{specific_frame_link}}
 
   - id: component-library
-    title: Component Library / Design System
+    title: 组件库/设计系统
     instruction: |
-      Discuss whether to use an existing design system or create a new one. If creating new, identify foundational components and their key states. Note that detailed technical specs belong in front-end-architecture.
+      讨论是使用现有的设计系统还是创建一个新的。如果创建新的，请确定基础组件及其关键状态。注意，详细的技术规范属于前端架构。
     elicit: true
     sections:
       - id: design-system-approach
-        template: "**Design System Approach:** {{design_system_approach}}"
+        template: "**设计系统方法：** {{design_system_approach}}"
       - id: core-components
-        title: Core Components
+        title: 核心组件
         repeatable: true
         sections:
           - id: component
             title: "{{component_name}}"
             template: |
-              **Purpose:** {{component_purpose}}
+              **目的：** {{component_purpose}}
 
-              **Variants:** {{component_variants}}
+              **变体：** {{component_variants}}
 
-              **States:** {{component_states}}
+              **状态：** {{component_states}}
 
-              **Usage Guidelines:** {{usage_guidelines}}
+              **使用指南：** {{usage_guidelines}}
 
   - id: branding-style
-    title: Branding & Style Guide
-    instruction: Link to existing style guide or define key brand elements. Ensure consistency with company brand guidelines if they exist.
+    title: 品牌与风格指南
+    instruction: 链接到现有的风格指南或定义关键品牌元素。如果存在公司品牌指南，请确保与其保持一致。
     elicit: true
     sections:
       - id: visual-identity
-        title: Visual Identity
-        template: "**Brand Guidelines:** {{brand_guidelines_link}}"
+        title: 视觉识别
+        template: "**品牌指南：** {{brand_guidelines_link}}"
       - id: color-palette
-        title: Color Palette
+        title: 调色板
         type: table
-        columns: ["Color Type", "Hex Code", "Usage"]
+        columns: ["颜色类型", "十六进制代码", "用途"]
         rows:
-          - ["Primary", "{{primary_color}}", "{{primary_usage}}"]
-          - ["Secondary", "{{secondary_color}}", "{{secondary_usage}}"]
-          - ["Accent", "{{accent_color}}", "{{accent_usage}}"]
-          - ["Success", "{{success_color}}", "Positive feedback, confirmations"]
-          - ["Warning", "{{warning_color}}", "Cautions, important notices"]
-          - ["Error", "{{error_color}}", "Errors, destructive actions"]
-          - ["Neutral", "{{neutral_colors}}", "Text, borders, backgrounds"]
+          - ["主色", "{{primary_color}}", "{{primary_usage}}"]
+          - ["次色", "{{secondary_color}}", "{{secondary_usage}}"]
+          - ["强调色", "{{accent_color}}", "{{accent_usage}}"]
+          - ["成功色", "{{success_color}}", "积极反馈、确认"]
+          - ["警告色", "{{warning_color}}", "警告、重要通知"]
+          - ["错误色", "{{error_color}}", "错误、破坏性操作"]
+          - ["中性色", "{{neutral_colors}}", "文本、边框、背景"]
       - id: typography
-        title: Typography
+        title: 排版
         sections:
           - id: font-families
-            title: Font Families
+            title: 字体家族
             template: |
-              - **Primary:** {{primary_font}}
-              - **Secondary:** {{secondary_font}}
-              - **Monospace:** {{mono_font}}
+              - **主要字体：** {{primary_font}}
+              - **次要字体：** {{secondary_font}}
+              - **等宽字体：** {{mono_font}}
           - id: type-scale
-            title: Type Scale
+            title: 字号比例
             type: table
-            columns: ["Element", "Size", "Weight", "Line Height"]
+            columns: ["元素", "大小", "字重", "行高"]
             rows:
               - ["H1", "{{h1_size}}", "{{h1_weight}}", "{{h1_line}}"]
               - ["H2", "{{h2_size}}", "{{h2_weight}}", "{{h2_line}}"]
               - ["H3", "{{h3_size}}", "{{h3_weight}}", "{{h3_line}}"]
-              - ["Body", "{{body_size}}", "{{body_weight}}", "{{body_line}}"]
-              - ["Small", "{{small_size}}", "{{small_weight}}", "{{small_line}}"]
+              - ["正文", "{{body_size}}", "{{body_weight}}", "{{body_line}}"]
+              - ["小号", "{{small_size}}", "{{small_weight}}", "{{small_line}}"]
       - id: iconography
-        title: Iconography
+        title: 图标
         template: |
-          **Icon Library:** {{icon_library}}
+          **图标库：** {{icon_library}}
 
-          **Usage Guidelines:** {{icon_guidelines}}
+          **使用指南：** {{icon_guidelines}}
       - id: spacing-layout
-        title: Spacing & Layout
+        title: 间距与布局
         template: |
-          **Grid System:** {{grid_system}}
+          **网格系统：** {{grid_system}}
 
-          **Spacing Scale:** {{spacing_scale}}
+          **间距比例：** {{spacing_scale}}
 
   - id: accessibility
-    title: Accessibility Requirements
-    instruction: Define specific accessibility requirements based on target compliance level and user needs. Be comprehensive but practical.
+    title: 可访问性要求
+    instruction: 根据目标合规级别和用户需求定义具体的可访问性要求。要全面但实用。
     elicit: true
     sections:
       - id: compliance-target
-        title: Compliance Target
-        template: "**Standard:** {{compliance_standard}}"
+        title: 合规目标
+        template: "**标准：** {{compliance_standard}}"
       - id: key-requirements
-        title: Key Requirements
+        title: 关键要求
         template: |
-          **Visual:**
-          - Color contrast ratios: {{contrast_requirements}}
-          - Focus indicators: {{focus_requirements}}
-          - Text sizing: {{text_requirements}}
+          **视觉：**
+          - 颜色对比度：{{contrast_requirements}}
+          - 焦点指示器：{{focus_requirements}}
+          - 文本大小：{{text_requirements}}
 
-          **Interaction:**
-          - Keyboard navigation: {{keyboard_requirements}}
-          - Screen reader support: {{screen_reader_requirements}}
-          - Touch targets: {{touch_requirements}}
+          **交互：**
+          - 键盘导航：{{keyboard_requirements}}
+          - 屏幕阅读器支持：{{screen_reader_requirements}}
+          - 触摸目标：{{touch_requirements}}
 
-          **Content:**
-          - Alternative text: {{alt_text_requirements}}
-          - Heading structure: {{heading_requirements}}
-          - Form labels: {{form_requirements}}
+          **内容：**
+          - 替代文本：{{alt_text_requirements}}
+          - 标题结构：{{heading_requirements}}
+          - 表单标签：{{form_requirements}}
       - id: testing-strategy
-        title: Testing Strategy
+        title: 测试策略
         template: "{{accessibility_testing}}"
 
   - id: responsiveness
-    title: Responsiveness Strategy
-    instruction: Define breakpoints and adaptation strategies for different device sizes. Consider both technical constraints and user contexts.
+    title: 响应式策略
+    instruction: 定义不同设备尺寸的断点和适应策略。同时考虑技术约束和用户上下文。
     elicit: true
     sections:
       - id: breakpoints
-        title: Breakpoints
+        title: 断点
         type: table
-        columns: ["Breakpoint", "Min Width", "Max Width", "Target Devices"]
+        columns: ["断点", "最小宽度", "最大宽度", "目标设备"]
         rows:
-          - ["Mobile", "{{mobile_min}}", "{{mobile_max}}", "{{mobile_devices}}"]
-          - ["Tablet", "{{tablet_min}}", "{{tablet_max}}", "{{tablet_devices}}"]
-          - ["Desktop", "{{desktop_min}}", "{{desktop_max}}", "{{desktop_devices}}"]
-          - ["Wide", "{{wide_min}}", "-", "{{wide_devices}}"]
+          - ["手机", "{{mobile_min}}", "{{mobile_max}}", "{{mobile_devices}}"]
+          - ["平板", "{{tablet_min}}", "{{tablet_max}}", "{{tablet_devices}}"]
+          - ["桌面", "{{desktop_min}}", "{{desktop_max}}", "{{desktop_devices}}"]
+          - ["宽屏", "{{wide_min}}", "-", "{{wide_devices}}"]
       - id: adaptation-patterns
-        title: Adaptation Patterns
+        title: 适应模式
         template: |
-          **Layout Changes:** {{layout_adaptations}}
+          **布局变更：** {{layout_adaptations}}
 
-          **Navigation Changes:** {{nav_adaptations}}
+          **导航变更：** {{nav_adaptations}}
 
-          **Content Priority:** {{content_adaptations}}
+          **内容优先级：** {{content_adaptations}}
 
-          **Interaction Changes:** {{interaction_adaptations}}
+          **交互变更：** {{interaction_adaptations}}
 
   - id: animation
-    title: Animation & Micro-interactions
-    instruction: Define motion design principles and key interactions. Keep performance and accessibility in mind.
+    title: 动画与微交互
+    instruction: 定义动效设计原则和关键交互。牢记性能和可访问性。
     elicit: true
     sections:
       - id: motion-principles
-        title: Motion Principles
+        title: 动效原则
         template: "{{motion_principles}}"
       - id: key-animations
-        title: Key Animations
+        title: 关键动画
         repeatable: true
-        template: "- **{{animation_name}}:** {{animation_description}} (Duration: {{duration}}, Easing: {{easing}})"
+        template: "- **{{animation_name}}:** {{animation_description}} (持续时间: {{duration}}, 缓动: {{easing}})"
 
   - id: performance
-    title: Performance Considerations
-    instruction: Define performance goals and strategies that impact UX design decisions.
+    title: 性能考虑
+    instruction: 定义影响UX设计决策的性能目标和策略。
     sections:
       - id: performance-goals
-        title: Performance Goals
+        title: 性能目标
         template: |
-          - **Page Load:** {{load_time_goal}}
-          - **Interaction Response:** {{interaction_goal}}
-          - **Animation FPS:** {{animation_goal}}
+          - **页面加载：** {{load_time_goal}}
+          - **交互响应：** {{interaction_goal}}
+          - **动画FPS：** {{animation_goal}}
       - id: design-strategies
-        title: Design Strategies
+        title: 设计策略
         template: "{{performance_strategies}}"
 
   - id: next-steps
-    title: Next Steps
+    title: 下一步
     instruction: |
-      After completing the UI/UX specification:
+      完成UI/UX规范后：
 
-      1. Recommend review with stakeholders
-      2. Suggest creating/updating visual designs in design tool
-      3. Prepare for handoff to Design Architect for frontend architecture
-      4. Note any open questions or decisions needed
+      1. 建议与利益相关者审查
+      2. 建议在设计工具中创建/更新视觉设计
+      3. 准备交接给设计架构师进行前端架构设计
+      4. 注意任何悬而未决的问题或需要做出的决定
     sections:
       - id: immediate-actions
-        title: Immediate Actions
+        title: 立即行动
         type: numbered-list
         template: "{{action}}"
       - id: design-handoff-checklist
-        title: Design Handoff Checklist
+        title: 设计交接清单
         type: checklist
         items:
-          - "All user flows documented"
-          - "Component inventory complete"
-          - "Accessibility requirements defined"
-          - "Responsive strategy clear"
-          - "Brand guidelines incorporated"
-          - "Performance goals established"
+          - "所有用户流程已记录"
+          - "组件清单已完成"
+          - "可访问性要求已定义"
+          - "响应式策略清晰"
+          - "品牌指南已纳入"
+          - "性能目标已建立"
 
   - id: checklist-results
-    title: Checklist Results
-    instruction: If a UI/UX checklist exists, run it against this document and report results here.
+    title: 清单结果
+    instruction: 如果存在UI/UX清单，请根据此文档运行并在此处报告结果。

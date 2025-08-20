@@ -1,162 +1,162 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Create Brownfield Epic Task
+# 创建棕地史诗任务
 
-## Purpose
+## 目的
 
-Create a single epic for smaller brownfield enhancements that don't require the full PRD and Architecture documentation process. This task is for isolated features or modifications that can be completed within a focused scope.
+为不需要完整PRD和架构文档流程的较小规模棕地增强项目创建一个独立的史诗。此任务适用于可以在一个专注范围内完成的孤立功能或修改。
 
-## When to Use This Task
+## 何时使用此任务
 
-**Use this task when:**
+**在以下情况下使用此任务：**
 
-- The enhancement can be completed in 1-3 stories
-- No significant architectural changes are required
-- The enhancement follows existing project patterns
-- Integration complexity is minimal
-- Risk to existing system is low
+-   增强功能可以在1-3个故事内完成
+-   不需要重大的架构变更
+-   增强功能遵循现有的项目模式
+-   集成复杂度最低
+-   对现有系统的风险较低
 
-**Use the full brownfield PRD/Architecture process when:**
+**在以下情况下使用完整的棕地PRD/架构流程：**
 
-- The enhancement requires multiple coordinated stories
-- Architectural planning is needed
-- Significant integration work is required
-- Risk assessment and mitigation planning is necessary
+-   增强功能需要多个协调的故事
+-   需要进行架构规划
+-   需要大量的集成工作
+-   需要进行风险评估和缓解规划
 
-## Instructions
+## 说明
 
-### 1. Project Analysis (Required)
+### 1. 项目分析（必需）
 
-Before creating the epic, gather essential information about the existing project:
+在创建史诗之前，收集有关现有项目的重要信息：
 
-**Existing Project Context:**
+**现有项目背景：**
 
-- [ ] Project purpose and current functionality understood
-- [ ] Existing technology stack identified
-- [ ] Current architecture patterns noted
-- [ ] Integration points with existing system identified
+- [ ] 理解项目目的和当前功能
+- [ ] 确定现有技术栈
+- [ ] 注意到当前的架构模式
+- [ ] 确定与现有系统的集成点
 
-**Enhancement Scope:**
+**增强范围：**
 
-- [ ] Enhancement clearly defined and scoped
-- [ ] Impact on existing functionality assessed
-- [ ] Required integration points identified
-- [ ] Success criteria established
+- [ ] 明确定义和界定增强范围
+- [ ] 评估对现有功能的影响
+- [ ] 确定所需的集成点
+- [ ] 建立成功标准
 
-### 2. Epic Creation
+### 2. 史诗创建
 
-Create a focused epic following this structure:
+按照此结构创建一个专注的史诗：
 
-#### Epic Title
+#### 史诗标题
 
-{{Enhancement Name}} - Brownfield Enhancement
+{{增强功能名称}} - 棕地增强
 
-#### Epic Goal
+#### 史诗目标
 
-{{1-2 sentences describing what the epic will accomplish and why it adds value}}
+{{1-2句话描述该史诗将完成什么以及为什么它能增加价值}}
 
-#### Epic Description
+#### 史诗描述
 
-**Existing System Context:**
+**现有系统背景：**
 
-- Current relevant functionality: {{brief description}}
-- Technology stack: {{relevant existing technologies}}
-- Integration points: {{where new work connects to existing system}}
+-   当前相关功能：{{简要描述}}
+-   技术栈：{{相关的现有技术}}
+-   集成点：{{新工作与现有系统连接的地方}}
 
-**Enhancement Details:**
+**增强详情：**
 
-- What's being added/changed: {{clear description}}
-- How it integrates: {{integration approach}}
-- Success criteria: {{measurable outcomes}}
+-   正在添加/更改的内容：{{清晰的描述}}
+-   如何集成：{{集成方法}}
+-   成功标准：{{可衡量的结果}}
 
-#### Stories
+#### 故事
 
-List 1-3 focused stories that complete the epic:
+列出1-3个完成该史诗的专注故事：
 
-1. **Story 1:** {{Story title and brief description}}
-2. **Story 2:** {{Story title and brief description}}
-3. **Story 3:** {{Story title and brief description}}
+1.  **故事1：** {{故事标题和简要描述}}
+2.  **故事2：** {{故事标题和简要描述}}
+3.  **故事3：** {{故事标题和简要描述}}
 
-#### Compatibility Requirements
+#### 兼容性要求
 
-- [ ] Existing APIs remain unchanged
-- [ ] Database schema changes are backward compatible
-- [ ] UI changes follow existing patterns
-- [ ] Performance impact is minimal
+- [ ] 现有API保持不变
+- [ ] 数据库模式变更是向后兼容的
+- [ ] UI变更遵循现有模式
+- [ ] 性能影响最小
 
-#### Risk Mitigation
+#### 风险缓解
 
-- **Primary Risk:** {{main risk to existing system}}
-- **Mitigation:** {{how risk will be addressed}}
-- **Rollback Plan:** {{how to undo changes if needed}}
+-   **主要风险：** {{对现有系统的主要风险}}
+-   **缓解措施：** {{将如何解决风险}}
+-   **回滚计划：** {{如果需要，如何撤销更改}}
 
-#### Definition of Done
+#### 完成的定义
 
-- [ ] All stories completed with acceptance criteria met
-- [ ] Existing functionality verified through testing
-- [ ] Integration points working correctly
-- [ ] Documentation updated appropriately
-- [ ] No regression in existing features
+- [ ] 所有故事均已完成，并满足验收标准
+- [ ] 通过测试验证了现有功能
+- [ ] 集成点工作正常
+- [ ] 适当更新了文档
+- [ ] 现有功能无回归
 
-### 3. Validation Checklist
+### 3. 验证清单
 
-Before finalizing the epic, ensure:
+在最终确定史诗之前，请确保：
 
-**Scope Validation:**
+**范围验证：**
 
-- [ ] Epic can be completed in 1-3 stories maximum
-- [ ] No architectural documentation is required
-- [ ] Enhancement follows existing patterns
-- [ ] Integration complexity is manageable
+- [ ] 史诗最多可在1-3个故事内完成
+- [ ] 不需要架构文档
+- [ ] 增强功能遵循现有模式
+- [ ] 集成复杂度可管理
 
-**Risk Assessment:**
+**风险评估：**
 
-- [ ] Risk to existing system is low
-- [ ] Rollback plan is feasible
-- [ ] Testing approach covers existing functionality
-- [ ] Team has sufficient knowledge of integration points
+- [ ] 对现有系统的风险较低
+- [ ] 回滚计划是可行的
+- [ ] 测试方法覆盖了现有功能
+- [ ] 团队对集成点有足够的了解
 
-**Completeness Check:**
+**完整性检查：**
 
-- [ ] Epic goal is clear and achievable
-- [ ] Stories are properly scoped
-- [ ] Success criteria are measurable
-- [ ] Dependencies are identified
+- [ ] 史诗目标清晰且可实现
+- [ ] 故事范围界定得当
+- [ ] 成功标准是可衡量的
+- [ ] 确定了依赖关系
 
-### 4. Handoff to Story Manager
+### 4. 交接给故事管理员
 
-Once the epic is validated, provide this handoff to the Story Manager:
-
----
-
-**Story Manager Handoff:**
-
-"Please develop detailed user stories for this brownfield epic. Key considerations:
-
-- This is an enhancement to an existing system running {{technology stack}}
-- Integration points: {{list key integration points}}
-- Existing patterns to follow: {{relevant existing patterns}}
-- Critical compatibility requirements: {{key requirements}}
-- Each story must include verification that existing functionality remains intact
-
-The epic should maintain system integrity while delivering {{epic goal}}."
+一旦史诗经过验证，将此交接提供给故事管理员：
 
 ---
 
-## Success Criteria
+**故事管理员交接：**
 
-The epic creation is successful when:
+“请为此棕地史诗制定详细的用户故事。关键考虑因素：
 
-1. Enhancement scope is clearly defined and appropriately sized
-2. Integration approach respects existing system architecture
-3. Risk to existing functionality is minimized
-4. Stories are logically sequenced for safe implementation
-5. Compatibility requirements are clearly specified
-6. Rollback plan is feasible and documented
+-   这是对运行{{technology stack}}的现有系统的增强
+-   集成点：{{列出关键集成点}}
+-   要遵循的现有模式：{{相关的现有模式}}
+-   关键兼容性要求：{{关键要求}}
+-   每个故事都必须包括对现有功能保持不变的验证
 
-## Important Notes
+该史诗应在交付{{epic goal}}的同时保持系统完整性。”
 
-- This task is specifically for SMALL brownfield enhancements
-- If the scope grows beyond 3 stories, consider the full brownfield PRD process
-- Always prioritize existing system integrity over new functionality
-- When in doubt about scope or complexity, escalate to full brownfield planning
+---
+
+## 成功标准
+
+当满足以下条件时，史诗创建成功：
+
+1.  增强范围定义清晰且大小适当
+2.  集成方法尊重现有系统架构
+3.  对现有功能的风险最小化
+4.  故事按逻辑顺序排列以确保安全实施
+5.  明确规定了兼容性要求
+6.  回滚计划可行且已记录
+
+## 重要说明
+
+-   此任务专门用于小规模的棕地增强
+-   如果范围超出3个故事，请考虑完整的棕地PRD流程
+-   始终将现有系统的完整性置于新功能之上
+-   当对范围或复杂性有疑问时，升级到完整的棕地规划流程

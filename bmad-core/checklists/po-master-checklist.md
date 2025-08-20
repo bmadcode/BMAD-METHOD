@@ -1,434 +1,434 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Product Owner (PO) Master Validation Checklist
+# 产品负责人 (PO) 主验证清单
 
-This checklist serves as a comprehensive framework for the Product Owner to validate project plans before development execution. It adapts intelligently based on project type (greenfield vs brownfield) and includes UI/UX considerations when applicable.
+本清单为产品负责人在开发执行前验证项目计划提供了一个全面的框架。它会根据项目类型（绿地 vs 棕地）智能调整，并在适用时包含 UI/UX 考量。
 
-[[LLM: INITIALIZATION INSTRUCTIONS - PO MASTER CHECKLIST
+[[LLM: 初始化说明 - PO 主清单
 
-PROJECT TYPE DETECTION:
-First, determine the project type by checking:
+项目类型检测：
+首先，通过检查以下内容确定项目类型：
 
-1. Is this a GREENFIELD project (new from scratch)?
-   - Look for: New project initialization, no existing codebase references
-   - Check for: prd.md, architecture.md, new project setup stories
+1.  这是一个绿地项目（从零开始的新项目）吗？
+    -   寻找：新项目初始化，没有现有代码库引用
+    -   检查：prd.md, architecture.md, 新项目设置故事
 
-2. Is this a BROWNFIELD project (enhancing existing system)?
-   - Look for: References to existing codebase, enhancement/modification language
-   - Check for: brownfield-prd.md, brownfield-architecture.md, existing system analysis
+2.  这是一个棕地项目（增强现有系统）吗？
+    -   寻找：对现有代码库的引用，增强/修改的语言
+    -   检查：brownfield-prd.md, brownfield-architecture.md, 现有系统分析
 
-3. Does the project include UI/UX components?
-   - Check for: frontend-architecture.md, UI/UX specifications, design files
-   - Look for: Frontend stories, component specifications, user interface mentions
+3.  项目是否包含 UI/UX 组件？
+    -   检查：frontend-architecture.md, UI/UX 规范, 设计文件
+    -   寻找：前端故事，组件规范，用户界面提及
 
-DOCUMENT REQUIREMENTS:
-Based on project type, ensure you have access to:
+文档要求：
+根据项目类型，确保您可以访问：
 
-For GREENFIELD projects:
+对于绿地项目：
 
-- prd.md - The Product Requirements Document
-- architecture.md - The system architecture
-- frontend-architecture.md - If UI/UX is involved
-- All epic and story definitions
+-   prd.md - 产品需求文档
+-   architecture.md - 系统架构
+-   frontend-architecture.md - 如果涉及 UI/UX
+-   所有史诗和故事定义
 
-For BROWNFIELD projects:
+对于棕地项目：
 
-- brownfield-prd.md - The brownfield enhancement requirements
-- brownfield-architecture.md - The enhancement architecture
-- Existing project codebase access (CRITICAL - cannot proceed without this)
-- Current deployment configuration and infrastructure details
-- Database schemas, API documentation, monitoring setup
+-   brownfield-prd.md - 棕地增强需求
+-   brownfield-architecture.md - 增强架构
+-   现有项目代码库访问权限（关键 - 没有这个无法继续）
+-   当前部署配置和基础设施详情
+-   数据库模式，API 文档，监控设置
 
-SKIP INSTRUCTIONS:
+跳过说明：
 
-- Skip sections marked [[BROWNFIELD ONLY]] for greenfield projects
-- Skip sections marked [[GREENFIELD ONLY]] for brownfield projects
-- Skip sections marked [[UI/UX ONLY]] for backend-only projects
-- Note all skipped sections in your final report
+-   对于绿地项目，跳过标有 [[仅棕地]] 的部分
+-   对于棕地项目，跳过标有 [[仅绿地]] 的部分
+-   对于仅后端的项目，跳过标有 [[仅UI/UX]] 的部分
+-   在最终报告中注明所有跳过的部分
 
-VALIDATION APPROACH:
+验证方法：
 
-1. Deep Analysis - Thoroughly analyze each item against documentation
-2. Evidence-Based - Cite specific sections or code when validating
-3. Critical Thinking - Question assumptions and identify gaps
-4. Risk Assessment - Consider what could go wrong with each decision
+1.  深入分析 - 对照文档彻底分析每个项目
+2.  基于证据 - 验证时引用具体章节或代码
+3.  批判性思维 - 质疑假设并发现差距
+4.  风险评估 - 考虑每个决策可能出错的地方
 
-EXECUTION MODE:
-Ask the user if they want to work through the checklist:
+执行模式：
+询问用户是否希望通过以下方式审阅清单：
 
-- Section by section (interactive mode) - Review each section, get confirmation before proceeding
-- All at once (comprehensive mode) - Complete full analysis and present report at end]]
+-   逐节进行（互动模式） - 审阅每个部分，获得确认后再继续
+-   一次性完成（全面模式） - 完成全部分析并在最后提交报告]]
 
-## 1. PROJECT SETUP & INITIALIZATION
+## 1. 项目设置与初始化
 
-[[LLM: Project setup is the foundation. For greenfield, ensure clean start. For brownfield, ensure safe integration with existing system. Verify setup matches project type.]]
+[[LLM: 项目设置是基础。对于绿地项目，确保干净的开始。对于棕地项目，确保与现有系统安全集成。验证设置与项目类型匹配。]]
 
-### 1.1 Project Scaffolding [[GREENFIELD ONLY]]
+### 1.1 项目脚手架 [[仅绿地]]
 
-- [ ] Epic 1 includes explicit steps for project creation/initialization
-- [ ] If using a starter template, steps for cloning/setup are included
-- [ ] If building from scratch, all necessary scaffolding steps are defined
-- [ ] Initial README or documentation setup is included
-- [ ] Repository setup and initial commit processes are defined
+- [ ] 史诗1包含项目创建/初始化的明确步骤
+- [ ] 如果使用入门模板，则包含克隆/设置的步骤
+- [ ] 如果从头开始构建，则定义了所有必要的脚手架步骤
+- [ ] 包含初始 README 或文档设置
+- [ ] 定义了存储库设置和初始提交过程
 
-### 1.2 Existing System Integration [[BROWNFIELD ONLY]]
+### 1.2 现有系统集成 [[仅棕地]]
 
-- [ ] Existing project analysis has been completed and documented
-- [ ] Integration points with current system are identified
-- [ ] Development environment preserves existing functionality
-- [ ] Local testing approach validated for existing features
-- [ ] Rollback procedures defined for each integration point
+- [ ] 已完成并记录了现有项目分析
+- [ ] 确定了与当前系统的集成点
+- [ ] 开发环境保留了现有功能
+- [ ] 验证了现有功能的本地测试方法
+- [ ] 为每个集成点定义了回滚程序
 
-### 1.3 Development Environment
+### 1.3 开发环境
 
-- [ ] Local development environment setup is clearly defined
-- [ ] Required tools and versions are specified
-- [ ] Steps for installing dependencies are included
-- [ ] Configuration files are addressed appropriately
-- [ ] Development server setup is included
+- [ ] 明确定义了本地开发环境设置
+- [ ] 指定了所需的工具和版本
+- [ ] 包含了安装依赖项的步骤
+- [ ] 适当处理了配置文件
+- [ ] 包含了开发服务器设置
 
-### 1.4 Core Dependencies
+### 1.4 核心依赖
 
-- [ ] All critical packages/libraries are installed early
-- [ ] Package management is properly addressed
-- [ ] Version specifications are appropriately defined
-- [ ] Dependency conflicts or special requirements are noted
-- [ ] [[BROWNFIELD ONLY]] Version compatibility with existing stack verified
+- [ ] 所有关键包/库都已尽早安装
+- [ ] 妥善处理了包管理
+- [ ] 适当定义了版本规范
+- [ ] 注意到了依赖冲突或特殊要求
+- [ ] [[仅棕地]] 验证了与现有技术栈的版本兼容性
 
-## 2. INFRASTRUCTURE & DEPLOYMENT
+## 2. 基础设施与部署
 
-[[LLM: Infrastructure must exist before use. For brownfield, must integrate with existing infrastructure without breaking it.]]
+[[LLM: 基础设施必须在使用前存在。对于棕地项目，必须与现有基础设施集成而不能破坏它。]]
 
-### 2.1 Database & Data Store Setup
+### 2.1 数据库与数据存储设置
 
-- [ ] Database selection/setup occurs before any operations
-- [ ] Schema definitions are created before data operations
-- [ ] Migration strategies are defined if applicable
-- [ ] Seed data or initial data setup is included if needed
-- [ ] [[BROWNFIELD ONLY]] Database migration risks identified and mitigated
-- [ ] [[BROWNFIELD ONLY]] Backward compatibility ensured
+- [ ] 在任何操作之前进行数据库选择/设置
+- [ ] 在数据操作之前创建模式定义
+- [ ] 如果适用，定义了迁移策略
+- [ ] 如果需要，包含种子数据或初始数据设置
+- [ ] [[仅棕地]] 识别并缓解了数据库迁移风险
+- [ ] [[仅棕地]] 确保了向后兼容性
 
-### 2.2 API & Service Configuration
+### 2.2 API 与服务配置
 
-- [ ] API frameworks are set up before implementing endpoints
-- [ ] Service architecture is established before implementing services
-- [ ] Authentication framework is set up before protected routes
-- [ ] Middleware and common utilities are created before use
-- [ ] [[BROWNFIELD ONLY]] API compatibility with existing system maintained
-- [ ] [[BROWNFIELD ONLY]] Integration with existing authentication preserved
+- [ ] 在实现端点之前设置 API 框架
+- [ ] 在实现服务之前建立服务架构
+- [ ] 在受保护路由之前设置身份验证框架
+- [ ] 在使用之前创建中间件和通用实用程序
+- [ ] [[仅棕地]] 保持了与现有系统的 API 兼容性
+- [ ] [[仅棕地]] 保留了与现有身份验证的集成
 
-### 2.3 Deployment Pipeline
+### 2.3 部署流水线
 
-- [ ] CI/CD pipeline is established before deployment actions
-- [ ] Infrastructure as Code (IaC) is set up before use
-- [ ] Environment configurations are defined early
-- [ ] Deployment strategies are defined before implementation
-- [ ] [[BROWNFIELD ONLY]] Deployment minimizes downtime
-- [ ] [[BROWNFIELD ONLY]] Blue-green or canary deployment implemented
+- [ ] 在部署操作之前建立 CI/CD 流水线
+- [ ] 在使用之前设置基础设施即代码 (IaC)
+- [ ] 尽早定义环境配置
+- [ ] 在实现之前定义部署策略
+- [ ] [[仅棕地]] 部署最大限度地减少了停机时间
+- [ ] [[仅棕地]] 实施了蓝绿部署或金丝雀部署
 
-### 2.4 Testing Infrastructure
+### 2.4 测试基础设施
 
-- [ ] Testing frameworks are installed before writing tests
-- [ ] Test environment setup precedes test implementation
-- [ ] Mock services or data are defined before testing
-- [ ] [[BROWNFIELD ONLY]] Regression testing covers existing functionality
-- [ ] [[BROWNFIELD ONLY]] Integration testing validates new-to-existing connections
+- [ ] 在编写测试之前安装测试框架
+- [ ] 在测试实现之前设置测试环境
+- [ ] 在测试之前定义模拟服务或数据
+- [ ] [[仅棕地]] 回归测试覆盖了现有功能
+- [ ] [[仅棕地]] 集成测试验证了新旧连接
 
-## 3. EXTERNAL DEPENDENCIES & INTEGRATIONS
+## 3. 外部依赖与集成
 
-[[LLM: External dependencies often block progress. For brownfield, ensure new dependencies don't conflict with existing ones.]]
+[[LLM: 外部依赖常常阻碍进度。对于棕地项目，确保新依赖不与现有依赖冲突。]]
 
-### 3.1 Third-Party Services
+### 3.1 第三方服务
 
-- [ ] Account creation steps are identified for required services
-- [ ] API key acquisition processes are defined
-- [ ] Steps for securely storing credentials are included
-- [ ] Fallback or offline development options are considered
-- [ ] [[BROWNFIELD ONLY]] Compatibility with existing services verified
-- [ ] [[BROWNFIELD ONLY]] Impact on existing integrations assessed
+- [ ] 确定了所需服务的帐户创建步骤
+- [ ] 定义了 API 密钥获取流程
+- [ ] 包含了安全存储凭据的步骤
+- [ ] 考虑了回退或离线开发选项
+- [ ] [[仅棕地]] 验证了与现有服务的兼容性
+- [ ] [[仅棕地]] 评估了对现有集成的影响
 
-### 3.2 External APIs
+### 3.2 外部 API
 
-- [ ] Integration points with external APIs are clearly identified
-- [ ] Authentication with external services is properly sequenced
-- [ ] API limits or constraints are acknowledged
-- [ ] Backup strategies for API failures are considered
-- [ ] [[BROWNFIELD ONLY]] Existing API dependencies maintained
+- [ ] 明确标识了与外部 API 的集成点
+- [ ] 正确排序了与外部服务的身份验证
+- [ ] 确认了 API 限制或约束
+- [ ] 考虑了 API 故障的备份策略
+- [ ] [[仅棕地]] 维护了现有的 API 依赖
 
-### 3.3 Infrastructure Services
+### 3.3 基础设施服务
 
-- [ ] Cloud resource provisioning is properly sequenced
-- [ ] DNS or domain registration needs are identified
-- [ ] Email or messaging service setup is included if needed
-- [ ] CDN or static asset hosting setup precedes their use
-- [ ] [[BROWNFIELD ONLY]] Existing infrastructure services preserved
+- [ ] 正确排序了云资源配置
+- [ ] 确定了 DNS 或域名注册需求
+- [ ] 如果需要，包含电子邮件或消息服务设置
+- [ ] 在使用之前设置 CDN 或静态资产托管
+- [ ] [[仅棕地]] 保留了现有的基础设施服务
 
-## 4. UI/UX CONSIDERATIONS [[UI/UX ONLY]]
+## 4. UI/UX 考量 [[仅UI/UX]]
 
-[[LLM: Only evaluate this section if the project includes user interface components. Skip entirely for backend-only projects.]]
+[[LLM: 仅当项目包含用户界面组件时才评估此部分。对于仅后端的项目，完全跳过。]]
 
-### 4.1 Design System Setup
+### 4.1 设计系统设置
 
-- [ ] UI framework and libraries are selected and installed early
-- [ ] Design system or component library is established
-- [ ] Styling approach (CSS modules, styled-components, etc.) is defined
-- [ ] Responsive design strategy is established
-- [ ] Accessibility requirements are defined upfront
+- [ ] 尽早选择并安装了 UI 框架和库
+- [ ] 建立了设计系统或组件库
+- [ ] 定义了样式方法（CSS 模块、styled-components 等）
+- [ ] 建立了响应式设计策略
+- [ ] 预先定义了可访问性要求
 
-### 4.2 Frontend Infrastructure
+### 4.2 前端基础设施
 
-- [ ] Frontend build pipeline is configured before development
-- [ ] Asset optimization strategy is defined
-- [ ] Frontend testing framework is set up
-- [ ] Component development workflow is established
-- [ ] [[BROWNFIELD ONLY]] UI consistency with existing system maintained
+- [ ] 在开发前配置了前端构建流水线
+- [ ] 定义了资产优化策略
+- [ ] 设置了前端测试框架
+- [ ] 建立了组件开发工作流
+- [ ] [[仅棕地]] 保持了与现有系统的 UI 一致性
 
-### 4.3 User Experience Flow
+### 4.3 用户体验流程
 
-- [ ] User journeys are mapped before implementation
-- [ ] Navigation patterns are defined early
-- [ ] Error states and loading states are planned
-- [ ] Form validation patterns are established
-- [ ] [[BROWNFIELD ONLY]] Existing user workflows preserved or migrated
+- [ ] 在实现前映射了用户旅程
+- [ ] 尽早定义了导航模式
+- [ ] 计划了错误状态和加载状态
+- [ ] 建立了表单验证模式
+- [ ] [[仅棕地]] 保留或迁移了现有用户工作流
 
-## 5. USER/AGENT RESPONSIBILITY
+## 5. 用户/代理责任
 
-[[LLM: Clear ownership prevents confusion. Ensure tasks are assigned appropriately based on what only humans can do.]]
+[[LLM: 清晰的所有权可以防止混淆。确保根据只有人类能做的事情适当地分配任务。]]
 
-### 5.1 User Actions
+### 5.1 用户操作
 
-- [ ] User responsibilities limited to human-only tasks
-- [ ] Account creation on external services assigned to users
-- [ ] Purchasing or payment actions assigned to users
-- [ ] Credential provision appropriately assigned to users
+- [ ] 用户责任仅限于只有人类能完成的任务
+- [ ] 将在外部服务上创建帐户分配给用户
+- [ ] 将购买或支付操作分配给用户
+- [ ] 将凭据提供适当地分配给用户
 
-### 5.2 Developer Agent Actions
+### 5.2 开发代理操作
 
-- [ ] All code-related tasks assigned to developer agents
-- [ ] Automated processes identified as agent responsibilities
-- [ ] Configuration management properly assigned
-- [ ] Testing and validation assigned to appropriate agents
+- [ ] 将所有与代码相关的任务分配给开发代理
+- [ ] 将自动化流程确定为代理的责任
+- [ ] 适当分配了配置管理
+- [ ] 将测试和验证分配给适当的代理
 
-## 6. FEATURE SEQUENCING & DEPENDENCIES
+## 6. 功能排序与依赖关系
 
-[[LLM: Dependencies create the critical path. For brownfield, ensure new features don't break existing ones.]]
+[[LLM: 依赖关系创建了关键路径。对于棕地项目，确保新功能不会破坏现有功能。]]
 
-### 6.1 Functional Dependencies
+### 6.1 功能依赖
 
-- [ ] Features depending on others are sequenced correctly
-- [ ] Shared components are built before their use
-- [ ] User flows follow logical progression
-- [ ] Authentication features precede protected features
-- [ ] [[BROWNFIELD ONLY]] Existing functionality preserved throughout
+- [ ] 正确排序了依赖于其他功能的功能
+- [ ] 在使用共享组件之前构建它们
+- [ ] 用户流程遵循逻辑进展
+- [ ] 身份验证功能先于受保护的功能
+- [ ] [[仅棕地]] 在整个过程中保留了现有功能
 
-### 6.2 Technical Dependencies
+### 6.2 技术依赖
 
-- [ ] Lower-level services built before higher-level ones
-- [ ] Libraries and utilities created before their use
-- [ ] Data models defined before operations on them
-- [ ] API endpoints defined before client consumption
-- [ ] [[BROWNFIELD ONLY]] Integration points tested at each step
+- [ ] 在构建更高级别的服务之前构建较低级别的服务
+- [ ] 在使用库和实用程序之前创建它们
+- [ ] 在对数据模型进行操作之前定义它们
+- [ ] 在客户端使用 API 端点之前定义它们
+- [ ] [[仅棕地]] 在每个步骤都测试了集成点
 
-### 6.3 Cross-Epic Dependencies
+### 6.3 跨史诗依赖
 
-- [ ] Later epics build upon earlier epic functionality
-- [ ] No epic requires functionality from later epics
-- [ ] Infrastructure from early epics utilized consistently
-- [ ] Incremental value delivery maintained
-- [ ] [[BROWNFIELD ONLY]] Each epic maintains system integrity
+- [ ] 后续史诗建立在早期史诗功能之上
+- [ ] 没有史诗需要来自后续史诗的功能
+- [ ] 一致地利用了早期史诗的基础设施
+- [ ] 保持了增量价值交付
+- [ ] [[仅棕地]] 每个史诗都保持了系统完整性
 
-## 7. RISK MANAGEMENT [[BROWNFIELD ONLY]]
+## 7. 风险管理 [[仅棕地]]
 
-[[LLM: This section is CRITICAL for brownfield projects. Think pessimistically about what could break.]]
+[[LLM: 此部分对于棕地项目至关重要。悲观地思考可能出问题的地方。]]
 
-### 7.1 Breaking Change Risks
+### 7.1 重大变更风险
 
-- [ ] Risk of breaking existing functionality assessed
-- [ ] Database migration risks identified and mitigated
-- [ ] API breaking change risks evaluated
-- [ ] Performance degradation risks identified
-- [ ] Security vulnerability risks evaluated
+- [ ] 评估了破坏现有功能的风险
+- [ ] 识别并缓解了数据库迁移风险
+- [ ] 评估了 API 重大变更风险
+- [ ] 识别了性能下降风险
+- [ ] 评估了安全漏洞风险
 
-### 7.2 Rollback Strategy
+### 7.2 回滚策略
 
-- [ ] Rollback procedures clearly defined per story
-- [ ] Feature flag strategy implemented
-- [ ] Backup and recovery procedures updated
-- [ ] Monitoring enhanced for new components
-- [ ] Rollback triggers and thresholds defined
+- [ ] 为每个故事明确定义了回滚程序
+- [ ] 实施了功能标志策略
+- [ ] 更新了备份和恢复程序
+- [ ] 增强了对新组件的监控
+- [ ] 定义了回滚触发器和阈值
 
-### 7.3 User Impact Mitigation
+### 7.3 用户影响缓解
 
-- [ ] Existing user workflows analyzed for impact
-- [ ] User communication plan developed
-- [ ] Training materials updated
-- [ ] Support documentation comprehensive
-- [ ] Migration path for user data validated
+- [ ] 分析了现有用户工作流以评估影响
+- [ ] 制定了用户沟通计划
+- [ ] 更新了培训材料
+- [ ] 支持文档全面
+- [ ] 验证了用户数据的迁移路径
 
-## 8. MVP SCOPE ALIGNMENT
+## 8. MVP 范围对齐
 
-[[LLM: MVP means MINIMUM viable product. For brownfield, ensure enhancements are truly necessary.]]
+[[LLM: MVP 意味着最小可行产品。对于棕地项目，确保增强功能是真正必要的。]]
 
-### 8.1 Core Goals Alignment
+### 8.1 核心目标对齐
 
-- [ ] All core goals from PRD are addressed
-- [ ] Features directly support MVP goals
-- [ ] No extraneous features beyond MVP scope
-- [ ] Critical features prioritized appropriately
-- [ ] [[BROWNFIELD ONLY]] Enhancement complexity justified
+- [ ] 解决了 PRD 中的所有核心目标
+- [ ] 功能直接支持 MVP 目标
+- [ ] 没有超出 MVP 范围的无关功能
+- [ ] 适当地优先考虑了关键功能
+- [ ] [[仅棕地]] 证明了增强的复杂性是合理的
 
-### 8.2 User Journey Completeness
+### 8.2 用户旅程完整性
 
-- [ ] All critical user journeys fully implemented
-- [ ] Edge cases and error scenarios addressed
-- [ ] User experience considerations included
-- [ ] [[UI/UX ONLY]] Accessibility requirements incorporated
-- [ ] [[BROWNFIELD ONLY]] Existing workflows preserved or improved
+- [ ] 完全实现了所有关键用户旅程
+- [ ] 解决了边缘情况和错误场景
+- [ ] 包括了用户体验考量
+- [ ] [[仅UI/UX]] 纳入了可访问性要求
+- [ ] [[仅棕地]] 保留或改进了现有工作流
 
-### 8.3 Technical Requirements
+### 8.3 技术要求
 
-- [ ] All technical constraints from PRD addressed
-- [ ] Non-functional requirements incorporated
-- [ ] Architecture decisions align with constraints
-- [ ] Performance considerations addressed
-- [ ] [[BROWNFIELD ONLY]] Compatibility requirements met
+- [ ] 解决了 PRD 中的所有技术约束
+- [ ] 纳入了非功能性需求
+- [ ] 架构决策与约束保持一致
+- [ ] 解决了性能考量
+- [ ] [[仅棕地]] 满足了兼容性要求
 
-## 9. DOCUMENTATION & HANDOFF
+## 9. 文档与交接
 
-[[LLM: Good documentation enables smooth development. For brownfield, documentation of integration points is critical.]]
+[[LLM: 好的文档可以实现顺利的开发。对于棕地项目，集成点的文档至关重要。]]
 
-### 9.1 Developer Documentation
+### 9.1 开发人员文档
 
-- [ ] API documentation created alongside implementation
-- [ ] Setup instructions are comprehensive
-- [ ] Architecture decisions documented
-- [ ] Patterns and conventions documented
-- [ ] [[BROWNFIELD ONLY]] Integration points documented in detail
+- [ ] 在实现的同时创建 API 文档
+- [ ] 设置说明全面
+- [ ] 记录了架构决策
+- [ ] 记录了模式和约定
+- [ ] [[仅棕地]] 详细记录了集成点
 
-### 9.2 User Documentation
+### 9.2 用户文档
 
-- [ ] User guides or help documentation included if required
-- [ ] Error messages and user feedback considered
-- [ ] Onboarding flows fully specified
-- [ ] [[BROWNFIELD ONLY]] Changes to existing features documented
+- [ ] 如果需要，包含用户指南或帮助文档
+- [ ] 考虑了错误消息和用户反馈
+- [ ] 完全指定了入门流程
+- [ ] [[仅棕地]] 记录了对现有功能的更改
 
-### 9.3 Knowledge Transfer
+### 9.3 知识转移
 
-- [ ] [[BROWNFIELD ONLY]] Existing system knowledge captured
-- [ ] [[BROWNFIELD ONLY]] Integration knowledge documented
-- [ ] Code review knowledge sharing planned
-- [ ] Deployment knowledge transferred to operations
-- [ ] Historical context preserved
+- [ ] [[仅棕地]] 捕获了现有系统知识
+- [ ] [[仅棕地]] 记录了集成知识
+- [ ] 计划了代码审查知识共享
+- [ ] 将部署知识转移给运营团队
+- [ ] 保留了历史背景
 
-## 10. POST-MVP CONSIDERATIONS
+## 10. MVP 后考量
 
-[[LLM: Planning for success prevents technical debt. For brownfield, ensure enhancements don't limit future growth.]]
+[[LLM: 为成功做规划可以防止技术债务。对于棕地项目，确保增强功能不会限制未来的增长。]]
 
-### 10.1 Future Enhancements
+### 10.1 未来增强
 
-- [ ] Clear separation between MVP and future features
-- [ ] Architecture supports planned enhancements
-- [ ] Technical debt considerations documented
-- [ ] Extensibility points identified
-- [ ] [[BROWNFIELD ONLY]] Integration patterns reusable
+- [ ] 明确区分 MVP 和未来功能
+- [ ] 架构支持计划的增强功能
+- [ ] 记录了技术债务考量
+- [ ] 确定了可扩展性点
+- [ ] [[仅棕地]] 集成模式可重用
 
-### 10.2 Monitoring & Feedback
+### 10.2 监控与反馈
 
-- [ ] Analytics or usage tracking included if required
-- [ ] User feedback collection considered
-- [ ] Monitoring and alerting addressed
-- [ ] Performance measurement incorporated
-- [ ] [[BROWNFIELD ONLY]] Existing monitoring preserved/enhanced
+- [ ] 如果需要，包含分析或使用情况跟踪
+- [ ] 考虑了用户反馈收集
+- [ ] 解决了监控和警报问题
+- [ ] 纳入了性能测量
+- [ ] [[仅棕地]] 保留/增强了现有监控
 
-## VALIDATION SUMMARY
+## 验证摘要
 
-[[LLM: FINAL PO VALIDATION REPORT GENERATION
+[[LLM: 最终 PO 验证报告生成
 
-Generate a comprehensive validation report that adapts to project type:
+生成一份适应项目类型的全面验证报告：
 
-1. Executive Summary
-   - Project type: [Greenfield/Brownfield] with [UI/No UI]
-   - Overall readiness (percentage)
-   - Go/No-Go recommendation
-   - Critical blocking issues count
-   - Sections skipped due to project type
+1.  执行摘要
+    -   项目类型：[绿地/棕地] 与 [有UI/无UI]
+    -   总体准备情况（百分比）
+    -   执行/不执行建议
+    -   关键阻塞问题数量
+    -   因项目类型而跳过的部分
 
-2. Project-Specific Analysis
+2.  项目特定分析
 
-   FOR GREENFIELD:
-   - Setup completeness
-   - Dependency sequencing
-   - MVP scope appropriateness
-   - Development timeline feasibility
+    对于绿地项目：
+    -   设置完整性
+    -   依赖排序
+    -   MVP 范围的适当性
+    -   开发时间线的可行性
 
-   FOR BROWNFIELD:
-   - Integration risk level (High/Medium/Low)
-   - Existing system impact assessment
-   - Rollback readiness
-   - User disruption potential
+    对于棕地项目：
+    -   集成风险级别（高/中/低）
+    -   现有系统影响评估
+    -   回滚准备情况
+    -   用户中断的可能性
 
-3. Risk Assessment
-   - Top 5 risks by severity
-   - Mitigation recommendations
-   - Timeline impact of addressing issues
-   - [BROWNFIELD] Specific integration risks
+3.  风险评估
+    -   按严重性排名的前 5 大风险
+    -   缓解建议
+    -   解决问题对时间线的影响
+    -   [棕地] 具体集成风险
 
-4. MVP Completeness
-   - Core features coverage
-   - Missing essential functionality
-   - Scope creep identified
-   - True MVP vs over-engineering
+4.  MVP 完整性
+    -   核心功能覆盖范围
+    -   缺少的基本功能
+    -   识别出的范围蔓延
+    -   真正的 MVP vs 过度设计
 
-5. Implementation Readiness
-   - Developer clarity score (1-10)
-   - Ambiguous requirements count
-   - Missing technical details
-   - [BROWNFIELD] Integration point clarity
+5.  实施准备情况
+    -   开发人员清晰度得分 (1-10)
+    -   模糊需求数量
+    -   缺少的技术细节
+    -   [棕地] 集成点清晰度
 
-6. Recommendations
-   - Must-fix before development
-   - Should-fix for quality
-   - Consider for improvement
-   - Post-MVP deferrals
+6.  建议
+    -   开发前必须修复
+    -   为保证质量应修复
+    -   考虑改进
+    -   MVP 后推迟
 
-7. [BROWNFIELD ONLY] Integration Confidence
-   - Confidence in preserving existing functionality
-   - Rollback procedure completeness
-   - Monitoring coverage for integration points
-   - Support team readiness
+7.  [仅棕地] 集成信心
+    -   对保留现有功能的信心
+    -   回滚程序的完整性
+    -   集成点的监控覆盖范围
+    -   支持团队的准备情况
 
-After presenting the report, ask if the user wants:
+在提交报告后，询问用户是否需要：
 
-- Detailed analysis of any failed sections
-- Specific story reordering suggestions
-- Risk mitigation strategies
-- [BROWNFIELD] Integration risk deep-dive]]
+-   任何失败部分的详细分析
+-   具体的故事重新排序建议
+-   风险缓解策略
+-   [棕地] 集成风险深度探讨]]
 
-### Category Statuses
+### 类别状态
 
-| Category                                | Status | Critical Issues |
-| --------------------------------------- | ------ | --------------- |
-| 1. Project Setup & Initialization       | _TBD_  |                 |
-| 2. Infrastructure & Deployment          | _TBD_  |                 |
-| 3. External Dependencies & Integrations | _TBD_  |                 |
-| 4. UI/UX Considerations                 | _TBD_  |                 |
-| 5. User/Agent Responsibility            | _TBD_  |                 |
-| 6. Feature Sequencing & Dependencies    | _TBD_  |                 |
-| 7. Risk Management (Brownfield)         | _TBD_  |                 |
-| 8. MVP Scope Alignment                  | _TBD_  |                 |
-| 9. Documentation & Handoff              | _TBD_  |                 |
-| 10. Post-MVP Considerations             | _TBD_  |                 |
+| 类别 | 状态 | 关键问题 |
+| --- | --- | --- |
+| 1. 项目设置与初始化 | _待定_ | |
+| 2. 基础设施与部署 | _待定_ | |
+| 3. 外部依赖与集成 | _待定_ | |
+| 4. UI/UX 考量 | _待定_ | |
+| 5. 用户/代理责任 | _待定_ | |
+| 6. 功能排序与依赖关系 | _待定_ | |
+| 7. 风险管理 (棕地) | _待定_ | |
+| 8. MVP 范围对齐 | _待定_ | |
+| 9. 文档与交接 | _待定_ | |
+| 10. MVP 后考量 | _待定_ | |
 
-### Critical Deficiencies
+### 关键缺陷
 
-(To be populated during validation)
+（在验证过程中填写）
 
-### Recommendations
+### 建议
 
-(To be populated during validation)
+（在验证过程中填写）
 
-### Final Decision
+### 最终决定
 
-- **APPROVED**: The plan is comprehensive, properly sequenced, and ready for implementation.
-- **CONDITIONAL**: The plan requires specific adjustments before proceeding.
-- **REJECTED**: The plan requires significant revision to address critical deficiencies.
+- **已批准**：该计划全面、顺序合理，并已准备好实施。
+- **有条件的**：该计划在继续之前需要进行特定调整。
+- **已拒绝**：该计划需要重大修订以解决关键缺陷。

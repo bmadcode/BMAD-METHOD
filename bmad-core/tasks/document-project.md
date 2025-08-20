@@ -1,345 +1,345 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Document an Existing Project
+# 记录现有项目
 
-## Purpose
+## 目的
 
-Generate comprehensive documentation for existing projects optimized for AI development agents. This task creates structured reference materials that enable AI agents to understand project context, conventions, and patterns for effective contribution to any codebase.
+为现有项目生成为AI开发代理优化的综合文档。此任务创建结构化的参考资料，使AI代理能够理解项目背景、惯例和模式，从而有效地为任何代码库做出贡献。
 
-## Task Instructions
+## 任务说明
 
-### 1. Initial Project Analysis
+### 1. 初步项目分析
 
-**CRITICAL:** First, check if a PRD or requirements document exists in context. If yes, use it to focus your documentation efforts on relevant areas only.
+**关键：** 首先，检查上下文中是否存在PRD或需求文档。如果存在，则用它来将您的文档工作重点放在相关领域。
 
-**IF PRD EXISTS**:
+**如果存在PRD：**
 
-- Review the PRD to understand what enhancement/feature is planned
-- Identify which modules, services, or areas will be affected
-- Focus documentation ONLY on these relevant areas
-- Skip unrelated parts of the codebase to keep docs lean
+-   审查PRD以了解计划中的增强/功能
+-   确定将受影响的模块、服务或区域
+-   仅将文档重点放在这些相关区域
+-   跳过代码库中不相关的部分，以保持文档精简
 
-**IF NO PRD EXISTS**:
-Ask the user:
+**如果不存在PRD：**
+询问用户：
 
-"I notice you haven't provided a PRD or requirements document. To create more focused and useful documentation, I recommend one of these options:
+“我注意到您没有提供PRD或需求文档。为了创建更专注、更有用的文档，我推荐以下选项之一：
 
-1. **Create a PRD first** - Would you like me to help create a brownfield PRD before documenting? This helps focus documentation on relevant areas.
+1.  **首先创建PRD** - 您希望我在记录之前帮助创建棕地PRD吗？这有助于将文档重点放在相关领域。
 
-2. **Provide existing requirements** - Do you have a requirements document, epic, or feature description you can share?
+2.  **提供现有需求** - 您是否有可以共享的需求文档、史诗或功能描述？
 
-3. **Describe the focus** - Can you briefly describe what enhancement or feature you're planning? For example:
-   - 'Adding payment processing to the user service'
-   - 'Refactoring the authentication module'
-   - 'Integrating with a new third-party API'
+3.  **描述重点** - 您能简要描述您计划的增强或功能吗？例如：
+    -   ‘向用户服务添加支付处理’
+    -   ‘重构身份验证模块’
+    -   ‘与新的第三方API集成’
 
-4. **Document everything** - Or should I proceed with comprehensive documentation of the entire codebase? (Note: This may create excessive documentation for large projects)
+4.  **记录所有内容** - 或者我应该继续对整个代码库进行综合文档记录？（注意：对于大型项目，这可能会产生过多的文档）
 
-Please let me know your preference, or I can proceed with full documentation if you prefer."
+请告诉我您的偏好，或者如果您愿意，我可以继续进行完整的文档记录。”
 
-Based on their response:
+根据他们的回应：
 
-- If they choose option 1-3: Use that context to focus documentation
-- If they choose option 4 or decline: Proceed with comprehensive analysis below
+-   如果他们选择选项1-3：使用该背景来专注文档记录
+-   如果他们选择选项4或拒绝：继续下面的综合分析
 
-Begin by conducting analysis of the existing project. Use available tools to:
+首先对现有项目进行分析。使用可用工具：
 
-1. **Project Structure Discovery**: Examine the root directory structure, identify main folders, and understand the overall organization
-2. **Technology Stack Identification**: Look for package.json, requirements.txt, Cargo.toml, pom.xml, etc. to identify languages, frameworks, and dependencies
-3. **Build System Analysis**: Find build scripts, CI/CD configurations, and development commands
-4. **Existing Documentation Review**: Check for README files, docs folders, and any existing documentation
-5. **Code Pattern Analysis**: Sample key files to understand coding patterns, naming conventions, and architectural approaches
+1.  **项目结构发现**：检查根目录结构，识别主文件夹，并了解整体组织
+2.  **技术栈识别**：查找package.json、requirements.txt、Cargo.toml、pom.xml等，以识别语言、框架和依赖项
+3.  **构建系统分析**：查找构建脚本、CI/CD配置和开发命令
+4.  **现有文档审查**：检查README文件、docs文件夹和任何现有文档
+5.  **代码模式分析**：抽样关键文件以了解编码模式、命名约定和架构方法
 
-Ask the user these elicitation questions to better understand their needs:
+向用户提出这些启发性问题，以更好地了解他们的需求：
 
-- What is the primary purpose of this project?
-- Are there any specific areas of the codebase that are particularly complex or important for agents to understand?
-- What types of tasks do you expect AI agents to perform on this project? (e.g., bug fixes, feature additions, refactoring, testing)
-- Are there any existing documentation standards or formats you prefer?
-- What level of technical detail should the documentation target? (junior developers, senior developers, mixed team)
-- Is there a specific feature or enhancement you're planning? (This helps focus documentation)
+-   该项目的主要目的是什么？
+-   代码库中是否有任何特定领域对于代理理解特别复杂或重要？
+-   您希望AI代理在该项目上执行哪些类型的任务？（例如，错误修复、功能添加、重构、测试）
+-   您是否有任何偏好的现有文档标准或格式？
+-   文档应针对哪个技术细节级别？（初级开发人员、高级开发人员、混合团队）
+-   您是否正在计划特定的功能或增强？（这有助于专注文档记录）
 
-### 2. Deep Codebase Analysis
+### 2. 深入代码库分析
 
-CRITICAL: Before generating documentation, conduct extensive analysis of the existing codebase:
+关键：在生成文档之前，对现有代码库进行广泛分析：
 
-1. **Explore Key Areas**:
-   - Entry points (main files, index files, app initializers)
-   - Configuration files and environment setup
-   - Package dependencies and versions
-   - Build and deployment configurations
-   - Test suites and coverage
+1.  **探索关键领域**：
+    -   入口点（主文件、索引文件、应用程序初始化程序）
+    -   配置文件和环境设置
+    -   包依赖项和版本
+    -   构建和部署配置
+    -   测试套件和覆盖率
 
-2. **Ask Clarifying Questions**:
-   - "I see you're using [technology X]. Are there any custom patterns or conventions I should document?"
-   - "What are the most critical/complex parts of this system that developers struggle with?"
-   - "Are there any undocumented 'tribal knowledge' areas I should capture?"
-   - "What technical debt or known issues should I document?"
-   - "Which parts of the codebase change most frequently?"
+2.  **提出澄清问题**：
+    -   “我看到您正在使用[技术X]。我应该记录任何自定义模式或惯例吗？”
+    -   “开发人员在此系统中最关键/复杂的部分是什么？”
+    -   “我应该捕获任何未记录的‘部落知识’领域吗？”
+    -   “我应该记录哪些技术债务或已知问题？”
+    -   “代码库的哪些部分更改最频繁？”
 
-3. **Map the Reality**:
-   - Identify ACTUAL patterns used (not theoretical best practices)
-   - Find where key business logic lives
-   - Locate integration points and external dependencies
-   - Document workarounds and technical debt
-   - Note areas that differ from standard patterns
+3.  **映射现实**：
+    -   识别实际使用的模式（而不是理论上的最佳实践）
+    -   找到关键业务逻辑的位置
+    -   定位集成点和外部依赖项
+    -   记录变通方法和技术债务
+    -   注意与标准模式不同的区域
 
-**IF PRD PROVIDED**: Also analyze what would need to change for the enhancement
+**如果提供了PRD**：还要分析增强功能需要更改什么
 
-### 3. Core Documentation Generation
+### 3. 核心文档生成
 
-[[LLM: Generate a comprehensive BROWNFIELD architecture document that reflects the ACTUAL state of the codebase.
+[[LLM: 生成一份反映代码库实际状态的综合性棕地架构文档。
 
-**CRITICAL**: This is NOT an aspirational architecture document. Document what EXISTS, including:
+**关键**：这不是一份理想化的架构文档。记录存在的内容，包括：
 
-- Technical debt and workarounds
-- Inconsistent patterns between different parts
-- Legacy code that can't be changed
-- Integration constraints
-- Performance bottlenecks
+-   技术债务和变通方法
+-   不同部分之间不一致的模式
+-   无法更改的旧代码
+-   集成约束
+-   性能瓶颈
 
-**Document Structure**:
+**文档结构**：
 
-# [Project Name] Brownfield Architecture Document
+# [项目名称] 棕地架构文档
 
-## Introduction
+## 引言
 
-This document captures the CURRENT STATE of the [Project Name] codebase, including technical debt, workarounds, and real-world patterns. It serves as a reference for AI agents working on enhancements.
+本文档记录了[项目名称]代码库的当前状态，包括技术债务、变通方法和实际模式。它作为AI代理进行增强工作的参考。
 
-### Document Scope
+### 文档范围
 
-[If PRD provided: "Focused on areas relevant to: {enhancement description}"]
-[If no PRD: "Comprehensive documentation of entire system"]
+[如果提供了PRD：“专注于与以下内容相关的领域：{增强描述}”]
+[如果没有PRD：“整个系统的综合文档”]
 
-### Change Log
+### 变更日志
 
-| Date   | Version | Description                 | Author    |
-| ------ | ------- | --------------------------- | --------- |
-| [Date] | 1.0     | Initial brownfield analysis | [Analyst] |
+| 日期 | 版本 | 描述 | 作者 |
+| --- | --- | --- | --- |
+| [日期] | 1.0 | 初始棕地分析 | [分析师] |
 
-## Quick Reference - Key Files and Entry Points
+## 快速参考 - 关键文件和入口点
 
-### Critical Files for Understanding the System
+### 理解系统的关键文件
 
-- **Main Entry**: `src/index.js` (or actual entry point)
-- **Configuration**: `config/app.config.js`, `.env.example`
-- **Core Business Logic**: `src/services/`, `src/domain/`
-- **API Definitions**: `src/routes/` or link to OpenAPI spec
-- **Database Models**: `src/models/` or link to schema files
-- **Key Algorithms**: [List specific files with complex logic]
+-   **主入口**：`src/index.js`（或实际入口点）
+-   **配置**：`config/app.config.js`、`.env.example`
+-   **核心业务逻辑**：`src/services/`、`src/domain/`
+-   **API定义**：`src/routes/`或指向OpenAPI规范的链接
+-   **数据库模型**：`src/models/`或指向模式文件的链接
+-   **关键算法**：[列出具有复杂逻辑的特定文件]
 
-### If PRD Provided - Enhancement Impact Areas
+### 如果提供了PRD - 增强影响区域
 
-[Highlight which files/modules will be affected by the planned enhancement]
+[突出显示计划的增强将影响哪些文件/模块]
 
-## High Level Architecture
+## 高层架构
 
-### Technical Summary
+### 技术摘要
 
-### Actual Tech Stack (from package.json/requirements.txt)
+### 实际技术栈（来自package.json/requirements.txt）
 
-| Category  | Technology | Version | Notes                      |
-| --------- | ---------- | ------- | -------------------------- |
-| Runtime   | Node.js    | 16.x    | [Any constraints]          |
-| Framework | Express    | 4.18.2  | [Custom middleware?]       |
-| Database  | PostgreSQL | 13      | [Connection pooling setup] |
+| 类别 | 技术 | 版本 | 说明 |
+| --- | --- | --- | --- |
+| 运行时 | Node.js | 16.x | [任何约束] |
+| 框架 | Express | 4.18.2 | [自定义中间件？] |
+| 数据库 | PostgreSQL | 13 | [连接池设置] |
 
-etc...
+等等...
 
-### Repository Structure Reality Check
+### 存储库结构现实检查
 
-- Type: [Monorepo/Polyrepo/Hybrid]
-- Package Manager: [npm/yarn/pnpm]
-- Notable: [Any unusual structure decisions]
+-   类型：[单体仓库/多仓库/混合]
+-   包管理器：[npm/yarn/pnpm]
+-   值得注意的：[任何不寻常的结构决策]
 
-## Source Tree and Module Organization
+## 源代码树和模块组织
 
-### Project Structure (Actual)
+### 项目结构（实际）
 
 ```text
 project-root/
 ├── src/
-│   ├── controllers/     # HTTP request handlers
-│   ├── services/        # Business logic (NOTE: inconsistent patterns between user and payment services)
-│   ├── models/          # Database models (Sequelize)
-│   ├── utils/           # Mixed bag - needs refactoring
-│   └── legacy/          # DO NOT MODIFY - old payment system still in use
-├── tests/               # Jest tests (60% coverage)
-├── scripts/             # Build and deployment scripts
-└── config/              # Environment configs
+│   ├── controllers/     # HTTP请求处理程序
+│   ├── services/        # 业务逻辑（注意：用户和支付服务之间的模式不一致）
+│   ├── models/          # 数据库模型（Sequelize）
+│   ├── utils/           # 混合包 - 需要重构
+│   └── legacy/          # 请勿修改 - 仍在使用的旧支付系统
+├── tests/               # Jest测试（覆盖率60%）
+├── scripts/             # 构建和部署脚本
+└── config/              # 环境配置
 ```
 
-### Key Modules and Their Purpose
+### 关键模块及其用途
 
-- **User Management**: `src/services/userService.js` - Handles all user operations
-- **Authentication**: `src/middleware/auth.js` - JWT-based, custom implementation
-- **Payment Processing**: `src/legacy/payment.js` - CRITICAL: Do not refactor, tightly coupled
-- **[List other key modules with their actual files]**
+-   **用户管理**：`src/services/userService.js` - 处理所有用户操作
+-   **身份验证**：`src/middleware/auth.js` - 基于JWT的自定义实现
+-   **支付处理**：`src/legacy/payment.js` - 关键：不要重构，紧密耦合
+-   **[列出其他关键模块及其各自的文件]**
 
-## Data Models and APIs
+## 数据模型和API
 
-### Data Models
+### 数据模型
 
-Instead of duplicating, reference actual model files:
+不要重复，而是引用实际的模型文件：
 
-- **User Model**: See `src/models/User.js`
-- **Order Model**: See `src/models/Order.js`
-- **Related Types**: TypeScript definitions in `src/types/`
+-   **用户模型**：参见 `src/models/User.js`
+-   **订单模型**：参见 `src/models/Order.js`
+-   **相关类型**：`src/types/` 中的TypeScript定义
 
-### API Specifications
+### API规范
 
-- **OpenAPI Spec**: `docs/api/openapi.yaml` (if exists)
-- **Postman Collection**: `docs/api/postman-collection.json`
-- **Manual Endpoints**: [List any undocumented endpoints discovered]
+-   **OpenAPI规范**：`docs/api/openapi.yaml`（如果存在）
+-   **Postman集合**：`docs/api/postman-collection.json`
+-   **手动端点**：[列出发现的任何未记录的端点]
 
-## Technical Debt and Known Issues
+## 技术债务和已知问题
 
-### Critical Technical Debt
+### 关键技术债务
 
-1. **Payment Service**: Legacy code in `src/legacy/payment.js` - tightly coupled, no tests
-2. **User Service**: Different pattern than other services, uses callbacks instead of promises
-3. **Database Migrations**: Manually tracked, no proper migration tool
-4. **[Other significant debt]**
+1.  **支付服务**：`src/legacy/payment.js` 中的旧代码 - 紧密耦合，没有测试
+2.  **用户服务**：与其他服务模式不同，使用回调而不是Promise
+3.  **数据库迁移**：手动跟踪，没有合适的迁移工具
+4.  **[其他重大债务]**
 
-### Workarounds and Gotchas
+### 变通方法和陷阱
 
-- **Environment Variables**: Must set `NODE_ENV=production` even for staging (historical reason)
-- **Database Connections**: Connection pool hardcoded to 10, changing breaks payment service
-- **[Other workarounds developers need to know]**
+-   **环境变量**：即使对于预发环境，也必须设置 `NODE_ENV=production`（历史原因）
+-   **数据库连接**：连接池硬编码为10，更改会破坏支付服务
+-   **[开发人员需要知道的其他变通方法]**
 
-## Integration Points and External Dependencies
+## 集成点和外部依赖
 
-### External Services
+### 外部服务
 
-| Service  | Purpose  | Integration Type | Key Files                      |
-| -------- | -------- | ---------------- | ------------------------------ |
-| Stripe   | Payments | REST API         | `src/integrations/stripe/`     |
-| SendGrid | Emails   | SDK              | `src/services/emailService.js` |
+| 服务 | 目的 | 集成类型 | 关键文件 |
+| --- | --- | --- | --- |
+| Stripe | 支付 | REST API | `src/integrations/stripe/` |
+| SendGrid | 电子邮件 | SDK | `src/services/emailService.js` |
 
-etc...
+等等...
 
-### Internal Integration Points
+### 内部集成点
 
-- **Frontend Communication**: REST API on port 3000, expects specific headers
-- **Background Jobs**: Redis queue, see `src/workers/`
-- **[Other integrations]**
+-   **前端通信**：端口3000上的REST API，需要特定的头信息
+-   **后台作业**：Redis队列，参见 `src/workers/`
+-   **[其他集成]**
 
-## Development and Deployment
+## 开发和部署
 
-### Local Development Setup
+### 本地开发设置
 
-1. Actual steps that work (not ideal steps)
-2. Known issues with setup
-3. Required environment variables (see `.env.example`)
+1.  实际可行的步骤（不是理想步骤）
+2.  设置的已知问题
+3.  所需的环境变量（参见 `.env.example`）
 
-### Build and Deployment Process
+### 构建和部署过程
 
-- **Build Command**: `npm run build` (webpack config in `webpack.config.js`)
-- **Deployment**: Manual deployment via `scripts/deploy.sh`
-- **Environments**: Dev, Staging, Prod (see `config/environments/`)
+-   **构建命令**：`npm run build`（webpack配置在 `webpack.config.js` 中）
+-   **部署**：通过 `scripts/deploy.sh` 手动部署
+-   **环境**：开发、预发、生产（参见 `config/environments/`）
 
-## Testing Reality
+## 测试现状
 
-### Current Test Coverage
+### 当前测试覆盖率
 
-- Unit Tests: 60% coverage (Jest)
-- Integration Tests: Minimal, in `tests/integration/`
-- E2E Tests: None
-- Manual Testing: Primary QA method
+-   单元测试：60%覆盖率（Jest）
+-   集成测试：最少，在 `tests/integration/` 中
+-   端到端测试：无
+-   手动测试：主要的QA方法
 
-### Running Tests
+### 运行测试
 
 ```bash
-npm test           # Runs unit tests
-npm run test:integration  # Runs integration tests (requires local DB)
+npm test           # 运行单元测试
+npm run test:integration  # 运行集成测试（需要本地数据库）
 ```
 
-## If Enhancement PRD Provided - Impact Analysis
+## 如果提供了增强PRD - 影响分析
 
-### Files That Will Need Modification
+### 需要修改的文件
 
-Based on the enhancement requirements, these files will be affected:
+根据增强需求，这些文件将受到影响：
 
-- `src/services/userService.js` - Add new user fields
-- `src/models/User.js` - Update schema
-- `src/routes/userRoutes.js` - New endpoints
-- [etc...]
+-   `src/services/userService.js` - 添加新的用户字段
+-   `src/models/User.js` - 更新模式
+-   `src/routes/userRoutes.js` - 新的端点
+-   [等等...]
 
-### New Files/Modules Needed
+### 需要的新文件/模块
 
-- `src/services/newFeatureService.js` - New business logic
-- `src/models/NewFeature.js` - New data model
-- [etc...]
+-   `src/services/newFeatureService.js` - 新的业务逻辑
+-   `src/models/NewFeature.js` - 新的数据模型
+-   [等等...]
 
-### Integration Considerations
+### 集成注意事项
 
-- Will need to integrate with existing auth middleware
-- Must follow existing response format in `src/utils/responseFormatter.js`
-- [Other integration points]
+-   需要与现有的身份验证中间件集成
+-   必须遵循 `src/utils/responseFormatter.js` 中的现有响应格式
+-   [其他集成点]
 
-## Appendix - Useful Commands and Scripts
+## 附录 - 有用的命令和脚本
 
-### Frequently Used Commands
+### 常用命令
 
 ```bash
-npm run dev         # Start development server
-npm run build       # Production build
-npm run migrate     # Run database migrations
-npm run seed        # Seed test data
+npm run dev         # 启动开发服务器
+npm run build       # 生产构建
+npm run migrate     # 运行数据库迁移
+npm run seed        # 填充测试数据
 ```
 
-### Debugging and Troubleshooting
+### 调试和故障排除
 
-- **Logs**: Check `logs/app.log` for application logs
-- **Debug Mode**: Set `DEBUG=app:*` for verbose logging
-- **Common Issues**: See `docs/troubleshooting.md`]]
+-   **日志**：检查 `logs/app.log` 以获取应用程序日志
+-   **调试模式**：设置 `DEBUG=app:*` 以获取详细日志
+-   **常见问题**：参见 `docs/troubleshooting.md`]]
 
-### 4. Document Delivery
+### 4. 文档交付
 
-1. **In Web UI (Gemini, ChatGPT, Claude)**:
-   - Present the entire document in one response (or multiple if too long)
-   - Tell user to copy and save as `docs/brownfield-architecture.md` or `docs/project-architecture.md`
-   - Mention it can be sharded later in IDE if needed
+1.  **在Web UI中（Gemini, ChatGPT, Claude）**：
+    -   在一个响应中呈现整个文档（如果太长则分多个）
+    -   告诉用户复制并另存为 `docs/brownfield-architecture.md` 或 `docs/project-architecture.md`
+    -   如果需要，提及以后可以在IDE中分片
 
-2. **In IDE Environment**:
-   - Create the document as `docs/brownfield-architecture.md`
-   - Inform user this single document contains all architectural information
-   - Can be sharded later using PO agent if desired
+2.  **在IDE环境中**：
+    -   将文档创建为 `docs/brownfield-architecture.md`
+    -   告知用户此单个文档包含所有架构信息
+    -   如果需要，以后可以使用PO代理分片
 
-The document should be comprehensive enough that future agents can understand:
+文档应足够全面，以便将来的代理能够理解：
 
-- The actual state of the system (not idealized)
-- Where to find key files and logic
-- What technical debt exists
-- What constraints must be respected
-- If PRD provided: What needs to change for the enhancement]]
+-   系统的实际状态（非理想化）
+-   在哪里找到关键文件和逻辑
+-   存在哪些技术债务
+-   必须遵守哪些约束
+-   如果提供了PRD：增强功能需要更改什么]]
 
-### 5. Quality Assurance
+### 5. 质量保证
 
-CRITICAL: Before finalizing the document:
+关键：在最终确定文档之前：
 
-1. **Accuracy Check**: Verify all technical details match the actual codebase
-2. **Completeness Review**: Ensure all major system components are documented
-3. **Focus Validation**: If user provided scope, verify relevant areas are emphasized
-4. **Clarity Assessment**: Check that explanations are clear for AI agents
-5. **Navigation**: Ensure document has clear section structure for easy reference
+1.  **准确性检查**：验证所有技术细节与实际代码库匹配
+2.  **完整性审查**：确保所有主要系统组件都已记录
+3.  **重点验证**：如果用户提供了范围，验证相关领域是否被强调
+4.  **清晰度评估**：检查解释对AI代理是否清晰
+5.  **导航**：确保文档具有清晰的章节结构，便于参考
 
-Apply the advanced elicitation task after major sections to refine based on user feedback.
+在主要章节后应用高级启发任务，以根据用户反馈进行完善。
 
-## Success Criteria
+## 成功标准
 
-- Single comprehensive brownfield architecture document created
-- Document reflects REALITY including technical debt and workarounds
-- Key files and modules are referenced with actual paths
-- Models/APIs reference source files rather than duplicating content
-- If PRD provided: Clear impact analysis showing what needs to change
-- Document enables AI agents to navigate and understand the actual codebase
-- Technical constraints and "gotchas" are clearly documented
+-   创建了单一的综合性棕地架构文档
+-   文档反映了现实，包括技术债务和变通方法
+-   关键文件和模块用实际路径引用
+-   模型/API引用源文件而不是重复内容
+-   如果提供了PRD：清晰的影响分析，显示需要更改的内容
+-   文档使AI代理能够导航和理解实际代码库
+-   清楚地记录了技术约束和“陷阱”
 
-## Notes
+## 说明
 
-- This task creates ONE document that captures the TRUE state of the system
-- References actual files rather than duplicating content when possible
-- Documents technical debt, workarounds, and constraints honestly
-- For brownfield projects with PRD: Provides clear enhancement impact analysis
-- The goal is PRACTICAL documentation for AI agents doing real work
+-   此任务创建一个捕获系统真实状态的单一文档
+-   尽可能引用实际文件而不是重复内容
+-   诚实地记录技术债务、变通方法和约束
+-   对于有PRD的棕地项目：提供清晰的增强影响分析
+-   目标是为从事实际工作的AI代理提供实用的文档

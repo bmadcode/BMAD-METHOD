@@ -1,253 +1,253 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: market-research-template-v2
-  name: Market Research Report
+  name: 市场研究报告
   version: 2.0
   output:
     format: markdown
     filename: docs/market-research.md
-    title: "Market Research Report: {{project_product_name}}"
+    title: "市场研究报告：{{project_product_name}}"
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Market Research Elicitation Actions"
+    title: "市场研究启发行动"
     options:
-      - "Expand market sizing calculations with sensitivity analysis"
-      - "Deep dive into a specific customer segment"
-      - "Analyze an emerging market trend in detail"
-      - "Compare this market to an analogous market"
-      - "Stress test market assumptions"
-      - "Explore adjacent market opportunities"
-      - "Challenge market definition and boundaries"
-      - "Generate strategic scenarios (best/base/worst case)"
-      - "If only we had considered [X market factor]..."
-      - "Proceed to next section"
+      - "通过敏感性分析扩展市场规模计算"
+      - "深入研究特定客户细分"
+      - "详细分析新兴市场趋势"
+      - "将此市场与类似市场进行比较"
+      - "压力测试市场假设"
+      - "探索邻近市场机会"
+      - "挑战市场定义和边界"
+      - "生成战略情景（最佳/基本/最差情况）"
+      - "如果我们当初考虑了[X市场因素]..."
+      - "进入下一节"
 
 sections:
   - id: executive-summary
-    title: Executive Summary
-    instruction: Provide a high-level overview of key findings, market opportunity assessment, and strategic recommendations. Write this section LAST after completing all other sections.
+    title: 执行摘要
+    instruction: 提供关键发现、市场机会评估和战略建议的高层概述。在完成所有其他部分后最后撰写此部分。
 
   - id: research-objectives
-    title: Research Objectives & Methodology
-    instruction: This template guides the creation of a comprehensive market research report. Begin by understanding what market insights the user needs and why. Work through each section systematically, using the appropriate analytical frameworks based on the research objectives.
+    title: 研究目标与方法论
+    instruction: 此模板指导创建全面的市场研究报告。首先了解用户需要哪些市场见解以及原因。系统地完成每个部分，根据研究目标使用适当的分析框架。
     sections:
       - id: objectives
-        title: Research Objectives
+        title: 研究目标
         instruction: |
-          List the primary objectives of this market research:
-          - What decisions will this research inform?
-          - What specific questions need to be answered?
-          - What are the success criteria for this research?
+          列出此市场研究的主要目标：
+          - 此研究将为哪些决策提供信息？
+          - 需要回答哪些具体问题？
+          - 此研究的成功标准是什么？
       - id: methodology
-        title: Research Methodology
+        title: 研究方法论
         instruction: |
-          Describe the research approach:
-          - Data sources used (primary/secondary)
-          - Analysis frameworks applied
-          - Data collection timeframe
-          - Limitations and assumptions
+          描述研究方法：
+          - 使用的数据来源（一手/二手）
+          - 应用的分析框架
+          - 数据收集时间范围
+          - 局限性和假设
 
   - id: market-overview
-    title: Market Overview
+    title: 市场概述
     sections:
       - id: market-definition
-        title: Market Definition
+        title: 市场定义
         instruction: |
-          Define the market being analyzed:
-          - Product/service category
-          - Geographic scope
-          - Customer segments included
-          - Value chain position
+          定义正在分析的市场：
+          - 产品/服务类别
+          - 地理范围
+          - 包括的客户细分
+          - 价值链位置
       - id: market-size-growth
-        title: Market Size & Growth
+        title: 市场规模与增长
         instruction: |
-          Guide through TAM, SAM, SOM calculations with clear assumptions. Use one or more approaches:
-          - Top-down: Start with industry data, narrow down
-          - Bottom-up: Build from customer/unit economics
-          - Value theory: Based on value provided vs. alternatives
+          通过明确的假设指导TAM、SAM、SOM的计算。使用一种或多种方法：
+          - 自上而下：从行业数据开始，逐步缩小范围
+          - 自下而上：从客户/单位经济学构建
+          - 价值理论：基于提供的价值与替代方案
         sections:
           - id: tam
-            title: Total Addressable Market (TAM)
-            instruction: Calculate and explain the total market opportunity
+            title: 总可寻址市场 (TAM)
+            instruction: 计算并解释总市场机会
           - id: sam
-            title: Serviceable Addressable Market (SAM)
-            instruction: Define the portion of TAM you can realistically reach
+            title: 可服务可寻址市场 (SAM)
+            instruction: 定义您可以实际接触到的TAM部分
           - id: som
-            title: Serviceable Obtainable Market (SOM)
-            instruction: Estimate the portion you can realistically capture
+            title: 可服务可获得市场 (SOM)
+            instruction: 估计您可以实际捕获的部分
       - id: market-trends
-        title: Market Trends & Drivers
-        instruction: Analyze key trends shaping the market using appropriate frameworks like PESTEL
+        title: 市场趋势与驱动因素
+        instruction: 使用PESTEL等适当框架分析塑造市场的关键趋势
         sections:
           - id: key-trends
-            title: Key Market Trends
+            title: 关键市场趋势
             instruction: |
-              List and explain 3-5 major trends:
-              - Trend 1: Description and impact
-              - Trend 2: Description and impact
-              - etc.
+              列出并解释3-5个主要趋势：
+              - 趋势1：描述和影响
+              - 趋势2：描述和影响
+              - 等等。
           - id: growth-drivers
-            title: Growth Drivers
-            instruction: Identify primary factors driving market growth
+            title: 增长驱动因素
+            instruction: 识别推动市场增长的主要因素
           - id: market-inhibitors
-            title: Market Inhibitors
-            instruction: Identify factors constraining market growth
+            title: 市场抑制因素
+            instruction: 识别限制市场增长的因素
 
   - id: customer-analysis
-    title: Customer Analysis
+    title: 客户分析
     sections:
       - id: segment-profiles
-        title: Target Segment Profiles
-        instruction: For each segment, create detailed profiles including demographics/firmographics, psychographics, behaviors, needs, and willingness to pay
+        title: 目标细分市场简介
+        instruction: 为每个细分市场创建详细的简介，包括人口统计/公司统计、心理统计、行为、需求和支付意愿
         repeatable: true
         sections:
           - id: segment
-            title: "Segment {{segment_number}}: {{segment_name}}"
+            title: "细分市场 {{segment_number}}: {{segment_name}}"
             template: |
-              - **Description:** {{brief_overview}}
-              - **Size:** {{number_of_customers_market_value}}
-              - **Characteristics:** {{key_demographics_firmographics}}
-              - **Needs & Pain Points:** {{primary_problems}}
-              - **Buying Process:** {{purchasing_decisions}}
-              - **Willingness to Pay:** {{price_sensitivity}}
+              - **描述：** {{brief_overview}}
+              - **规模：** {{number_of_customers_market_value}}
+              - **特征：** {{key_demographics_firmographics}}
+              - **需求与痛点：** {{primary_problems}}
+              - **购买过程：** {{purchasing_decisions}}
+              - **支付意愿：** {{price_sensitivity}}
       - id: jobs-to-be-done
-        title: Jobs-to-be-Done Analysis
-        instruction: Uncover what customers are really trying to accomplish
+        title: 待办任务分析
+        instruction: 揭示客户真正想要完成的事情
         sections:
           - id: functional-jobs
-            title: Functional Jobs
-            instruction: List practical tasks and objectives customers need to complete
+            title: 功能性任务
+            instruction: 列出客户需要完成的实际任务和目标
           - id: emotional-jobs
-            title: Emotional Jobs
-            instruction: Describe feelings and perceptions customers seek
+            title: 情感性任务
+            instruction: 描述客户寻求的感觉和看法
           - id: social-jobs
-            title: Social Jobs
-            instruction: Explain how customers want to be perceived by others
+            title: 社交性任务
+            instruction: 解释客户希望如何被他人看待
       - id: customer-journey
-        title: Customer Journey Mapping
-        instruction: Map the end-to-end customer experience for primary segments
+        title: 客户旅程图
+        instruction: 为主要细分市场绘制端到端的客户体验图
         template: |
-          For primary customer segment:
+          对于主要客户细分市场：
 
-          1. **Awareness:** {{discovery_process}}
-          2. **Consideration:** {{evaluation_criteria}}
-          3. **Purchase:** {{decision_triggers}}
-          4. **Onboarding:** {{initial_expectations}}
-          5. **Usage:** {{interaction_patterns}}
-          6. **Advocacy:** {{referral_behaviors}}
+          1. **认知：** {{discovery_process}}
+          2. **考虑：** {{evaluation_criteria}}
+          3. **购买：** {{decision_triggers}}
+          4. **上手：** {{initial_expectations}}
+          5. **使用：** {{interaction_patterns}}
+          6. **拥护：** {{referral_behaviors}}
 
   - id: competitive-landscape
-    title: Competitive Landscape
+    title: 竞争格局
     sections:
       - id: market-structure
-        title: Market Structure
+        title: 市场结构
         instruction: |
-          Describe the overall competitive environment:
-          - Number of competitors
-          - Market concentration
-          - Competitive intensity
+          描述整体竞争环境：
+          - 竞争对手数量
+          - 市场集中度
+          - 竞争激烈程度
       - id: major-players
-        title: Major Players Analysis
+        title: 主要参与者分析
         instruction: |
-          For top 3-5 competitors:
-          - Company name and brief description
-          - Market share estimate
-          - Key strengths and weaknesses
-          - Target customer focus
-          - Pricing strategy
+          对于前3-5名竞争对手：
+          - 公司名称和简要描述
+          - 市场份额估计
+          - 关键优势和劣势
+          - 目标客户重点
+          - 定价策略
       - id: competitive-positioning
-        title: Competitive Positioning
+        title: 竞争定位
         instruction: |
-          Analyze how competitors are positioned:
-          - Value propositions
-          - Differentiation strategies
-          - Market gaps and opportunities
+          分析竞争对手的定位：
+          - 价值主张
+          - 差异化策略
+          - 市场差距和机会
 
   - id: industry-analysis
-    title: Industry Analysis
+    title: 行业分析
     sections:
       - id: porters-five-forces
-        title: Porter's Five Forces Assessment
-        instruction: Analyze each force with specific evidence and implications
+        title: 波特五力评估
+        instruction: 用具体证据和影响分析每一种力量
         sections:
           - id: supplier-power
-            title: "Supplier Power: {{power_level}}"
+            title: "供应商议价能力：{{power_level}}"
             template: "{{analysis_and_implications}}"
           - id: buyer-power
-            title: "Buyer Power: {{power_level}}"
+            title: "购买者议价能力：{{power_level}}"
             template: "{{analysis_and_implications}}"
           - id: competitive-rivalry
-            title: "Competitive Rivalry: {{intensity_level}}"
+            title: "竞争激烈程度：{{intensity_level}}"
             template: "{{analysis_and_implications}}"
           - id: threat-new-entry
-            title: "Threat of New Entry: {{threat_level}}"
+            title: "新进入者的威胁：{{threat_level}}"
             template: "{{analysis_and_implications}}"
           - id: threat-substitutes
-            title: "Threat of Substitutes: {{threat_level}}"
+            title: "替代品的威胁：{{threat_level}}"
             template: "{{analysis_and_implications}}"
       - id: adoption-lifecycle
-        title: Technology Adoption Lifecycle Stage
+        title: 技术采纳生命周期阶段
         instruction: |
-          Identify where the market is in the adoption curve:
-          - Current stage and evidence
-          - Implications for strategy
-          - Expected progression timeline
+          识别市场处于采纳曲线的哪个阶段：
+          - 当前阶段和证据
+          - 对策略的影响
+          - 预期的进展时间线
 
   - id: opportunity-assessment
-    title: Opportunity Assessment
+    title: 机会评估
     sections:
       - id: market-opportunities
-        title: Market Opportunities
-        instruction: Identify specific opportunities based on the analysis
+        title: 市场机会
+        instruction: 根据分析识别具体机会
         repeatable: true
         sections:
           - id: opportunity
-            title: "Opportunity {{opportunity_number}}: {{name}}"
+            title: "机会 {{opportunity_number}}: {{name}}"
             template: |
-              - **Description:** {{what_is_the_opportunity}}
-              - **Size/Potential:** {{quantified_potential}}
-              - **Requirements:** {{needed_to_capture}}
-              - **Risks:** {{key_challenges}}
+              - **描述：** {{what_is_the_opportunity}}
+              - **规模/潜力：** {{quantified_potential}}
+              - **要求：** {{needed_to_capture}}
+              - **风险：** {{key_challenges}}
       - id: strategic-recommendations
-        title: Strategic Recommendations
+        title: 战略建议
         sections:
           - id: go-to-market
-            title: Go-to-Market Strategy
+            title: 市场进入策略
             instruction: |
-              Recommend approach for market entry/expansion:
-              - Target segment prioritization
-              - Positioning strategy
-              - Channel strategy
-              - Partnership opportunities
+              推荐市场进入/扩张的方法：
+              - 目标细分市场优先级
+              - 定位策略
+              - 渠道策略
+              - 合作机会
           - id: pricing-strategy
-            title: Pricing Strategy
+            title: 定价策略
             instruction: |
-              Based on willingness to pay analysis and competitive landscape:
-              - Recommended pricing model
-              - Price points/ranges
-              - Value metric
-              - Competitive positioning
+              基于支付意愿分析和竞争格局：
+              - 推荐的定价模型
+              - 价格点/范围
+              - 价值指标
+              - 竞争定位
           - id: risk-mitigation
-            title: Risk Mitigation
+            title: 风险缓解
             instruction: |
-              Key risks and mitigation strategies:
-              - Market risks
-              - Competitive risks
-              - Execution risks
-              - Regulatory/compliance risks
+              关键风险和缓解策略：
+              - 市场风险
+              - 竞争风险
+              - 执行风险
+              - 法规/合规风险
 
   - id: appendices
-    title: Appendices
+    title: 附录
     sections:
       - id: data-sources
-        title: A. Data Sources
-        instruction: List all sources used in the research
+        title: A. 数据来源
+        instruction: 列出研究中使用的所有来源
       - id: calculations
-        title: B. Detailed Calculations
-        instruction: Include any complex calculations or models
+        title: B. 详细计算
+        instruction: 包括任何复杂的计算或模型
       - id: additional-analysis
-        title: C. Additional Analysis
-        instruction: Any supplementary analysis not included in main body
+        title: C. 附加分析
+        instruction: 未包含在正文中的任何补充分析

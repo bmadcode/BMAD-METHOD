@@ -1,114 +1,114 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Create Next Story Task
+# 创建下一个故事任务
 
-## Purpose
+## 目的
 
-To identify the next logical story based on project progress and epic definitions, and then to prepare a comprehensive, self-contained, and actionable story file using the `Story Template`. This task ensures the story is enriched with all necessary technical context, requirements, and acceptance criteria, making it ready for efficient implementation by a Developer Agent with minimal need for additional research or finding its own context.
+根据项目进度和史诗定义，确定下一个合乎逻辑的故事，然后使用 `故事模板` 准备一个全面的、自包含的、可操作的故事文件。此任务确保故事富含所有必要的技术背景、需求和验收标准，使其准备好由开发代理高效实施，而无需额外的研究或寻找自身背景。
 
-## SEQUENTIAL Task Execution (Do not proceed until current Task is complete)
+## 顺序任务执行（在当前任务完成前不要继续）
 
-### 0. Load Core Configuration and Check Workflow
+### 0. 加载核心配置并检查工作流
 
-- Load `{root}/core-config.yaml` from the project root
-- If the file does not exist, HALT and inform the user: "core-config.yaml not found. This file is required for story creation. You can either: 1) Copy it from GITHUB bmad-core/core-config.yaml and configure it for your project OR 2) Run the BMad installer against your project to upgrade and add the file automatically. Please add and configure core-config.yaml before proceeding."
-- Extract key configurations: `devStoryLocation`, `prd.*`, `architecture.*`, `workflow.*`
+-   从项目根目录加载 `{root}/core-config.yaml`
+-   如果文件不存在，则停止并通知用户：“未找到 core-config.yaml。此文件是创建故事所必需的。您可以：1) 从 GITHUB bmad-core/core-config.yaml 复制并为您的项目配置它 或 2) 对您的项目运行 BMad 安装程序以自动升级并添加该文件。请在继续之前添加并配置 core-config.yaml。”
+-   提取关键配置：`devStoryLocation`、`prd.*`、`architecture.*`、`workflow.*`
 
-### 1. Identify Next Story for Preparation
+### 1. 确定要准备的下一个故事
 
-#### 1.1 Locate Epic Files and Review Existing Stories
+#### 1.1 定位史诗文件并审查现有故事
 
-- Based on `prdSharded` from config, locate epic files (sharded location/pattern or monolithic PRD sections)
-- If `devStoryLocation` has story files, load the highest `{epicNum}.{storyNum}.story.md` file
-- **If highest story exists:**
-  - Verify status is 'Done'. If not, alert user: "ALERT: Found incomplete story! File: {lastEpicNum}.{lastStoryNum}.story.md Status: [current status] You should fix this story first, but would you like to accept risk & override to create the next story in draft?"
-  - If proceeding, select next sequential story in the current epic
-  - If epic is complete, prompt user: "Epic {epicNum} Complete: All stories in Epic {epicNum} have been completed. Would you like to: 1) Begin Epic {epicNum + 1} with story 1 2) Select a specific story to work on 3) Cancel story creation"
-  - **CRITICAL**: NEVER automatically skip to another epic. User MUST explicitly instruct which story to create.
-- **If no story files exist:** The next story is ALWAYS 1.1 (first story of first epic)
-- Announce the identified story to the user: "Identified next story for preparation: {epicNum}.{storyNum} - {Story Title}"
+-   根据配置中的 `prdSharded`，定位史诗文件（分片位置/模式或单片PRD部分）
+-   如果 `devStoryLocation` 有故事文件，则加载最高的 `{epicNum}.{storyNum}.story.md` 文件
+-   **如果存在最高的故事：**
+    -   验证状态是否为“完成”。如果不是，则提醒用户：“警报：发现未完成的故事！文件：{lastEpicNum}.{lastStoryNum}.story.md 状态：[当前状态] 您应首先修复此故事，但您想接受风险并覆盖以草稿形式创建下一个故事吗？”
+    -   如果继续，则选择当前史诗中的下一个顺序故事
+    -   如果史诗已完成，则提示用户：“史诗 {epicNum} 已完成：史诗 {epicNum} 中的所有故事均已完成。您想：1) 从故事1开始史诗 {epicNum + 1} 2) 选择要处理的特定故事 3) 取消故事创建”
+    -   **关键**：切勿自动跳到另一个史诗。用户必须明确指示要创建哪个故事。
+-   **如果没有故事文件：** 下一个故事始终是 1.1（第一个史诗的第一个故事）
+-   向用户宣布已识别的故事：“已确定要准备的下一个故事：{epicNum}.{storyNum} - {故事标题}”
 
-### 2. Gather Story Requirements and Previous Story Context
+### 2. 收集故事需求和上一个故事的背景
 
-- Extract story requirements from the identified epic file
-- If previous story exists, review Dev Agent Record sections for:
-  - Completion Notes and Debug Log References
-  - Implementation deviations and technical decisions
-  - Challenges encountered and lessons learned
-- Extract relevant insights that inform the current story's preparation
+-   从已识别的史诗文件中提取故事需求
+-   如果存在上一个故事，则审查开发代理记录部分以获取：
+    -   完成说明和调试日志参考
+    -   实施偏差和技术决策
+    -   遇到的挑战和经验教训
+-   提取为当前故事准备提供信息的相​​关见解
 
-### 3. Gather Architecture Context
+### 3. 收集架构背景
 
-#### 3.1 Determine Architecture Reading Strategy
+#### 3.1 确定架构阅读策略
 
-- **If `architectureVersion: >= v4` and `architectureSharded: true`**: Read `{architectureShardedLocation}/index.md` then follow structured reading order below
-- **Else**: Use monolithic `architectureFile` for similar sections
+-   **如果 `architectureVersion: >= v4` 且 `architectureSharded: true`**：阅读 `{architectureShardedLocation}/index.md`，然后按照下面的结构化阅读顺序进行
+-   **否则**：对类似部分使用单片 `architectureFile`
 
-#### 3.2 Read Architecture Documents Based on Story Type
+#### 3.2 根据故事类型阅读架构文档
 
-**For ALL Stories:** tech-stack.md, unified-project-structure.md, coding-standards.md, testing-strategy.md
+**对于所有故事：** tech-stack.md、unified-project-structure.md、coding-standards.md、testing-strategy.md
 
-**For Backend/API Stories, additionally:** data-models.md, database-schema.md, backend-architecture.md, rest-api-spec.md, external-apis.md
+**对于后端/API故事，另外：** data-models.md、database-schema.md、backend-architecture.md、rest-api-spec.md、external-apis.md
 
-**For Frontend/UI Stories, additionally:** frontend-architecture.md, components.md, core-workflows.md, data-models.md
+**对于前端/UI故事，另外：** frontend-architecture.md、components.md、core-workflows.md、data-models.md
 
-**For Full-Stack Stories:** Read both Backend and Frontend sections above
+**对于全栈故事：** 阅读上面的后端和前端部分
 
-#### 3.3 Extract Story-Specific Technical Details
+#### 3.3 提取特定于故事的技术细节
 
-Extract ONLY information directly relevant to implementing the current story. Do NOT invent new libraries, patterns, or standards not in the source documents.
+仅提取与实施当前故事直接相关的信息。不要发明源文档中没有的新库、模式或标准。
 
-Extract:
+提取：
 
-- Specific data models, schemas, or structures the story will use
-- API endpoints the story must implement or consume
-- Component specifications for UI elements in the story
-- File paths and naming conventions for new code
-- Testing requirements specific to the story's features
-- Security or performance considerations affecting the story
+-   故事将使用的特定数据模型、模式或结构
+-   故事必须实施或使用的API端点
+-   故事中UI元素的组件规范
+-   新代码的文件路径和命名约定
+-   特定于故事功能的测试要求
+-   影响故事的安全或性能考虑
 
-ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
+始终引用源文档：`[来源：architecture/{filename}.md#{section}]`
 
-### 4. Verify Project Structure Alignment
+### 4. 验证项目结构对齐
 
-- Cross-reference story requirements with Project Structure Guide from `docs/architecture/unified-project-structure.md`
-- Ensure file paths, component locations, or module names align with defined structures
-- Document any structural conflicts in "Project Structure Notes" section within the story draft
+-   将故事需求与 `docs/architecture/unified-project-structure.md` 中的项目结构指南进行交叉引用
+-   确保文件路径、组件位置或模块名称与定义的结构保持一致
+-   在故事草稿的“项目结构说明”部分记录任何结构冲突
 
-### 5. Populate Story Template with Full Context
+### 5. 用完整上下文填充故事模板
 
-- Create new story file: `{devStoryLocation}/{epicNum}.{storyNum}.story.md` using Story Template
-- Fill in basic story information: Title, Status (Draft), Story statement, Acceptance Criteria from Epic
-- **`Dev Notes` section (CRITICAL):**
-  - CRITICAL: This section MUST contain ONLY information extracted from architecture documents. NEVER invent or assume technical details.
-  - Include ALL relevant technical details from Steps 2-3, organized by category:
-    - **Previous Story Insights**: Key learnings from previous story
-    - **Data Models**: Specific schemas, validation rules, relationships [with source references]
-    - **API Specifications**: Endpoint details, request/response formats, auth requirements [with source references]
-    - **Component Specifications**: UI component details, props, state management [with source references]
-    - **File Locations**: Exact paths where new code should be created based on project structure
-    - **Testing Requirements**: Specific test cases or strategies from testing-strategy.md
-    - **Technical Constraints**: Version requirements, performance considerations, security rules
-  - Every technical detail MUST include its source reference: `[Source: architecture/{filename}.md#{section}]`
-  - If information for a category is not found in the architecture docs, explicitly state: "No specific guidance found in architecture docs"
-- **`Tasks / Subtasks` section:**
-  - Generate detailed, sequential list of technical tasks based ONLY on: Epic Requirements, Story AC, Reviewed Architecture Information
-  - Each task must reference relevant architecture documentation
-  - Include unit testing as explicit subtasks based on the Testing Strategy
-  - Link tasks to ACs where applicable (e.g., `Task 1 (AC: 1, 3)`)
-- Add notes on project structure alignment or discrepancies found in Step 4
+-   创建新故事文件：使用故事模板在 `{devStoryLocation}/{epicNum}.{storyNum}.story.md` 创建
+-   填写基本故事信息：标题、状态（草稿）、故事陈述、来自史诗的验收标准
+-   **`开发说明`部分（关键）：**
+    -   关键：此部分必须仅包含从架构文档中提取的信息。切勿发明或假设技术细节。
+    -   包括步骤2-3中的所有相关技术细节，按类别组织：
+        -   **上一个故事的见解**：上一个故事的关键经验教训
+        -   **数据模型**：特定的模式、验证规则、关系[附带来源参考]
+        -   **API规范**：端点细节、请求/响应格式、身份验证要求[附带来源参考]
+        -   **组件规范**：UI组件细节、属性、状态管理[附带来源参考]
+        -   **文件位置**：根据项目结构应创建新代码的确切路径
+        -   **测试要求**：来自testing-strategy.md的特定测试用例或策略
+        -   **技术约束**：版本要求、性能考虑、安全规则
+    -   每个技术细节都必须包含其来源参考：`[来源：architecture/{filename}.md#{section}]`
+    -   如果在架构文档中未找到某个类别的信息，则明确说明：“在架构文档中未找到具体指导”
+-   **`任务/子任务`部分：**
+    -   仅根据：史诗需求、故事AC、审查过的架构信息，生成详细的、顺序的技术任务列表
+    -   每个任务都必须引用相关的架构文档
+    -   根据测试策略，将单元测试作为明确的子任务包括在内
+    -   在适用的情况下将任务链接到AC（例如，`任务1 (AC: 1, 3)`）
+-   在步骤4中添加有关项目结构对齐或发现的差异的说明
 
-### 6. Story Draft Completion and Review
+### 6. 故事草稿完成和审查
 
-- Review all sections for completeness and accuracy
-- Verify all source references are included for technical details
-- Ensure tasks align with both epic requirements and architecture constraints
-- Update status to "Draft" and save the story file
-- Execute `{root}/tasks/execute-checklist` `{root}/checklists/story-draft-checklist`
-- Provide summary to user including:
-  - Story created: `{devStoryLocation}/{epicNum}.{storyNum}.story.md`
-  - Status: Draft
-  - Key technical components included from architecture docs
-  - Any deviations or conflicts noted between epic and architecture
-  - Checklist Results
-  - Next steps: For Complex stories, suggest the user carefully review the story draft and also optionally have the PO run the task `{root}/tasks/validate-next-story`
+-   审查所有部分的完整性和准确性
+-   验证技术细节的所有来源参考都已包括在内
+-   确保任务与史诗需求和架构约束保持一致
+-   将状态更新为“草稿”并保存故事文件
+-   执行 `{root}/tasks/execute-checklist` `{root}/checklists/story-draft-checklist`
+-   向用户提供摘要，包括：
+    -   创建的故事：`{devStoryLocation}/{epicNum}.{storyNum}.story.md`
+    -   状态：草稿
+    -   从架构文档中包含的关键技术组件
+    -   注意到的史诗和架构之间的任何偏差或冲突
+    -   清单结果
+    -   下一步：对于复杂的故事，建议用户仔细审查故事草稿，并可选择让PO运行任务 `{root}/tasks/validate-next-story`

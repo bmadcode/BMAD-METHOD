@@ -1,53 +1,53 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Create AI Frontend Prompt Task
+# 创建AI前端提示任务
 
-## Purpose
+## 目的
 
-To generate a masterful, comprehensive, and optimized prompt that can be used with any AI-driven frontend development tool (e.g., Vercel v0, Lovable.ai, or similar) to scaffold or generate significant portions of a frontend application.
+生成一个精湛、全面且优化的提示，可用于任何AI驱动的前端开发工具（例如，Vercel v0、Lovable.ai或类似工具），以搭建或生成前端应用程序的重要部分。
 
-## Inputs
+## 输入
 
-- Completed UI/UX Specification (`front-end-spec.md`)
-- Completed Frontend Architecture Document (`front-end-architecture`) or a full stack combined architecture such as `architecture.md`
-- Main System Architecture Document (`architecture` - for API contracts and tech stack to give further context)
+-   完整的UI/UX规范 (`front-end-spec.md`)
+-   完整的前端架构文档 (`front-end-architecture`) 或全栈组合架构，例如 `architecture.md`
+-   主系统架构文档 (`architecture` - 用于API合约和技术栈以提供更多上下文)
 
-## Key Activities & Instructions
+## 关键活动与说明
 
-### 1. Core Prompting Principles
+### 1. 核心提示原则
 
-Before generating the prompt, you must understand these core principles for interacting with a generative AI for code.
+在生成提示之前，您必须了解与用于代码的生成式AI交互的这些核心原则。
 
-- **Be Explicit and Detailed**: The AI cannot read your mind. Provide as much detail and context as possible. Vague requests lead to generic or incorrect outputs.
-- **Iterate, Don't Expect Perfection**: Generating an entire complex application in one go is rare. The most effective method is to prompt for one component or one section at a time, then build upon the results.
-- **Provide Context First**: Always start by providing the AI with the necessary context, such as the tech stack, existing code snippets, and overall project goals.
-- **Mobile-First Approach**: Frame all UI generation requests with a mobile-first design mindset. Describe the mobile layout first, then provide separate instructions for how it should adapt for tablet and desktop.
+-   **明确具体**：AI无法读懂您的心思。提供尽可能多的细节和上下文。模糊的请求会导致通用或不正确的输出。
+-   **迭代，不要期望完美**：一次性生成整个复杂的应用程序很少见。最有效的方法是一次提示一个组件或一个部分，然后在结果的基础上进行构建。
+-   **首先提供上下文**：始终首先向AI提供必要的上下文，例如技术栈、现有代码片段和总体项目目标。
+-   **移动优先方法**：以移动优先的设计思维来构建所有UI生成请求。首先描述移动布局，然后提供关于它应如何适应平板电脑和桌面的单独说明。
 
-### 2. The Structured Prompting Framework
+### 2. 结构化提示框架
 
-To ensure the highest quality output, you MUST structure every prompt using the following four-part framework.
+为确保最高质量的输出，您必须使用以下四部分框架来构建每个提示。
 
-1. **High-Level Goal**: Start with a clear, concise summary of the overall objective. This orients the AI on the primary task.
-   - _Example: "Create a responsive user registration form with client-side validation and API integration."_
-2. **Detailed, Step-by-Step Instructions**: Provide a granular, numbered list of actions the AI should take. Break down complex tasks into smaller, sequential steps. This is the most critical part of the prompt.
-   - _Example: "1. Create a new file named `RegistrationForm.js`. 2. Use React hooks for state management. 3. Add styled input fields for 'Name', 'Email', and 'Password'. 4. For the email field, ensure it is a valid email format. 5. On submission, call the API endpoint defined below."_
-3. **Code Examples, Data Structures & Constraints**: Include any relevant snippets of existing code, data structures, or API contracts. This gives the AI concrete examples to work with. Crucially, you must also state what _not_ to do.
-   - _Example: "Use this API endpoint: `POST /api/register`. The expected JSON payload is `{ "name": "string", "email": "string", "password": "string" }`. Do NOT include a 'confirm password' field. Use Tailwind CSS for all styling."_
-4. **Define a Strict Scope**: Explicitly define the boundaries of the task. Tell the AI which files it can modify and, more importantly, which files to leave untouched to prevent unintended changes across the codebase.
-   - _Example: "You should only create the `RegistrationForm.js` component and add it to the `pages/register.js` file. Do NOT alter the `Navbar.js` component or any other existing page or component."_
+1.  **高层目标**：以清晰、简洁的总体目标摘要开始。这可以使AI明确主要任务。
+    -   *示例：“创建一个具有客户端验证和API集成的响应式用户注册表单。”*
+2.  **详细的、分步的说明**：提供一个细粒度的、编号的AI应采取的行动列表。将复杂的任务分解为更小的、顺序的步骤。这是提示中最关键的部分。
+    -   *示例：“1. 创建一个名为 `RegistrationForm.js` 的新文件。2. 使用React钩子进行状态管理。3. 为‘姓名’、‘电子邮件’和‘密码’添加带样式的输入字段。4. 对于电子邮件字段，确保其为有效的电子邮件格式。5. 提交时，调用下面定义的API端点。”*
+3.  **代码示例、数据结构和约束**：包括任何相关的现有代码片段、数据结构或API合约。这为AI提供了具体的示例。至关重要的是，您还必须说明*不*该做什么。
+    -   *示例：“使用此API端点：`POST /api/register`。预期的JSON负载是 `{ "name": "string", "email": "string", "password": "string" }`。不要包括‘确认密码’字段。所有样式都使用Tailwind CSS。”*
+4.  **定义严格的范围**：明确定义任务的边界。告诉AI它可以修改哪些文件，更重要的是，哪些文件要保持不变，以防止在整个代码库中发生意外更改。
+    -   *示例：“您只应创建 `RegistrationForm.js` 组件并将其添加到 `pages/register.js` 文件中。不要更改 `Navbar.js` 组件或任何其他现有页面或组件。”*
 
-### 3. Assembling the Master Prompt
+### 3. 组装主提示
 
-You will now synthesize the inputs and the above principles into a final, comprehensive prompt.
+您现在将综合输入和上述原则，形成一个最终的、全面的提示。
 
-1. **Gather Foundational Context**:
-   - Start the prompt with a preamble describing the overall project purpose, the full tech stack (e.g., Next.js, TypeScript, Tailwind CSS), and the primary UI component library being used.
-2. **Describe the Visuals**:
-   - If the user has design files (Figma, etc.), instruct them to provide links or screenshots.
-   - If not, describe the visual style: color palette, typography, spacing, and overall aesthetic (e.g., "minimalist", "corporate", "playful").
-3. **Build the Prompt using the Structured Framework**:
-   - Follow the four-part framework from Section 2 to build out the core request, whether it's for a single component or a full page.
-4. **Present and Refine**:
-   - Output the complete, generated prompt in a clear, copy-pasteable format (e.g., a large code block).
-   - Explain the structure of the prompt and why certain information was included, referencing the principles above.
-   - <important_note>Conclude by reminding the user that all AI-generated code will require careful human review, testing, and refinement to be considered production-ready.</important_note>
+1.  **收集基础上下文**：
+    -   以描述总体项目目的、完整技术栈（例如，Next.js、TypeScript、Tailwind CSS）和正在使用的主要UI组件库的前言开始提示。
+2.  **描述视觉效果**：
+    -   如果用户有设计文件（Figma等），请指示他们提供链接或屏幕截图。
+    -   如果没有，请描述视觉风格：调色板、排版、间距和整体美学（例如，“简约”、“企业”、“俏皮”）。
+3.  **使用结构化框架构建提示**：
+    -   遵循第2节中的四部分框架来构建核心请求，无论是针对单个组件还是整个页面。
+4.  **呈现和完善**：
+    -   以清晰、可复制粘贴的格式（例如，一个大的代码块）输出完整的、生成的提示。
+    -   解释提示的结构以及为何包含某些信息，并参考上述原则。
+    -   <important_note>最后提醒用户，所有AI生成的代码都需要仔细的人工审查、测试和完善，才能被认为是生产就绪的。</important_note>

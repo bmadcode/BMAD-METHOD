@@ -1,156 +1,157 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Elicitation Methods Data
+# 启发式方法数据
 
-## Core Reflective Methods
+## 核心反思方法
 
-**Expand or Contract for Audience**
+**为受众扩展或收缩**
 
-- Ask whether to 'expand' (add detail, elaborate) or 'contract' (simplify, clarify)
-- Identify specific target audience if relevant
-- Tailor content complexity and depth accordingly
+-   询问是“扩展”（添加细节、阐述）还是“收缩”（简化、澄清）
+-   如果相关，确定具体的目标受众
+-   相应地调整内容的复杂性和深度
 
-**Explain Reasoning (CoT Step-by-Step)**
+**解释推理（CoT分步进行）**
 
-- Walk through the step-by-step thinking process
-- Reveal underlying assumptions and decision points
-- Show how conclusions were reached from current role's perspective
+-   逐步展示思维过程
+-   揭示潜在的假设和决策点
+-   从当前角色的角度展示结论是如何得出的
 
-**Critique and Refine**
+**批判与完善**
 
-- Review output for flaws, inconsistencies, or improvement areas
-- Identify specific weaknesses from role's expertise
-- Suggest refined version reflecting domain knowledge
+-   审查输出中的缺陷、不一致或改进领域
+-   从角色的专业知识角度找出具体弱点
+-   建议反映领域知识的完善版本
 
-## Structural Analysis Methods
+## 结构分析方法
 
-**Analyze Logical Flow and Dependencies**
+**分析逻辑流程和依赖关系**
 
-- Examine content structure for logical progression
-- Check internal consistency and coherence
-- Identify and validate dependencies between elements
-- Confirm effective ordering and sequencing
+-   检查内容结构的逻辑进展
+-   检查内部一致性和连贯性
+-   识别并验证元素之间的依赖关系
+-   确认有效的排序和顺序
 
-**Assess Alignment with Overall Goals**
+**评估与总体目标的对齐情况**
 
-- Evaluate content contribution to stated objectives
-- Identify any misalignments or gaps
-- Interpret alignment from specific role's perspective
-- Suggest adjustments to better serve goals
+-   评估内容对既定目标的贡献
+-   识别任何不一致或差距
+-   从特定角色的角度解释对齐情况
+-   建议调整以更好地服务于目标
 
-## Risk and Challenge Methods
+## 风险与挑战方法
 
-**Identify Potential Risks and Unforeseen Issues**
+**识别潜在风险和未预见的问题**
 
-- Brainstorm potential risks from role's expertise
-- Identify overlooked edge cases or scenarios
-- Anticipate unintended consequences
-- Highlight implementation challenges
+-   从角色的专业知识角度头脑风暴潜在风险
+-   识别被忽视的边缘案例或场景
+-   预测意想不到的后果
+-   突出实施挑战
 
-**Challenge from Critical Perspective**
+**从批判性角度提出挑战**
 
-- Adopt critical stance on current content
-- Play devil's advocate from specified viewpoint
-- Argue against proposal highlighting weaknesses
-- Apply YAGNI principles when appropriate (scope trimming)
+-   对当前内容采取批判性立场
+-   从指定角度扮演“魔鬼代言人”
+-   反驳提案，突出弱点
+-   在适当时应用YAGNI原则（削减范围）
 
-## Creative Exploration Methods
+## 创意探索方法
 
-**Tree of Thoughts Deep Dive**
+**思维树深度探索**
 
-- Break problem into discrete "thoughts" or intermediate steps
-- Explore multiple reasoning paths simultaneously
-- Use self-evaluation to classify each path as "sure", "likely", or "impossible"
-- Apply search algorithms (BFS/DFS) to find optimal solution paths
+-   将问题分解为离散的“思想”或中间步骤
+-   同时探索多种推理路径
+-   使用自我评估将每条路径分类为“确定”、“可能”或“不可能”
+-   应用搜索算法（BFS/DFS）寻找最优解决方案路径
 
-**Hindsight is 20/20: The 'If Only...' Reflection**
+**事后诸葛亮：“如果当初…”反思**
 
-- Imagine retrospective scenario based on current content
-- Identify the one "if only we had known/done X..." insight
-- Describe imagined consequences humorously or dramatically
-- Extract actionable learnings for current context
+-   根据当前内容想象一个回顾性场景
+-   找出那个“如果我们当初知道/做了X就好了…”的洞见
+-   幽默或戏剧性地描述想象中的后果
+-   为当前情境提取可操作的学习经验
 
-## Multi-Persona Collaboration Methods
+## 多角色协作方法
 
-**Agile Team Perspective Shift**
+**敏捷团队视角转换**
 
-- Rotate through different Scrum team member viewpoints
-- Product Owner: Focus on user value and business impact
-- Scrum Master: Examine process flow and team dynamics
-- Developer: Assess technical implementation and complexity
-- QA: Identify testing scenarios and quality concerns
+-   在不同的Scrum团队成员视角之间轮换
+-   产品负责人：关注用户价值和业务影响
+-   Scrum Master：检查流程和团队动态
+-   开发人员：评估技术实施和复杂性
+-   QA：识别测试场景和质量问题
 
-**Stakeholder Round Table**
+**利益相关者圆桌会议**
 
-- Convene virtual meeting with multiple personas
-- Each persona contributes unique perspective on content
-- Identify conflicts and synergies between viewpoints
-- Synthesize insights into actionable recommendations
+-   召集多个角色的虚拟会议
+-   每个角色对内容贡献独特的视角
+-   识别不同观点之间的冲突和协同作用
+-   将洞见综合为可操作的建议
 
-**Meta-Prompting Analysis**
+**元提示分析**
 
-- Step back to analyze the structure and logic of current approach
-- Question the format and methodology being used
-- Suggest alternative frameworks or mental models
-- Optimize the elicitation process itself
+-   退后一步分析当前方法的结构和逻辑
+-   质疑正在使用的格式和方法论
+-   建议替代框架或心智模型
+-
+-   优化启发过程本身
 
-## Advanced 2025 Techniques
+## 2025年高级技术
 
-**Self-Consistency Validation**
+**自我一致性验证**
 
-- Generate multiple reasoning paths for same problem
-- Compare consistency across different approaches
-- Identify most reliable and robust solution
-- Highlight areas where approaches diverge and why
+-   为同一问题生成多个推理路径
+-   比较不同方法之间的一致性
+-   确定最可靠和稳健的解决方案
+-   突出不同方法产生分歧的领域及其原因
 
-**ReWOO (Reasoning Without Observation)**
+**ReWOO（无观察推理）**
 
-- Separate parametric reasoning from tool-based actions
-- Create reasoning plan without external dependencies
-- Identify what can be solved through pure reasoning
-- Optimize for efficiency and reduced token usage
+-   将参数化推理与基于工具的行动分开
+-   在没有外部依赖的情况下创建推理计划
+-   确定可以通过纯粹推理解决的问题
+-   优化效率并减少令牌使用
 
-**Persona-Pattern Hybrid**
+**角色-模式混合**
 
-- Combine specific role expertise with elicitation pattern
-- Architect + Risk Analysis: Deep technical risk assessment
-- UX Expert + User Journey: End-to-end experience critique
-- PM + Stakeholder Analysis: Multi-perspective impact review
+-   将特定角色的专业知识与启发模式相结合
+-   架构师 + 风险分析：深入的技术风险评估
+-   UX专家 + 用户旅程：端到端的体验批判
+-   PM + 利益相关者分析：多角度影响审查
 
-**Emergent Collaboration Discovery**
+**涌现式协作发现**
 
-- Allow multiple perspectives to naturally emerge
-- Identify unexpected insights from persona interactions
-- Explore novel combinations of viewpoints
-- Capture serendipitous discoveries from multi-agent thinking
+-   让多种视角自然涌现
+-   从角色互动中识别意想不到的洞见
+-   探索新颖的观点组合
+-   捕捉多代理思维中的意外发现
 
-## Game-Based Elicitation Methods
+## 基于游戏的启发方法
 
-**Red Team vs Blue Team**
+**红队 vs 蓝队**
 
-- Red Team: Attack the proposal, find vulnerabilities
-- Blue Team: Defend and strengthen the approach
-- Competitive analysis reveals blind spots
-- Results in more robust, battle-tested solutions
+-   红队：攻击提案，发现漏洞
+-   蓝队：捍卫并加强方法
+-   竞争性分析揭示盲点
+-   产生更稳健、经过实战检验的解决方案
 
-**Innovation Tournament**
+**创新锦标赛**
 
-- Pit multiple alternative approaches against each other
-- Score each approach across different criteria
-- Crowd-source evaluation from different personas
-- Identify winning combination of features
+-   让多种替代方法相互竞争
+-   根据不同标准对每种方法进行评分
+-   从不同角色中众包评估
+-   确定获胜的功能组合
 
-**Escape Room Challenge**
+**密室逃脱挑战**
 
-- Present content as constraints to work within
-- Find creative solutions within tight limitations
-- Identify minimum viable approach
-- Discover innovative workarounds and optimizations
+-   将内容作为工作限制呈现
+-   在严格的限制下寻找创造性解决方案
+--   确定最小可行方法
+-   发现创新的变通方法和优化
 
-## Process Control
+## 流程控制
 
-**Proceed / No Further Actions**
+**继续/无进一步操作**
 
-- Acknowledge choice to finalize current work
-- Accept output as-is or move to next step
-- Prepare to continue without additional elicitation
+-   确认完成当前工作的选择
+-   按原样接受输出或进入下一步
+-   准备在没有额外启发的情况下继续

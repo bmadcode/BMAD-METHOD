@@ -1,103 +1,103 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: qa-gate-template-v1
-  name: Quality Gate Decision
+  name: 质量门禁决策
   version: 1.0
   output:
     format: yaml
     filename: qa.qaLocation/gates/{{epic_num}}.{{story_num}}-{{story_slug}}.yml
-    title: "Quality Gate: {{epic_num}}.{{story_num}}"
+    title: "质量门禁：{{epic_num}}.{{story_num}}"
 
-# Required fields (keep these first)
+# 必填字段（保持这些在最前面）
 schema: 1
 story: "{{epic_num}}.{{story_num}}"
 story_title: "{{story_title}}"
 gate: "{{gate_status}}" # PASS|CONCERNS|FAIL|WAIVED
-status_reason: "{{status_reason}}" # 1-2 sentence summary of why this gate decision
-reviewer: "Quinn (Test Architect)"
+status_reason: "{{status_reason}}" # 1-2句话总结此门禁决策的原因
+reviewer: "Quinn (测试架构师)"
 updated: "{{iso_timestamp}}"
 
-# Always present but only active when WAIVED
+# 始终存在，但仅在WAIVED时激活
 waiver: { active: false }
 
-# Issues (if any) - Use fixed severity: low | medium | high
-top_issues: []
+# 问题（如果有） - 使用固定的严重性：low | medium | high
+top_issues: [] # 如果没有问题，则为空数组
 
-# Risk summary (from risk-profile task if run)
+# 风险摘要（如果运行了risk-profile任务）
 risk_summary:
   totals: { critical: 0, high: 0, medium: 0, low: 0 }
   recommendations:
     must_fix: []
     monitor: []
 
-# Examples section using block scalars for clarity
+# 使用块标量以求清晰的示例部分
 examples:
   with_issues: |
     top_issues:
       - id: "SEC-001"
-        severity: high  # ONLY: low|medium|high
-        finding: "No rate limiting on login endpoint"
-        suggested_action: "Add rate limiting middleware before production"
+        severity: high  # 仅限：low|medium|high
+        finding: "登录端点上没有速率限制"
+        suggested_action: "在生产前添加速率限制中间件"
       - id: "TEST-001"  
         severity: medium
-        finding: "Missing integration tests for auth flow"
-        suggested_action: "Add test coverage for critical paths"
+        finding: "认证流程缺少集成测试"
+        suggested_action: "为关键路径添加测试覆盖"
 
   when_waived: |
     waiver:
       active: true
-      reason: "Accepted for MVP release - will address in next sprint"
-      approved_by: "Product Owner"
+      reason: "为MVP版本接受 - 将在下一个冲刺中解决"
+      approved_by: "产品负责人"
 
-# ============ Optional Extended Fields ============
-# Uncomment and use if your team wants more detail
+# ============ 可选的扩展字段 ============
+# 如果您的团队需要更多细节，请取消注释并使用
 
 optional_fields_examples:
   quality_and_expiry: |
-    quality_score: 75  # 0-100 (optional scoring)
-    expires: "2025-01-26T00:00:00Z"  # Optional gate freshness window
+    quality_score: 75  # 0-100（可选评分）
+    expires: "2025-01-26T00:00:00Z"  # 可选的门禁保鲜期
 
   evidence: |
     evidence:
       tests_reviewed: 15
       risks_identified: 3
       trace:
-        ac_covered: [1, 2, 3]  # AC numbers with test coverage
-        ac_gaps: [4]  # AC numbers lacking coverage
+        ac_covered: [1, 2, 3]  # 有测试覆盖的AC编号
+        ac_gaps: [4]  # 缺少覆盖的AC编号
 
   nfr_validation: |
     nfr_validation:
-      security: { status: CONCERNS, notes: "Rate limiting missing" }
+      security: { status: CONCERNS, notes: "缺少速率限制" }
       performance: { status: PASS, notes: "" }
       reliability: { status: PASS, notes: "" }
       maintainability: { status: PASS, notes: "" }
 
   history: |
-    history:  # Append-only audit trail
+    history:  # 仅追加的审计跟踪
       - at: "2025-01-12T10:00:00Z"
         gate: FAIL
-        note: "Initial review - missing tests"
+        note: "初步审查 - 缺少测试"
       - at: "2025-01-12T15:00:00Z"  
         gate: CONCERNS
-        note: "Tests added but rate limiting still missing"
+        note: "已添加测试，但仍缺少速率限制"
 
   risk_summary: |
-    risk_summary:  # From risk-profile task
+    risk_summary:  # 来自risk-profile任务
       totals:
         critical: 0
         high: 0
         medium: 0
         low: 0
-      # 'highest' is emitted only when risks exist
+      # 'highest'仅在存在风险时发出
       recommendations:
         must_fix: []
         monitor: []
 
   recommendations: |
     recommendations:
-      immediate:  # Must fix before production
-        - action: "Add rate limiting to auth endpoints"
+      immediate:  # 生产前必须修复
+        - action: "向认证端点添加速率限制"
           refs: ["api/auth/login.ts:42-68"]
-      future:  # Can be addressed later
-        - action: "Consider caching for better performance"
+      future:  # 以后可以解决
+        - action: "考虑缓存以提高性能"
           refs: ["services/data.service.ts"]

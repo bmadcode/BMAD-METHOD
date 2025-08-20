@@ -1,184 +1,184 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Change Navigation Checklist
+# 变更导航清单
 
-**Purpose:** To systematically guide the selected Agent and user through the analysis and planning required when a significant change (pivot, tech issue, missing requirement, failed story) is identified during the BMad workflow.
+**目的：** 在BMad工作流中识别出重大变更（转向、技术问题、需求缺失、故事失败）时，系统地引导选定的代理和用户进行分析和规划。
 
-**Instructions:** Review each item with the user. Mark `[x]` for completed/confirmed, `[N/A]` if not applicable, or add notes for discussion points.
+**说明：** 与用户一起审阅每个项目。标记 `[x]` 表示已完成/已确认，`[N/A]` 表示不适用，或为讨论点添加备注。
 
-[[LLM: INITIALIZATION INSTRUCTIONS - CHANGE NAVIGATION
+[[LLM: 初始化说明 - 变更导航
 
-Changes during development are inevitable, but how we handle them determines project success or failure.
+开发过程中的变更是不可避免的，但我们如何处理它们决定了项目的成败。
 
-Before proceeding, understand:
+在继续之前，请理解：
 
-1. This checklist is for SIGNIFICANT changes that affect the project direction
-2. Minor adjustments within a story don't require this process
-3. The goal is to minimize wasted work while adapting to new realities
-4. User buy-in is critical - they must understand and approve changes
+1.  此清单适用于影响项目方向的重大变更。
+2.  故事内的微小调整不需要此流程。
+3.  目标是在适应新现实的同时，最大限度地减少工作浪费。
+4.  用户认同至关重要 - 他们必须理解并批准变更。
 
-Required context:
+所需背景：
 
-- The triggering story or issue
-- Current project state (completed stories, current epic)
-- Access to PRD, architecture, and other key documents
-- Understanding of remaining work planned
+-   触发问题的具体故事或问题。
+-   当前项目状态（已完成的故事、当前史诗）。
+-   访问PRD、架构和其他关键文档。
+-   了解剩余的计划工作。
 
-APPROACH:
-This is an interactive process with the user. Work through each section together, discussing implications and options. The user makes final decisions, but provide expert guidance on technical feasibility and impact.
+方法：
+这是一个与用户的互动过程。一起逐节审阅，讨论影响和选项。用户做最终决定，但您需要提供关于技术可行性和影响的专业指导。
 
-REMEMBER: Changes are opportunities to improve, not failures. Handle them professionally and constructively.]]
+切记：变更是改进的机会，而不是失败。请专业、建设性地处理它们。]]
 
 ---
 
-## 1. Understand the Trigger & Context
+## 1. 理解触发器和背景
 
-[[LLM: Start by fully understanding what went wrong and why. Don't jump to solutions yet. Ask probing questions:
+[[LLM: 首先要完全理解哪里出了问题以及原因。不要急于寻找解决方案。提出探究性问题：
 
-- What exactly happened that triggered this review?
-- Is this a one-time issue or symptomatic of a larger problem?
-- Could this have been anticipated earlier?
-- What assumptions were incorrect?
+-   究竟发生了什么触发了这次审查？
+-   这是一个一次性问题还是更大问题的症状？
+-   这能更早地预见到吗？
+-   哪些假设是错误的？
 
-Be specific and factual, not blame-oriented.]]
+要具体、实事求是，不要指责。]]
 
-- [ ] **Identify Triggering Story:** Clearly identify the story (or stories) that revealed the issue.
-- [ ] **Define the Issue:** Articulate the core problem precisely.
-  - [ ] Is it a technical limitation/dead-end?
-  - [ ] Is it a newly discovered requirement?
-  - [ ] Is it a fundamental misunderstanding of existing requirements?
-  - [ ] Is it a necessary pivot based on feedback or new information?
-  - [ ] Is it a failed/abandoned story needing a new approach?
-- [ ] **Assess Initial Impact:** Describe the immediate observed consequences (e.g., blocked progress, incorrect functionality, non-viable tech).
-- [ ] **Gather Evidence:** Note any specific logs, error messages, user feedback, or analysis that supports the issue definition.
+- [ ] **识别触发故事：** 清楚地识别出揭示问题的故事。
+- [ ] **定义问题：** 精确地阐明核心问题。
+    - [ ] 是技术限制/死胡同吗？
+    - [ ] 是新发现的需求吗？
+    - [ ] 是对现有需求的根本性误解吗？
+    - [ ] 是基于反馈或新信息而必须的转向吗？
+    - [ ] 是一个需要新方法的失败/废弃的故事吗？
+- [ ] **评估初步影响：** 描述直接观察到的后果（例如，进度受阻、功能不正确、技术不可行）。
+- [ ] **收集证据：** 记录支持问题定义的任何具体日志、错误消息、用户反馈或分析。
 
-## 2. Epic Impact Assessment
+## 2. 史诗影响评估
 
-[[LLM: Changes ripple through the project structure. Systematically evaluate:
+[[LLM: 变更会在整个项目结构中产生连锁反应。系统地评估：
 
-1. Can we salvage the current epic with modifications?
-2. Do future epics still make sense given this change?
-3. Are we creating or eliminating dependencies?
-4. Does the epic sequence need reordering?
+1.  我们能通过修改来挽救当前的史诗吗？
+2.  考虑到这个变更，未来的史诗还有意义吗？
+3.  我们是在创造还是消除了依赖关系？
+4.  史诗的顺序需要重新排列吗？
 
-Think about both immediate and downstream effects.]]
+考虑直接和下游的影响。]]
 
-- [ ] **Analyze Current Epic:**
-  - [ ] Can the current epic containing the trigger story still be completed?
-  - [ ] Does the current epic need modification (story changes, additions, removals)?
-  - [ ] Should the current epic be abandoned or fundamentally redefined?
-- [ ] **Analyze Future Epics:**
-  - [ ] Review all remaining planned epics.
-  - [ ] Does the issue require changes to planned stories in future epics?
-  - [ ] Does the issue invalidate any future epics?
-  - [ ] Does the issue necessitate the creation of entirely new epics?
-  - [ ] Should the order/priority of future epics be changed?
-- [ ] **Summarize Epic Impact:** Briefly document the overall effect on the project's epic structure and flow.
+- [ ] **分析当前史诗：**
+    - [ ] 包含触发故事的当前史诗还能完成吗？
+    - [ ] 当前史诗需要修改吗（故事变更、增加、删除）？
+    - [ ] 当前史诗应该被放弃还是从根本上重新定义？
+- [ ] **分析未来史诗：**
+    - [ ] 审查所有剩余的计划史诗。
+    - [ ] 该问题是否需要更改未来史诗中的计划故事？
+    - [ ] 该问题是否使任何未来的史诗无效？
+    - [ ] 该问题是否需要创建全新的史诗？
+    - [ ] 是否应该更改未来史诗的顺序/优先级？
+- [ ] **总结史诗影响：** 简要记录对项目史诗结构和流程的总体影响。
 
-## 3. Artifact Conflict & Impact Analysis
+## 3. 工件冲突与影响分析
 
-[[LLM: Documentation drives development in BMad. Check each artifact:
+[[LLM: 文档驱动着BMad的开发。检查每个工件：
 
-1. Does this change invalidate documented decisions?
-2. Are architectural assumptions still valid?
-3. Do user flows need rethinking?
-4. Are technical constraints different than documented?
+1.  这个变更是否使已记录的决策无效？
+2.  架构假设是否仍然有效？
+3.  用户流程是否需要重新思考？
+4.  技术约束是否与文档记录的不同？
 
-Be thorough - missed conflicts cause future problems.]]
+要彻底——遗漏的冲突会导致未来的问题。]]
 
-- [ ] **Review PRD:**
-  - [ ] Does the issue conflict with the core goals or requirements stated in the PRD?
-  - [ ] Does the PRD need clarification or updates based on the new understanding?
-- [ ] **Review Architecture Document:**
-  - [ ] Does the issue conflict with the documented architecture (components, patterns, tech choices)?
-  - [ ] Are specific components/diagrams/sections impacted?
-  - [ ] Does the technology list need updating?
-  - [ ] Do data models or schemas need revision?
-  - [ ] Are external API integrations affected?
-- [ ] **Review Frontend Spec (if applicable):**
-  - [ ] Does the issue conflict with the FE architecture, component library choice, or UI/UX design?
-  - [ ] Are specific FE components or user flows impacted?
-- [ ] **Review Other Artifacts (if applicable):**
-  - [ ] Consider impact on deployment scripts, IaC, monitoring setup, etc.
-- [ ] **Summarize Artifact Impact:** List all artifacts requiring updates and the nature of the changes needed.
+- [ ] **审查PRD：**
+    - [ ] 该问题是否与PRD中陈述的核心目标或要求冲突？
+    - [ ] PRD是否需要根据新的理解进行澄清或更新？
+- [ ] **审查架构文档：**
+    - [ ] 该问题是否与文档化的架构（组件、模式、技术选择）冲突？
+    - [ ] 是否影响了特定的组件/图表/部分？
+    - [ ] 技术清单是否需要更新？
+    - [ ] 数据模型或模式是否需要修订？
+    - [ ] 是否影响了外部API集成？
+- [ ] **审查前端规范（如果适用）：**
+    - [ ] 该问题是否与前端架构、组件库选择或UI/UX设计冲突？
+    - [ ] 是否影响了特定的前端组件或用户流程？
+- [ ] **审查其他工件（如果适用）：**
+    - [ ] 考虑对部署脚本、IaC、监控设置等的影响。
+- [ ] **总结工件影响：** 列出所有需要更新的工件以及所需的变更性质。
 
-## 4. Path Forward Evaluation
+## 4. 前进路径评估
 
-[[LLM: Present options clearly with pros/cons. For each path:
+[[LLM: 清晰地展示选项及其优缺点。对于每条路径：
 
-1. What's the effort required?
-2. What work gets thrown away?
-3. What risks are we taking?
-4. How does this affect timeline?
-5. Is this sustainable long-term?
+1.  需要多少工作量？
+2.  哪些工作会被丢弃？
+3.  我们承担了哪些风险？
+4.  这对时间表有何影响？
+5.  这在长期内是否可持续？
 
-Be honest about trade-offs. There's rarely a perfect solution.]]
+要诚实地对待权衡。很少有完美的解决方案。]]
 
-- [ ] **Option 1: Direct Adjustment / Integration:**
-  - [ ] Can the issue be addressed by modifying/adding future stories within the existing plan?
-  - [ ] Define the scope and nature of these adjustments.
-  - [ ] Assess feasibility, effort, and risks of this path.
-- [ ] **Option 2: Potential Rollback:**
-  - [ ] Would reverting completed stories significantly simplify addressing the issue?
-  - [ ] Identify specific stories/commits to consider for rollback.
-  - [ ] Assess the effort required for rollback.
-  - [ ] Assess the impact of rollback (lost work, data implications).
-  - [ ] Compare the net benefit/cost vs. Direct Adjustment.
-- [ ] **Option 3: PRD MVP Review & Potential Re-scoping:**
-  - [ ] Is the original PRD MVP still achievable given the issue and constraints?
-  - [ ] Does the MVP scope need reduction (removing features/epics)?
-  - [ ] Do the core MVP goals need modification?
-  - [ ] Are alternative approaches needed to meet the original MVP intent?
-  - [ ] **Extreme Case:** Does the issue necessitate a fundamental replan or potentially a new PRD V2 (to be handled by PM)?
-- [ ] **Select Recommended Path:** Based on the evaluation, agree on the most viable path forward.
+- [ ] **选项1：直接调整/集成：**
+    - [ ] 能否通过在现有计划内修改/添加未来的故事来解决问题？
+    - [ ] 定义这些调整的范围和性质。
+    - [ ] 评估此路径的可行性、工作量和风险。
+- [ ] **选项2：潜在回滚：**
+    - [ ] 恢复已完成的故事是否会显著简化问题处理？
+    - [ ] 确定要考虑回滚的具体故事/提交。
+    - [ ] 评估回滚所需的工作量。
+    - [ ] 评估回滚的影响（丢失的工作、数据影响）。
+    - [ ] 比较与直接调整的净收益/成本。
+- [ ] **选项3：PRD MVP审查与潜在范围重定：**
+    - [ ] 考虑到问题和约束，最初的PRD MVP是否仍可实现？
+    - [ ] MVP范围是否需要缩减（移除功能/史诗）？
+    - [ ] 核心MVP目标是否需要修改？
+    - [ ] 是否需要替代方法来满足最初的MVP意图？
+    - [ ] **极端情况：** 该问题是否需要根本性的重新规划或可能需要一个新的PRD V2（由PM处理）？
+- [ ] **选择推荐路径：** 基于评估，就最可行的前进路径达成一致。
 
-## 5. Sprint Change Proposal Components
+## 5. 冲刺变更提案组件
 
-[[LLM: The proposal must be actionable and clear. Ensure:
+[[LLM: 提案必须是可操作且清晰的。确保：
 
-1. The issue is explained in plain language
-2. Impacts are quantified where possible
-3. The recommended path has clear rationale
-4. Next steps are specific and assigned
-5. Success criteria for the change are defined
+1.  问题用通俗易懂的语言解释。
+2.  影响在可能的情况下被量化。
+3.  推荐的路径有明确的理由。
+4.  下一步是具体且已分配的。
+5.  定义了变更的成功标准。
 
-This proposal guides all subsequent work.]]
+该提案指导所有后续工作。]]
 
-(Ensure all agreed-upon points from previous sections are captured in the proposal)
+（确保所有先前章节中达成一致的要点都已在提案中体现）
 
-- [ ] **Identified Issue Summary:** Clear, concise problem statement.
-- [ ] **Epic Impact Summary:** How epics are affected.
-- [ ] **Artifact Adjustment Needs:** List of documents to change.
-- [ ] **Recommended Path Forward:** Chosen solution with rationale.
-- [ ] **PRD MVP Impact:** Changes to scope/goals (if any).
-- [ ] **High-Level Action Plan:** Next steps for stories/updates.
-- [ ] **Agent Handoff Plan:** Identify roles needed (PM, Arch, Design Arch, PO).
+- [ ] **已识别问题摘要：** 清晰、简洁的问题陈述。
+- [ ] **史诗影响摘要：** 史诗受影响的方式。
+- [ ] **工件调整需求：** 需要更改的文档列表。
+- [ ] **推荐的前进路径：** 选择的解决方案及理由。
+- [ ] **PRD MVP影响：** 范围/目标的变更（如有）。
+- [ ] **高层行动计划：** 故事/更新的下一步。
+- [ ] **代理交接计划：** 确定所需的角色（PM、架构师、设计架构师、PO）。
 
-## 6. Final Review & Handoff
+## 6. 最终审查与交接
 
-[[LLM: Changes require coordination. Before concluding:
+[[LLM: 变更需要协调。在结束之前：
 
-1. Is the user fully aligned with the plan?
-2. Do all stakeholders understand the impacts?
-3. Are handoffs to other agents clear?
-4. Is there a rollback plan if the change fails?
-5. How will we validate the change worked?
+1.  用户是否完全同意该计划？
+2.  所有利益相关者是否都理解其影响？
+3.  向其他代理的交接是否清晰？
+4.  如果变更失败，是否有回滚计划？
+5.  我们将如何验证变更是否成功？
 
-Get explicit approval - implicit agreement causes problems.
+获得明确的批准——默许的同意会导致问题。
 
-FINAL REPORT:
-After completing the checklist, provide a concise summary:
+最终报告：
+完成清单后，提供一份简明的摘要：
 
-- What changed and why
-- What we're doing about it
-- Who needs to do what
-- When we'll know if it worked
+-   什么变了，为什么变。
+-   我们对此采取什么措施。
+-   谁需要做什么。
+-   我们何时能知道它是否奏效。
 
-Keep it action-oriented and forward-looking.]]
+保持行动导向和前瞻性。]]
 
-- [ ] **Review Checklist:** Confirm all relevant items were discussed.
-- [ ] **Review Sprint Change Proposal:** Ensure it accurately reflects the discussion and decisions.
-- [ ] **User Approval:** Obtain explicit user approval for the proposal.
-- [ ] **Confirm Next Steps:** Reiterate the handoff plan and the next actions to be taken by specific agents.
+- [ ] **审查清单：** 确认所有相关项目都已讨论。
+- [ ] **审查冲刺变更提案：** 确保其准确反映了讨论和决定。
+- [ ] **用户批准：** 获得用户对提案的明确批准。
+- [ ] **确认下一步：** 重申交接计划和特定代理将要采取的下一步行动。
 
 ---

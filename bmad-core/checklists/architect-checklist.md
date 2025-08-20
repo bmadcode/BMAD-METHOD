@@ -1,440 +1,440 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# Architect Solution Validation Checklist
+# 架构师解决方案验证清单
 
-This checklist serves as a comprehensive framework for the Architect to validate the technical design and architecture before development execution. The Architect should systematically work through each item, ensuring the architecture is robust, scalable, secure, and aligned with the product requirements.
+本清单为架构师在开发执行前验证技术设计和架构提供了一个全面的框架。架构师应系统地审阅每个项目，确保架构的健壮性、可扩展性、安全性，并与产品需求保持一致。
 
-[[LLM: INITIALIZATION INSTRUCTIONS - REQUIRED ARTIFACTS
+[[LLM: 初始化说明 - 必要构件
 
-Before proceeding with this checklist, ensure you have access to:
+在开始使用此清单之前，请确保您能访问以下内容：
 
-1. architecture.md - The primary architecture document (check docs/architecture.md)
-2. prd.md - Product Requirements Document for requirements alignment (check docs/prd.md)
-3. frontend-architecture.md or fe-architecture.md - If this is a UI project (check docs/frontend-architecture.md)
-4. Any system diagrams referenced in the architecture
-5. API documentation if available
-6. Technology stack details and version specifications
+1.  architecture.md - 主要架构文档 (检查 docs/architecture.md)
+2.  prd.md - 产品需求文档，用于需求对齐 (检查 docs/prd.md)
+3.  frontend-architecture.md 或 fe-architecture.md - 如果是UI项目 (检查 docs/frontend-architecture.md)
+4.  架构中引用的任何系统图
+5.  可用的API文档
+6.  技术栈详情和版本规范
 
-IMPORTANT: If any required documents are missing or inaccessible, immediately ask the user for their location or content before proceeding.
+重要提示：如果任何所需文件缺失或无法访问，请在继续之前立即向用户询问其位置或内容。
 
-PROJECT TYPE DETECTION:
-First, determine the project type by checking:
+项目类型检测：
+首先，通过检查以下内容来确定项目类型：
 
-- Does the architecture include a frontend/UI component?
-- Is there a frontend-architecture.md document?
-- Does the PRD mention user interfaces or frontend requirements?
+- 架构是否包含前端/UI组件？
+- 是否有 frontend-architecture.md 文档？
+- PRD是否提及用户界面或前端需求？
 
-If this is a backend-only or service-only project:
+如果这是一个仅后端或仅服务的项目：
 
-- Skip sections marked with [[FRONTEND ONLY]]
-- Focus extra attention on API design, service architecture, and integration patterns
-- Note in your final report that frontend sections were skipped due to project type
+- 跳过标有 [[仅前端]] 的部分
+- 特别关注API设计、服务架构和集成模式
+- 在最终报告中注明由于项目类型而跳过了前端部分
 
-VALIDATION APPROACH:
-For each section, you must:
+验证方法：
+对于每个部分，您必须：
 
-1. Deep Analysis - Don't just check boxes, thoroughly analyze each item against the provided documentation
-2. Evidence-Based - Cite specific sections or quotes from the documents when validating
-3. Critical Thinking - Question assumptions and identify gaps, not just confirm what's present
-4. Risk Assessment - Consider what could go wrong with each architectural decision
+1.  深入分析 - 不要只是勾选复选框，要根据提供的文档彻底分析每个项目
+2.  基于证据 - 验证时引用文档中的具体部分或引述
+3.  批判性思维 - 质疑假设并识别差距，而不仅仅是确认已有的内容
+4.  风险评估 - 考虑每个架构决策可能出错的地方
 
-EXECUTION MODE:
-Ask the user if they want to work through the checklist:
+执行模式：
+询问用户是否希望通过以下方式审阅清单：
 
-- Section by section (interactive mode) - Review each section, present findings, get confirmation before proceeding
-- All at once (comprehensive mode) - Complete full analysis and present comprehensive report at end]]
+- 逐节进行（互动模式） - 审阅每个部分，提出发现，在继续前获得确认
+- 一次性完成（全面模式） - 完成全部分析并在最后提交综合报告]]
 
-## 1. REQUIREMENTS ALIGNMENT
+## 1. 需求对齐
 
-[[LLM: Before evaluating this section, take a moment to fully understand the product's purpose and goals from the PRD. What is the core problem being solved? Who are the users? What are the critical success factors? Keep these in mind as you validate alignment. For each item, don't just check if it's mentioned - verify that the architecture provides a concrete technical solution.]]
+[[LLM: 在评估本节之前，请花点时间从PRD中充分理解产品的目的和目标。要解决的核心问题是什么？用户是谁？关键成功因素是什么？在验证对齐性时请牢记这些。对于每个项目，不要只检查是否提及 - 验证架构是否提供了具体的技术解决方案。]]
 
-### 1.1 Functional Requirements Coverage
+### 1.1 功能性需求覆盖
 
-- [ ] Architecture supports all functional requirements in the PRD
-- [ ] Technical approaches for all epics and stories are addressed
-- [ ] Edge cases and performance scenarios are considered
-- [ ] All required integrations are accounted for
-- [ ] User journeys are supported by the technical architecture
+- [ ] 架构支持PRD中的所有功能性需求
+- [ ] 所有史诗和故事的技术方法都已解决
+- [ ] 已考虑边缘情况和性能场景
+- [ ] 所有必需的集成都已考虑在内
+- [ ] 技术架构支持用户旅程
 
-### 1.2 Non-Functional Requirements Alignment
+### 1.2 非功能性需求对齐
 
-- [ ] Performance requirements are addressed with specific solutions
-- [ ] Scalability considerations are documented with approach
-- [ ] Security requirements have corresponding technical controls
-- [ ] Reliability and resilience approaches are defined
-- [ ] Compliance requirements have technical implementations
+- [ ] 性能需求通过具体解决方案得到满足
+- [ ] 可扩展性考虑已记录并有相应方法
+- [ ] 安全需求有相应的技术控制
+- [ ] 可靠性和弹性方法已定义
+- [ ] 合规性需求有技术实现
 
-### 1.3 Technical Constraints Adherence
+### 1.3 技术约束遵守
 
-- [ ] All technical constraints from PRD are satisfied
-- [ ] Platform/language requirements are followed
-- [ ] Infrastructure constraints are accommodated
-- [ ] Third-party service constraints are addressed
-- [ ] Organizational technical standards are followed
+- [ ] 满足PRD中的所有技术约束
+- [ ] 遵循平台/语言要求
+- [ ] 已适应基础设施约束
+- [ ] 已解决第三方服务约束
+- [ ] 遵循组织技术标准
 
-## 2. ARCHITECTURE FUNDAMENTALS
+## 2. 架构基础
 
-[[LLM: Architecture clarity is crucial for successful implementation. As you review this section, visualize the system as if you were explaining it to a new developer. Are there any ambiguities that could lead to misinterpretation? Would an AI agent be able to implement this architecture without confusion? Look for specific diagrams, component definitions, and clear interaction patterns.]]
+[[LLM: 架构的清晰度对于成功实施至关重要。在审阅本节时，请想象一下您正在向新开发人员解释该系统。是否存在任何可能导致误解的模糊之处？AI代理能否在没有困惑的情况下实现此架构？寻找具体的图表、组件定义和清晰的交互模式。]]
 
-### 2.1 Architecture Clarity
+### 2.1 架构清晰度
 
-- [ ] Architecture is documented with clear diagrams
-- [ ] Major components and their responsibilities are defined
-- [ ] Component interactions and dependencies are mapped
-- [ ] Data flows are clearly illustrated
-- [ ] Technology choices for each component are specified
+- [ ] 架构以清晰的图表记录
+- [ ] 定义了主要组件及其职责
+- [ ] 映射了组件交互和依赖关系
+- [ ] 清晰地说明了数据流
+- [ ] 指定了每个组件的技术选择
 
-### 2.2 Separation of Concerns
+### 2.2 关注点分离
 
-- [ ] Clear boundaries between UI, business logic, and data layers
-- [ ] Responsibilities are cleanly divided between components
-- [ ] Interfaces between components are well-defined
-- [ ] Components adhere to single responsibility principle
-- [ ] Cross-cutting concerns (logging, auth, etc.) are properly addressed
+- [ ] UI、业务逻辑和数据层之间有清晰的界限
+- [ ] 组件之间的职责划分清晰
+- [ ] 组件之间的接口定义良好
+- [ ] 组件遵守单一职责原则
+- [ ] 横切关注点（日志、认证等）得到妥善处理
 
-### 2.3 Design Patterns & Best Practices
+### 2.3 设计模式与最佳实践
 
-- [ ] Appropriate design patterns are employed
-- [ ] Industry best practices are followed
-- [ ] Anti-patterns are avoided
-- [ ] Consistent architectural style throughout
-- [ ] Pattern usage is documented and explained
+- [ ] 采用了适当的设计模式
+- [ ] 遵循了行业最佳实践
+- [ ] 避免了反模式
+- [ ] 整个架构风格一致
+- [ ] 模式的使用已记录和解释
 
-### 2.4 Modularity & Maintainability
+### 2.4 模块化与可维护性
 
-- [ ] System is divided into cohesive, loosely-coupled modules
-- [ ] Components can be developed and tested independently
-- [ ] Changes can be localized to specific components
-- [ ] Code organization promotes discoverability
-- [ ] Architecture specifically designed for AI agent implementation
+- [ ] 系统被划分为内聚、松耦合的模块
+- [ ] 组件可以独立开发和测试
+- [ ] 变更可以本地化到特定组件
+- [ ] 代码组织促进可发现性
+- [ ] 专为AI代理实现而设计的架构
 
-## 3. TECHNICAL STACK & DECISIONS
+## 3. 技术栈与决策
 
-[[LLM: Technology choices have long-term implications. For each technology decision, consider: Is this the simplest solution that could work? Are we over-engineering? Will this scale? What are the maintenance implications? Are there security vulnerabilities in the chosen versions? Verify that specific versions are defined, not ranges.]]
+[[LLM: 技术选择具有长期影响。对于每个技术决策，请考虑：这是可行的最简单解决方案吗？我们是否过度设计了？这能扩展吗？维护 implications 是什么？所选版本是否存在安全漏洞？验证定义的版本是特定的，而不是范围。]]
 
-### 3.1 Technology Selection
+### 3.1 技术选型
 
-- [ ] Selected technologies meet all requirements
-- [ ] Technology versions are specifically defined (not ranges)
-- [ ] Technology choices are justified with clear rationale
-- [ ] Alternatives considered are documented with pros/cons
-- [ ] Selected stack components work well together
+- [ ] 所选技术满足所有要求
+- [ ] 技术版本已明确定义（非范围）
+- [ ] 技术选择有明确的理由
+- [ ] 记录了考虑的备选方案及其优缺点
+- [ ] 所选堆栈组件协同工作良好
 
-### 3.2 Frontend Architecture [[FRONTEND ONLY]]
+### 3.2 前端架构 [[仅前端]]
 
-[[LLM: Skip this entire section if this is a backend-only or service-only project. Only evaluate if the project includes a user interface.]]
+[[LLM: 如果这是仅后端或仅服务的项目，请跳过整个部分。仅当项目包含用户界面时才进行评估。]]
 
-- [ ] UI framework and libraries are specifically selected
-- [ ] State management approach is defined
-- [ ] Component structure and organization is specified
-- [ ] Responsive/adaptive design approach is outlined
-- [ ] Build and bundling strategy is determined
+- [ ] UI框架和库已明确选择
+- [ ] 状态管理方法已定义
+- [ ] 组件结构和组织已指定
+- [ ] 响应式/自适应设计方法已概述
+- [ ] 构建和打包策略已确定
 
-### 3.3 Backend Architecture
+### 3.3 后端架构
 
-- [ ] API design and standards are defined
-- [ ] Service organization and boundaries are clear
-- [ ] Authentication and authorization approach is specified
-- [ ] Error handling strategy is outlined
-- [ ] Backend scaling approach is defined
+- [ ] API设计和标准已定义
+- [ ] 服务组织和边界清晰
+- [ ] 认证和授权方法已指定
+- [ ] 错误处理策略已概述
+- [ ] 后端扩展方法已定义
 
-### 3.4 Data Architecture
+### 3.4 数据架构
 
-- [ ] Data models are fully defined
-- [ ] Database technologies are selected with justification
-- [ ] Data access patterns are documented
-- [ ] Data migration/seeding approach is specified
-- [ ] Data backup and recovery strategies are outlined
+- [ ] 数据模型已完全定义
+- [ ] 数据库技术已选择并有理由
+- [ ] 数据访问模式已记录
+- [ ] 数据迁移/种子方法已指定
+- [ ] 数据备份和恢复策略已概述
 
-## 4. FRONTEND DESIGN & IMPLEMENTATION [[FRONTEND ONLY]]
+## 4. 前端设计与实现 [[仅前端]]
 
-[[LLM: This entire section should be skipped for backend-only projects. Only evaluate if the project includes a user interface. When evaluating, ensure alignment between the main architecture document and the frontend-specific architecture document.]]
+[[LLM: 对于仅后端的项目，应跳过整个部分。仅当项目包含用户界面时才进行评估。评估时，请确保主架构文档和特定于前端的架构文档之间的一致性。]]
 
-### 4.1 Frontend Philosophy & Patterns
+### 4.1 前端理念与模式
 
-- [ ] Framework & Core Libraries align with main architecture document
-- [ ] Component Architecture (e.g., Atomic Design) is clearly described
-- [ ] State Management Strategy is appropriate for application complexity
-- [ ] Data Flow patterns are consistent and clear
-- [ ] Styling Approach is defined and tooling specified
+- [ ] 框架和核心库与主架构文档一致
+- [ ] 组件架构（例如，原子设计）有清晰描述
+- [ ] 状态管理策略适合应用程序复杂性
+- [ ] 数据流模式一致且清晰
+- [ ] 样式方法已定义并指定了工具
 
-### 4.2 Frontend Structure & Organization
+### 4.2 前端结构与组织
 
-- [ ] Directory structure is clearly documented with ASCII diagram
-- [ ] Component organization follows stated patterns
-- [ ] File naming conventions are explicit
-- [ ] Structure supports chosen framework's best practices
-- [ ] Clear guidance on where new components should be placed
+- [ ] 目录结构以ASCII图清晰记录
+- [ ] 组件组织遵循所述模式
+- [ ] 文件命名约定明确
+- [ ] 结构支持所选框架的最佳实践
+- [ ] 关于新组件应放置位置的明确指导
 
-### 4.3 Component Design
+### 4.3 组件设计
 
-- [ ] Component template/specification format is defined
-- [ ] Component props, state, and events are well-documented
-- [ ] Shared/foundational components are identified
-- [ ] Component reusability patterns are established
-- [ ] Accessibility requirements are built into component design
+- [ ] 定义了组件模板/规范格式
+- [ ] 组件的props、state和events有详细文档
+- [ ] 已识别共享/基础组件
+- [ ] 已建立组件可重用性模式
+- [ ] 可访问性要求已内置于组件设计中
 
-### 4.4 Frontend-Backend Integration
+### 4.4 前后端集成
 
-- [ ] API interaction layer is clearly defined
-- [ ] HTTP client setup and configuration documented
-- [ ] Error handling for API calls is comprehensive
-- [ ] Service definitions follow consistent patterns
-- [ ] Authentication integration with backend is clear
+- [ ] API交互层定义清晰
+- [ ] HTTP客户端设置和配置已记录
+- [ ] API调用的错误处理全面
+- [ ] 服务定义遵循一致模式
+- [ ] 与后端的认证集成清晰
 
-### 4.5 Routing & Navigation
+### 4.5 路由与导航
 
-- [ ] Routing strategy and library are specified
-- [ ] Route definitions table is comprehensive
-- [ ] Route protection mechanisms are defined
-- [ ] Deep linking considerations addressed
-- [ ] Navigation patterns are consistent
+- [ ] 路由策略和库已指定
+- [ ] 路由定义表全面
+- [ ] 路由保护机制已定义
+- [ ] 已解决深层链接问题
+- [ ] 导航模式一致
 
-### 4.6 Frontend Performance
+### 4.6 前端性能
 
-- [ ] Image optimization strategies defined
-- [ ] Code splitting approach documented
-- [ ] Lazy loading patterns established
-- [ ] Re-render optimization techniques specified
-- [ ] Performance monitoring approach defined
+- [ ] 定义了图像优化策略
+- [ ] 记录了代码拆分方法
+- [ ] 建立了延迟加载模式
+- [ ] 指定了重新渲染优化技术
+- [ ] 定义了性能监控方法
 
-## 5. RESILIENCE & OPERATIONAL READINESS
+## 5. 弹性和运营准备
 
-[[LLM: Production systems fail in unexpected ways. As you review this section, think about Murphy's Law - what could go wrong? Consider real-world scenarios: What happens during peak load? How does the system behave when a critical service is down? Can the operations team diagnose issues at 3 AM? Look for specific resilience patterns, not just mentions of "error handling".]]
+[[LLM: 生产系统会以意想不到的方式失败。在审阅本节时，请考虑墨菲定律 - 可能会出什么问题？考虑真实世界场景：高峰负载期间会发生什么？当关键服务宕机时系统如何表现？运营团队能在凌晨3点诊断问题吗？寻找特定的弹性模式，而不仅仅是提及“错误处理”。]]
 
-### 5.1 Error Handling & Resilience
+### 5.1 错误处理与弹性
 
-- [ ] Error handling strategy is comprehensive
-- [ ] Retry policies are defined where appropriate
-- [ ] Circuit breakers or fallbacks are specified for critical services
-- [ ] Graceful degradation approaches are defined
-- [ ] System can recover from partial failures
+- [ ] 错误处理策略全面
+- [ ] 在适当情况下定义了重试策略
+- [ ] 为关键服务指定了断路器或回退机制
+- [ ] 定义了优雅降级方法
+- [ ] 系统可以从部分故障中恢复
 
-### 5.2 Monitoring & Observability
+### 5.2 监控与可观察性
 
-- [ ] Logging strategy is defined
-- [ ] Monitoring approach is specified
-- [ ] Key metrics for system health are identified
-- [ ] Alerting thresholds and strategies are outlined
-- [ ] Debugging and troubleshooting capabilities are built in
+- [ ] 定义了日志记录策略
+- [ ] 指定了监控方法
+- [ ] 确定了系统健康的关键指标
+- [ ] 概述了警报阈值和策略
+- [ ] 内置了调试和故障排除功能
 
-### 5.3 Performance & Scaling
+### 5.3 性能与扩展
 
-- [ ] Performance bottlenecks are identified and addressed
-- [ ] Caching strategy is defined where appropriate
-- [ ] Load balancing approach is specified
-- [ ] Horizontal and vertical scaling strategies are outlined
-- [ ] Resource sizing recommendations are provided
+- [ ] 已识别并解决了性能瓶颈
+- [ ] 在适当情况下定义了缓存策略
+- [ ] 指定了负载均衡方法
+- [ ] 概述了水平和垂直扩展策略
+- [ ] 提供了资源规模建议
 
-### 5.4 Deployment & DevOps
+### 5.4 部署与DevOps
 
-- [ ] Deployment strategy is defined
-- [ ] CI/CD pipeline approach is outlined
-- [ ] Environment strategy (dev, staging, prod) is specified
-- [ ] Infrastructure as Code approach is defined
-- [ ] Rollback and recovery procedures are outlined
+- [ ] 定义了部署策略
+- [ ] 概述了CI/CD管道方法
+- [ ] 指定了环境策略（开发、预发、生产）
+- [ ] 定义了基础设施即代码（IaC）方法
+- [ ] 概述了回滚和恢复程序
 
-## 6. SECURITY & COMPLIANCE
+## 6. 安全与合规
 
-[[LLM: Security is not optional. Review this section with a hacker's mindset - how could someone exploit this system? Also consider compliance: Are there industry-specific regulations that apply? GDPR? HIPAA? PCI? Ensure the architecture addresses these proactively. Look for specific security controls, not just general statements.]]
+[[LLM: 安全不是可选项。以黑客的思维方式审阅本节 - 有人会如何利用此系统？还要考虑合规性：是否有适用的行业特定法规？GDPR？HIPAA？PCI？确保架构主动解决这些问题。寻找特定的安全控制，而不仅仅是笼统的陈述。]]
 
-### 6.1 Authentication & Authorization
+### 6.1 认证与授权
 
-- [ ] Authentication mechanism is clearly defined
-- [ ] Authorization model is specified
-- [ ] Role-based access control is outlined if required
-- [ ] Session management approach is defined
-- [ ] Credential management is addressed
+- [ ] 认证机制定义清晰
+- [ ] 授权模型已指定
+- [ ] 如果需要，概述了基于角色的访问控制
+- [ ] 定义了会话管理方法
+- [ ] 已解决凭证管理问题
 
-### 6.2 Data Security
+### 6.2 数据安全
 
-- [ ] Data encryption approach (at rest and in transit) is specified
-- [ ] Sensitive data handling procedures are defined
-- [ ] Data retention and purging policies are outlined
-- [ ] Backup encryption is addressed if required
-- [ ] Data access audit trails are specified if required
+- [ ] 指定了数据加密方法（静态和传输中）
+- [ ] 定义了敏感数据处理程序
+- [ ] 概述了数据保留和清除策略
+- [ ] 如果需要，已解决备份加密问题
+- [ ] 如果需要，指定了数据访问审计跟踪
 
-### 6.3 API & Service Security
+### 6.3 API与服务安全
 
-- [ ] API security controls are defined
-- [ ] Rate limiting and throttling approaches are specified
-- [ ] Input validation strategy is outlined
-- [ ] CSRF/XSS prevention measures are addressed
-- [ ] Secure communication protocols are specified
+- [ ] 定义了API安全控制
+- [ ] 指定了速率限制和节流方法
+- [ ] 概述了输入验证策略
+- [ ] 已解决CSRF/XSS预防措施
+- [ ] 指定了安全通信协议
 
-### 6.4 Infrastructure Security
+### 6.4 基础设施安全
 
-- [ ] Network security design is outlined
-- [ ] Firewall and security group configurations are specified
-- [ ] Service isolation approach is defined
-- [ ] Least privilege principle is applied
-- [ ] Security monitoring strategy is outlined
+- [ ] 概述了网络安全设计
+- [ ] 指定了防火墙和安全组配置
+- [ ] 定义了服务隔离方法
+- [ ] 应用了最小权限原则
+- [ ] 概述了安全监控策略
 
-## 7. IMPLEMENTATION GUIDANCE
+## 7. 实施指南
 
-[[LLM: Clear implementation guidance prevents costly mistakes. As you review this section, imagine you're a developer starting on day one. Do they have everything they need to be productive? Are coding standards clear enough to maintain consistency across the team? Look for specific examples and patterns.]]
+[[LLM: 清晰的实施指南可防止代价高昂的错误。在审阅本节时，请想象您是第一天开始工作的开发人员。他们是否拥有高效工作所需的一切？编码标准是否足够清晰以保持团队的一致性？寻找具体的示例和模式。]]
 
-### 7.1 Coding Standards & Practices
+### 7.1 编码标准与实践
 
-- [ ] Coding standards are defined
-- [ ] Documentation requirements are specified
-- [ ] Testing expectations are outlined
-- [ ] Code organization principles are defined
-- [ ] Naming conventions are specified
+- [ ] 定义了编码标准
+- [ ] 指定了文档要求
+- [ ] 概述了测试期望
+- [ ] 定义了代码组织原则
+- [ ] 指定了命名约定
 
-### 7.2 Testing Strategy
+### 7.2 测试策略
 
-- [ ] Unit testing approach is defined
-- [ ] Integration testing strategy is outlined
-- [ ] E2E testing approach is specified
-- [ ] Performance testing requirements are outlined
-- [ ] Security testing approach is defined
+- [ ] 定义了单元测试方法
+- [ ] 概述了集成测试策略
+- [ ] 指定了端到端（E2E）测试方法
+- [ ] 概述了性能测试要求
+- [ ] 定义了安全测试方法
 
-### 7.3 Frontend Testing [[FRONTEND ONLY]]
+### 7.3 前端测试 [[仅前端]]
 
-[[LLM: Skip this subsection for backend-only projects.]]
+[[LLM: 对于仅后端的项目，跳过此小节。]]
 
-- [ ] Component testing scope and tools defined
-- [ ] UI integration testing approach specified
-- [ ] Visual regression testing considered
-- [ ] Accessibility testing tools identified
-- [ ] Frontend-specific test data management addressed
+- [ ] 定义了组件测试范围和工具
+- [ ] 指定了UI集成测试方法
+- [ ] 考虑了可视化回归测试
+- [ ] 确定了可访问性测试工具
+- [ ] 已解决特定于前端的测试数据管理
 
-### 7.4 Development Environment
+### 7.4 开发环境
 
-- [ ] Local development environment setup is documented
-- [ ] Required tools and configurations are specified
-- [ ] Development workflows are outlined
-- [ ] Source control practices are defined
-- [ ] Dependency management approach is specified
+- [ ] 记录了本地开发环境设置
+- [ ] 指定了所需工具和配置
+- [ ] 概述了开发工作流程
+- [ ] 定义了源代码控制实践
+- [ ] 指定了依赖管理方法
 
-### 7.5 Technical Documentation
+### 7.5 技术文档
 
-- [ ] API documentation standards are defined
-- [ ] Architecture documentation requirements are specified
-- [ ] Code documentation expectations are outlined
-- [ ] System diagrams and visualizations are included
-- [ ] Decision records for key choices are included
+- [ ] 定义了API文档标准
+- [ ] 指定了架构文档要求
+- [ ] 概述了代码文档期望
+- [ ] 包括了系统图和可视化
+- [ ] 包括了关键选择的决策记录
 
-## 8. DEPENDENCY & INTEGRATION MANAGEMENT
+## 8. 依赖与集成管理
 
-[[LLM: Dependencies are often the source of production issues. For each dependency, consider: What happens if it's unavailable? Is there a newer version with security patches? Are we locked into a vendor? What's our contingency plan? Verify specific versions and fallback strategies.]]
+[[LLM: 依赖项通常是生产问题的根源。对于每个依赖项，请考虑：如果它不可用会怎样？是否有带安全补丁的新版本？我们是否被供应商锁定？我们的应急计划是什么？验证特定版本和回退策略。]]
 
-### 8.1 External Dependencies
+### 8.1 外部依赖
 
-- [ ] All external dependencies are identified
-- [ ] Versioning strategy for dependencies is defined
-- [ ] Fallback approaches for critical dependencies are specified
-- [ ] Licensing implications are addressed
-- [ ] Update and patching strategy is outlined
+- [ ] 已识别所有外部依赖项
+- [ ] 定义了依赖项的版本控制策略
+- [ ] 指定了关键依赖项的回退方法
+- [ ] 已解决许可影响
+- [ ] 概述了更新和修补策略
 
-### 8.2 Internal Dependencies
+### 8.2 内部依赖
 
-- [ ] Component dependencies are clearly mapped
-- [ ] Build order dependencies are addressed
-- [ ] Shared services and utilities are identified
-- [ ] Circular dependencies are eliminated
-- [ ] Versioning strategy for internal components is defined
+- [ ] 清晰映射了组件依赖关系
+- [ ] 已解决构建顺序依赖关系
+- [ ] 已识别共享服务和实用程序
+- [ ] 消除了循环依赖
+- [ ] 定义了内部组件的版本控制策略
 
-### 8.3 Third-Party Integrations
+### 8.3 第三方集成
 
-- [ ] All third-party integrations are identified
-- [ ] Integration approaches are defined
-- [ ] Authentication with third parties is addressed
-- [ ] Error handling for integration failures is specified
-- [ ] Rate limits and quotas are considered
+- [ ] 已识别所有第三方集成
+- [ ] 定义了集成方法
+- [ ] 已解决与第三方的认证问题
+- [- ] 指定了集成失败的错误处理
+- [ ] 考虑了速率限制和配额
 
-## 9. AI AGENT IMPLEMENTATION SUITABILITY
+## 9. AI代理实施适用性
 
-[[LLM: This architecture may be implemented by AI agents. Review with extreme clarity in mind. Are patterns consistent? Is complexity minimized? Would an AI agent make incorrect assumptions? Remember: explicit is better than implicit. Look for clear file structures, naming conventions, and implementation patterns.]]
+[[LLM: 此架构可能由AI代理实施。审阅时要特别注意清晰度。模式是否一致？复杂性是否最小化？AI代理会做出错误的假设吗？记住：显式优于隐式。寻找清晰的文件结构、命名约定和实施模式。]]
 
-### 9.1 Modularity for AI Agents
+### 9.1 AI代理的模块化
 
-- [ ] Components are sized appropriately for AI agent implementation
-- [ ] Dependencies between components are minimized
-- [ ] Clear interfaces between components are defined
-- [ ] Components have singular, well-defined responsibilities
-- [ ] File and code organization optimized for AI agent understanding
+- [ ] 组件大小适合AI代理实施
+- [ ] 组件之间的依赖关系最小化
+- [ ] 定义了组件之间的清晰接口
+- [ ] 组件具有单一、明确定义的职责
+- [ ] 为AI代理理解优化了文件和代码组织
 
-### 9.2 Clarity & Predictability
+### 9.2 清晰性与可预测性
 
-- [ ] Patterns are consistent and predictable
-- [ ] Complex logic is broken down into simpler steps
-- [ ] Architecture avoids overly clever or obscure approaches
-- [ ] Examples are provided for unfamiliar patterns
-- [ ] Component responsibilities are explicit and clear
+- [ ] 模式一致且可预测
+- [ ] 复杂逻辑被分解为更简单的步骤
+- [ ] 架构避免了过于聪明或晦涩的方法
+- [ ] 为不熟悉的模式提供了示例
+- [ ] 组件职责明确清晰
 
-### 9.3 Implementation Guidance
+### 9.3 实施指南
 
-- [ ] Detailed implementation guidance is provided
-- [ ] Code structure templates are defined
-- [ ] Specific implementation patterns are documented
-- [ ] Common pitfalls are identified with solutions
-- [ ] References to similar implementations are provided when helpful
+- [ ] 提供了详细的实施指南
+- [ ] 定义了代码结构模板
+- [ ] 记录了具体的实施模式
+- [ ] 识别了常见陷阱并提供了解决方案
+- [ ] 在有帮助时提供了类似实现的参考
 
-### 9.4 Error Prevention & Handling
+### 9.4 错误预防与处理
 
-- [ ] Design reduces opportunities for implementation errors
-- [ ] Validation and error checking approaches are defined
-- [ ] Self-healing mechanisms are incorporated where possible
-- [ ] Testing patterns are clearly defined
-- [ ] Debugging guidance is provided
+- [ ] 设计减少了实施错误的机会
+- [ ] 定义了验证和错误检查方法
+- [ ] 在可能的情况下加入了自愈机制
+- [ ] 清晰定义了测试模式
+- [ ] 提供了调试指南
 
-## 10. ACCESSIBILITY IMPLEMENTATION [[FRONTEND ONLY]]
+## 10. 可访问性实施 [[仅前端]]
 
-[[LLM: Skip this section for backend-only projects. Accessibility is a core requirement for any user interface.]]
+[[LLM: 对于仅后端的项目，跳过此部分。可访问性是任何用户界面的核心要求。]]
 
-### 10.1 Accessibility Standards
+### 10.1 可访问性标准
 
-- [ ] Semantic HTML usage is emphasized
-- [ ] ARIA implementation guidelines provided
-- [ ] Keyboard navigation requirements defined
-- [ ] Focus management approach specified
-- [ ] Screen reader compatibility addressed
+- [ ] 强调了语义化HTML的使用
+- [ ] 提供了ARIA实施指南
+- [ ] 定义了键盘导航要求
+- [ ] 指定了焦点管理方法
+- [ ] 已解决屏幕阅读器兼容性问题
 
-### 10.2 Accessibility Testing
+### 10.2 可访问性测试
 
-- [ ] Accessibility testing tools identified
-- [ ] Testing process integrated into workflow
-- [ ] Compliance targets (WCAG level) specified
-- [ ] Manual testing procedures defined
-- [ ] Automated testing approach outlined
+- [ ] 确定了可访问性测试工具
+- [ ] 测试过程已集成到工作流程中
+- [ ] 指定了合规性目标（WCAG级别）
+- [ ] 定义了手动测试程序
+- [ ] 概述了自动化测试方法
 
-[[LLM: FINAL VALIDATION REPORT GENERATION
+[[LLM: 最终验证报告生成
 
-Now that you've completed the checklist, generate a comprehensive validation report that includes:
+既然您已经完成了清单，请生成一份全面的验证报告，其中包括：
 
-1. Executive Summary
-   - Overall architecture readiness (High/Medium/Low)
-   - Critical risks identified
-   - Key strengths of the architecture
-   - Project type (Full-stack/Frontend/Backend) and sections evaluated
+1.  执行摘要
+    -   整体架构准备情况（高/中/低）
+    -   识别出的关键风险
+    -   架构的主要优势
+    -   项目类型（全栈/前端/后端）和评估的部分
 
-2. Section Analysis
-   - Pass rate for each major section (percentage of items passed)
-   - Most concerning failures or gaps
-   - Sections requiring immediate attention
-   - Note any sections skipped due to project type
+2.  部分分析
+    -   每个主要部分的通过率（通过项目百分比）
+    -   最令人担忧的失败或差距
+    -   需要立即关注的部分
+    -   注明因项目类型而跳过的任何部分
 
-3. Risk Assessment
-   - Top 5 risks by severity
-   - Mitigation recommendations for each
-   - Timeline impact of addressing issues
+3.  风险评估
+    -   按严重性排名的前5大风险
+    -   每个风险的缓解建议
+    -   解决问题对时间线的影响
 
-4. Recommendations
-   - Must-fix items before development
-   - Should-fix items for better quality
-   - Nice-to-have improvements
+4.  建议
+    -   开发前必须修复的项目
+    -   为提高质量应修复的项目
+    -   可有可无的改进
 
-5. AI Implementation Readiness
-   - Specific concerns for AI agent implementation
-   - Areas needing additional clarification
-   - Complexity hotspots to address
+5.  AI实施准备情况
+    -   对AI代理实施的具体担忧
+    -   需要额外说明的领域
+    -   需要解决的复杂性热点
 
-6. Frontend-Specific Assessment (if applicable)
-   - Frontend architecture completeness
-   - Alignment between main and frontend architecture docs
-   - UI/UX specification coverage
-   - Component design clarity
+6.  前端特定评估（如果适用）
+    -   前端架构完整性
+    -   主架构和前端架构文档之间的一致性
+    -   UI/UX规范覆盖范围
+    -   组件设计清晰度
 
-After presenting the report, ask the user if they would like detailed analysis of any specific section, especially those with warnings or failures.]]
+提交报告后，询问用户是否希望对任何特定部分进行详细分析，尤其是那些有警告或失败的部分。]]

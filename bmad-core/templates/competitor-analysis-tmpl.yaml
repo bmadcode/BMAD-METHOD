@@ -1,307 +1,307 @@
-# <!-- Powered by BMAD™ Core -->
+# <!-- 由 BMAD™ Core 驱动 -->
 template:
   id: competitor-analysis-template-v2
-  name: Competitive Analysis Report
+  name: 竞争分析报告
   version: 2.0
   output:
     format: markdown
     filename: docs/competitor-analysis.md
-    title: "Competitive Analysis Report: {{project_product_name}}"
+    title: "竞争分析报告：{{project_product_name}}"
 
 workflow:
   mode: interactive
   elicitation: advanced-elicitation
   custom_elicitation:
-    title: "Competitive Analysis Elicitation Actions"
+    title: "竞争分析启发行动"
     options:
-      - "Deep dive on a specific competitor's strategy"
-      - "Analyze competitive dynamics in a specific segment"
-      - "War game competitive responses to your moves"
-      - "Explore partnership vs. competition scenarios"
-      - "Stress test differentiation claims"
-      - "Analyze disruption potential (yours or theirs)"
-      - "Compare to competition in adjacent markets"
-      - "Generate win/loss analysis insights"
-      - "If only we had known about [competitor X's plan]..."
-      - "Proceed to next section"
+      - "深入探讨特定竞争对手的策略"
+      - "分析特定细分市场的竞争动态"
+      - "推演您行动的竞争反应"
+      - "探索合作与竞争的情景"
+      - "压力测试差异化主张"
+      - "分析颠覆潜力（您的或他们的）"
+      - "与邻近市场的竞争进行比较"
+      - "生成赢/输分析见解"
+      - "如果我们当初知道[竞争对手X的计划]就好了..."
+      - "进入下一节"
 
 sections:
   - id: executive-summary
-    title: Executive Summary
-    instruction: Provide high-level competitive insights, main threats and opportunities, and recommended strategic actions. Write this section LAST after completing all analysis.
+    title: 执行摘要
+    instruction: 提供高层次的竞争见解、主要威胁和机遇，以及推荐的战略行动。在完成所有分析后最后撰写此部分。
 
   - id: analysis-scope
-    title: Analysis Scope & Methodology
-    instruction: This template guides comprehensive competitor analysis. Start by understanding the user's competitive intelligence needs and strategic objectives. Help them identify and prioritize competitors before diving into detailed analysis.
+    title: 分析范围与方法论
+    instruction: 此模板指导全面的竞争对手分析。首先了解用户的竞争情报需求和战略目标。在深入进行详细分析之前，帮助他们识别和优先排序竞争对手。
     sections:
       - id: analysis-purpose
-        title: Analysis Purpose
+        title: 分析目的
         instruction: |
-          Define the primary purpose:
-          - New market entry assessment
-          - Product positioning strategy
-          - Feature gap analysis
-          - Pricing strategy development
-          - Partnership/acquisition targets
-          - Competitive threat assessment
+          定义主要目的：
+          - 新市场进入评估
+          - 产品定位策略
+          - 功能差距分析
+          - 定价策略制定
+          - 合作/收购目标
+          - 竞争威胁评估
       - id: competitor-categories
-        title: Competitor Categories Analyzed
+        title: 分析的竞争对手类别
         instruction: |
-          List categories included:
-          - Direct Competitors: Same product/service, same target market
-          - Indirect Competitors: Different product, same need/problem
-          - Potential Competitors: Could enter market easily
-          - Substitute Products: Alternative solutions
-          - Aspirational Competitors: Best-in-class examples
+          列出包含的类别：
+          - 直接竞争对手：相同的产品/服务，相同的目标市场
+          - 间接竞争对手：不同的产品，相同的需求/问题
+          - 潜在竞争对手：可以轻松进入市场
+          - 替代产品：替代解决方案
+          - 理想竞争对手：同类最佳示例
       - id: research-methodology
-        title: Research Methodology
+        title: 研究方法论
         instruction: |
-          Describe approach:
-          - Information sources used
-          - Analysis timeframe
-          - Confidence levels
-          - Limitations
+          描述方法：
+          - 使用的信息来源
+          - 分析时间范围
+          - 置信水平
+          - 局限性
 
   - id: competitive-landscape
-    title: Competitive Landscape Overview
+    title: 竞争格局概述
     sections:
       - id: market-structure
-        title: Market Structure
+        title: 市场结构
         instruction: |
-          Describe the competitive environment:
-          - Number of active competitors
-          - Market concentration (fragmented/consolidated)
-          - Competitive dynamics
-          - Recent market entries/exits
+          描述竞争环境：
+          - 活跃竞争对手数量
+          - 市场集中度（分散/集中）
+          - 竞争动态
+          - 近期市场进入/退出情况
       - id: prioritization-matrix
-        title: Competitor Prioritization Matrix
+        title: 竞争对手优先级矩阵
         instruction: |
-          Help categorize competitors by market share and strategic threat level
+          帮助按市场份额和战略威胁级别对竞争对手进行分类
 
-          Create a 2x2 matrix:
-          - Priority 1 (Core Competitors): High Market Share + High Threat
-          - Priority 2 (Emerging Threats): Low Market Share + High Threat
-          - Priority 3 (Established Players): High Market Share + Low Threat
-          - Priority 4 (Monitor Only): Low Market Share + Low Threat
+          创建一个2x2矩阵：
+          - 优先级1（核心竞争对手）：高市场份额 + 高威胁
+          - 优先级2（新兴威胁）：低市场份额 + 高威胁
+          - 优先级3（老牌玩家）：高市场份额 + 低威胁
+          - 优先级4（仅监控）：低市场份额 + 低威胁
 
   - id: competitor-profiles
-    title: Individual Competitor Profiles
-    instruction: Create detailed profiles for each Priority 1 and Priority 2 competitor. For Priority 3 and 4, create condensed profiles.
+    title: 单个竞争对手简介
+    instruction: 为每个优先级1和优先级2的竞争对手创建详细简介。对于优先级3和4，创建简要简介。
     repeatable: true
     sections:
       - id: competitor
-        title: "{{competitor_name}} - Priority {{priority_level}}"
+        title: "{{competitor_name}} - 优先级 {{priority_level}}"
         sections:
           - id: company-overview
-            title: Company Overview
+            title: 公司概况
             template: |
-              - **Founded:** {{year_founders}}
-              - **Headquarters:** {{location}}
-              - **Company Size:** {{employees_revenue}}
-              - **Funding:** {{total_raised_investors}}
-              - **Leadership:** {{key_executives}}
+              - **成立时间：** {{year_founders}}
+              - **总部：** {{location}}
+              - **公司规模：** {{employees_revenue}}
+              - **融资情况：** {{total_raised_investors}}
+              - **领导层：** {{key_executives}}
           - id: business-model
-            title: Business Model & Strategy
+            title: 商业模式与策略
             template: |
-              - **Revenue Model:** {{revenue_model}}
-              - **Target Market:** {{customer_segments}}
-              - **Value Proposition:** {{value_promise}}
-              - **Go-to-Market Strategy:** {{gtm_approach}}
-              - **Strategic Focus:** {{current_priorities}}
+              - **收入模式：** {{revenue_model}}
+              - **目标市场：** {{customer_segments}}
+              - **价值主张：** {{value_promise}}
+              - **市场进入策略：** {{gtm_approach}}
+              - **战略重点：** {{current_priorities}}
           - id: product-analysis
-            title: Product/Service Analysis
+            title: 产品/服务分析
             template: |
-              - **Core Offerings:** {{main_products}}
-              - **Key Features:** {{standout_capabilities}}
-              - **User Experience:** {{ux_assessment}}
-              - **Technology Stack:** {{tech_stack}}
-              - **Pricing:** {{pricing_model}}
+              - **核心产品：** {{main_products}}
+              - **关键功能：** {{standout_capabilities}}
+              - **用户体验：** {{ux_assessment}}
+              - **技术栈：** {{tech_stack}}
+              - **定价：** {{pricing_model}}
           - id: strengths-weaknesses
-            title: Strengths & Weaknesses
+            title: 优势与劣势
             sections:
               - id: strengths
-                title: Strengths
+                title: 优势
                 type: bullet-list
                 template: "- {{strength}}"
               - id: weaknesses
-                title: Weaknesses
+                title: 劣势
                 type: bullet-list
                 template: "- {{weakness}}"
           - id: market-position
-            title: Market Position & Performance
+            title: 市场地位与表现
             template: |
-              - **Market Share:** {{market_share_estimate}}
-              - **Customer Base:** {{customer_size_notables}}
-              - **Growth Trajectory:** {{growth_trend}}
-              - **Recent Developments:** {{key_news}}
+              - **市场份额：** {{market_share_estimate}}
+              - **客户群：** {{customer_size_notables}}
+              - **增长轨迹：** {{growth_trend}}
+              - **近期发展：** {{key_news}}
 
   - id: comparative-analysis
-    title: Comparative Analysis
+    title: 比较分析
     sections:
       - id: feature-comparison
-        title: Feature Comparison Matrix
-        instruction: Create a detailed comparison table of key features across competitors
+        title: 功能比较矩阵
+        instruction: 创建一个详细的跨竞争对手关键功能比较表
         type: table
         columns:
           [
-            "Feature Category",
+            "功能类别",
             "{{your_company}}",
             "{{competitor_1}}",
             "{{competitor_2}}",
             "{{competitor_3}}",
           ]
         rows:
-          - category: "Core Functionality"
+          - category: "核心功能"
             items:
-              - ["Feature A", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
-              - ["Feature B", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
-          - category: "User Experience"
+              - ["功能A", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
+              - ["功能B", "{{status}}", "{{status}}", "{{status}}", "{{status}}"]
+          - category: "用户体验"
             items:
-              - ["Mobile App", "{{rating}}", "{{rating}}", "{{rating}}", "{{rating}}"]
-              - ["Onboarding Time", "{{time}}", "{{time}}", "{{time}}", "{{time}}"]
-          - category: "Integration & Ecosystem"
+              - ["移动应用", "{{rating}}", "{{rating}}", "{{rating}}", "{{rating}}"]
+              - ["上手时间", "{{time}}", "{{time}}", "{{time}}", "{{time}}"]
+          - category: "集成与生态系统"
             items:
               - [
-                  "API Availability",
+                  "API可用性",
                   "{{availability}}",
                   "{{availability}}",
                   "{{availability}}",
                   "{{availability}}",
                 ]
-              - ["Third-party Integrations", "{{number}}", "{{number}}", "{{number}}", "{{number}}"]
-          - category: "Pricing & Plans"
+              - ["第三方集成", "{{number}}", "{{number}}", "{{number}}", "{{number}}"]
+          - category: "定价与计划"
             items:
-              - ["Starting Price", "{{price}}", "{{price}}", "{{price}}", "{{price}}"]
-              - ["Free Tier", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}"]
+              - ["起步价", "{{price}}", "{{price}}", "{{price}}", "{{price}}"]
+              - ["免费套餐", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}", "{{yes_no}}"]
       - id: swot-comparison
-        title: SWOT Comparison
-        instruction: Create SWOT analysis for your solution vs. top competitors
+        title: SWOT比较
+        instruction: 为您的解决方案与主要竞争对手创建SWOT分析
         sections:
           - id: your-solution
-            title: Your Solution
+            title: 您的解决方案
             template: |
-              - **Strengths:** {{strengths}}
-              - **Weaknesses:** {{weaknesses}}
-              - **Opportunities:** {{opportunities}}
-              - **Threats:** {{threats}}
+              - **优势：** {{strengths}}
+              - **劣势：** {{weaknesses}}
+              - **机会：** {{opportunities}}
+              - **威胁：** {{threats}}
           - id: vs-competitor
             title: "vs. {{main_competitor}}"
             template: |
-              - **Competitive Advantages:** {{your_advantages}}
-              - **Competitive Disadvantages:** {{their_advantages}}
-              - **Differentiation Opportunities:** {{differentiation}}
+              - **竞争优势：** {{your_advantages}}
+              - **竞争劣势：** {{their_advantages}}
+              - **差异化机会：** {{differentiation}}
       - id: positioning-map
-        title: Positioning Map
+        title: 定位图
         instruction: |
-          Describe competitor positions on key dimensions
+          描述竞争对手在关键维度上的位置
 
-          Create a positioning description using 2 key dimensions relevant to the market, such as:
-          - Price vs. Features
-          - Ease of Use vs. Power
-          - Specialization vs. Breadth
-          - Self-Serve vs. High-Touch
+          使用与市场相关的2个关键维度创建定位描述，例如：
+          - 价格 vs. 功能
+          - 易用性 vs. 强大功能
+          - 专业化 vs. 广度
+          - 自助服务 vs. 高接触度
 
   - id: strategic-analysis
-    title: Strategic Analysis
+    title: 战略分析
     sections:
       - id: competitive-advantages
-        title: Competitive Advantages Assessment
+        title: 竞争优势评估
         sections:
           - id: sustainable-advantages
-            title: Sustainable Advantages
+            title: 可持续优势
             instruction: |
-              Identify moats and defensible positions:
-              - Network effects
-              - Switching costs
-              - Brand strength
-              - Technology barriers
-              - Regulatory advantages
+              识别护城河和可防御的阵地：
+              - 网络效应
+              - 转换成本
+              - 品牌实力
+              - 技术壁垒
+              - 监管优势
           - id: vulnerable-points
-            title: Vulnerable Points
+            title: 薄弱环节
             instruction: |
-              Where competitors could be challenged:
-              - Weak customer segments
-              - Missing features
-              - Poor user experience
-              - High prices
-              - Limited geographic presence
+              可以挑战竞争对手的地方：
+              - 薄弱的客户细分
+              - 缺失的功能
+              - 糟糕的用户体验
+              - 高昂的价格
+              - 有限的地理覆盖范围
       - id: blue-ocean
-        title: Blue Ocean Opportunities
+        title: 蓝海机会
         instruction: |
-          Identify uncontested market spaces
+          识别无竞争的市场空间
 
-          List opportunities to create new market space:
-          - Underserved segments
-          - Unaddressed use cases
-          - New business models
-          - Geographic expansion
-          - Different value propositions
+          列出创造新市场空间的机会：
+          - 服务不足的细分市场
+          - 未解决的用例
+          - 新的商业模式
+          - 地域扩张
+          - 不同的价值主张
 
   - id: strategic-recommendations
-    title: Strategic Recommendations
+    title: 战略建议
     sections:
       - id: differentiation-strategy
-        title: Differentiation Strategy
+        title: 差异化策略
         instruction: |
-          How to position against competitors:
-          - Unique value propositions to emphasize
-          - Features to prioritize
-          - Segments to target
-          - Messaging and positioning
+          如何针对竞争对手进行定位：
+          - 强调独特的价值主张
+          - 优先考虑的功能
+          - 目标细分市场
+          - 消息传递和定位
       - id: competitive-response
-        title: Competitive Response Planning
+        title: 竞争反应规划
         sections:
           - id: offensive-strategies
-            title: Offensive Strategies
+            title: 进攻策略
             instruction: |
-              How to gain market share:
-              - Target competitor weaknesses
-              - Win competitive deals
-              - Capture their customers
+              如何获得市场份额：
+              - 针对竞争对手的弱点
+              - 赢得竞争性交易
+              - 争取他们的客户
           - id: defensive-strategies
-            title: Defensive Strategies
+            title: 防御策略
             instruction: |
-              How to protect your position:
-              - Strengthen vulnerable areas
-              - Build switching costs
-              - Deepen customer relationships
+              如何保护您的地位：
+              - 加强薄弱环节
+              - 建立转换成本
+              - 深化客户关系
       - id: partnership-ecosystem
-        title: Partnership & Ecosystem Strategy
+        title: 合作与生态系统策略
         instruction: |
-          Potential collaboration opportunities:
-          - Complementary players
-          - Channel partners
-          - Technology integrations
-          - Strategic alliances
+          潜在的合作机会：
+          - 互补的参与者
+          - 渠道合作伙伴
+          - 技术集成
+          - 战略联盟
 
   - id: monitoring-plan
-    title: Monitoring & Intelligence Plan
+    title: 监控与情报计划
     sections:
       - id: key-competitors
-        title: Key Competitors to Track
-        instruction: Priority list with rationale
+        title: 要跟踪的关键竞争对手
+        instruction: 带有理由的优先级列表
       - id: monitoring-metrics
-        title: Monitoring Metrics
+        title: 监控指标
         instruction: |
-          What to track:
-          - Product updates
-          - Pricing changes
-          - Customer wins/losses
-          - Funding/M&A activity
-          - Market messaging
+          要跟踪的内容：
+          - 产品更新
+          - 定价变化
+          - 客户赢/输情况
+          - 融资/并购活动
+          - 市场消息
       - id: intelligence-sources
-        title: Intelligence Sources
+        title: 情报来源
         instruction: |
-          Where to gather ongoing intelligence:
-          - Company websites/blogs
-          - Customer reviews
-          - Industry reports
-          - Social media
-          - Patent filings
+          在哪里收集持续的情报：
+          - 公司网站/博客
+          - 客户评论
+          - 行业报告
+          - 社交媒体
+          - 专利申请
       - id: update-cadence
-        title: Update Cadence
+        title: 更新频率
         instruction: |
-          Recommended review schedule:
-          - Weekly: {{weekly_items}}
-          - Monthly: {{monthly_items}}
-          - Quarterly: {{quarterly_analysis}}
+          推荐的审查时间表：
+          - 每周：{{weekly_items}}
+          - 每月：{{monthly_items}}
+          - 每季度：{{quarterly_analysis}}

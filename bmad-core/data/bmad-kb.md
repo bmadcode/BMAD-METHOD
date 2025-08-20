@@ -1,227 +1,227 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# BMAD™ Knowledge Base
+# BMAD™ 知识库
 
-## Overview
+## 概述
 
-BMAD-METHOD™ (Breakthrough Method of Agile AI-driven Development) is a framework that combines AI agents with Agile development methodologies. The v4 system introduces a modular architecture with improved dependency management, bundle optimization, and support for both web and IDE environments.
+BMAD-METHOD™ (敏捷AI驱动开发的突破性方法) 是一个将AI代理与敏捷开发方法论相结合的框架。v4系统引入了模块化架构，改进了依赖管理、包优化，并支持Web和IDE环境。
 
-### Key Features
+### 主要特性
 
-- **Modular Agent System**: Specialized AI agents for each Agile role
-- **Build System**: Automated dependency resolution and optimization
-- **Dual Environment Support**: Optimized for both web UIs and IDEs
-- **Reusable Resources**: Portable templates, tasks, and checklists
-- **Slash Command Integration**: Quick agent switching and control
+- **模块化代理系统**: 为每个敏捷角色配备专门的AI代理
+- **构建系统**: 自动化的依赖解析和优化
+- **双环境支持**: 针对Web UI和IDE进行了优化
+- **可复用资源**: 可移植的模板、任务和清单
+- **斜杠命令集成**: 快速切换代理和控制
 
-### When to Use BMad
+### 何时使用BMad
 
-- **New Projects (Greenfield)**: Complete end-to-end development
-- **Existing Projects (Brownfield)**: Feature additions and enhancements
-- **Team Collaboration**: Multiple roles working together
-- **Quality Assurance**: Structured testing and validation
-- **Documentation**: Professional PRDs, architecture docs, user stories
+- **新项目 (绿地)**: 完整的端到端开发
+- **现有项目 (棕地)**: 功能添加和增强
+- **团队协作**: 多个角色协同工作
+- **质量保证**: 结构化的测试和验证
+- **文档**: 专业的PRD、架构文档、用户故事
 
-## How BMad Works
+## BMad如何工作
 
-### The Core Method
+### 核心方法
 
-BMad transforms you into a "Vibe CEO" - directing a team of specialized AI agents through structured workflows. Here's how:
+BMad将您转变为“Vibe CEO”——通过结构化的工作流指导一个由专业AI代理组成的团队。具体如下：
 
-1. **You Direct, AI Executes**: You provide vision and decisions; agents handle implementation details
-2. **Specialized Agents**: Each agent masters one role (PM, Developer, Architect, etc.)
-3. **Structured Workflows**: Proven patterns guide you from idea to deployed code
-4. **Clean Handoffs**: Fresh context windows ensure agents stay focused and effective
+1.  **您指导，AI执行**: 您提供愿景和决策；代理处理实施细节
+2.  **专业代理**: 每个代理精通一个角色（产品经理、开发人员、架构师等）
+3.  **结构化工作流**: 经过验证的模式指导您从想法到部署代码
+4.  **清晰的交接**: 全新的上下文窗口确保代理保持专注和高效
 
-### The Two-Phase Approach
+### 两阶段方法
 
-#### Phase 1: Planning (Web UI - Cost Effective)
+#### 阶段1：规划 (Web UI - 经济高效)
 
-- Use large context windows (Gemini's 1M tokens)
-- Generate comprehensive documents (PRD, Architecture)
-- Leverage multiple agents for brainstorming
-- Create once, use throughout development
+-   使用大上下文窗口 (Gemini的1M令牌)
+-   生成全面的文档 (PRD, 架构)
+-   利用多个代理进行头脑风暴
+-   一次创建，贯穿整个开发过程
 
-#### Phase 2: Development (IDE - Implementation)
+#### 阶段2：开发 (IDE - 实施)
 
-- Shard documents into manageable pieces
-- Execute focused SM → Dev cycles
-- One story at a time, sequential progress
-- Real-time file operations and testing
+-   将文档分片成可管理的部分
+-   执行专注的SM → Dev周期
+-   一次一个故事，顺序进展
+-   实时文件操作和测试
 
-### The Development Loop
+### 开发循环
 
 ```text
-1. SM Agent (New Chat) → Creates next story from sharded docs
-2. You → Review and approve story
-3. Dev Agent (New Chat) → Implements approved story
-4. QA Agent (New Chat) → Reviews and refactors code
-5. You → Verify completion
-6. Repeat until epic complete
+1. SM代理 (新聊天) → 从分片文档中创建下一个故事
+2. 您 → 审查并批准故事
+3. 开发代理 (新聊天) → 实施批准的故事
+4. QA代理 (新聊天) → 审查和重构代码
+5. 您 → 验证完成情况
+6. 重复直到史诗完成
 ```
 
-### Why This Works
+### 为何有效
 
-- **Context Optimization**: Clean chats = better AI performance
-- **Role Clarity**: Agents don't context-switch = higher quality
-- **Incremental Progress**: Small stories = manageable complexity
-- **Human Oversight**: You validate each step = quality control
-- **Document-Driven**: Specs guide everything = consistency
+- **上下文优化**: 清洁的聊天 = 更好的AI性能
+- **角色清晰**: 代理不切换上下文 = 更高的质量
+- **增量进展**: 小故事 = 可管理的复杂性
+- **人工监督**: 您验证每一步 = 质量控制
+- **文档驱动**: 规范指导一切 = 一致性
 
-## Getting Started
+## 开始使用
 
-### Quick Start Options
+### 快速入门选项
 
-#### Option 1: Web UI
+#### 选项1：Web UI
 
-**Best for**: ChatGPT, Claude, Gemini users who want to start immediately
+**最适合**: 想要立即开始的ChatGPT, Claude, Gemini用户
 
-1. Navigate to `dist/teams/`
-2. Copy `team-fullstack.txt` content
-3. Create new Gemini Gem or CustomGPT
-4. Upload file with instructions: "Your critical operating instructions are attached, do not break character as directed"
-5. Type `/help` to see available commands
+1.  导航到 `dist/teams/`
+2.  复制 `team-fullstack.txt` 的内容
+3.  创建新的Gemini Gem或CustomGPT
+4.  上传文件并附上说明：“您的关键操作说明已附上，请按指示不要脱离角色”
+5.  输入 `/help` 查看可用命令
 
-#### Option 2: IDE Integration
+#### 选项2：IDE集成
 
-**Best for**: Cursor, Claude Code, Windsurf, Trae, Cline, Roo Code, Github Copilot users
+**最适合**: Cursor, Claude Code, Windsurf, Trae, Cline, Roo Code, Github Copilot用户
 
 ```bash
-# Interactive installation (recommended)
+# 交互式安装 (推荐)
 npx bmad-method install
 ```
 
-**Installation Steps**:
+**安装步骤**:
 
-- Choose "Complete installation"
-- Select your IDE from supported options:
-  - **Cursor**: Native AI integration
-  - **Claude Code**: Anthropic's official IDE
-  - **Windsurf**: Built-in AI capabilities
-  - **Trae**: Built-in AI capabilities
-  - **Cline**: VS Code extension with AI features
-  - **Roo Code**: Web-based IDE with agent support
-  - **GitHub Copilot**: VS Code extension with AI peer programming assistant
+-   选择“完整安装”
+-   从支持的选项中选择您的IDE:
+    -   **Cursor**: 原生AI集成
+    -   **Claude Code**: Anthropic的官方IDE
+    -   **Windsurf**: 内置AI功能
+    -   **Trae**: 内置AI功能
+    -   **Cline**: 带有AI功能的VS Code扩展
+    -   **Roo Code**: 支持代理的基于Web的IDE
+    -   **GitHub Copilot**: 带有AI结对编程助手的VS Code扩展
 
-**Note for VS Code Users**: BMAD-METHOD™ assumes when you mention "VS Code" that you're using it with an AI-powered extension like GitHub Copilot, Cline, or Roo. Standard VS Code without AI capabilities cannot run BMad agents. The installer includes built-in support for Cline and Roo.
+**VS Code用户注意**: BMAD-METHOD™ 假设当您提到“VS Code”时，您正在使用它与一个AI驱动的扩展程序，如GitHub Copilot、Cline或Roo。没有AI功能的标准VS Code无法运行BMad代理。安装程序内置了对Cline和Roo的支持。
 
-**Verify Installation**:
+**验证安装**:
 
-- `.bmad-core/` folder created with all agents
-- IDE-specific integration files created
-- All agent commands/rules/modes available
+-   创建了 `.bmad-core/` 文件夹，包含所有代理
+-   创建了特定于IDE的集成文件
+-   所有代理命令/规则/模式均可用
 
-**Remember**: At its core, BMAD-METHOD™ is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use BMad - the framework provides the structured prompts and workflows that make AI development effective
+**请记住**: BMAD-METHOD™ 的核心是掌握和利用提示工程。任何支持AI代理的IDE都可以使用BMad——该框架提供了使AI开发有效的结构化提示和工作流。
 
-### Environment Selection Guide
+### 环境选择指南
 
-**Use Web UI for**:
+**使用Web UI进行**:
 
-- Initial planning and documentation (PRD, architecture)
-- Cost-effective document creation (especially with Gemini)
-- Brainstorming and analysis phases
-- Multi-agent consultation and planning
+-   初始规划和文档编写 (PRD, 架构)
+-   经济高效的文档创建 (尤其使用Gemini时)
+-   头脑风暴和分析阶段
+-   多代理咨询和规划
 
-**Use IDE for**:
+**使用IDE进行**:
 
-- Active development and coding
-- File operations and project integration
-- Document sharding and story management
-- Implementation workflow (SM/Dev cycles)
+-   积极的开发和编码
+-   文件操作和项目集成
+-   文档分片和故事管理
+-   实施工作流 (SM/Dev周期)
 
-**Cost-Saving Tip**: Create large documents (PRDs, architecture) in web UI, then copy to `docs/prd.md` and `docs/architecture.md` in your project before switching to IDE for development.
+**节省成本提示**: 在Web UI中创建大型文档 (PRD, 架构)，然后复制到您项目中的 `docs/prd.md` 和 `docs/architecture.md`，再切换到IDE进行开发。
 
-### IDE-Only Workflow Considerations
+### 仅IDE工作流的考量
 
-**Can you do everything in IDE?** Yes, but understand the tradeoffs:
+**您能在IDE中完成所有事情吗？** 可以，但要了解其中的权衡：
 
-**Pros of IDE-Only**:
+**仅IDE的优点**:
 
-- Single environment workflow
-- Direct file operations from start
-- No copy/paste between environments
-- Immediate project integration
+-   单一环境工作流
+-   从一开始就直接进行文件操作
+-   无需在环境之间复制/粘贴
+-   即时项目集成
 
-**Cons of IDE-Only**:
+**仅IDE的缺点**:
 
-- Higher token costs for large document creation
-- Smaller context windows (varies by IDE/model)
-- May hit limits during planning phases
-- Less cost-effective for brainstorming
+-   创建大型文档的令牌成本更高
+-   上下文窗口较小 (因IDE/模型而异)
+-   在规划阶段可能会达到限制
+-   对于头脑风暴来说成本效益较低
 
-**Using Web Agents in IDE**:
+**在IDE中使用Web代理**:
 
-- **NOT RECOMMENDED**: Web agents (PM, Architect) have rich dependencies designed for large contexts
-- **Why it matters**: Dev agents are kept lean to maximize coding context
-- **The principle**: "Dev agents code, planning agents plan" - mixing breaks this optimization
+-   **不推荐**: Web代理 (PM, 架构师) 具有丰富的依赖项，专为大型上下文设计
+-   **为何重要**: 开发代理保持精简以最大化编码上下文
+-   **原则**: “开发代理编码，规划代理规划”——混合使用会破坏此优化
 
-**About bmad-master and bmad-orchestrator**:
+**关于bmad-master和bmad-orchestrator**:
 
-- **bmad-master**: CAN do any task without switching agents, BUT...
-- **Still use specialized agents for planning**: PM, Architect, and UX Expert have tuned personas that produce better results
-- **Why specialization matters**: Each agent's personality and focus creates higher quality outputs
-- **If using bmad-master/orchestrator**: Fine for planning phases, but...
+-   **bmad-master**: 可以不切换代理完成任何任务，但是...
+-   **规划仍应使用专业代理**: PM, 架构师, 和UX专家拥有经过调整的角色，能产生更好的结果
+-   **为何专业化很重要**: 每个代理的个性和专注点能创造更高质量的产出
+-   **如果使用bmad-master/orchestrator**: 在规划阶段可以，但是...
 
-**CRITICAL RULE for Development**:
+**开发的关键规则**:
 
-- **ALWAYS use SM agent for story creation** - Never use bmad-master or bmad-orchestrator
-- **ALWAYS use Dev agent for implementation** - Never use bmad-master or bmad-orchestrator
-- **Why this matters**: SM and Dev agents are specifically optimized for the development workflow
-- **No exceptions**: Even if using bmad-master for everything else, switch to SM → Dev for implementation
+-   **创建故事时始终使用SM代理** - 切勿使用bmad-master或bmad-orchestrator
+-   **实施时始终使用Dev代理** - 切勿使用bmad-master或bmad-orchestrator
+-   **为何这很重要**: SM和Dev代理专为开发工作流进行了优化
+-   **没有例外**: 即使其他所有事情都使用bmad-master，实施时也要切换到SM → Dev
 
-**Best Practice for IDE-Only**:
+**仅IDE的最佳实践**:
 
-1. Use PM/Architect/UX agents for planning (better than bmad-master)
-2. Create documents directly in project
-3. Shard immediately after creation
-4. **MUST switch to SM agent** for story creation
-5. **MUST switch to Dev agent** for implementation
-6. Keep planning and coding in separate chat sessions
+1.  使用PM/架构师/UX代理进行规划 (比bmad-master更好)
+2.  直接在项目中创建文档
+3.  创建后立即分片
+4.  **必须切换到SM代理**创建故事
+5.  **必须切换到Dev代理**进行实施
+6.  在不同的聊天会话中进行规划和编码
 
-## Core Configuration (core-config.yaml)
+## 核心配置 (core-config.yaml)
 
-**New in V4**: The `bmad-core/core-config.yaml` file is a critical innovation that enables BMad to work seamlessly with any project structure, providing maximum flexibility and backwards compatibility.
+**V4新功能**: `bmad-core/core-config.yaml` 文件是一项关键创新，它使BMad能够与任何项目结构无缝协作，提供最大的灵活性和向后兼容性。
 
-### What is core-config.yaml?
+### 什么是core-config.yaml？
 
-This configuration file acts as a map for BMad agents, telling them exactly where to find your project documents and how they're structured. It enables:
+此配置文件充当BMad代理的地图，准确地告诉它们在哪里找到您的项目文档以及它们的结构。它实现了：
 
-- **Version Flexibility**: Work with V3, V4, or custom document structures
-- **Custom Locations**: Define where your documents and shards live
-- **Developer Context**: Specify which files the dev agent should always load
-- **Debug Support**: Built-in logging for troubleshooting
+-   **版本灵活性**: 使用V3, V4或自定义文档结构
+-   **自定义位置**: 定义您的文档和分片的位置
+-   **开发者上下文**: 指定开发代理应始终加载哪些文件
+-   **调试支持**: 内置日志记录以进行故障排除
 
-### Key Configuration Areas
+### 关键配置领域
 
-#### PRD Configuration
+#### PRD配置
 
-- **prdVersion**: Tells agents if PRD follows v3 or v4 conventions
-- **prdSharded**: Whether epics are embedded (false) or in separate files (true)
-- **prdShardedLocation**: Where to find sharded epic files
-- **epicFilePattern**: Pattern for epic filenames (e.g., `epic-{n}*.md`)
+-   **prdVersion**: 告诉代理PRD遵循v3还是v4约定
+-   **prdSharded**: 史诗是嵌入式 (false) 还是在单独的文件中 (true)
+-   **prdShardedLocation**: 在哪里找到分片的史诗文件
+-   **epicFilePattern**: 史诗文件名的模式 (例如, `epic-{n}*.md`)
 
-#### Architecture Configuration
+#### 架构配置
 
-- **architectureVersion**: v3 (monolithic) or v4 (sharded)
-- **architectureSharded**: Whether architecture is split into components
-- **architectureShardedLocation**: Where sharded architecture files live
+-   **architectureVersion**: v3 (单体) 或 v4 (分片)
+-   **architectureSharded**: 架构是否被拆分为组件
+-   **architectureShardedLocation**: 分片架构文件的存放位置
 
-#### Developer Files
+#### 开发者文件
 
-- **devLoadAlwaysFiles**: List of files the dev agent loads for every task
-- **devDebugLog**: Where dev agent logs repeated failures
-- **agentCoreDump**: Export location for chat conversations
+-   **devLoadAlwaysFiles**: 开发代理为每个任务加载的文件列表
+-   **devDebugLog**: 开发代理记录重复失败的地方
+-   **agentCoreDump**: 聊天对话的导出位置
 
-### Why It Matters
+### 为何重要
 
-1. **No Forced Migrations**: Keep your existing document structure
-2. **Gradual Adoption**: Start with V3 and migrate to V4 at your pace
-3. **Custom Workflows**: Configure BMad to match your team's process
-4. **Intelligent Agents**: Agents automatically adapt to your configuration
+1.  **无需强制迁移**: 保留您现有的文档结构
+2.  **逐步采用**: 从V3开始，按照您的节奏迁移到V4
+3.  **自定义工作流**: 配置BMad以匹配您团队的流程
+4.  **智能代理**: 代理自动适应您的配置
 
-### Common Configurations
+### 常见配置
 
-**Legacy V3 Project**:
+**旧版V3项目**:
 
 ```yaml
 prdVersion: v3
@@ -230,7 +230,7 @@ architectureVersion: v3
 architectureSharded: false
 ```
 
-**V4 Optimized Project**:
+**V4优化项目**:
 
 ```yaml
 prdVersion: v4
@@ -241,568 +241,568 @@ architectureSharded: true
 architectureShardedLocation: docs/architecture
 ```
 
-## Core Philosophy
+## 核心理念
 
 ### Vibe CEO'ing
 
-You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a singular vision. Your AI agents are your high-powered team, and your role is to:
+您是“Vibe CEO”——像一位拥有无限资源和单一愿景的CEO一样思考。您的AI代理是您的高效团队，您的角色是：
 
-- **Direct**: Provide clear instructions and objectives
-- **Refine**: Iterate on outputs to achieve quality
-- **Oversee**: Maintain strategic alignment across all agents
+-   **指导**: 提供明确的指示和目标
+-   **完善**: 迭代产出以达到高质量
+-   **监督**: 在所有代理之间保持战略一致性
 
-### Core Principles
+### 核心原则
 
-1. **MAXIMIZE_AI_LEVERAGE**: Push the AI to deliver more. Challenge outputs and iterate.
-2. **QUALITY_CONTROL**: You are the ultimate arbiter of quality. Review all outputs.
-3. **STRATEGIC_OVERSIGHT**: Maintain the high-level vision and ensure alignment.
-4. **ITERATIVE_REFINEMENT**: Expect to revisit steps. This is not a linear process.
-5. **CLEAR_INSTRUCTIONS**: Precise requests lead to better outputs.
-6. **DOCUMENTATION_IS_KEY**: Good inputs (briefs, PRDs) lead to good outputs.
-7. **START_SMALL_SCALE_FAST**: Test concepts, then expand.
-8. **EMBRACE_THE_CHAOS**: Adapt and overcome challenges.
+1.  **最大化AI杠杆**: 推动AI交付更多。挑战产出并进行迭代。
+2.  **质量控制**: 您是质量的最终裁决者。审查所有产出。
+3.  **战略监督**: 保持高层愿景并确保一致性。
+4.  **迭代完善**: 预计会重新审视步骤。这不是一个线性过程。
+5.  **明确指示**: 精确的请求会带来更好的产出。
+6.  **文档是关键**: 好的输入 (简报, PRD) 会带来好的输出。
+7.  **从小处着手，快速扩展**: 测试概念，然后扩展。
+8.  **拥抱混乱**: 适应并克服挑战。
 
-### Key Workflow Principles
+### 关键工作流原则
 
-1. **Agent Specialization**: Each agent has specific expertise and responsibilities
-2. **Clean Handoffs**: Always start fresh when switching between agents
-3. **Status Tracking**: Maintain story statuses (Draft → Approved → InProgress → Done)
-4. **Iterative Development**: Complete one story before starting the next
-5. **Documentation First**: Always start with solid PRD and architecture
+1.  **代理专业化**: 每个代理都有特定的专业知识和职责
+2.  **清晰的交接**: 在代理之间切换时始终重新开始
+3.  **状态跟踪**: 维护故事状态 (草稿 → 已批准 → 进行中 → 完成)
+4.  **迭代开发**: 在开始下一个故事之前完成一个故事
+5.  **文档优先**: 始终从坚实的PRD和架构开始
 
-## Agent System
+## 代理系统
 
-### Core Development Team
+### 核心开发团队
 
-| Agent       | Role               | Primary Functions                       | When to Use                            |
-| ----------- | ------------------ | --------------------------------------- | -------------------------------------- |
-| `analyst`   | Business Analyst   | Market research, requirements gathering | Project planning, competitive analysis |
-| `pm`        | Product Manager    | PRD creation, feature prioritization    | Strategic planning, roadmaps           |
-| `architect` | Solution Architect | System design, technical architecture   | Complex systems, scalability planning  |
-| `dev`       | Developer          | Code implementation, debugging          | All development tasks                  |
-| `qa`        | QA Specialist      | Test planning, quality assurance        | Testing strategies, bug validation     |
-| `ux-expert` | UX Designer        | UI/UX design, prototypes                | User experience, interface design      |
-| `po`        | Product Owner      | Backlog management, story validation    | Story refinement, acceptance criteria  |
-| `sm`        | Scrum Master       | Sprint planning, story creation         | Project management, workflow           |
+| 代理 | 角色 | 主要功能 | 何时使用 |
+| --- | --- | --- | --- |
+| `analyst` | 业务分析师 | 市场研究，需求收集 | 项目规划，竞争分析 |
+| `pm` | 产品经理 | PRD创建，功能优先级排序 | 战略规划，路线图 |
+| `architect` | 解决方案架构师 | 系统设计，技术架构 | 复杂系统，可扩展性规划 |
+| `dev` | 开发人员 | 代码实现，调试 | 所有开发任务 |
+| `qa` | QA专家 | 测试规划，质量保证 | 测试策略，错误验证 |
+| `ux-expert` | UX设计师 | UI/UX设计，原型 | 用户体验，界面设计 |
+| `po` | 产品负责人 | 待办事项管理，故事验证 | 故事完善，验收标准 |
+| `sm` | Scrum Master | Sprint规划，故事创建 | 项目管理，工作流 |
 
-### Meta Agents
+### 元代理
 
-| Agent               | Role             | Primary Functions                     | When to Use                       |
-| ------------------- | ---------------- | ------------------------------------- | --------------------------------- |
-| `bmad-orchestrator` | Team Coordinator | Multi-agent workflows, role switching | Complex multi-role tasks          |
-| `bmad-master`       | Universal Expert | All capabilities without switching    | Single-session comprehensive work |
+| 代理 | 角色 | 主要功能 | 何时使用 |
+| --- | --- | --- | --- |
+| `bmad-orchestrator` | 团队协调员 | 多代理工作流，角色切换 | 复杂的多角色任务 |
+| `bmad-master` | 通用专家 | 无需切换的所有功能 | 单会话综合工作 |
 
-### Agent Interaction Commands
+### 代理交互命令
 
-#### IDE-Specific Syntax
+#### IDE特定语法
 
-**Agent Loading by IDE**:
+**按IDE加载代理**:
 
-- **Claude Code**: `/agent-name` (e.g., `/bmad-master`)
-- **Cursor**: `@agent-name` (e.g., `@bmad-master`)
-- **Windsurf**: `/agent-name` (e.g., `/bmad-master`)
-- **Trae**: `@agent-name` (e.g., `@bmad-master`)
-- **Roo Code**: Select mode from mode selector (e.g., `bmad-master`)
-- **GitHub Copilot**: Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
+-   **Claude Code**: `/agent-name` (例如, `/bmad-master`)
+-   **Cursor**: `@agent-name` (例如, `@bmad-master`)
+-   **Windsurf**: `/agent-name` (例如, `/bmad-master`)
+-   **Trae**: `@agent-name` (例如, `@bmad-master`)
+-   **Roo Code**: 从模式选择器中选择模式 (例如, `bmad-master`)
+-   **GitHub Copilot**: 打开聊天视图 (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) 并从聊天模式选择器中选择**Agent**。
 
-**Chat Management Guidelines**:
+**聊天管理指南**:
 
-- **Claude Code, Cursor, Windsurf, Trae**: Start new chats when switching agents
-- **Roo Code**: Switch modes within the same conversation
+-   **Claude Code, Cursor, Windsurf, Trae**: 切换代理时开始新的聊天
+-   **Roo Code**: 在同一对话中切换模式
 
-**Common Task Commands**:
+**常用任务命令**:
 
-- `*help` - Show available commands
-- `*status` - Show current context/progress
-- `*exit` - Exit the agent mode
-- `*shard-doc docs/prd.md prd` - Shard PRD into manageable pieces
-- `*shard-doc docs/architecture.md architecture` - Shard architecture document
-- `*create` - Run create-next-story task (SM agent)
+-   `*help` - 显示可用命令
+-   `*status` - 显示当前上下文/进度
+-   `*exit` - 退出代理模式
+-   `*shard-doc docs/prd.md prd` - 将PRD分片成可管理的部分
+-   `*shard-doc docs/architecture.md architecture` - 分片架构文档
+-   `*create` - 运行create-next-story任务 (SM代理)
 
-**In Web UI**:
+**在Web UI中**:
 
 ```text
 /pm create-doc prd
 /architect review system design
 /dev implement story 1.2
-/help - Show available commands
-/switch agent-name - Change active agent (if orchestrator available)
+/help - 显示可用命令
+/switch agent-name - 更改活动代理 (如果协调器可用)
 ```
 
-## Team Configurations
+## 团队配置
 
-### Pre-Built Teams
+### 预建团队
 
-#### Team All
+#### 全员团队
 
-- **Includes**: All 10 agents + orchestrator
-- **Use Case**: Complete projects requiring all roles
-- **Bundle**: `team-all.txt`
+-   **包括**: 所有10个代理 + 协调器
+-   **用例**: 需要所有角色的完整项目
+-   **包**: `team-all.txt`
 
-#### Team Fullstack
+#### 全栈团队
 
-- **Includes**: PM, Architect, Developer, QA, UX Expert
-- **Use Case**: End-to-end web/mobile development
-- **Bundle**: `team-fullstack.txt`
+-   **包括**: PM, 架构师, 开发人员, QA, UX专家
+-   **用例**: 端到端的Web/移动开发
+-   **包**: `team-fullstack.txt`
 
-#### Team No-UI
+#### 无UI团队
 
-- **Includes**: PM, Architect, Developer, QA (no UX Expert)
-- **Use Case**: Backend services, APIs, system development
-- **Bundle**: `team-no-ui.txt`
+-   **包括**: PM, 架构师, 开发人员, QA (无UX专家)
+-   **用例**: 后端服务, API, 系统开发
+-   **包**: `team-no-ui.txt`
 
-## Core Architecture
+## 核心架构
 
-### System Overview
+### 系统概述
 
-The BMAD-METHOD™ is built around a modular architecture centered on the `bmad-core` directory, which serves as the brain of the entire system. This design enables the framework to operate effectively in both IDE environments (like Cursor, VS Code) and web-based AI interfaces (like ChatGPT, Gemini).
+BMAD-METHOD™ 围绕一个以 `bmad-core` 目录为中心的模块化架构构建，该目录是整个系统的大脑。这种设计使框架能够在IDE环境（如Cursor, VS Code）和基于Web的AI界面（如ChatGPT, Gemini）中有效运行。
 
-### Key Architectural Components
+### 关键架构组件
 
-#### 1. Agents (`bmad-core/agents/`)
+#### 1. 代理 (`bmad-core/agents/`)
 
-- **Purpose**: Each markdown file defines a specialized AI agent for a specific Agile role (PM, Dev, Architect, etc.)
-- **Structure**: Contains YAML headers specifying the agent's persona, capabilities, and dependencies
-- **Dependencies**: Lists of tasks, templates, checklists, and data files the agent can use
-- **Startup Instructions**: Can load project-specific documentation for immediate context
+-   **目的**: 每个markdown文件为特定的敏捷角色（PM, Dev, 架构师等）定义一个专门的AI代理
+-   **结构**: 包含指定代理角色、能力和依赖项的YAML头
+-   **依赖项**: 代理可以使用的任务、模板、清单和数据文件列表
+-   **启动说明**: 可以加载特定于项目的文档以获得即时上下文
 
-#### 2. Agent Teams (`bmad-core/agent-teams/`)
+#### 2. 代理团队 (`bmad-core/agent-teams/`)
 
-- **Purpose**: Define collections of agents bundled together for specific purposes
-- **Examples**: `team-all.yaml` (comprehensive bundle), `team-fullstack.yaml` (full-stack development)
-- **Usage**: Creates pre-packaged contexts for web UI environments
+-   **目的**: 定义为特定目的捆绑在一起的代理集合
+-   **示例**: `team-all.yaml` (综合包), `team-fullstack.yaml` (全栈开发)
+-   **用途**: 为Web UI环境创建预打包的上下文
 
-#### 3. Workflows (`bmad-core/workflows/`)
+#### 3. 工作流 (`bmad-core/workflows/`)
 
-- **Purpose**: YAML files defining prescribed sequences of steps for specific project types
-- **Types**: Greenfield (new projects) and Brownfield (existing projects) for UI, service, and fullstack development
-- **Structure**: Defines agent interactions, artifacts created, and transition conditions
+-   **目的**: 为特定项目类型定义规定步骤序列的YAML文件
+-   **类型**: 绿地 (新项目) 和棕地 (现有项目) 的UI、服务和全栈开发
+-   **结构**: 定义代理交互、创建的工件和转换条件
 
-#### 4. Reusable Resources
+#### 4. 可复用资源
 
-- **Templates** (`bmad-core/templates/`): Markdown templates for PRDs, architecture specs, user stories
-- **Tasks** (`bmad-core/tasks/`): Instructions for specific repeatable actions like "shard-doc" or "create-next-story"
-- **Checklists** (`bmad-core/checklists/`): Quality assurance checklists for validation and review
-- **Data** (`bmad-core/data/`): Core knowledge base and technical preferences
+-   **模板** (`bmad-core/templates/`): PRD、架构规范、用户故事的Markdown模板
+-   **任务** (`bmad-core/tasks/`): 特定可重复操作的说明，如 "shard-doc" 或 "create-next-story"
+-   **清单** (`bmad-core/checklists/`): 用于验证和审查的质量保证清单
+-   **数据** (`bmad-core/data/`): 核心知识库和技术偏好
 
-### Dual Environment Architecture
+### 双环境架构
 
-#### IDE Environment
+#### IDE环境
 
-- Users interact directly with agent markdown files
-- Agents can access all dependencies dynamically
-- Supports real-time file operations and project integration
-- Optimized for development workflow execution
+-   用户直接与代理markdown文件交互
+-   代理可以动态访问所有依赖项
+-   支持实时文件操作和项目集成
+-   为开发工作流执行而优化
 
-#### Web UI Environment
+#### Web UI环境
 
-- Uses pre-built bundles from `dist/teams` for stand alone 1 upload files for all agents and their assets with an orchestrating agent
-- Single text files containing all agent dependencies are in `dist/agents/` - these are unnecessary unless you want to create a web agent that is only a single agent and not a team
-- Created by the web-builder tool for upload to web interfaces
-- Provides complete context in one package
+-   使用 `dist/teams` 中的预建包，为所有代理及其资产提供独立的单个上传文件，并带有一个协调代理
+-   包含所有代理依赖项的单个文本文件位于 `dist/agents/` 中 - 除非您想创建一个仅为单个代理而非团队的Web代理，否则这些文件是不必要的
+-   由web-builder工具创建，用于上传到Web界面
+-   在一个包中提供完整的上下文
 
-### Template Processing System
+### 模板处理系统
 
-BMad employs a sophisticated template system with three key components:
+BMad采用了一个复杂的模板系统，包含三个关键组件：
 
-1. **Template Format** (`utils/bmad-doc-template.md`): Defines markup language for variable substitution and AI processing directives from yaml templates
-2. **Document Creation** (`tasks/create-doc.md`): Orchestrates template selection and user interaction to transform yaml spec to final markdown output
-3. **Advanced Elicitation** (`tasks/advanced-elicitation.md`): Provides interactive refinement through structured brainstorming
+1.  **模板格式** (`utils/bmad-doc-template.md`): 定义用于变量替换和来自yaml模板的AI处理指令的标记语言
+2.  **文档创建** (`tasks/create-doc.md`): 协调模板选择和用户交互，将yaml规范转换为最终的markdown输出
+3.  **高级启发** (`tasks/advanced-elicitation.md`): 通过结构化的头脑风暴提供交互式完善
 
-### Technical Preferences Integration
+### 技术偏好集成
 
-The `technical-preferences.md` file serves as a persistent technical profile that:
+`technical-preferences.md` 文件作为一个持久的技术配置文件，它：
 
-- Ensures consistency across all agents and projects
-- Eliminates repetitive technology specification
-- Provides personalized recommendations aligned with user preferences
-- Evolves over time with lessons learned
+-   确保所有代理和项目的一致性
+-   消除重复的技术规范
+-   提供符合用户偏好的个性化建议
+-   随着经验教训的积累而不断演进
 
-### Build and Delivery Process
+### 构建和交付过程
 
-The `web-builder.js` tool creates web-ready bundles by:
+`web-builder.js` 工具通过以下方式创建Web就绪的包：
 
-1. Reading agent or team definition files
-2. Recursively resolving all dependencies
-3. Concatenating content into single text files with clear separators
-4. Outputting ready-to-upload bundles for web AI interfaces
+1.  读取代理或团队定义文件
+2.  递归解析所有依赖项
+3.  将内容连接成带有清晰分隔符的单个文本文件
+4.  输出可供上传到Web AI界面的就绪包
 
-This architecture enables seamless operation across environments while maintaining the rich, interconnected agent ecosystem that makes BMad powerful.
+这种架构实现了跨环境的无缝操作，同时保持了使BMad强大的丰富、互联的代理生态系统。
 
-## Complete Development Workflow
+## 完整开发工作流
 
-### Planning Phase (Web UI Recommended - Especially Gemini!)
+### 规划阶段 (推荐Web UI - 特别是Gemini！)
 
-**Ideal for cost efficiency with Gemini's massive context:**
+**对于使用Gemini巨大上下文的成本效益是理想的：**
 
-**For Brownfield Projects - Start Here!**:
+**对于棕地项目 - 从这里开始！**:
 
-1. **Upload entire project to Gemini Web** (GitHub URL, files, or zip)
-2. **Document existing system**: `/analyst` → `*document-project`
-3. **Creates comprehensive docs** from entire codebase analysis
+1.  **将整个项目上传到Gemini Web** (GitHub URL, 文件, 或zip)
+2.  **记录现有系统**: `/analyst` → `*document-project`
+3.  **从整个代码库分析中创建全面的文档**
 
-**For All Projects**:
+**对于所有项目**:
 
-1. **Optional Analysis**: `/analyst` - Market research, competitive analysis
-2. **Project Brief**: Create foundation document (Analyst or user)
-3. **PRD Creation**: `/pm create-doc prd` - Comprehensive product requirements
-4. **Architecture Design**: `/architect create-doc architecture` - Technical foundation
-5. **Validation & Alignment**: `/po` run master checklist to ensure document consistency
-6. **Document Preparation**: Copy final documents to project as `docs/prd.md` and `docs/architecture.md`
+1.  **可选分析**: `/analyst` - 市场研究, 竞争分析
+2.  **项目简报**: 创建基础文档 (分析师或用户)
+3.  **PRD创建**: `/pm create-doc prd` - 全面的产品需求
+4.  **架构设计**: `/architect create-doc architecture` - 技术基础
+5.  **验证与对齐**: `/po` 运行主清单以确保文档一致性
+6.  **文档准备**: 将最终文档复制到项目中的 `docs/prd.md` 和 `docs/architecture.md`
 
-#### Example Planning Prompts
+#### 示例规划提示
 
-**For PRD Creation**:
+**用于PRD创建**:
 
 ```text
-"I want to build a [type] application that [core purpose].
-Help me brainstorm features and create a comprehensive PRD."
+"我想构建一个[类型]应用程序，其[核心目的]。
+帮我头脑风暴功能并创建一个全面的PRD。"
 ```
 
-**For Architecture Design**:
+**用于架构设计**:
 
 ```text
-"Based on this PRD, design a scalable technical architecture
-that can handle [specific requirements]."
+"基于此PRD，设计一个可扩展的技术架构
+能够处理[特定需求]。"
 ```
 
-### Critical Transition: Web UI to IDE
+### 关键转换：Web UI到IDE
 
-**Once planning is complete, you MUST switch to IDE for development:**
+**规划完成后，您必须切换到IDE进行开发：**
 
-- **Why**: Development workflow requires file operations, real-time project integration, and document sharding
-- **Cost Benefit**: Web UI is more cost-effective for large document creation; IDE is optimized for development tasks
-- **Required Files**: Ensure `docs/prd.md` and `docs/architecture.md` exist in your project
+-   **原因**: 开发工作流需要文件操作、实时项目集成和文档分片
+-   **成本效益**: Web UI对于大型文档创建更具成本效益；IDE为开发任务进行了优化
+-   **所需文件**: 确保您的项目中存在 `docs/prd.md` 和 `docs/architecture.md`
 
-### IDE Development Workflow
+### IDE开发工作流
 
-**Prerequisites**: Planning documents must exist in `docs/` folder
+**先决条件**: 规划文档必须存在于 `docs/` 文件夹中
 
-1. **Document Sharding** (CRITICAL STEP):
-   - Documents created by PM/Architect (in Web or IDE) MUST be sharded for development
-   - Two methods to shard:
-     a) **Manual**: Drag `shard-doc` task + document file into chat
-     b) **Agent**: Ask `@bmad-master` or `@po` to shard documents
-   - Shards `docs/prd.md` → `docs/prd/` folder
-   - Shards `docs/architecture.md` → `docs/architecture/` folder
-   - **WARNING**: Do NOT shard in Web UI - copying many small files is painful!
+1.  **文档分片** (关键步骤):
+    -   由PM/架构师创建的文档 (在Web或IDE中) 必须为开发进行分片
+    -   分片有两种方法：
+        a) **手动**: 将 `shard-doc` 任务 + 文档文件拖入聊天
+        b) **代理**: 要求 `@bmad-master` 或 `@po` 分片文档
+    -   将 `docs/prd.md` 分片到 `docs/prd/` 文件夹
+    -   将 `docs/architecture.md` 分片到 `docs/architecture/` 文件夹
+    -   **警告**: 不要在Web UI中分片 - 复制许多小文件很痛苦！
 
-2. **Verify Sharded Content**:
-   - At least one `epic-n.md` file in `docs/prd/` with stories in development order
-   - Source tree document and coding standards for dev agent reference
-   - Sharded docs for SM agent story creation
+2.  **验证分片内容**:
+    -   `docs/prd/` 中至少有一个 `epic-n.md` 文件，其中包含按开发顺序列出的故事
+    -   供开发代理参考的源代码树文档和编码标准
+    -   供SM代理创建故事的分片文档
 
-Resulting Folder Structure:
+生成的文件夹结构：
 
-- `docs/prd/` - Broken down PRD sections
-- `docs/architecture/` - Broken down architecture sections
-- `docs/stories/` - Generated user stories
+-   `docs/prd/` - 分解的PRD部分
+-   `docs/architecture/` - 分解的架构部分
+-   `docs/stories/` - 生成的用户故事
 
-1. **Development Cycle** (Sequential, one story at a time):
+1.  **开发周期** (顺序进行，一次一个故事):
 
-   **CRITICAL CONTEXT MANAGEMENT**:
-   - **Context windows matter!** Always use fresh, clean context windows
-   - **Model selection matters!** Use most powerful thinking model for SM story creation
-   - **ALWAYS start new chat between SM, Dev, and QA work**
+    **关键上下文管理**:
+    -   **上下文窗口很重要！** 始终使用全新的、干净的上下文窗口
+    -   **模型选择很重要！** 为SM故事创建使用最强大的思维模型
+    -   **在SM, Dev, 和QA工作之间始终开始新的聊天**
 
-   **Step 1 - Story Creation**:
-   - **NEW CLEAN CHAT** → Select powerful model → `@sm` → `*create`
-   - SM executes create-next-story task
-   - Review generated story in `docs/stories/`
-   - Update status from "Draft" to "Approved"
+    **步骤1 - 故事创建**:
+    -   **新的干净聊天** → 选择强大的模型 → `@sm` → `*create`
+    -   SM执行create-next-story任务
+    -   在 `docs/stories/` 中审查生成的故事
+    -   将状态从“草稿”更新为“已批准”
 
-   **Step 2 - Story Implementation**:
-   - **NEW CLEAN CHAT** → `@dev`
-   - Agent asks which story to implement
-   - Include story file content to save dev agent lookup time
-   - Dev follows tasks/subtasks, marking completion
-   - Dev maintains File List of all changes
-   - Dev marks story as "Review" when complete with all tests passing
+    **步骤2 - 故事实施**:
+    -   **新的干净聊天** → `@dev`
+    -   代理询问要实施哪个故事
+    -   包含故事文件内容以节省开发代理查找时间
+    -   开发人员遵循任务/子任务，标记完成
+    -   开发人员维护所有更改的文件列表
+    -   当所有测试通过时，开发人员将故事标记为“待审查”
 
-   **Step 3 - Senior QA Review**:
-   - **NEW CLEAN CHAT** → `@qa` → execute review-story task
-   - QA performs senior developer code review
-   - QA can refactor and improve code directly
-   - QA appends results to story's QA Results section
-   - If approved: Status → "Done"
-   - If changes needed: Status stays "Review" with unchecked items for dev
+    **步骤3 - 高级QA审查**:
+    -   **新的干净聊天** → `@qa` → 执行review-story任务
+    -   QA执行高级开发人员代码审查
+    -   QA可以直接重构和改进代码
+    -   QA将结果附加到故事的QA结果部分
+    -   如果批准：状态 → “完成”
+    -   如果需要更改：状态保持“待审查”，并为开发人员提供未检查的项目
 
-   **Step 4 - Repeat**: Continue SM → Dev → QA cycle until all epic stories complete
+    **步骤4 - 重复**: 继续SM → Dev → QA循环，直到所有史诗故事完成
 
-**Important**: Only 1 story in progress at a time, worked sequentially until all epic stories complete.
+**重要提示**: 一次只有一个故事在进行中，按顺序工作，直到所有史诗故事完成。
 
-### Status Tracking Workflow
+### 状态跟踪工作流
 
-Stories progress through defined statuses:
+故事通过定义的状态进行：
 
-- **Draft** → **Approved** → **InProgress** → **Done**
+-   **草稿** → **已批准** → **进行中** → **完成**
 
-Each status change requires user verification and approval before proceeding.
+每个状态更改都需要用户验证和批准才能继续。
 
-### Workflow Types
+### 工作流类型
 
-#### Greenfield Development
+#### 绿地开发
 
-- Business analysis and market research
-- Product requirements and feature definition
-- System architecture and design
-- Development execution
-- Testing and deployment
+-   业务分析和市场研究
+-   产品需求和功能定义
+-   系统架构和设计
+-   开发执行
+-   测试和部署
 
-#### Brownfield Enhancement (Existing Projects)
+#### 棕地增强 (现有项目)
 
-**Key Concept**: Brownfield development requires comprehensive documentation of your existing project for AI agents to understand context, patterns, and constraints.
+**关键概念**: 棕地开发需要对您现有项目进行全面记录，以便AI代理了解上下文、模式和约束。
 
-**Complete Brownfield Workflow Options**:
+**完整的棕地工作流选项**:
 
-**Option 1: PRD-First (Recommended for Large Codebases/Monorepos)**:
+**选项1：PRD优先 (推荐用于大型代码库/单体仓库)**:
 
-1. **Upload project to Gemini Web** (GitHub URL, files, or zip)
-2. **Create PRD first**: `@pm` → `*create-doc brownfield-prd`
-3. **Focused documentation**: `@analyst` → `*document-project`
-   - Analyst asks for focus if no PRD provided
-   - Choose "single document" format for Web UI
-   - Uses PRD to document ONLY relevant areas
-   - Creates one comprehensive markdown file
-   - Avoids bloating docs with unused code
+1.  **将项目上传到Gemini Web** (GitHub URL, 文件, 或zip)
+2.  **首先创建PRD**: `@pm` → `*create-doc brownfield-prd`
+3.  **专注文档**: `@analyst` → `*document-project`
+    -   如果未提供PRD，分析师会要求提供焦点
+    -   为Web UI选择“单一文档”格式
+    -   使用PRD仅记录相关区域
+    -   创建一个全面的markdown文件
+    -   避免用未使用的代码使文档膨胀
 
-**Option 2: Document-First (Good for Smaller Projects)**:
+**选项2：文档优先 (适用于较小项目)**:
 
-1. **Upload project to Gemini Web**
-2. **Document everything**: `@analyst` → `*document-project`
-3. **Then create PRD**: `@pm` → `*create-doc brownfield-prd`
-   - More thorough but can create excessive documentation
+1.  **将项目上传到Gemini Web**
+2.  **记录所有内容**: `@analyst` → `*document-project`
+3.  **然后创建PRD**: `@pm` → `*create-doc brownfield-prd`
+    -   更彻底，但可能产生过多文档
 
-4. **Requirements Gathering**:
-   - **Brownfield PRD**: Use PM agent with `brownfield-prd-tmpl`
-   - **Analyzes**: Existing system, constraints, integration points
-   - **Defines**: Enhancement scope, compatibility requirements, risk assessment
-   - **Creates**: Epic and story structure for changes
+4.  **需求收集**:
+    -   **棕地PRD**: 使用带有 `brownfield-prd-tmpl` 的PM代理
+    -   **分析**: 现有系统、约束、集成点
+    -   **定义**: 增强范围、兼容性要求、风险评估
+    -   **创建**: 更改的史诗和故事结构
 
-5. **Architecture Planning**:
-   - **Brownfield Architecture**: Use Architect agent with `brownfield-architecture-tmpl`
-   - **Integration Strategy**: How new features integrate with existing system
-   - **Migration Planning**: Gradual rollout and backwards compatibility
-   - **Risk Mitigation**: Addressing potential breaking changes
+5.  **架构规划**:
+    -   **棕地架构**: 使用带有 `brownfield-architecture-tmpl` 的架构师代理
+    -   **集成策略**: 新功能如何与现有系统集成
+    -   **迁移规划**: 逐步推出和向后兼容性
+    -   **风险缓解**: 解决潜在的重大变更
 
-**Brownfield-Specific Resources**:
+**棕地特定资源**:
 
-**Templates**:
+**模板**:
 
-- `brownfield-prd-tmpl.md`: Comprehensive enhancement planning with existing system analysis
-- `brownfield-architecture-tmpl.md`: Integration-focused architecture for existing systems
+-   `brownfield-prd-tmpl.md`: 带有现有系统分析的全面增强规划
+-   `brownfield-architecture-tmpl.md`: 用于现有系统的以集成为重点的架构
 
-**Tasks**:
+**任务**:
 
-- `document-project`: Generates comprehensive documentation from existing codebase
-- `brownfield-create-epic`: Creates single epic for focused enhancements (when full PRD is overkill)
-- `brownfield-create-story`: Creates individual story for small, isolated changes
+-   `document-project`: 从现有代码库生成全面的文档
+-   `brownfield-create-epic`: 为专注的增强创建单个史诗 (当完整的PRD过于冗长时)
+-   `brownfield-create-story`: 为小的、孤立的更改创建单个故事
 
-**When to Use Each Approach**:
+**何时使用每种方法**:
 
-**Full Brownfield Workflow** (Recommended for):
+**完整棕地工作流** (推荐用于):
 
-- Major feature additions
-- System modernization
-- Complex integrations
-- Multiple related changes
+-   主要功能添加
+-   系统现代化
+-   复杂集成
+-   多个相关更改
 
-**Quick Epic/Story Creation** (Use when):
+**快速史诗/故事创建** (用于):
 
-- Single, focused enhancement
-- Isolated bug fixes
-- Small feature additions
-- Well-documented existing system
+-   单一、专注的增强
+-   孤立的错误修复
+-   小的功能添加
+-   文档齐全的现有系统
 
-**Critical Success Factors**:
+**关键成功因素**:
 
-1. **Documentation First**: Always run `document-project` if docs are outdated/missing
-2. **Context Matters**: Provide agents access to relevant code sections
-3. **Integration Focus**: Emphasize compatibility and non-breaking changes
-4. **Incremental Approach**: Plan for gradual rollout and testing
+1.  **文档优先**: 如果文档过时/缺失，请始终运行 `document-project`
+2.  **上下文很重要**: 为代理提供对相关代码部分的访问权限
+3.  **关注集成**: 强调兼容性和非破坏性更改
+4.  **增量方法**: 计划逐步推出和测试
 
-**For detailed guide**: See `docs/working-in-the-brownfield.md`
+**详细指南**: 请参阅 `docs/working-in-the-brownfield.md`
 
-## Document Creation Best Practices
+## 文档创建最佳实践
 
-### Required File Naming for Framework Integration
+### 框架集成的必需文件命名
 
-- `docs/prd.md` - Product Requirements Document
-- `docs/architecture.md` - System Architecture Document
+-   `docs/prd.md` - 产品需求文档
+-   `docs/architecture.md` - 系统架构文档
 
-**Why These Names Matter**:
+**为何这些名称很重要**:
 
-- Agents automatically reference these files during development
-- Sharding tasks expect these specific filenames
-- Workflow automation depends on standard naming
+-   代理在开发过程中自动引用这些文件
+-   分片任务期望这些特定的文件名
+-   工作流自动化依赖于标准命名
 
-### Cost-Effective Document Creation Workflow
+### 经济高效的文档创建工作流
 
-**Recommended for Large Documents (PRD, Architecture):**
+**推荐用于大型文档 (PRD, 架构):**
 
-1. **Use Web UI**: Create documents in web interface for cost efficiency
-2. **Copy Final Output**: Save complete markdown to your project
-3. **Standard Names**: Save as `docs/prd.md` and `docs/architecture.md`
-4. **Switch to IDE**: Use IDE agents for development and smaller documents
+1.  **使用Web UI**: 在Web界面中创建文档以提高成本效益
+2.  **复制最终输出**: 将完整的markdown保存到您的项目中
+3.  **标准名称**: 另存为 `docs/prd.md` 和 `docs/architecture.md`
+4.  **切换到IDE**: 使用IDE代理进行开发和处理较小的文档
 
-### Document Sharding
+### 文档分片
 
-Templates with Level 2 headings (`##`) can be automatically sharded:
+具有2级标题 (`##`) 的模板可以自动分片：
 
-**Original PRD**:
+**原始PRD**:
 
 ```markdown
-## Goals and Background Context
+## 目标和背景上下文
 
-## Requirements
+## 需求
 
-## User Interface Design Goals
+## 用户界面设计目标
 
-## Success Metrics
+## 成功指标
 ```
 
-**After Sharding**:
+**分片后**:
 
-- `docs/prd/goals-and-background-context.md`
-- `docs/prd/requirements.md`
-- `docs/prd/user-interface-design-goals.md`
-- `docs/prd/success-metrics.md`
+-   `docs/prd/goals-and-background-context.md`
+-   `docs/prd/requirements.md`
+-   `docs/prd/user-interface-design-goals.md`
+-   `docs/prd/success-metrics.md`
 
-Use the `shard-doc` task or `@kayvan/markdown-tree-parser` tool for automatic sharding.
+使用 `shard-doc` 任务或 `@kayvan/markdown-tree-parser` 工具进行自动分片。
 
-## Usage Patterns and Best Practices
+## 使用模式和最佳实践
 
-### Environment-Specific Usage
+### 特定环境的使用
 
-**Web UI Best For**:
+**Web UI最适合**:
 
-- Initial planning and documentation phases
-- Cost-effective large document creation
-- Agent consultation and brainstorming
-- Multi-agent workflows with orchestrator
+-   初始规划和文档阶段
+-   经济高效的大型文档创建
+-   代理咨询和头脑风暴
+-   使用协调器的多代理工作流
 
-**IDE Best For**:
+**IDE最适合**:
 
-- Active development and implementation
-- File operations and project integration
-- Story management and development cycles
-- Code review and debugging
+-   积极的开发和实施
+-   文件操作和项目集成
+-   故事管理和开发周期
+-   代码审查和调试
 
-### Quality Assurance
+### 质量保证
 
-- Use appropriate agents for specialized tasks
-- Follow Agile ceremonies and review processes
-- Maintain document consistency with PO agent
-- Regular validation with checklists and templates
+-   为专业任务使用适当的代理
+-   遵循敏捷仪式和审查流程
+-   与PO代理保持文档一致性
+-   使用清单和模板进行定期验证
 
-### Performance Optimization
+### 性能优化
 
-- Use specific agents vs. `bmad-master` for focused tasks
-- Choose appropriate team size for project needs
-- Leverage technical preferences for consistency
-- Regular context management and cache clearing
+-   为专注任务使用特定代理，而不是 `bmad-master`
+-   为项目需求选择适当的团队规模
+-   利用技术偏好以保持一致性
+-   定期进行上下文管理和缓存清理
 
-## Success Tips
+## 成功秘诀
 
-- **Use Gemini for big picture planning** - The team-fullstack bundle provides collaborative expertise
-- **Use bmad-master for document organization** - Sharding creates manageable chunks
-- **Follow the SM → Dev cycle religiously** - This ensures systematic progress
-- **Keep conversations focused** - One agent, one task per conversation
-- **Review everything** - Always review and approve before marking complete
+-   **使用Gemini进行宏观规划** - team-fullstack包提供协作专业知识
+-   **使用bmad-master进行文档组织** - 分片创建可管理的块
+-   **严格遵循SM → Dev周期** - 这确保了系统的进展
+-   **保持对话专注** - 每个对话一个代理，一个任务
+-   **审查一切** - 在标记完成前始终审查和批准
 
-## Contributing to BMAD-METHOD™
+## 为BMAD-METHOD™做贡献
 
-### Quick Contribution Guidelines
+### 快速贡献指南
 
-For full details, see `CONTRIBUTING.md`. Key points:
+有关完整详细信息，请参阅 `CONTRIBUTING.md`。要点：
 
-**Fork Workflow**:
+**Fork工作流**:
 
-1. Fork the repository
-2. Create feature branches
-3. Submit PRs to `next` branch (default) or `main` for critical fixes only
-4. Keep PRs small: 200-400 lines ideal, 800 lines maximum
-5. One feature/fix per PR
+1.  Fork仓库
+2.  创建功能分支
+3.  向 `next` 分支提交PR (默认) 或仅为关键修复提交到 `main`
+4.  保持PR小：200-400行是理想的，最多800行
+5.  每个PR一个功能/修复
 
-**PR Requirements**:
+**PR要求**:
 
-- Clear descriptions (max 200 words) with What/Why/How/Testing
-- Use conventional commits (feat:, fix:, docs:)
-- Atomic commits - one logical change per commit
-- Must align with guiding principles
+-   清晰的描述 (最多200字)，包括什么/为什么/如何/测试
+-   使用常规提交 (feat:, fix:, docs:)
+-   原子提交 - 每个提交一个逻辑更改
+-   必须与指导原则保持一致
 
-**Core Principles** (from docs/GUIDING-PRINCIPLES.md):
+**核心原则** (来自 docs/GUIDING-PRINCIPLES.md):
 
-- **Dev Agents Must Be Lean**: Minimize dependencies, save context for code
-- **Natural Language First**: Everything in markdown, no code in core
-- **Core vs Expansion Packs**: Core for universal needs, packs for specialized domains
-- **Design Philosophy**: "Dev agents code, planning agents plan"
+-   **开发代理必须精简**: 最小化依赖项，为代码节省上下文
+-   **自然语言优先**: 所有内容都在markdown中，核心中没有代码
+-   **核心与扩展包**: 核心用于通用需求，包用于专业领域
+-   **设计理念**: “开发代理编码，规划代理规划”
 
-## Expansion Packs
+## 扩展包
 
-### What Are Expansion Packs?
+### 什么是扩展包？
 
-Expansion packs extend BMAD-METHOD™ beyond traditional software development into ANY domain. They provide specialized agent teams, templates, and workflows while keeping the core framework lean and focused on development.
+扩展包将BMAD-METHOD™ 从传统的软件开发扩展到任何领域。它们提供专业的代理团队、模板和工作流，同时保持核心框架的精简和专注于开发。
 
-### Why Use Expansion Packs?
+### 为何使用扩展包？
 
-1. **Keep Core Lean**: Dev agents maintain maximum context for coding
-2. **Domain Expertise**: Deep, specialized knowledge without bloating core
-3. **Community Innovation**: Anyone can create and share packs
-4. **Modular Design**: Install only what you need
+1.  **保持核心精简**: 开发代理为编码保持最大的上下文
+2.  **领域专业知识**: 深入的、专业的知识，而不会使核心膨胀
+3.  **社区创新**: 任何人都可以创建和共享包
+4.  **模块化设计**: 只安装您需要的东西
 
-### Available Expansion Packs
+### 可用扩展包
 
-**Technical Packs**:
+**技术包**:
 
-- **Infrastructure/DevOps**: Cloud architects, SRE experts, security specialists
-- **Game Development**: Game designers, level designers, narrative writers
-- **Mobile Development**: iOS/Android specialists, mobile UX experts
-- **Data Science**: ML engineers, data scientists, visualization experts
+-   **基础设施/DevOps**: 云架构师, SRE专家, 安全专家
+-   **游戏开发**: 游戏设计师, 关卡设计师, 叙事作家
+-   **移动开发**: iOS/Android专家, 移动UX专家
+-   **数据科学**: 机器学习工程师, 数据科学家, 可视化专家
 
-**Non-Technical Packs**:
+**非技术包**:
 
-- **Business Strategy**: Consultants, financial analysts, marketing strategists
-- **Creative Writing**: Plot architects, character developers, world builders
-- **Health & Wellness**: Fitness trainers, nutritionists, habit engineers
-- **Education**: Curriculum designers, assessment specialists
-- **Legal Support**: Contract analysts, compliance checkers
+-   **商业战略**: 顾问, 财务分析师, 营销策略师
+-   **创意写作**: 情节架构师, 角色开发者, 世界构建者
+-   **健康与保健**: 健身教练, 营养师, 习惯工程师
+-   **教育**: 课程设计师, 评估专家
+-   **法律支持**: 合同分析师, 合规检查员
 
-**Specialty Packs**:
+**专业包**:
 
-- **Expansion Creator**: Tools to build your own expansion packs
-- **RPG Game Master**: Tabletop gaming assistance
-- **Life Event Planning**: Wedding planners, event coordinators
-- **Scientific Research**: Literature reviewers, methodology designers
+-   **扩展创建者**: 用于构建您自己的扩展包的工具
+-   **RPG游戏大师**: 桌游辅助
+-   **生活事件规划**: 婚礼策划师, 活动协调员
+-   **科学研究**: 文献综述员, 方法论设计师
 
-### Using Expansion Packs
+### 使用扩展包
 
-1. **Browse Available Packs**: Check `expansion-packs/` directory
-2. **Get Inspiration**: See `docs/expansion-packs.md` for detailed examples and ideas
-3. **Install via CLI**:
+1.  **浏览可用包**: 查看 `expansion-packs/` 目录
+2.  **获取灵感**: 查看 `docs/expansion-packs.md` 获取详细示例和想法
+3.  **通过CLI安装**:
 
    ```bash
    npx bmad-method install
-   # Select "Install expansion pack" option
+   # 选择 "安装扩展包" 选项
    ```
 
-4. **Use in Your Workflow**: Installed packs integrate seamlessly with existing agents
+4.  **在您的工作流中使用**: 安装的包与现有代理无缝集成
 
-### Creating Custom Expansion Packs
+### 创建自定义扩展包
 
-Use the **expansion-creator** pack to build your own:
+使用 **expansion-creator** 包构建您自己的：
 
-1. **Define Domain**: What expertise are you capturing?
-2. **Design Agents**: Create specialized roles with clear boundaries
-3. **Build Resources**: Tasks, templates, checklists for your domain
-4. **Test & Share**: Validate with real use cases, share with community
+1.  **定义领域**: 您要捕获什么专业知识？
+2.  **设计代理**: 创建具有清晰边界的专业角色
+3.  **构建资源**: 为您的领域创建任务、模板、清单
+4.  **测试与分享**: 用真实用例验证，与社区分享
 
-**Key Principle**: Expansion packs democratize expertise by making specialized knowledge accessible through AI agents.
+**关键原则**: 扩展包通过AI代理使专业知识变得可访问，从而使专业知识民主化。
 
-## Getting Help
+## 获取帮助
 
-- **Commands**: Use `*/*help` in any environment to see available commands
-- **Agent Switching**: Use `*/*switch agent-name` with orchestrator for role changes
-- **Documentation**: Check `docs/` folder for project-specific context
-- **Community**: Discord and GitHub resources available for support
-- **Contributing**: See `CONTRIBUTING.md` for full guidelines
+-   **命令**: 在任何环境中使用 `*/*help` 查看可用命令
+-   **代理切换**: 使用 `*/*switch agent-name` 与协调器进行角色更改
+-   **文档**: 查看 `docs/` 文件夹以获取特定于项目的上下文
+-   **社区**: 可通过Discord和GitHub获取支持资源
+-   **贡献**: 有关完整指南，请参阅 `CONTRIBUTING.md`

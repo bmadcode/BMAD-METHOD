@@ -1,150 +1,150 @@
-<!-- Powered by BMAD™ Core -->
+<!-- 由 BMAD™ Core 驱动 -->
 
-# apply-qa-fixes
+# 应用QA修复
 
-Implement fixes based on QA results (gate and assessments) for a specific story. This task is for the Dev agent to systematically consume QA outputs and apply code/test changes while only updating allowed sections in the story file.
+根据特定故事的QA结果（门禁和评估）实施修复。此任务供开发代理系统地使用QA输出并应用代码/测试更改，同时仅更新故事文件中允许的部分。
 
-## Purpose
+## 目的
 
-- Read QA outputs for a story (gate YAML + assessment markdowns)
-- Create a prioritized, deterministic fix plan
-- Apply code and test changes to close gaps and address issues
-- Update only the allowed story sections for the Dev agent
+-   读取故事的QA输出（门禁YAML + 评估markdown）
+-   创建优先的、确定性的修复计划
+-   应用代码和测试更改以弥补差距和解决问题
+-   仅更新开发代理允许的故事部分
 
-## Inputs
+## 输入
 
 ```yaml
 required:
-  - story_id: '{epic}.{story}' # e.g., "2.2"
-  - qa_root: from `bmad-core/core-config.yaml` key `qa.qaLocation` (e.g., `docs/project/qa`)
-  - story_root: from `bmad-core/core-config.yaml` key `devStoryLocation` (e.g., `docs/project/stories`)
+  - story_id: '{epic}.{story}' # 例如, "2.2"
+  - qa_root: 来自 `bmad-core/core-config.yaml` 键 `qa.qaLocation` (例如, `docs/project/qa`)
+  - story_root: 来自 `bmad-core/core-config.yaml` 键 `devStoryLocation` (例如, `docs/project/stories`)
 
 optional:
-  - story_title: '{title}' # derive from story H1 if missing
-  - story_slug: '{slug}' # derive from title (lowercase, hyphenated) if missing
+  - story_title: '{title}' # 如果缺少，则从故事的H1派生
+  - story_slug: '{slug}' # 如果缺少，则从标题派生 (小写，连字符连接)
 ```
 
-## QA Sources to Read
+## 要读取的QA源
 
-- Gate (YAML): `{qa_root}/gates/{epic}.{story}-*.yml`
-  - If multiple, use the most recent by modified time
-- Assessments (Markdown):
-  - Test Design: `{qa_root}/assessments/{epic}.{story}-test-design-*.md`
-  - Traceability: `{qa_root}/assessments/{epic}.{story}-trace-*.md`
-  - Risk Profile: `{qa_root}/assessments/{epic}.{story}-risk-*.md`
-  - NFR Assessment: `{qa_root}/assessments/{epic}.{story}-nfr-*.md`
+-   门禁 (YAML): `{qa_root}/gates/{epic}.{story}-*.yml`
+    -   如果有多个，则使用修改时间最新的一个
+-   评估 (Markdown):
+    -   测试设计: `{qa_root}/assessments/{epic}.{story}-test-design-*.md`
+    -   可追溯性: `{qa_root}/assessments/{epic}.{story}-trace-*.md`
+    -   风险概况: `{qa_root}/assessments/{epic}.{story}-risk-*.md`
+    -   非功能性需求评估: `{qa_root}/assessments/{epic}.{story}-nfr-*.md`
 
-## Prerequisites
+## 先决条件
 
-- Repository builds and tests run locally (Deno 2)
-- Lint and test commands available:
-  - `deno lint`
-  - `deno test -A`
+-   仓库在本地构建和测试运行 (Deno 2)
+-   可用的Lint和测试命令:
+    -   `deno lint`
+    -   `deno test -A`
 
-## Process (Do not skip steps)
+## 流程 (不要跳过步骤)
 
-### 0) Load Core Config & Locate Story
+### 0) 加载核心配置并定位故事
 
-- Read `bmad-core/core-config.yaml` and resolve `qa_root` and `story_root`
-- Locate story file in `{story_root}/{epic}.{story}.*.md`
-  - HALT if missing and ask for correct story id/path
+-   读取 `bmad-core/core-config.yaml` 并解析 `qa_root` 和 `story_root`
+-   在 `{story_root}/{epic}.{story}.*.md` 中定位故事文件
+    -   如果缺少，则停止并要求正确的故事ID/路径
 
-### 1) Collect QA Findings
+### 1) 收集QA发现
 
-- Parse the latest gate YAML:
-  - `gate` (PASS|CONCERNS|FAIL|WAIVED)
-  - `top_issues[]` with `id`, `severity`, `finding`, `suggested_action`
-  - `nfr_validation.*.status` and notes
-  - `trace` coverage summary/gaps
-  - `test_design.coverage_gaps[]`
-  - `risk_summary.recommendations.must_fix[]` (if present)
-- Read any present assessment markdowns and extract explicit gaps/recommendations
+-   解析最新的门禁YAML:
+    -   `gate` (PASS|CONCERNS|FAIL|WAIVED)
+    -   `top_issues[]` 包含 `id`, `severity`, `finding`, `suggested_action`
+    -   `nfr_validation.*.status` 和注释
+    -   `trace` 覆盖范围摘要/差距
+    -   `test_design.coverage_gaps[]`
+    -   `risk_summary.recommendations.must_fix[]` (如果存在)
+-   读取任何存在的评估markdown并提取明确的差距/建议
 
-### 2) Build Deterministic Fix Plan (Priority Order)
+### 2) 构建确定性修复计划 (按优先级顺序)
 
-Apply in order, highest priority first:
+按顺序应用，优先级最高的优先：
 
-1. High severity items in `top_issues` (security/perf/reliability/maintainability)
-2. NFR statuses: all FAIL must be fixed → then CONCERNS
-3. Test Design `coverage_gaps` (prioritize P0 scenarios if specified)
-4. Trace uncovered requirements (AC-level)
-5. Risk `must_fix` recommendations
-6. Medium severity issues, then low
+1.  `top_issues` 中的高严重性项目 (安全/性能/可靠性/可维护性)
+2.  NFR状态：所有FAIL必须修复 → 然后是CONCERNS
+3.  测试设计 `coverage_gaps` (如果指定，则优先处理P0场景)
+4.  Trace未覆盖的需求 (AC级别)
+5.  风险 `must_fix` 建议
+6.  中等严重性问题，然后是低严重性问题
 
-Guidance:
+指导：
 
-- Prefer tests closing coverage gaps before/with code changes
-- Keep changes minimal and targeted; follow project architecture and TS/Deno rules
+-   在代码更改之前/同时，优先选择弥补覆盖差距的测试
+-   保持更改最小化和有针对性；遵循项目架构和TS/Deno规则
 
-### 3) Apply Changes
+### 3) 应用更改
 
-- Implement code fixes per plan
-- Add missing tests to close coverage gaps (unit first; integration where required by AC)
-- Keep imports centralized via `deps.ts` (see `docs/project/typescript-rules.md`)
-- Follow DI boundaries in `src/core/di.ts` and existing patterns
+-   根据计划实施代码修复
+-   添加缺失的测试以弥补覆盖差距 (单元测试优先；根据AC要求进行集成测试)
+-   通过 `deps.ts` 保持导入集中化 (参见 `docs/project/typescript-rules.md`)
+-   遵循 `src/core/di.ts` 中的DI边界和现有模式
 
-### 4) Validate
+### 4) 验证
 
-- Run `deno lint` and fix issues
-- Run `deno test -A` until all tests pass
-- Iterate until clean
+-   运行 `deno lint` 并修复问题
+-   运行 `deno test -A` 直到所有测试通过
+-   迭代直到干净
 
-### 5) Update Story (Allowed Sections ONLY)
+### 5) 更新故事 (仅限允许的部分)
 
-CRITICAL: Dev agent is ONLY authorized to update these sections of the story file. Do not modify any other sections (e.g., QA Results, Story, Acceptance Criteria, Dev Notes, Testing):
+关键：开发代理仅被授权更新故事文件的这些部分。不要修改任何其他部分 (例如, QA结果, 故事, 验收标准, 开发说明, 测试):
 
-- Tasks / Subtasks Checkboxes (mark any fix subtask you added as done)
-- Dev Agent Record →
-  - Agent Model Used (if changed)
-  - Debug Log References (commands/results, e.g., lint/tests)
-  - Completion Notes List (what changed, why, how)
-  - File List (all added/modified/deleted files)
-- Change Log (new dated entry describing applied fixes)
-- Status (see Rule below)
+-   任务/子任务复选框 (将您添加的任何修复子任务标记为完成)
+-   开发代理记录 →
+    -   使用的代理模型 (如果更改)
+    -   调试日志参考 (命令/结果, 例如, lint/tests)
+    -   完成说明列表 (更改了什么, 为什么, 如何)
+    -   文件列表 (所有添加/修改/删除的文件)
+-   更改日志 (描述应用的修复的新的带日期的条目)
+-   状态 (见下文规则)
 
-Status Rule:
+状态规则：
 
-- If gate was PASS and all identified gaps are closed → set `Status: Ready for Done`
-- Otherwise → set `Status: Ready for Review` and notify QA to re-run the review
+-   如果门禁为PASS且所有已识别的差距都已弥补 → 设置 `Status: Ready for Done`
+-   否则 → 设置 `Status: Ready for Review` 并通知QA重新运行审查
 
-### 6) Do NOT Edit Gate Files
+### 6) 不要编辑门禁文件
 
-- Dev does not modify gate YAML. If fixes address issues, request QA to re-run `review-story` to update the gate
+-   开发人员不修改门禁YAML。如果修复解决了问题，请请求QA重新运行 `review-story` 以更新门禁
 
-## Blocking Conditions
+## 阻塞条件
 
-- Missing `bmad-core/core-config.yaml`
-- Story file not found for `story_id`
-- No QA artifacts found (neither gate nor assessments)
-  - HALT and request QA to generate at least a gate file (or proceed only with clear developer-provided fix list)
+-   缺少 `bmad-core/core-config.yaml`
+-   找不到 `story_id` 的故事文件
+-   未找到QA工件 (门禁和评估都没有)
+    -   停止并请求QA生成至少一个门禁文件 (或仅在有明确的开发人员提供的修复列表的情况下继续)
 
-## Completion Checklist
+## 完成清单
 
-- deno lint: 0 problems
-- deno test -A: all tests pass
-- All high severity `top_issues` addressed
-- NFR FAIL → resolved; CONCERNS minimized or documented
-- Coverage gaps closed or explicitly documented with rationale
-- Story updated (allowed sections only) including File List and Change Log
-- Status set according to Status Rule
+-   deno lint: 0个问题
+-   deno test -A: 所有测试通过
+-   所有高严重性的 `top_issues` 已解决
+-   NFR FAIL → 已解决; CONCERNS 已最小化或记录
+-   覆盖差距已弥补或用理由明确记录
+-   故事已更新 (仅限允许的部分)，包括文件列表和更改日志
+-   状态已根据状态规则设置
 
-## Example: Story 2.2
+## 示例：故事2.2
 
-Given gate `docs/project/qa/gates/2.2-*.yml` shows
+给定门禁 `docs/project/qa/gates/2.2-*.yml` 显示
 
-- `coverage_gaps`: Back action behavior untested (AC2)
-- `coverage_gaps`: Centralized dependencies enforcement untested (AC4)
+-   `coverage_gaps`: 未测试返回操作行为 (AC2)
+-   `coverage_gaps`: 未测试集中化依赖项强制执行 (AC4)
 
-Fix plan:
+修复计划：
 
-- Add a test ensuring the Toolkit Menu "Back" action returns to Main Menu
-- Add a static test verifying imports for service/view go through `deps.ts`
-- Re-run lint/tests and update Dev Agent Record + File List accordingly
+-   添加一个测试，确保工具包菜单的“返回”操作返回到主菜单
+-   添加一个静态测试，验证服务/视图的导入通过 `deps.ts`
+-   重新运行lint/tests并相应地更新开发代理记录 + 文件列表
 
-## Key Principles
+## 关键原则
 
-- Deterministic, risk-first prioritization
-- Minimal, maintainable changes
-- Tests validate behavior and close gaps
-- Strict adherence to allowed story update areas
-- Gate ownership remains with QA; Dev signals readiness via Status
+-   确定性的、风险优先的优先级排序
+-   最小的、可维护的更改
+-   测试验证行为并弥补差距
+-   严格遵守允许的故事更新区域
+-   门禁所有权仍归QA所有；开发通过状态信号表示准备就绪
