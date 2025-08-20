@@ -37,6 +37,7 @@
 - [ ] **API Integration** - Correct usage of WeChat Mini-Game APIs (e.g., login, payment)
 - [ ] **Asset Requirements** - All needed assets (images, audio, data) identified
 - [ ] **WeChat Performance Considerations** - Package size limits and optimization requirements
+- [ ] **WeChat Content Policy Compliance** - Story content adheres to WeChat's content policies.
 
 ### Code Quality Standards
 

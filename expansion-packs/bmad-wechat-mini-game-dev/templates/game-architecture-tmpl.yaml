@@ -176,19 +176,59 @@ sections:
           - `js/input-manager.js`
       - id: wechat-api-integration
         title: WeChat API Integration
-        template: |
-          **Purpose:** Integrate with WeChat's social features
+        sections:
+          - id: wechat-login-and-user-info
+            title: Login and User Info
+            template: |
+              **Purpose:** Handle user authentication and retrieve player profiles.
 
-          **Key APIs:**
+              **Key APIs:**
+              - `wx.login` for user authentication.
+              - `wx.getUserInfo` for player profiles (requires user authorization via button).
+              - **Server-side:** Exchange login code for `session_key` and `openid`.
 
-          - `wx.login` for user authentication
-          - `wx.getUserInfo` for player profiles
-          - `wx.shareAppMessage` for sharing
-          - Open Data Context for leaderboards
+              **Files to Create:**
+              - `js/wechat-auth.js`
 
-          **Files to Create:**
+          - id: wechat-social-features
+            title: Social Features
+            template: |
+              **Purpose:** Integrate with WeChat's social features to enhance player engagement.
 
-          - `js/wechat-api.js`
+              **Key APIs:**
+              - `wx.shareAppMessage` for sharing game content with friends.
+              - **OpenDataContext:** For displaying leaderboards and other social data.
+
+              **Files to Create:**
+              - `js/wechat-social.js`
+              - `opendata/index.js` (for OpenDataContext logic)
+
+          - id: wechat-cloud-services
+            title: WeChat Cloud Services
+            template: |
+              **Purpose:** Utilize WeChat's cloud capabilities for backend services.
+
+              **Services to Use:**
+              - **Cloud Functions:** For serverless backend logic (e.g., handling payments, validating data).
+              - **Cloud Database:** For storing user data and game state.
+              - **Cloud Storage:** For storing user-generated content or large assets.
+
+              **Architecture:**
+              - Define the structure of the cloud database collections.
+              - List the cloud functions to be created and their purposes.
+
+          - id: subpackage-planning
+            title: Subpackage Planning
+            template: |
+              **Purpose:** Manage the game's package size and optimize loading times.
+
+              **Main Package:**
+              - Core game logic, essential assets, and the initial loading screen.
+
+              **Subpackages:**
+              - **package-levels:** Contains assets and data for additional levels.
+              - **package-high-res-assets:** Contains high-resolution assets for high-end devices.
+              - **package-extra-features:** Contains code for non-essential features.
       - id: audio-system
         title: Audio System
         template: |

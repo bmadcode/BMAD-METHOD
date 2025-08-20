@@ -171,6 +171,42 @@ sections:
           **Total Levels:** {{number}}
           **Unlock Pattern:** {{progression_method}}
 
+  - id: social-and-monetization
+    title: Social and Monetization
+    instruction: Define how the game will integrate with WeChat's social features and generate revenue.
+    sections:
+      - id: social-mechanics
+        title: Social Mechanics
+        template: |
+          **Purpose:** Leverage WeChat's social graph to drive engagement and user acquisition.
+
+          **Features:**
+          - **Leaderboards:**
+            - Type: (e.g., Friends, Global)
+            - Update Frequency: (e.g., Weekly, All-time)
+            - Implementation: Via OpenDataContext
+          - **Sharing:**
+            - Share Triggers: (e.g., New high score, Unlocked achievement)
+            - Share Content: Customizable images and text.
+            - Rewards: (e.g., In-game currency for successful shares)
+          - **Inviting Friends:**
+            - Incentive: (e.g., Reward for each friend who installs the game)
+
+      - id: monetization-design
+        title: Monetization Design
+        template: |
+          **Purpose:** Outline the strategy for generating revenue.
+
+          **Methods:**
+          - **Rewarded Video Ads:**
+            - Placement: (e.g., Continue after losing, Get extra currency)
+            - Frequency Cap: (e.g., 5 per day)
+          - **Banner Ads:**
+            - Placement: (e.g., Bottom of the menu screen)
+          - **In-App Purchases (IAP):**
+            - Currency: (e.g., Gems)
+            - Items for Sale: (e.g., Cosmetics, Power-ups, Ad removal)
+
   - id: technical-specifications
     title: Technical Specifications
     instruction: Define technical requirements that will guide architecture and implementation decisions. Review any existing technical preferences.

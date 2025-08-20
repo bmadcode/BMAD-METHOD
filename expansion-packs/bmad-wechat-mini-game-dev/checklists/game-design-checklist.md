@@ -74,6 +74,45 @@
 - [ ] **Secret Content** - Hidden areas and optional challenges designed
 - [ ] **Accessibility Options** - Multiple difficulty levels or assist modes considered
 
+## WeChat Mini-Game Specifics
+
+### UI and UX
+
+- [ ] **UI Conventions:** The UI follows WeChat's design guidelines and feels native to the platform.
+- [ ] **Authorization Prompts:** User authorization for login, user info, etc., is handled gracefully and triggered by user interaction (e.g., a button press).
+- [ ] **Navigation:** The game's navigation is intuitive and doesn't conflict with WeChat's native navigation gestures.
+
+### Social Features
+
+- [ ] **Sharing:**
+    - [ ] Share triggers are well-placed and contextually relevant.
+    - [ ] Share content (images, titles) is engaging.
+    - [ ] Rewards for sharing are clearly communicated and correctly implemented.
+- [ ] **Leaderboards (OpenDataContext):**
+    - [ ] The OpenDataContext is implemented correctly and performs well.
+    - [ ] Leaderboard data is displayed clearly and updates as expected.
+- [ ] **Inviting Friends:**
+    - [ ] The invitation flow is simple and intuitive.
+    - [ ] Incentives for inviting friends are clear and properly awarded.
+
+### Platform Limitations and Performance
+
+- [ ] **Package Size:** The initial package size is under the 4MB limit.
+- [ ] **Subpackages:** Subpackages are used effectively for non-essential assets.
+- [ ] **Performance:** The game meets its performance targets on a range of target devices.
+- [ ] **API Usage:** The game uses WeChat APIs correctly and handles potential failures gracefully.
+
+### Monetization
+
+- [ ] **Rewarded Ads:**
+    - [ ] Ad placements are logical and don't feel overly intrusive.
+    - [ ] The rewards for watching ads are valuable to the player.
+- [ ] **Banner Ads:**
+    - [ ] Banner ads don't obstruct important UI elements.
+- [ ] **In-App Purchases (IAP):**
+    - [ ] The IAP flow is smooth and secure.
+    - [ ] The value proposition for IAPs is clear to the player.
+
 ## Technical Implementation Readiness
 
 ### Performance Requirements
