@@ -197,11 +197,16 @@ sections:
 
               **Key APIs:**
               - `wx.shareAppMessage` for sharing game content with friends.
-              - **OpenDataContext:** For displaying leaderboards and other social data.
+              - **OpenDataContext:** For displaying leaderboards and other social data. The OpenDataContext runs in an isolated environment. Communication is handled via `wx.getOpenDataContext().postMessage()`.
+
+              **OpenDataContext Structure:**
+              - A separate `opendata` directory with its own `project.config.json` and `index.js`.
+              - `index.js` will listen for messages (e.g., `{command: 'updateScore', score: 100}`) and render the leaderboard to a shared canvas.
 
               **Files to Create:**
               - `js/wechat-social.js`
-              - `opendata/index.js` (for OpenDataContext logic)
+              - `opendata/index.js`
+              - `opendata/project.config.json`
 
           - id: wechat-cloud-services
             title: WeChat Cloud Services
@@ -209,26 +214,54 @@ sections:
               **Purpose:** Utilize WeChat's cloud capabilities for backend services.
 
               **Services to Use:**
-              - **Cloud Functions:** For serverless backend logic (e.g., handling payments, validating data).
+              - **Cloud Functions:** For serverless backend logic.
               - **Cloud Database:** For storing user data and game state.
-              - **Cloud Storage:** For storing user-generated content or large assets.
 
-              **Architecture:**
-              - Define the structure of the cloud database collections.
-              - List the cloud functions to be created and their purposes.
+              **Example Architecture:**
+              - **Database Collections:**
+                - `users`: `{ _id: 'openid', nickname: 'string', avatarUrl: 'string', highScore: 'number' }`
+                - `scores`: `{ _id: 'uuid', openid: 'string', score: 'number', timestamp: 'date' }`
+              - **Cloud Functions:**
+                - `onLogin`: Takes a login code, gets the user's `openid`, and returns user data from the `users` collection.
+                - `saveScore`: Saves a new score to the `scores` collection and updates the user's `highScore` in the `users` collection.
 
           - id: subpackage-planning
             title: Subpackage Planning
             template: |
               **Purpose:** Manage the game's package size and optimize loading times.
 
-              **Main Package:**
-              - Core game logic, essential assets, and the initial loading screen.
+              **Main Package (under 4MB):**
+              - Core game logic (`js/` directory).
+              - Initial loading screen assets.
+              - Essential UI components.
 
               **Subpackages:**
-              - **package-levels:** Contains assets and data for additional levels.
-              - **package-high-res-assets:** Contains high-resolution assets for high-end devices.
-              - **package-extra-features:** Contains code for non-essential features.
+              - **`packageLevels`**: Contains assets and data for levels 1-10.
+              - **`packageBosses`**: Contains assets and logic for boss battles.
+
+              **Preloading:**
+              - Use `wx.loadSubpackage()` to preload subpackages in the background during gameplay to ensure smooth transitions.
+
+              **Example `game.json` configuration:**
+              ```json
+              "subpackages": [
+                {
+                  "name": "packageLevels",
+                  "root": "package-levels/",
+                  "pages": [
+                    "pages/level-1/index",
+                    "pages/level-2/index"
+                  ]
+                },
+                {
+                  "name": "packageBosses",
+                  "root": "package-bosses/",
+                  "pages": [
+                    "pages/boss-1/index"
+                  ]
+                }
+              ]
+              ```
       - id: audio-system
         title: Audio System
         template: |

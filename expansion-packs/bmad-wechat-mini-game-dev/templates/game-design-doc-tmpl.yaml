@@ -182,30 +182,38 @@ sections:
 
           **Features:**
           - **Leaderboards:**
-            - Type: (e.g., Friends, Global)
-            - Update Frequency: (e.g., Weekly, All-time)
-            - Implementation: Via OpenDataContext
+            - **Type:** Friends-only leaderboard.
+            - **Update Frequency:** Weekly, resetting every Monday at midnight.
+            - **Display:** Shows the top 10 friends, plus the player's own rank.
+            - **Implementation:** Via OpenDataContext.
           - **Sharing:**
-            - Share Triggers: (e.g., New high score, Unlocked achievement)
-            - Share Content: Customizable images and text.
-            - Rewards: (e.g., In-game currency for successful shares)
+            - **Share Triggers:** New high score, unlocking a rare item.
+            - **Share Content:** "I just scored {{score}} in {{game_title}}! Can you beat my score?"
+            - **Rewards:** 100 Gold for each successful share (friend clicks the link).
           - **Inviting Friends:**
-            - Incentive: (e.g., Reward for each friend who installs the game)
+            - **Incentive:** 500 Gold for each friend who installs the game and completes the tutorial.
 
       - id: monetization-design
         title: Monetization Design
         template: |
-          **Purpose:** Outline the strategy for generating revenue.
+          **Purpose:** Outline the strategy for generating revenue through a mix of ads and in-app purchases.
 
           **Methods:**
           - **Rewarded Video Ads:**
-            - Placement: (e.g., Continue after losing, Get extra currency)
-            - Frequency Cap: (e.g., 5 per day)
+            - **Placement:**
+              - "Continue Game": Watch an ad to continue a game after losing (once per game).
+              - "Get Daily Bonus": Watch an ad to receive a daily bonus of 200 Gold.
+            - **Frequency Cap:** 5 rewarded ads per player per day.
           - **Banner Ads:**
-            - Placement: (e.g., Bottom of the menu screen)
+            - **Placement:** Bottom of the main menu and settings screens.
           - **In-App Purchases (IAP):**
-            - Currency: (e.g., Gems)
-            - Items for Sale: (e.g., Cosmetics, Power-ups, Ad removal)
+            - **Virtual Currency:**
+              - **Gems:** Premium currency, purchased with real money.
+              - **Gold:** Soft currency, earned through gameplay and watching ads.
+            - **Items for Sale:**
+              - **Cosmetics:** Character skins, custom UI themes (purchased with Gems).
+              - **Power-ups:** "Coin Doubler" (permanent, purchased with Gems), "Extra Life" (consumable, purchased with Gold).
+              - **Ad Removal:** One-time purchase to permanently remove banner ads (purchased with real money).
 
   - id: technical-specifications
     title: Technical Specifications

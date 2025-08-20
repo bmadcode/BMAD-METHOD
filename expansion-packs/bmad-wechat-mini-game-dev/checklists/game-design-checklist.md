@@ -81,15 +81,16 @@
 - [ ] **UI Conventions:** The UI follows WeChat's design guidelines and feels native to the platform.
 - [ ] **Authorization Prompts:** User authorization for login, user info, etc., is handled gracefully and triggered by user interaction (e.g., a button press).
 - [ ] **Navigation:** The game's navigation is intuitive and doesn't conflict with WeChat's native navigation gestures.
+- [ ] **Aspect Ratio:** The UI is responsive and handles various screen aspect ratios gracefully.
 
 ### Social Features
 
 - [ ] **Sharing:**
     - [ ] Share triggers are well-placed and contextually relevant.
-    - [ ] Share content (images, titles) is engaging.
+    - [ ] Share content (images, titles) is engaging and customized.
     - [ ] Rewards for sharing are clearly communicated and correctly implemented.
 - [ ] **Leaderboards (OpenDataContext):**
-    - [ ] The OpenDataContext is implemented correctly and performs well.
+    - [ ] The OpenDataContext is implemented correctly and performs well, even with many friends.
     - [ ] Leaderboard data is displayed clearly and updates as expected.
 - [ ] **Inviting Friends:**
     - [ ] The invitation flow is simple and intuitive.
@@ -98,20 +99,21 @@
 ### Platform Limitations and Performance
 
 - [ ] **Package Size:** The initial package size is under the 4MB limit.
-- [ ] **Subpackages:** Subpackages are used effectively for non-essential assets.
-- [ ] **Performance:** The game meets its performance targets on a range of target devices.
-- [ ] **API Usage:** The game uses WeChat APIs correctly and handles potential failures gracefully.
+- [ ] **Subpackages:** Subpackages are used effectively for non-essential assets, and preloading is implemented where necessary.
+- [ ] **Performance:** The game meets its performance targets (e.g., 60 FPS) on a range of target devices.
+- [ ] **API Usage:** The game uses WeChat APIs correctly and handles potential failures and version differences gracefully.
+- [ ] **Privacy Compliance:** All user data requests are compliant with the latest WeChat privacy policy.
 
 ### Monetization
 
 - [ ] **Rewarded Ads:**
     - [ ] Ad placements are logical and don't feel overly intrusive.
-    - [ ] The rewards for watching ads are valuable to the player.
+    - [ ] The rewards for watching ads are valuable and clearly communicated to the player.
 - [ ] **Banner Ads:**
-    - [ ] Banner ads don't obstruct important UI elements.
+    - [ ] Banner ads don't obstruct important UI elements or gameplay.
 - [ ] **In-App Purchases (IAP):**
-    - [ ] The IAP flow is smooth and secure.
-    - [ ] The value proposition for IAPs is clear to the player.
+    - [ ] The IAP flow is smooth, secure, and easy to understand.
+    - [ ] The value proposition for all IAPs is clear and compelling to the player.
 
 ## Technical Implementation Readiness
 

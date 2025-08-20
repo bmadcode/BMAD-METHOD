@@ -31,36 +31,44 @@ workflow:
       duration: 15-30 minutes
       creates: prototype-architecture.md
       requires: prototype-spec.md
-      notes: Define minimal technical implementation plan. Identify core WeChat Mini-Game systems needed and performance constraints.
+      notes: Define a minimal technical implementation plan. Identify the core WeChat Mini-Game systems needed and any performance constraints.
     - step: implementation_stories
       agent: game-sm
       duration: 30-45 minutes
       creates: prototype-stories/
-      requires: prototype-spec.md, prototype-architecture.md
-      notes: Create 3-5 focused implementation stories for core prototype features. Each story should be completable in 2-4 hours.
+      requires:
+        - prototype-spec.md
+        - prototype-architecture.md
+      notes: Create 3-5 focused implementation stories for the core prototype features. Each story should be completable in 2-4 hours.
     - step: iterative_development
       agent: game-developer
       duration: varies
       implements: prototype-stories/
-      notes: Implement stories in priority order. Test frequently and adjust design based on what feels fun. Document discoveries.
+      notes: Implement stories in priority order. Test frequently and adjust the design based on what feels fun. Document discoveries.
+    - step: qa_check
+      agent: game-qa
+      duration: 15-30 minutes
+      optional: true
+      requires: working-prototype
+      notes: "(Optional) Perform a quick QA check to ensure the prototype is stable enough for effective playtesting and feedback."
   workflow_end:
     action: prototype_evaluation
-    notes: "Prototype complete. Evaluate core mechanics, gather feedback, and decide next steps: iterate, expand, or archive."
+    notes: "Prototype complete. Evaluate the core mechanics, gather feedback, and decide on the next steps: iterate, expand, or archive."
   game_jam_sequence:
     - step: jam_concept
       agent: game-designer
       duration: 10-15 minutes
       creates: jam-concept.md
-      notes: Define game concept based on jam theme. One sentence core mechanic, basic controls, win condition.
+      notes: Define the game concept based on the jam theme. One-sentence core mechanic, basic controls, and a win condition.
     - step: jam_implementation
       agent: game-developer
       duration: varies (jam timeline)
       creates: working-prototype
       requires: jam-concept.md
-      notes: Directly implement core mechanic. No formal stories - iterate rapidly on what's fun. Document major decisions.
+      notes: Directly implement the core mechanic. No formal stories—iterate rapidly on what's fun. Document major decisions.
   jam_workflow_end:
     action: jam_submission
-    notes: Submit to game jam. Capture lessons learned and consider post-jam development if concept shows promise.
+    notes: Submit to the game jam. Capture lessons learned and consider post-jam development if the concept shows promise.
   flow_diagram: |
     ```mermaid
     graph TD
@@ -72,23 +80,24 @@ workflow:
         E --> F[game-developer: prototype-architecture.md]
         F --> G[game-sm: create prototype stories]
         G --> H[game-developer: iterative implementation]
-        H --> I[Prototype Evaluation]
+        H --> I{QA Check? (Optional)}
+        I -->|Yes| J[game-qa: Stability Check]
+        I -->|No| K[Prototype Evaluation]
+        J --> K
 
-        D --> J[game-developer: direct implementation]
-        J --> K[Game Jam Submission]
+        D --> L[game-developer: direct implementation]
+        L --> M[Game Jam Submission]
 
-        E -.-> E1[Optional: quick brainstorming]
-        E -.-> E2[Optional: reference research]
-
-        style I fill:#90EE90
         style K fill:#90EE90
+        style M fill:#90EE90
         style C fill:#FFE4B5
         style E fill:#FFE4B5
         style F fill:#FFE4B5
         style G fill:#FFE4B5
         style H fill:#FFE4B5
+        style J fill:#FFDAB9
         style D fill:#FFB6C1
-        style J fill:#FFB6C1
+        style L fill:#FFB6C1
     ```
   decision_guidance:
     use_prototype_sequence_when:

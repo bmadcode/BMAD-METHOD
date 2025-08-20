@@ -148,37 +148,71 @@ mini-game-project/
 
 ## Game Development Team Roles
 
-### Game Designer (Alex)
+### `game-po` (Product Owner)
+- **Primary Focus**: Game vision, strategy, and profitability.
+- **Key Outputs**: Project Brief, prioritized feature backlog, monetization strategy.
+- **Specialties**: Market research, user-centered design, business goals.
 
-- **Primary Focus**: Game mechanics, player experience, design documentation
-- **Key Outputs**: Game Brief, Game Design Document, Level Design Framework
-- **Specialties**: Brainstorming, game balance, player psychology, creative direction
+### `game-pm` (Project Manager)
+- **Primary Focus**: Project execution, timelines, and resource management.
+- **Key Outputs**: Project plan, risk assessment, status reports.
+- **Specialties**: Agile/Scrum methodologies, dependency management.
 
-### Game Developer (Maya)
+### `game-designer`
+- **Primary Focus**: Game mechanics, player experience, and design documentation.
+- **Key Outputs**: Game Design Document (GDD), level design framework.
+- **Specialties**: Brainstorming, game balance, player psychology.
 
-- **Primary Focus**: WeChat Mini-Game implementation, technical excellence, performance
-- **Key Outputs**: Working game features, optimized code, technical architecture
-- **Specialties**: JavaScript/TypeScript, WeChat Mini-Game APIs, performance optimization
+### `game-orchestrator`
+- **Primary Focus**: Technical vision and architecture.
+- **Key Outputs**: Game Architecture Document, technical standards.
+- **Specialties**: System design, performance optimization, WeChat platform architecture.
 
-### Game Scrum Master (Jordan)
+### `game-sm` (Scrum Master)
+- **Primary Focus**: Story creation, development planning, and agile process facilitation.
+- **Key Outputs**: Detailed implementation stories, sprint planning.
+- **Specialties**: Story breakdown, developer handoffs, process optimization.
 
-- **Primary Focus**: Story creation, development planning, agile process
-- **Key Outputs**: Detailed implementation stories, sprint planning, quality assurance
-- **Specialties**: Story breakdown, developer handoffs, process optimization
+### `game-developer`
+- **Primary Focus**: WeChat Mini-Game implementation, code quality, and performance.
+- **Key Outputs**: Working game features, optimized code.
+- **Specialties**: JavaScript/TypeScript, WeChat Mini-Game APIs.
 
-## WeChat Mini-Game Platform Considerations
+### `game-qa` (Quality Assurance)
+- **Primary Focus**: Testing, bug detection, and quality gates.
+- **Key Outputs**: Test plans, bug reports, performance analysis.
+- **Specialties**: Manual and automated testing, performance profiling.
 
-### API Usage
+### `game-analyst`
+- **Primary Focus**: Data analysis and player behavior insights.
+- **Key Outputs**: Analytics reports, A/B test results, retention analysis.
+- **Specialties**: SQL, data visualization, game analytics KPIs.
 
-- Correctly use `wx.login`, `wx.getUserInfo`, etc.
-- Implement sharing and invitation features using `wx.shareAppMessage`.
-- Use Open Data Context for leaderboards and other social features.
+## Agent-Specific WeChat Platform Considerations
 
-### Performance and Limitations
+### `game-po`
+- **Focus**: Understand the WeChat ecosystem to inform the product strategy.
+- **Actions**: Analyze successful WeChat mini-games, define a monetization strategy that leverages WeChat's ad and IAP APIs, and prioritize social features that drive engagement on the platform.
 
-- Be mindful of the package size limit. Use subpackages for larger games.
-- Optimize image and audio assets to reduce file size.
-- Understand the limitations of the rendering context (e.g., no WebGL for 2D canvas).
+### `game-designer`
+- **Focus**: Design games that feel native to the WeChat platform.
+- **Actions**: Incorporate WeChat's social features (sharing, leaderboards) into the core game loop, design UI that works well with WeChat's navigation, and create mechanics that are suited for short, mobile play sessions.
+
+### `game-orchestrator`
+- **Focus**: Design a technical architecture that is optimized for the WeChat Mini-Game runtime.
+- **Actions**: Plan for the 4MB initial package size limit by designing a subpackage strategy, choose the right data storage solution (local storage vs. cloud database), and design the integration with the OpenDataContext.
+
+### `game-developer`
+- **Focus**: Implement features using WeChat's specific APIs and best practices.
+- **Actions**: Use the `wx.login` API for authentication, implement the ad APIs for monetization, use the OpenDataContext for social features, and write efficient code that performs well on mobile devices.
+
+### `game-qa`
+- **Focus**: Test the game on a wide range of devices and network conditions.
+- **Actions**: Use the WeChat DevTools for debugging and performance profiling, test on both iOS and Android devices, and specifically test the functionality of social sharing and ad placements.
+
+### `game-analyst`
+- **Focus**: Use WeChat's analytics tools to gather insights.
+- **Actions**: Track key metrics like retention, session length, and conversion rates using the platform's built-in analytics or third-party tools. Analyze the performance of social features and monetization strategies.
 
 ### Success Metrics for WeChat Mini-Games
 
