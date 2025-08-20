@@ -13,44 +13,28 @@ workflow:
     - rapid-iteration
   prototype_sequence:
     - step: concept_definition
-      agent: game-designer
+      agent: game-analyst
       duration: 15-30 minutes
       creates: concept-summary.md
-      notes: Quickly define core game concept, primary mechanic, and target experience. Focus on what makes this game unique and fun.
+      notes: "The Analyst quickly defines the core concept, target experience, and success criteria for the prototype."
     - step: rapid_design
       agent: game-designer
       duration: 30-60 minutes
       creates: prototype-spec.md
       requires: concept-summary.md
-      optional_steps:
-        - quick_brainstorming
-        - reference_research
-      notes: Create minimal but complete design specification. Focus on core mechanics, basic controls, and success/failure conditions.
-    - step: technical_planning
-      agent: game-developer
-      duration: 15-30 minutes
-      creates: prototype-architecture.md
-      requires: prototype-spec.md
-      notes: Define a minimal technical implementation plan. Identify the core WeChat Mini-Game systems needed and any performance constraints.
-    - step: implementation_stories
-      agent: game-sm
-      duration: 30-45 minutes
-      creates: prototype-stories/
-      requires:
-        - prototype-spec.md
-        - prototype-architecture.md
-      notes: Create 3-5 focused implementation stories for the core prototype features. Each story should be completable in 2-4 hours.
-    - step: iterative_development
+      notes: "The Designer creates a minimal design spec, focusing on the core mechanic and controls."
+    - step: implementation
       agent: game-developer
       duration: varies
-      implements: prototype-stories/
-      notes: Implement stories in priority order. Test frequently and adjust the design based on what feels fun. Document discoveries.
+      creates: working-prototype
+      requires: prototype-spec.md
+      notes: "The Developer directly implements the core mechanic for rapid playtesting and iteration. No formal stories are created."
     - step: qa_check
       agent: game-qa
       duration: 15-30 minutes
       optional: true
       requires: working-prototype
-      notes: "(Optional) Perform a quick QA check to ensure the prototype is stable enough for effective playtesting and feedback."
+      notes: "(Optional) Perform a quick stability check to ensure the prototype is usable for feedback sessions."
   workflow_end:
     action: prototype_evaluation
     notes: "Prototype complete. Evaluate the core mechanics, gather feedback, and decide on the next steps: iterate, expand, or archive."
@@ -73,31 +57,27 @@ workflow:
     ```mermaid
     graph TD
         A[Start: Prototype Project] --> B{Development Context?}
-        B -->|Standard Prototype| C[game-designer: concept-summary.md]
+        B -->|Standard Prototype| C[game-analyst: concept-summary.md]
         B -->|Game Jam| D[game-designer: jam-concept.md]
 
         C --> E[game-designer: prototype-spec.md]
-        E --> F[game-developer: prototype-architecture.md]
-        F --> G[game-sm: create prototype stories]
-        G --> H[game-developer: iterative implementation]
-        H --> I{QA Check? (Optional)}
-        I -->|Yes| J[game-qa: Stability Check]
-        I -->|No| K[Prototype Evaluation]
-        J --> K
+        E --> F[game-developer: implementation]
+        F --> G{QA Check? (Optional)}
+        G -->|Yes| H[game-qa: Stability Check]
+        G -->|No| I[Prototype Evaluation]
+        H --> I
 
-        D --> L[game-developer: direct implementation]
-        L --> M[Game Jam Submission]
+        D --> J[game-developer: direct implementation]
+        J --> K[Game Jam Submission]
 
+        style I fill:#90EE90
         style K fill:#90EE90
-        style M fill:#90EE90
         style C fill:#FFE4B5
         style E fill:#FFE4B5
         style F fill:#FFE4B5
-        style G fill:#FFE4B5
-        style H fill:#FFE4B5
-        style J fill:#FFDAB9
+        style H fill:#FFDAB9
         style D fill:#FFB6C1
-        style L fill:#FFB6C1
+        style J fill:#FFB6C1
     ```
   decision_guidance:
     use_prototype_sequence_when:

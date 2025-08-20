@@ -12,74 +12,52 @@ workflow:
     - prototype-game
     - game-jam
   full_game_sequence:
-    - agent: game-designer
+    - agent: game-analyst
       creates: game-brief.md
       optional_steps:
         - brainstorming_session
-        - game_research_prompt
-        - player_research
-      notes: "Start with brainstorming game concepts, then create comprehensive game brief. SAVE OUTPUT: Copy final game-brief.md to your project's docs/design/ folder."
+        - market_research
+      notes: "The Analyst creates the initial Game Brief, defining the core concept and market opportunity."
+    - agent: game-pm
+      creates: prd.md
+      requires: game-brief.md
+      notes: "The Project Manager expands the brief into a full Product Requirements Document (PRD), defining features, epics, and user stories."
     - agent: game-designer
       creates: game-design-doc.md
-      requires: game-brief.md
-      optional_steps:
-        - competitive_analysis
-        - technical_research
-      notes: "Create detailed Game Design Document using game-design-doc-tmpl. Defines all gameplay mechanics, progression, and technical requirements. SAVE OUTPUT: Copy final game-design-doc.md to your project's docs/design/ folder."
-    - agent: game-qa
-      validates: gdd_testability
-      requires: game-design-doc.md
-      optional_steps:
-        - risk_assessment
-      notes: "(Optional but Recommended) The QA agent reviews the GDD for testability, clarity, and potential performance risks."
+      requires: prd.md
+      notes: "The Game Designer uses the PRD to create a detailed Game Design Document (GDD), focusing on mechanics, game feel, and player experience."
     - agent: game-orchestrator
       creates: game-architecture.md
-      requires: game-design-doc.md
-      optional_steps:
-        - technical_research_prompt
-        - performance_analysis
-        - platform_research
-      notes: "Create comprehensive technical architecture using game-architecture-tmpl. Defines WeChat Mini-Game systems, performance optimization, and code structure. SAVE OUTPUT: Copy final game-architecture.md to your project's docs/architecture/ folder."
-    - agent: game-pm
-      creates: project-plan.md
       requires:
+        - prd.md
         - game-design-doc.md
-        - game-architecture.md
-      notes: "The PM creates a high-level project plan, including timelines, milestones, and epics, based on the GDD and architecture."
+      notes: "The Orchestrator creates the technical architecture to support the GDD and PRD."
     - agent: game-po
-      validates: all_documents
+      action: shard_documents
       requires:
-        - game-brief.md
+        - prd.md
         - game-design-doc.md
         - game-architecture.md
-        - project-plan.md
-      uses: game-design-checklist
-      notes: The Product Owner validates all planning documents for consistency, completeness, and alignment with the project's goals.
-    - agent: various
-      updates: flagged_design_documents
-      condition: validation_issues
-      notes: If validation finds issues, return to the relevant agent to fix and re-export the updated documents to the docs/ folder.
+      notes: "The Product Owner shards the final documents into epics and stories for the development team."
   project_setup_guidance:
     action: guide_game_project_structure
     notes: Set up the game project structure following the game architecture document. Create pages/, components/, js/, and images/ directories. Initialize WeChat Mini-Game configuration.
   workflow_end:
     action: move_to_story_development
-    notes: All planning artifacts are complete. Begin the story-driven development phase. Use the Game Scrum Master to create implementation stories from the design documents.
+    notes: All planning artifacts are complete and sharded. Begin the story-driven development phase.
   prototype_sequence:
     - step: prototype_scope
-      action: assess_prototype_complexity
-      notes: First, assess if this needs a full game design (use full_game_sequence) or can be a rapid prototype.
-    - agent: game-designer
-      creates: game-brief.md
-      optional_steps:
-        - quick_brainstorming
-        - concept_validation
-      notes: "Create a focused game brief for the prototype. Emphasize core mechanics and immediate playability. SAVE OUTPUT: Copy final game-brief.md to your project's docs/ folder."
+      agent: game-analyst
+      action: assess_prototype_scope
+      notes: "The Analyst quickly defines the core concept and scope for a prototype."
     - agent: game-designer
       creates: prototype-design.md
-      uses: create-doc prototype-design OR create-game-story
-      requires: game-brief.md
-      notes: Create a minimal design document or jump directly to implementation stories for rapid prototyping. Choose based on the prototype's complexity.
+      requires: concept-summary.md
+      notes: "The Designer creates a minimal design spec for the core mechanic."
+    - agent: game-developer
+      action: implement_prototype
+      requires: prototype-design.md
+      notes: "The Developer rapidly implements the core mechanic for playtesting."
   prototype_workflow_end:
     action: move_to_rapid_implementation
     notes: The prototype is defined. Begin immediate implementation with the Game Developer. Focus on core mechanics first, then iterate based on playtesting.
@@ -87,35 +65,29 @@ workflow:
     ```mermaid
     graph TD
         A[Start: WeChat Game Development Project] --> B{Project Scope?}
-        B -->|Full Game/Production| C[game-designer: game-brief.md]
-        B -->|Prototype/Game Jam| D[game-designer: focused game-brief.md]
+        B -->|Full Game/Production| C[game-analyst: game-brief.md]
+        B -->|Prototype/Game Jam| D[game-analyst: prototype-scope.md]
 
-        C --> E[game-designer: game-design-doc.md]
-        E --> F{QA Review? (Optional)}
-        F -->|Yes| G[game-qa: GDD Testability Review]
-        F -->|No| H[game-orchestrator: game-architecture.md]
-        G --> H
-        H --> I[game-pm: project-plan.md]
-        I --> J[game-po: Validate All Documents]
-        J --> K{Validation Issues?}
-        K -->|Yes| L[Return to relevant agent for fixes]
-        K -->|No| M[Set up game project structure]
-        L --> J
-        M --> N[Move to Story Development Phase]
+        C --> E[game-pm: prd.md]
+        E --> F[game-designer: game-design-doc.md]
+        F --> G[game-orchestrator: game-architecture.md]
+        G --> H[game-po: Shard Documents]
+        H --> I[Move to Story Development Phase]
 
-        D --> O[game-designer: prototype-design.md]
-        O --> P[Move to Rapid Implementation]
+        D --> J[game-designer: prototype-design.md]
+        J --> K[game-developer: Implement Prototype]
+        K --> L[Prototype Evaluation & Iteration]
 
-        style N fill:#90EE90
-        style P fill:#90EE90
+        style I fill:#90EE90
+        style L fill:#90EE90
         style C fill:#FFE4B5
-        style E fill:#FFE4B5
+        style E fill:#ADD8E6
+        style F fill:#E6E6FA
         style G fill:#FFDAB9
-        style H fill:#E6E6FA
-        style I fill:#ADD8E6
-        style J fill:#FFB6C1
+        style H fill:#FFB6C1
         style D fill:#FFB6C1
-        style O fill:#FFB6C1
+        style J fill:#FFB6C1
+        style K fill:#FFB6C1
     ```
   decision_guidance:
     use_full_sequence_when:
