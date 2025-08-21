@@ -26,12 +26,12 @@ workflow:
       creates: game-design-doc.md
       requires: prd.md
       notes: "The Game Designer uses the PRD to create a detailed Game Design Document (GDD), focusing on mechanics, game feel, and player experience."
-    - agent: game-orchestrator
+    - agent: game-architect
       creates: game-architecture.md
       requires:
         - prd.md
         - game-design-doc.md
-      notes: "The Orchestrator creates the technical architecture to support the GDD and PRD."
+      notes: "The Architect creates the technical architecture to support the GDD and PRD."
     - agent: game-po
       action: shard_documents
       requires:
@@ -70,7 +70,7 @@ workflow:
 
         C --> E[game-pm: prd.md]
         E --> F[game-designer: game-design-doc.md]
-        F --> G[game-orchestrator: game-architecture.md]
+        F --> G[game-architect: game-architecture.md]
         G --> H[game-po: Shard Documents]
         H --> I[Move to Story Development Phase]
 
@@ -107,8 +107,8 @@ workflow:
   handoff_prompts:
     analyst_to_pm: "Game brief is complete. The PM should now create the PRD."
     pm_to_designer: "PRD is complete. The Game Designer should now create the GDD."
-    designer_to_orchestrator: "GDD is complete. The Game Orchestrator should now create the technical architecture."
-    orchestrator_to_po: "All planning documents are complete. The PO should now shard them for development."
+    designer_to_architect: "GDD is complete. The Game Architect should now create the technical architecture."
+    architect_to_po: "All planning documents are complete. The PO should now shard them for development."
     validation_issues: "Validation found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     full_complete: "All planning artifacts are complete and sharded. Set up the game project structure and move to the story development phase."
     prototype_analyst_to_designer: "Prototype concept is defined. The Game Designer should now create a minimal design specification."

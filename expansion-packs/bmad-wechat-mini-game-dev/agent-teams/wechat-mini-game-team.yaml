@@ -7,6 +7,7 @@ agents:
   - game-analyst
   - game-orchestrator
   - game-designer
+  - game-architect
   - game-developer
   - game-sm
   - game-pm
