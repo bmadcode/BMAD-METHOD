@@ -38,6 +38,7 @@ commands:
 dependencies:
   data:
     - development-guidelines.md
+    - technical-preferences.md
   tasks:
     - document-project.md
   templates:
