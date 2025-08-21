@@ -9,7 +9,7 @@ Create comprehensive test scenarios with appropriate test level recommendations 
 ```yaml
 required:
   - story_id: '{epic}.{story}' # e.g., "1.3"
-  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from core-config.yaml
+  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path provided by the project setup.
   - story_title: '{title}' # If missing, derive from story file H1
   - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
 ```
