@@ -5,7 +5,7 @@ template:
   version: 1.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-architecture.md"
+    filename: "docs/architecture.md"
     title: "{{game_title}} WeChat Mini-Game Architecture Document"
 
 workflow:

@@ -5,7 +5,7 @@ template:
   version: 1.0
   output:
     format: markdown
-    filename: "docs/{{game_name}}-game-design-document.md"
+    filename: "docs/gdd.md"
     title: "{{game_title}} Game Design Document (GDD)"
 
 workflow:
