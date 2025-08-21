@@ -1,0 +1,164 @@
+# <!-- Powered by BMAD™ Core -->
+workflow:
+  id: wechat-game-prototype
+  name: WeChat Game Prototype Development
+  description: Fast-track workflow for rapid game prototyping and concept validation. Optimized for game jams, proof-of-concept development, and quick iteration on game mechanics for the WeChat Mini-Game platform.
+  type: prototype
+  project_types:
+    - game-jam
+    - proof-of-concept
+    - mechanic-test
+    - technical-demo
+    - learning-project
+    - rapid-iteration
+  prototype_sequence:
+    - step: concept_definition
+      agent: game-analyst
+      duration: 15-30 minutes
+      creates: concept-summary.md
+      notes: "The Analyst quickly defines the core concept, target experience, and success criteria for the prototype."
+    - step: rapid_design
+      agent: game-designer
+      duration: 30-60 minutes
+      creates: prototype-spec.md
+      requires: concept-summary.md
+      notes: "The Designer creates a minimal design spec, focusing on the core mechanic and controls."
+    - step: implementation
+      agent: game-developer
+      duration: varies
+      creates: working-prototype
+      requires: prototype-spec.md
+      notes: "The Developer directly implements the core mechanic for rapid playtesting and iteration. No formal stories are created."
+    - step: qa_check
+      agent: game-qa
+      duration: 15-30 minutes
+      optional: true
+      requires: working-prototype
+      notes: "(Optional) Perform a quick stability check to ensure the prototype is usable for feedback sessions."
+  workflow_end:
+    action: prototype_evaluation
+    notes: "Prototype complete. Evaluate the core mechanics, gather feedback, and decide on the next steps: iterate, expand, or archive."
+  game_jam_sequence:
+    - step: jam_concept
+      agent: game-designer
+      duration: 10-15 minutes
+      creates: jam-concept.md
+      notes: Define the game concept based on the jam theme. One-sentence core mechanic, basic controls, and a win condition.
+    - step: jam_implementation
+      agent: game-developer
+      duration: varies (jam timeline)
+      creates: working-prototype
+      requires: jam-concept.md
+      notes: Directly implement the core mechanic. No formal stories—iterate rapidly on what's fun. Document major decisions.
+  jam_workflow_end:
+    action: jam_submission
+    notes: Submit to the game jam. Capture lessons learned and consider post-jam development if the concept shows promise.
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: Prototype Project] --> B{Development Context?}
+        B -->|Standard Prototype| C[game-analyst: concept-summary.md]
+        B -->|Game Jam| D[game-designer: jam-concept.md]
+
+        C --> E[game-designer: prototype-spec.md]
+        E --> F[game-developer: implementation]
+        F --> G{QA Check? (Optional)}
+        G -->|Yes| H[game-qa: Stability Check]
+        G -->|No| I[Prototype Evaluation]
+        H --> I
+
+        D --> J[game-developer: direct implementation]
+        J --> K[Game Jam Submission]
+
+        style I fill:#90EE90
+        style K fill:#90EE90
+        style C fill:#FFE4B5
+        style E fill:#FFE4B5
+        style F fill:#FFE4B5
+        style H fill:#FFDAB9
+        style D fill:#FFB6C1
+        style J fill:#FFB6C1
+    ```
+  decision_guidance:
+    use_prototype_sequence_when:
+      - Learning new game development concepts
+      - Testing specific game mechanics
+      - Building portfolio pieces
+      - Have 1-7 days for development
+      - Need structured but fast development
+      - Want to validate game concepts before full development
+    use_game_jam_sequence_when:
+      - Participating in time-constrained game jams
+      - Have 24-72 hours total development time
+      - Want to experiment with wild or unusual concepts
+      - Learning through rapid iteration
+      - Building networking/portfolio presence
+  prototype_best_practices:
+    scope_management:
+      - Start with absolute minimum viable gameplay
+      - One core mechanic implemented well beats many mechanics poorly
+      - Focus on "game feel" over features
+      - Cut features ruthlessly to meet timeline
+    rapid_iteration:
+      - Test the game every 1-2 hours of development
+      - Ask "Is this fun?" frequently during development
+      - Be willing to pivot mechanics if they don't feel good
+      - Document what works and what doesn't
+    technical_efficiency:
+      - Use simple graphics (geometric shapes, basic sprites)
+      - Leverage WeChat Mini-Game's built-in systems heavily
+      - Avoid complex custom systems in prototypes
+      - Prioritize functional over polished
+  prototype_evaluation_criteria:
+    core_mechanic_validation:
+      - Is the primary mechanic engaging for 30+ seconds?
+      - Do players understand the mechanic without explanation?
+      - Does the mechanic have depth for extended play?
+      - Are there natural difficulty progression opportunities?
+    technical_feasibility:
+      - Does the prototype run at acceptable frame rates?
+      - Are there obvious technical blockers for expansion?
+      - Is the codebase clean enough for further development?
+      - Are performance targets realistic for full game?
+    player_experience:
+      - Do testers engage with the game voluntarily?
+      - What emotions does the game create in players?
+      - Are players asking for "just one more try"?
+      - What do players want to see added or changed?
+  post_prototype_options:
+    iterate_and_improve:
+      action: continue_prototyping
+      when: Core mechanic shows promise but needs refinement
+      next_steps: Create new prototype iteration focusing on identified improvements
+    expand_to_full_game:
+      action: transition_to_full_development
+      when: Prototype validates strong game concept
+      next_steps: Use wechat-game-dev-greenfield workflow to create full game design and architecture
+    pivot_concept:
+      action: new_prototype_direction
+      when: Current mechanic doesn't work but insights suggest new direction
+      next_steps: Apply learnings to new prototype concept
+    archive_and_learn:
+      action: document_learnings
+      when: Prototype doesn't work but provides valuable insights
+      next_steps: Document lessons learned and move to next prototype concept
+  time_boxing_guidance:
+    concept_phase: Maximum 30 minutes - if you can't explain the game simply, simplify it
+    design_phase: Maximum 1 hour - focus on core mechanics only
+    planning_phase: Maximum 30 minutes - identify critical path to playable prototype
+    implementation_phase: Time-boxed iterations - test every 2-4 hours of work
+  success_metrics:
+    development_velocity:
+      - Playable prototype in first day of development
+      - Core mechanic demonstrable within 4-6 hours of coding
+      - Major iteration cycles completed in 2-4 hour blocks
+    learning_objectives:
+      - Clear understanding of what makes the mechanic fun (or not)
+      - Technical feasibility assessment for full development
+      - Player reaction and engagement validation
+      - Design insights for future development
+  handoff_prompts:
+    analyst_to_designer: "Prototype concept is defined. The Game Designer should now create a minimal design specification."
+    designer_to_developer: "Prototype spec is ready. The Game Developer should now implement the core mechanic for playtesting."
+    implementation_to_qa: "A working prototype is ready for an optional stability check."
+    prototype_complete: "Prototype implemented. Evaluate mechanics, gather feedback, and decide on next steps."

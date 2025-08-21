@@ -1,0 +1,159 @@
+# <!-- Powered by BMAD™ Core -->
+workflow:
+  id: wechat-game-dev-greenfield
+  name: WeChat Game Development - Greenfield Project
+  description: Specialized workflow for creating 2D games from concept to implementation for the WeChat Mini-Game platform. Guides teams through game concept development, design documentation, technical architecture, and story-driven development for professional game development.
+  type: greenfield
+  project_types:
+    - indie-game
+    - mobile-game
+    - web-game
+    - educational-game
+    - prototype-game
+    - game-jam
+  full_game_sequence:
+    - agent: game-analyst
+      creates: game-brief.md
+      optional_steps:
+        - brainstorming_session
+        - market_research
+      notes: "The Analyst creates the initial Game Brief, defining the core concept and market opportunity."
+    - agent: game-pm
+      creates: prd.md
+      requires: game-brief.md
+      notes: "The Project Manager expands the brief into a full Product Requirements Document (PRD), defining features, epics, and user stories."
+    - agent: game-designer
+      creates: game-design-doc.md
+      requires: prd.md
+      notes: "The Game Designer uses the PRD to create a detailed Game Design Document (GDD), focusing on mechanics, game feel, and player experience."
+    - agent: game-architect
+      creates: game-architecture.md
+      requires:
+        - prd.md
+        - game-design-doc.md
+      notes: "The Architect creates the technical architecture to support the GDD and PRD."
+    - agent: game-po
+      action: shard_documents
+      requires:
+        - prd.md
+        - game-design-doc.md
+        - game-architecture.md
+      notes: "The Product Owner shards the final documents into epics and stories for the development team."
+  project_setup_guidance:
+    action: guide_game_project_structure
+    notes: Set up the game project structure following the game architecture document. Create pages/, components/, js/, and images/ directories. Initialize WeChat Mini-Game configuration.
+  workflow_end:
+    action: move_to_story_development
+    notes: All planning artifacts are complete and sharded. Begin the story-driven development phase.
+  prototype_sequence:
+    - step: prototype_scope
+      agent: game-analyst
+      action: assess_prototype_scope
+      notes: "The Analyst quickly defines the core concept and scope for a prototype."
+    - agent: game-designer
+      creates: prototype-design.md
+      requires: concept-summary.md
+      notes: "The Designer creates a minimal design spec for the core mechanic."
+    - agent: game-developer
+      action: implement_prototype
+      requires: prototype-design.md
+      notes: "The Developer rapidly implements the core mechanic for playtesting."
+  prototype_workflow_end:
+    action: move_to_rapid_implementation
+    notes: The prototype is defined. Begin immediate implementation with the Game Developer. Focus on core mechanics first, then iterate based on playtesting.
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: WeChat Game Development Project] --> B{Project Scope?}
+        B -->|Full Game/Production| C[game-analyst: game-brief.md]
+        B -->|Prototype/Game Jam| D[game-analyst: prototype-scope.md]
+
+        C --> E[game-pm: prd.md]
+        E --> F[game-designer: game-design-doc.md]
+        F --> G[game-architect: game-architecture.md]
+        G --> H[game-po: Shard Documents]
+        H --> I[Move to Story Development Phase]
+
+        D --> J[game-designer: prototype-design.md]
+        J --> K[game-developer: Implement Prototype]
+        K --> L[Prototype Evaluation & Iteration]
+
+        style I fill:#90EE90
+        style L fill:#90EE90
+        style C fill:#FFE4B5
+        style E fill:#ADD8E6
+        style F fill:#E6E6FA
+        style G fill:#FFDAB9
+        style H fill:#FFB6C1
+        style D fill:#FFB6C1
+        style J fill:#FFB6C1
+        style K fill:#FFB6C1
+    ```
+  decision_guidance:
+    use_full_sequence_when:
+      - Building commercial or production games
+      - Multiple team members involved
+      - Complex gameplay systems (3+ core mechanics)
+      - Long-term development timeline (2+ months)
+      - Need comprehensive documentation for team coordination
+      - Educational or enterprise game projects
+    use_prototype_sequence_when:
+      - Game jams or time-constrained development
+      - Solo developer or very small team
+      - Experimental or proof-of-concept games
+      - Simple mechanics (1-2 core systems)
+      - Quick validation of game concepts
+      - Learning projects or technical demos
+  handoff_prompts:
+    analyst_to_pm: "Game brief is complete. The PM should now create the PRD."
+    pm_to_designer: "PRD is complete. The Game Designer should now create the GDD."
+    designer_to_architect: "GDD is complete. The Game Architect should now create the technical architecture."
+    architect_to_po: "All planning documents are complete. The PO should now shard them for development."
+    validation_issues: "Validation found issues with [document]. Please return to [agent] to fix and re-save the updated document."
+    full_complete: "All planning artifacts are complete and sharded. Set up the game project structure and move to the story development phase."
+    prototype_analyst_to_designer: "Prototype concept is defined. The Game Designer should now create a minimal design specification."
+    prototype_designer_to_dev: "Prototype spec is ready. The Game Developer should now implement the core mechanic for playtesting."
+    prototype_complete: "Prototype implemented. Evaluate mechanics, gather feedback, and decide on next steps."
+  story_development_guidance:
+    epic_breakdown:
+      - Core Game Systems" - Fundamental gameplay mechanics and player controls
+      - Level Content" - Individual levels, progression, and content implementation
+      - User Interface" - Menus, HUD, settings, and player feedback systems
+      - Audio Integration" - Music, sound effects, and audio systems
+      - Performance Optimization" - Platform optimization and technical polish
+      - Game Polish" - Visual effects, animations, and final user experience
+    story_creation_process:
+      - Use Game Scrum Master to create detailed implementation stories
+      - Each story should reference specific GDD sections
+      - Include performance requirements
+      - Specify WeChat Mini-Game implementation details
+      - Apply game-story-dod-checklist for quality validation
+      - Ensure stories are immediately actionable by Game Developer
+  game_development_best_practices:
+    performance_targets:
+      - Maintain smooth performance on target devices throughout development
+      - Memory usage under specified limits per game system
+      - Loading times under 3 seconds for levels
+      - Smooth animation and responsive player controls
+    technical_standards:
+      - JavaScript/TypeScript best practices
+      - Component-based game architecture
+      - Comprehensive error handling and graceful degradation
+    playtesting_integration:
+      - Test core mechanics early and frequently
+      - Validate game balance through metrics and player feedback
+      - Iterate on design based on implementation discoveries
+      - Document design changes and rationale
+  success_criteria:
+    design_phase_complete:
+      - All design documents created and validated
+      - Technical architecture aligns with game design requirements
+      - Performance targets defined and achievable
+      - Story breakdown ready for implementation
+      - Project structure established
+    implementation_readiness:
+      - Development environment configured for WeChat Mini-Game
+      - Asset pipeline and build system established
+      - Testing framework in place
+      - Team roles and responsibilities defined
+      - First implementation stories created and ready
