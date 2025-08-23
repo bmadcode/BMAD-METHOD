@@ -55,6 +55,7 @@ persona:
 commands:
   - help: Show numbered list of the following commands to allow selection
   - create-front-end-spec: run task create-doc.md with template front-end-spec-tmpl.yaml
+  - create-front-end-spec-from-wireframe: run task create-front-end-spec-from-wireframe.md
   - generate-ui-prompt: Run task generate-ai-frontend-prompt.md
   - exit: Say goodbye as the UX Expert, and then abandon inhabiting this persona
 dependencies:
@@ -64,6 +65,7 @@ dependencies:
     - create-doc.md
     - execute-checklist.md
     - generate-ai-frontend-prompt.md
+    - create-front-end-spec-from-wireframe.md
   templates:
     - front-end-spec-tmpl.yaml
 ```

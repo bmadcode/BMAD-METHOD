@@ -102,6 +102,39 @@ sections:
 
           **Breadcrumb Strategy:** {{breadcrumb_strategy}}
 
+  - id: screen-transitions
+    title: Screen Transitions
+    instruction: |
+      Document how users move between screens at an application level.
+
+      - Use Mermaid flow diagrams to visualize transitions
+      - Include decision points (permissions, confirmations) as diamond nodes
+      - Prefer concise labels for nodes and edges
+      - Reflect destructive actions (disable/delete) as in-place flows if no navigation occurs
+    sections:
+      - id: global-transitions-diagram
+        title: Global Transitions Diagram
+        type: mermaid
+        mermaid_type: graph
+        template: "{{screen_transitions_diagram}}"
+        examples:
+          - |
+            graph TD
+                A[Entry: Menu / Deep Link] --> P{Permission OK?}
+                P -- No --> X[403 / Redirect]
+                P -- Yes --> L[/Screen List/]
+                L -- Create --> M[Type Select Modal]
+                M --> N[/Screen New/]
+                N -- Save/Cancel --> L
+                L -- Edit --> E[/Screen Edit/:id/]
+                E -- Save/Cancel --> L
+                L -- Disable --> D{Confirm?}
+                D -- Yes --> API1[POST /disable]\nSuccess → Reload List
+                D -- No --> L
+                L -- Delete --> C{Confirm?}
+                C -- Yes --> API2[DELETE /:id]\nSuccess → Reload List
+                C -- No --> L
+
   - id: user-flows
     title: User Flows
     instruction: |
@@ -144,6 +177,11 @@ sections:
       Clarify where detailed visual designs will be created (Figma, Sketch, etc.) and how to reference them. If low-fidelity wireframes are needed, offer to help conceptualize layouts for key screens.
     elicit: true
     sections:
+      - id: wireframe-screenshots
+        title: Wireframe Screenshots
+        instruction: |
+          If a local HTML wireframe exists, capture a screenshot automatically and embed it here. Provide relative path usable from the spec location.
+        template: "![{{screen_id}} Wireframe]({{wireframe_screenshot_relpath}})"
       - id: design-files
         template: "**Primary Design Files:** {{design_tool_link}}"
       - id: key-screen-layouts

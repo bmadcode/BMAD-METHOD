@@ -115,6 +115,26 @@ class FileManager {
       files: [],
     };
 
+    // Prewarm setup to reduce first-run latency for UX wireframe flows
+    // These commands are safe to run multiple times.
+    manifest.prewarm = [
+      {
+        name: 'python-playwright',
+        description:
+          'Install Python Playwright and Chromium browser for headless screenshots',
+        commands: [
+          'python3 -m pip install --user playwright',
+          'python3 -m playwright install chromium',
+        ],
+      },
+    ];
+
+    // Conventions for auto-generated UI specs and assets
+    manifest.conventions = {
+      frontend_spec_output: 'documents/frontend_spec/{{screen_id}}.md',
+      wireframe_screenshot: 'documents/assets/{{screen_id}}-wireframe.png',
+    };
+
     // Add file information
     for (const file of files) {
       const filePath = path.join(installDir, file);
