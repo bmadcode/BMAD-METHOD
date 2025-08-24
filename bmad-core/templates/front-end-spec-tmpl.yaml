@@ -66,7 +66,7 @@ sections:
   - id: information-architecture
     title: Information Architecture (IA)
     instruction: |
-      Collaborate with the user to create a comprehensive information architecture:
+      Collaborate with the user to create a comprehensive information architecture. When BMAD_STYLE=prose, describe structures and rationale in paragraphs first, then add diagrams for support (not as the sole content):
 
       1. Build a Site Map or Screen Inventory showing all major areas
       2. Define the Navigation Structure (primary, secondary, breadcrumbs)
@@ -105,7 +105,7 @@ sections:
   - id: screen-transitions
     title: Screen Transitions
     instruction: |
-      Document how users move between screens at an application level.
+      Document how users move between screens at an application level. In prose mode, explain the entry points, decision points, and outcomes in full sentences before the diagram. Avoid terse bullet-only descriptions.
 
       - Use Mermaid flow diagrams to visualize transitions
       - Include decision points (permissions, confirmations) as diamond nodes
@@ -174,7 +174,7 @@ sections:
   - id: wireframes-mockups
     title: Wireframes & Mockups
     instruction: |
-      Clarify where detailed visual designs will be created (Figma, Sketch, etc.) and how to reference them. If low-fidelity wireframes are needed, offer to help conceptualize layouts for key screens.
+      Clarify where detailed visual designs will be created (Figma, Sketch, etc.) and how to reference them. If low-fidelity wireframes are needed, offer to help conceptualize layouts for key screens. In prose mode, describe each screenshot’s purpose, key elements, and intended interactions in sentences, not only bullets.
     elicit: true
     sections:
       - id: wireframe-screenshots
@@ -280,6 +280,7 @@ sections:
   - id: accessibility
     title: Accessibility Requirements
     instruction: Define specific accessibility requirements based on target compliance level and user needs. Be comprehensive but practical.
+    note: "When BMAD_STYLE=prose, precede lists with paragraphs that explain goals and rationale."
     elicit: true
     sections:
       - id: compliance-target

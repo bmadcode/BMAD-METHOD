@@ -107,7 +107,7 @@ sections:
 
   - id: component-standards
     title: Component Standards
-    instruction: Define exact patterns for component creation based on the chosen framework.
+    instruction: Define exact patterns for component creation based on the chosen framework. In prose mode, describe the intent and rationale for each rule in paragraph form before providing code templates.
     elicit: true
     sections:
       - id: component-template

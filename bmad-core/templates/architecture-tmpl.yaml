@@ -68,7 +68,7 @@ sections:
   - id: high-level-architecture
     title: High Level Architecture
     instruction: |
-      This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together at once.
+      This section contains multiple subsections that establish the foundation of the architecture. Present all subsections together at once. When BMAD_STYLE=prose, precede any lists or diagrams with paragraph narratives that explain the why behind choices, trade-offs, and how this architecture satisfies PRD goals.
     elicit: true
     sections:
       - id: technical-summary
