@@ -23,7 +23,7 @@
    - 変数: `screen_id`, `wireframe_screenshot_relpath`（例: `../assets/{{screen_id}}-wireframe.png`）
 5. 生成された仕様書に「Wireframe Screenshots」セクションが含まれることを確認
 6. （任意）プローズモードでの出力
-   - `export BMAD_STYLE=prose` を設定してからレンダリングを行うと、箇条書き中心の短文ではなく、段落ベースの詳細な説明が優先される。
+   - `export BMAD_STYLE=prose` を設定してからレンダリングを行うと、本リポジトリのポリシーに従い「1文1行＋各行先頭に`* `」で整形されたプローズが生成される（コードブロック・Mermaid・画像・表は除外）。
 
 ## Execution Notes
 - 撮影後に画像パスを相対に変換し、仕様書から参照可能にします。

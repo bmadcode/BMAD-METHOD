@@ -39,13 +39,14 @@ If a YAML Template has not been provided, list all templates from .bmad-core/tem
 
 ## Global Prose Mode (BMAD_STYLE=prose)
 
-When the environment variable `BMAD_STYLE=prose` is set:
+When the environment variable `BMAD_STYLE=prose` is set, apply this repository's formatting policy:
 
-1. Write sections in full sentences and paragraphs. Avoid shorthand.
-2. Do not use terse bullet-only outputs unless identifiers are mandatory (e.g., FR/NFR numbers). When lists are necessary, convert each item into 1-2 descriptive sentences.
-3. Always cover, in order where applicable: Purpose → Structure → Behavior → Conditions → Results → Errors/Edge Cases → Accessibility/Non-Functional → Acceptance.
-4. Replace ambiguous shorthand with explicit phrasing. Example: “1行省略” → “1行表示領域を超えたテキストは末尾に省略記号（…）を付けて切り詰める”。
-5. Prefer paragraph explanations before any diagrams or tables to clarify context and rationale.
+1. Write in full sentences, but format output as one sentence per line, and prefix each sentence with `* ` (asterisk + space).
+2. Do not wrap multiple sentences into a single paragraph. Each sentence must be its own bullet line for readability and diffability.
+3. Exceptions: Do NOT alter formatting for code blocks, diagrams (e.g., Mermaid), tables, or images; keep their native formats.
+4. Always cover, in order where applicable: Purpose → Structure → Behavior → Conditions → Results → Errors/Edge Cases → Accessibility/Non-Functional → Acceptance.
+5. Replace ambiguous shorthand with explicit phrasing. Example: “1行省略” → “1行表示領域を超えたテキストは末尾に省略記号（…）を付けて切り詰める”。
+6. Before any lists or diagrams, you may include context sentences; still apply one-sentence-per-line with leading `* ` to those sentences (diagrams/tables themselves are excluded).
 
 ## Processing Flow
 

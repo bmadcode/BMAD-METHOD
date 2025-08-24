@@ -19,6 +19,8 @@ sections:
       Review provided documents including Project Brief, PRD, and any user research to gather context. Focus on understanding user needs, pain points, and desired outcomes before beginning the specification.
 
       Establish the document's purpose and scope. Keep the content below but ensure project name is properly substituted.
+
+      Formatting Policy (when BMAD_STYLE=prose): Output narrative as one sentence per line and prefix each sentence with `* `. Do not change formatting of code blocks, Mermaid diagrams, tables, or images.
     content: |
       This document defines the user experience goals, information architecture, user flows, and visual design specifications for {{project_name}}'s user interface. It serves as the foundation for visual design and frontend development, ensuring a cohesive and user-centered experience.
     sections:
@@ -66,7 +68,7 @@ sections:
   - id: information-architecture
     title: Information Architecture (IA)
     instruction: |
-      Collaborate with the user to create a comprehensive information architecture. When BMAD_STYLE=prose, describe structures and rationale in paragraphs first, then add diagrams for support (not as the sole content):
+      Collaborate with the user to create a comprehensive information architecture. When BMAD_STYLE=prose, still format each sentence as its own bullet line with `* ` for diffability. Provide the narrative before diagrams:
 
       1. Build a Site Map or Screen Inventory showing all major areas
       2. Define the Navigation Structure (primary, secondary, breadcrumbs)
@@ -105,7 +107,7 @@ sections:
   - id: screen-transitions
     title: Screen Transitions
     instruction: |
-      Document how users move between screens at an application level. In prose mode, explain the entry points, decision points, and outcomes in full sentences before the diagram. Avoid terse bullet-only descriptions.
+      Document how users move between screens at an application level. In prose mode, explain the entry points, decision points, and outcomes in full sentences, formatted as one sentence per line with leading `* `, before the diagram. Avoid mixing multiple sentences on a single line.
 
       - Use Mermaid flow diagrams to visualize transitions
       - Include decision points (permissions, confirmations) as diamond nodes
@@ -174,7 +176,7 @@ sections:
   - id: wireframes-mockups
     title: Wireframes & Mockups
     instruction: |
-      Clarify where detailed visual designs will be created (Figma, Sketch, etc.) and how to reference them. If low-fidelity wireframes are needed, offer to help conceptualize layouts for key screens. In prose mode, describe each screenshot’s purpose, key elements, and intended interactions in sentences, not only bullets.
+      Clarify where detailed visual designs will be created (Figma, Sketch, etc.) and how to reference them. If low-fidelity wireframes are needed, offer to help conceptualize layouts for key screens. In prose mode, describe each screenshot’s purpose, key elements, and intended interactions as one sentence per line with leading `* `. Do not alter code/diagrams.
     elicit: true
     sections:
       - id: wireframe-screenshots
