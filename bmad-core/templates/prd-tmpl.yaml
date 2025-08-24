@@ -16,7 +16,9 @@ sections:
   - id: goals-context
     title: Goals and Background Context
     instruction: |
-      Ask if Project Brief document is available. If NO Project Brief exists, STRONGLY recommend creating one first using project-brief-tmpl (it provides essential foundation: problem statement, target users, success metrics, MVP scope, constraints). If user insists on PRD without brief, gather this information during Goals section. If Project Brief exists, review and use it to populate Goals (bullet list of desired outcomes) and Background Context (1-2 paragraphs on what this solves and why) so we can determine what is and is not in scope for PRD mvp. Either way this is critical to determine the requirements. Include Change Log table.
+      Ask if Project Brief document is available. If NO Project Brief exists, STRONGLY recommend creating one first using project-brief-tmpl. If user insists on PRD without brief, gather this information during Goals section.
+
+      When BMAD_STYLE=prose, ensure the Background Context and subsequent sections open with paragraph explanations: clearly state the problem, users, constraints, and rationale before any lists or tables.
     sections:
       - id: goals
         title: Goals
@@ -34,21 +36,21 @@ sections:
 
   - id: requirements
     title: Requirements
-    instruction: Draft the list of functional and non functional requirements under the two child sections
+    instruction: Draft the list of functional and non functional requirements under the two child sections. In prose mode, for each requirement, add a short explanatory paragraph (purpose, preconditions, acceptance) beneath the item, avoiding single-line shorthand.
     elicit: true
     sections:
       - id: functional
         title: Functional
         type: numbered-list
         prefix: FR
-        instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with FR
+        instruction: Each Requirement will be a numbered item starting with FR. In prose mode, follow each FR with a paragraph explaining rationale, conditions, and acceptance.
         examples:
           - "FR6: The Todo List uses AI to detect and warn against potentially duplicate todo items that are worded differently."
       - id: non-functional
         title: Non Functional
         type: numbered-list
         prefix: NFR
-        instruction: Each Requirement will be a bullet markdown and an identifier sequence starting with NFR
+        instruction: Each Requirement will be a numbered item starting with NFR. In prose mode, follow each NFR with a paragraph explaining rationale and measurement.
         examples:
           - "NFR1: AWS service usage must aim to stay within free-tier limits where feasible."
 

@@ -37,6 +37,16 @@ If a YAML Template has not been provided, list all templates from .bmad-core/tem
 
 **NEVER ask yes/no questions or use any other format.**
 
+## Global Prose Mode (BMAD_STYLE=prose)
+
+When the environment variable `BMAD_STYLE=prose` is set:
+
+1. Write sections in full sentences and paragraphs. Avoid shorthand.
+2. Do not use terse bullet-only outputs unless identifiers are mandatory (e.g., FR/NFR numbers). When lists are necessary, convert each item into 1-2 descriptive sentences.
+3. Always cover, in order where applicable: Purpose → Structure → Behavior → Conditions → Results → Errors/Edge Cases → Accessibility/Non-Functional → Acceptance.
+4. Replace ambiguous shorthand with explicit phrasing. Example: “1行省略” → “1行表示領域を超えたテキストは末尾に省略記号（…）を付けて切り詰める”。
+5. Prefer paragraph explanations before any diagrams or tables to clarify context and rationale.
+
 ## Processing Flow
 
 1. **Parse YAML template** - Load template metadata and sections
