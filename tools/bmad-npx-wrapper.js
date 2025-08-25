@@ -26,9 +26,12 @@ if (isNpxExecution) {
   }
 
   try {
+    // Honor the directory where the user invoked npx from
+    const originalCwd = process.env.INIT_CWD || process.env.PWD || process.cwd();
     execSync(`node "${bmadScriptPath}" ${arguments_.join(' ')}`, {
       stdio: 'inherit',
-      cwd: path.dirname(__dirname),
+      cwd: originalCwd,
+      env: { ...process.env, BMAD_ORIGINAL_CWD: originalCwd },
     });
   } catch (error) {
     process.exit(error.status || 1);

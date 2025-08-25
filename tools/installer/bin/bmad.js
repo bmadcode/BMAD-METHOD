@@ -208,6 +208,7 @@ async function promptInstallation() {
   console.log(chalk.bold.magenta('🚀 Universal AI Agent Framework for Any Domain'));
   console.log(chalk.bold.blue(`✨ Installer v${version}\n`));
 
+  const originalCwd = process.env.INIT_CWD || process.env.PWD || process.cwd();
   const answers = {};
 
   // Ask for installation directory first
@@ -216,7 +217,7 @@ async function promptInstallation() {
       type: 'input',
       name: 'directory',
       message: 'Enter the full path to your project directory where BMad should be installed:',
-      default: path.resolve('.'),
+      default: originalCwd,
       validate: (input) => {
         if (!input.trim()) {
           return 'Please enter a valid project path';

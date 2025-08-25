@@ -520,15 +520,14 @@ class IdeSetup extends BaseIdeSetup {
     }
 
     if (await fileManager.pathExists(tasksDir)) {
-      const glob = require('glob');
-      const taskFiles = glob.sync('*.md', { cwd: tasksDir });
+      const taskFiles = await resourceLocator.findFiles('*.md', { cwd: tasksDir });
       allTaskIds.push(...taskFiles.map((file) => path.basename(file, '.md')));
     }
 
     // Check common tasks
     const commonTasksDir = path.join(installDir, 'common', 'tasks');
     if (await fileManager.pathExists(commonTasksDir)) {
-      const commonTaskFiles = glob.sync('*.md', { cwd: commonTasksDir });
+      const commonTaskFiles = await resourceLocator.findFiles('*.md', { cwd: commonTasksDir });
       allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, '.md')));
     }
 
