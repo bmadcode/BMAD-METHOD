@@ -28,6 +28,15 @@ ide-configurations:
       # To use BMad agents in Claude Code:
       # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
       # 2. Claude will switch to that agent's persona
+  iflow-cli:
+    name: iFlow CLI
+    rule-dir: .iflow/commands/BMad/
+    format: multi-file
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in iFlow CLI:
+      # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
+      # 2. iFlow will switch to that agent's persona
   crush:
     name: Crush
     rule-dir: .crush/commands/BMad/

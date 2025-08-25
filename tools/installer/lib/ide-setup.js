@@ -47,6 +47,9 @@ class IdeSetup extends BaseIdeSetup {
       case 'claude-code': {
         return this.setupClaudeCode(installDir, selectedAgent);
       }
+      case 'iflow-cli': {
+        return this.setupIFlowCli(installDir, selectedAgent);
+      }
       case 'crush': {
         return this.setupCrush(installDir, selectedAgent);
       }
@@ -270,6 +273,141 @@ class IdeSetup extends BaseIdeSetup {
 
     console.log(
       chalk.green(`\n✓ Created Claude Code commands for ${packageName} in ${commandsBaseDir}`),
+    );
+    console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
+    console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
+  }
+
+  async setupIFlowCli(installDir, selectedAgent) {
+    // Setup bmad-core commands
+    const coreSlashPrefix = await this.getCoreSlashPrefix(installDir);
+    const coreAgents = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
+    const coreTasks = await this.getCoreTaskIds(installDir);
+    await this.setupIFlowCliForPackage(
+      installDir,
+      'core',
+      coreSlashPrefix,
+      coreAgents,
+      coreTasks,
+      '.bmad-core',
+    );
+
+    // Setup expansion pack commands
+    const expansionPacks = await this.getInstalledExpansionPacks(installDir);
+    for (const packInfo of expansionPacks) {
+      const packSlashPrefix = await this.getExpansionPackSlashPrefix(packInfo.path);
+      const packAgents = await this.getExpansionPackAgents(packInfo.path);
+      const packTasks = await this.getExpansionPackTasks(packInfo.path);
+
+      if (packAgents.length > 0 || packTasks.length > 0) {
+        // Use the actual directory name where the expansion pack is installed
+        const rootPath = path.relative(installDir, packInfo.path);
+        await this.setupIFlowCliForPackage(
+          installDir,
+          packInfo.name,
+          packSlashPrefix,
+          packAgents,
+          packTasks,
+          rootPath,
+        );
+      }
+    }
+
+    return true;
+  }
+
+  async setupIFlowCliForPackage(
+    installDir,
+    packageName,
+    slashPrefix,
+    agentIds,
+    taskIds,
+    rootPath,
+  ) {
+    const commandsBaseDir = path.join(installDir, '.iflow', 'commands', slashPrefix);
+    const agentsDir = path.join(commandsBaseDir, 'agents');
+    const tasksDir = path.join(commandsBaseDir, 'tasks');
+
+    // Ensure directories exist
+    await fileManager.ensureDirectory(agentsDir);
+    await fileManager.ensureDirectory(tasksDir);
+
+    // Setup agents
+    for (const agentId of agentIds) {
+      // Find the agent file - for expansion packs, prefer the expansion pack version
+      let agentPath;
+      if (packageName === 'core') {
+        // For core, use the normal search
+        agentPath = await this.findAgentPath(agentId, installDir);
+      } else {
+        // For expansion packs, first try to find the agent in the expansion pack directory
+        const expansionPackPath = path.join(installDir, rootPath, 'agents', `${agentId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          agentPath = expansionPackPath;
+        } else {
+          // Fall back to core if not found in expansion pack
+          agentPath = await this.findAgentPath(agentId, installDir);
+        }
+      }
+
+      const commandPath = path.join(agentsDir, `${agentId}.md`);
+
+      if (agentPath) {
+        // Create command file with agent content
+        let agentContent = await fileManager.readFile(agentPath);
+
+        // Replace {root} placeholder with the appropriate root path for this context
+        agentContent = agentContent.replaceAll('{root}', rootPath);
+
+        // Add command header
+        let commandContent = `# /${agentId} Command\n\n`;
+        commandContent += `When this command is used, adopt the following agent persona:\n\n`;
+        commandContent += agentContent;
+
+        await fileManager.writeFile(commandPath, commandContent);
+        console.log(chalk.green(`✓ Created agent command: /${agentId}`));
+      }
+    }
+
+    // Setup tasks
+    for (const taskId of taskIds) {
+      // Find the task file - for expansion packs, prefer the expansion pack version
+      let taskPath;
+      if (packageName === 'core') {
+        // For core, use the normal search
+        taskPath = await this.findTaskPath(taskId, installDir);
+      } else {
+        // For expansion packs, first try to find the task in the expansion pack directory
+        const expansionPackPath = path.join(installDir, rootPath, 'tasks', `${taskId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          taskPath = expansionPackPath;
+        } else {
+          // Fall back to core if not found in expansion pack
+          taskPath = await this.findTaskPath(taskId, installDir);
+        }
+      }
+
+      const commandPath = path.join(tasksDir, `${taskId}.md`);
+
+      if (taskPath) {
+        // Create command file with task content
+        let taskContent = await fileManager.readFile(taskPath);
+
+        // Replace {root} placeholder with the appropriate root path for this context
+        taskContent = taskContent.replaceAll('{root}', rootPath);
+
+        // Add command header
+        let commandContent = `# /${taskId} Task\n\n`;
+        commandContent += `When this command is used, execute the following task:\n\n`;
+        commandContent += taskContent;
+
+        await fileManager.writeFile(commandPath, commandContent);
+        console.log(chalk.green(`✓ Created task command: /${taskId}`));
+      }
+    }
+
+    console.log(
+      chalk.green(`\n✓ Created iFlow CLI commands for ${packageName} in ${commandsBaseDir}`),
     );
     console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
     console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
