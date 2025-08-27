@@ -27,7 +27,8 @@ class Installer {
 
     try {
       // Store the original CWD where npx was executed
-      const originalCwd = process.env.INIT_CWD || process.env.PWD || process.cwd();
+      const originalCwd =
+        process.env.BMAD_ORIGINAL_CWD || process.env.INIT_CWD || process.env.PWD || process.cwd();
 
       // Resolve installation directory relative to where the user ran the command
       let installDir = path.isAbsolute(config.directory)
@@ -1005,7 +1006,8 @@ class Installer {
   }
 
   async showStatus() {
-    const installDir = await this.findInstallation();
+    // Try to locate an installation root. Include expansion-only installs.
+    const installDir = await this.findInstallation(true);
 
     if (!installDir) {
       console.log(chalk.yellow('No BMad installation found in current directory tree'));
@@ -1013,35 +1015,61 @@ class Installer {
     }
 
     const manifest = await fileManager.readManifest(installDir);
+    const expansionPacks = await this.detectExpansionPacks(installDir);
+    const hasExpansionPacks = expansionPacks && Object.keys(expansionPacks).length > 0;
 
-    if (!manifest) {
+    if (!manifest && !hasExpansionPacks) {
       console.log(chalk.red('Invalid installation - manifest not found'));
       return;
     }
 
-    console.log(chalk.bold('\nBMad Installation Status:\n'));
-    console.log(`  Directory:      ${installDir}`);
-    console.log(`  Version:        ${manifest.version}`);
-    console.log(`  Installed:      ${new Date(manifest.installed_at).toLocaleDateString()}`);
-    console.log(`  Type:           ${manifest.install_type}`);
+    if (manifest) {
+      console.log(chalk.bold('\nBMad Installation Status:\n'));
+      console.log(`  Directory:      ${installDir}`);
+      console.log(`  Version:        ${manifest.version}`);
+      console.log(`  Installed:      ${new Date(manifest.installed_at).toLocaleDateString()}`);
+      console.log(`  Type:           ${manifest.install_type}`);
 
-    if (manifest.agent) {
-      console.log(`  Agent:          ${manifest.agent}`);
+      if (manifest.agent) {
+        console.log(`  Agent:          ${manifest.agent}`);
+      }
+
+      if (manifest.ides_setup && manifest.ides_setup.length > 0) {
+        console.log(`  IDE Setup:      ${manifest.ides_setup.join(', ')}`);
+      }
+
+      console.log(`  Total Files:    ${manifest.files.length}`);
+
+      // Check for modifications in core
+      const modifiedFiles = await fileManager.checkModifiedFiles(installDir, manifest);
+      if (modifiedFiles.length > 0) {
+        console.log(chalk.yellow(`  Modified Files: ${modifiedFiles.length}`));
+      }
+
+      // If there are also expansion packs, list them
+      if (hasExpansionPacks) {
+        console.log('\nExpansion Packs:');
+        for (const [packId, info] of Object.entries(expansionPacks)) {
+          const version = info.manifest?.version || 'unknown';
+          console.log(`  - ${packId} (${version})`);
+        }
+      }
+      console.log('');
+      return;
     }
 
-    if (manifest.ides_setup && manifest.ides_setup.length > 0) {
-      console.log(`  IDE Setup:      ${manifest.ides_setup.join(', ')}`);
+    // Expansion-only installation (no .bmad-core manifest)
+    if (hasExpansionPacks) {
+      console.log(chalk.bold('\nBMad Expansion-only Installation Status:\n'));
+      console.log(`  Directory:      ${installDir}`);
+      console.log(`  Expansion Packs: ${Object.keys(expansionPacks).length}`);
+      for (const [packId, info] of Object.entries(expansionPacks)) {
+        const version = info.manifest?.version || 'unknown';
+        console.log(`    • ${packId} (${version})`);
+      }
+      console.log('');
+      return;
     }
-
-    console.log(`  Total Files:    ${manifest.files.length}`);
-
-    // Check for modifications
-    const modifiedFiles = await fileManager.checkModifiedFiles(installDir, manifest);
-    if (modifiedFiles.length > 0) {
-      console.log(chalk.yellow(`  Modified Files: ${modifiedFiles.length}`));
-    }
-
-    console.log('');
   }
 
   async getAvailableAgents() {
@@ -1792,32 +1820,22 @@ class Installer {
 
     for (const folder of dotFolders) {
       const folderPath = path.join(installDir, folder);
-      const stats = await fileManager.pathExists(folderPath);
+      const exists = await fileManager.pathExists(folderPath);
+      if (!exists) continue;
 
-      if (stats) {
-        // Check if it has a manifest
-        const manifestPath = path.join(folderPath, 'install-manifest.yaml');
-        if (await fileManager.pathExists(manifestPath)) {
-          const manifest = await fileManager.readExpansionPackManifest(installDir, folder.slice(1));
-          if (manifest) {
-            expansionPacks[folder.slice(1)] = {
-              path: folderPath,
-              manifest: manifest,
-              hasManifest: true,
-            };
-          }
-        } else {
-          // Check if it has a config.yaml (expansion pack without manifest)
-          const configPath = path.join(folderPath, 'config.yaml');
-          if (await fileManager.pathExists(configPath)) {
-            expansionPacks[folder.slice(1)] = {
-              path: folderPath,
-              manifest: null,
-              hasManifest: false,
-            };
-          }
-        }
-      }
+      // Only consider folders with an explicit BMad expansion manifest
+      const manifestPath = path.join(folderPath, 'install-manifest.yaml');
+      if (!(await fileManager.pathExists(manifestPath))) continue;
+
+      const manifest = await fileManager.readExpansionPackManifest(installDir, folder.slice(1));
+      // Validate manifest to avoid false positives from unrelated dot-folders
+      if (!manifest || typeof manifest.expansion_pack_id !== 'string') continue;
+
+      expansionPacks[folder.slice(1)] = {
+        path: folderPath,
+        manifest,
+        hasManifest: true,
+      };
     }
 
     return expansionPacks;
@@ -1943,27 +1961,80 @@ class Installer {
     }
   }
 
-  async findInstallation() {
-    // Look for .bmad-core in current directory or parent directories
-    let currentDir = process.cwd();
+  async findInstallation(includeExpansionOnly = false) {
+    // Start from where the user invoked the CLI (npx wrapper sets BMAD_ORIGINAL_CWD)
+    const startDir =
+      process.env.BMAD_ORIGINAL_CWD || process.env.INIT_CWD || process.env.PWD || process.cwd();
 
-    while (currentDir !== path.dirname(currentDir)) {
-      const bmadDir = path.join(currentDir, '.bmad-core');
-      const manifestPath = path.join(bmadDir, 'install-manifest.yaml');
+    const debug = (message) => {
+      if (process.env.BMAD_DEBUG) console.log(chalk.dim(`[bmad:findInstallation] ${message}`));
+    };
 
-      if (await fileManager.pathExists(manifestPath)) {
-        return currentDir; // Return parent directory, not .bmad-core itself
+    let currentDir = path.resolve(startDir);
+    const visited = new Set();
+
+    while (true) {
+      if (visited.has(currentDir)) break;
+      visited.add(currentDir);
+      debug(`checking: ${currentDir}`);
+
+      // Case: we are inside .bmad-core
+      if (path.basename(currentDir) === '.bmad-core') {
+        const parentDir = path.dirname(currentDir);
+        const coreManifest = path.join(parentDir, '.bmad-core', 'install-manifest.yaml');
+        if (await fileManager.pathExists(coreManifest)) {
+          debug(`found core manifest (from inside .bmad-core): ${coreManifest}`);
+          return parentDir;
+        }
       }
 
-      currentDir = path.dirname(currentDir);
-    }
-
-    // Also check if we're inside a .bmad-core directory
-    if (path.basename(process.cwd()) === '.bmad-core') {
-      const manifestPath = path.join(process.cwd(), 'install-manifest.yaml');
-      if (await fileManager.pathExists(manifestPath)) {
-        return path.dirname(process.cwd()); // Return parent directory
+      // Case: we are inside an expansion pack dot-folder
+      if (includeExpansionOnly) {
+        const base = path.basename(currentDir);
+        if (base.startsWith('.') && base !== '.git' && base !== '.bmad-core') {
+          const packManifest = path.join(currentDir, 'install-manifest.yaml');
+          if (await fileManager.pathExists(packManifest)) {
+            const parentDir = path.dirname(currentDir);
+            // Validate it's a BMad expansion manifest
+            try {
+              const manifest = await fileManager.readExpansionPackManifest(
+                parentDir,
+                base.slice(1),
+              );
+              if (manifest && typeof manifest.expansion_pack_id === 'string') {
+                debug(`found expansion pack folder at ${currentDir}; root is ${parentDir}`);
+                return parentDir;
+              }
+            } catch {
+              // ignore invalid manifests
+            }
+          }
+        }
       }
+
+      // Detection: full installation (.bmad-core with manifest)
+      const coreManifestPath = path.join(currentDir, '.bmad-core', 'install-manifest.yaml');
+      if (await fileManager.pathExists(coreManifestPath)) {
+        debug(`found core manifest at ${coreManifestPath}`);
+        return currentDir;
+      }
+
+      // Detection: expansion-only installation (any expansion dot-folder with manifest/config)
+      if (includeExpansionOnly) {
+        try {
+          const expansions = await this.detectExpansionPacks(currentDir);
+          if (expansions && Object.keys(expansions).length > 0) {
+            debug(`found expansion-only installation at ${currentDir}`);
+            return currentDir;
+          }
+        } catch {
+          // ignore errors during detection and continue ascending
+        }
+      }
+
+      const parent = path.dirname(currentDir);
+      if (parent === currentDir) break; // reached filesystem root
+      currentDir = parent;
     }
 
     return null;

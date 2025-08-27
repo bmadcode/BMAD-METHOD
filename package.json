@@ -40,6 +40,8 @@
     "release:minor": "gh workflow run \"Manual Release\" -f version_bump=minor",
     "release:patch": "gh workflow run \"Manual Release\" -f version_bump=patch",
     "release:watch": "gh run watch",
+    "status": "node tools/installer/bin/bmad.js status",
+    "status:debug": "BMAD_DEBUG=1 node tools/installer/bin/bmad.js status",
     "validate": "node tools/cli.js validate",
     "version:all": "node tools/bump-all-versions.js",
     "version:all:major": "node tools/bump-all-versions.js major",
