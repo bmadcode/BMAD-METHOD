@@ -528,6 +528,7 @@ class IdeSetup extends BaseIdeSetup {
     // Check common tasks
     const commonTasksDir = path.join(installDir, 'common', 'tasks');
     if (await fileManager.pathExists(commonTasksDir)) {
+      const glob = require('glob');
       const commonTaskFiles = glob.sync('*.md', { cwd: commonTasksDir });
       allTaskIds.push(...commonTaskFiles.map((file) => path.basename(file, '.md')));
     }
