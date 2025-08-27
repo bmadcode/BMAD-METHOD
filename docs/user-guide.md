@@ -12,38 +12,38 @@ If the diagrams below don't render, install Markdown All in One along with the M
 
 ### The Planning Workflow (Web UI or Powerful IDE Agents)
 
-Before development begins, BMad follows a structured planning workflow that's ideally done in web UI for cost efficiency:
+Before development begins, BMad follows a structured planning workflow that's ideally done in web UI for cost efficiency. When loading an agent, always initialize the agent before loading anything else. This will ensure the agent loads any dependencies and is ready to assist you in the planning process. Some IDE's and web models will automatically initialize the agent for you, but if not, simply sending an arbitrary message such as a period will initialize the agent.
 
 ```mermaid
 graph TD
     A["Start: Project Idea"] --> B{"Optional: Analyst Research"}
-    B -->|Yes| C["Analyst: Brainstorming (Optional)"]
+    B -->|Yes| C["Analyst: Brainstorming (Optional)<br/>*brainstorm {topic}"]
     B -->|No| G{"Project Brief Available?"}
-    C --> C2["Analyst: Market Research (Optional)"]
-    C2 --> C3["Analyst: Competitor Analysis (Optional)"]
-    C3 --> D["Analyst: Create Project Brief"]
+    C --> C2["Analyst: Market Research (Optional)<br/>*perform-market-research"]
+    C2 --> C3["Analyst: Competitor Analysis (Optional)<br/>*create-competitor-analysis"]
+    C3 --> D["Analyst: Create Project Brief<br/>*create-project-brief"]
     D --> G
-    G -->|Yes| E["PM: Create PRD from Brief (Fast Track)"]
-    G -->|No| E2["PM: Interactive PRD Creation (More Questions)"]
+    G -->|Yes| E["PM: Create PRD from Brief (Fast Track)<br/>*create-prd"]
+    G -->|No| E2["PM: Interactive PRD Creation (More Questions)<br/>*create-prd"]
     E --> F["PRD Created with FRs, NFRs, Epics & Stories"]
     E2 --> F
     F --> F2{"UX Required?"}
-    F2 -->|Yes| F3["UX Expert: Create Front End Spec"]
-    F2 -->|No| H["Architect: Create Architecture from PRD"]
-    F3 --> F4["UX Expert: Generate UI Prompt for Lovable/V0 (Optional)"]
-    F4 --> H2["Architect: Create Architecture from PRD + UX Spec"]
+    F2 -->|Yes| F3["UX Expert: Create Front End Spec<br/>*create-front-end-spec"]
+    F2 -->|No| H["Architect: Create Architecture from PRD<br/>*create-full-stack-architecture"]
+    F3 --> F4["UX Expert: Generate UI Prompt for Lovable/V0 (Optional)<br/>*generate-ui-prompt"]
+    F4 --> H2["Architect: Create Architecture from PRD + UX Spec<br/>*create-full-stack-architecture"]
     H --> Q{"Early Test Strategy? (Optional)"}
     H2 --> Q
-    Q -->|Yes| R["QA: Early Test Architecture Input on High-Risk Areas"]
+    Q -->|Yes| R["QA: Early Test Architecture Input on High-Risk Areas<br/>*risk-profile + *test-design"]
     Q -->|No| I
-    R --> I["PO: Run Master Checklist"]
+    R --> I["PO: Run Master Checklist<br/>*execute-checklist-po"]
     I --> J{"Documents Aligned?"}
     J -->|Yes| K["Planning Complete"]
-    J -->|No| L["PO: Update Epics & Stories"]
+    J -->|No| L["PO: Update Epics & Stories<br/>*create-epic/*create-story"]
     L --> M["Update PRD/Architecture as needed"]
     M --> I
     K --> N["📁 Switch to IDE (If in a Web Agent Platform)"]
-    N --> O["PO: Shard Documents"]
+    N --> O["PO: Shard Documents<br/>*shard-doc {document} {destination}"]
     O --> P["Ready for SM/Dev Cycle"]
 
     style A fill:#f5f5f5,color:#000
@@ -100,35 +100,36 @@ Once planning is complete and documents are sharded, BMad follows a structured d
 ```mermaid
 graph TD
     A["Development Phase Start"] --> B["SM: Reviews Previous Story Dev/QA Notes"]
-    B --> B2["SM: Drafts Next Story from Sharded Epic + Architecture"]
+    B --> B2["SM: Drafts Next Story from Sharded Epic + Architecture<br/>*draft"]
     B2 --> S{"High-Risk Story? (Optional)"}
     S -->|Yes| T["QA: *risk + *design on Draft Story"]
     S -->|No| B3
     T --> U["Test Strategy & Risk Profile Created"]
     U --> B3{"PO: Validate Story Draft (Optional)"}
-    B3 -->|Validation Requested| B4["PO: Validate Story Against Artifacts"]
+    B3 -->|Validation Requested| B4["PO: Validate Story Against Artifacts<br/>*validate-story-draft {story}"]
     B3 -->|Skip Validation| C{"User Approval"}
     B4 --> C
     C -->|Approved| D["Dev: Sequential Task Execution"]
     C -->|Needs Changes| B2
-    D --> E["Dev: Implement Tasks + Tests"]
+    D --> E["Dev: Implement Tasks + Tests<br/>*develop-story"]
     E --> V{"Mid-Dev QA Check? (Optional)"}
-    V -->|Yes| W["QA: *trace or *nfr for Early Validation"]
+    V -->|Yes| W["QA: Early Validation<br/>*trace or *nfr-assess"]
     V -->|No| F
-    W --> X["Dev: Address Coverage/NFR Gaps"]
-    X --> F["Dev: Run All Validations"]
+    W --> X["Dev: Address Coverage/NFR Gaps<br/>*review-qa"]
+    X --> F["Dev: Run All Validations<br/>*run-tests"]
     F --> G["Dev: Mark Ready for Review + Add Notes"]
     G --> H{"User Verification"}
     H -->|Request QA Review| I["QA: Test Architect Review + Quality Gate"]
     H -->|Approve Without QA| M["IMPORTANT: Verify All Regression Tests and Linting are Passing"]
-    I --> J["QA: Test Architecture Analysis + Active Refactoring"]
+    I --> J["QA: Test Architecture Analysis + Active Refactoring<br/>*review {story}"]
     J --> L{"QA Decision"}
-    L -->|Needs Dev Work| D
+    L -->|Needs Dev Work| D2["Dev: Apply QA Fixes<br/>*review-qa"]
+    D2 --> M
     L -->|Approved| M
     H -->|Needs Fixes| D
     M --> N["IMPORTANT: COMMIT YOUR CHANGES BEFORE PROCEEDING!"]
     N --> Y{"Gate Update Needed?"}
-    Y -->|Yes| Z["QA: *gate to Update Status"]
+    Y -->|Yes| Z["QA: Update Gate Status<br/>*gate {story}"]
     Y -->|No| K
     Z --> K["Mark Story as Done"]
     K --> B
