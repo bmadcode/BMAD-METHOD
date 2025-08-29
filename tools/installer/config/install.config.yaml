@@ -121,3 +121,22 @@ ide-configurations:
       # 2. It concatenates all agent files into a single QWEN.md file.
       # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
       # 4. The Qwen Code CLI will automatically have the context for that agent.
+
+  augment-code:
+    name: Augment Code
+    format: multi-location
+    locations:
+      user:
+        name: User Commands (Global)
+        rule-dir: ~/.augment/commands/bmad/
+        description: Available across all your projects (user-wide)
+      workspace:
+        name: Workspace Commands (Project)
+        rule-dir: ./.augment/commands/bmad/
+        description: Stored in your repository and shared with your team
+    command-suffix: .md
+    instructions: |
+      # To use BMad agents in Augment Code:
+      # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
+      # 2. The agent will adopt that persona for the conversation
+      # 3. Commands are available based on your selected location(s)
