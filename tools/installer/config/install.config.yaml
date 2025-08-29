@@ -137,6 +137,6 @@ ide-configurations:
     command-suffix: .md
     instructions: |
       # To use BMad agents in Augment Code:
-      # 1. Type /agent-name (e.g., "/bmad:dev", "/bmad:pm", "/bmad:architect")
+      # 1. Type /bmad:agent-name (e.g., "/bmad:dev", "/bmad:pm", "/bmad:architect")
       # 2. The agent will adopt that persona for the conversation
       # 3. Commands are available based on your selected location(s)
