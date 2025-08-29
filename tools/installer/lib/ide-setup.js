@@ -75,7 +75,7 @@ class IdeSetup extends BaseIdeSetup {
         return this.setupQwenCode(installDir, selectedAgent);
       }
       case 'augment-code': {
-        return this.setupAugmentCode(installDir, selectedAgent);
+        return this.setupAugmentCode(installDir, selectedAgent, spinner, preConfiguredSettings);
       }
       default: {
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
@@ -1440,7 +1440,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     console.log(chalk.dim('You can modify these settings anytime in .vscode/settings.json'));
   }
 
-  async setupAugmentCode(installDir, selectedAgent) {
+  async setupAugmentCode(installDir, selectedAgent, spinner = null, preConfiguredSettings = null) {
     const os = require('node:os');
     const inquirer = require('inquirer');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
@@ -1449,24 +1449,51 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     const ideConfig = await configLoader.getIdeConfiguration('augment-code');
     const locations = ideConfig.locations;
 
-    // Prompt user to select which locations to install to
-    const { selectedLocations } = await inquirer.prompt([
-      {
-        type: 'checkbox',
-        name: 'selectedLocations',
-        message: 'Select Augment Code command locations:',
-        choices: Object.entries(locations).map(([key, location]) => ({
-          name: `${location.name}: ${location.description}`,
-          value: key,
-        })),
-        validate: (selected) => {
-          if (selected.length === 0) {
-            return 'Please select at least one location';
-          }
-          return true;
+    // Use pre-configured settings if provided, otherwise prompt
+    let selectedLocations;
+    if (preConfiguredSettings && preConfiguredSettings.selectedLocations) {
+      selectedLocations = preConfiguredSettings.selectedLocations;
+      console.log(
+        chalk.dim(`Using pre-configured Augment Code locations: ${selectedLocations.join(', ')}`),
+      );
+    } else {
+      // Pause spinner during location selection to avoid UI conflicts
+      let spinnerWasActive = false;
+      if (spinner && spinner.isSpinning) {
+        spinner.stop();
+        spinnerWasActive = true;
+      }
+
+      // Clear any previous output and add spacing to avoid conflicts with loaders
+      console.log('\n'.repeat(2));
+      console.log(chalk.blue('📍 Augment Code Location Configuration'));
+      console.log(chalk.dim('Choose where to install BMad agents for Augment Code access.'));
+      console.log(''); // Add extra spacing
+
+      const response = await inquirer.prompt([
+        {
+          type: 'checkbox',
+          name: 'selectedLocations',
+          message: 'Select Augment Code command locations:',
+          choices: Object.entries(locations).map(([key, location]) => ({
+            name: `${location.name}: ${location.description}`,
+            value: key,
+          })),
+          validate: (selected) => {
+            if (selected.length === 0) {
+              return 'Please select at least one location';
+            }
+            return true;
+          },
         },
-      },
-    ]);
+      ]);
+      selectedLocations = response.selectedLocations;
+
+      // Restart spinner if it was active before prompts
+      if (spinner && spinnerWasActive) {
+        spinner.start();
+      }
+    }
 
     // Install to each selected location
     for (const locationKey of selectedLocations) {
