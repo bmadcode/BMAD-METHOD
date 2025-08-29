@@ -74,6 +74,9 @@ class IdeSetup extends BaseIdeSetup {
       case 'qwen-code': {
         return this.setupQwenCode(installDir, selectedAgent);
       }
+      case 'augment-code': {
+        return this.setupAugmentCode(installDir, selectedAgent);
+      }
       default: {
         console.log(chalk.yellow(`\nIDE ${ide} not yet supported`));
         return false;
@@ -1435,6 +1438,67 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     }
     console.log(chalk.dim(''));
     console.log(chalk.dim('You can modify these settings anytime in .vscode/settings.json'));
+  }
+
+  async setupAugmentCode(installDir, selectedAgent) {
+    const os = require('node:os');
+    const inquirer = require('inquirer');
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
+
+    // Get the IDE configuration to access location options
+    const ideConfig = await configLoader.getIdeConfiguration('augment-code');
+    const locations = ideConfig.locations;
+
+    // Prompt user to select which locations to install to
+    const { selectedLocations } = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'selectedLocations',
+        message: 'Select Augment Code command locations:',
+        choices: Object.entries(locations).map(([key, location]) => ({
+          name: `${location.name}: ${location.description}`,
+          value: key,
+        })),
+        validate: (selected) => {
+          if (selected.length === 0) {
+            return 'Please select at least one location';
+          }
+          return true;
+        },
+      },
+    ]);
+
+    // Install to each selected location
+    for (const locationKey of selectedLocations) {
+      const location = locations[locationKey];
+      let commandsDir = location['rule-dir'];
+
+      // Handle tilde expansion for user directory
+      if (commandsDir.startsWith('~/')) {
+        commandsDir = path.join(os.homedir(), commandsDir.slice(2));
+      } else if (commandsDir.startsWith('./')) {
+        commandsDir = path.join(installDir, commandsDir.slice(2));
+      }
+
+      await fileManager.ensureDirectory(commandsDir);
+
+      for (const agentId of agents) {
+        // Find the agent file
+        const agentPath = await this.findAgentPath(agentId, installDir);
+
+        if (agentPath) {
+          const agentContent = await fileManager.readFile(agentPath);
+          const mdPath = path.join(commandsDir, `${agentId}.md`);
+          await fileManager.writeFile(mdPath, agentContent);
+          console.log(chalk.green(`✓ Created command: ${agentId}.md in ${location.name}`));
+        }
+      }
+
+      console.log(chalk.green(`\n✓ Created Augment Code commands in ${commandsDir}`));
+      console.log(chalk.dim(`  Location: ${location.name} - ${location.description}`));
+    }
+
+    return true;
   }
 }
 

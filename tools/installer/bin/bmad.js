@@ -49,7 +49,7 @@ program
   .option('-d, --directory <path>', 'Installation directory')
   .option(
     '-i, --ide <ide...>',
-    'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, trae, roo, kilo, cline, gemini, qwen-code, github-copilot, other)',
+    'Configure for specific IDE(s) - can specify multiple (cursor, claude-code, windsurf, trae, roo, kilo, cline, gemini, qwen-code, github-copilot, augment-code, other)',
   )
   .option(
     '-e, --expansion-packs <packs...>',
@@ -406,6 +406,7 @@ async function promptInstallation() {
           { name: 'Qwen Code', value: 'qwen-code' },
           { name: 'Crush', value: 'crush' },
           { name: 'Github Copilot', value: 'github-copilot' },
+          { name: 'Augment Code', value: 'augment-code' },
         ],
       },
     ]);
